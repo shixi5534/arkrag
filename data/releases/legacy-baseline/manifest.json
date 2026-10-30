@@ -1,0 +1,230 @@
+{
+  "baseline_id": "legacy-baseline",
+  "label": "legacy",
+  "read_only": true,
+  "created_at": "2026-10-30T11:15:13Z",
+  "note": "冻结的既有可用产物。后续实验禁止直接写入这些路径；新产物写 generations/<generation_id>/。确需重建时设置 ARKRAG_ALLOW_LEGACY_WRITE=1。",
+  "protected_files": [
+    "data/arkrag/graph.json",
+    "data/arkrag/index/lexical.json",
+    "data/arkrag/gates.json",
+    "data/arkrag/circuit_open.json"
+  ],
+  "protected_dirs": [
+    "data/arkrag/cache"
+  ],
+  "versions": {
+    "schema_version": "ark-rag-1",
+    "prompt_version": "v2",
+    "normalizer_version": "n2",
+    "chunk_target_chars": 900,
+    "chunk_min_chars": 120,
+    "chunk_overlap_turns": 1,
+    "t1_categories": [
+      "obt/main",
+      "activities",
+      "obt/memory",
+      "obt/roguelike",
+      "obt/rogue"
+    ],
+    "confidence_threshold": 0.5
+  },
+  "metrics": {
+    "collected_at": "2026-10-30T11:09:15Z",
+    "versions": {
+      "schema_version": "ark-rag-1",
+      "prompt_version": "v2",
+      "normalizer_version": "n2",
+      "chunk_target_chars": 900,
+      "chunk_min_chars": 120,
+      "chunk_overlap_turns": 1,
+      "t1_categories": [
+        "obt/main",
+        "activities",
+        "obt/memory",
+        "obt/roguelike",
+        "obt/rogue"
+      ],
+      "confidence_threshold": 0.5
+    },
+    "python": "3.14.3",
+    "corpus": {
+      "l0_keys": [
+        "baseline",
+        "corpus_source",
+        "dropped_files",
+        "encoding",
+        "props",
+        "reconciliation",
+        "schema_version",
+        "source_dir",
+        "top_level_keys"
+      ],
+      "files": 0,
+      "corpus_fp": null,
+      "story_files_scanned": 2292
+    },
+    "scenes": {
+      "count": 2291,
+      "turns": 422975
+    },
+    "chunks": {
+      "total": 13786,
+      "t1": 13781,
+      "per_category": {
+        "activities": 7948,
+        "obt/guide": 5,
+        "obt/main": 2272,
+        "obt/memory": 3138,
+        "obt/rogue": 373,
+        "obt/roguelike": 50
+      }
+    },
+    "extraction_cache": {
+      "count": 13801,
+      "bytes": 30688245,
+      "largest_bytes": 9368,
+      "digest": "a244f0362aa423dc78f65db11a2eab0c11b5357114354d84b33eea73f2b797b7"
+    },
+    "graph": {
+      "entities": 6483,
+      "edges": 28234,
+      "isolated": 852,
+      "avg_degree": 8.71016504704612,
+      "fingerprint": "f90a78f6df41f564",
+      "corpus_fp": "188e3218448d6bb4",
+      "schema_version": "ark-rag-1",
+      "prompt_version": "v2",
+      "normalizer_version": "n2",
+      "entity_rule_version": "ev2",
+      "alias_count": 1605
+    },
+    "index": {
+      "bytes": 127244404,
+      "meta": {
+        "schema_version": "ark-rag-1",
+        "corpus_fp": "188e3218448d6bb4",
+        "graph_fp": "f90a78f6df41f564",
+        "prompt_version": "v2",
+        "normalizer_version": "n2",
+        "built_at": "2026-10-30T04:21:19Z",
+        "chunk_count": 13781,
+        "entity_count": 6483,
+        "edge_count": 28234,
+        "vector_channels": "not_built_no_embedding_backend",
+        "embedding_model": null,
+        "embedding_dim": null
+      },
+      "terms": 694304,
+      "postings": 10525428,
+      "docs": 13781
+    },
+    "gates": {
+      "rows": 75,
+      "by_stage": {
+        "L0": 10,
+        "L1": 9,
+        "L2": 7,
+        "L3": 19,
+        "L4": 13,
+        "L5": 9,
+        "L6": 8
+      },
+      "by_verdict": {
+        "PASS": 75
+      },
+      "non_pass": []
+    }
+  },
+  "artifacts": [
+    {
+      "path": "data/arkrag/graph.json",
+      "bytes": 17115864,
+      "sha256": "ee7b1e05a31d61b0ac5c895d42e7b56bb4960b17665a2cc78ce91348cf52cb48",
+      "mtime": 1793334037.0059254,
+      "mtime_iso": "2026-10-30T04:20:37Z",
+      "kind": "graph"
+    },
+    {
+      "path": "data/arkrag/index/lexical.json",
+      "bytes": 127244404,
+      "sha256": "39911f26426bbe3b79b4582a5df51e5cdb103a862b88bdf61ef783091e9486c2",
+      "mtime": 1793334093.104412,
+      "mtime_iso": "2026-10-30T04:21:33Z",
+      "kind": "index"
+    },
+    {
+      "path": "data/arkrag/gates.json",
+      "bytes": 18499,
+      "sha256": "393ef1dca0466eaacd28a03d507fc44f7f71aa43e0b8f48253470049ff8ddc7e",
+      "mtime": 1793334085.6305315,
+      "mtime_iso": "2026-10-30T04:21:25Z",
+      "kind": "gates"
+    },
+    {
+      "path": "data/arkrag/chunks.jsonl",
+      "bytes": 40016871,
+      "sha256": "56841f32f1736eae912c4799cad9f693cd298d1c940596d07205eab183bf213b",
+      "mtime": 1793194625.3381865,
+      "mtime_iso": "2026-10-28T13:37:05Z",
+      "kind": "chunks"
+    },
+    {
+      "path": "data/arkrag/scenes.jsonl",
+      "bytes": 71305439,
+      "sha256": "689b9b9343596bc0b5901f019f19c9d66354adf08f6db8a49342ae25d877cec5",
+      "mtime": 1793331191.5961084,
+      "mtime_iso": "2026-10-30T03:33:11Z",
+      "kind": "scenes"
+    },
+    {
+      "path": "data/arkrag/shards.json",
+      "bytes": 139498,
+      "sha256": "a8e516454f2cea96a0181e32da25bf32f261ba29a248f04a580e0b0461e7e532",
+      "mtime": 1793194625.340525,
+      "mtime_iso": "2026-10-28T13:37:05Z",
+      "kind": "shards"
+    },
+    {
+      "path": "data/arkrag/l0_manifest.json",
+      "bytes": 159722,
+      "sha256": "a4ca9d8d1232148fbe9f09eb96f4765e33da1c34f89f5d0014df23197b6d0ce2",
+      "mtime": 1793331137.3787718,
+      "mtime_iso": "2026-10-30T03:32:17Z",
+      "kind": "l0_manifest"
+    },
+    {
+      "path": "data/arkrag/l1_stats.json",
+      "bytes": 2950,
+      "sha256": "baf1b7e3abb9bdf0380eac27b3b7012c89e11deb41b14fb0a570aa8e05a7295c",
+      "mtime": 1793331191.6012156,
+      "mtime_iso": "2026-10-30T03:33:11Z",
+      "kind": "l1_stats"
+    },
+    {
+      "path": "data/arkrag/l1_dropped.json",
+      "bytes": 86,
+      "sha256": "34fccd6e5cde55f45473b72ec499fd4abd7eadb230eb464471d968ab9fbef2a2",
+      "mtime": 1793331191.6032639,
+      "mtime_iso": "2026-10-30T03:33:11Z",
+      "kind": "l1_dropped"
+    },
+    {
+      "path": "data/arkrag/corpus_meta.json",
+      "bytes": 153,
+      "sha256": "97d9a477d19b2e0d20363ec2e37999103bee13d9a6b11c331ddee9549a7274c4",
+      "mtime": 1793331192.4188912,
+      "mtime_iso": "2026-10-30T03:33:12Z",
+      "kind": "corpus_meta"
+    },
+    {
+      "path": "data/arkrag/cache",
+      "kind": "extraction_cache_dir",
+      "count": 13801,
+      "bytes": 30688245,
+      "digest": "a244f0362aa423dc78f65db11a2eab0c11b5357114354d84b33eea73f2b797b7"
+    }
+  ],
+  "gate_rows": 75,
+  "gate_report_sha256": "393ef1dca0466eaacd28a03d507fc44f7f71aa43e0b8f48253470049ff8ddc7e"
+}

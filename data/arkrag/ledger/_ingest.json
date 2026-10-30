@@ -1,0 +1,23 @@
+{
+  "executor": "agent:qoder-subagent",
+  "schema_version": "ark-rag-1",
+  "prompt_version": "v2",
+  "prompt_sha256": "75835665be8edb9b147c3453827b14dbdf7fbde09e0648c4a7fbb2382c4846f1",
+  "prompt_fingerprint": "75835665be8edb9b",
+  "normalizer_version": "n2",
+  "parts_settled": 0,
+  "parts_deferred": 1,
+  "parts_bad": 0,
+  "parts_complete": 0,
+  "parts_incomplete": 0,
+  "written": 0,
+  "cache_hit": 0,
+  "deduped": 0,
+  "conflicts": 0,
+  "quarantined": 0,
+  "missing": 0,
+  "entities": 0,
+  "relations": 0,
+  "unknown_chunk_ids": 0,
+  "bad_examples": []
+}

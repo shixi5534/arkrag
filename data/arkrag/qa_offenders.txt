@@ -1,0 +1,71 @@
+词表外 3
+   ('activities/act38side/level_act38side_10_beg#007', '资助', '以威尼斯载具公司的名义去资助那家叫罗德岛的医药公司')
+   ('activities/act38side/level_act38side_st01#000', '服役', '你可是叙拉古第一所警察学校的毕业生')
+   ('activities/act38side/level_act38side_st01#004', '定位', '我是卡车工会的工人')
+证据不在正文 74
+   activities/act29side/level_act29side_03_end#001 | 布兰特·赖纳。你不可能永远逃避选择。
+   activities/act38side/level_act38side_09_end#007 | 她是从法院的楼顶翻过来的
+   activities/act38side/level_act38side_09_end#008 | 你必须接受惩罚。
+   activities/act38side/level_act38side_09_end#010 | 所有的源石炸药都被串在了一起，只要我拉动这根缝纫线
+   activities/act38side/level_act38side_10_beg#000 | 更多的时间都待在那家叫德蒙塔诺的店里
+   activities/act38side/level_act38side_10_beg#003 | 红一直在帮着凯尔希，罗德岛上有很多事情需要红去做
+   activities/act38side/level_act38side_10_beg#008 | 丽萨，我爱那个可爱又聪明的孩子
+   activities/act38side/level_act38side_10_beg#011 | 我是卡车工会的工人
+   activities/act38side/level_act38side_10_end#000 | 我还能控制局势
+   activities/act38side/level_act38side_10_end#001 | 我是您的女婿
+   activities/act38side/level_act38side_10_end#004 | 德克萨斯，你想说什么？
+   activities/act38side/level_act38side_st01#000 | 你可是叙拉古第一所警察学校的毕业生
+   activities/act38side/level_act38side_st01#000 | 你可是叙拉古第一所警察学校的毕业生
+   activities/act38side/level_act38side_st01#000 | 3，2，1，action！
+   activities/act38side/level_act38side_st01#004 | 我是说......一己偏见？
+   activities/act38side/level_act38side_st01#006 | 那时市政厅组建卡车工会的公告贴出去了半个月了
+   activities/act42side/level_act42side_09_end#000 | 再见，我亲爱的弟弟
+   activities/act42side/level_act42side_09_end#006 | 平台的正下方，老人沉默地站立着
+   activities/act42side/level_act42side_09_end#006 | 这台机器——或是律法
+   activities/act42side/level_act42side_10_beg#000 | 你不是梦，那你为什么
+   obt/main/level_main_01-01_beg#000 | 四点钟方向的敌人，我会安静地处理掉。
+Ace：另一侧
+   obt/main/level_main_01-06_beg#000 | 这是对整合运动的羞辱
+   obt/main/level_main_09-07_beg#002 | 号角：我马上带着大提琴他们去东北角的一号通讯基站
+   obt/main/level_main_09-07_beg#004 | Outcast：简，你想不想听个故事？
+   obt/main/level_main_09-08_end#000 | Outcast：资料都整理好了吗？干员弗雷德：是的，女士，都在这里了。
+   obt/main/level_main_09-08_end#002 | 奥利弗，陷在离别之愁里还为时过早
+   obt/main/level_main_09-17_beg#001 | 希尔：是的，长官。
+   obt/main/level_main_tr28_end#003 | 罗德岛新基地，工程部
+   obt/main/level_st_07-02#002 | 如果小塔真是被科西切教成这样的
+   obt/main/level_st_07-02#003 | 我不允许任何人动你
+   obt/main/level_st_17-01#001 | 凯尔希所长......老师
+   obt/main/level_st_17-01#001 | 他们怎么可能这么快摸清研究所内部的情报
+   obt/main/level_st_17-01#001 | 有叛徒......所长，一定有人出卖了研究所的情报
+   obt/main/level_st_17-01#001 | 冷静点，伊利亚。这个时候去想这些事没有任何益处
+   obt/main/level_st_17-01#002 | 伊利亚？伊利亚：......不，我留下来。
+   obt/main/level_st_17-01#002 | 乌萨斯，切尔诺伯格研究所
+   obt/main/level_st_17-01#002 | 这座石棺的核心功能装置已经被完全封锁起来了
+   obt/main/level_st_17-01#002 | 你们第四集团军的先锋刽子手？你们可以回去告诉安德里安了
+   obt/main/level_st_17-01#003 | 你们第四集团军的先锋刽子手？你们可以回去告诉安德里安了
+   obt/main/level_st_17-01#003 | 乌萨斯，切尔诺伯格研究所
+证据超 40 字 6
+   activities/act38side/level_act38side_10_beg#007 | 比如他们的计划再怎么周详，也不至于能提前准备好丽萨半个月前偶然看电影才喜欢上的玩偶。
+   obt/main/level_st_17-01#004 | 从你狂妄到决定对元帅举起反旗的那一刻起，你们整个兵团就已经不再属于光荣的第四集团军
+   obt/main/level_st_17-01#004 | 从你狂妄到决定对元帅举起反旗的那一刻起，你们整个兵团就已经不再属于光荣的第四集团军
+   obt/main/level_st_17-01#005 | 军队哗变事件中所处的位置...... 沉默的男孩：彼得洛夫家族已经被判剥夺世袭爵位
+   obt/main/level_st_17-01#006 | 军队哗变事件中所处的位置...... 沉默的男孩：彼得洛夫家族已经被判剥夺世袭爵位
+   obt/main/level_st_17-01#010 | 把政策的决定权交到圣骏堡随便哪个市民的手里去。 瓦西里：现在人们可以说，贵族们终于连最后一点工作都不用做，要交给平民了
+端点缺失 16
+   ('activities/act38side/level_act38side_09_end#008', '扎罗->东国的杀手')
+   ('activities/act38side/level_act38side_09_end#010', '卢奇诺->源石炸药')
+   ('activities/act38side/level_act38side_10_beg#006', '英格丽->威尼斯家族')
+   ('activities/act38side/level_act38side_10_beg#008', '安东尼奥->源石技艺')
+   ('activities/act38side/level_act38side_10_end#000', '安东尼奥->威尼斯家族')
+   ('activities/act38side/level_act38side_10_end#001', '老威尼斯->威尼斯家族')
+   ('activities/act38side/level_act38side_10_end#003', '伊雷妮->卡车')
+   ('activities/act38side/level_act38side_10_end#004', '伊雷妮->卡车工会')
+   ('activities/act38side/level_act38side_st01#007', '伊雷妮->萨卢佐')
+   ('activities/act42side/level_act42side_07_beg#003', '保育员->席德佳')
+   ('activities/act42side/level_act42side_07_end#002', '安多恩->保育员')
+   ('activities/act42side/level_act42side_09_end#003', '能天使->圣徒')
+   ('activities/act42side/level_act42side_09_end#003', '圣徒->能天使')
+   ('obt/main/level_main_01-06_beg#000', '浮士德->斥候')
+   ('obt/main/level_main_01-06_beg#000', '浮士德->罗德岛')
+   ('obt/main/level_st_07-02#002', '科西切->塔露拉')
+违规块统计（按 chunk 前缀族）: Counter({'obt': 54, 'activities': 23})

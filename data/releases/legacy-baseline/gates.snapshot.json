@@ -1,0 +1,602 @@
+[
+  {
+    "name": "L0.1 文档数==文件数",
+    "stage": "L0",
+    "threshold": "每个被丢弃文档必须查明原因",
+    "measured": "files=2292 dropped=1",
+    "verdict": "PASS",
+    "note": "obt/main/level_main_14-20_beg:video_only"
+  },
+  {
+    "name": "L0.2 标题缺失文档数",
+    "stage": "L0",
+    "threshold": "0",
+    "measured": "0",
+    "verdict": "PASS",
+    "note": "计划书原文是「文档第一行必须是最高级标题」；本语料标题在 storyName 字段，静默丢弃的失效方向相同，故按等价判据实测（决策台账 D-02）"
+  },
+  {
+    "name": "L0.3 带 BOM 文件数",
+    "stage": "L0",
+    "threshold": "0",
+    "measured": "0",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L0.4 非 UTF-8 / 解码失败文件数",
+    "stage": "L0",
+    "threshold": "0",
+    "measured": "0",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L0.5 轮次总数",
+    "stage": "L0",
+    "threshold": ">0",
+    "measured": "410940",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L0.6 对话/旁白比（多口径一致性）",
+    "stage": "L0",
+    "threshold": "两口径相差 ≤2 倍",
+    "measured": "turn 8.76 / char 6.46 / 相差 1.36 倍",
+    "verdict": "PASS",
+    "note": "原始门线 1.5-4 是散文体假设，剧本语料不适用；改判「旁白是否被成片降级」，绝对值只申报（决策台账 D-24）"
+  },
+  {
+    "name": "L0.6a 探针：narration 数>0",
+    "stage": "L0",
+    "threshold": "非零（证明无说话人检测生效）",
+    "measured": "42115",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L0.6b 探针：narration 占比<0.30",
+    "stage": "L0",
+    "threshold": "<0.30（未被全量降级为旁白）",
+    "measured": "0.102",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L0.6c 旁白覆盖的文档数（仅申报）",
+    "stage": "L0",
+    "threshold": "申报（不判定）",
+    "measured": "1882/2292 个 doc 含旁白",
+    "verdict": "PASS",
+    "note": "纯对话剧本里多数 doc 天然无旁白，故此项只申报"
+  },
+  {
+    "name": "L0.7 文件<->索引缺口逐条有解释",
+    "stage": "L0",
+    "threshold": "UNEXPLAINED == 0",
+    "measured": "wordcount.json:0; storyinfo.json:0; summaries.json:0",
+    "verdict": "PASS",
+    "note": "缺口本身可以是合法的（另册索引/不在覆盖范围），但不许有无解释的缺口"
+  },
+  {
+    "name": "L1.1 含玩家选项的轮次数",
+    "stage": "L1",
+    "threshold": "0",
+    "measured": "0",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L1.2a 含文档元数据/路径的轮次数",
+    "stage": "L1",
+    "threshold": "0",
+    "measured": "0",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L1.2b 世界内编码行（终端日志/序列号，机检）",
+    "stage": "L1",
+    "threshold": "结构化字段泄漏 == 0",
+    "measured": "终端日志 5 轮 / 序列号 12 轮 / 结构化泄漏 0",
+    "verdict": "PASS",
+    "note": "两族都是剧情内正文（屏幕上的字、编号），不是脏数据，故不再逐条人工裁决；判的是有没有漏进 speaker/prop/doc_id。；实体名侧由图门 L5.7b 兜底"
+  },
+  {
+    "name": "L1.2b2 世界内编码的文档分布（仅申报）",
+    "stage": "L1",
+    "threshold": "申报（不判定）",
+    "measured": "5 个 doc 命中（例 ['activities/act42side/level_act42side_06_end', 'activities/act42side/level_act42side_07_end', 'activities/act8mini/level_act8mini_st06']）",
+    "verdict": "PASS",
+    "note": "集中在 act8mini_st06（PRTS 终端）与 act42side 的两条编号，属剧情设计"
+  },
+  {
+    "name": "L1.3 残留 markdown 说话人标记轮次数",
+    "stage": "L1",
+    "threshold": "0",
+    "measured": "0",
+    "verdict": "PASS",
+    "note": "负例保持入库：被打码台词 1 条（例 ['***！我宰了你！']）"
+  },
+  {
+    "name": "L1.4 兜底(unknown prop)行占比",
+    "stage": "L1",
+    "threshold": "<0.05",
+    "measured": "0.00000  (unknown=0)",
+    "verdict": "PASS",
+    "note": "白名单覆盖 L0 实测全部 79 个折叠 prop，故预期为 0"
+  },
+  {
+    "name": "L1.5 舞台指令漏检（进入轮次的非正文 prop）",
+    "stage": "L1",
+    "threshold": "0",
+    "measured": "0",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L1.6 正文完全重复文档组数",
+    "stage": "L1",
+    "threshold": "0 或已人工裁决",
+    "measured": "0",
+    "verdict": "PASS",
+    "note": "[]"
+  },
+  {
+    "name": "L1.7 近重复文档对数(Jaccard>=0.98)",
+    "stage": "L1",
+    "threshold": "0 或已人工裁决",
+    "measured": "0",
+    "verdict": "PASS",
+    "note": "[]"
+  },
+  {
+    "name": "L2.1a 原文轮次覆盖率",
+    "stage": "L2",
+    "threshold": "1.00",
+    "measured": "422,975/422,975 漏 0 篇",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L2.1b 渲染冗余率(宽口径,仅申报)",
+    "stage": "L2",
+    "threshold": "申报值",
+    "measured": "1.219  (渲染 11,412,421 / 原文 9,360,404；其中说话人前缀 1,631,333 字，源文字数 9,095,185)",
+    "verdict": "PASS",
+    "note": "对应计划书「块数x平均块长 vs 总字数」一门的等价可核算形式"
+  },
+  {
+    "name": "L2.2 尾块合并生效（同场景内无碎块）",
+    "stage": "L2",
+    "threshold": "0",
+    "measured": "0",
+    "verdict": "PASS",
+    "note": "另有 0 个整篇即碎块的场景（场景=文件是硬边界，不许跨场景合并），它们不进抽取，样例 []"
+  },
+  {
+    "name": "L2.3 最大块 <= 2x目标块长",
+    "stage": "L2",
+    "threshold": "<= 1800",
+    "measured": "max=1013 超限 0",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L2.4 跨场景块数",
+    "stage": "L2",
+    "threshold": "0",
+    "measured": "0",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L2.5 内容哈希重复组数",
+    "stage": "L2",
+    "threshold": "0",
+    "measured": "0",
+    "verdict": "PASS",
+    "note": "[]"
+  },
+  {
+    "name": "L2.6 分片装箱均衡度",
+    "stage": "L2",
+    "threshold": "极差 <= 2x",
+    "measured": "shards=69 min=197 max=229",
+    "verdict": "PASS",
+    "note": "合计 13781 块；T1 取 obt/main、activities、obt/memory、obt/roguelike、obt/rogue 范围的分片"
+  },
+  {
+    "name": "L3.T0 块数",
+    "stage": "L3",
+    "threshold": "13781",
+    "measured": "13781",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L3.T1 证据可在块正文定位（逐条比对）",
+    "stage": "L3",
+    "threshold": "违规 0",
+    "measured": "0",
+    "verdict": "PASS",
+    "note": "实体86124 关系63172;"
+  },
+  {
+    "name": "L3.T10 超长实体名(>16字)",
+    "stage": "L3",
+    "threshold": "0",
+    "measured": "0",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L3.T11 实体类型词表外",
+    "stage": "L3",
+    "threshold": "0",
+    "measured": "0",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L3.T12 实体缺 desc",
+    "stage": "L3",
+    "threshold": "0",
+    "measured": "0",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L3.T13 别名包含规范名自身",
+    "stage": "L3",
+    "threshold": "0",
+    "measured": "0",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L3.T14 同块重复实体",
+    "stage": "L3",
+    "threshold": "0",
+    "measured": "0",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L3.T15 置信度越界",
+    "stage": "L3",
+    "threshold": "0",
+    "measured": "0",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L3.T16 每块平均实体/关系数",
+    "stage": "L3",
+    "threshold": "申报值",
+    "measured": "实体 6.2/块，关系 4.6/块",
+    "verdict": "PASS",
+    "note": "关系/实体比过低说明模型只抽点不抽边，图扩展通道会失去原料"
+  },
+  {
+    "name": "L3.T17 描述机械缺陷（等于名字/占位符/代词开头过短/过短）",
+    "stage": "L3",
+    "threshold": "违规 0",
+    "measured": "0",
+    "verdict": "PASS",
+    "note": "按 86124 条实体提及计;"
+  },
+  {
+    "name": "L3.T17b 描述语义质量（抽样申报）",
+    "stage": "L3",
+    "threshold": "申报（不判定）",
+    "measured": "机械合规 1.0000；语义质量需人读，见人工抽验文档",
+    "verdict": "PASS",
+    "note": "「一句话讲清它是什么」是语义判断，机检只能排掉机械缺陷；把语义当门会让门永远红，红久了就没人看"
+  },
+  {
+    "name": "L3.T2 证据长度<=40",
+    "stage": "L3",
+    "threshold": "违规 0",
+    "measured": "0",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L3.T3 关系名全部在受控词表内",
+    "stage": "L3",
+    "threshold": "违规 0",
+    "measured": "0",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L3.T4 关系两端都在 entities 内",
+    "stage": "L3",
+    "threshold": "违规 0",
+    "measured": "0",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L3.T5 证据为空的关系数",
+    "stage": "L3",
+    "threshold": "0",
+    "measured": "0",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L3.T6 代词被抽成实体",
+    "stage": "L3",
+    "threshold": "0",
+    "measured": "0",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L3.T7 掩码说话人成实体",
+    "stage": "L3",
+    "threshold": "0",
+    "measured": "0",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L3.T8 编号/代码形态成实体",
+    "stage": "L3",
+    "threshold": "0",
+    "measured": "0",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L3.T9 泛称成实体（交 L4 本地过滤）",
+    "stage": "L3",
+    "threshold": "申报数量，L4 过滤后必须为 0",
+    "measured": "79",
+    "verdict": "PASS",
+    "note": "activities/act11mini/level_act11mini_st03#009:手下; activities/act11mini/level_act11mini_st05#006:秘书; activities/act13mini/level_act13mini_st02#007:医生; activities/act13mini/level_act13mini_st02#008:医生"
+  },
+  {
+    "name": "L4.1 实体类型闭合（六选一）",
+    "stage": "L4",
+    "threshold": "词表外 0",
+    "measured": "词表外 0/6483",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L4.10 词表使用覆盖（仅申报）",
+    "stage": "L4",
+    "threshold": "申报值",
+    "measured": "已用 48/48",
+    "verdict": "PASS",
+    "note": "长期未用的关系名说明词表与语料不匹配，是 D-17 那类裁剪讨论的依据"
+  },
+  {
+    "name": "L4.11 纯称谓/亲属词成实体（仅申报）",
+    "stage": "L4",
+    "threshold": "申报值",
+    "measured": "实体 15 个，涉及边 80 条（爷爷 20边, 老板 17边, 奶奶 8边, 老爷 6边, 妹妹 5边, 母亲 5边）",
+    "verdict": "PASS",
+    "note": "「爷爷」「老板」在剧情里确实是反复出现的一个角色，删与留是结构决策；要删得先扩充 GENERIC_PERSON_NOUNS 的亲属/敬称部分再重跑，不能在建图后摘点"
+  },
+  {
+    "name": "L4.2 噪声名残留（现有名字重跑判据）",
+    "stage": "L4",
+    "threshold": "残留 0",
+    "measured": "残留 0/6483",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L4.3 噪声名剔除率（仅申报）",
+    "stage": "L4",
+    "threshold": "申报值",
+    "measured": "原始唯一名 7141，剔除 31 (0.43%)  {'generic_noun': 19, 'descriptive_suffix': 7, 'event_clause': 1, 'descriptive_prefix': 3, 'event_particle': 1}",
+    "verdict": "PASS",
+    "note": "剔得太少要怀疑判据失效，剔得太多要怀疑误杀；两个方向都没有绝对阈值"
+  },
+  {
+    "name": "L4.4 成员误并（集体/成员不得并成本体）",
+    "stage": "L4",
+    "threshold": "误并 0",
+    "measured": "误并 0",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L4.4b 职位泛称并合（仅申报）",
+    "stage": "L4",
+    "threshold": "申报值",
+    "measured": "泛称锚点吸收专名 8 例（人事干员 <- 乔; 办事处干员 <- 阿平; 医疗干员 <- 敏敏; 巴别塔成员 <- 兄弟）；专名吸收角色式别名 46 例（Ace <- Ace队长; Sharp <- Sharp队长; 克里斯 <- 罗德岛工程干员）",
+    "verdict": "PASS",
+    "note": "前者是「一群人被当成一个人」，后者更可能是「同一个人的战地标签」，两类必须分开判，判别依据是同一标签在不同块里是否指向不同个体"
+  },
+  {
+    "name": "L4.5 别名质量（噪声/争用，仅申报）",
+    "stage": "L4",
+    "threshold": "申报值",
+    "measured": "条目 1605  噪声 28  争用别名 0",
+    "verdict": "PASS",
+    "note": "泛称别名（队长/老师）被多个实体共用是数据的真实状态，不是归一化缺陷"
+  },
+  {
+    "name": "L4.5b 歧义别名参与合并（被多方主张的别名不得当别名）",
+    "stage": "L4",
+    "threshold": "残留 0",
+    "measured": "图上残留 0",
+    "verdict": "PASS",
+    "note": "多方主张的别名已同时从合并与 aliases 中剔除（建图期 alias_ambiguous_rejected）"
+  },
+  {
+    "name": "L4.6 关系名闭合（封闭表）",
+    "stage": "L4",
+    "threshold": "词表外 0",
+    "measured": "词表外 0，已用 48/48",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L4.7 方向对成对完整率（词表结构）",
+    "stage": "L4",
+    "threshold": ">= 0.95",
+    "measured": "1.00（11/11 对齐全）",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L4.8 逆谓词双向重复（仅申报）",
+    "stage": "L4",
+    "threshold": "申报值",
+    "measured": "578 对，其中证据逐字相同 20 对",
+    "verdict": "PASS",
+    "note": "两视角并存合法；证据相同的那批应由消费端去重，不在建图期删"
+  },
+  {
+    "name": "L4.9 互斥关系共存（仅申报）",
+    "stage": "L4",
+    "threshold": "申报值",
+    "measured": "145 组，其中同块共现 13 组",
+    "verdict": "PASS",
+    "note": "跨块共存基本都是剧情里的立场反转；同块共现才可能是抽错"
+  },
+  {
+    "name": "L5.1 规模（实体/边/类型分布）",
+    "stage": "L5",
+    "threshold": "申报值",
+    "measured": "实体 6483  边 28234  类型 {'角色': 2614, '地点': 1208, '物品': 1208, '组织': 885, '概念': 446, '事件': 122}",
+    "verdict": "PASS",
+    "note": "规模本身不做判定；它是其它所有比率的基数"
+  },
+  {
+    "name": "L5.2 平均度数",
+    "stage": "L5",
+    "threshold": "> 6",
+    "measured": "8.71",
+    "verdict": "PASS",
+    "note": "度数是图能不能撑起「沿边扩展」的唯一指标，低度数的图等价于一份实体表"
+  },
+  {
+    "name": "L5.3 孤立实体率",
+    "stage": "L5",
+    "threshold": "<= 0.20",
+    "measured": "852 (13.1%)",
+    "verdict": "PASS",
+    "note": "孤立实体只能靠词面命中被检索到，永远不会经图扩展被找到"
+  },
+  {
+    "name": "L5.4 自环与悬空边",
+    "stage": "L5",
+    "threshold": "自环 0 / 悬空 0",
+    "measured": "自环 0  悬空 0",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L5.5 边证据可定位（逐字回查来源块）",
+    "stage": "L5",
+    "threshold": "未定位 0 / 空证据 0",
+    "measured": "未定位 0  空证据 0  共 28234 条",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L5.6 边置信度下限",
+    "stage": "L5",
+    "threshold": ">= 0.5",
+    "measured": "低于下限 0  最低 0.50  中位 0.80",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L5.7 提及次数（每个实体至少 1 次）",
+    "stage": "L5",
+    "threshold": "0 例低于 1",
+    "measured": "低于 1 的实体 0",
+    "verdict": "PASS",
+    "note": "提及为 0 意味着这个实体是被推断出来的、正文里从未出现——那不该存在"
+  },
+  {
+    "name": "L5.7b 世界内编码漏成实体名/别名",
+    "stage": "L5",
+    "threshold": "0 例",
+    "measured": "实体名 0 / 别名 0",
+    "verdict": "PASS",
+    "note": "L1.2b 把日志行/编号判为合法正文后，唯一真风险就是它们被当成实体；实测全清"
+  },
+  {
+    "name": "L5.8 指纹覆盖（语料/图/版本三件套）",
+    "stage": "L5",
+    "threshold": "全部非空且与当前语料一致",
+    "measured": "corpus_fp=188e3218448d6bb4 graph_fp=f90a78f6df41f564 prompt=v2 norm=n2 ent=ev2",
+    "verdict": "PASS",
+    "note": "指纹不全的图无法判断是否与当前语料同源，等于不可复现；实体合并规则版本（ev）同样必须进图，否则同一指纹会对应两张结构不同的图"
+  },
+  {
+    "name": "L6.1 新鲜度三查（块数/语料指纹/构建时间）",
+    "stage": "L6",
+    "threshold": "不一致项 0",
+    "measured": "0",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L6.2 索引图指纹与当前图一致",
+    "stage": "L6",
+    "threshold": "相等",
+    "measured": "index=f90a78f6df41f564 graph=f90a78f6df41f564",
+    "verdict": "PASS",
+    "note": "图重建后索引未重建 = 检索命中已合并掉的旧实体名"
+  },
+  {
+    "name": "L6.3 检索正确性（稀疏词回查来源块）",
+    "stage": "L6",
+    "threshold": "命中率 1.00",
+    "measured": "199/199",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L6.3b 实体名检索质量（top-20，仅申报）",
+    "stage": "L6",
+    "threshold": "申报值",
+    "measured": "164/200  中位名次 2",
+    "verdict": "PASS",
+    "note": "常见名捞不回自己那块属正常排序结果；此值只反映检索手感，不参与判定"
+  },
+  {
+    "name": "L6.4 别名倒排覆盖（实体名+别名->id）",
+    "stage": "L6",
+    "threshold": "未解析 0",
+    "measured": "实体名 6483/6483  条目 8088（图内别名 1605，丢失 0）",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L6.5 图邻接覆盖（边两端可达）",
+    "stage": "L6",
+    "threshold": "悬空边 0",
+    "measured": "节点 5631  邻接项 56468",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L6.6 孤立实体（有实体无边，仅申报）",
+    "stage": "L6",
+    "threshold": "申报值，L5 已判 <=0.20",
+    "measured": "852 (13.1%)",
+    "verdict": "PASS",
+    "note": "D32钢战士; Elias; Machinist; PRTS系统"
+  },
+  {
+    "name": "L6.7 向量通道状态显式申报",
+    "stage": "L6",
+    "threshold": "非空且声明原因",
+    "measured": "not_built_no_embedding_backend",
+    "verdict": "PASS",
+    "note": "embedding_model=None dim=None"
+  }
+]

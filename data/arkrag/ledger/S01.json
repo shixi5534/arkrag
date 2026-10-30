@@ -1,0 +1,17 @@
+{
+  "shard": "S01",
+  "executor": "agent:qoder-subagent",
+  "prompt_version": "v2",
+  "prompt_fingerprint": "75835665be8edb9b",
+  "normalizer_version": "n1",
+  "requested": 204,
+  "returned": 203,
+  "duplicate_lines": 0,
+  "cache_hit": 183,
+  "extracted_ok": 20,
+  "failed": 0,
+  "failed_chunks": [],
+  "raw_entities": 144,
+  "raw_relations": 76,
+  "task_file": "E:\\图rag\\data\\arkrag\\agent_inbox\\S01.jsonl"
+}

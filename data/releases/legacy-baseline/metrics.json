@@ -1,0 +1,107 @@
+{
+  "collected_at": "2026-10-30T11:09:15Z",
+  "versions": {
+    "schema_version": "ark-rag-1",
+    "prompt_version": "v2",
+    "normalizer_version": "n2",
+    "chunk_target_chars": 900,
+    "chunk_min_chars": 120,
+    "chunk_overlap_turns": 1,
+    "t1_categories": [
+      "obt/main",
+      "activities",
+      "obt/memory",
+      "obt/roguelike",
+      "obt/rogue"
+    ],
+    "confidence_threshold": 0.5
+  },
+  "python": "3.14.3",
+  "corpus": {
+    "l0_keys": [
+      "baseline",
+      "corpus_source",
+      "dropped_files",
+      "encoding",
+      "props",
+      "reconciliation",
+      "schema_version",
+      "source_dir",
+      "top_level_keys"
+    ],
+    "files": 0,
+    "corpus_fp": null,
+    "story_files_scanned": 2292
+  },
+  "scenes": {
+    "count": 2291,
+    "turns": 422975
+  },
+  "chunks": {
+    "total": 13786,
+    "t1": 13781,
+    "per_category": {
+      "activities": 7948,
+      "obt/guide": 5,
+      "obt/main": 2272,
+      "obt/memory": 3138,
+      "obt/rogue": 373,
+      "obt/roguelike": 50
+    }
+  },
+  "extraction_cache": {
+    "count": 13801,
+    "bytes": 30688245,
+    "largest_bytes": 9368,
+    "digest": "a244f0362aa423dc78f65db11a2eab0c11b5357114354d84b33eea73f2b797b7"
+  },
+  "graph": {
+    "entities": 6483,
+    "edges": 28234,
+    "isolated": 852,
+    "avg_degree": 8.71016504704612,
+    "fingerprint": "f90a78f6df41f564",
+    "corpus_fp": "188e3218448d6bb4",
+    "schema_version": "ark-rag-1",
+    "prompt_version": "v2",
+    "normalizer_version": "n2",
+    "entity_rule_version": "ev2",
+    "alias_count": 1605
+  },
+  "index": {
+    "bytes": 127244404,
+    "meta": {
+      "schema_version": "ark-rag-1",
+      "corpus_fp": "188e3218448d6bb4",
+      "graph_fp": "f90a78f6df41f564",
+      "prompt_version": "v2",
+      "normalizer_version": "n2",
+      "built_at": "2026-10-30T04:21:19Z",
+      "chunk_count": 13781,
+      "entity_count": 6483,
+      "edge_count": 28234,
+      "vector_channels": "not_built_no_embedding_backend",
+      "embedding_model": null,
+      "embedding_dim": null
+    },
+    "terms": 694304,
+    "postings": 10525428,
+    "docs": 13781
+  },
+  "gates": {
+    "rows": 75,
+    "by_stage": {
+      "L0": 10,
+      "L1": 9,
+      "L2": 7,
+      "L3": 19,
+      "L4": 13,
+      "L5": 9,
+      "L6": 8
+    },
+    "by_verdict": {
+      "PASS": 75
+    },
+    "non_pass": []
+  }
+}

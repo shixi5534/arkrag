@@ -1,0 +1,32 @@
+{
+  "generation_id": "g-20261030T115103Z-7b0fd3",
+  "status": "PUBLISHED",
+  "created_at": "2026-10-30T11:51:03Z",
+  "run_id": "r-20261030T115027Z-1407c2",
+  "parent_generation": "g-20261030T114823Z-606ea9",
+  "source_fingerprint": "188e3218448d6bb4",
+  "chunk_manifest_hash": "34e6971d86c72935663db969d9c1e3c27eeecc8e05e385ad27ace0f967812b37",
+  "chunk_count": 13781,
+  "extraction_manifest_hash": "0bec19c2b08a90fd79d173959a73a2539ba940e748200a52bddfd6b0c357e5e1",
+  "extraction_count": 13781,
+  "versions": {
+    "schema_version": "ark-rag-1",
+    "prompt_version": "v2",
+    "normalizer_version": "n2"
+  },
+  "git_revision": "",
+  "graph_artifact_id": "6d81ee4a46f872aef4b0a7a017d2573fda8db3bd7a75b38c959479e62265657a",
+  "index_artifact_id": "817f2427e0ea212159b0125235d7d3d0f4df8954f02ae26d834f0056df799bdf",
+  "graph_build_fp": "f90a78f6df41f564",
+  "index_build_fp": "bb5c93f8f1a75d42",
+  "gate_report_hash": "0cb2d92ff9ac0ab7a534949dd93ca3518244042ac40bd8314c141fa1ed64be93",
+  "index_content_digest": "c1fef3588e662271e3bf852ee99a0abf726b123e975e791888308aec59fa16d1",
+  "probe_digest": "46e600c1f3a9ec9e890109a72b0ea1d23ac73bfac846426ed11e5943677836b4",
+  "updated_at": "2026-10-30T11:53:16Z",
+  "stats": {
+    "entities": 6483,
+    "edges": 28234,
+    "isolated": 852
+  },
+  "published_at": "2026-10-30T11:53:16Z"
+}

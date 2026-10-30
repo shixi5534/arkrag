@@ -1,0 +1,43 @@
+{
+  "chunks_total": 13786,
+  "chunks_cached": 5355,
+  "chunks_empty": 11,
+  "entities": 39150,
+  "relations": 25599,
+  "rel_evidence_bad": 74,
+  "rel_endpoint_missing": 16,
+  "rel_off_vocab": 3,
+  "rel_too_long": 6,
+  "report": {
+    "executor": "agent:qoder-subagent",
+    "prompt_version": "v2",
+    "prompt_fingerprint": "75835665be8edb9b",
+    "entity_per_chunk": 7.31,
+    "relation_per_chunk": 4.78,
+    "avg_degree": 1.31,
+    "type_distribution": {
+      "角色": 22570,
+      "地点": 6606,
+      "物品": 1379,
+      "组织": 5955,
+      "事件": 230,
+      "概念": 2410
+    },
+    "relations_used_distinct": 51,
+    "relations_vocab_size": 48,
+    "evidence_bad_ratio": 0.0029
+  }
+}
+--- evidence 不在正文的样例:
+   activities/act29side/level_act29side_03_end#001: '布兰特·赖纳。你不可能永远逃避选择。'
+   activities/act38side/level_act38side_09_end#007: '她是从法院的楼顶翻过来的'
+   activities/act38side/level_act38side_09_end#008: '你必须接受惩罚。'
+   activities/act38side/level_act38side_09_end#010: '所有的源石炸药都被串在了一起，只要我拉动这根缝纫线'
+   activities/act38side/level_act38side_10_beg#000: '更多的时间都待在那家叫德蒙塔诺的店里'
+   activities/act38side/level_act38side_10_beg#003: '红一直在帮着凯尔希，罗德岛上有很多事情需要红去做'
+   activities/act38side/level_act38side_10_beg#008: '丽萨，我爱那个可爱又聪明的孩子'
+   activities/act38side/level_act38side_10_beg#011: '我是卡车工会的工人'
+   activities/act38side/level_act38side_10_end#000: '我还能控制局势'
+   activities/act38side/level_act38side_10_end#001: '我是您的女婿'
+   activities/act38side/level_act38side_10_end#004: '德克萨斯，你想说什么？'
+   activities/act38side/level_act38side_st01#000: '你可是叙拉古第一所警察学校的毕业生'

@@ -1,0 +1,38 @@
+# ---- 不入库：只读原始语料与体积巨大的生成数据（计划 A2）----
+# 语料投影 239 MB，只读输入。溯源锚点记在 data/arkrag/l0_manifest.json 与
+# data/arkrag/corpus_meta.json（这两个小文件入库，否则无法证明跑的是哪份语料）。
+corpus/
+zh_CN.zip
+
+# 抽取缓存：13,801 个文件。可从语料 + 提示词 + 契约重算，不该占仓库空间。
+data/arkrag/cache/
+data/arkrag/cache_quarantine/
+# 索引：单文件 127 MB。
+data/arkrag/index/
+
+# 大图与大流水线中间产物（单个 16–71 MB）。入库的是它们的 Manifest 与门禁报告。
+data/arkrag/graph.json
+data/arkrag/chunks.jsonl
+data/arkrag/scenes.jsonl
+data/arkrag/agent_inbox/
+data/arkrag/agent_outbox/
+
+# Generation 里的图与索引是同一批大产物，只是换了目录。
+data/arkrag/generations/*/graph/
+data/arkrag/generations/*/index/
+
+# 运行日志：机器相关、每次不同，由 runs/<run_id>/ 现场生成。
+data/arkrag/runs/*/events.jsonl
+
+# 锁文件是运行期同步副产物，永远不该入库。
+*.lock
+data/arkrag/*.lock
+data/arkrag/**/*.lock
+
+# ---- 工具与本地环境 ----
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.pytest_cache/
+.ruff_cache/

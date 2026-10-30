@@ -1,0 +1,13 @@
+* -text
+
+# 证据类产物一律原样存储：落盘字节必须等于入库字节，否则 sha/指纹校验必然失败
+*.json      -text
+*.jsonl     -text
+*.csv       -text
+corpus/**   -text
+data/**     -text
+
+# 源码与文档统一 LF
+*.py  text eol=lf
+*.md  text eol=lf
+*.sh  text eol=lf

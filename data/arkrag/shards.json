@@ -1,0 +1,5933 @@
+{
+  "schema_version": "ark-rag-1",
+  "target_blocks_per_shard": 200,
+  "t1_scope": [
+    "obt/main",
+    "activities",
+    "obt/memory",
+    "obt/roguelike",
+    "obt/rogue"
+  ],
+  "t1": {
+    "chunks": 13781,
+    "shards": [
+      {
+        "shard": "S00",
+        "blocks": 229,
+        "chapters": [
+          {
+            "chapter": "obt/main::main_ep14",
+            "blocks": 229,
+            "docs": 36
+          }
+        ],
+        "docs": 36
+      },
+      {
+        "shard": "S01",
+        "blocks": 225,
+        "chapters": [
+          {
+            "chapter": "activities::act29side",
+            "blocks": 225,
+            "docs": 23
+          }
+        ],
+        "docs": 23
+      },
+      {
+        "shard": "S02",
+        "blocks": 223,
+        "chapters": [
+          {
+            "chapter": "activities::act13side",
+            "blocks": 223,
+            "docs": 27
+          }
+        ],
+        "docs": 27
+      },
+      {
+        "shard": "S03",
+        "blocks": 218,
+        "chapters": [
+          {
+            "chapter": "activities::act25side",
+            "blocks": 218,
+            "docs": 24
+          }
+        ],
+        "docs": 24
+      },
+      {
+        "shard": "S04",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "obt/main::main_ep17",
+            "blocks": 199,
+            "docs": 18
+          }
+        ],
+        "docs": 18
+      },
+      {
+        "shard": "S05",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "activities::act42side",
+            "blocks": 197,
+            "docs": 24
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue6_entry",
+            "blocks": 2,
+            "docs": 1
+          }
+        ],
+        "docs": 25
+      },
+      {
+        "shard": "S06",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act46side",
+            "blocks": 189,
+            "docs": 24
+          },
+          {
+            "chapter": "obt/memory::memory_thorns",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue4_ending_2",
+            "blocks": 2,
+            "docs": 1
+          }
+        ],
+        "docs": 26
+      },
+      {
+        "shard": "S07",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "activities::act38side",
+            "blocks": 187,
+            "docs": 24
+          },
+          {
+            "chapter": "obt/memory::memory_jnight",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_baslin",
+            "blocks": 5,
+            "docs": 1
+          }
+        ],
+        "docs": 26
+      },
+      {
+        "shard": "S08",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "obt/main::main_ep13",
+            "blocks": 180,
+            "docs": 24
+          },
+          {
+            "chapter": "obt/memory::memory_rope",
+            "blocks": 8,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_snhunt",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue6_ending_2",
+            "blocks": 3,
+            "docs": 1
+          }
+        ],
+        "docs": 28
+      },
+      {
+        "shard": "S09",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act21side",
+            "blocks": 175,
+            "docs": 24
+          },
+          {
+            "chapter": "obt/memory::memory_bobb",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_wulfen",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_aosta",
+            "blocks": 6,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue1_ending_1",
+            "blocks": 1,
+            "docs": 1
+          }
+        ],
+        "docs": 28
+      },
+      {
+        "shard": "S10",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "activities::act17side",
+            "blocks": 169,
+            "docs": 24
+          },
+          {
+            "chapter": "obt/memory::memory_kafka",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_flamtl",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_grabds",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_irene",
+            "blocks": 6,
+            "docs": 1
+          }
+        ],
+        "docs": 28
+      },
+      {
+        "shard": "S11",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act49side",
+            "blocks": 163,
+            "docs": 24
+          },
+          {
+            "chapter": "obt/memory::memory_ctable",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_yu",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_spuria",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_tiger",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue4_ending_4",
+            "blocks": 2,
+            "docs": 1
+          }
+        ],
+        "docs": 29
+      },
+      {
+        "shard": "S12",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "obt/main::main_ep10",
+            "blocks": 155,
+            "docs": 24
+          },
+          {
+            "chapter": "obt/memory::memory_blemsh",
+            "blocks": 11,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_frostl",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_branch",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_aprl",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_whispr",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue1_ending_2",
+            "blocks": 1,
+            "docs": 1
+          }
+        ],
+        "docs": 30
+      },
+      {
+        "shard": "S13",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act51side",
+            "blocks": 151,
+            "docs": 18
+          },
+          {
+            "chapter": "obt/memory::memory_makiri",
+            "blocks": 12,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_doberm",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_zumama",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_susuro",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_tippi",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue4_ending_5",
+            "blocks": 2,
+            "docs": 1
+          }
+        ],
+        "docs": 24
+      },
+      {
+        "shard": "S14",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act33side",
+            "blocks": 150,
+            "docs": 23
+          },
+          {
+            "chapter": "obt/memory::memory_popka",
+            "blocks": 13,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_ebnhlz",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_ansel",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_rosesa",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_sophia",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue6_ending_4",
+            "blocks": 3,
+            "docs": 1
+          }
+        ],
+        "docs": 30
+      },
+      {
+        "shard": "S15",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act30side",
+            "blocks": 149,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/memory::memory_headb2",
+            "blocks": 13,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_cement",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_wintim",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_siege",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_tachak",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/main::main_spst17",
+            "blocks": 2,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue1_ending_3",
+            "blocks": 1,
+            "docs": 1
+          }
+        ],
+        "docs": 26
+      },
+      {
+        "shard": "S16",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "activities::act34side",
+            "blocks": 144,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/memory::memory_skgoat",
+            "blocks": 16,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_glider",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_mgllan",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_ironmn",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_kjera",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_bdhkgt",
+            "blocks": 5,
+            "docs": 1
+          }
+        ],
+        "docs": 26
+      },
+      {
+        "shard": "S17",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "activities::act14side",
+            "blocks": 143,
+            "docs": 20
+          },
+          {
+            "chapter": "obt/memory::memory_vigil",
+            "blocks": 17,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_gnosis",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_mizuki",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_jesica",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_kroos2",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_lava2",
+            "blocks": 5,
+            "docs": 1
+          }
+        ],
+        "docs": 27
+      },
+      {
+        "shard": "S18",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "obt/main::main_ep08",
+            "blocks": 141,
+            "docs": 28
+          },
+          {
+            "chapter": "obt/memory::memory_kazema",
+            "blocks": 17,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_bryota",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_heidi",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_chnut",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_ccheal",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_bluep",
+            "blocks": 6,
+            "docs": 1
+          }
+        ],
+        "docs": 35
+      },
+      {
+        "shard": "S19",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act40side",
+            "blocks": 138,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/memory::memory_astesi",
+            "blocks": 18,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_gvial2",
+            "blocks": 11,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_gdglow",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_bubble",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_bison",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_ascln",
+            "blocks": 6,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue1_ending_4",
+            "blocks": 1,
+            "docs": 1
+          }
+        ],
+        "docs": 27
+      },
+      {
+        "shard": "S20",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act44side",
+            "blocks": 137,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/main::main_st15",
+            "blocks": 18,
+            "docs": 3
+          },
+          {
+            "chapter": "obt/memory::memory_broca",
+            "blocks": 11,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_fuze",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_brownb",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_asbest",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_whitw2",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue1_entry",
+            "blocks": 1,
+            "docs": 1
+          }
+        ],
+        "docs": 29
+      },
+      {
+        "shard": "S21",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act27side",
+            "blocks": 135,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/memory::memory_phenxi",
+            "blocks": 19,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/main::main_st16",
+            "blocks": 11,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_firwhl",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_beewax",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_wang",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_wscoot",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue2_ending_2",
+            "blocks": 1,
+            "docs": 1
+          }
+        ],
+        "docs": 28
+      },
+      {
+        "shard": "S22",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "obt/main::main_ep16",
+            "blocks": 135,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/memory::memory_strong",
+            "blocks": 19,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_aglina",
+            "blocks": 11,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_flint",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_bena",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_wildmn",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_akafyu",
+            "blocks": 6,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue5_ending_1",
+            "blocks": 2,
+            "docs": 1
+          }
+        ],
+        "docs": 28
+      },
+      {
+        "shard": "S23",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act37side",
+            "blocks": 134,
+            "docs": 18
+          },
+          {
+            "chapter": "obt/main::main_ep01",
+            "blocks": 19,
+            "docs": 12
+          },
+          {
+            "chapter": "obt/memory::memory_nights",
+            "blocks": 12,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_frncat",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_billro",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_windft",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_almond",
+            "blocks": 6,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue5_ending_4",
+            "blocks": 2,
+            "docs": 1
+          }
+        ],
+        "docs": 37
+      },
+      {
+        "shard": "S24",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act53side",
+            "blocks": 134,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/memory::memory_headbr",
+            "blocks": 19,
+            "docs": 2
+          },
+          {
+            "chapter": "activities::act11d7",
+            "blocks": 11,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_erato",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_ash",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_swllow",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_vendla",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue5_ending_5",
+            "blocks": 2,
+            "docs": 1
+          }
+        ],
+        "docs": 27
+      },
+      {
+        "shard": "S25",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act47side",
+            "blocks": 133,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/memory::memory_nymph",
+            "blocks": 20,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/main::main_main",
+            "blocks": 11,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_estell",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_ashlok",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_tuye",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_wanqin",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue6_ending_1",
+            "blocks": 2,
+            "docs": 1
+          }
+        ],
+        "docs": 27
+      },
+      {
+        "shard": "S26",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "obt/main::main_ep15",
+            "blocks": 133,
+            "docs": 22
+          },
+          {
+            "chapter": "obt/memory::memory_quercu",
+            "blocks": 20,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/main::main_spst16",
+            "blocks": 11,
+            "docs": 4
+          },
+          {
+            "chapter": "obt/memory::memory_finlpp",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_beagle",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_waaifu",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_warmy",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue6_ending_3",
+            "blocks": 2,
+            "docs": 1
+          }
+        ],
+        "docs": 33
+      },
+      {
+        "shard": "S27",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "activities::act39side",
+            "blocks": 127,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/memory::memory_ghost",
+            "blocks": 21,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_amgoat",
+            "blocks": 13,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_archet",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_mm",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_kaitou",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_leto",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_leizi",
+            "blocks": 5,
+            "docs": 1
+          }
+        ],
+        "docs": 28
+      },
+      {
+        "shard": "S28",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "obt/main::main_ep12",
+            "blocks": 127,
+            "docs": 24
+          },
+          {
+            "chapter": "obt/memory::memory_savage",
+            "blocks": 21,
+            "docs": 3
+          },
+          {
+            "chapter": "obt/memory::memory_deepcl",
+            "blocks": 13,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_aroma",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_mudrok",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_kalts",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_ling",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_melan",
+            "blocks": 5,
+            "docs": 1
+          }
+        ],
+        "docs": 34
+      },
+      {
+        "shard": "S29",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "activities::act28side",
+            "blocks": 126,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/memory::memory_breeze",
+            "blocks": 21,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_mostma",
+            "blocks": 14,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_bgsnow",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_nblade",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_lessng",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_mantra",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_milu",
+            "blocks": 5,
+            "docs": 1
+          }
+        ],
+        "docs": 28
+      },
+      {
+        "shard": "S30",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "activities::act26side",
+            "blocks": 124,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/main::main_ep00",
+            "blocks": 21,
+            "docs": 12
+          },
+          {
+            "chapter": "obt/memory::memory_franka",
+            "blocks": 15,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_halo2",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_nothin",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_lmlee",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_medic2",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_phatom",
+            "blocks": 5,
+            "docs": 1
+          }
+        ],
+        "docs": 38
+      },
+      {
+        "shard": "S31",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "activities::act52side",
+            "blocks": 122,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/main::main_st06",
+            "blocks": 24,
+            "docs": 3
+          },
+          {
+            "chapter": "obt/memory::memory_catap",
+            "blocks": 14,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_narant",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_nowell",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_lolxh",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_mlyss",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_platnm",
+            "blocks": 5,
+            "docs": 1
+          }
+        ],
+        "docs": 29
+      },
+      {
+        "shard": "S32",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "activities::act19side",
+            "blocks": 121,
+            "docs": 20
+          },
+          {
+            "chapter": "obt/main::main_st11",
+            "blocks": 27,
+            "docs": 3
+          },
+          {
+            "chapter": "obt/memory::memory_durnar",
+            "blocks": 13,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_blkkgt",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_pudd",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_lumen",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_moeshd",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_skadi",
+            "blocks": 5,
+            "docs": 1
+          }
+        ],
+        "docs": 30
+      },
+      {
+        "shard": "S33",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "obt/main::main_ep11",
+            "blocks": 120,
+            "docs": 24
+          },
+          {
+            "chapter": "obt/main::main_st10",
+            "blocks": 27,
+            "docs": 4
+          },
+          {
+            "chapter": "obt/memory::memory_otter",
+            "blocks": 14,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_botany",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_qiubai",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_mantic",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_nian",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_12fce",
+            "blocks": 4,
+            "docs": 1
+          }
+        ],
+        "docs": 35
+      },
+      {
+        "shard": "S34",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act35side",
+            "blocks": 118,
+            "docs": 19
+          },
+          {
+            "chapter": "activities::a001",
+            "blocks": 27,
+            "docs": 16
+          },
+          {
+            "chapter": "obt/memory::memory_hadiya",
+            "blocks": 15,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_qanik",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_quartz",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_mberry",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_panda",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_aprot2",
+            "blocks": 4,
+            "docs": 1
+          }
+        ],
+        "docs": 42
+      },
+      {
+        "shard": "S35",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act23side",
+            "blocks": 115,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/memory::memory_svrash",
+            "blocks": 29,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_sora",
+            "blocks": 16,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_saga",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_rdoc",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_midn",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_peper",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_vigna",
+            "blocks": 4,
+            "docs": 1
+          }
+        ],
+        "docs": 28
+      },
+      {
+        "shard": "S36",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "activities::act15side",
+            "blocks": 114,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/main::main_ep03",
+            "blocks": 29,
+            "docs": 16
+          },
+          {
+            "chapter": "obt/memory::memory_hmau",
+            "blocks": 16,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_demetr",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_lasher",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_folivo",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_graceb",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_kichi",
+            "blocks": 6,
+            "docs": 1
+          }
+        ],
+        "docs": 42
+      },
+      {
+        "shard": "S37",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "activities::act41side",
+            "blocks": 114,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/main::main_st07",
+            "blocks": 29,
+            "docs": 4
+          },
+          {
+            "chapter": "obt/memory::memory_liskam",
+            "blocks": 16,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_doroth",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_liesel",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_folnic",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_gravel",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_kroos",
+            "blocks": 6,
+            "docs": 1
+          }
+        ],
+        "docs": 30
+      },
+      {
+        "shard": "S38",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act31side",
+            "blocks": 111,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/main::main_st09",
+            "blocks": 30,
+            "docs": 4
+          },
+          {
+            "chapter": "obt/memory::memory_kirara",
+            "blocks": 17,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_chen",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_hibisc",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_christ",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_cerber",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_bpipe",
+            "blocks": 6,
+            "docs": 1
+          }
+        ],
+        "docs": 30
+      },
+      {
+        "shard": "S39",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act48side",
+            "blocks": 111,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/main::main_ep02",
+            "blocks": 29,
+            "docs": 20
+          },
+          {
+            "chapter": "obt/memory::memory_slchan",
+            "blocks": 18,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_closur",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_hsguma",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_chyue",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_cgbird",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_bstalk",
+            "blocks": 6,
+            "docs": 1
+          }
+        ],
+        "docs": 46
+      },
+      {
+        "shard": "S40",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "activities::act32side",
+            "blocks": 110,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/main::main_ep04",
+            "blocks": 32,
+            "docs": 20
+          },
+          {
+            "chapter": "obt/memory::memory_rfalcn",
+            "blocks": 17,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_dusk",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_lin",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_greyy2",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_greyy",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_noirc",
+            "blocks": 6,
+            "docs": 1
+          }
+        ],
+        "docs": 46
+      },
+      {
+        "shard": "S41",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act18side",
+            "blocks": 109,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/main::main_st14",
+            "blocks": 38,
+            "docs": 3
+          },
+          {
+            "chapter": "obt/memory::memory_ray",
+            "blocks": 14,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_buildr",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_sddrag",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_mint",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_plosis",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_yuki",
+            "blocks": 4,
+            "docs": 1
+          }
+        ],
+        "docs": 29
+      },
+      {
+        "shard": "S42",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act43side",
+            "blocks": 109,
+            "docs": 19
+          },
+          {
+            "chapter": "activities::act6d5",
+            "blocks": 37,
+            "docs": 3
+          },
+          {
+            "chapter": "obt/memory::memory_ceylon",
+            "blocks": 14,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_snsant",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_sesa",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_morgan",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_podego",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/main::main_st05",
+            "blocks": 3,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue2_ending_3",
+            "blocks": 1,
+            "docs": 1
+          }
+        ],
+        "docs": 30
+      },
+      {
+        "shard": "S43",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act24side",
+            "blocks": 108,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/main::main_st13",
+            "blocks": 38,
+            "docs": 3
+          },
+          {
+            "chapter": "obt/memory::memory_chen2",
+            "blocks": 14,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_sntlla",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_silent",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_myrrh",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_reckpr",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/rogue::rogue_month_chat_rogue_1_1",
+            "blocks": 3,
+            "docs": 3
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue2_ending_4",
+            "blocks": 1,
+            "docs": 1
+          }
+        ],
+        "docs": 32
+      },
+      {
+        "shard": "S44",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act20side",
+            "blocks": 107,
+            "docs": 18
+          },
+          {
+            "chapter": "obt/main::main_ep05",
+            "blocks": 38,
+            "docs": 16
+          },
+          {
+            "chapter": "obt/memory::memory_orchid",
+            "blocks": 15,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_tknogi",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_spikes",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_myrtle",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_robrta",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/rogue::rogue_month_chat_rogue_1_2",
+            "blocks": 3,
+            "docs": 3
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue2_entry",
+            "blocks": 1,
+            "docs": 1
+          }
+        ],
+        "docs": 44
+      },
+      {
+        "shard": "S45",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "obt/main::main_ep07",
+            "blocks": 103,
+            "docs": 16
+          },
+          {
+            "chapter": "obt/rogue::rogue_rogue_2",
+            "blocks": 44,
+            "docs": 36
+          },
+          {
+            "chapter": "obt/memory::memory_shotst",
+            "blocks": 14,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_cammou",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_swire",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_ncdeer",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_rockr",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/rogue::rogue_month_chat_rogue_1_3",
+            "blocks": 3,
+            "docs": 3
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue3_ending_2",
+            "blocks": 1,
+            "docs": 1
+          }
+        ],
+        "docs": 62
+      },
+      {
+        "shard": "S46",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act16side",
+            "blocks": 102,
+            "docs": 18
+          },
+          {
+            "chapter": "activities::act4d0",
+            "blocks": 45,
+            "docs": 7
+          },
+          {
+            "chapter": "obt/memory::memory_shwaz",
+            "blocks": 14,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_caper",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_tanya",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_nearl2",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_serum",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/rogue::rogue_month_chat_rogue_1_4",
+            "blocks": 3,
+            "docs": 3
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue3_ending_4",
+            "blocks": 1,
+            "docs": 1
+          }
+        ],
+        "docs": 35
+      },
+      {
+        "shard": "S47",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act13d5",
+            "blocks": 99,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/main::main_st08",
+            "blocks": 51,
+            "docs": 6
+          },
+          {
+            "chapter": "obt/memory::memory_totter",
+            "blocks": 13,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_ela",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_ardign",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_skfire",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_takila",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue2_ending_1",
+            "blocks": 2,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue3_entry",
+            "blocks": 1,
+            "docs": 1
+          }
+        ],
+        "docs": 33
+      },
+      {
+        "shard": "S48",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act18d3",
+            "blocks": 99,
+            "docs": 18
+          },
+          {
+            "chapter": "obt/main::main_st17",
+            "blocks": 46,
+            "docs": 4
+          },
+          {
+            "chapter": "obt/memory::memory_sleach",
+            "blocks": 15,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_turdus",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_tecno",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_papyrs",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_shining",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/rogue::rogue_month_chat_rogue_1_5",
+            "blocks": 3,
+            "docs": 3
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue4_ending_3",
+            "blocks": 1,
+            "docs": 1
+          }
+        ],
+        "docs": 32
+      },
+      {
+        "shard": "S49",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act18d0",
+            "blocks": 98,
+            "docs": 14
+          },
+          {
+            "chapter": "activities::act3d0",
+            "blocks": 52,
+            "docs": 25
+          },
+          {
+            "chapter": "obt/memory::memory_cetsyr",
+            "blocks": 12,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_chiave",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_wyvern",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_slbell",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_texas",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue3_ending_1",
+            "blocks": 2,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue4_entry",
+            "blocks": 1,
+            "docs": 1
+          }
+        ],
+        "docs": 46
+      },
+      {
+        "shard": "S50",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act22side",
+            "blocks": 96,
+            "docs": 18
+          },
+          {
+            "chapter": "activities::act11mini",
+            "blocks": 52,
+            "docs": 6
+          },
+          {
+            "chapter": "obt/memory::memory_f12yin",
+            "blocks": 13,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_cast3",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_tmslot",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_poca",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_shu",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/rogue::rogue_month_chat_rogue_1_6",
+            "blocks": 3,
+            "docs": 3
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue5_ending_2",
+            "blocks": 1,
+            "docs": 1
+          }
+        ],
+        "docs": 34
+      },
+      {
+        "shard": "S51",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "obt/main::main_ep09",
+            "blocks": 95,
+            "docs": 16
+          },
+          {
+            "chapter": "activities::act13mini",
+            "blocks": 54,
+            "docs": 6
+          },
+          {
+            "chapter": "obt/memory::memory_pinecn",
+            "blocks": 13,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_confes",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_xingzh",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_spot",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_therex",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue3_ending_3",
+            "blocks": 2,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue5_ending_3",
+            "blocks": 1,
+            "docs": 1
+          }
+        ],
+        "docs": 30
+      },
+      {
+        "shard": "S52",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act11d0",
+            "blocks": 91,
+            "docs": 20
+          },
+          {
+            "chapter": "activities::act7d5",
+            "blocks": 56,
+            "docs": 6
+          },
+          {
+            "chapter": "obt/memory::memory_weedy",
+            "blocks": 14,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_cathy",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_tomimi",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_provs",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_sidero",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/rogue::rogue_month_chat_rogue_1_7",
+            "blocks": 3,
+            "docs": 3
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue5_entry",
+            "blocks": 1,
+            "docs": 1
+          }
+        ],
+        "docs": 36
+      },
+      {
+        "shard": "S53",
+        "blocks": 197,
+        "chapters": [
+          {
+            "chapter": "activities::act5d0",
+            "blocks": 88,
+            "docs": 27
+          },
+          {
+            "chapter": "activities::act13d0",
+            "blocks": 57,
+            "docs": 7
+          },
+          {
+            "chapter": "obt/memory::memory_utage",
+            "blocks": 15,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_vodfox",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_udflow",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_puzzle",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_skybx",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/rogue::rogue_month_chat_rogue_1_8",
+            "blocks": 3,
+            "docs": 3
+          }
+        ],
+        "docs": 43
+      },
+      {
+        "shard": "S54",
+        "blocks": 197,
+        "chapters": [
+          {
+            "chapter": "activities::act50side",
+            "blocks": 86,
+            "docs": 18
+          },
+          {
+            "chapter": "activities::act9d0",
+            "blocks": 61,
+            "docs": 13
+          },
+          {
+            "chapter": "obt/main::main_spst08",
+            "blocks": 13,
+            "docs": 5
+          },
+          {
+            "chapter": "obt/memory::memory_vvana",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_vrdant",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_robin",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_snakek",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue4_ending_1",
+            "blocks": 3,
+            "docs": 1
+          }
+        ],
+        "docs": 41
+      },
+      {
+        "shard": "S55",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "obt/main::main_ep06",
+            "blocks": 86,
+            "docs": 24
+          },
+          {
+            "chapter": "activities::act9mini",
+            "blocks": 58,
+            "docs": 7
+          },
+          {
+            "chapter": "obt/memory::memory_sqrrel",
+            "blocks": 16,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_absin",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_lionhd",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_haak",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_halo",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_rfrost",
+            "blocks": 6,
+            "docs": 1
+          }
+        ],
+        "docs": 38
+      },
+      {
+        "shard": "S56",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "obt/rogue::rogue_rogue_4",
+            "blocks": 85,
+            "docs": 44
+          },
+          {
+            "chapter": "activities::act8mini",
+            "blocks": 61,
+            "docs": 6
+          },
+          {
+            "chapter": "obt/memory::memory_excu",
+            "blocks": 14,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_acdrop",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_lunacu",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_haini",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_harold",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_scave",
+            "blocks": 6,
+            "docs": 1
+          }
+        ],
+        "docs": 57
+      },
+      {
+        "shard": "S57",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "activities::act54side",
+            "blocks": 83,
+            "docs": 13
+          },
+          {
+            "chapter": "activities::act15d5",
+            "blocks": 62,
+            "docs": 7
+          },
+          {
+            "chapter": "obt/memory::memory_bldsk",
+            "blocks": 14,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_elysm",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_luton",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_hbisc2",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_helage",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_surfer",
+            "blocks": 6,
+            "docs": 1
+          }
+        ],
+        "docs": 27
+      },
+      {
+        "shard": "S58",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "obt/rogue::rogue_rogue_5",
+            "blocks": 83,
+            "docs": 44
+          },
+          {
+            "chapter": "activities::act7mini",
+            "blocks": 61,
+            "docs": 6
+          },
+          {
+            "chapter": "obt/memory::memory_sunbr",
+            "blocks": 16,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_adnach",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_malist",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_horn",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_hpsts",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_toddi",
+            "blocks": 6,
+            "docs": 1
+          }
+        ],
+        "docs": 57
+      },
+      {
+        "shard": "S59",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "activities::act12side",
+            "blocks": 81,
+            "docs": 20
+          },
+          {
+            "chapter": "activities::act14mini",
+            "blocks": 65,
+            "docs": 6
+          },
+          {
+            "chapter": "obt/memory::memory_lava",
+            "blocks": 14,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_alanna",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_melnte",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_huang",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_indigo",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_yak",
+            "blocks": 6,
+            "docs": 1
+          }
+        ],
+        "docs": 33
+      },
+      {
+        "shard": "S60",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act36side",
+            "blocks": 81,
+            "docs": 16
+          },
+          {
+            "chapter": "obt/rogue::rogue_rogue_6",
+            "blocks": 63,
+            "docs": 24
+          },
+          {
+            "chapter": "obt/memory::memory_angel",
+            "blocks": 15,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_glacus",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_meteo",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_ifrit",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_inside",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/main::main_spst14",
+            "blocks": 5,
+            "docs": 1
+          }
+        ],
+        "docs": 47
+      },
+      {
+        "shard": "S61",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act15mini",
+            "blocks": 75,
+            "docs": 7
+          },
+          {
+            "chapter": "activities::act19mini",
+            "blocks": 66,
+            "docs": 7
+          },
+          {
+            "chapter": "obt/memory::memory_mitm",
+            "blocks": 17,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_crow",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_humus",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_clour",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_cutter",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_durin",
+            "blocks": 6,
+            "docs": 1
+          }
+        ],
+        "docs": 21
+      },
+      {
+        "shard": "S62",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "obt/rogue::rogue_rogue_3",
+            "blocks": 74,
+            "docs": 53
+          },
+          {
+            "chapter": "activities::act18mini",
+            "blocks": 67,
+            "docs": 6
+          },
+          {
+            "chapter": "obt/memory::memory_pianst",
+            "blocks": 17,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_dagda",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_iana",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_coldst",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_ethan",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_falco",
+            "blocks": 6,
+            "docs": 1
+          }
+        ],
+        "docs": 66
+      },
+      {
+        "shard": "S63",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act15d0",
+            "blocks": 73,
+            "docs": 18
+          },
+          {
+            "chapter": "activities::act12mini",
+            "blocks": 67,
+            "docs": 7
+          },
+          {
+            "chapter": "obt/main::main_st12",
+            "blocks": 17,
+            "docs": 3
+          },
+          {
+            "chapter": "obt/memory::memory_iris",
+            "blocks": 11,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_jaksel",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_crosly",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_excu2",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_fmout",
+            "blocks": 6,
+            "docs": 1
+          }
+        ],
+        "docs": 33
+      },
+      {
+        "shard": "S64",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act21mini",
+            "blocks": 72,
+            "docs": 7
+          },
+          {
+            "chapter": "activities::act10mini",
+            "blocks": 67,
+            "docs": 6
+          },
+          {
+            "chapter": "obt/memory::memory_blackd",
+            "blocks": 18,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_philae",
+            "blocks": 11,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_jesca2",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_ctrail",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_fartth",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_forcer",
+            "blocks": 6,
+            "docs": 1
+          }
+        ],
+        "docs": 20
+      },
+      {
+        "shard": "S65",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act45side",
+            "blocks": 72,
+            "docs": 17
+          },
+          {
+            "chapter": "activities::act12d0",
+            "blocks": 67,
+            "docs": 21
+          },
+          {
+            "chapter": "obt/memory::memory_glassb",
+            "blocks": 18,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_tinman",
+            "blocks": 11,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_ju",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_demkni",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_ghost2",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_glady",
+            "blocks": 6,
+            "docs": 1
+          }
+        ],
+        "docs": 45
+      },
+      {
+        "shard": "S66",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act16d5",
+            "blocks": 71,
+            "docs": 17
+          },
+          {
+            "chapter": "activities::act16mini",
+            "blocks": 69,
+            "docs": 6
+          },
+          {
+            "chapter": "obt/memory::memory_bibeak",
+            "blocks": 17,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_zebra",
+            "blocks": 11,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_judge",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_fang",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_glaze",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_hamoni",
+            "blocks": 6,
+            "docs": 1
+          }
+        ],
+        "docs": 30
+      },
+      {
+        "shard": "S67",
+        "blocks": 197,
+        "chapters": [
+          {
+            "chapter": "activities::act17mini",
+            "blocks": 71,
+            "docs": 6
+          },
+          {
+            "chapter": "activities::act20mini",
+            "blocks": 68,
+            "docs": 6
+          },
+          {
+            "chapter": "obt/memory::memory_prove",
+            "blocks": 18,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_agoat2",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_grani",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_cello",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_blkngt",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_aurora",
+            "blocks": 6,
+            "docs": 1
+          }
+        ],
+        "docs": 19
+      },
+      {
+        "shard": "S68",
+        "blocks": 197,
+        "chapters": [
+          {
+            "chapter": "activities::act10d5",
+            "blocks": 70,
+            "docs": 7
+          },
+          {
+            "chapter": "activities::act17d0",
+            "blocks": 70,
+            "docs": 17
+          },
+          {
+            "chapter": "obt/memory::memory_flower",
+            "blocks": 17,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_ayer",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_gyuki",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_chimes",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_brigid",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_blitz",
+            "blocks": 6,
+            "docs": 1
+          }
+        ],
+        "docs": 31
+      }
+    ],
+    "concurrency_plan": "2 片并行 x 每片并发 4 = 全局 8"
+  },
+  "full": {
+    "chunks": 13786,
+    "shards": [
+      {
+        "shard": "S00",
+        "blocks": 229,
+        "chapters": [
+          {
+            "chapter": "obt/main::main_ep14",
+            "blocks": 229,
+            "docs": 36
+          }
+        ],
+        "docs": 36
+      },
+      {
+        "shard": "S01",
+        "blocks": 225,
+        "chapters": [
+          {
+            "chapter": "activities::act29side",
+            "blocks": 225,
+            "docs": 23
+          }
+        ],
+        "docs": 23
+      },
+      {
+        "shard": "S02",
+        "blocks": 223,
+        "chapters": [
+          {
+            "chapter": "activities::act13side",
+            "blocks": 223,
+            "docs": 27
+          }
+        ],
+        "docs": 27
+      },
+      {
+        "shard": "S03",
+        "blocks": 218,
+        "chapters": [
+          {
+            "chapter": "activities::act25side",
+            "blocks": 218,
+            "docs": 24
+          }
+        ],
+        "docs": 24
+      },
+      {
+        "shard": "S04",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "obt/main::main_ep17",
+            "blocks": 199,
+            "docs": 18
+          }
+        ],
+        "docs": 18
+      },
+      {
+        "shard": "S05",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "activities::act42side",
+            "blocks": 197,
+            "docs": 24
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue6_ending_3",
+            "blocks": 2,
+            "docs": 1
+          }
+        ],
+        "docs": 25
+      },
+      {
+        "shard": "S06",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act46side",
+            "blocks": 189,
+            "docs": 24
+          },
+          {
+            "chapter": "obt/memory::memory_thorns",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue3_ending_3",
+            "blocks": 2,
+            "docs": 1
+          }
+        ],
+        "docs": 26
+      },
+      {
+        "shard": "S07",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "activities::act38side",
+            "blocks": 187,
+            "docs": 24
+          },
+          {
+            "chapter": "obt/memory::memory_jnight",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/main::main_spst14",
+            "blocks": 5,
+            "docs": 1
+          }
+        ],
+        "docs": 26
+      },
+      {
+        "shard": "S08",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "obt/main::main_ep13",
+            "blocks": 180,
+            "docs": 24
+          },
+          {
+            "chapter": "obt/memory::memory_rope",
+            "blocks": 8,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_snhunt",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue4_ending_1",
+            "blocks": 3,
+            "docs": 1
+          }
+        ],
+        "docs": 28
+      },
+      {
+        "shard": "S09",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "activities::act21side",
+            "blocks": 175,
+            "docs": 24
+          },
+          {
+            "chapter": "obt/memory::memory_bobb",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_wulfen",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_aosta",
+            "blocks": 6,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue6_entry",
+            "blocks": 2,
+            "docs": 1
+          }
+        ],
+        "docs": 28
+      },
+      {
+        "shard": "S10",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "activities::act17side",
+            "blocks": 169,
+            "docs": 24
+          },
+          {
+            "chapter": "obt/memory::memory_kafka",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_flamtl",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_grabds",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_irene",
+            "blocks": 6,
+            "docs": 1
+          }
+        ],
+        "docs": 28
+      },
+      {
+        "shard": "S11",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act49side",
+            "blocks": 163,
+            "docs": 24
+          },
+          {
+            "chapter": "obt/memory::memory_ctable",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_yu",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_spuria",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_tiger",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue4_ending_2",
+            "blocks": 2,
+            "docs": 1
+          }
+        ],
+        "docs": 29
+      },
+      {
+        "shard": "S12",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "obt/main::main_ep10",
+            "blocks": 155,
+            "docs": 24
+          },
+          {
+            "chapter": "obt/memory::memory_blemsh",
+            "blocks": 11,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_frostl",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_branch",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_aprl",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_whispr",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue1_ending_1",
+            "blocks": 1,
+            "docs": 1
+          }
+        ],
+        "docs": 30
+      },
+      {
+        "shard": "S13",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act51side",
+            "blocks": 151,
+            "docs": 18
+          },
+          {
+            "chapter": "obt/memory::memory_makiri",
+            "blocks": 12,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_doberm",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_zumama",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_susuro",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_tippi",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue4_ending_4",
+            "blocks": 2,
+            "docs": 1
+          }
+        ],
+        "docs": 24
+      },
+      {
+        "shard": "S14",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act33side",
+            "blocks": 150,
+            "docs": 23
+          },
+          {
+            "chapter": "obt/memory::memory_popka",
+            "blocks": 13,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_ebnhlz",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_ansel",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_rosesa",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_sophia",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue6_ending_2",
+            "blocks": 3,
+            "docs": 1
+          }
+        ],
+        "docs": 30
+      },
+      {
+        "shard": "S15",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act30side",
+            "blocks": 149,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/memory::memory_headb2",
+            "blocks": 13,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_cement",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_wintim",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_siege",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_tachak",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue6_ending_4",
+            "blocks": 3,
+            "docs": 1
+          }
+        ],
+        "docs": 25
+      },
+      {
+        "shard": "S16",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "activities::act34side",
+            "blocks": 144,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/memory::memory_skgoat",
+            "blocks": 16,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_glider",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_mgllan",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_ironmn",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_kjera",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_baslin",
+            "blocks": 5,
+            "docs": 1
+          }
+        ],
+        "docs": 26
+      },
+      {
+        "shard": "S17",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "activities::act14side",
+            "blocks": 143,
+            "docs": 20
+          },
+          {
+            "chapter": "obt/memory::memory_vigil",
+            "blocks": 17,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_gnosis",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_mizuki",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_jesica",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_kroos2",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_bdhkgt",
+            "blocks": 5,
+            "docs": 1
+          }
+        ],
+        "docs": 27
+      },
+      {
+        "shard": "S18",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "obt/main::main_ep08",
+            "blocks": 141,
+            "docs": 28
+          },
+          {
+            "chapter": "obt/memory::memory_kazema",
+            "blocks": 17,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_bryota",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_heidi",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_chnut",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_ccheal",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_bluep",
+            "blocks": 6,
+            "docs": 1
+          }
+        ],
+        "docs": 35
+      },
+      {
+        "shard": "S19",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act40side",
+            "blocks": 138,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/memory::memory_astesi",
+            "blocks": 18,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_gvial2",
+            "blocks": 11,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_gdglow",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_bubble",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_bison",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_ascln",
+            "blocks": 6,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue1_ending_2",
+            "blocks": 1,
+            "docs": 1
+          }
+        ],
+        "docs": 27
+      },
+      {
+        "shard": "S20",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act44side",
+            "blocks": 137,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/main::main_st15",
+            "blocks": 18,
+            "docs": 3
+          },
+          {
+            "chapter": "obt/memory::memory_broca",
+            "blocks": 11,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_fuze",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_brownb",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_asbest",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_whitw2",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue1_ending_3",
+            "blocks": 1,
+            "docs": 1
+          }
+        ],
+        "docs": 29
+      },
+      {
+        "shard": "S21",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act27side",
+            "blocks": 135,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/memory::memory_phenxi",
+            "blocks": 19,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/main::main_st16",
+            "blocks": 11,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_firwhl",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_beewax",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_wang",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_wscoot",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue1_ending_4",
+            "blocks": 1,
+            "docs": 1
+          }
+        ],
+        "docs": 28
+      },
+      {
+        "shard": "S22",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "obt/main::main_ep16",
+            "blocks": 135,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/memory::memory_strong",
+            "blocks": 19,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_aglina",
+            "blocks": 11,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_flint",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_bena",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_wildmn",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_akafyu",
+            "blocks": 6,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue4_ending_5",
+            "blocks": 2,
+            "docs": 1
+          }
+        ],
+        "docs": 28
+      },
+      {
+        "shard": "S23",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act37side",
+            "blocks": 134,
+            "docs": 18
+          },
+          {
+            "chapter": "obt/main::main_ep01",
+            "blocks": 19,
+            "docs": 12
+          },
+          {
+            "chapter": "obt/memory::memory_nights",
+            "blocks": 12,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_frncat",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_billro",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_windft",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_almond",
+            "blocks": 6,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue5_ending_1",
+            "blocks": 2,
+            "docs": 1
+          }
+        ],
+        "docs": 37
+      },
+      {
+        "shard": "S24",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act53side",
+            "blocks": 134,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/memory::memory_headbr",
+            "blocks": 19,
+            "docs": 2
+          },
+          {
+            "chapter": "activities::act11d7",
+            "blocks": 11,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_erato",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_ash",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_swllow",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_vendla",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue5_ending_4",
+            "blocks": 2,
+            "docs": 1
+          }
+        ],
+        "docs": 27
+      },
+      {
+        "shard": "S25",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act47side",
+            "blocks": 133,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/memory::memory_nymph",
+            "blocks": 20,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/main::main_main",
+            "blocks": 11,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_estell",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_ashlok",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_tuye",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_wanqin",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue5_ending_5",
+            "blocks": 2,
+            "docs": 1
+          }
+        ],
+        "docs": 27
+      },
+      {
+        "shard": "S26",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "obt/main::main_ep15",
+            "blocks": 133,
+            "docs": 22
+          },
+          {
+            "chapter": "obt/memory::memory_quercu",
+            "blocks": 20,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/main::main_spst16",
+            "blocks": 11,
+            "docs": 4
+          },
+          {
+            "chapter": "obt/memory::memory_finlpp",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_beagle",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_waaifu",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_warmy",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue6_ending_1",
+            "blocks": 2,
+            "docs": 1
+          }
+        ],
+        "docs": 33
+      },
+      {
+        "shard": "S27",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "activities::act39side",
+            "blocks": 127,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/memory::memory_ghost",
+            "blocks": 21,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_amgoat",
+            "blocks": 13,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_archet",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_mm",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_kaitou",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_leto",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_lava2",
+            "blocks": 5,
+            "docs": 1
+          }
+        ],
+        "docs": 28
+      },
+      {
+        "shard": "S28",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "obt/main::main_ep12",
+            "blocks": 127,
+            "docs": 24
+          },
+          {
+            "chapter": "obt/memory::memory_savage",
+            "blocks": 21,
+            "docs": 3
+          },
+          {
+            "chapter": "obt/memory::memory_deepcl",
+            "blocks": 13,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_aroma",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_mudrok",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_kalts",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_ling",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_leizi",
+            "blocks": 5,
+            "docs": 1
+          }
+        ],
+        "docs": 34
+      },
+      {
+        "shard": "S29",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "activities::act28side",
+            "blocks": 126,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/memory::memory_breeze",
+            "blocks": 21,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_mostma",
+            "blocks": 14,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_bgsnow",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_nblade",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_lessng",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_mantra",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_melan",
+            "blocks": 5,
+            "docs": 1
+          }
+        ],
+        "docs": 28
+      },
+      {
+        "shard": "S30",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "activities::act26side",
+            "blocks": 124,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/main::main_ep00",
+            "blocks": 21,
+            "docs": 12
+          },
+          {
+            "chapter": "obt/memory::memory_franka",
+            "blocks": 15,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_halo2",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_nothin",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_lmlee",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_medic2",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_milu",
+            "blocks": 5,
+            "docs": 1
+          }
+        ],
+        "docs": 38
+      },
+      {
+        "shard": "S31",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "activities::act52side",
+            "blocks": 122,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/main::main_st06",
+            "blocks": 24,
+            "docs": 3
+          },
+          {
+            "chapter": "obt/memory::memory_catap",
+            "blocks": 14,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_narant",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_nowell",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_lolxh",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_mlyss",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_phatom",
+            "blocks": 5,
+            "docs": 1
+          }
+        ],
+        "docs": 29
+      },
+      {
+        "shard": "S32",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "activities::act19side",
+            "blocks": 121,
+            "docs": 20
+          },
+          {
+            "chapter": "obt/main::main_st11",
+            "blocks": 27,
+            "docs": 3
+          },
+          {
+            "chapter": "obt/memory::memory_durnar",
+            "blocks": 13,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_blkkgt",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_pudd",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_lumen",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_moeshd",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_platnm",
+            "blocks": 5,
+            "docs": 1
+          }
+        ],
+        "docs": 30
+      },
+      {
+        "shard": "S33",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "obt/main::main_ep11",
+            "blocks": 120,
+            "docs": 24
+          },
+          {
+            "chapter": "obt/main::main_st10",
+            "blocks": 27,
+            "docs": 4
+          },
+          {
+            "chapter": "obt/memory::memory_otter",
+            "blocks": 14,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_botany",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_qiubai",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_mantic",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_nian",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_skadi",
+            "blocks": 5,
+            "docs": 1
+          }
+        ],
+        "docs": 35
+      },
+      {
+        "shard": "S34",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act35side",
+            "blocks": 118,
+            "docs": 19
+          },
+          {
+            "chapter": "activities::a001",
+            "blocks": 27,
+            "docs": 16
+          },
+          {
+            "chapter": "obt/memory::memory_hadiya",
+            "blocks": 15,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_qanik",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_quartz",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_mberry",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_panda",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_12fce",
+            "blocks": 4,
+            "docs": 1
+          }
+        ],
+        "docs": 42
+      },
+      {
+        "shard": "S35",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act23side",
+            "blocks": 115,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/memory::memory_svrash",
+            "blocks": 29,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_sora",
+            "blocks": 16,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_saga",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_rdoc",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_midn",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_peper",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_aprot2",
+            "blocks": 4,
+            "docs": 1
+          }
+        ],
+        "docs": 28
+      },
+      {
+        "shard": "S36",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "activities::act15side",
+            "blocks": 114,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/main::main_ep03",
+            "blocks": 29,
+            "docs": 16
+          },
+          {
+            "chapter": "obt/memory::memory_hmau",
+            "blocks": 16,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_demetr",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_lasher",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_folivo",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_graceb",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_kichi",
+            "blocks": 6,
+            "docs": 1
+          }
+        ],
+        "docs": 42
+      },
+      {
+        "shard": "S37",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "activities::act41side",
+            "blocks": 114,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/main::main_st07",
+            "blocks": 29,
+            "docs": 4
+          },
+          {
+            "chapter": "obt/memory::memory_liskam",
+            "blocks": 16,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_doroth",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_liesel",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_folnic",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_gravel",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_kroos",
+            "blocks": 6,
+            "docs": 1
+          }
+        ],
+        "docs": 30
+      },
+      {
+        "shard": "S38",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act31side",
+            "blocks": 111,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/main::main_st09",
+            "blocks": 30,
+            "docs": 4
+          },
+          {
+            "chapter": "obt/memory::memory_kirara",
+            "blocks": 17,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_chen",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_hibisc",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_christ",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_cerber",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_bpipe",
+            "blocks": 6,
+            "docs": 1
+          }
+        ],
+        "docs": 30
+      },
+      {
+        "shard": "S39",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act48side",
+            "blocks": 111,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/main::main_ep02",
+            "blocks": 29,
+            "docs": 20
+          },
+          {
+            "chapter": "obt/memory::memory_slchan",
+            "blocks": 18,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_closur",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_hsguma",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_chyue",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_cgbird",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_bstalk",
+            "blocks": 6,
+            "docs": 1
+          }
+        ],
+        "docs": 46
+      },
+      {
+        "shard": "S40",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "activities::act32side",
+            "blocks": 110,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/main::main_ep04",
+            "blocks": 32,
+            "docs": 20
+          },
+          {
+            "chapter": "obt/memory::memory_rfalcn",
+            "blocks": 17,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_dusk",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_lin",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_greyy2",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_greyy",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_noirc",
+            "blocks": 6,
+            "docs": 1
+          }
+        ],
+        "docs": 46
+      },
+      {
+        "shard": "S41",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act18side",
+            "blocks": 109,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/main::main_st14",
+            "blocks": 38,
+            "docs": 3
+          },
+          {
+            "chapter": "obt/memory::memory_ray",
+            "blocks": 14,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_buildr",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_sddrag",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_mint",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_plosis",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_vigna",
+            "blocks": 4,
+            "docs": 1
+          }
+        ],
+        "docs": 29
+      },
+      {
+        "shard": "S42",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act43side",
+            "blocks": 109,
+            "docs": 19
+          },
+          {
+            "chapter": "activities::act6d5",
+            "blocks": 37,
+            "docs": 3
+          },
+          {
+            "chapter": "obt/memory::memory_ceylon",
+            "blocks": 14,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_snsant",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_sesa",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_morgan",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_podego",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_yuki",
+            "blocks": 4,
+            "docs": 1
+          }
+        ],
+        "docs": 29
+      },
+      {
+        "shard": "S43",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act24side",
+            "blocks": 108,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/main::main_st13",
+            "blocks": 38,
+            "docs": 3
+          },
+          {
+            "chapter": "obt/memory::memory_chen2",
+            "blocks": 14,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_sntlla",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_silent",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_myrrh",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_reckpr",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/main::main_st05",
+            "blocks": 3,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue1_entry",
+            "blocks": 1,
+            "docs": 1
+          }
+        ],
+        "docs": 30
+      },
+      {
+        "shard": "S44",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act20side",
+            "blocks": 107,
+            "docs": 18
+          },
+          {
+            "chapter": "obt/main::main_ep05",
+            "blocks": 38,
+            "docs": 16
+          },
+          {
+            "chapter": "obt/memory::memory_orchid",
+            "blocks": 15,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_tknogi",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_spikes",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_myrtle",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_robrta",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/rogue::rogue_month_chat_rogue_1_1",
+            "blocks": 3,
+            "docs": 3
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue2_ending_2",
+            "blocks": 1,
+            "docs": 1
+          }
+        ],
+        "docs": 44
+      },
+      {
+        "shard": "S45",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "obt/main::main_ep07",
+            "blocks": 103,
+            "docs": 16
+          },
+          {
+            "chapter": "obt/rogue::rogue_rogue_2",
+            "blocks": 44,
+            "docs": 36
+          },
+          {
+            "chapter": "obt/memory::memory_shotst",
+            "blocks": 14,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_cammou",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_swire",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_ncdeer",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_rockr",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/rogue::rogue_month_chat_rogue_1_2",
+            "blocks": 3,
+            "docs": 3
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue2_ending_3",
+            "blocks": 1,
+            "docs": 1
+          }
+        ],
+        "docs": 62
+      },
+      {
+        "shard": "S46",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act16side",
+            "blocks": 102,
+            "docs": 18
+          },
+          {
+            "chapter": "activities::act4d0",
+            "blocks": 45,
+            "docs": 7
+          },
+          {
+            "chapter": "obt/memory::memory_shwaz",
+            "blocks": 14,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_caper",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_tanya",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_nearl2",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_serum",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/rogue::rogue_month_chat_rogue_1_3",
+            "blocks": 3,
+            "docs": 3
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue2_ending_4",
+            "blocks": 1,
+            "docs": 1
+          }
+        ],
+        "docs": 35
+      },
+      {
+        "shard": "S47",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act13d5",
+            "blocks": 99,
+            "docs": 19
+          },
+          {
+            "chapter": "obt/main::main_st08",
+            "blocks": 51,
+            "docs": 6
+          },
+          {
+            "chapter": "obt/memory::memory_totter",
+            "blocks": 13,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_ela",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_ardign",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_skfire",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_takila",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/main::main_spst17",
+            "blocks": 2,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue2_entry",
+            "blocks": 1,
+            "docs": 1
+          }
+        ],
+        "docs": 33
+      },
+      {
+        "shard": "S48",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act18d3",
+            "blocks": 99,
+            "docs": 18
+          },
+          {
+            "chapter": "obt/main::main_st17",
+            "blocks": 46,
+            "docs": 4
+          },
+          {
+            "chapter": "obt/memory::memory_sleach",
+            "blocks": 15,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_turdus",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_tecno",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_papyrs",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_shining",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/rogue::rogue_month_chat_rogue_1_4",
+            "blocks": 3,
+            "docs": 3
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue3_ending_2",
+            "blocks": 1,
+            "docs": 1
+          }
+        ],
+        "docs": 32
+      },
+      {
+        "shard": "S49",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act18d0",
+            "blocks": 98,
+            "docs": 14
+          },
+          {
+            "chapter": "activities::act3d0",
+            "blocks": 52,
+            "docs": 25
+          },
+          {
+            "chapter": "obt/memory::memory_cetsyr",
+            "blocks": 12,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_chiave",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_wyvern",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_slbell",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_texas",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue2_ending_1",
+            "blocks": 2,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue3_ending_4",
+            "blocks": 1,
+            "docs": 1
+          }
+        ],
+        "docs": 46
+      },
+      {
+        "shard": "S50",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act22side",
+            "blocks": 96,
+            "docs": 18
+          },
+          {
+            "chapter": "activities::act11mini",
+            "blocks": 52,
+            "docs": 6
+          },
+          {
+            "chapter": "obt/memory::memory_f12yin",
+            "blocks": 13,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_cast3",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_tmslot",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_poca",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_shu",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/rogue::rogue_month_chat_rogue_1_5",
+            "blocks": 3,
+            "docs": 3
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue3_entry",
+            "blocks": 1,
+            "docs": 1
+          }
+        ],
+        "docs": 34
+      },
+      {
+        "shard": "S51",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "obt/main::main_ep09",
+            "blocks": 95,
+            "docs": 16
+          },
+          {
+            "chapter": "activities::act13mini",
+            "blocks": 54,
+            "docs": 6
+          },
+          {
+            "chapter": "obt/memory::memory_pinecn",
+            "blocks": 13,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_confes",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_xingzh",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_spot",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_therex",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue3_ending_1",
+            "blocks": 2,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue4_ending_3",
+            "blocks": 1,
+            "docs": 1
+          }
+        ],
+        "docs": 30
+      },
+      {
+        "shard": "S52",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act11d0",
+            "blocks": 91,
+            "docs": 20
+          },
+          {
+            "chapter": "activities::act7d5",
+            "blocks": 56,
+            "docs": 6
+          },
+          {
+            "chapter": "obt/memory::memory_weedy",
+            "blocks": 14,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_cathy",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_tomimi",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_provs",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_sidero",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/rogue::rogue_month_chat_rogue_1_6",
+            "blocks": 3,
+            "docs": 3
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue4_entry",
+            "blocks": 1,
+            "docs": 1
+          }
+        ],
+        "docs": 36
+      },
+      {
+        "shard": "S53",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act5d0",
+            "blocks": 88,
+            "docs": 27
+          },
+          {
+            "chapter": "activities::act13d0",
+            "blocks": 57,
+            "docs": 7
+          },
+          {
+            "chapter": "obt/memory::memory_utage",
+            "blocks": 15,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_vodfox",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_udflow",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_puzzle",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_skybx",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/rogue::rogue_month_chat_rogue_1_7",
+            "blocks": 3,
+            "docs": 3
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue5_ending_2",
+            "blocks": 1,
+            "docs": 1
+          }
+        ],
+        "docs": 44
+      },
+      {
+        "shard": "S54",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act50side",
+            "blocks": 86,
+            "docs": 18
+          },
+          {
+            "chapter": "activities::act9d0",
+            "blocks": 61,
+            "docs": 13
+          },
+          {
+            "chapter": "obt/main::main_spst08",
+            "blocks": 13,
+            "docs": 5
+          },
+          {
+            "chapter": "obt/memory::memory_vvana",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_vrdant",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_robin",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_snakek",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/rogue::rogue_month_chat_rogue_1_8",
+            "blocks": 3,
+            "docs": 3
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue5_ending_3",
+            "blocks": 1,
+            "docs": 1
+          }
+        ],
+        "docs": 44
+      },
+      {
+        "shard": "S55",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "obt/main::main_ep06",
+            "blocks": 86,
+            "docs": 24
+          },
+          {
+            "chapter": "activities::act9mini",
+            "blocks": 58,
+            "docs": 7
+          },
+          {
+            "chapter": "obt/memory::memory_sqrrel",
+            "blocks": 16,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_absin",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_lionhd",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_haak",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_halo",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_rfrost",
+            "blocks": 6,
+            "docs": 1
+          }
+        ],
+        "docs": 38
+      },
+      {
+        "shard": "S56",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "obt/rogue::rogue_rogue_4",
+            "blocks": 85,
+            "docs": 44
+          },
+          {
+            "chapter": "activities::act8mini",
+            "blocks": 61,
+            "docs": 6
+          },
+          {
+            "chapter": "obt/memory::memory_excu",
+            "blocks": 14,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_acdrop",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_lunacu",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_haini",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_harold",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_scave",
+            "blocks": 6,
+            "docs": 1
+          }
+        ],
+        "docs": 57
+      },
+      {
+        "shard": "S57",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "activities::act54side",
+            "blocks": 83,
+            "docs": 13
+          },
+          {
+            "chapter": "activities::act15d5",
+            "blocks": 62,
+            "docs": 7
+          },
+          {
+            "chapter": "obt/memory::memory_bldsk",
+            "blocks": 14,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_elysm",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_luton",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_hbisc2",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_helage",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_surfer",
+            "blocks": 6,
+            "docs": 1
+          }
+        ],
+        "docs": 27
+      },
+      {
+        "shard": "S58",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "obt/rogue::rogue_rogue_5",
+            "blocks": 83,
+            "docs": 44
+          },
+          {
+            "chapter": "activities::act7mini",
+            "blocks": 61,
+            "docs": 6
+          },
+          {
+            "chapter": "obt/memory::memory_sunbr",
+            "blocks": 16,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_adnach",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_malist",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_horn",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_hpsts",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_toddi",
+            "blocks": 6,
+            "docs": 1
+          }
+        ],
+        "docs": 57
+      },
+      {
+        "shard": "S59",
+        "blocks": 199,
+        "chapters": [
+          {
+            "chapter": "activities::act12side",
+            "blocks": 81,
+            "docs": 20
+          },
+          {
+            "chapter": "activities::act14mini",
+            "blocks": 65,
+            "docs": 6
+          },
+          {
+            "chapter": "obt/memory::memory_lava",
+            "blocks": 14,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_alanna",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_melnte",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_huang",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_indigo",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_yak",
+            "blocks": 6,
+            "docs": 1
+          }
+        ],
+        "docs": 33
+      },
+      {
+        "shard": "S60",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act36side",
+            "blocks": 81,
+            "docs": 16
+          },
+          {
+            "chapter": "obt/rogue::rogue_rogue_6",
+            "blocks": 63,
+            "docs": 24
+          },
+          {
+            "chapter": "obt/memory::memory_angel",
+            "blocks": 15,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_glacus",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_meteo",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_ifrit",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_inside",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/guide::guide_other",
+            "blocks": 5,
+            "docs": 2
+          }
+        ],
+        "docs": 48
+      },
+      {
+        "shard": "S61",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act15mini",
+            "blocks": 75,
+            "docs": 7
+          },
+          {
+            "chapter": "activities::act19mini",
+            "blocks": 66,
+            "docs": 7
+          },
+          {
+            "chapter": "obt/memory::memory_mitm",
+            "blocks": 17,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_crow",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_humus",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_clour",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_cutter",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_durin",
+            "blocks": 6,
+            "docs": 1
+          }
+        ],
+        "docs": 21
+      },
+      {
+        "shard": "S62",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "obt/rogue::rogue_rogue_3",
+            "blocks": 74,
+            "docs": 53
+          },
+          {
+            "chapter": "activities::act18mini",
+            "blocks": 67,
+            "docs": 6
+          },
+          {
+            "chapter": "obt/memory::memory_pianst",
+            "blocks": 17,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_dagda",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_iana",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_coldst",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_ethan",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_falco",
+            "blocks": 6,
+            "docs": 1
+          }
+        ],
+        "docs": 66
+      },
+      {
+        "shard": "S63",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act15d0",
+            "blocks": 73,
+            "docs": 18
+          },
+          {
+            "chapter": "activities::act12mini",
+            "blocks": 67,
+            "docs": 7
+          },
+          {
+            "chapter": "obt/main::main_st12",
+            "blocks": 17,
+            "docs": 3
+          },
+          {
+            "chapter": "obt/memory::memory_iris",
+            "blocks": 11,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_jaksel",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_crosly",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_excu2",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_fmout",
+            "blocks": 6,
+            "docs": 1
+          }
+        ],
+        "docs": 33
+      },
+      {
+        "shard": "S64",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act21mini",
+            "blocks": 72,
+            "docs": 7
+          },
+          {
+            "chapter": "activities::act10mini",
+            "blocks": 67,
+            "docs": 6
+          },
+          {
+            "chapter": "obt/memory::memory_blackd",
+            "blocks": 18,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_philae",
+            "blocks": 11,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_jesca2",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_ctrail",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_fartth",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_forcer",
+            "blocks": 6,
+            "docs": 1
+          }
+        ],
+        "docs": 20
+      },
+      {
+        "shard": "S65",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act45side",
+            "blocks": 72,
+            "docs": 17
+          },
+          {
+            "chapter": "activities::act12d0",
+            "blocks": 67,
+            "docs": 21
+          },
+          {
+            "chapter": "obt/memory::memory_glassb",
+            "blocks": 18,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_tinman",
+            "blocks": 11,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_ju",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_demkni",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_ghost2",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_glady",
+            "blocks": 6,
+            "docs": 1
+          }
+        ],
+        "docs": 45
+      },
+      {
+        "shard": "S66",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act16d5",
+            "blocks": 71,
+            "docs": 17
+          },
+          {
+            "chapter": "activities::act16mini",
+            "blocks": 69,
+            "docs": 6
+          },
+          {
+            "chapter": "obt/memory::memory_bibeak",
+            "blocks": 17,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_zebra",
+            "blocks": 11,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_judge",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_fang",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_glaze",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_hamoni",
+            "blocks": 6,
+            "docs": 1
+          }
+        ],
+        "docs": 30
+      },
+      {
+        "shard": "S67",
+        "blocks": 198,
+        "chapters": [
+          {
+            "chapter": "activities::act17mini",
+            "blocks": 71,
+            "docs": 6
+          },
+          {
+            "chapter": "activities::act20mini",
+            "blocks": 68,
+            "docs": 6
+          },
+          {
+            "chapter": "obt/memory::memory_prove",
+            "blocks": 18,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_agoat2",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_grani",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_cello",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_blkngt",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_aurora",
+            "blocks": 6,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/roguelike::roguelike_level_rogue5_entry",
+            "blocks": 1,
+            "docs": 1
+          }
+        ],
+        "docs": 20
+      },
+      {
+        "shard": "S68",
+        "blocks": 197,
+        "chapters": [
+          {
+            "chapter": "activities::act10d5",
+            "blocks": 70,
+            "docs": 7
+          },
+          {
+            "chapter": "activities::act17d0",
+            "blocks": 70,
+            "docs": 17
+          },
+          {
+            "chapter": "obt/memory::memory_flower",
+            "blocks": 17,
+            "docs": 2
+          },
+          {
+            "chapter": "obt/memory::memory_ayer",
+            "blocks": 10,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_gyuki",
+            "blocks": 9,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_chimes",
+            "blocks": 8,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_brigid",
+            "blocks": 7,
+            "docs": 1
+          },
+          {
+            "chapter": "obt/memory::memory_blitz",
+            "blocks": 6,
+            "docs": 1
+          }
+        ],
+        "docs": 31
+      }
+    ]
+  }
+}

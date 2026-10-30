@@ -1,0 +1,30 @@
+{
+  "chunks_total": 13786,
+  "chunks_cached": 13781,
+  "chunks_empty": 41,
+  "entities": 86113,
+  "relations": 63180,
+  "rel_evidence_bad": 0,
+  "rel_endpoint_missing": 0,
+  "rel_off_vocab": 0,
+  "rel_too_long": 0,
+  "report": {
+    "executor": "agent:qoder-subagent",
+    "prompt_version": "v2",
+    "prompt_fingerprint": "75835665be8edb9b",
+    "entity_per_chunk": 6.25,
+    "relation_per_chunk": 4.58,
+    "avg_degree": 1.47,
+    "type_distribution": {
+      "角色": 52990,
+      "地点": 13426,
+      "物品": 3565,
+      "概念": 4212,
+      "组织": 11442,
+      "事件": 478
+    },
+    "relations_used_distinct": 48,
+    "relations_vocab_size": 48,
+    "evidence_bad_ratio": 0.0
+  }
+}

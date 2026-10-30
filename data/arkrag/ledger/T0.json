@@ -1,0 +1,17 @@
+{
+  "shard": "T0",
+  "executor": "agent:qoder-subagent",
+  "prompt_version": "v1",
+  "prompt_fingerprint": "e15fd6d13cb3ad61",
+  "normalizer_version": "n1",
+  "requested": 20,
+  "returned": 20,
+  "duplicate_lines": 0,
+  "cache_hit": 0,
+  "extracted_ok": 20,
+  "failed": 0,
+  "failed_chunks": [],
+  "raw_entities": 150,
+  "raw_relations": 40,
+  "task_file": "E:\\图rag\\data\\arkrag\\agent_inbox\\T0.jsonl"
+}

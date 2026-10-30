@@ -1,0 +1,13 @@
+activities/act29side/level_act29side_03_end#000
+activities/act29side/level_act29side_04_end#000
+activities/act29side/level_act29side_04_end#002
+activities/act42side/level_act42side_st02#003
+activities/act47side/level_act47side_08_beg#008
+activities/act52side/level_act52side_st03#004
+activities/act53side/level_act53side_07_beg#007
+activities/act53side/level_act53side_08_beg#003
+activities/act53side/level_act53side_08_end#001
+activities/act53side/level_act53side_08_end#002
+obt/memory/story_haini_1_1#003
+obt/memory/story_haini_1_1#007
+obt/memory/story_hamoni_1_1#001
