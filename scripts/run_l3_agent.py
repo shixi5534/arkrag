@@ -78,26 +78,60 @@ def main() -> int:
     ap.add_argument("--stratify", action="store_true")
     ap.add_argument("--batch-size", type=int, default=20)
     ap.add_argument("--limit", type=int, default=0)
-    ap.add_argument("--status", action="store_true", help="按片汇报已入库/缺口")
+    ap.add_argument("--status", action="store_true", help="按片汇报已入库/缺口（分 current/legacy/adopted）")
+    ap.add_argument(
+        "--adopt",
+        action="store_true",
+        help="对 miss 块尝试带来源复用（cache.adopt_legacy）：四项身份全等且过严格契约才搬",
+    )
     args = ap.parse_args()
 
-    if args.status or not args.label:
+    if args.status or (not args.label and not args.adopt):
         all_chunks = extract.load_chunks()
         by_shard: dict[str, list[dict]] = {}
         for c in all_chunks:
             by_shard.setdefault(c.get("shard") or "(范围外)", []).append(c)
-        done_total = 0
+        # 三层分开报：current=本轮新键抽取，legacy=只读复用旧记录，
+        # adopted=从旧记录按四项全等搬进新键。合成一个「已入库」会让
+        # 「这一代到底真抽了多少块」永久不可见（计划 D5）。
+        totals = {"current": 0, "legacy": 0, "adopted": 0, "miss": 0, "invalid": 0}
+        adopted_ids: list[str] = []
+        invalid_ids: list[str] = []
         for shard in sorted(by_shard):
             pool = by_shard[shard]
             # 状态查询必须带 chunk_id 核对（计划 B3）：「缓存文件存在」不等于
             # 「这一块抽过」。旧口径按 content_key 拼旧键，overlap 的同正文块会
             # 互相命中，剩余量被系统性低估，调度看着像快完成了其实还差很多。
-            hit = sum(1 for c in pool if cache.is_cached_for_chunk(c, agent_tasks.AGENT_MODEL))
-            done_total += hit
-            print(f"  {shard} 已入库 {hit:4d}/{len(pool):4d}  缺 {len(pool) - hit:3d}")
+            counts = {"current": 0, "legacy": 0, "adopted": 0, "miss": 0, "invalid": 0}
+            for c in pool:
+                lk = cache.lookup_for_chunk(c, agent_tasks.AGENT_MODEL)
+                lay = lk.layer if lk.layer in counts else "miss"
+                counts[lay] += 1
+                totals[lay] += 1
+                if lay == "adopted":
+                    adopted_ids.append(c["chunk_id"])
+                elif lay == "invalid":
+                    invalid_ids.append(c["chunk_id"])
+            done = counts["current"] + counts["legacy"] + counts["adopted"]
+            print(
+                f"  {shard} 已入库 {done:4d}/{len(pool):4d}  缺 {len(pool) - done:3d}"
+                f"   〔current {counts['current']:4d}  legacy {counts['legacy']:4d}"
+                f"  adopted {counts['adopted']:3d}  隔离 {counts['invalid']:3d}〕"
+            )
         out_of_t1 = sum(1 for c in all_chunks if not config.in_t1(c["category"]))
-        print(f"合计 {done_total}/{len(all_chunks)} 块已入库"
-              f"（T1 范围 {'、'.join(config.T1_CATEGORIES)}；范围外 {out_of_t1} 块）")
+        done_total = totals["current"] + totals["legacy"] + totals["adopted"]
+        print(
+            f"合计 {done_total}/{len(all_chunks)} 块已入库"
+            f"（T1 范围 {'、'.join(config.T1_CATEGORIES)}；范围外 {out_of_t1} 块）"
+        )
+        print(
+            f"来源分层 current {totals['current']}  legacy {totals['legacy']}"
+            f"  adopted {totals['adopted']}  miss {totals['miss']}  invalid {totals['invalid']}"
+        )
+        if adopted_ids:
+            print(f"  adopted 样例: " + "; ".join(adopted_ids[:5]))
+        if invalid_ids:
+            print(f"  invalid 样例: " + "; ".join(invalid_ids[:5]))
         return 0
 
     chunks = select_chunks(args)
@@ -133,6 +167,33 @@ def main() -> int:
         if receipt["missing_ids"]:
             print("  缺块样例: " + "; ".join(receipt["missing_ids"][:6]))
         return code
+
+    if args.adopt:
+        # 带来源的复用（计划 D5）：只对 miss 块尝试，四项身份全等 + 过严格契约才搬。
+        # 搬出来的记录写新键并标注 adopted_from/adopt_reason/adopted_at，
+        # 因此下游 lookup 会报 layer="adopted" 而不是混进 current。
+        targets = chunks
+        adopted, skipped, refused = [], [], []
+        for chunk in targets:
+            lk = cache.lookup_for_chunk(chunk, agent_tasks.AGENT_MODEL)
+            if lk.raw is not None:
+                skipped.append((chunk["chunk_id"], lk.layer))
+                continue
+            src = cache.load_legacy_record(chunk["content_key"], agent_tasks.AGENT_MODEL)
+            got = cache.adopt_legacy(src, chunk, agent_tasks.AGENT_MODEL)
+            if got.layer == "adopted":
+                adopted.append((chunk["chunk_id"], got.adopted_from))
+            else:
+                refused.append((chunk["chunk_id"], got.layer, got.reason))
+        print(
+            f"复用尝试 {len(targets)} 块：已命中跳过 {len(skipped)}  "
+            f"成功搬用 {len(adopted)}  拒绝 {len(refused)}"
+        )
+        for cid, src_key in adopted[:10]:
+            print(f"  adopted {cid}  <- {src_key}")
+        for cid, lay, why in refused[:12]:
+            print(f"  拒绝 {cid}  {lay}  {why[:110]}")
+        return 0 if not refused else 1
 
     print("需要 --plan 或 --ingest")
     return 2

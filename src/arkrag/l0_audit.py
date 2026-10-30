@@ -9,7 +9,7 @@ import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
-from . import config
+from . import atomic, config
 
 BOM = "﻿"
 
@@ -326,10 +326,7 @@ def main() -> int:
         "dropped_files": zero_turn_files,
     }
 
-    config.DATA_DIR.mkdir(parents=True, exist_ok=True)
-    config.L0_MANIFEST_PATH.write_text(
-        json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n"
-    )
+    atomic.atomic_write_json(config.l0_manifest_path(), manifest)
 
     b = manifest["baseline"]
     print("=== L0 基线 ===")
@@ -355,7 +352,7 @@ def main() -> int:
             f"对账 {name:18s}: 索引键 {r['index_keys']:5d} 文件 {r['files']}  "
             f"有索引无文件 {len(r['index_without_file']):5d}  有文件无索引 {len(r['file_without_index']):5d}"
         )
-    print(f"manifest -> {config.L0_MANIFEST_PATH}")
+    print(f"manifest -> {config.l0_manifest_path()}")
     return 0
 
 

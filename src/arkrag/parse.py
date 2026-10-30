@@ -6,7 +6,7 @@ import re
 from collections import Counter
 from pathlib import Path
 
-from . import config
+from . import atomic, config
 from .model import Scene, Turn
 from .prop_spec import DROP_CLASS, KIND_BY_PROP, KNOWN_PROPS, TEXT_PROP_FIELD
 
@@ -178,6 +178,7 @@ def parse_story(
                 node_id=int(node.get("id") or 0),
                 prop=low,
                 speaker_masked=masked,
+                ordinal=len(scene.turns),
             )
         )
         stats["turn_kind:" + kind] += 1
@@ -203,6 +204,13 @@ def parse_corpus(
     limit: int | None = None,
     dropped_log: list | None = None,
 ) -> tuple[list[Scene], Counter]:
+    """解析全语料。`out_path` 的写盘走 `atomic.atomic_write_stream`。
+
+    历史教训（2026-10-30）：这里原来是 `out_path.open("w")` 直写，**绕过了
+    `atomic`**，于是冻结写保护对 scenes.jsonl 完全失效——重跑 L1 把 71 MB 的
+    冻结产物写成了 7 字节的 `rebuilt`，直到事后跑 `snapshot_baseline --verify`
+    才发现。产物写入必须只有一条通道，否则"每个调用点记得调 guard"必然漏。
+    """
     stats: Counter = Counter()
     scenes: list[Scene] = []
     files = iter_story_files()
@@ -215,26 +223,20 @@ def parse_corpus(
     stats["files_scanned"] = len(files)
     stats["scenes_kept"] = len(scenes)
     if out_path is not None:
-        out_path.parent.mkdir(parents=True, exist_ok=True)
-        with out_path.open("w", encoding="utf-8", newline="\n") as fh:
+        def _writer(fh) -> None:
             for scene in scenes:
                 fh.write(json.dumps(scene.as_dict(), ensure_ascii=False) + "\n")
+
+        atomic.atomic_write_stream(out_path, _writer)
     return scenes, stats
 
 
 def main() -> int:
-    out = config.DATA_DIR / "scenes.jsonl"
+    out = config.scenes_path()
     dropped_log: list = []
     scenes, stats = parse_corpus(out, dropped_log=dropped_log)
-    config.DATA_DIR.mkdir(parents=True, exist_ok=True)
-    (config.DATA_DIR / "l1_dropped.json").write_text(
-        json.dumps(dropped_log, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n"
-    )
-    (config.DATA_DIR / "l1_stats.json").write_text(
-        json.dumps(dict(stats.most_common()), ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-        newline="\n",
-    )
+    atomic.atomic_write_json(config.l1_dropped_path(), dropped_log)
+    atomic.atomic_write_json(config.l1_stats_path(), dict(stats.most_common()))
     kinds = {k.split(":", 1)[1]: v for k, v in stats.items() if k.startswith("turn_kind:")}
     total_turns = sum(kinds.values())
     dialogue = kinds.get("dialogue", 0)

@@ -18,8 +18,6 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from arkrag import cache, config, extract, gates, index  # noqa: E402
 from arkrag.agent_tasks import AGENT_MODEL  # noqa: E402
 
-INDEX_PATH = config.INDEX_DIR / "lexical.json"
-
 
 def main() -> int:
     ap = argparse.ArgumentParser()
@@ -39,11 +37,12 @@ def main() -> int:
     if args.limit:
         chunks = sorted(chunks, key=lambda c: c["chunk_id"])[: args.limit]
 
-    if not config.GRAPH_PATH.exists():
-        print(f"拒绝建索引：{config.GRAPH_PATH} 不存在，先跑 run_l5.py", file=sys.stderr)
+    graph_path = config.graph_path()
+    if not graph_path.exists():
+        print(f"拒绝建索引：{graph_path} 不存在，先跑 run_l5.py", file=sys.stderr)
         return 2
-    graph = json.loads(config.GRAPH_PATH.read_text("utf-8"))
-    corpus_meta = json.loads((config.DATA_DIR / "corpus_meta.json").read_text("utf-8"))
+    graph = json.loads(graph_path.read_text("utf-8"))
+    corpus_meta = json.loads(config.corpus_meta_path().read_text("utf-8"))
     corpus_fp = corpus_meta["corpus_fp"]
 
     print("建词法倒排……")
@@ -86,20 +85,21 @@ def main() -> int:
           f"name {sum(1 for p in nm if p['rank'])}/{len(nm)}")
 
     run = gates.l6_gates(meta, graph, len(chunks), corpus_fp, probes)
-    gates.write_report(run, config.DATA_DIR / "gates.json", "L6")
+    gates.write_report(run, config.gates_path(), "L6")
     for g in run.gates:
         print(f"  [{g.verdict}] {g.name}  measured={g.measured}")
 
     if args.no_save:
         print("--no-save：未写索引文件")
         return 0
-    index.save_index(idx, meta, INDEX_PATH)
-    size_mb = INDEX_PATH.stat().st_size / 1e6
-    print(f"已写 {INDEX_PATH} ({size_mb:.1f} MB)  corpus_fp={meta['corpus_fp']} "
+    index_path = config.index_path()
+    index.save_index(idx, meta, index_path)
+    size_mb = index_path.stat().st_size / 1e6
+    print(f"已写 {index_path} ({size_mb:.1f} MB)  corpus_fp={meta['corpus_fp']} "
           f"graph_fp={meta['graph_fp']}")
 
     # 回读自检：写盘后必须能原样读回来，否则等于没写。
-    reloaded, meta2 = index.load_index(INDEX_PATH)
+    reloaded, meta2 = index.load_index(index_path)
     print(f"回读校验 文档 {reloaded.size:,}（原 {idx.size:,}）  词条 {len(reloaded.postings):,}"
           f"  一致={reloaded.size == idx.size and len(reloaded.postings) == len(idx.postings)}")
 

@@ -64,14 +64,39 @@ def _records(chunks: list[dict]) -> dict[str, dict]:
 
 
 def _snapshot(chunks=None):
+    """造一份输入快照。
+
+    `source_status` 必须显式给 `verified_zip`：D4 之后 `source_unverified`
+    的一代**不允许发布**，默认值刻意是"未验证"，别指望它自己变成已验证。
+    """
     chunks = chunks or _chunks()
     return release.capture_inputs(
-        chunks=chunks, records=_records(chunks), source_fp="srcfp0123456789"
+        chunks=chunks,
+        records=_records(chunks),
+        source_fp="srcfp0123456789",
+        scenes=[
+            {
+                "doc_id": "doc/a",
+                "title": "测试章",
+                "chapter": "第一章",
+                "category": "obt/main",
+                "turns": [
+                    {"ordinal": 0, "node_id": 1, "kind": "dialogue", "speaker": "凯尔希", "text": "第 0 段。"},
+                    {"ordinal": 1, "node_id": 2, "kind": "narration", "speaker": "", "text": "阿米娅点了点头。"},
+                ],
+            }
+        ],
+        source_status="verified_zip",
     )
 
 
 def _build_generation(gid: str = "g-20260101T000000Z-aaaaaa", *, chunks=None) -> release.Generation:
-    """造一代能通过全部校验的产物。"""
+    """造一代能通过全部校验的产物。
+
+    这一代必须满足 D3 的三层身份约束：图要记 `identities`（逐层对齐 Manifest）、
+    索引要绑 `graph_artifact_id`（证明这份倒排对着哪一份图**产物**，而不是哪一份
+    配置），Manifest 与索引的 `prompt_sha256`/`vocab_sha` 要一致。
+    """
     chunks = chunks or _chunks()
     snap = _snapshot(chunks)
     gen = release.Generation(gid)
@@ -83,10 +108,25 @@ def _build_generation(gid: str = "g-20260101T000000Z-aaaaaa", *, chunks=None) ->
         "corpus_fp": snap.source_fingerprint,
         "entities": [{"id": "凯尔希", "name": "凯尔希", "type": "角色", "aliases": []}],
         "edges": [],
+        # 图必须记录它吃的是哪一层输入（D3）：图自己算不出上游指纹，
+        # 但必须记下来，否则事后无法回答"这张图吃的是哪一批块"。
+        "identities": {
+            "source_fp": snap.source_fingerprint,
+            "source_status": snap.source_status,
+            "scene_fp": snap.scene_fingerprint,
+            "chunk_fp": snap.chunk_fingerprint,
+            "chunk_manifest_hash": snap.chunk_manifest_hash,
+            "extraction_manifest_hash": snap.extraction_manifest_hash,
+        },
     }
     gen.graph_path.write_text(json.dumps(graph, ensure_ascii=False), encoding="utf-8")
 
-    idx, meta = index_mod.build(chunks, graph, snap.source_fingerprint)
+    idx, meta = index_mod.build(
+        chunks,
+        graph,
+        snap.source_fingerprint,
+        graph_artifact_id=release.sha256_file(gen.graph_path),
+    )
     index_mod.save_index(idx, meta, gen.index_path)
 
     gen.gate_report_path.write_text(
@@ -220,6 +260,38 @@ class TestVerify:
         gen = _build_generation()
         assert release.verify_generation(gen) == []
 
+    @pytest.mark.parametrize(
+        "status",
+        [
+            "source_unverified",  # 显式的未验证
+            "",  # 空串：没写，不等于验证过
+            "VERIFIED_ZIP",  # 大小写不同
+            "verified_zip ",  # 尾空格（笔误）
+            "verified",  # 缩写
+            "verified_zip\n",  # 换行
+            "bogus",  # 完全不认识
+        ],
+    )
+    def test_any_unrecognized_source_status_blocks_release(self, sandbox, status):
+        """门必须是白名单。
+
+        只拒绝字面量 "source_unverified" 的写法等于没有门：把状态写成
+        ""、"VERIFIED_ZIP"、"verified_zip " 这些同样**不是已验证**的取值，
+        全都绕得过去。判据与 source.strength() 必须是同一张表。
+        """
+        gen = _build_generation()
+        gen.update(source_status=status)
+        problems = release.verify_generation(gen)
+        assert any("source_status" in p for p in problems), (
+            f"source_status={status!r} 竟然通过了来源门"
+        )
+
+    @pytest.mark.parametrize("status", ["verified_zip", "verified_tree"])
+    def test_recognized_verified_status_passes(self, sandbox, status):
+        gen = _build_generation()
+        gen.update(source_status=status)
+        assert release.verify_generation(gen) == []
+
     def test_missing_graph_is_reported(self, sandbox):
         gen = _build_generation()
         gen.graph_path.unlink()
@@ -309,6 +381,45 @@ class TestPublish:
         (sandbox / "current.json").write_text("{not json", encoding="utf-8")
         with pytest.raises(release.ReleaseError):
             release.read_current()
+
+    def test_publish_refuses_incomplete_coverage(self, sandbox):
+        """覆盖不全的一代可以完全自洽（Manifest 记的字节就是盘上这些字节），
+        但把它切上线就是用 13764 块的图冒充 13798 块的语料。这一条只认
+        Manifest 里的显式申报，不猜、不修。"""
+        gen = _build_generation("g-20260101T000000Z-000031")
+        gen.update(
+            coverage_status=release.COVERAGE_INCOMPLETE,
+            coverage_declared=3,
+            coverage_covered=2,
+            coverage_missing=["doc/a#002"],
+        )
+        assert release.verify_generation(gen) == []
+        with pytest.raises(release.ReleaseError) as exc:
+            release.publish(gen)
+        assert "覆盖不全" in str(exc.value)
+        assert "doc/a#002" in exc.value.detail
+        assert release.read_current() is None
+        # 拒绝发布不改状态：这一代还是 READY，人可以补齐输入后重试
+        assert gen.status() == release.READY
+
+    def test_publish_refusal_keeps_existing_pointer(self, sandbox):
+        good = _build_generation("g-20260101T000000Z-000032")
+        release.publish(good)
+        before = sandbox.joinpath("current.json").read_bytes()
+
+        bad = _build_generation("g-20260102T000000Z-000033")
+        bad.update(coverage_status=release.COVERAGE_INCOMPLETE, coverage_missing=["doc/a#002"])
+        with pytest.raises(release.ReleaseError):
+            release.publish(bad)
+
+        assert sandbox.joinpath("current.json").read_bytes() == before
+        assert release.current_generation().generation_id == good.generation_id
+
+    def test_generation_without_coverage_field_is_treated_as_complete(self, sandbox):
+        """兼容历史世代：老 Manifest 没有 coverage_status，不能因为缺字段就拒发。"""
+        gen = _build_generation("g-20260101T000000Z-000034")
+        assert "coverage_status" not in gen.load()
+        assert release.publish(gen)["generation_id"] == gen.generation_id
 
 
 # ---------------------------------------------------------------- 回滚

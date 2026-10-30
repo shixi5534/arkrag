@@ -45,7 +45,7 @@ import json
 import time
 from pathlib import Path
 
-from . import atomic, config, prompt
+from . import atomic, config, contracts, prompt
 
 CACHE_FORMAT = "raw"
 
@@ -115,8 +115,14 @@ def write_raw(
     schema_version: str | None = None,
     prompt_digest: str | None = None,
     generation: int = 0,
+    extra: dict | None = None,
 ) -> Path:
-    """失败块不写缓存：瞬时故障一旦入库就会被永久固化。"""
+    """失败块不写缓存：瞬时故障一旦入库就会被永久固化。
+
+    `extra` 只给 `adopt_legacy()` 用：它要往记录里写 `adopted_from` /
+    `adopt_reason` / `adopted_at` 三个来源字段。做成参数而不是"写完再读回来改"，
+    是为了让落盘只有一次原子写——读-改-写之间被打断会留下半个记录。
+    """
     if not isinstance(raw, dict):
         raise ValueError("缓存只接受模型原始输出 dict")
     path = cache_path(key)
@@ -137,6 +143,8 @@ def write_raw(
         "written_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "raw": raw,
     }
+    if extra:
+        rec.update(extra)
     atomic.atomic_write_json(path, rec)
     return path
 
@@ -177,13 +185,22 @@ def read_raw(key: str) -> dict | None:
 class Lookup:
     """一次查找的结果。把「命中哪一层」也说清楚，否则无法判断缓存健康度。"""
 
-    __slots__ = ("raw", "key", "layer", "reason")
+    __slots__ = ("raw", "key", "layer", "reason", "adopted_from")
 
-    def __init__(self, raw: dict | None, key: str = "", layer: str = "miss", reason: str = "") -> None:
+    def __init__(
+        self,
+        raw: dict | None,
+        key: str = "",
+        layer: str = "miss",
+        reason: str = "",
+        adopted_from: str = "",
+    ) -> None:
         self.raw = raw
         self.key = key
-        self.layer = layer  # "current" | "legacy" | "miss" | "invalid"
+        self.layer = layer  # "current" | "legacy" | "adopted" | "miss" | "invalid"
         self.reason = reason
+        # adopted 层专用：这条新键记录是从哪个 legacy 缓存键搬过来的
+        self.adopted_from = adopted_from
 
     def __bool__(self) -> bool:
         return self.raw is not None
@@ -218,6 +235,194 @@ def _legacy_record_is_safe(rec: dict, *, chunk_id: str, content_key: str, model:
     return True, ""
 
 
+# ------------------------------------------------------------------ 复用层
+
+#: `adopt_legacy()` 唯一允许写进 `adopt_reason` 的值。新增理由必须先证明
+#: 「raw 抽取的输入与当初逐项相等」，不能只是「看起来差不多」。
+ADOPT_REASON_IDENTICAL = "identical_content"
+
+
+def _scene_of_chunk_id(chunk_id: str) -> str:
+    """`doc_id#NNN` 的 doc 部分。legacy 记录只保留了这一处场景绑定。"""
+    head, sep, _ = str(chunk_id or "").rpartition("#")
+    return head if sep else ""
+
+
+def load_legacy_record(content_key: str, model: str, *, prompt_version: str | None = None) -> dict | None:
+    """按 legacy 键取原始记录（不做身份核对，核对交给 `adopt_legacy()`）。
+
+    存在的理由：`lookup()` 在 chunk_id 对不上时会返回 invalid，而「换块身份后
+    能否复用」恰恰要拿到那条 chunk_id 对不上的记录再逐项核对。这条路径只读。
+    """
+    key = cache_key(content_key, model, prompt_version or config.PROMPT_VERSION)
+    return _load(cache_path(key))
+
+
+def adopt_legacy(
+    src_record: dict | None,
+    chunk: dict,
+    model: str,
+    *,
+    generation: int = 0,
+) -> Lookup:
+    """把一条 legacy 缓存记录**带来源地**搬成本 Chunk 的新键记录。
+
+    ## 为什么这不是「用 A 块的抽取结果去建 B 块的边」
+
+    抽取这一步的函数签名是 `raw = f(块正文, 提示词, 模型)`——**输入里没有块身份**。
+    `chunk_id` / `scene_id` / `generation` 只用于「这份结果属于谁」的记账，它们不
+    参与任何生成语义。因此当且仅当下面四项**逐项字节相等**时，两条块在抽取语义
+    上是同一个输入，raw 就是本次输入的合法输出，而不是别人的结论被借用：
+
+    1. `content_key`——并且本函数会重算 `sha256(chunk["text"])[:24]` 核对它，
+       确保 content_key 确实指向当前正文，而不是一个没跟着正文走的旧字段；
+    2. `scene_id`——legacy 记录没有 `scene_id` 字段，它保留的唯一场景绑定是
+       `chunk_id` 的 `doc#NNN` 前缀，故取 `doc` 部分比对；不等即拒；
+    3. `model`——同一个模型才有同一个条件分布；
+    4. `prompt_sha256`——legacy 记录同样没有这个字段，只有人工维护的
+       `prompt_version`。所以这一项只能**降级为「`prompt_version` 与当前
+       `config.PROMPT_VERSION` 相等」**来成立，并在新记录里写下当前真实的
+       `prompt_sha256()`。这是本次复用唯一的弱环节，已如实计入 `note`，不再假装
+       它是逐字节证明。
+
+    四项之外还有一道独立的结构门：把 legacy 的 raw 按当前身份组成一条抽取记录，
+    交给 `contracts.validate_extraction()` 校验——`schema_version`、实体类型、
+    置信度区间、以及**每条关系的 `evidence` 必须在当前块正文里逐字出现**（并回填
+    `evidence_start`/`evidence_end`）。证据定位是这一层最有分量的判据：它直接检查
+    「这条边的原文依据是否真的在这一块里」。任何一条 error 就整体拒绝。
+
+    注意契约**不**检查关系两端是否都在 entities 里（`_check_relations()` 收了
+    `entity_names` 参数但没用它）。这里补一道：任一端点不在 entities 内的记录直接
+    拒——否则搬进来的边在 L4/L5 会因为找不到端点被丢掉，等于白搬并且掩盖了坏数据。
+
+    通过后写一条**新键**记录，并在记录里留下 `adopted_from`（来源 legacy 缓存键）、
+    `adopt_reason`（恒为 `identical_content`）、`adopted_at`。下游 `lookup()` 会把
+    这类记录单独报成 `layer="adopted"`，绝不混进 `current` 冒充本轮抽取产出——
+    所以「有多少块是这个世代真抽的、多少块是搬来的」永远是分开的两个数。
+
+    ## 拒绝时的返回值
+
+    `src_record` 为空 → `layer="miss"`；任一项核对失败 → `layer="invalid"` 且
+    `reason` 以 `adopt:` 开头说明断在哪一项。两种都不写盘，不静默降级。
+    """
+    content_key = chunk["content_key"]
+    chunk_id = chunk["chunk_id"]
+    scene_id = chunk.get("scene_id") or chunk.get("doc_id") or ""
+    new_key = key_for(
+        content_key=content_key,
+        chunk_id=chunk_id,
+        scene_id=scene_id,
+        model=model,
+        generation=generation,
+    )
+
+    # 已经搬过就不再搬：重复调用必须是幂等的
+    existing = _load(cache_path(new_key))
+    if existing is not None and isinstance(existing.get("raw"), dict):
+        if existing.get("adopted_from"):
+            return Lookup(
+                existing["raw"], new_key, "adopted", str(existing.get("adopt_reason") or ""),
+                adopted_from=str(existing["adopted_from"]),
+            )
+        return Lookup(existing["raw"], new_key, "current")
+
+    if not isinstance(src_record, dict):
+        return Lookup(None, new_key, "miss", "adopt:no_source")
+
+    # ① content_key：既比字段，也比「正文是否真的产出了这个字段」
+    src_ck = src_record.get("content_key")
+    if src_ck != content_key:
+        return Lookup(None, new_key, "invalid", f"adopt:content_key_mismatch({src_ck!r}!={content_key!r})")
+    actual_ck = hashlib.sha256(str(chunk.get("text") or "").encode("utf-8")).hexdigest()[:24]
+    if actual_ck != content_key:
+        return Lookup(
+            None, new_key, "invalid",
+            f"adopt:chunk_text_does_not_match_content_key({actual_ck}!={content_key})",
+        )
+
+    # ② scene_id：legacy 没有独立字段，只能取 chunk_id 的 doc 前缀
+    src_scene = _scene_of_chunk_id(src_record.get("chunk_id") or "")
+    if not scene_id or src_scene != scene_id:
+        return Lookup(None, new_key, "invalid", f"adopt:scene_id_mismatch({src_scene!r}!={scene_id!r})")
+
+    # ③ model
+    src_model = src_record.get("model")
+    if src_model != model:
+        return Lookup(None, new_key, "invalid", f"adopt:model_mismatch({src_model!r}!={model!r})")
+
+    # ④ prompt_sha256（legacy 只有 prompt_version，只能降级比对，理由见 docstring）
+    if src_record.get("prompt_version") != config.PROMPT_VERSION:
+        return Lookup(
+            None, new_key, "invalid",
+            f"adopt:prompt_version_mismatch({src_record.get('prompt_version')!r}"
+            f"!={config.PROMPT_VERSION!r})",
+        )
+    if src_record.get("__cache_format__") != LEGACY_CACHE_FORMAT:
+        return Lookup(None, new_key, "invalid", "adopt:bad_format")
+
+    src_raw = src_record.get("raw")
+    if not isinstance(src_raw, dict):
+        return Lookup(None, new_key, "invalid", "adopt:raw_not_object")
+
+    # 端点闭合：契约收了 entity_names 却没用它，这里自己补，免得搬进来的边在
+    # L4/L5 因为找不到端点被静默丢掉（那会让「复用」变成「看起来成功但没边」）。
+    src_entities = src_raw.get("entities")
+    if isinstance(src_entities, list):
+        names = {
+            str(e.get("name") or "").strip()
+            for e in src_entities
+            if isinstance(e, dict) and str(e.get("name") or "").strip()
+        }
+        src_relations = src_raw.get("relations")
+        if isinstance(src_relations, list):
+            for rel in src_relations:
+                if not isinstance(rel, dict):
+                    continue
+                for end in ("source", "target"):
+                    name = str(rel.get(end) or "").strip()
+                    if name and name not in names:
+                        return Lookup(
+                            None, new_key, "invalid",
+                            f"adopt:dangling_endpoint({end}={name!r} 不在 entities 内)",
+                        )
+
+    # 结构门：把 raw 按当前身份组记录，交给严格契约逐项校验（含证据定位）
+    candidate = {
+        "schema_version": contracts.EXTRACTION_SCHEMA,
+        "chunk_id": chunk_id,
+        "content_key": content_key,
+        "scene_id": scene_id,
+        "entities": src_raw.get("entities"),
+        "relations": src_raw.get("relations"),
+    }
+    task = {"chunk_id": chunk_id, "content_key": content_key, "scene_id": scene_id}
+    cleaned, errors = contracts.validate_extraction(candidate, task, str(chunk.get("text") or ""))
+    if cleaned is None:
+        first = next((e for e in errors if e.get("level") == "error"), {})
+        return Lookup(
+            None, new_key, "invalid",
+            f"adopt:contract_rejected({first.get('code', '?')}: {str(first.get('detail', ''))[:80]})",
+        )
+
+    legacy_key = cache_key(content_key, model, config.PROMPT_VERSION)
+    adopted_at = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+    write_raw(
+        new_key,
+        src_raw,
+        model,
+        chunk_id,
+        content_key,
+        scene_id=scene_id,
+        generation=generation,
+        extra={
+            "adopted_from": legacy_key,
+            "adopt_reason": ADOPT_REASON_IDENTICAL,
+            "adopted_at": adopted_at,
+        },
+    )
+    return Lookup(src_raw, new_key, "adopted", ADOPT_REASON_IDENTICAL, adopted_from=legacy_key)
+
+
 def lookup(
     *,
     content_key: str,
@@ -243,6 +448,13 @@ def lookup(
     if rec is not None:
         if rec.get("__cache_format__") == CACHE_FORMAT and isinstance(rec.get("raw"), dict):
             if rec.get("prompt_sha256") in (None, prompt_sha256()):
+                # 带 adopted_from 的是「从 legacy 记录按四项全等搬过来的」，
+                # 单独一层 reported，不能混进 current 冒充本轮抽取产出。
+                if rec.get("adopted_from"):
+                    return Lookup(
+                        rec["raw"], new_key, "adopted", str(rec.get("adopt_reason") or ""),
+                        adopted_from=str(rec["adopted_from"]),
+                    )
                 return Lookup(rec["raw"], new_key, "current")
 
     if not allow_legacy:
@@ -314,11 +526,6 @@ def is_cached(content_key: str, chunk_id: str, model: str, *, generation: int = 
 
 
 def paths_for_chunk(chunk: dict, model: str, *, generation: int = 0) -> list[Path]:
-    """本 Chunk 在新旧两种键下的缓存文件路径。
-
-    返修要「作废本 Chunk 的缓存」时必须两种都清：只删新键而留下 legacy 记录，
-    下次 `lookup()` 仍会把它当可证明安全的旧记录复用，看起来「删了没生效」。
-    """
     keys = [
         key_for(
             content_key=chunk["content_key"],

@@ -18,8 +18,24 @@ FAILS: list[str] = []
 
 
 def expect(cond: bool, message: str) -> None:
+    """断言。失败时**立刻抛异常**，而不是只往列表里记一笔。
+
+    ## 为什么不能只记录
+
+    旧写法是 `if not cond: FAILS.append(message)`，只有 `main()` 会在末尾读
+    `FAILS`。于是 `pytest tests/test_negative.py` 显示全部通过——每个
+    `test_*` 函数都正常返回了，pytest 无从知道里面记过失败。
+
+    实测代价：分块器把 ordinal 记成块内下标（见 `chunk._with_ordinal` 的
+    docstring）导致 40 轮只覆盖 7 轮时，`pytest` 报 **11 passed**，
+    只有直接运行本文件才看到那 1 条 FAIL。这种"假通过"比没有测试更糟：
+    CI 绿着，缺陷照样躺在那里。
+
+    现在失败就是异常，两种运行方式的结论必然一致：
+    pytest 报 FAILED，`main()` 捕获后汇总成 FAIL 列表。
+    """
     if not cond:
-        FAILS.append(message)
+        raise AssertionError(message)
 
 
 def synthetic(payload: dict, name: str) -> Path:
@@ -143,11 +159,34 @@ def test_chunks_never_cross_scene() -> None:
     chunks = chunker.split_scene(scene)
     expect(len(chunks) > 1, f"40 个长轮次应该切成多块，实得 {len(chunks)}")
     expect(all(c["doc_id"] == scene["doc_id"] for c in chunks), "块跨场景")
-    expect(all(c["chars"] <= 2 * config.CHUNK_TARGET_CHARS for c in chunks), "块长超过 2 倍目标")
+    expect(
+        all(c["chars"] <= config.CHUNK_MAX_CHARS for c in chunks),
+        f"有块超过硬上限 {config.CHUNK_MAX_CHARS}（计划 D2）",
+    )
+    # 轮次覆盖按"实例序号"算，不按 node_id（计划 D1）：node_id 是源文件给的编号，
+    # 会缺失也会重复，拿它当唯一键在重复时会把两轮当成一轮、静默丢内容。
     covered = set()
     for c in chunks:
-        covered |= set(c["turn_ids"])
-    expect(covered == {t["node_id"] for t in turns}, "有轮次未被任何块覆盖（静默丢内容）")
+        covered |= set(c["turn_ordinals"])
+    expect(covered == set(range(len(turns))), "有轮次未被任何块覆盖（静默丢内容）")
+
+
+def test_duplicate_node_id_keeps_both_turns() -> None:
+    """计划 D1 必测：node_id 相同的两轮若正文不同，都必须保留。"""
+    turns = [
+        {"kind": "dialogue", "speaker": "凯尔希", "text": "第一轮正文", "node_id": 1, "prop": "name", "masked": False},
+        {"kind": "dialogue", "speaker": "阿米娅", "text": "第二轮正文", "node_id": 1, "prop": "name", "masked": False},
+        {"kind": "dialogue", "speaker": "博士", "text": "第三轮正文", "node_id": 2, "prop": "name", "masked": False},
+    ]
+    scene = {"doc_id": "obt/main/level_dup", "category": "obt/main", "chapter": "c", "title": "t", "turns": turns}
+    chunks = chunker.split_scene(scene)
+    text = "".join(c["text"] for c in chunks)
+    for turn in turns:
+        expect(turn["text"] in text, f"node_id={turn['node_id']} 的轮次被当成重复丢掉了: {turn['text']}")
+    expect(
+        sum(len(c["turn_ordinals"]) for c in chunks) >= 3,
+        f"覆盖的轮次实例不足 3（重叠会让它大于 3，但不该小于）: {[c['turn_ordinals'] for c in chunks]}",
+    )
 
 
 def test_fingerprint_tracks_normalizer_version() -> None:
@@ -296,8 +335,14 @@ def main() -> int:
         test_trial_gates_actually_fire,
         test_relation_adjudication_keeps_facts,
     ]
+    # 现在 expect() 是抛异常的，所以 main() 必须逐个捕获——否则第一个失败
+    # 就会中断整轮，看不到后面还有几条红。这条汇总路径的意义是：单文件直接
+    # 运行时能一次看到全部失败，而 pytest 各自独立、天然就是这个行为。
     for fn in suite:
-        fn()
+        try:
+            fn()
+        except AssertionError as exc:
+            FAILS.append(f"{fn.__name__}: {exc}")
     if FAILS:
         print(f"负例测试 FAIL（{len(FAILS)} 条，共跑 {len(suite)} 项）:")
         for f in FAILS:

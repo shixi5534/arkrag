@@ -22,6 +22,8 @@ import uuid
 from pathlib import Path
 from typing import Any, Iterator
 
+from . import legacy
+
 # Windows 上 msvcrt 可用；POSIX 上 fcntl 可用。两者都不可用时退化为进程内锁。
 try:  # pragma: no cover - 平台分支
     import msvcrt
@@ -45,8 +47,15 @@ def fsync_dir(path: Path) -> None:
 
 
 def atomic_write_bytes(path: Path, data: bytes) -> None:
-    """同目录 UUID 临时文件 + fsync + 原子替换 + 目录 fsync。"""
+    """同目录 UUID 临时文件 + fsync + 原子替换 + 目录 fsync。
+
+    这里是**所有产物写入的唯一通道**，因此也是冻结写保护的唯一关口
+    （`legacy.guard_frozen_artifact`）。保护放在这里而不是各调用点，是因为
+    2026-10-30 的事故证明"每个调用点各自记得调一次"必然漏：`run_l1.py` /
+    `run_l2.py` 都没调，重跑就把已冻结产物覆盖了。
+    """
     path = Path(path)
+    legacy.guard_frozen_artifact(path, reason="atomic_write_bytes")
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.parent / f".{path.name}.{os.getpid()}.{uuid.uuid4().hex[:12]}.tmp"
     try:
@@ -66,6 +75,34 @@ def atomic_write_text(path: Path, text: str, *, newline: str = "\n") -> None:
     if newline != "\n":
         text = text.replace("\n", newline)
     atomic_write_bytes(path, text.encode("utf-8"))
+
+
+def atomic_write_stream(path: Path, writer) -> None:
+    """流式版本：把已打开的临时文件句柄交给 `writer(fh)` 逐行写。
+
+    为什么需要它：`scenes.jsonl` 有 71 MB，拼成一个 `bytes` 再交给
+    `atomic_write_bytes` 意味着峰值内存翻几倍。但**不能因此绕开这条通道**——
+    2026-10-30 的事故正是 `parse.parse_corpus` 用 `out_path.open("w")` 直写，
+    保护完全没经过，冻结的 scenes.jsonl 被写成了 7 字节的 `rebuilt`。
+
+    所以两个要求一起满足：保护照样在这里拦（第一行就查），写盘照样是
+    write → flush → fsync → replace → fsync(dir)，只是内容由调用方流式灌进来。
+    """
+    path = Path(path)
+    legacy.guard_frozen_artifact(path, reason="atomic_write_stream")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.parent / f".{path.name}.{os.getpid()}.{uuid.uuid4().hex[:12]}.tmp"
+    try:
+        with open(tmp, "w", encoding="utf-8", newline="\n") as fh:
+            writer(fh)
+            fh.flush()
+            os.fsync(fh.fileno())
+        os.replace(tmp, path)
+        fsync_dir(path.parent)
+    except BaseException:
+        with contextlib.suppress(OSError):
+            tmp.unlink()
+        raise
 
 
 def atomic_write_json(path: Path, obj: Any, *, indent: int | None = 2) -> None:

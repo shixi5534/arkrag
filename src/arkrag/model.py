@@ -15,6 +15,10 @@ class Turn:
     node_id: int
     prop: str
     speaker_masked: bool = False
+    # 轮次在本场景内的原始序号（0 起）。这是轮次的**实例身份**：
+    # node_id 是源文件给的编号，会缺失（实测 201 轮 id 为 0）、也可能重复，
+    # 拿它当唯一键会在重复时静默丢内容（计划 D1）。
+    ordinal: int = 0
 
     def as_dict(self) -> dict:
         return {
@@ -24,6 +28,7 @@ class Turn:
             "node_id": self.node_id,
             "prop": self.prop,
             "masked": self.speaker_masked,
+            "ordinal": self.ordinal,
         }
 
 

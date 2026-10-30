@@ -24,7 +24,7 @@ MODEL = "agent:qoder-subagent"
 
 def load_chunks(limit: int | None = None) -> list[dict]:
     out = []
-    with config.CHUNKS_PATH.open(encoding="utf-8") as fh:
+    with config.chunks_path().open(encoding="utf-8") as fh:
         for line in fh:
             line = line.strip()
             if line:

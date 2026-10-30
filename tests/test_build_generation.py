@@ -90,8 +90,31 @@ def _wire(mod, monkeypatch, tmp_path, *, gate_fails: bool = False):
     assert str(data_dir).startswith(str(tmp_path.resolve())), "DATA_DIR 必须隔离到临时目录"
     data_dir.mkdir(parents=True, exist_ok=True)
     monkeypatch.setattr(mod.config, "DATA_DIR", data_dir)
+    # 来源状态的**权威**是验证记录（`run_l0.py` 跑完核对后写的那份），
+    # 脚本现在优先读它、`corpus_meta` 里的同名字段只作兜底与交叉核对。
+    # 所以人造前提必须写在权威位置——只写副本的那一版会被如实判为
+    # 「两份记录不一致，取更保守的 source_unverified」然后拒绝构建。
+    (data_dir / "source_verification.json").write_text(
+        json.dumps(
+            {
+                "status": "verified_zip",
+                "checks": ["zip_bytes_and_sha256", "zip_matches_tree"],
+                "problems": [],
+            }
+        ),
+        encoding="utf-8",
+    )
     (data_dir / "corpus_meta.json").write_text(
-        json.dumps({"corpus_fp": "corpusfp01234567"}), encoding="utf-8"
+        json.dumps(
+            {
+                "corpus_fp": "corpusfp01234567",
+                # D4 之后 `source_unverified` 的一代不许发布，所以人造语料必须显式声明
+                # 来源已验证；这里是在声明测试前提，不是在绕过检查——真实链路里这个
+                # 字段由 `run_l1.py` 从 `source.verify()` 的结果写进来。
+                "source_status": "verified_zip",
+            }
+        ),
+        encoding="utf-8",
     )
 
     monkeypatch.setattr(mod.extract, "load_chunks", lambda *a, **k: [dict(c) for c in CHUNKS])
@@ -125,7 +148,7 @@ def _wire(mod, monkeypatch, tmp_path, *, gate_fails: bool = False):
 def _argv(**kw):
     import argparse
 
-    defaults = {"probes": 5, "no_publish": False}
+    defaults = {"probes": 5, "no_publish": False, "allow_incomplete": False}
     defaults.update(kw)
     return argparse.Namespace(**defaults)
 
@@ -232,6 +255,106 @@ class TestMustFail:
         monkeypatch.setattr(script.cache, "is_cached_for_chunk", lambda *a, **k: False)
         assert script.build(_argv()) == 2
         assert release.list_generations() == []
+        assert release.read_current() is None
+
+    def test_allow_incomplete_without_no_publish_is_refused(self, script, monkeypatch):
+        """覆盖不全的一代只能停在候选，`--allow-incomplete` 单独用必须被拒。
+
+        这条守的是「不许把不完整输入当完整世代发布」的**入口**：
+        哪怕调用方漏了 --no-publish，脚本也不许自己滑进发布分支。
+        """
+        _wire(script, monkeypatch, script.TEST_ROOT)
+        monkeypatch.setattr(script.cache, "is_cached_for_chunk", lambda *a, **k: False)
+        assert script.build(_argv(allow_incomplete=True, no_publish=False)) == 2
+        assert release.list_generations() == []
+        assert release.read_current() is None
+
+    def test_unverified_source_refuses_to_build(self, script, monkeypatch):
+        """没有验证记录时不许开建：来源身份未知的一代不得冒充 Release。
+
+        这条与本轮修的 bug 是同一枚硬币的两面。修的是"副本缺字段被读成未验证"，
+        但**真的没有验证记录**时结论必须仍然是拒绝——否则那个修复就变成了
+        "来源检查形同虚设"。判据看的是权威文件在不在，不是副本怎么说。
+        """
+        _wire(script, monkeypatch, script.TEST_ROOT)
+        (Path(script.config.DATA_DIR) / "source_verification.json").unlink()
+
+        assert script.build(_argv()) == 2
+        assert release.list_generations() == []
+        assert release.read_current() is None
+
+    def test_copy_cannot_rescue_absent_verification_record(self, script, monkeypatch):
+        """副本说自己 `verified_zip`，但权威记录不存在 —— 仍必须拒绝。
+
+        如果这条能过，那么任何人在 `corpus_meta.json` 里写一行
+        `"source_status": "verified_zip"` 就能让未经校验的语料上线。
+        """
+        _wire(script, monkeypatch, script.TEST_ROOT)
+        data_dir = Path(script.config.DATA_DIR)
+        (data_dir / "source_verification.json").unlink()
+        (data_dir / "corpus_meta.json").write_text(
+            json.dumps({"corpus_fp": "corpusfp01234567", "source_status": "verified_zip"}),
+            encoding="utf-8",
+        )
+
+        assert script.build(_argv()) == 2
+        assert release.list_generations() == []
+
+    def test_conflicting_copy_downgrades_and_refuses(self, script, monkeypatch):
+        """权威已验证、副本停留在旧结论：取更保守的一侧，于是拒绝构建。
+
+        这正是"两份记录不一致不许静默取一边"的可观测后果：如果实现偷偷信权威，
+        这条会返回 0 并发布——过期副本这种真事故就没人看得见。
+        """
+        _wire(script, monkeypatch, script.TEST_ROOT)
+        (Path(script.config.DATA_DIR) / "corpus_meta.json").write_text(
+            json.dumps({"corpus_fp": "corpusfp01234567", "source_status": "source_unverified"}),
+            encoding="utf-8",
+        )
+
+        assert script.build(_argv()) == 2
+        assert release.list_generations() == []
+
+    def test_build_records_source_provenance_in_manifest(self, script, monkeypatch):
+        """Manifest 必须记下这一代的来源状态，且与权威记录一致。"""
+        _wire(script, monkeypatch, script.TEST_ROOT)
+        assert script.build(_argv()) == 0
+
+        gen = release.Generation(release.read_current()["generation_id"])
+        manifest = json.loads(gen.manifest_path.read_text("utf-8"))
+        assert manifest["source_status"] == "verified_zip"
+
+    def test_incomplete_candidate_is_declared_and_cannot_be_published(self, script, monkeypatch):
+        """覆盖不全时候选照建，但 Manifest 必须自报家门，且发布被硬拒。
+
+        这里验的不是"能不能建"，而是"建出来的东西有没有资格叫完整世代"：
+        少了块却声称完整，事后没有任何指针能看出少了哪几块。
+        """
+        _wire(script, monkeypatch, script.TEST_ROOT)
+        # 4 块里只让前 3 块有抽取，第 4 块缺席——用真实判据（缓存命中）制造缺口
+        present = {c["chunk_id"] for c in CHUNKS[:-1]}
+        monkeypatch.setattr(
+            script.cache,
+            "is_cached_for_chunk",
+            lambda chunk, *a, **k: chunk["chunk_id"] in present,
+        )
+        assert script.build(_argv(allow_incomplete=True, no_publish=True)) == 0
+
+        gens = release.list_generations()
+        assert len(gens) == 1 and gens[0]["status"] == release.READY
+        gen = release.Generation(gens[0]["generation_id"])
+        manifest = gen.load()
+        assert manifest["coverage_status"] == release.COVERAGE_INCOMPLETE
+        assert manifest["coverage_declared"] == 4
+        assert manifest["coverage_covered"] == 3
+        assert manifest["coverage_missing"] == [CHUNKS[-1]["chunk_id"]]
+
+        # READY 且自洽，但不许发布
+        assert release.verify_generation(gen) == []
+        with pytest.raises(release.ReleaseError) as exc:
+            release.publish(gen)
+        assert "覆盖不全" in str(exc.value)
+        assert CHUNKS[-1]["chunk_id"] in exc.value.detail
         assert release.read_current() is None
 
     def test_tampered_candidate_is_caught_by_readback(self, script, monkeypatch):

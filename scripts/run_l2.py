@@ -9,7 +9,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from arkrag import chunk as chunker  # noqa: E402
-from arkrag import config, gates  # noqa: E402
+from arkrag import atomic, config, fingerprint, gates  # noqa: E402
 
 T1_CATEGORIES = config.T1_CATEGORIES
 
@@ -24,7 +24,7 @@ def load_scenes(path: Path) -> list[dict]:
 
 
 def main() -> int:
-    scenes = load_scenes(config.DATA_DIR / "scenes.jsonl")
+    scenes = load_scenes(config.scenes_path())
     chunks = []
     for scene in scenes:
         chunks.extend(chunker.split_scene(scene))
@@ -38,37 +38,51 @@ def main() -> int:
         c["shard"] = owner_t1.get(c["chunk_id"], "")
         c["in_t1"] = config.in_t1(c["category"])
 
-    config.DATA_DIR.mkdir(parents=True, exist_ok=True)
-    with (config.DATA_DIR / "chunks.jsonl").open("w", encoding="utf-8", newline="\n") as fh:
-        for c in chunks:
-            fh.write(json.dumps(c, ensure_ascii=False) + "\n")
+    config.artifact_root().mkdir(parents=True, exist_ok=True)
+    # 分块层身份：只比块数不够——调小目标块长会让块数变多、调大重叠会让块数不变而内容全变
+    chunk_fp = fingerprint.chunk_fingerprint(
+        chunks,
+        params={
+            "target_chars": config.CHUNK_TARGET_CHARS,
+            "min_chars": config.CHUNK_MIN_CHARS,
+            "max_chars": config.CHUNK_MAX_CHARS,
+            "overlap_turns": config.CHUNK_OVERLAP_TURNS,
+            "t1_categories": list(config.T1_CATEGORIES),
+            "pack_size": 200,
+        },
+    )
+    lines = "".join(json.dumps(c, ensure_ascii=False) + "\n" for c in chunks)
+    atomic.atomic_write_text(config.chunks_path(), lines)
 
-    (config.DATA_DIR / "shards.json").write_text(
-        json.dumps(
-            {
-                "schema_version": config.SCHEMA_VERSION,
-                "target_blocks_per_shard": 200,
-                "t1_scope": list(T1_CATEGORIES),
-                "t1": {
-                    "chunks": len(t1_chunks),
-                    "shards": shards_t1,
-                    "concurrency_plan": "2 片并行 x 每片并发 4 = 全局 8",
-                },
-                "full": {"chunks": len(chunks), "shards": shards_full},
+    atomic.atomic_write_json(
+        config.shards_path(),
+        {
+            "schema_version": config.SCHEMA_VERSION,
+            "target_blocks_per_shard": 200,
+            "t1_scope": list(T1_CATEGORIES),
+            # 分块层身份随分片清单一起落盘，下游不必重算就知道这批块是哪套参数切的
+            "chunk_fp": chunk_fp,
+            "chunk_params": {
+                "target_chars": config.CHUNK_TARGET_CHARS,
+                "min_chars": config.CHUNK_MIN_CHARS,
+                "max_chars": config.CHUNK_MAX_CHARS,
+                "overlap_turns": config.CHUNK_OVERLAP_TURNS,
             },
-            ensure_ascii=False,
-            indent=2,
-        )
-        + "\n",
-        encoding="utf-8",
-        newline="\n",
+            "t1": {
+                "chunks": len(t1_chunks),
+                "shards": shards_t1,
+                "concurrency_plan": "2 片并行 x 每片并发 4 = 全局 8",
+            },
+            "full": {"chunks": len(chunks), "shards": shards_full},
+        },
     )
 
     run = gates.l2_gates(chunks, shards_t1, scenes)
-    gates.write_report(run, config.DATA_DIR / "gates.json", "L2")
+    gates.write_report(run, config.gates_path(), "L2")
 
     total_chars = sum(len(t["text"]) for s in scenes for t in s["turns"])
     print("=== L2 结果 ===")
+    print(f"产物根 {config.artifact_root()}")
     print(f"总块数 {len(chunks):,}   T1 块数 {len(t1_chunks):,}   总字数 {total_chars:,}")
     print("T1 范围: " + "、".join(T1_CATEGORIES))
     sizes = Counter()

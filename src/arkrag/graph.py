@@ -11,7 +11,7 @@ from pathlib import Path
 
 from . import atomic, cache, config, fingerprint, legacy, norm_entity, norm_relation
 from .agent_tasks import AGENT_MODEL
-from .vocab import ENTITY_RULE_VERSION, ENTITY_TYPES
+from .vocab import ENTITY_RULE_VERSION, ENTITY_TYPES, RELATION_VERSION
 
 
 def load_records(chunks: list[dict]) -> list[dict]:
@@ -194,20 +194,55 @@ def build_graph(chunks: list[dict], records: list[dict]) -> dict:
 
 
 def graph_fp_inputs() -> dict:
+    """建图配置的全量输入（计划 D3）。
+
+    这里刻意不只用 `config.PROMPT_VERSION` 这类展示字符串，而是吃三类**内容摘要**：
+      * `prompt_sha256` —— 提示词实际内容。改了提示词忘改版本号，指纹照样会变。
+      * `vocab_sha`     —— 词表内容（211 条同义词、逆谓词、对称关系、互斥对……）。
+                           加一条同义词不动代码不动提示词，却能让整张图结构变掉。
+      * `chunk_params`  —— 分块参数全组，不只目标块长（重叠轮次数同样改产物）。
+    """
     return {
         "schema_version": config.SCHEMA_VERSION,
         "model": "agent:qoder-subagent",
         "prompt_version": config.PROMPT_VERSION,
+        "prompt_sha256": fingerprint.prompt_digest(),
+        "vocab_sha": fingerprint.vocab_digest(),
+        "relation_version": RELATION_VERSION,
         "chunk_chars": config.CHUNK_TARGET_CHARS,
+        "chunk_params": {
+            "target_chars": config.CHUNK_TARGET_CHARS,
+            "min_chars": config.CHUNK_MIN_CHARS,
+            "max_chars": config.CHUNK_MAX_CHARS,
+            "overlap_turns": config.CHUNK_OVERLAP_TURNS,
+            "t1_categories": list(config.T1_CATEGORIES),
+        },
         "normalizer_version": config.NORMALIZER_VERSION,
         "entity_rule_version": ENTITY_RULE_VERSION,
     }
 
 
-def attach_corpus_fp(graph: dict, corpus_fp: str) -> None:
+def attach_corpus_fp(
+    graph: dict,
+    corpus_fp: str,
+    *,
+    identities: dict | None = None,
+) -> None:
+    """挂上建图配置指纹，并把分层身份一起写进产物（计划 D3）。
+
+    `identities` 是上游各层的指纹（source_fp / scene_fp / chunk_fp）。图自己算不出
+    它们——那是上一层的输入——但图必须**记录**它们，否则事后无法回答
+    "这张图吃的是哪一批块、那一批块来自哪一版场景"。
+    """
     fp = fingerprint.graph_fingerprint(**graph_fp_inputs(), corpus_fp=corpus_fp)
     graph["corpus_fp"] = corpus_fp
     graph["fingerprint"] = fp
+    # 把配置输入本身也写进产物：事后要能回答"这张图是按什么配置建的"，
+    # 只留一个 16 位指纹等于把答案丢掉。
+    graph["build_config"] = {
+        k: v for k, v in graph_fp_inputs().items() if k != "prompt_version"
+    }
+    graph["identities"] = dict(identities or {})
 
 
 def save(graph: dict, path: Path) -> dict:

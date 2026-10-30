@@ -34,7 +34,7 @@ def main() -> int:
 
     records = graph.load_records(chunks)
     built = graph.build_graph(records and chunks or [], records)
-    corpus_meta = json.loads((config.DATA_DIR / "corpus_meta.json").read_text("utf-8"))
+    corpus_meta = json.loads(config.corpus_meta_path().read_text("utf-8"))
     # 语料指纹覆盖全部场景（不只是 T1），保证与 L6 三查同源
     graph.attach_corpus_fp(built, corpus_meta["corpus_fp"])
     stats = built["stats"]
@@ -62,11 +62,11 @@ def main() -> int:
         print("--allow-partial：仅诊断，未写 graph.json、未写门禁报告")
         return 0
 
-    counts = graph.save(built, config.GRAPH_PATH)
-    print(f"已写 {config.GRAPH_PATH} -> {counts}")
-    gates.write_report(l4, config.DATA_DIR / "gates.json", "L4")
-    gates.write_report(l5, config.DATA_DIR / "gates.json", "L5")
-    print("已写门禁报告 -> data/arkrag/gates.json（L4/L5）")
+    counts = graph.save(built, config.graph_path())
+    print(f"已写 {config.graph_path()} -> {counts}")
+    gates.write_report(l4, config.gates_path(), "L4")
+    gates.write_report(l5, config.gates_path(), "L5")
+    print(f"已写门禁报告 -> {config.gates_path()}（L4/L5）")
 
     fails = [g for g in (l4.gates + l5.gates) if g.verdict == "FAIL"]
     print(f"FAIL {len(fails)} / 共 {len(l4.gates) + len(l5.gates)}")

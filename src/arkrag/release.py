@@ -52,7 +52,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
-from . import atomic, config
+from . import atomic, config, fingerprint, source
 
 GENERATIONS_DIR = config.DATA_DIR / "generations"
 RUNS_DIR = config.DATA_DIR / "runs"
@@ -79,6 +79,12 @@ TRANSITIONS: dict[str, tuple[str, ...]] = {
 }
 
 GEN_ID_RE = re.compile(r"^g-\d{8}T\d{6}Z-[0-9a-f]{6}$")
+
+# 覆盖状态。默认是"完整"，只有构建脚本显式申报才可能是"不完整"。
+# 这一项不参与「这一代自不自洽」的判定（那是 verify_generation 的事），
+# 只拦一件事：把不完整输入建成的一代当完整世代发布出去。
+COVERAGE_COMPLETE = "complete"
+COVERAGE_INCOMPLETE = "incomplete"
 
 
 class ReleaseError(RuntimeError):
@@ -160,19 +166,32 @@ def extraction_manifest_hash(records: dict[str, dict]) -> str:
 
 @dataclass
 class InputSnapshot:
-    """构建前固定下来的输入身份。构建过程中输入再被改动，也不影响这一代。"""
+    """构建前固定下来的输入身份。构建过程中输入再被改动，也不影响这一代。
+
+    分层是因为一层代表不了另一层（计划 D3）：块数相同内容全换，块清单摘要会变；
+    块清单相同而图变了，是抽取结果变了；抽取相同而图仍变了，就是建图配置变了。
+    少了任何一层，「产物变了」这件事就落不到具体哪一层上。
+    """
 
     source_fingerprint: str
     chunk_manifest_hash: str
     chunk_count: int
     extraction_manifest_hash: str
     extraction_count: int
+    scene_fingerprint: str = ""
+    chunk_fingerprint: str = ""
     versions: dict[str, str] = field(default_factory=dict)
     git_revision: str = ""
+    # 默认值引用 source.UNVERIFIED 而不是手抄字面量：默认值决定了"没写等于什么"，
+    # 偏向哪一侧是有语义的（未验证 = 不得发布），不能在两处各写一份。
+    source_status: str = source.UNVERIFIED
 
     def as_dict(self) -> dict[str, Any]:
         return {
             "source_fingerprint": self.source_fingerprint,
+            "source_status": self.source_status,
+            "scene_fingerprint": self.scene_fingerprint,
+            "chunk_fingerprint": self.chunk_fingerprint,
             "chunk_manifest_hash": self.chunk_manifest_hash,
             "chunk_count": self.chunk_count,
             "extraction_manifest_hash": self.extraction_manifest_hash,
@@ -182,9 +201,29 @@ class InputSnapshot:
         }
 
 
-def capture_inputs(*, chunks: list[dict], records: dict[str, dict], source_fp: str) -> InputSnapshot:
+def capture_inputs(
+    *,
+    chunks: list[dict],
+    records: dict[str, dict],
+    source_fp: str,
+    scenes: list[dict] | None = None,
+    source_status: str = source.UNVERIFIED,
+) -> InputSnapshot:
     return InputSnapshot(
         source_fingerprint=source_fp,
+        source_status=source_status,
+        scene_fingerprint=fingerprint.scene_fingerprint(scenes) if scenes else "",
+        chunk_fingerprint=fingerprint.chunk_fingerprint(
+            chunks,
+            params={
+                "target_chars": config.CHUNK_TARGET_CHARS,
+                "min_chars": config.CHUNK_MIN_CHARS,
+                "max_chars": config.CHUNK_MAX_CHARS,
+                "overlap_turns": config.CHUNK_OVERLAP_TURNS,
+                "t1_categories": list(config.T1_CATEGORIES),
+                "pack_size": 200,
+            },
+        ),
         chunk_manifest_hash=chunk_manifest_hash(chunks),
         chunk_count=len(chunks),
         extraction_manifest_hash=extraction_manifest_hash(records),
@@ -192,6 +231,9 @@ def capture_inputs(*, chunks: list[dict], records: dict[str, dict], source_fp: s
         versions={
             "schema_version": config.SCHEMA_VERSION,
             "prompt_version": config.PROMPT_VERSION,
+            # 版本字符串只用于展示；下面两个内容摘要才是身份（计划 D3）
+            "prompt_sha256": fingerprint.prompt_digest(),
+            "vocab_sha": fingerprint.vocab_digest(),
             "normalizer_version": config.NORMALIZER_VERSION,
         },
         git_revision=git_revision(),
@@ -425,11 +467,63 @@ def verify_generation(gen: Generation) -> list[str]:
             f"索引绑定的图指纹与图不一致：index.graph_fp={idx_payload_meta.get('graph_fp') or '(空)'} "
             f"graph={graph_fp or '(空)'}"
         )
+    # 索引必须绑定**图产物的内容摘要**，不匹配就说明这份倒排是对着另一张图建的（计划 D3）。
+    # 只绑 graph_fp（配置指纹）不够：同一份配置重建两次图，配置指纹一样而内容未必一样。
+    idx_graph_aid = idx_payload_meta.get("graph_artifact_id") or ""
+    if not idx_graph_aid:
+        problems.append("索引 meta 缺 graph_artifact_id：无法证明这份倒排对着哪一份图产物")
+    elif idx_graph_aid != digests["graph"]:
+        problems.append(
+            f"索引绑定的图产物摘要与实际图不符：index.graph_artifact_id={idx_graph_aid[:16]} "
+            f"实际图={digests['graph'][:16]}"
+        )
     if idx_payload_meta.get("corpus_fp") != manifest.get("source_fingerprint"):
         problems.append(
             f"索引语料指纹与 Manifest 不符：index={idx_payload_meta.get('corpus_fp') or '(空)'} "
             f"manifest={manifest.get('source_fingerprint') or '(空)'}"
         )
+    # 提示词与词表的内容摘要必须与 Manifest 记的一致：改提示词忘改版本号这类漏洞，
+    # 只有在"配置摘要与实际内容比对"时才暴露（计划 D3）。
+    versions = manifest.get("versions") or {}
+    for key, meta_key in (("prompt_sha256", "prompt_sha256"), ("vocab_sha", "vocab_sha")):
+        want = versions.get(key) or ""
+        got = idx_payload_meta.get(meta_key) or ""
+        if want and got and want != got:
+            problems.append(f"索引 {meta_key} 与 Manifest 不符：index={got[:16]} manifest={want[:16]}")
+    # 来源未验证的世代不得冒充 Release（计划 D4）
+    #
+    # 判据必须和 source.strength() 共用同一张表，不能只认字面量
+    # "source_unverified"。否则 source_status 写成 ""、"VERIFIED_ZIP"、
+    # "verified_zip "（尾空格）、"bogus" 这些**同样不是已验证**的取值，
+    # 都能绕过这道门 —— 门只拒绝一个特定拼写，等于没有门。
+    # 改成白名单判定：只有明确认定已验证的两个取值才放行。
+    _source_status = manifest.get("source_status") or ""
+    if _source_status not in (source.VERIFIED_ZIP, source.VERIFIED_TREE):
+        problems.append(
+            f"source_status={_source_status!r}：语料来源未能验证，"
+            f"按计划 D4 不得作为 Release 发布"
+        )
+
+    # 分层身份必须逐层对齐（计划 D3）：Manifest 记的是这一代吃进去的每一层输入，
+    # 图里记的是它自己认为吃进去的每一层。两者不一致就说明图不是从这一代输入建的。
+    identities = graph.get("identities") or {}
+    if identities:
+        for key, want in (
+            ("source_fp", manifest.get("source_fingerprint")),
+            ("scene_fp", manifest.get("scene_fingerprint")),
+            ("chunk_fp", manifest.get("chunk_fingerprint")),
+            ("chunk_manifest_hash", manifest.get("chunk_manifest_hash")),
+            ("extraction_manifest_hash", manifest.get("extraction_manifest_hash")),
+        ):
+            got = identities.get(key) or ""
+            if want and got and got != want:
+                problems.append(
+                    f"图记录的 {key} 与 Manifest 不符：graph={got[:16]} manifest={str(want)[:16]}"
+                )
+            elif want and not got:
+                problems.append(f"图缺 {key}：无法证明这张图吃的是本代输入")
+    elif manifest.get("chunk_fingerprint"):
+        problems.append("图缺 identities：Manifest 有分层身份而图完全没有记录，无法逐层对齐")
 
     # 内容摘要：不只比数量。数量相同内容不同是静默失效最典型的形态。
     if manifest.get("index_content_digest"):
@@ -490,6 +584,23 @@ def publish(gen: Generation, *, run: Run | None = None) -> dict:
     if status != READY:
         raise IllegalTransition(f"只有 READY 能发布，当前 {gen.generation_id} 是 {status}")
 
+    manifest = gen.load()
+    # 覆盖不全的一代不许发布。这条不是「自洽性」检查——不完整的一代可以完全自洽
+    # （Manifest 记的字节就是盘上这些字节），但把它当完整世代切上线，等于用
+    # 13,764 块的图冒充 13,798 块的语料，事后没有任何指针能看出少了 34 块。
+    # 判据看两处：显式申报的 coverage_status，以及 coverage_missing 是否非空。
+    # 后者不是为了防手滑——它兜住的是"Manifest 里记了缺哪些块、却没写状态"的形态，
+    # 缺字段时按 complete 处理是为了兼容历史世代，但记了缺块就是记了。
+    coverage = str(manifest.get("coverage_status") or COVERAGE_COMPLETE)
+    missing = manifest.get("coverage_missing") or []
+    if coverage != COVERAGE_COMPLETE or missing:
+        detail = f"覆盖 {coverage}，缺 {len(missing)} 块：{'; '.join(str(c) for c in missing[:5])}"
+        if run:
+            run.error("publish", "这一代覆盖不全，拒绝发布", detail)
+        raise ReleaseError(
+            f"{gen.generation_id} 覆盖不全（{coverage}），拒绝发布为完整世代", detail=detail
+        )
+
     problems = verify_generation(gen)
     if problems:
         gen.fail("publish_verify_failed", detail="; ".join(problems[:8]))
@@ -498,7 +609,6 @@ def publish(gen: Generation, *, run: Run | None = None) -> dict:
         raise ReleaseError(f"发布前校验失败（{len(problems)} 项）", detail="; ".join(problems[:8]))
 
     previous = read_current() or {}
-    manifest = gen.load()
     pointer = {
         "generation_id": gen.generation_id,
         "path": str(gen.dir),

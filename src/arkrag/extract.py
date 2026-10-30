@@ -143,7 +143,7 @@ def extract_chunk(
 def load_chunks(shard: str | None = None, limit: int | None = None, ids: list[str] | None = None) -> list[dict]:
     out = []
     wanted = set(ids) if ids else None
-    with (config.DATA_DIR / "chunks.jsonl").open(encoding="utf-8") as fh:
+    with config.chunks_path().open(encoding="utf-8") as fh:
         for line in fh:
             if not line.strip():
                 continue

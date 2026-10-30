@@ -45,12 +45,25 @@ def main() -> int:
         chunks = [all_chunks[i] for i in ids if i in all_chunks]
 
     records, absent = [], []
+    layers = {"current": 0, "legacy": 0, "adopted": 0}
     for chunk in chunks:
-        raw = cache.read_for_chunk(chunk, agent_tasks.AGENT_MODEL)
-        if raw is None:
+        lk = cache.lookup_for_chunk(chunk, agent_tasks.AGENT_MODEL)
+        if lk.raw is None:
             absent.append(chunk["chunk_id"])
             continue
-        records.append({"chunk_id": chunk["chunk_id"], "text": chunk["text"], "raw": raw, "chunk": chunk})
+        if lk.layer in layers:
+            layers[lk.layer] += 1
+        records.append(
+            {
+                "chunk_id": chunk["chunk_id"],
+                "text": chunk["text"],
+                "raw": lk.raw,
+                "chunk": chunk,
+                # 来源分层一路带到门里：L3.T19 只申报不判定，但必须看得见
+                "layer": lk.layer,
+                "adopted_from": lk.adopted_from,
+            }
+        )
 
     run = gates.l3_trial_gates(records, expected_blocks=len(chunks))
     if absent:
@@ -64,10 +77,15 @@ def main() -> int:
                 "; ".join(absent[:5]),
             )
         )
-    gates.write_report(run, config.DATA_DIR / "gates.json", "L3")
+    gates.write_report(run, config.gates_path(), "L3")
 
+    layer_line = (
+        f"来源分层 current {layers['current']} / legacy {layers['legacy']} / "
+        f"adopted {layers['adopted']}"
+    )
     if args.no_doc:
         print(f"=== L3 抽检（{args.label}：{len(records)}/{len(chunks)} 块已入库）===")
+        print(f"  {layer_line}")
         for g in run.gates:
             print(f"  {g.verdict:12s} {g.name:44s} 门线[{g.threshold}] 实测[{g.measured[:70]}]")
             if g.verdict != "PASS" and g.note:
@@ -94,6 +112,7 @@ def main() -> int:
     out.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
 
     print(f"=== L3 抽检（{args.label}：{len(records)}/{len(chunks)} 块已入库）===")
+    print(f"  {layer_line}")
     for g in run.gates:
         print(f"  {g.verdict:12s} {g.name:30s} 门线[{g.threshold}] 实测[{g.measured[:70]}]")
         if g.verdict != "PASS" and g.note:

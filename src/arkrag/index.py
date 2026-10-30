@@ -24,7 +24,7 @@ import time
 from collections import Counter, defaultdict
 from pathlib import Path
 
-from . import atomic, config, legacy
+from . import atomic, config, fingerprint, legacy
 
 TOKEN_RE = re.compile(r"[A-Za-z0-9]+")
 
@@ -140,7 +140,13 @@ def build_alias_index(entities: list[dict]) -> dict[str, str]:
     return out
 
 
-def build(chunk_records: list[dict], graph: dict, corpus_fp: str) -> tuple[LexicalIndex, dict]:
+def build(
+    chunk_records: list[dict],
+    graph: dict,
+    corpus_fp: str,
+    *,
+    graph_artifact_id: str = "",
+) -> tuple[LexicalIndex, dict]:
     index = LexicalIndex()
     for slot, rec in enumerate(sorted(chunk_records, key=lambda r: r["chunk_id"])):
         # 块向量/词法文本都带标题前缀：正文常缺主语与场景，只嵌正文会分不清同章节的不同场景
@@ -148,8 +154,14 @@ def build(chunk_records: list[dict], graph: dict, corpus_fp: str) -> tuple[Lexic
     meta = {
         "schema_version": config.SCHEMA_VERSION,
         "corpus_fp": corpus_fp,
+        # graph_fp 是**配置**指纹，graph_artifact_id 是**内容**摘要（计划 D3）。
+        # 只绑配置不够：同一份配置重建两次图，指纹一样而图未必一样；
+        # 索引必须能回答"我这份倒排是对着哪一份图产物建的"，那只有内容摘要能答。
         "graph_fp": graph.get("fingerprint", ""),
+        "graph_artifact_id": graph_artifact_id,
         "prompt_version": config.PROMPT_VERSION,
+        "prompt_sha256": fingerprint.prompt_digest(),
+        "vocab_sha": fingerprint.vocab_digest(),
         "normalizer_version": config.NORMALIZER_VERSION,
         # 配置指纹与内容摘要分开记：前者表"该不该重建"，后者表"字节是不是这些字节"
         "index_build_fp": index_build_fingerprint(),

@@ -15,7 +15,7 @@ from collections import Counter, defaultdict
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
-from . import atomic, config
+from . import atomic, config, source
 from .prop_spec import TEXT_PROP_FIELD
 
 # 文档级元数据泄漏进正文的形态：顶层键名、磁盘路径、词频表字段
@@ -201,6 +201,34 @@ def l0_gates(manifest: dict) -> GateRun:
             "缺口本身可以是合法的（另册索引/不在覆盖范围），但不许有无解释的缺口",
         )
     )
+    # 来源身份（计划 D4）。旧版 ZIP 不在场时只打印一句"跳过校验"就继续，
+    # 于是"没人检查过"和"已验证"在下游完全无法区分，产物照样被当 Release 引用。
+    # 这条门让那个区别变成机器可读的结论。
+    sv = manifest.get("source_verification") or {}
+    # 判定只能有一处事实源：这里引用 source 的常量，不手抄字面量。
+    # 手抄的后果已经发生过——release.py 曾只拒绝字面量 "source_unverified"，
+    # 于是 ""、"VERIFIED_ZIP"、"verified_zip "（尾空格）全都绕过了发布门。
+    # 同一个判定在两处各写一份，整套检查就等于那处最松的。
+    status = sv.get("status") or manifest.get("source_status") or source.UNVERIFIED
+    checks = sv.get("checks") or []
+    problems = sv.get("problems") or []
+    verified = status in (source.VERIFIED_ZIP, source.VERIFIED_TREE)
+    run.add(
+        Gate(
+            "L0.8 来源已验证（ZIP 或确定性解压树清单）",
+            "L0",
+            "status ∈ {verified_zip, verified_tree}",
+            f"status={status} checks={len(checks)} problems={len(problems)} "
+            f"tree_files={sv.get('tree_files', 0)}",
+            "PASS" if verified else "FAIL",
+            "; ".join(problems[:3])
+            or (
+                "来源身份未知时产物不得冒充 Release（计划 D4）"
+                if not verified
+                else ""
+            ),
+        )
+    )
     return run
 
 
@@ -370,6 +398,56 @@ def l1_gates(scenes: list[dict], stats: dict) -> GateRun:
             json.dumps(near[:8], ensure_ascii=False),
         )
     )
+
+    # ---- node_id 身份校验（计划 D1）------------------------------------------
+    # 旧实现拿 node_id 当轮次唯一键：`if turn["node_id"] in seen: continue`。
+    # 于是同编号不同正文的两轮只剩一轮，而且**没有任何一处会报错**——
+    # 更糟的是 L2 的覆盖率门当时也用 node_id 当基准，分子分母一起少，门照样 PASS。
+    # 这里把「缺失」与「重复」分开报，因为两者含义完全不同：
+    #   缺失（id 为空/0）是上游数据特性，轮次仍然有效，只需申报；
+    #   同场景内重复才是身份冲突，必须能被看见。
+    missing_id = [
+        (s["doc_id"], i) for s in scenes for i, t in enumerate(s["turns"]) if not t.get("node_id")
+    ]
+    dup_id: list[tuple[str, int, int]] = []
+    for s in scenes:
+        seen: dict[int, list[str]] = defaultdict(list)
+        for t in s["turns"]:
+            nid = t.get("node_id")
+            if nid:
+                seen[nid].append(t["text"])
+        for nid, texts in seen.items():
+            if len(texts) > 1:
+                # 正文完全相同是上游重复行（可去重），正文不同才是身份冲突（会丢内容）
+                distinct = len({norm_for_dup(x) for x in texts})
+                dup_id.append((s["doc_id"], nid, distinct))
+    run.add(
+        Gate(
+            "L1.8 node_id 缺失轮次数（仅申报）",
+            "L1",
+            "申报（不判定）",
+            f"{len(missing_id)} 轮无 node_id（分布 {len({d for d, _ in missing_id})} 个场景）",
+            "PASS",
+            "上游部分节点没有 id 字段。轮次本身有效，实例身份改用场景内序号 ordinal 承担；"
+            "此项只申报，避免下一个人把「id 为 0」误当成「解析出错」",
+        )
+    )
+    conflicting = [d for d in dup_id if d[2] > 1]
+    run.add(
+        Gate(
+            "L1.8b 同场景 node_id 重复且正文不同（身份冲突）",
+            "L1",
+            "0",
+            f"重复编号 {len(dup_id)} 组，其中正文不同 {len(conflicting)} 组",
+            "PASS" if not conflicting else "FAIL",
+            "; ".join(f"{d}:id={n}:{k}种正文" for d, n, k in conflicting[:5])
+            or (
+                "正文相同的重复编号只是上游重复行，可去重；正文不同的重复会静默丢内容（计划 D1）"
+                if dup_id
+                else "本语料无重复编号"
+            ),
+        )
+    )
     return run
 
 
@@ -380,15 +458,26 @@ def l2_gates(chunks: list[dict], shards: list[dict], scenes: list[dict]) -> Gate
     # 计划书原文「块数 x 平均块长 与总字数之差 <10%」在带说话人前缀与轮次重叠的
     # 渲染形态下结构性不可能成立（前缀与重叠都是净增字）。这里换成同方向的失效探针：
     # 窄口径=原文覆盖率（任何一轮未被任何块包含即丢内容），宽口径=渲染冗余率。
+    #
+    # 覆盖判据按**轮次实例身份**（scene_id, ordinal）而不是 node_id（计划 D1）：
+    # node_id 会缺失（实测 201 轮为 0）也会重复，拿它当集合元素时，
+    # 同编号的两轮会被当成一轮——丢内容的同时门还是 PASS。
     covered: dict[str, set[int]] = defaultdict(set)
+    covered_text: dict[str, list[tuple[int, str]]] = defaultdict(list)
     for c in chunks:
-        covered[c["doc_id"]] |= set(c["turn_ids"])
+        ordinals = c.get("turn_ordinals")
+        if ordinals is None:  # 老产物没有该字段时退回 turn_ids 并明确降级
+            ordinals = []
+        covered[c["doc_id"]] |= set(ordinals)
+        for span in c.get("turn_spans") or []:
+            if span.get("ordinal") is not None:
+                covered_text[c["doc_id"]].append((span["ordinal"], c["text"][span["start"] : span["end"]]))
     missing = []
     total_turns = 0
     for s in scenes:
-        ids = {t["node_id"] for t in s["turns"]}
-        total_turns += len(ids)
-        gap = ids - covered.get(s["doc_id"], set())
+        ordinals = set(range(len(s["turns"])))
+        total_turns += len(ordinals)
+        gap = ordinals - covered.get(s["doc_id"], set())
         if gap:
             missing.append((s["doc_id"], sorted(gap)[:3]))
     raw_sum = sum(c["raw_chars"] for c in chunks)
@@ -417,38 +506,86 @@ def l2_gates(chunks: list[dict], shards: list[dict], scenes: list[dict]) -> Gate
         )
     )
 
-    # 最小块长门：跨场景不许合并，所以判定对象是「同场景内仍有碎块」= 尾块合并失效
+    # D1 三重覆盖：轮次实例覆盖 + 原始顺序 + 正文内容
+    # 只查"序号都在"不够——序号齐了但顺序被调换、或偏移指向别轮的正文，都是损坏。
+    order_bad: list[str] = []
+    content_bad: list[str] = []
+    for s in scenes:
+        spans = sorted(
+            covered_text.get(s["doc_id"], []), key=lambda x: x[0]
+        )
+        prev_end = -1
+        for ordinal, text in spans:
+            if not (0 <= ordinal < len(s["turns"])):
+                continue
+            expect = s["turns"][ordinal]
+            rendered = expect["text"]
+            if expect["kind"] == "dialogue" and expect["speaker"]:
+                rendered = f"{expect['speaker']}：{rendered}"
+            if text != rendered:
+                content_bad.append(f"{s['doc_id']}#{ordinal}")
+            if ordinal < prev_end:
+                order_bad.append(f"{s['doc_id']}#{ordinal}")
+            prev_end = ordinal
+    run.add(
+        Gate(
+            "L2.1c 轮次顺序与正文一致（逐轮实例）",
+            "L2",
+            "0",
+            f"顺序异常 {len(order_bad)} / 正文不符 {len(content_bad)}",
+            "PASS" if not order_bad and not content_bad else "FAIL",
+            f"顺序例 {order_bad[:3]}；正文例 {content_bad[:3]}",
+        )
+    )
+
+    # 最小块长门：跨场景不许合并，所以判定对象是「同场景内仍有碎块」= 尾块处置失效。
+    # 计划 D2：允许保留短尾块，但必须显式写明原因；原因空着才算失败——那等于
+    # "静默留了个碎块"或"静默造了个超长块"，两者都不能当 PASS。
     by_doc: dict[str, list[dict]] = defaultdict(list)
     for c in chunks:
         by_doc[c["doc_id"]].append(c)
-    tail_fail = [
-        c["chunk_id"]
-        for doc, lst in by_doc.items()
-        if len(lst) > 1
-        for c in lst
-        if c["chars"] < config.CHUNK_MIN_CHARS
+    unexplained = [
+        f"{c['chunk_id']}({c['chars']})"
+        for c in chunks
+        if c["chars"] < config.CHUNK_MIN_CHARS and not c.get("short_reason")
     ]
-    tiny_single = [c["chunk_id"] for c in chunks if c["chars"] < config.CHUNK_MIN_CHARS and len(by_doc[c["doc_id"]]) == 1]
+    short_kept = [c for c in chunks if c.get("short_reason")]
     run.add(
         Gate(
-            "L2.2 尾块合并生效（同场景内无碎块）",
+            "L2.2 短块必须有书面原因",
             "L2",
             "0",
-            str(len(tail_fail)),
-            "PASS" if not tail_fail else "FAIL",
-            f"另有 {len(tiny_single)} 个整篇即碎块的场景（场景=文件是硬边界，不许跨场景合并），"
-            f"它们不进抽取，样例 {tiny_single[:3]}",
+            f"无原因短块 {len(unexplained)} / 有原因短块 {len(short_kept)}",
+            "PASS" if not unexplained else "FAIL",
+            "有原因短块按原因计数: "
+            + json.dumps(Counter(c["short_reason"] for c in short_kept), ensure_ascii=False),
         )
     )
-    oversize = [c["chunk_id"] for c in chunks if c["chars"] > 2 * config.CHUNK_TARGET_CHARS]
+    oversize = [c for c in chunks if c["chars"] > config.CHUNK_MAX_CHARS]
+    # 超限分两种，判据不同：
+    #   atomic   —— 块里有一轮本身超过硬上限。轮次是原子单位，切半句就定位不到证据，
+    #               所以这是"已知不可修"的事实，交人工决定是放宽上限还是允许超长轮次独立成块。
+    #   logic    —— 没有任何单轮超上限，块却超了。这是合并/重叠逻辑自己造出来的，
+    #               必须 FAIL——它正是计划 D2 要防的那个失效。
+    atomic_oversize = [c for c in oversize if c.get("oversize_turn")]
+    logic_oversize = [c for c in oversize if not c.get("oversize_turn")]
+    oversize_verdict = "PASS" if not oversize else ("FAIL" if logic_oversize else "NEEDS_HUMAN")
     run.add(
         Gate(
-            "L2.3 最大块 <= 2x目标块长",
+            "L2.3 最大块 <= 硬上限",
             "L2",
-            f"<= {2 * config.CHUNK_TARGET_CHARS}",
-            f"max={max((c['chars'] for c in chunks), default=0)} 超限 {len(oversize)}",
-            "PASS" if not oversize else "FAIL",
-            "; ".join(oversize[:3]),
+            f"<= {config.CHUNK_MAX_CHARS}",
+            f"max={max((c['chars'] for c in chunks), default=0)} "
+            f"超限 {len(oversize)}（合并逻辑造成 {len(logic_oversize)} / 单轮本身超长 {len(atomic_oversize)}）",
+            oversize_verdict,
+            ("合并逻辑造出超长块: " + "; ".join(c["chunk_id"] for c in logic_oversize[:3]))
+            if logic_oversize
+            else (
+                "单轮本身超上限（轮次不可切，需人工定夺）: "
+                + "; ".join(f"{c['chunk_id']}({c['chars']})" for c in atomic_oversize[:3])
+                if atomic_oversize
+                else ""
+            ),
         )
     )
     cross = [c["chunk_id"] for c in chunks if c["doc_id"].lower() not in c["chunk_id"].lower()]
@@ -670,6 +807,32 @@ def l3_trial_gates(records: list[dict], expected_blocks: int | None = None) -> G
             "PASS",
             "「一句话讲清它是什么」是语义判断，机检只能排掉机械缺陷；"
             "把语义当门会让门永远红，红久了就没人看",
+        )
+    )
+
+    # 块来源分层：本轮抽取 / 只读复用 legacy / 从 legacy 搬进新键。
+    # 只申报、不判定——「搬用占比」该是多少取决于块身份变了多少，没有普适阈值；
+    # 但它是必须被看见的数：把 adopted 混进 current 报，等于让「这一代真抽了多少」
+    # 永久失明。records 的 layer 字段由调用方从 cache.Lookup.layer 带过来。
+    layers = {"current": 0, "legacy": 0, "adopted": 0}
+    unlabeled = 0
+    for rec in records:
+        lay = str(rec.get("layer") or "")
+        if lay in layers:
+            layers[lay] += 1
+        else:
+            unlabeled += 1
+    adopted_ids = [r["chunk_id"] for r in records if str(r.get("layer") or "") == "adopted"]
+    run.add(
+        Gate(
+            "L3.T19 块来源分层（current/legacy/adopted 申报）",
+            "L3",
+            "申报值（不判定）",
+            f"current {layers['current']} / legacy {layers['legacy']} / "
+            f"adopted {layers['adopted']} / 未标注 {unlabeled}",
+            "PASS",
+            ("adopted 块: " + "; ".join(adopted_ids[:4])) if adopted_ids
+            else "无 adopted 块（没有可证明复用的对象，或本轮全部走 current/legacy）",
         )
     )
     return run

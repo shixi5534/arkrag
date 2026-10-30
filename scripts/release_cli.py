@@ -94,7 +94,17 @@ def cmd_verify(args: argparse.Namespace) -> int:
 def cmd_publish(args: argparse.Namespace) -> int:
     gen = release.Generation(args.generation_id)
     run = release.Run()
-    pointer = release.publish(gen, run=run)
+    try:
+        pointer = release.publish(gen, run=run)
+    except release.ReleaseError as exc:
+        # 发布被拒是正常业务结果（覆盖不全 / 状态不对 / 自检不过），
+        # 不是程序崩溃——给人一句能读的话，再加 detail 指向排查入口，
+        # 而不是甩一段 traceback 让人以为工具坏了。
+        print(f"拒绝发布：{exc}", file=sys.stderr)
+        if exc.detail:
+            print(f"  明细：{exc.detail}", file=sys.stderr)
+        print(f"  run={run.run_id}  日志 {run.dir / 'events.jsonl'}", file=sys.stderr)
+        return 1
     print(f"已发布 {pointer['generation_id']}（上一代 {pointer['previous_generation'] or '(无)'}）")
     print(f"  run={run.run_id}  日志 {run.dir / 'events.jsonl'}")
     return 0

@@ -32,7 +32,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from arkrag import cache, config, extract, gates, graph, index, release  # noqa: E402
+from arkrag import cache, config, extract, gates, graph, index, release, source  # noqa: E402
 from arkrag.agent_tasks import AGENT_MODEL  # noqa: E402
 
 
@@ -76,6 +76,24 @@ def build_probes(idx, chunks: list[dict], built: dict, *, count: int = 200) -> l
     return probes
 
 
+def _load_scenes() -> list[dict]:
+    """读场景（只为算 scene_fingerprint，算不出就是空列表，不影响构建）。"""
+    path = config.scenes_path()
+    if not path.exists():
+        return []
+    out = []
+    with path.open("r", encoding="utf-8") as fh:
+        for line in fh:
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                out.append(json.loads(line))
+            except json.JSONDecodeError:
+                continue
+    return out
+
+
 def _fails(*runs) -> list[gates.Gate]:
     out = []
     for run in runs:
@@ -92,7 +110,14 @@ def build(args: argparse.Namespace) -> int:
     chunks = [c for c in extract.load_chunks() if config.in_t1(c["category"])]
     missing = [c["chunk_id"] for c in chunks if not cache.is_cached_for_chunk(c, AGENT_MODEL)]
     run.event("snapshot", "读取块清单", chunks=len(chunks), missing=len(missing))
-    if missing:
+    # 覆盖不全时只有一条路可走：建一个**明确标着 incomplete 的候选**，永不发布。
+    # 不允许"补几个块让它看起来完整"——那是拿别的块的证据顶替。
+    allow_incomplete = bool(getattr(args, "allow_incomplete", False))
+    if allow_incomplete and not getattr(args, "no_publish", False):
+        print("--allow-incomplete 必须与 --no-publish 同时使用：覆盖不全的世代不许发布。", file=sys.stderr)
+        run.finish("failed", reason="allow_incomplete_requires_no_publish")
+        return 2
+    if missing and not allow_incomplete:
         run.error("snapshot", "仍有块未抽取，拒绝构建", f"{len(missing)} 块缺失")
         run.finish("failed", reason="missing_extractions", missing=len(missing))
         print(
@@ -104,14 +129,72 @@ def build(args: argparse.Namespace) -> int:
 
     records_list = graph.load_records(chunks)
     records = {r["chunk_id"]: r["raw"] for r in records_list}
-    corpus_meta = json.loads((config.DATA_DIR / "corpus_meta.json").read_text("utf-8"))
+    corpus_meta = json.loads(config.corpus_meta_path().read_text("utf-8"))
     corpus_fp = corpus_meta["corpus_fp"]
-    snapshot = release.capture_inputs(chunks=chunks, records=records, source_fp=corpus_fp)
+    # 来源状态：权威是验证记录（`source.status_for_build()` 读的那份），
+    # `corpus_meta.json` 里的同名字段只是 L1 抄下来的副本，只作兜底与交叉核对。
+    # 完整理由见 `source.resolve_for_build` 的文档字符串——简版是：
+    # 验证记录是**产出验证的地方**写的，下游缓存的副本不该反向当权威；
+    # 而这份冻结的 corpus_meta.json（153 B，D4 之前的产物）压根没有这个字段，
+    # 旧代码 `corpus_meta.get("source_status", "source_unverified")` 于是把
+    # 一份实际已验证的语料判成未知来源、拒绝构建。缺字段 = 这个文件里没写，
+    # 不等于"没验证过"。
+    resolved = source.resolve_for_build(corpus_meta)
+    source_status = resolved["status"]
+    for line in resolved["conflicts"]:
+        # 不一致不许静默：打出来、写进 run 日志，并已按更保守的一侧取值。
+        print(f"警告：{line}", file=sys.stderr)
+    run.event(
+        "snapshot",
+        "来源状态已裁定",
+        source_status=source_status,
+        authority_status=resolved["authority_status"],
+        authority_path=resolved["authority_path"],
+        authority_present=resolved["authority_present"],
+        corpus_meta_copy=resolved["copy_status"] or "(无字段)",
+        conflicts=len(resolved["conflicts"]),
+    )
+    if not resolved["verified"]:
+        # 早拒：来源身份未知时建图要跑几分钟，且下游 verify_generation 反正会拦。
+        # 在这里停，是把"为什么停"讲在花掉那几分钟之前。
+        run.error(
+            "snapshot",
+            "来源未验证，拒绝构建",
+            f"status={source_status} 权威={resolved['authority_path']}",
+        )
+        # reason 记实际状态而不是固定标签：如果状态是 "bogus" 这种笔误，
+        # 记成 "source_unverified" 就把"写错了"和"确实没验证"混成一件事了。
+        run.finish(
+            "failed",
+            reason=f"source_not_verified:{source_status}",
+            source_status=source_status,
+        )
+        print(
+            f"拒绝构建：来源状态 {source_status}（权威记录 {resolved['authority_path']}"
+            f"{'' if resolved['authority_present'] else '，该文件不存在'}）。"
+            "来源身份未知时建出来的图不得冒充 Release（计划 D4）。",
+            file=sys.stderr,
+        )
+        return 2
+    # 场景层身份：块内容没变但标题/章节/node_id 变了时，只有这一层能看出来
+    scenes = _load_scenes()
+    snapshot = release.capture_inputs(
+        chunks=chunks,
+        records=records,
+        source_fp=corpus_fp,
+        scenes=scenes,
+        source_status=source_status,
+    )
     run.event(
         "snapshot",
         "输入快照已固定",
+        source_status=snapshot.source_status,
+        scene_fp=snapshot.scene_fingerprint,
+        chunk_fp=snapshot.chunk_fingerprint,
         chunk_manifest_hash=snapshot.chunk_manifest_hash[:16],
         extraction_manifest_hash=snapshot.extraction_manifest_hash[:16],
+        prompt_sha256=snapshot.versions.get("prompt_sha256", "")[:16],
+        vocab_sha=snapshot.versions.get("vocab_sha", ""),
         git_revision=snapshot.git_revision,
     )
 
@@ -119,11 +202,30 @@ def build(args: argparse.Namespace) -> int:
     parent = (release.read_current() or {}).get("generation_id", "")
     gen = release.Generation(release.new_generation_id())
     gen.create(snapshot=snapshot, run_id=run.run_id, parent=parent)
+    # 覆盖申报写进 Manifest，让「这一代覆盖了哪些块」成为可核对的事实，
+    # 而不是留在构建日志里。缺块时 release.publish() 会据此硬拒。
+    gen.update(
+        coverage_status=release.COVERAGE_INCOMPLETE if missing else release.COVERAGE_COMPLETE,
+        coverage_declared=len(chunks),
+        coverage_covered=len(chunks) - len(missing),
+        coverage_missing=list(missing),
+    )
     gen.advance(release.BUILDING)
     run.event("build", "候选目录已就位", generation_id=gen.generation_id, path=str(gen.dir))
 
     built = graph.build_graph(chunks, records_list)
-    graph.attach_corpus_fp(built, corpus_fp)
+    graph.attach_corpus_fp(
+        built,
+        corpus_fp,
+        identities={
+            "source_fp": snapshot.source_fingerprint,
+            "source_status": snapshot.source_status,
+            "scene_fp": snapshot.scene_fingerprint,
+            "chunk_fp": snapshot.chunk_fingerprint,
+            "chunk_manifest_hash": snapshot.chunk_manifest_hash,
+            "extraction_manifest_hash": snapshot.extraction_manifest_hash,
+        },
+    )
 
     try:
         graph.save(built, gen.graph_path)
@@ -134,7 +236,12 @@ def build(args: argparse.Namespace) -> int:
         print(f"建图失败：{exc}", file=sys.stderr)
         return 1
 
-    idx, idx_meta = index.build(chunks, built, corpus_fp)
+    # 索引绑定的是**图产物的内容摘要**，不是图配置指纹（计划 D3）：
+    # 同一份配置重建两次图，指纹相同而产物未必相同，只有内容摘要能答"这份倒排对的是哪份图"。
+    graph_artifact_id = release.sha256_file(gen.graph_path)
+    idx, idx_meta = index.build(
+        chunks, built, corpus_fp, graph_artifact_id=graph_artifact_id
+    )
     probes = build_probes(idx, chunks, built, count=args.probes)
     index.save_index(idx, idx_meta, gen.index_path)
     stats = built["stats"]
@@ -214,6 +321,11 @@ def build(args: argparse.Namespace) -> int:
 
     # ---- 5. 全部通过才 READY，再发布 ---------------------------------------
     gen.advance(release.READY)
+    if missing:
+        print(
+            f"注意：这一代覆盖不全——申报 {len(chunks)} 块，实际覆盖 {len(chunks) - len(missing)} 块，"
+            f"缺 {len(missing)} 块（Manifest 已标 coverage_status=incomplete，release.publish() 会拒绝发布）。"
+        )
     if args.no_publish:
         run.event("ready", "已到 READY，按 --no-publish 未切换指针", generation_id=gen.generation_id)
         run.finish("ready", generation_id=gen.generation_id)
@@ -239,6 +351,11 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="事务式构建并原子发布一代产物")
     ap.add_argument("--probes", type=int, default=200, help="检索自检抽样条数")
     ap.add_argument("--no-publish", action="store_true", help="只构建到 READY，不切换指针")
+    ap.add_argument(
+        "--allow-incomplete",
+        action="store_true",
+        help="允许在有块未抽取时构建候选（Manifest 标 incomplete，强制要求 --no-publish）",
+    )
     return build(ap.parse_args())
 
 

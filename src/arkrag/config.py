@@ -60,6 +60,9 @@ def in_t1(category: str) -> bool:
 # L2 参数（决策推荐区间：目标 800-1000 / 最小 100-150）
 CHUNK_TARGET_CHARS = int(os.environ.get("ARKRAG_CHUNK_CHARS", "900"))
 CHUNK_MIN_CHARS = int(os.environ.get("ARKRAG_CHUNK_MIN_CHARS", "120"))
+# 硬上限：任何块的字符数都不得超过它。尾块合并与重新平衡都以这条为红线，
+# 计划 D2 要的正是"合并前预测总长度，超硬上限不许合"。
+CHUNK_MAX_CHARS = int(os.environ.get("ARKRAG_CHUNK_MAX_CHARS", str(2 * CHUNK_TARGET_CHARS)))
 CHUNK_OVERLAP_TURNS = int(os.environ.get("ARKRAG_CHUNK_OVERLAP_TURNS", "1"))
 
 # L3 并发预算：全局上限 8，由「并行子代数 x 本值」共同决定
@@ -70,8 +73,76 @@ LLM_BASE_URL = os.environ.get("ARKRAG_LLM_BASE_URL", "")
 
 CONFIDENCE_THRESHOLD = float(os.environ.get("ARKRAG_CONF_THRESHOLD", "0.5"))
 
+CIRCUIT_OPEN_PATH = DATA_DIR / "circuit_open.json"
+
+
+def artifact_root() -> Path:
+    """本轮产物根。默认就是 `DATA_DIR`；重跑 L0/L1/L2 时指到 staging。
+
+    为什么需要这层间接：`data/arkrag/` 下那 11 个文件已被冻结为
+    `legacy-baseline`（见 `data/releases/legacy-baseline/manifest.json`），
+    写保护会拦它们。但 D 阶段修了分块器的两个 bug，必须重跑 L1/L2 才能得到
+    真正的 13,798 块——于是产物**必须**有地方落。
+
+    做法是把"产物根"从"冻结基线目录"里拆出来：
+
+        ARKRAG_ARTIFACT_DIR=data/arkrag/staging/d-stage
+        py -3 scripts\\run_l1.py && py -3 scripts\\run_l2.py
+
+    这样新产物一律写进 staging，冻结基线一个字节都不动；`snapshot_baseline
+    --verify` 因此永远是 PASS，而不是"FAIL 了再去 --force 重建基线"。
+
+    **注意这是函数不是常量**：测试通过 `monkeypatch.setattr(config, "DATA_DIR", …)`
+    把产物根指到临时目录，函数体内的 `DATA_DIR` 引用才会跟着变。改成模块级常量
+    会让那些测试静默读写真实仓库——`tests/test_build_generation.py` 记着这个教训。
+    """
+    raw = os.environ.get("ARKRAG_ARTIFACT_DIR")
+    return Path(raw) if raw else DATA_DIR
+
+
+def scenes_path() -> Path:
+    return artifact_root() / "scenes.jsonl"
+
+
+def chunks_path() -> Path:
+    return artifact_root() / "chunks.jsonl"
+
+
+def shards_path() -> Path:
+    return artifact_root() / "shards.json"
+
+
+def corpus_meta_path() -> Path:
+    return artifact_root() / "corpus_meta.json"
+
+
+def l1_stats_path() -> Path:
+    return artifact_root() / "l1_stats.json"
+
+
+def l1_dropped_path() -> Path:
+    return artifact_root() / "l1_dropped.json"
+
+
+def l0_manifest_path() -> Path:
+    return artifact_root() / "l0_manifest.json"
+
+
+def gates_path() -> Path:
+    return artifact_root() / "gates.json"
+
+
+def graph_path() -> Path:
+    return artifact_root() / "graph.json"
+
+
+def index_path() -> Path:
+    return artifact_root() / "index" / "lexical.json"
+
+
+# 兼容别名：老代码按常量名引用。它们绑定在 `DATA_DIR` 上，**只在冻结基线
+# 语境下正确**；新代码一律用上面的函数。
 CHUNKS_PATH = DATA_DIR / "chunks.jsonl"
 SHARDS_PATH = DATA_DIR / "shards.json"
 GRAPH_PATH = DATA_DIR / "graph.json"
 L0_MANIFEST_PATH = DATA_DIR / "l0_manifest.json"
-CIRCUIT_OPEN_PATH = DATA_DIR / "circuit_open.json"
