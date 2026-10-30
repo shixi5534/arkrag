@@ -2,8 +2,11 @@
   "generation_id": "g-20261030T114823Z-606ea9",
   "path": "E:\\图rag\\data\\arkrag\\generations\\g-20261030T114823Z-606ea9",
   "status": "PUBLISHED",
-  "published_at": "2026-10-30T11:53:53Z",
+  "published_at": "2026-10-30T11:59:56Z",
   "previous_generation": "g-20261030T115103Z-7b0fd3",
   "rolled_back": true,
-  "source_fingerprint": "188e3218448d6bb4"
+  "source_fingerprint": "188e3218448d6bb4",
+  "graph_artifact_id": "6d81ee4a46f872aef4b0a7a017d2573fda8db3bd7a75b38c959479e62265657a",
+  "index_artifact_id": "fc10e9bf1a0603d861c95680a1f7d12e7275f3c96dfe64e68ae78387de9a0eba",
+  "gate_report_hash": "0cb2d92ff9ac0ab7a534949dd93ca3518244042ac40bd8314c141fa1ed64be93"
 }

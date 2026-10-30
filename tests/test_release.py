@@ -329,6 +329,42 @@ class TestRollback:
         # 只切指针：历史产物一个字节都不许变
         assert first.graph_path.read_bytes() == graph_bytes
 
+    def test_rollback_pointer_has_same_shape_as_publish(self, sandbox):
+        """回滚指针必须与发布指针同构。
+
+        首版回滚只写了 generation_id，于是 `release_cli current` 事后查不出线上跑的是
+        哪份图、哪份索引、哪份门禁报告——而这些正是回滚后要核对的东西。
+        """
+        first = _build_generation("g-20260101T000000Z-000023")
+        release.publish(first)
+        release.publish(_build_generation("g-20260102T000000Z-000024"))
+        rolled = release.rollback(first.generation_id)
+
+        for key in (
+            "generation_id",
+            "status",
+            "published_at",
+            "previous_generation",
+            "source_fingerprint",
+            "graph_artifact_id",
+            "index_artifact_id",
+            "gate_report_hash",
+        ):
+            assert rolled.get(key), f"回滚指针缺 {key}"
+            assert rolled[key] == release.read_current()[key]
+
+    def test_rollback_to_current_is_refused(self, sandbox):
+        """回滚到「已经是当前」的那一代必须被拒。
+
+        否则指针会声称这一代替换了它自己，`previous_generation` 指向自身，
+        下次真回滚时就没有可退的目标了。
+        """
+        gen = _build_generation("g-20260101T000000Z-000025")
+        release.publish(gen)
+        with pytest.raises(release.ReleaseError):
+            release.rollback(gen.generation_id)
+        assert release.read_current()["previous_generation"] == ""
+
     def test_rollback_refuses_failed_generation(self, sandbox):
         gen = _build_generation()
         gen.fail("manual")

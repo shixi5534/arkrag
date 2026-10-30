@@ -532,6 +532,16 @@ def rollback(generation_id: str, *, run: Run | None = None) -> dict:
             detail="; ".join(problems[:8]),
         )
     previous = read_current() or {}
+    # 回滚到"当前已经是"的那一代是空操作。若照写不误，指针会声称
+    # 「这一代替换了它自己」，`previous_generation` 从此指向自身，
+    # 下次真回滚时就没有可退的目标了。
+    if previous.get("generation_id") == gen.generation_id:
+        raise ReleaseError(
+            f"{gen.generation_id} 已经是当前世代，无需回滚（previous_generation 会退化成指向自身）"
+        )
+    manifest = gen.load()
+    # 回滚指针必须与 publish 指针同构：只记 generation_id 的话，
+    # `release_cli current` 事后查不出线上跑的是哪份图、哪份索引、哪份门禁报告。
     pointer = {
         "generation_id": gen.generation_id,
         "path": str(gen.dir),
@@ -539,7 +549,10 @@ def rollback(generation_id: str, *, run: Run | None = None) -> dict:
         "published_at": _now(),
         "previous_generation": previous.get("generation_id", ""),
         "rolled_back": True,
-        "source_fingerprint": gen.load().get("source_fingerprint", ""),
+        "source_fingerprint": manifest.get("source_fingerprint", ""),
+        "graph_artifact_id": manifest.get("graph_artifact_id", ""),
+        "index_artifact_id": manifest.get("index_artifact_id", ""),
+        "gate_report_hash": manifest.get("gate_report_hash", ""),
     }
     atomic.atomic_write_json(CURRENT_PATH, pointer)
     if run:
