@@ -16,6 +16,50 @@ def _env_path(name: str, default: Path) -> Path:
     return Path(raw) if raw else default
 
 
+def rel_to_root(path) -> str:
+    """仓库内路径写成相对仓库根的形式（正斜杠），仓库外保持原样。
+
+    为什么需要：绝对机台路径进 git 后换机器就错。相对路径在任何机器上都指向
+    同一个仓库内对象。
+
+    两条边界，都是刻意的：
+
+    * 仓库**外**原样返回 `str(path)`，不写成 `../../..` 逃逸形式。那种字符串
+      看着像相对路径，实际把"站在哪个目录"重新塞回语义里——换个 caller 就解析
+      到别处，比绝对路径更糟。
+    * 大小写只用于**比较**，不用于输出。Windows 上 `E:\\图rag` 与 `e:\\图rag`
+      是同一路径但字符串不等，所以"在不在仓库内"要在 casefold 之后判断；
+      返回的相对部分取自已 `resolve()` 的路径，保留磁盘上的原始大小写。
+      （`Path.resolve()` 在 NTFS 上会顺手把父目录大小写归一，但不能指望这一点：
+      大小写敏感文件系统上它保留调用者给的大小写。）
+
+    比较前一律 `resolve()`：`..` 与符号链接会让"字符串像是仓库内"变成假象。
+    """
+    raw = Path(path)
+    root = ROOT.resolve()
+    try:
+        resolved = raw.resolve()
+    except OSError:
+        # resolve(strict=False) 正常不抛；真抛了也不该让"写报告"这一步失败，
+        # 退一步用不解析的绝对形式——它至少还是这台机器上正确的路径。
+        resolved = raw.absolute()
+    # 按**路径分量**比较，不按字符串前缀切片：
+    #   * 分量比较天然要求边界落在分隔符上——`E:\\图rag2\\x` 的分量是
+    #     ('E:\\', '图rag2', 'x')，不会因为前缀相似被错认成仓库内。
+    #   * casefold 可能改变字符串长度（如 'ß'.casefold() == 'ss'），按长度切片
+    #     会切错位置；分量比较没有这个前提。
+    root_parts = root.parts
+    got_parts = resolved.parts
+    if len(got_parts) >= len(root_parts) and all(
+        a.casefold() == b.casefold() for a, b in zip(got_parts, root_parts)
+    ):
+        rest = got_parts[len(root_parts) :]
+        if not rest:
+            return "."
+        return Path(*rest).as_posix()
+    return str(raw)
+
+
 SOURCE_DIR = _env_path("ARKRAG_SOURCE_DIR", ROOT / "corpus" / "zh_CN")
 DATA_DIR = _env_path("ARKRAG_DATA_DIR", ROOT / "data" / "arkrag")
 CACHE_DIR = DATA_DIR / "cache"

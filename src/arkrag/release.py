@@ -555,13 +555,28 @@ def verify_generation(gen: Generation) -> list[str]:
 
 
 def read_current() -> dict | None:
+    """读发布指针。历史指针里可能带 `path`，读的时候就当它不存在。
+
+    为什么要容忍而不是报错：2026-10 之前的指针写了一个 `"path"` 字段，存的是
+    `generations/<gid>` 的**绝对机台路径**。那个字段全仓库没有任何一处读取
+    （`release_cli current` 只打印身份字段），因为目录本来就能从 id 推导：
+    `Generation(gid).dir == GENERATIONS_DIR / gid`。存一份能推导的东西，等于存
+    一份会过期的、机台相关的副本——进 git 后换机器就是错的。
+
+    所以这里**只针对 `path` 特判**：弹出它，其余字段原样保留。不静默丢弃其它
+    未知字段，是因为那些可能是未来版本加的（老代码读新指针时把未来字段吃掉，
+    等于让"降级一次就把信息丢了"变成静默行为）。
+    """
     if not CURRENT_PATH.exists():
         return None
     try:
-        return json.loads(CURRENT_PATH.read_text("utf-8"))
+        cur = json.loads(CURRENT_PATH.read_text("utf-8"))
     except json.JSONDecodeError:
         # 指针文件坏了绝不能猜一个，直接当"没有可用版本"报出去
         raise ReleaseError(f"current.json 不可解析，拒绝猜测当前版本：{CURRENT_PATH}")
+    if isinstance(cur, dict):
+        cur.pop("path", None)
+    return cur
 
 
 def current_generation() -> Generation | None:
@@ -609,9 +624,11 @@ def publish(gen: Generation, *, run: Run | None = None) -> dict:
         raise ReleaseError(f"发布前校验失败（{len(problems)} 项）", detail="; ".join(problems[:8]))
 
     previous = read_current() or {}
+    # 指针里**不存** `path`：目录能从 id 推导（`Generation(gid).dir`），
+    # 存一份就等于存了一份会过期的绝对机台路径——指针进 git，换台机器 clone
+    # 下来那个字符串全是错的，而它本来一个读取方都没有。
     pointer = {
         "generation_id": gen.generation_id,
-        "path": str(gen.dir),
         "status": PUBLISHED,
         "published_at": _now(),
         "previous_generation": previous.get("generation_id", ""),
@@ -652,9 +669,12 @@ def rollback(generation_id: str, *, run: Run | None = None) -> dict:
     manifest = gen.load()
     # 回滚指针必须与 publish 指针同构：只记 generation_id 的话，
     # `release_cli current` 事后查不出线上跑的是哪份图、哪份索引、哪份门禁报告。
+    # 同构指**身份字段**：publish 的 8 个键这里一个不少，多出的 `rolled_back`
+    # 是回滚独有的语义标记（记录"这一代是被回滚切上来的"），不是身份。
+    # 两者都**不含** `path`：目录能从 `Generation(gid).dir` 推导，存绝对路径只会让
+    # 指针在别的机器上指向不存在的地方。这一条有测试盯着（键集必须完全相同）。
     pointer = {
         "generation_id": gen.generation_id,
-        "path": str(gen.dir),
         "status": PUBLISHED,
         "published_at": _now(),
         "previous_generation": previous.get("generation_id", ""),

@@ -177,6 +177,9 @@ def verify(
     都在不了就明确报 unknown，**绝不静默当成通过**。
     """
     contract = SOURCE_CONTRACT if contract is None else contract
+    # 内部一律用**真实绝对路径**读盘（下面的 exists()/stat()/tree_entries() 都吃它）。
+    # 只有写进报告的字符串走 rel_to_root 变相对——报告要进 git，绝对机台路径
+    # 换台机器就是错的；相对路径在任何机器上都指向同一个仓库内对象。
     story_root = Path(story_root or config.STORY_ROOT)
     zip_path = Path(zip_path) if zip_path else zip_path_from_env()
 
@@ -184,8 +187,8 @@ def verify(
         "status": UNVERIFIED,
         "contract": contract,
         "contract_fp": contract_fingerprint(contract),
-        "story_root": str(story_root),
-        "zip_path": str(zip_path),
+        "story_root": config.rel_to_root(story_root),
+        "zip_path": config.rel_to_root(zip_path),
         "zip_present": zip_path.exists(),
         "checks": [],
         "problems": [],

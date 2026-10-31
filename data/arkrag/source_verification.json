@@ -1,0 +1,31 @@
+{
+  "status": "verified_zip",
+  "contract": {
+    "repo": "3aKHP/ArknightsStoryJson",
+    "release_tag": "akdp-26-10-14-13-45-10-99469376-v1",
+    "asset": "zh_CN.zip",
+    "zip_bytes": 35904420,
+    "zip_sha256": "46b106207bac11af75fe70169e49b00f25e360da0f32d41824e29b52a01e0aeb",
+    "compatibility_contract": "prts-story-v1",
+    "factory_manifest_events": 485,
+    "factory_manifest_chapters": 2032,
+    "factory_manifest_json_files": 2360
+  },
+  "contract_fp": "5e29738a9269c8b2",
+  "story_root": "corpus/zh_CN/gamedata/story",
+  "zip_path": "zh_CN.zip",
+  "zip_present": true,
+  "checks": [
+    "zip_bytes_and_sha256",
+    "zip_matches_tree"
+  ],
+  "problems": [],
+  "tree_files": 2293,
+  "tree_bytes": 135500365,
+  "tree_digest": "2abbcd969a7a8e692a972422a46daafa57316aefc093b679b052cc36464bc43e",
+  "path_norm": "casefold",
+  "zip_bytes": 35904420,
+  "zip_sha256": "46b106207bac11af75fe70169e49b00f25e360da0f32d41824e29b52a01e0aeb",
+  "zip_story_files": 2293,
+  "zip_tree_digest": "2abbcd969a7a8e692a972422a46daafa57316aefc093b679b052cc36464bc43e"
+}

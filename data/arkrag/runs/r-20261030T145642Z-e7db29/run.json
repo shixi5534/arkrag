@@ -1,0 +1,9 @@
+{
+  "run_id": "r-20261030T145642Z-e7db29",
+  "finished_at": "2026-10-30T14:57:02Z",
+  "status": "failed",
+  "pid": 52616,
+  "git_revision": "2929287b9dd677b70a312802861fb04dad960dd1",
+  "reason": "missing_extractions",
+  "missing": 34
+}
