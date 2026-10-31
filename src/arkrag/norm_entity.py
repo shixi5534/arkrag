@@ -17,27 +17,30 @@ RE_LATIN_DIGIT = re.compile(r"[A-Za-z0-9]")
 
 
 def norm_type(raw: object) -> str:
-    """三层：精确 -> 子串 -> 同义词表 -> 兜底「概念」。
+    """实体类型归一，契约 §3.4 的四步（顺序不可调换）。
 
-    兜底不能给「未分类」，否则下游所有按类型的过滤静默失效（计划书 4.1）。
+    1. 规范值精确匹配
+    2. 精确同义词
+    3. 受限模糊（仅 len(text) >= 2，且命中项**长于** text 的一半）
+    4. 兜底「概念」
+
+    本函数只是 `identity.normalize_type` 的转发入口，判据只有那一份。
+
+    为什么删掉原来的子串步：旧顺序把最松的判据（子串）放在第 2 位，于是
+    「人物设定」因为含「人物」被判成 角色、`感染事件报告` 因为含「事件」被判成
+    事件——真实数据里这类描述性短语不少。判据一松，第 1 条（类型兼容）就形同虚设。
+    「同一个判定在两处各写一份，整套检查就等于最松的那处」正是本项目反复踩过的坑，
+    所以这里不留副本，连兜底字面量也不再重复写一个 "概念"。
+
+    兜底不给「未分类」：下游所有按类型的过滤会因为多出一个词表外的值而静默失效。
+
+    延迟导入的原因：`identity` 是本人模块的下层（它的合并逻辑要复用
+    `can_merge_fullname` / `is_member_index` / `canonical_pick`），顶层互相 import
+    会成环。函数内导入在 import 期零成本，且不受 import 顺序影响。
     """
-    if not isinstance(raw, str):
-        return "概念"
-    text = raw.strip()
-    if not text:
-        return "概念"
-    if text in vocab.ENTITY_TYPES:
-        return text
-    for canonical in vocab.ENTITY_TYPES:
-        if canonical in text or text in canonical:
-            return canonical
-    hit = vocab.TYPE_SYNONYMS.get(text)
-    if hit:
-        return hit
-    for key, val in vocab.TYPE_SYNONYMS.items():
-        if key in text:
-            return val
-    return "概念"
+    from . import identity  # noqa: PLC0415 —— 见 docstring「延迟导入的原因」
+
+    return identity.normalize_type(raw)
 
 
 def is_structured_proper_name(name: str) -> bool:

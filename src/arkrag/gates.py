@@ -1441,6 +1441,265 @@ def l5_gates(graph: dict, chunks: list[dict], corpus_fp: str) -> GateRun:
     return run
 
 
+def l5_evidence_gates(
+    graph: dict,
+    assertions: list[dict],
+    edges: list[dict],
+    chunks: list[dict],
+) -> GateRun:
+    """L5.9 / L5.10 / L5.11：逐观察证据、聚合边只存派生统计、观察守恒。
+
+    这三条门是 E1 的验收核心，共同回答一个旧模型答不了的问题：
+    **「这张图上的这条边，凭哪一段原文说的？」**
+
+    旧聚合边每条只留一条 `evidence`，实测 9,747 条边的多条观察共用一条证据、
+    单边最多 116 条观察只留 1 条——也就是说 34,536 次观察在图里没有自己的位置。
+    那不是"证据少了一点"，而是"想知道第三十个出处时查不到"。
+
+    所以：
+    * L5.9 每条断言必须能在**它自己的块**里定位（不许拿别的块的原文替代）；
+    * L5.10 聚合边不许再冒充事实来源，只许存派生统计，且代表证据必须可回溯；
+    * L5.11 观察守恒——每条断言要么被某条边引用一次、要么有书面理由不存在。
+    """
+    from . import assertion as assertion_mod
+
+    run = GateRun()
+    by_chunk = {c["chunk_id"]: c["text"] for c in chunks}
+
+    # --- L5.9 逐观察证据可定位 ---
+    unlocatable = []
+    bad_all = []
+    for a in assertions:
+        text = by_chunk.get(a["chunk_id"], "")
+        start, end = a["evidence_start"], a["evidence_end"]
+        if text[start:end] != a["evidence_text"]:
+            unlocatable.append(a["assertion_id"])
+        for occ in a.get("evidence_all") or []:
+            if text[occ["start"] : occ["end"]] != a["evidence_text"]:
+                bad_all.append(a["assertion_id"])
+                break
+    run.add(
+        Gate(
+            "L5.9 逐观察证据可定位（断言在自己的块里能查到原文）",
+            "L5",
+            "定位失败 0 / evidence_all 不符 0",
+            f"断言 {len(assertions)}  定位失败 {len(unlocatable)}  evidence_all 不符 {len(bad_all)}",
+            "PASS" if not (unlocatable or bad_all) else "FAIL",
+            (
+                "证据定位是回答可核对的唯一依据；"
+                + (
+                    "; ".join((unlocatable + bad_all)[:4])
+                    if (unlocatable or bad_all)
+                    else "实测全部可定位"
+                )
+            ),
+        )
+    )
+
+    # --- L5.10 聚合边只存派生统计 ---
+    # 判据：必须带 assertion_ids 且 support_count 与之一致；
+    # 代表证据必须真的属于同边的某条断言（不能是拼出来的、也不能是摘来的）。
+    synthetic = []
+    mismatch = []
+    untraceable = []
+    by_aid = {a["assertion_id"]: a for a in assertions}
+    for e in edges:
+        aids = e.get("assertion_ids") or []
+        if not aids:
+            synthetic.append(e.get("edge_id") or e.get("id") or "?")
+            continue
+        if int(e.get("support_count") or 0) != len(aids):
+            mismatch.append(
+                f"{e.get('edge_id')} support={e.get('support_count')} ids={len(aids)}"
+            )
+        rep = e.get("evidence_assertion_id") or ""
+        if rep not in aids:
+            untraceable.append(f"{e.get('edge_id')} 代表证据不属于本边")
+        elif by_aid.get(rep, {}).get("evidence_text") != e.get("evidence"):
+            untraceable.append(f"{e.get('edge_id')} 代表证据与断言原文不一致")
+    run.add(
+        Gate(
+            "L5.10 聚合边只存派生统计（可回溯到具体观察）",
+            "L5",
+            "无 assertion_ids 0 / support 不符 0 / 不可回溯 0",
+            f"边 {len(edges)}  缺 ids {len(synthetic)}  support 不符 {len(mismatch)}  不可回溯 {len(untraceable)}",
+            "PASS" if not (synthetic or mismatch or untraceable) else "FAIL",
+            (
+                "聚合边一旦自己带『一条证据 + 一个置信度』，"
+                "就成了无法追问出处的事实来源——旧模型正是这样"
+                + (
+                    "; ".join((synthetic + mismatch + untraceable)[:4])
+                    if (synthetic or mismatch or untraceable)
+                    else "；实测全部可回溯"
+                )
+            ),
+        )
+    )
+
+    # --- L5.11 观察守恒 ---
+    conservation = assertion_mod.observation_conservation(assertions, edges)
+    detail = (
+        f"断言 {conservation['assertions']}  边 {conservation['edges']}  "
+        f"support_sum {conservation['support_sum']}"
+    )
+    problems = (
+        conservation["unreferenced"]
+        + conservation["multiply_referenced"]
+        + conservation["unknown_references"]
+        + conservation["support_mismatch"]
+    )
+    run.add(
+        Gate(
+            "L5.11 观察守恒（每条断言恰好被一条边引用一次）",
+            "L5",
+            "未引用 0 / 重复引用 0 / 未知引用 0 / support 不符 0",
+            detail,
+            "PASS" if conservation["ok"] else "FAIL",
+            (
+                "丢一条观察不会报错，只会让某个事实突然只有一处出处；"
+                + ("; ".join(str(p) for p in problems[:4]) if problems else "实测守恒")
+            ),
+        )
+    )
+    return run
+
+
+def l4_identity_gates(graph: dict) -> GateRun:
+    """L4.12 / L4.13：实体 id 不含名字、合并检查有记录。
+
+    L4.12 现在是**必然 FAIL** 的：当前图的 `entities[].id` 就是名字本身
+    （E3 之前的设计）。把它写出来而不是等 E3 落地再加，
+    是因为"id 是名字"这件事本身就是误并的温床——名字一改 id 就变，
+    拆分合并的历史也就无处可查。E3 落地后这条门会自然转 PASS。
+
+    门默认不接进 `build_generation`（会把当前所有构建打红），
+    由 `scripts/e_gates.py` 显式运行——见该脚本说明。
+    """
+    run = GateRun()
+    entities = graph.get("entities") or []
+
+    name_as_id = [
+        e["name"]
+        for e in entities
+        if (e.get("id") or "") == (e.get("name") or "") or (e.get("name") or "") in (e.get("id") or "")
+    ]
+    run.add(
+        Gate(
+            "L4.12 实体 id 不含名字（身份与展示名分离）",
+            "L4",
+            "命中 0",
+            f"{len(name_as_id)}/{len(entities)}",
+            "PASS" if not name_as_id else "FAIL",
+            (
+                "id 含名字 = 改一个展示名就换一个身份，合并/拆分历史随之断掉；"
+                + ("; ".join(name_as_id[:4]) if name_as_id else "")
+            ),
+        )
+    )
+
+    # 合并检查有记录：每个被并进别处的名字都该在 merged_from 里留下痕迹，
+    # 且合并后的实体必须能说清按哪条规则并的（stats.merge 的计数）。
+    merge_stats = (graph.get("stats") or {}).get("merge") or {}
+    merged_total = sum(
+        len(e.get("merged_from") or []) for e in entities
+    )
+    has_record = bool(merge_stats)
+    run.add(
+        Gate(
+            "L4.13 合并检查有记录（merged_from 与规则计数同时存在）",
+            "L4",
+            "两者皆非空（无合并时允许均为空）",
+            f"merged_from 条目 {merged_total}  规则计数 {len(merge_stats)} 项",
+            "PASS" if (merged_total == 0 and not merge_stats) or (merged_total > 0 and has_record) else "FAIL",
+            (
+                "并了却没记按哪条规则并的，事后无法复核是否误并；"
+                + (f"规则计数 {merge_stats}" if has_record else "无规则计数")
+            ),
+        )
+    )
+    return run
+
+
+def l6_direction_gates(adjacency: dict, edges: list[dict]) -> GateRun:
+    """L6.4：邻接方向完整性——出边入边分开、反向换逆谓词、无伪装。
+
+    这里有三条独立判据，缺一条就会留下一条绕过路径：
+
+    1. **方向标记与所在列表一致**（`direction_report.fake_out`）——
+       抓"入边混进 out 列表"。
+    2. **反向不沿用原谓词**（`verify_reverse_semantics`）——
+       抓旧 `build_adjacency` 那种"两侧都塞、关系名不变"。
+    3. **每条对称以外的边，两端各有正确落位**——
+       光靠第 1 条不够：把入边塞进 out 列表并顺手把 `direction` 标成 `out`，
+       第 1 条就放过了。第 3 条是拿原边反查邻接表，必须两边都在该在的位置。
+
+    第 3 条是补上一个实测发现的缺口：最初只有前两条时，手工构造
+    「入边塞进出边列表 + 方向标 out」的邻接能通过 L6.4——而旧代码正是那么写的。
+    """
+    from . import adjacency as adjacency_mod
+
+    run = GateRun()
+    report = adjacency_mod.direction_report(adjacency)
+    problems = adjacency_mod.verify_reverse_semantics(edges)
+
+    # 判据 3：拿原边反查邻接表的两端落位
+    misplaced: list[str] = []
+    for e in edges:
+        subject = e["subject_id"]
+        obj = e["object_id"]
+        predicate = e["predicate"]
+        subject_out = (adjacency.get(subject) or {}).get("out") or []
+        obj_in = (adjacency.get(obj) or {}).get("in") or []
+        if not any(
+            it["neighbor_id"] == obj and it["edge_id"] == e["edge_id"]
+            for it in subject_out
+        ):
+            misplaced.append(f"{e['edge_id']} 主语侧的出边缺失（{subject}->{obj}）")
+        if adjacency_mod.is_symmetric(predicate):
+            # 对称边两侧都该在 out，不该进 in
+            if obj_in and any(it["edge_id"] == e["edge_id"] for it in obj_in):
+                misplaced.append(f"{e['edge_id']} 对称边被塞进入边列表")
+            continue
+        if not any(
+            it["neighbor_id"] == subject and it["edge_id"] == e["edge_id"]
+            for it in obj_in
+        ):
+            misplaced.append(f"{e['edge_id']} 宾语侧的入边缺失（{obj}<-{subject}）")
+
+    run.add(
+        Gate(
+            "L6.4 邻接方向完整性（出/入分列，反向换逆谓词，两端落位正确）",
+            "L6",
+            "方向伪装 0 / 反向沿用原谓词 0 / 落位错误 0",
+            f"实体 {report['entities']}  出 {report['out_items']}  入 {report['in_items']}  "
+            f"伪装 {report['fake_out']}  反向语义问题 {len(problems)}  落位错误 {len(misplaced)}",
+            "PASS" if not (report["fake_out"] or problems or misplaced) else "FAIL",
+            (
+                "反向边沿用原谓词会把「凯尔希 隶属 罗德岛」读成「罗德岛 隶属 凯尔希」——"
+                "检索侧看不出来，因为它只拿到邻居和关系名；"
+                + (
+                    "; ".join((problems + misplaced)[:4])
+                    if (problems or misplaced)
+                    else "实测方向干净"
+                )
+            ),
+        )
+    )
+    # 无逆谓词的反向边只申报：这类边不得用于顺着方向说事实，但它们的入边本身不是错误。
+    run.add(
+        Gate(
+            "L6.4a 无逆谓词的反向边（仅申报，不得用于方向性表述）",
+            "L6",
+            "申报值",
+            f"{report['missing_inverse']} 条",
+            "PASS",
+            "词表没给逆谓词（创建/前往/使用…），反向只能当无向邻接用；"
+            "要用于方向性回答必须先补逆谓词或人工裁决",
+        )
+    )
+    return run
+
+
 def write_report(run: GateRun, out: Path, stage: str) -> None:
     """把本 stage 的行合并进门禁报告。
 
