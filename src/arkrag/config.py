@@ -10,6 +10,22 @@ SCHEMA_VERSION = "ark-rag-1"
 PROMPT_VERSION = "v2"
 NORMALIZER_VERSION = "n2"
 
+# 图产物的 schema 有两代，**并存**，不是替代：
+#
+#   ark-rag-1  聚合边模型：`entities[].id` 就是规范名，`aliases` 是 list[str]，
+#              边是 `{source, relation, target, confidence, evidence}` 的压平结果。
+#              已发布的每一代产物都是这一版，`data/releases/legacy-baseline` 也是。
+#   ark-rag-3  逐观察模型（E 阶段）：实体用 `e-<16 位哈希>` 稳定 id，别名是
+#              list[dict] 且权威/待审/拒绝三表分离，边带 `assertion_ids` 可回查
+#              每一条观察，邻接分 out/in 且反向换逆谓词。
+#
+# 为什么不直接把 `SCHEMA_VERSION` 改成 ark-rag-3：那个常量进的是**抽取契约**的
+# 身份（`contracts`、`extraction` 块、`chunks.jsonl` 的 schema_version），
+# 改它等于宣称缓存里的 13,801 条 raw 抽取结果换了契约——它们没换。
+# 图的结构换代是另一件事，所以单独两个常量，由构建脚本按 `--graph-model` 选。
+GRAPH_SCHEMA_LEGACY = "ark-rag-1"
+GRAPH_SCHEMA_IDENTITY = "ark-rag-3"
+
 
 def _env_path(name: str, default: Path) -> Path:
     raw = os.environ.get(name)

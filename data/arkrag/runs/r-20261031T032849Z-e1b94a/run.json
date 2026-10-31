@@ -1,0 +1,9 @@
+{
+  "run_id": "r-20261031T032849Z-e1b94a",
+  "finished_at": "2026-10-31T03:30:18Z",
+  "status": "failed",
+  "pid": 49784,
+  "git_revision": "72da1d0225aa2d8badd4973a8116468cef5df725",
+  "reason": "gate_fail",
+  "generation_id": "g-20261031T032914Z-1d1b08"
+}

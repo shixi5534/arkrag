@@ -121,22 +121,58 @@ class LexicalIndex:
 
 
 def build_adjacency(edges: list[dict]) -> dict[str, list[tuple[str, str, float]]]:
+    """旧形态的检索期邻接：双向塞、关系名不变。
+
+    这是 `ark-rag-1` 的语义，**保留原样**（已发布世代的索引就是这么建的，
+    改它等于让旧代的索引与建它的代码不再同源）。`ark-rag-3` 的方向邻接不走这里，
+    走 `arkrag.adjacency.build_directed_adjacency`——那里 out/in 分列、反向换逆谓词。
+
+    字段按元素类型分派（两代边字段名不同，见 `gates.edge_ends` 的注释）：
+    这里的映射是**无损的**，只换字段名不改语义。
+    """
     adj: dict[str, list[tuple[str, str, float]]] = defaultdict(list)
     for edge in edges:
-        src, dst = edge["source"], edge["target"]
-        weight = float(edge.get("confidence") or 0.0)
-        adj[src].append((dst, edge["relation"], weight))
+        src = edge.get("source")
+        dst = edge.get("target")
+        if src is None:
+            src = edge.get("subject_id")
+        if dst is None:
+            dst = edge.get("object_id")
+        src, dst = str(src or ""), str(dst or "")
+        rel = edge.get("relation")
+        if rel is None:
+            rel = edge.get("predicate")
+        weight = edge.get("confidence")
+        if weight is None:
+            summary = edge.get("confidence_summary") or {}
+            weight = summary.get("max") if isinstance(summary, dict) else None
+        adj[src].append((dst, str(rel or ""), float(weight or 0.0)))
         # 检索期游走要双向连通；方向语义由关系名本身携带，不在这里反转事实
-        adj[dst].append((src, edge["relation"], weight))
+        adj[dst].append((src, str(rel or ""), float(weight or 0.0)))
     return {k: sorted(v) for k, v in adj.items()}
 
 
 def build_alias_index(entities: list[dict]) -> dict[str, str]:
+    """实体名 + 权威别名 -> 实体 id。
+
+    `aliases` 有两代形态：`ark-rag-1` 是 list[str]，`ark-rag-3` 是 list[dict]
+    且**只含 review ∈ {auto, approved}**（`identity.to_dict()` 已把待审/拒绝
+    分到另外两张表）。这里按元素类型取文本，不按 schema 分支——同一个函数
+    服务两代图，判据不重复写。
+
+    为什么不在新图那边额外过滤 `pending_aliases`：`to_dict()` 的输出里根本没有
+    把待审别名放进 `aliases`，本函数再过滤一遍就是"同一判定写两处"，
+    而那正是 `tests/test_single_source_of_truth.py` 记录的三次事故的共同机理。
+    """
     out: dict[str, str] = {}
     for ent in entities:
-        out[ent["name"]] = ent["id"]
-        for alias in ent["aliases"]:
-            out.setdefault(alias, ent["id"])
+        eid = ent["id"]
+        out[ent["name"]] = eid
+        for item in ent.get("aliases") or []:
+            text = str(item.get("text") or "") if isinstance(item, dict) else str(item or "")
+            text = text.strip()
+            if text:
+                out.setdefault(text, eid)
     return out
 
 

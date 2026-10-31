@@ -1,4 +1,4 @@
-"""E 阶段门禁的回归测试：L5.9 / L5.10 / L5.11 / L4.12 / L4.13 / L6.4。
+"""E 阶段门禁的回归测试：L5.9 / L5.10 / L5.11 / L4.12 / L4.13 / L6.8。
 
 这些门守的是本项目最贵的一类错误——**图说得对，但说不出凭什么**。
 所以每一条门都必须能被注入的坏数据打红；只断言"干净数据时 PASS"
@@ -264,12 +264,12 @@ class TestL64Direction:
         edges = self._edges()
         adj = adjacency.build_directed_adjacency(edges)
         run = gates.l6_direction_gates(adj, edges)
-        assert _gate(run, "L6.4").verdict == "PASS"
+        assert _gate(run, "L6.8").verdict == "PASS"
 
     def test_masqueraded_direction_fails(self):
         """入边塞进出边列表，并且把 direction 也改成 out——模拟旧 build_adjacency。
 
-        这条用例最初是**通过的**（门没红），暴露了 L6.4 的真实缺口：
+        这条用例最初是**通过的**（门没红），暴露了 L6.8 的真实缺口：
         只查"方向标记与所在列表一致"和"反向不沿用原谓词"，
         对"整体搬进 out 列表并改标记"这种形态无能为力。
         补上"两端落位"判据后才会红。记在这里，免得日后有人把那条判据当成冗余删掉。
@@ -279,8 +279,8 @@ class TestL64Direction:
         adj["罗德岛"]["out"].append(dict(adj["罗德岛"]["in"][0], direction="out"))
         adj["罗德岛"]["in"] = []
         run = gates.l6_direction_gates(adj, edges)
-        assert _gate(run, "L6.4").verdict == "FAIL"
-        assert "落位错误" in _gate(run, "L6.4").threshold
+        assert _gate(run, "L6.8").verdict == "FAIL"
+        assert "落位错误" in _gate(run, "L6.8").threshold
 
     def test_missing_subject_out_edge_fails(self):
         """主语侧出边被删掉，只留宾语侧入边——半张图，也算方向错误。"""
@@ -290,7 +290,7 @@ class TestL64Direction:
             it for it in adj["凯尔希"]["out"] if it["edge_id"] != "r-1"
         ]
         run = gates.l6_direction_gates(adj, edges)
-        assert _gate(run, "L6.4").verdict == "FAIL"
+        assert _gate(run, "L6.8").verdict == "FAIL"
 
     def test_symmetric_edge_in_in_list_fails(self):
         """对称边被塞进入边列表——会让人以为"有个人指向我"。"""
@@ -299,22 +299,22 @@ class TestL64Direction:
         sym = [it for it in adj["凯尔希"]["out"] if it["edge_id"] == "r-2"][0]
         adj["阿米娅"]["in"].append(dict(sym, neighbor_id="凯尔希", direction="in"))
         run = gates.l6_direction_gates(adj, edges)
-        assert _gate(run, "L6.4").verdict == "FAIL"
+        assert _gate(run, "L6.8").verdict == "FAIL"
 
     def test_reverse_using_original_predicate_fails(self, monkeypatch):
         edges = self._edges()
         adj = adjacency.build_directed_adjacency(edges)
         monkeypatch.setattr(adjacency, "inverse_of", lambda _p: "隶属")
         run = gates.l6_direction_gates(adj, edges)
-        assert _gate(run, "L6.4").verdict == "FAIL"
+        assert _gate(run, "L6.8").verdict == "FAIL"
 
     def test_missing_inverse_is_declared_not_failed(self):
         """无逆谓词只申报：这类边不能用于方向性表述，但它本身不是错误。"""
         edges = [_edge("r-1", subject="凯尔希", obj="罗德岛") | {"predicate": "前往"}]
         adj = adjacency.build_directed_adjacency(edges)
         run = gates.l6_direction_gates(adj, edges)
-        assert _gate(run, "L6.4").verdict == "PASS"
-        decl = _gate(run, "L6.4a")
+        assert _gate(run, "L6.8").verdict == "PASS"
+        decl = _gate(run, "L6.8a")
         assert decl.verdict == "PASS"
         assert "1 条" in decl.measured
 
@@ -341,7 +341,7 @@ class TestAllEGatesCanFail:
                 "stats": {},
             }
         ),
-        "L6.4": lambda: gates.l6_direction_gates(
+        "L6.8": lambda: gates.l6_direction_gates(
             {
                 "罗德岛": {
                     "out": [
@@ -389,8 +389,8 @@ class TestAllEGatesCanFail:
         produced |= {g.name.split(" ")[0] for g in gates.l6_direction_gates(
             adjacency.build_directed_adjacency(edges), edges
         ).gates}
-        # L6.4a 是纯申报门，不需要失败输入
-        declared_informational = {"L6.4a"}
+        # L6.8a 是纯申报门，不需要失败输入
+        declared_informational = {"L6.8a"}
         missing = produced - set(self.FAILING_INPUTS) - declared_informational
         assert missing == set(), (
             f"这些门没有登记失败输入：{sorted(missing)}。"

@@ -213,7 +213,23 @@ def build(args: argparse.Namespace) -> int:
     gen.advance(release.BUILDING)
     run.event("build", "候选目录已就位", generation_id=gen.generation_id, path=str(gen.dir))
 
-    built = graph.build_graph(chunks, records_list)
+    # 图模型分派（E 阶段）。默认 legacy，旧路径的行为逐字节不变：
+    # `graph.build_graph` 一行没改，`ark-rag-1` 产物还是原来那份。
+    graph_model = str(getattr(args, "graph_model", "legacy") or "legacy")
+    ident = None
+    if graph_model == "identity":
+        ident = graph.build_identity_graph(
+            chunks,
+            records_list,
+            extraction_meta={
+                "extraction_manifest_hash": snapshot.extraction_manifest_hash,
+                "generation_id": gen.generation_id,
+            },
+        )
+        built = ident["graph"]
+    else:
+        built = graph.build_graph(chunks, records_list)
+
     graph.attach_corpus_fp(
         built,
         corpus_fp,
@@ -236,6 +252,19 @@ def build(args: argparse.Namespace) -> int:
         print(f"建图失败：{exc}", file=sys.stderr)
         return 1
 
+    # ark-rag-3 的两份独立产物。写在 graph.json **之后**，因为它们的身份要由
+    # 这一代自己的 Manifest 记下来；写失败就整代失败，不许留"图在、断言缺"的半成品。
+    if ident is not None:
+        try:
+            graph.save_assertions(ident["assertions"], gen.assertion_path)
+            graph.save_adjacency(ident["adjacency"], gen.adjacency_path)
+        except RuntimeError as exc:
+            gen.fail("identity_sidecar_refused", detail=str(exc))
+            run.error("build", "断言/邻接落盘被拒", str(exc))
+            run.finish("failed", reason="identity_sidecar_refused", generation_id=gen.generation_id)
+            print(f"断言/邻接写盘失败：{exc}", file=sys.stderr)
+            return 1
+
     # 索引绑定的是**图产物的内容摘要**，不是图配置指纹（计划 D3）：
     # 同一份配置重建两次图，指纹相同而产物未必相同，只有内容摘要能答"这份倒排对的是哪份图"。
     graph_artifact_id = release.sha256_file(gen.graph_path)
@@ -257,15 +286,35 @@ def build(args: argparse.Namespace) -> int:
     l4 = gates.l4_gates(records_list, built)
     l5 = gates.l5_gates(built, chunks, corpus_fp)
     l6 = gates.l6_gates(idx_meta, built, len(chunks), corpus_fp, probes)
-    for run_ in (l4, l5, l6):
+
+    # ark-rag-3 的三组 E 门：断言可回溯 / 实体身份 / 邻接方向。
+    #
+    # 必须**并进同 stage 的那个 GateRun**再落盘，不能各自 write_report 一次：
+    # `gates.write_report` 是按 stage 整段替换的（`existing = [r for r in existing
+    # if r["stage"] != stage]`），L4.12 与 L4.1 同属 stage "L4"，分两次写就是
+    # 后写的那组把前一组从报告里抹掉。实测第一次真跑时 reports/gates.json 只剩
+    # 7 行、显示"7 项全 PASS"，其实 L4/L5/L6 主组 30 项全被覆盖没了——
+    # 门禁报告少一半还全绿，比门禁红更危险。
+    gate_runs = [l4, l5, l6]
+    if ident is not None:
+        for target, extra in (
+            (l4, gates.l4_identity_gates(built)),
+            (l5, gates.l5_evidence_gates(built, ident["assertions"], ident["edges"], chunks)),
+            (l6, gates.l6_direction_gates(ident["adjacency"], ident["edges"])),
+        ):
+            for gate in extra.gates:
+                target.add(gate)
+
+    for run_ in gate_runs:
         gates.write_report(run_, gen.gate_report_path, run_.gates[0].stage)
 
-    hard_fails = _fails(l4, l5, l6)
+    hard_fails = _fails(*gate_runs)
     run.event(
         "gate",
         "门禁计算完成",
         fails=len(hard_fails),
-        gates=len(l4.gates) + len(l5.gates) + len(l6.gates),
+        gates=sum(len(r.gates) for r in gate_runs),
+        graph_model=graph_model,
         failed_names=[g.name for g in hard_fails[:10]],
     )
     if hard_fails:
@@ -279,6 +328,20 @@ def build(args: argparse.Namespace) -> int:
         return 1
 
     # ---- 4. 回读候选产物并核身份与摘要 ------------------------------------
+    # ark-rag-3 的六个 Manifest 字段：图/断言/邻接三个 artifact 摘要 + 三个计数。
+    # 只在 identity 分支写，legacy 分支的 Manifest 形态一个字段都不多——
+    # 旧代的 Manifest 已经进过发布指针与冻结校验，补字段等于改旧产物的形状。
+    identity_fields: dict = {}
+    if ident is not None:
+        identity_fields = {
+            "graph_schema": config.GRAPH_SCHEMA_IDENTITY,
+            "assertion_artifact_id": release.sha256_file(gen.assertion_path),
+            "adjacency_artifact_id": release.sha256_file(gen.adjacency_path),
+            "assertion_count": len(ident["assertions"]),
+            "entity_count": len(built.get("entities") or []),
+            "edge_count": len(built.get("edges") or []),
+        }
+
     gen.advance(
         release.VALIDATING,
         graph_build_fp=built.get("fingerprint", ""),
@@ -289,6 +352,7 @@ def build(args: argparse.Namespace) -> int:
         probe_digest=idx_meta.get("probe_digest", ""),
         gate_report_hash=release.sha256_file(gen.gate_report_path),
         stats={"entities": stats["entities"], "edges": stats["edges"], "isolated": stats["isolated"]},
+        **identity_fields,
     )
     # 真回读一次：读回来重算摘要，不看内存里那份
     reloaded, reloaded_meta = index.load_index(gen.index_path)
@@ -342,7 +406,7 @@ def build(args: argparse.Namespace) -> int:
     print(f"  实体 {stats['entities']}  边 {stats['edges']}  块 {len(chunks)}  "
           f"词条 {len(idx.postings):,}")
     print(f"  graph={pointer['graph_artifact_id'][:16]}  index={pointer['index_artifact_id'][:16]}")
-    print(f"  门禁 {len(l4.gates) + len(l5.gates) + len(l6.gates)} 项全 PASS  "
+    print(f"  门禁 {sum(len(r.gates) for r in gate_runs)} 项全 PASS  "
           f"耗时 {elapsed:.1f}s  run={run.run_id}")
     return 0
 
@@ -355,6 +419,13 @@ def main() -> int:
         "--allow-incomplete",
         action="store_true",
         help="允许在有块未抽取时构建候选（Manifest 标 incomplete，强制要求 --no-publish）",
+    )
+    ap.add_argument(
+        "--graph-model",
+        choices=("legacy", "identity"),
+        default="legacy",
+        help="建图模型：legacy=聚合边 ark-rag-1（默认，行为逐字节不变）；"
+        "identity=逐观察断言 + 稳定 id + 方向邻接 ark-rag-3",
     )
     return build(ap.parse_args())
 

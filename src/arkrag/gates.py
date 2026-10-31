@@ -77,6 +77,107 @@ def shingles(text: str, k: int = 12) -> set[str]:
     return {text[i : i + k] for i in range(0, len(text) - k + 1, 3)}
 
 
+# --------------------------------------------------------------- 两代图字段分派
+#
+# 图产物有两代 schema 并存（`config.GRAPH_SCHEMA_LEGACY` / `GRAPH_SCHEMA_IDENTITY`）：
+#
+#   ark-rag-1  `entities[].aliases` 是 list[str]，`edges[]` 用 source/target/relation，
+#              置信度是 `confidence` 单值。
+#   ark-rag-3  `entities[].aliases` 是 list[dict]，`edges[]` 用 subject_id/object_id/
+#              predicate，置信度是 `confidence_summary` 三元。
+#
+# 门禁要读这些字段。这里有两条都不许走的路：
+#
+#   1. **把新图改回旧形态再喂门**——那等于让门测的是一份为了过门而造的形状，
+#      被测对象和产物脱钩，门就成了装饰。
+#   2. **复制一套只认新形态的门**——同一判据写两处，只要一处较松，整套就等于
+#      那处最松的（`tests/test_single_source_of_truth.py` 记的三个真实事故都是这个机理）。
+#
+# 所以：判据只写一份，**字段按元素类型分派**。分派放在最小面上（五个取值函数），
+# 判定逻辑一行不动，两代图走的是同一条门。
+#
+# 为什么按元素类型而不是 `schema_version`：同一份对比报告里可能同时装着两代图
+# （迁移期要横向比），而元素类型就在手上、不会说谎；`schema_version` 抄错一个字母
+# 会让整组门静默走错分支。
+
+
+def alias_texts(entity: dict) -> list[str]:
+    """实体的**权威**别名文本（ark-rag-1 list[str] / ark-rag-3 list[dict]）。
+
+    ark-rag-3 的 `aliases` 只含 `review ∈ {auto, approved}`（见
+    `identity.CanonicalEntity.to_dict()`），待审与拒绝在另外两张表里，
+    所以这里不需要再判 review——判两次就有两次机会判错。
+    """
+    out: list[str] = []
+    for item in entity.get("aliases") or []:
+        text = str(item.get("text") or "") if isinstance(item, dict) else str(item or "")
+        text = text.strip()
+        if text:
+            out.append(text)
+    return out
+
+
+def merged_names(entity: dict) -> list[str]:
+    """被并进来的名字（ark-rag-1 list[str] / ark-rag-3 list[{name,reason,scenes}]）。"""
+    out: list[str] = []
+    for item in entity.get("merged_from") or []:
+        name = str(item.get("name") or "") if isinstance(item, dict) else str(item or "")
+        name = name.strip()
+        if name:
+            out.append(name)
+    return out
+
+
+def edge_ends(edge: dict) -> tuple[str, str]:
+    """边的两端 id（ark-rag-1 source/target / ark-rag-3 subject_id/object_id）。"""
+    src = edge.get("source")
+    dst = edge.get("target")
+    if src is None:
+        src = edge.get("subject_id")
+    if dst is None:
+        dst = edge.get("object_id")
+    return str(src or ""), str(dst or "")
+
+
+def edge_relation(edge: dict) -> str:
+    """边的谓词（ark-rag-1 relation / ark-rag-3 predicate）。"""
+    rel = edge.get("relation")
+    if rel is None:
+        rel = edge.get("predicate")
+    return str(rel or "")
+
+
+def edge_confidence(edge: dict) -> float:
+    """边的置信度标量。
+
+    ark-rag-1 直接存 `confidence`；ark-rag-3 的聚合边只存派生统计
+    `confidence_summary{min,max,mean}`（不许存单一代表值，见契约 §1.4 与 L5.10）。
+    取 `max` 而不是 `mean`：旧门的判据是「这条边最可信的那次观察够不够可信」，
+    `max` 与它同义；用 `mean` 会把「一次高置信 + 多次低置信」的边判成低置信，
+    那是判据换了含义，不是换了个字段名。
+    """
+    raw = edge.get("confidence")
+    if raw is None:
+        summary = edge.get("confidence_summary") or {}
+        if isinstance(summary, dict):
+            raw = summary.get("max")
+    try:
+        return float(raw)
+    except (TypeError, ValueError):
+        return 0.0
+
+
+def entity_key(graph: dict, entity: dict) -> str:
+    """实体在邻接表里的键。
+
+    ark-rag-1 的邻接键是规范名（旧图 id 就是名字），ark-rag-3 是实体 id。
+    按**图里实际存在的邻接键**分派：先看 id，再看名字。这样门问的是
+    「这个实体在邻接表里找得到吗」，而不是「它的 id 长得像不像名字」。
+    """
+    ident = str(entity.get("id") or "")
+    return ident if ident else str(entity.get("name") or "")
+
+
 def l0_gates(manifest: dict) -> GateRun:
     run = GateRun()
     b = manifest["baseline"]
@@ -933,10 +1034,57 @@ def l6_gates(
         )
     )
 
+    # 别名可检索性：待审别名绝不能替自己的属主开口。
+    #
+    # 这一条是**独立**的 FAIL 门，不是 L6.4 的子项：L6.4 问「该找到的能不能找到」，
+    # 这一条问「不该找到的会不会被找到」。两个方向都要守——`identity.py:241` 记录的
+    # 实测事故正是后者：拒绝合并「暴雨 <- 库兰塔士兵」之后别名表里仍写着
+    # `review:"pending"`，而下游 `{alias: ent["id"] for alias in ent["aliases"]}`
+    # 照样把它指向暴雨。L6.4 在那件事上永远是 PASS（暴雨自己解析得到自己），
+    # 只有专门查「待审别名有没有替属主开口」才抓得住。
+    #
+    # 判据是**指向属主**，不是「文本可检索」。第一版写成「文本出现在检索表里」，
+    # 真实语料上直接报 101 条泄漏，逐条查过去**没有一条**指向属主：那 101 条
+    # pending 文本（「女妖」之于 Logos、「乌萨斯」之于「乌萨斯帝国」）本来就是
+    # 别的实体的规范名或已生效别名，检索到它们是正确的，与这条 pending 无关。
+    # 把「文本可检索」当泄漏会让门在真实数据上永远红，红久了就没人看——
+    # 所以判据收紧成：**这条 pending 的文本解析到的是不是它自己的属主**。
+    # 是，说明它真进了检索并在替属主说话；不是，它对检索结果没有贡献。
+    #
+    # 两个来源都看：现算的 `alias_index`（检索真正用的那份）与图里申报的
+    # `graph["alias_index"]`（消费端可能直接读它建倒排）。后者优先——
+    # 图自己写错了才是最该被抓的情形。
+    searchable = dict(alias_index)
+    searchable.update(graph.get("alias_index") or {})
+    leaked_pending = [
+        f"{e['name']}:{item.get('text')}"
+        for e in entities
+        for item in (e.get("pending_aliases") or [])
+        if str(item.get("text") or "").strip()
+        and searchable.get(str(item.get("text") or "").strip()) == e["id"]
+    ]
+    run.add(
+        Gate(
+            "L6.4c 待审别名不得进入检索（pending 只能留档）",
+            "L6",
+            "泄漏 0",
+            f"待审 {sum(len(e.get('pending_aliases') or []) for e in entities)}  "
+            f"泄漏 {len(leaked_pending)}",
+            "PASS" if not leaked_pending else "FAIL",
+            "; ".join(leaked_pending[:4])
+            or "检索表只收 review ∈ {auto, approved} 的别名（identity.to_dict() 保证）",
+        )
+    )
+
     # 图邻接：边的两端必须都能走到；孤立实体按 L5 口径申报（它们有实体但无边）。
+    # 邻接键按图分派：`ark-rag-1` 是规范名（旧图 id 就是名字），`ark-rag-3` 是实体 id。
+    # 两边都用 entity_key 取，门问的始终是「这个实体在邻接表里找得到吗」。
     adjacency = index_mod.build_adjacency(graph.get("edges") or [])
-    dangling = [f"{e['source']}->{e['target']}" for e in (graph.get("edges") or [])
-                if e["source"] not in adjacency or e["target"] not in adjacency]
+    dangling = [
+        f"{edge_ends(e)[0]}->{edge_ends(e)[1]}"
+        for e in (graph.get("edges") or [])
+        if edge_ends(e)[0] not in adjacency or edge_ends(e)[1] not in adjacency
+    ]
     run.add(
         Gate(
             "L6.5 图邻接覆盖（边两端可达）",
@@ -948,7 +1096,7 @@ def l6_gates(
         )
     )
 
-    isolated = [e["name"] for e in entities if e["name"] not in adjacency]
+    isolated = [e["name"] for e in entities if entity_key(graph, e) not in adjacency]
     run.add(
         Gate(
             "L6.6 孤立实体（有实体无边，仅申报）",
@@ -1060,7 +1208,9 @@ def l4_gates(records: list[dict], graph: dict) -> GateRun:
     role_anchor = []
     role_alias = []
     for e in entities:
-        for member in list(e.get("merged_from") or []) + list(e.get("aliases") or []):
+        # 别名的两代形态差异在 alias_texts/merged_names 里分派（见文件头部注释），
+        # 这里拿到的永远是名字字符串，判据本身不区分 schema。
+        for member in merged_names(e) + alias_texts(e):
             if struct_member(e["name"], member) or struct_member(member, e["name"]):
                 member_bad.append(f"{e['name']} <- {member}")
             elif is_role_name(e["name"]) and not is_role_name(member):
@@ -1102,13 +1252,13 @@ def l4_gates(records: list[dict], graph: dict) -> GateRun:
     alias_noise = []
     owner: dict[str, list[str]] = defaultdict(list)
     for e in entities:
-        for a in e.get("aliases") or []:
+        for a in alias_texts(e):
             owner[a].append(e["id"])
             bad, why = norm_entity.is_noise_name(a, e["type"])
             if bad:
                 alias_noise.append(f"{e['name']}:{a}({why})")
     contested = {a: ids for a, ids in owner.items() if len(ids) > 1}
-    alias_total = sum(len(e.get("aliases") or []) for e in entities)
+    alias_total = sum(len(alias_texts(e)) for e in entities)
     run.add(
         Gate(
             "L4.5 别名质量（噪声/争用，仅申报）",
@@ -1128,14 +1278,14 @@ def l4_gates(records: list[dict], graph: dict) -> GateRun:
     # 规则生效后图上残留必须为 0，残留即说明有别的路径又把歧义别名带回来了。
     ambiguous = norm_entity.ambiguous_aliases(
         {
-            e["name"]: {"aliases": set(e.get("aliases") or [])}
+            e["name"]: {"aliases": set(alias_texts(e))}
             for e in entities
         }
     )
     residual_ambiguous = [
         f"{e['name']}:{a}"
         for e in entities
-        for a in (e.get("aliases") or [])
+        for a in alias_texts(e)
         if a in ambiguous
     ]
     run.add(
@@ -1150,14 +1300,14 @@ def l4_gates(records: list[dict], graph: dict) -> GateRun:
         )
     )
 
-    off_vocab_rel = sorted({e["relation"] for e in edges} - canon_rel)
+    off_vocab_rel = sorted({edge_relation(e) for e in edges} - canon_rel)
     run.add(
         Gate(
             "L4.6 关系名闭合（封闭表）",
             "L4",
             "词表外 0",
             f"词表外 {len(off_vocab_rel)}，"
-            f"已用 {len({e['relation'] for e in edges} & canon_rel)}/{len(V.CANONICAL_RELATIONS)}",
+            f"已用 {len({edge_relation(e) for e in edges} & canon_rel)}/{len(V.CANONICAL_RELATIONS)}",
             "PASS" if not off_vocab_rel else "FAIL",
             "; ".join(off_vocab_rel[:4]),
         )
@@ -1180,7 +1330,8 @@ def l4_gates(records: list[dict], graph: dict) -> GateRun:
 
     by_pair: dict[tuple[str, str], dict[str, dict]] = defaultdict(dict)
     for e in edges:
-        by_pair[(e["source"], e["target"])][e["relation"]] = e
+        src_e, dst_e = edge_ends(e)
+        by_pair[(src_e, dst_e)][edge_relation(e)] = e
 
     # 逆谓词双向重复不是错误，是同一句话被抽成了两个视角（「她救了我」既是
     # 救助也是获救于）。这里额外数出「证据逐字相同」的那批——那才是真冗余。
@@ -1229,7 +1380,7 @@ def l4_gates(records: list[dict], graph: dict) -> GateRun:
         )
     )
 
-    used = {e["relation"] for e in edges} & canon_rel
+    used = {edge_relation(e) for e in edges} & canon_rel
     unused = [r for r in V.CANONICAL_RELATIONS if r not in used]
     run.add(
         Gate(
@@ -1256,8 +1407,11 @@ def l4_gates(records: list[dict], graph: dict) -> GateRun:
     bare = [e for e in entities if e["name"] in BARE_TITLES]
     degree_all: dict[str, int] = defaultdict(int)
     for edge in edges:
-        degree_all[edge["source"]] += 1
-        degree_all[edge["target"]] += 1
+        # degree_all 的键与边的端点同一坐标系：`ark-rag-1` 是规范名（id==name），
+        # `ark-rag-3` 是实体 id。下面的 e["id"] 两代都能对上，判据不用分叉。
+        src_e, dst_e = edge_ends(edge)
+        degree_all[src_e] += 1
+        degree_all[dst_e] += 1
     bare_edges = sum(degree_all[e["id"]] for e in bare)
     bare_top = ", ".join(
         "%s %d边" % (e["name"], degree_all[e["id"]])
@@ -1304,8 +1458,9 @@ def l5_gates(graph: dict, chunks: list[dict], corpus_fp: str) -> GateRun:
 
     degree: Counter = Counter()
     for e in edges:
-        degree[e["source"]] += 1
-        degree[e["target"]] += 1
+        src_e, dst_e = edge_ends(e)
+        degree[src_e] += 1
+        degree[dst_e] += 1
     avg_degree = (2 * n_edge / n_ent) if n_ent else 0.0
     run.add(
         Gate(
@@ -1331,10 +1486,13 @@ def l5_gates(graph: dict, chunks: list[dict], corpus_fp: str) -> GateRun:
         )
     )
 
-    self_loop = [f"{e['source']}->{e['target']}" for e in edges if e["source"] == e["target"]]
+    self_loop = [f"{edge_ends(e)[0]}->{edge_ends(e)[1]}" for e in edges
+                 if edge_ends(e)[0] == edge_ends(e)[1]]
+    # known 用 id：两代图里「实体节点身份」都是 id（ark-rag-1 的 id 就是规范名，
+    # 所以这条对旧图等价于原来的 known = {name}）。
     known = {e["id"] for e in entities}
-    dangling = [f"{e['source']}->{e['target']}" for e in edges
-                if e["source"] not in known or e["target"] not in known]
+    dangling = [f"{edge_ends(e)[0]}->{edge_ends(e)[1]}" for e in edges
+                if edge_ends(e)[0] not in known or edge_ends(e)[1] not in known]
     run.add(
         Gate(
             "L5.4 自环与悬空边",
@@ -1349,14 +1507,15 @@ def l5_gates(graph: dict, chunks: list[dict], corpus_fp: str) -> GateRun:
     # 边证据必须能回到它自己列出的来源块里逐字定位。编造的证据在图上完全看不出来，
     # 只有拿正文比对才暴露——这是 L5 唯一能守住「证据非空」承诺的检查。
     text_by_chunk: dict[str, str] = {c["chunk_id"]: c["text"] for c in chunks}
-    no_ev = [f"{e['source']}->{e['target']}" for e in edges if not (e.get("evidence") or "").strip()]
+    no_ev = [f"{edge_ends(e)[0]}->{edge_ends(e)[1]}" for e in edges
+             if not (e.get("evidence") or "").strip()]
     unlocatable = []
     for e in edges:
         ev = (e.get("evidence") or "").strip()
         if not ev:
             continue
         if not any(ev in text_by_chunk.get(cid, "") for cid in (e.get("chunks") or [])):
-            unlocatable.append(f"{e['source']}-{e['relation']}->{e['target']}")
+            unlocatable.append(f"{edge_ends(e)[0]}-{edge_relation(e)}->{edge_ends(e)[1]}")
     run.add(
         Gate(
             "L5.5 边证据可定位（逐字回查来源块）",
@@ -1368,9 +1527,11 @@ def l5_gates(graph: dict, chunks: list[dict], corpus_fp: str) -> GateRun:
         )
     )
 
-    confs = sorted(float(e.get("confidence") or 0) for e in edges)
-    low = [f"{e['source']}->{e['target']}" for e in edges
-           if float(e.get("confidence") or 0) < config.CONFIDENCE_THRESHOLD]
+    # 置信度按元素类型取（ark-rag-3 的聚合边只有 confidence_summary，
+    # 取 max 的理由见 edge_confidence 的文档字符串）。
+    confs = sorted(edge_confidence(e) for e in edges)
+    low = [f"{edge_ends(e)[0]}->{edge_ends(e)[1]}" for e in edges
+           if edge_confidence(e) < config.CONFIDENCE_THRESHOLD]
     run.add(
         Gate(
             "L5.6 边置信度下限",
@@ -1405,7 +1566,7 @@ def l5_gates(graph: dict, chunks: list[dict], corpus_fp: str) -> GateRun:
     code_alias = [
         f"{e['name']}<-{a}"
         for e in entities
-        for a in (e.get("aliases") or [])
+        for a in alias_texts(e)
         if RE_SERIAL.search(a) or RE_TERMINAL_LOG.search(a)
     ]
     run.add(
@@ -1621,7 +1782,7 @@ def l4_identity_gates(graph: dict) -> GateRun:
 
 
 def l6_direction_gates(adjacency: dict, edges: list[dict]) -> GateRun:
-    """L6.4：邻接方向完整性——出边入边分开、反向换逆谓词、无伪装。
+    """L6.8：邻接方向完整性——出边入边分开、反向换逆谓词、无伪装。
 
     这里有三条独立判据，缺一条就会留下一条绕过路径：
 
@@ -1634,7 +1795,7 @@ def l6_direction_gates(adjacency: dict, edges: list[dict]) -> GateRun:
        第 1 条就放过了。第 3 条是拿原边反查邻接表，必须两边都在该在的位置。
 
     第 3 条是补上一个实测发现的缺口：最初只有前两条时，手工构造
-    「入边塞进出边列表 + 方向标 out」的邻接能通过 L6.4——而旧代码正是那么写的。
+    「入边塞进出边列表 + 方向标 out」的邻接能通过 L6.8——而旧代码正是那么写的。
     """
     from . import adjacency as adjacency_mod
 
@@ -1668,7 +1829,7 @@ def l6_direction_gates(adjacency: dict, edges: list[dict]) -> GateRun:
 
     run.add(
         Gate(
-            "L6.4 邻接方向完整性（出/入分列，反向换逆谓词，两端落位正确）",
+            "L6.8 邻接方向完整性（出/入分列，反向换逆谓词，两端落位正确）",
             "L6",
             "方向伪装 0 / 反向沿用原谓词 0 / 落位错误 0",
             f"实体 {report['entities']}  出 {report['out_items']}  入 {report['in_items']}  "
@@ -1688,7 +1849,7 @@ def l6_direction_gates(adjacency: dict, edges: list[dict]) -> GateRun:
     # 无逆谓词的反向边只申报：这类边不得用于顺着方向说事实，但它们的入边本身不是错误。
     run.add(
         Gate(
-            "L6.4a 无逆谓词的反向边（仅申报，不得用于方向性表述）",
+            "L6.8a 无逆谓词的反向边（仅申报，不得用于方向性表述）",
             "L6",
             "申报值",
             f"{report['missing_inverse']} 条",

@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -370,6 +371,100 @@ class TestMustFail:
         assert script.build(_argv()) == 1
         assert release.read_current() is None
         assert release.list_generations()[0]["status"] == release.FAILED
+
+
+# ---------------------------------------------------------------- ark-rag-3 分派
+
+
+class TestIdentityGraphModel:
+    """`--graph-model identity` 的接线：两份额外产物、六个 Manifest 字段、E 门并入。
+
+    门禁替身只替换 L4/L5/L6 主组（理由同上：这些测试的对象是接线与发布顺序），
+    E 门三组走**真函数**——它们正是本次要验证的接线对象，替换掉就等于没测。
+    """
+
+    def _identity_build(self, script, monkeypatch, **argv):
+        _wire(script, monkeypatch, script.TEST_ROOT)
+        return script.build(_argv(graph_model="identity", no_publish=True, **argv))
+
+    def test_identity_candidate_is_ark_rag_3_and_ready(self, script, monkeypatch):
+        assert self._identity_build(script, monkeypatch) == 0
+        gens = release.list_generations()
+        assert len(gens) == 1
+        gen = release.Generation(gens[0]["generation_id"])
+        assert gen.status() == release.READY
+        manifest = gen.load()
+        assert manifest["graph_schema"] == "ark-rag-3"
+
+        graph_doc = json.loads(gen.graph_path.read_text("utf-8"))
+        assert graph_doc["schema_version"] == "ark-rag-3"
+        # 旧图 id==名字；新图必须是 e- 哈希，否则 L4.12 的 PASS 是假的
+        assert all(re.fullmatch(r"e-[0-9a-f]{16}", e["id"]) for e in graph_doc["entities"])
+
+        # 两份额外产物都在，且 Manifest 记了它们的摘要与条数
+        assert gen.assertion_path.exists() and gen.adjacency_path.exists()
+        lines = [x for x in gen.assertion_path.read_text("utf-8").splitlines() if x.strip()]
+        assert manifest["assertion_count"] == len(lines) > 0
+        assert manifest["assertion_artifact_id"] == release.sha256_file(gen.assertion_path)
+        assert manifest["adjacency_artifact_id"] == release.sha256_file(gen.adjacency_path)
+        assert manifest["entity_count"] == len(graph_doc["entities"])
+        assert manifest["edge_count"] == len(graph_doc["edges"])
+        # 自洽（覆盖完整，所以 publish 也不会被覆盖度拦）
+        assert release.verify_generation(gen) == []
+
+    def test_gate_report_keeps_both_main_and_e_stages(self, script, monkeypatch):
+        """E 门与主组同 stage，落盘必须**合并**而不是后写覆盖前写。
+
+        回归守卫：第一版实现分三次 `write_report`，`reports/gates.json` 只剩 7 行
+        （E 组），主组 30 项被抹掉却仍显示全绿。这里断言三件事同时成立：
+        主组替身门在、E 门在、stage 计数对得上。
+        """
+        assert self._identity_build(script, monkeypatch) == 0
+        gen = release.Generation(release.list_generations()[0]["generation_id"])
+        rows = json.loads(gen.gate_report_path.read_text("utf-8"))
+        names = [r["name"] for r in rows]
+
+        # 主组替身门（L4 两项、L5 三项、L6 两项）
+        assert sum(1 for n in names if n.startswith("L4.")) >= 2 + 2  # 替身 2 + 真 E 门 2
+        # E 门三组都在
+        for prefix in ("L4.12", "L4.13", "L5.9", "L5.10", "L5.11", "L6.8"):
+            assert any(n.startswith(prefix) for n in names), f"{prefix} 不在门禁报告里"
+
+    def test_verify_catches_tampered_assertions(self, script, monkeypatch):
+        """断言产物被改一个字节 → verify_generation 必须报，不许静默放行。"""
+        assert self._identity_build(script, monkeypatch) == 0
+        gen = release.Generation(release.list_generations()[0]["generation_id"])
+        original = gen.assertion_path.read_bytes()
+        gen.assertion_path.write_bytes(original.replace(b'"a-', b'"b-', 1))
+
+        problems = release.verify_generation(gen)
+        assert problems, "断言产物被改动却没被发现"
+        assert any("assertion_artifact_id" in p for p in problems)
+
+    def test_verify_catches_assertion_count_drift(self, script, monkeypatch):
+        """Manifest 记的条数与文件实际行数不符 → 必须报（截断一半也得看出来）。"""
+        assert self._identity_build(script, monkeypatch) == 0
+        gen = release.Generation(release.list_generations()[0]["generation_id"])
+        gen.update(assertion_count=1)
+        problems = release.verify_generation(gen)
+        assert any("assertion_count" in p for p in problems)
+
+    def test_legacy_model_writes_no_ark_rag_3_fields(self, script, monkeypatch):
+        """默认 legacy 分支的 Manifest 形态一个字段都不许多（旧代产物形状不许变）。"""
+        _wire(script, monkeypatch, script.TEST_ROOT)
+        assert script.build(_argv(no_publish=True)) == 0
+        gen = release.Generation(release.list_generations()[0]["generation_id"])
+        manifest = gen.load()
+        for key in (
+            "graph_schema",
+            "assertion_artifact_id",
+            "adjacency_artifact_id",
+            "assertion_count",
+            "entity_count",
+            "edge_count",
+        ):
+            assert key not in manifest, f"legacy 分支不该写 {key}"
+        assert not gen.assertion_path.exists() and not gen.adjacency_path.exists()
 
 
 # ---------------------------------------------------------------- 回滚链

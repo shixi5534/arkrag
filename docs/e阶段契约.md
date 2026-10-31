@@ -325,7 +325,7 @@ sha256("\x1f".join([entity_rule_version, canonical_name_at_birth]))[:16]  前缀
 
 ### 5.2 强化（E2）
 
-* `L6.4 邻接方向完整性（FAIL）` —— 每条邻接项必须有 `direction` ∈ {out,in,undirected}；
+* `L6.8 邻接方向完整性（FAIL）` —— 每条邻接项必须有 `direction` ∈ {out,in,undirected}；
   `in` 项的 `relation` 必须是 `relation` 的逆谓词或为空；每条邻接项的 `assertion_ids` 非空。
 
 ### 5.3 强化（E3）

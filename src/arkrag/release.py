@@ -326,6 +326,16 @@ class Generation:
         return self.dir / "graph" / "graph.json"
 
     @property
+    def assertion_path(self) -> Path:
+        """逐观察断言（仅 `ark-rag-3`）。与 graph.json 同目录，同属图产物家族。"""
+        return self.dir / "graph" / "assertions.jsonl"
+
+    @property
+    def adjacency_path(self) -> Path:
+        """有方向邻接（仅 `ark-rag-3`）。"""
+        return self.dir / "graph" / "adjacency.json"
+
+    @property
     def index_path(self) -> Path:
         return self.dir / "index" / "lexical.json"
 
@@ -462,6 +472,56 @@ def verify_generation(gen: Generation) -> list[str]:
         problems.append(
             f"graph_build_fp 不符：Manifest={manifest['graph_build_fp']} 图内={graph_fp or '(空)'}"
         )
+
+    # ---- ark-rag-3 专属：断言与邻接是**独立产物**，必须各自能证明身份 ------
+    #
+    # 只在这一代声明了 `graph_schema == GRAPH_SCHEMA_IDENTITY` 时才查。
+    # 旧代（ark-rag-1）根本没有这两个文件，硬查会让每一代历史产物都"不合格"——
+    # 那不是发现缺陷，那是把新规则追溯适用于旧产物。
+    graph_schema = str(graph.get("schema_version") or "")
+    if graph_schema == config.GRAPH_SCHEMA_IDENTITY:
+        declared = str(manifest.get("graph_schema") or "")
+        if declared != graph_schema:
+            problems.append(
+                f"Manifest 的 graph_schema={declared or '(空)'} 与图内 schema_version={graph_schema} 不符"
+            )
+        for key, path, label in (
+            ("assertion_artifact_id", gen.assertion_path, "断言"),
+            ("adjacency_artifact_id", gen.adjacency_path, "邻接"),
+        ):
+            want = str(manifest.get(key) or "")
+            if not want:
+                problems.append(f"Manifest 缺 {key}：这一代声明了 ark-rag-3，{label}产物必须可追踪")
+                continue
+            if not path.exists():
+                problems.append(f"{label}产物不存在：{path}")
+                continue
+            actual = sha256_file(path)
+            if actual != want:
+                problems.append(
+                    f"{key} 不符：Manifest={want[:16]} 实际={actual[:16]}"
+                )
+        # 断言条数必须与 Manifest 记的一致：条数是"这一代到底抽出了多少条观察"的
+        # 唯一外部可核对口径，缺了它，断言文件被截断一半也没人知道。
+        want_count = manifest.get("assertion_count")
+        if want_count is None:
+            problems.append("Manifest 缺 assertion_count：无法核对断言产物是否完整")
+        elif gen.assertion_path.exists():
+            try:
+                with gen.assertion_path.open("r", encoding="utf-8") as fh:
+                    actual_count = sum(1 for line in fh if line.strip())
+            except OSError as exc:
+                problems.append(f"断言产物不可读：{exc}")
+            else:
+                if int(want_count) != actual_count:
+                    problems.append(
+                        f"assertion_count 不符：Manifest={want_count} 实际行数={actual_count}"
+                    )
+    elif manifest.get("graph_schema"):
+        problems.append(
+            f"Manifest 的 graph_schema={manifest.get('graph_schema')} 与图内 schema_version={graph_schema or '(空)'} 不符"
+        )
+
     if idx_payload_meta.get("graph_fp") != graph_fp:
         problems.append(
             f"索引绑定的图指纹与图不一致：index.graph_fp={idx_payload_meta.get('graph_fp') or '(空)'} "

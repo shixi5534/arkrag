@@ -1,0 +1,58 @@
+[
+  {
+    "name": "L4.12 实体 id 不含名字（身份与展示名分离）",
+    "stage": "L4",
+    "threshold": "命中 0",
+    "measured": "0/6582",
+    "verdict": "PASS",
+    "note": "id 含名字 = 改一个展示名就换一个身份，合并/拆分历史随之断掉；"
+  },
+  {
+    "name": "L4.13 合并检查有记录（merged_from 与规则计数同时存在）",
+    "stage": "L4",
+    "threshold": "两者皆非空（无合并时允许均为空）",
+    "measured": "merged_from 条目 528  规则计数 21 项",
+    "verdict": "PASS",
+    "note": "并了却没记按哪条规则并的，事后无法复核是否误并；规则计数 {'rejected:type_conflict': 60, 'rejected:member_index': 0, 'rejected:generic_anchor': 9, 'rejected:ambiguous_alias': 479, 'rejected:component_conflict': 0, 'rejected:relation_conflict': 39, 'candidates': 7110, 'entities': 6582, 'duplicate_candidate': 0, 'alias_merged': 493, 'alias_dropped_unknown': 1605, 'alias_ambiguous_rejected': 472, 'fullname_merged': 35, 'fullname_rejected_member': 31, 'alias_chain_merged': 26, 'already_same_group': 125, 'ambiguous_aliases': 201, 'alias_pending': 370, 'alias_generic_pending': 29, 'alias_conflict_pending': 98, 'aliases': 2234}"
+  },
+  {
+    "name": "L5.10 聚合边只存派生统计（可回溯到具体观察）",
+    "stage": "L5",
+    "threshold": "无 assertion_ids 0 / support 不符 0 / 不可回溯 0",
+    "measured": "边 28625  缺 ids 0  support 不符 0  不可回溯 0",
+    "verdict": "PASS",
+    "note": "聚合边一旦自己带『一条证据 + 一个置信度』，就成了无法追问出处的事实来源——旧模型正是这样；实测全部可回溯"
+  },
+  {
+    "name": "L5.11 观察守恒（每条断言恰好被一条边引用一次）",
+    "stage": "L5",
+    "threshold": "未引用 0 / 重复引用 0 / 未知引用 0 / support 不符 0",
+    "measured": "断言 62910  边 28625  support_sum 62910",
+    "verdict": "PASS",
+    "note": "丢一条观察不会报错，只会让某个事实突然只有一处出处；实测守恒"
+  },
+  {
+    "name": "L5.9 逐观察证据可定位（断言在自己的块里能查到原文）",
+    "stage": "L5",
+    "threshold": "定位失败 0 / evidence_all 不符 0",
+    "measured": "断言 62910  定位失败 0  evidence_all 不符 0",
+    "verdict": "PASS",
+    "note": "证据定位是回答可核对的唯一依据；实测全部可定位"
+  },
+  {
+    "name": "L6.4 邻接方向完整性（出/入分列，反向换逆谓词，两端落位正确）",
+    "stage": "L6",
+    "threshold": "方向伪装 0 / 反向沿用原谓词 0 / 落位错误 0",
+    "measured": "实体 5728  出 41980  入 15270  伪装 0  反向语义问题 0  落位错误 0",
+    "verdict": "PASS",
+    "note": "反向边沿用原谓词会把「凯尔希 隶属 罗德岛」读成「罗德岛 隶属 凯尔希」——检索侧看不出来，因为它只拿到邻居和关系名；实测方向干净"
+  },
+  {
+    "name": "L6.4a 无逆谓词的反向边（仅申报，不得用于方向性表述）",
+    "stage": "L6",
+    "threshold": "申报值",
+    "measured": "5206 条",
+    "verdict": "PASS",
+    "note": "词表没给逆谓词（创建/前往/使用…），反向只能当无向邻接用；要用于方向性回答必须先补逆谓词或人工裁决"
+  }
+]
