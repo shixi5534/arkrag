@@ -1,0 +1,40 @@
+{
+  "generation": "g-20261031T035231Z-4eafae",
+  "schema": "ark-goldset-1",
+  "seed": 20261101,
+  "quotas": {
+    "single_chunk": 64,
+    "alias": 48,
+    "direct_relation": 48,
+    "multihop": 48,
+    "cross_chunk": 32,
+    "time_conflict": 32,
+    "negative_abstain": 32,
+    "adversarial": 16
+  },
+  "total_requested": 320,
+  "total_actual": 320,
+  "produced": {
+    "single_chunk": 64,
+    "alias": 48,
+    "direct_relation": 48,
+    "multihop": 48,
+    "cross_chunk": 32,
+    "time_conflict": 32,
+    "negative_abstain": 32,
+    "adversarial": 16
+  },
+  "gaps": {},
+  "share_actual": {
+    "single_chunk": 0.2,
+    "alias": 0.15,
+    "direct_relation": 0.15,
+    "multihop": 0.15,
+    "cross_chunk": 0.1,
+    "time_conflict": 0.1,
+    "negative_abstain": 0.1,
+    "adversarial": 0.05
+  },
+  "validation_failures": [],
+  "duplicate_questions": []
+}

@@ -205,7 +205,7 @@ class TestSuiteSizeIsMonotonic:
     少掉一个门要有人签字，不能让"少跑了几个测试"静默发生。
     """
 
-    N = 717
+    N = 826
 
     def test_declared_count_matches_actual(self) -> None:
         """用 pytest 自己数一遍当前收集到的用例数，与本文件登记值比对。"""
