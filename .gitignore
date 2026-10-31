@@ -38,3 +38,10 @@ __pycache__/
 .ruff_cache/
 
 data/arkrag/staging/
+
+# 一次性临时文件（提交说明、诊断输出）。这些不该入库：
+# 提交说明 `_commit_msg.txt` 已经被误入库两次（a5031b9 与 ea3c52d），
+# 每次都靠后续 commit 删掉——与其靠记性，不如让 git 看不见它们。
+_commit_msg*.txt
+_*.tmp
+_*.log
