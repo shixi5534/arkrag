@@ -81,8 +81,19 @@ def prepare_batches(label: str, chunks: list[dict], batch_size: int) -> dict:
                     )
                     + "\n"
                 )
+        # 路径写**相对仓库根**的形式（计划 A3 / DoD「部署方式可复现」）：
+        # 这份 plan 会被 `run_l3_agent.py --plan` 落进 `data/arkrag/agent_plan.json`，
+        # 而那个文件是入库的。写绝对机台路径等于把 `E:\图rag` 硬编码进 git，
+        # 换机器后这些路径全部指向不存在的位置。
+        # 实测这两个字段零读取方（`run_l3_agent.py:150` 只打印 tag 与 blocks），
+        # 所以改成相对路径不会影响任何调用方。
         plan.append(
-            {"tag": tag, "blocks": len(batch), "inbox": str(path), "outbox": str(OUTBOX_DIR / f"{tag}.jsonl")}
+            {
+                "tag": tag,
+                "blocks": len(batch),
+                "inbox": config.rel_to_root(path),
+                "outbox": config.rel_to_root(OUTBOX_DIR / f"{tag}.jsonl"),
+            }
         )
     return {"label": label, "cached_before": len(chunks) - len(pending), "pending": len(pending), "batches": plan}
 
@@ -188,7 +199,9 @@ class HarvestResult:
             "quarantine": self.quarantine_items[:60],
             "raw_entities": self.raw_entities,
             "raw_relations": self.raw_relations,
-            "task_file": str(INBOX_DIR / f"{self.label}.jsonl"),
+            # 同 `prepare_batches` 的理由：收据会落进入库的 `data/arkrag/ledger/<label>.json`，
+            # 写绝对路径等于把机台路径提交进 git。此字段同样零读取方。
+            "task_file": config.rel_to_root(INBOX_DIR / f"{self.label}.jsonl"),
         }
 
 

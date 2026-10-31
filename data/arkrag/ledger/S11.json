@@ -74,5 +74,5 @@
   ],
   "raw_entities": 111,
   "raw_relations": 74,
-  "task_file": "E:\\图rag\\data\\arkrag\\agent_inbox\\S11.jsonl"
+  "task_file": "data/arkrag/agent_inbox/S11.jsonl"
 }

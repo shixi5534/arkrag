@@ -13,5 +13,5 @@
   "failed_chunks": [],
   "raw_entities": 1777,
   "raw_relations": 1164,
-  "task_file": "E:\\图rag\\data\\arkrag\\agent_inbox\\S03.jsonl"
+  "task_file": "data/arkrag/agent_inbox/S03.jsonl"
 }

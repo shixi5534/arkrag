@@ -1,0 +1,52 @@
+清理入库 JSON 的绝对机台路径
+
+## 为什么
+
+DoD 要求「依赖命令部署方式可复现」，A3 要求消除 `E:\图rag` 硬编码。
+上一轮 `repair_pointer_path.py` 只修了 `current.json` 与 `source_verification.json`，
+当时以为只有这两个文件。实测 `git ls-files data/` 逐文件扫描后，还有 17 个
+入库文件带机台绝对路径：
+
+  * `data/arkrag/agent_plan.json` —— `S*.batches[*].inbox` / `.outbox`，1,186 处
+  * `data/arkrag/ledger/<label>.json` —— `task_file`，16 个文件各 1 处
+
+这些文件换台机器 clone 下来，路径全部指向不存在的位置。
+
+## 改法
+
+产出点改用 `config.rel_to_root()`（仓库内 → 正斜杠相对形式，仓库外原样返回）：
+
+  * `src/arkrag/agent_tasks.py` `prepare_batches()` 的 `inbox` / `outbox`
+  * `src/arkrag/agent_tasks.py` `HarvestResult.to_receipt()` 的 `task_file`
+
+两个字段经 `Select-String` 确认零读取方（`run_l3_agent.py:150` 只打印
+`tag` 与 `blocks`），改形式不影响任何调用方。
+
+历史文件由新脚本 `scripts/repair_absolute_paths.py` 按同一规则改写，默认演练、
+`--apply` 才写盘、走 `atomic.atomic_write_json`（同目录临时文件 + fsync +
+os.replace），实测改写 1,201 处 / 16 个文件。
+
+**刻意不改** `data/arkrag/corpus_meta.json` 与 `data/arkrag/l0_manifest.json`：
+它们是 legacy-baseline 逐字节登记的冻结产物，为了让一条检查变绿去改证据，
+等于把证据毁掉。豁免名单由测试盯着——名单里塞进一个未被冻结的文件就变红。
+
+## 新增的回归门
+
+`tests/test_portable_paths.py::TestNoMachinePathsInTrackedJson` 四条：
+
+  1. 全库扫描：`git ls-files data/` 的每个 JSON/JSONL 逐值判是否绝对路径。
+     用 git 而不是 rglob —— 被 .gitignore 排除的缓存/索引/大图里出现本机路径
+     是正常的，不该判红。
+  2. 豁免项必须真的在冻结清单里，否则名单就是后门。
+  3. 扫描必须真的扫到 ≥20 个文件，"零命中"不许是"扫了个空集"。
+  4. 判据正反例：绝对路径必须被抓，相对路径必须放过。
+
+第 4 条是修假阳性时补的：第一版拿正则在 **JSON 原文**上跑，把门禁报告里
+`runs/`、`generations/<gid>/` 这类**相对**路径中间的斜杠误判成绝对路径，
+8 个文件全报假阳性。改成解析后再判 —— 误报会让人学会忽略这条门。
+
+## 验证
+
+`py -3 -m pytest tests -q` → 679 passed, 1 skipped（680 collected）
+`py -3 scripts\snapshot_baseline.py --verify` → 产物 11 项全部一致，EXIT=0
+注入验证：把绝对路径写回 `ledger/T0v2.json` → 扫描测试变红；恢复 → 4 passed

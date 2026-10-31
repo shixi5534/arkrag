@@ -22,6 +22,8 @@
 from __future__ import annotations
 
 import json
+import re
+import subprocess
 from pathlib import Path
 
 import pytest
@@ -266,3 +268,157 @@ class TestSourceReportIsPortable:
         assert report["tree_files"] == 1
         assert report["zip_present"] is False
         assert report["story_root"] == str(root)
+
+
+# ------------------------------------------------ 入库 JSON 全库扫描（防回归）
+
+
+#: 冻结基线产物：**允许**含绝对路径，因为它们的价值就是"逐字节不变的证据"。
+#: 为了让一条检查变绿去改它们，等于把证据毁掉——所以豁免。但豁免本身由
+#: `test_exemptions_are_really_frozen_artifacts` 盯着：名单里塞进一个没被冻结
+#: 的文件，测试就红。否则这张名单会变成后门。
+FROZEN_EXEMPT = (
+    "data/arkrag/corpus_meta.json",
+    "data/arkrag/l0_manifest.json",
+)
+
+#: Windows 盘符绝对路径、POSIX 绝对路径。刻意不匹配 `C:relative`——
+#: 那种形式在 Windows 上另有语义，不属于"机台绝对路径"。
+MACHINE_PATH_RE = re.compile(r"^(?:[A-Za-z]:[\\/]|/)")
+
+
+def _looks_absolute(value: str) -> bool:
+    """一个**字符串值**是不是绝对机台路径。
+
+    判据与 `scripts/repair_absolute_paths.py` 严格一致：只认真实存在的形态，
+    且不含冒号路径（`C:relative` 在 Windows 上另有语义）。
+    """
+    if len(value) >= 3 and value[1] == ":" and value[2] in "\\/":
+        return value[0].isalpha()
+    return value.startswith("/")
+
+
+def _walk_strings(obj):
+    """产出 JSON 文档里所有字符串值的 (路径, 值)。"""
+    if isinstance(obj, dict):
+        for key, value in obj.items():
+            if isinstance(value, str):
+                yield str(key), value
+            else:
+                for sub in _walk_strings(value):
+                    yield sub
+    elif isinstance(obj, list):
+        for item in obj:
+            if isinstance(item, str):
+                yield "[]", item
+            else:
+                for sub in _walk_strings(item):
+                    yield sub
+
+
+def _load_docs(rel: str) -> list:
+    """把一个入库产物读成待扫描的文档列表。
+
+    JSON 读成对象。JSONL 逐行读（一个坏行不该让整条门变哑巴——但它本身是
+    另一个问题，这里记成可报告的 `__unparsable__` 字符串以便被看见）。
+    """
+    text = (config.ROOT / rel).read_text("utf-8")
+    if rel.endswith(".jsonl"):
+        docs = []
+        for line in text.splitlines():
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                docs.append(json.loads(line))
+            except json.JSONDecodeError:
+                docs.append({"__unparsable__": line[:200]})
+        return docs
+    return [json.loads(text)]
+
+
+def _git_tracked_data_files() -> list[str]:
+    """git 跟踪的 `data/` 下 JSON/JSONL 文件（相对仓库根，正斜杠）。
+
+    用 `git ls-files` 而不是 `Path.rglob`：只有**入库**的文件才涉及
+    "换台机器 clone 下来能不能用"。被 .gitignore 排除的缓存、索引、大图里
+    出现本机路径是正常的，不该判红。
+    """
+    try:
+        out = subprocess.run(
+            ["git", "ls-files", "data/"],
+            cwd=config.ROOT,
+            capture_output=True,
+            text=True,
+            timeout=60,
+            check=False,
+        )
+    except (OSError, subprocess.SubprocessError):  # pragma: no cover
+        pytest.skip("git 不可用，无法判定哪些文件入库")
+    if out.returncode != 0:  # pragma: no cover
+        pytest.skip(f"git ls-files 失败：{out.stderr.strip()[:200]}")
+    return [rel for rel in out.stdout.split() if rel.endswith((".json", ".jsonl"))]
+
+
+class TestNoMachinePathsInTrackedJson:
+    def test_no_absolute_paths_in_tracked_data_json(self):
+        """入库的 JSON 里不许出现绝对机台路径（A3 / DoD「部署方式可复现」）。
+
+        这条是 `scripts/repair_absolute_paths.py` 那一轮的回归门：当时实测
+        `agent_plan.json` 有 1,186 处、16 个 ledger 文件各 1 处，全是
+        `E:\\图rag\\...`。产出点已改用 `config.rel_to_root()`，但若没人盯着，
+        下次谁写一句 `str(path)` 就全回来了——而那时 git diff 里只看到一串
+        JSON，看不出问题。
+
+        **只判字符串值，不在 JSON 文本上跑正则**：第一版就是拿正则扫原文，
+        结果把门禁报告里 `runs/`、`generations/<gid>/` 这类**相对**路径里的斜杠
+        误判成绝对路径（实测 8 个文件报假阳性）。解析后再判，才分得清
+        "值以 `/` 开头"与"值中间有个斜杠"——误报会让人学会忽略这条门。
+        """
+        offenders: list[str] = []
+        for rel in _git_tracked_data_files():
+            if rel in FROZEN_EXEMPT:
+                continue
+            for doc in _load_docs(rel):
+                for key, value in _walk_strings(doc):
+                    if _looks_absolute(value):
+                        offenders.append(f"{rel} [{key}]: {value!r}")
+        assert not offenders, (
+            "入库 JSON 里仍有绝对机台路径（换机器 clone 后指向空地）：\n  "
+            + "\n  ".join(offenders[:10])
+            + "\n修法：产出点改用 config.rel_to_root()，历史文件跑 "
+            "`py -3 scripts/repair_absolute_paths.py --apply`。"
+        )
+
+    def test_exemptions_are_really_frozen_artifacts(self):
+        """豁免名单里每个文件都必须在 legacy-baseline 的登记清单里。
+
+        否则这张名单就是后门：谁想绕过上面的检查，把自己的文件加进
+        `FROZEN_EXEMPT` 就行。冻结是**唯一**的豁免理由。
+        """
+        from arkrag import legacy
+
+        baseline = json.loads(legacy.BASELINE_MANIFEST.read_text("utf-8"))
+        frozen = {item["path"] for item in baseline.get("artifacts", [])}
+        not_frozen = [rel for rel in FROZEN_EXEMPT if rel not in frozen]
+        assert not not_frozen, f"这些文件不在冻结基线清单里，不构成豁免理由：{not_frozen}"
+
+    def test_scan_actually_finds_files(self):
+        """扫描本身必须真的扫到了文件，否则"零命中"可能只是扫了个空集。"""
+        files = _git_tracked_data_files()
+        assert len(files) >= 20, f"只扫到 {len(files)} 个入库 JSON，判据可能坏了"
+
+    def test_detector_recognizes_machine_paths_and_ignores_relative_ones(self):
+        """判据本身的正反例：绝对路径必须被抓到，相对路径必须放过。
+
+        没有这条，"全库零命中"无法区分「真干净」与「判据根本不工作」。
+        """
+        assert _looks_absolute("E:\\图rag\\data\\x.json")
+        assert _looks_absolute("E:/图rag/data/x.json")
+        assert _looks_absolute("/usr/local/x.json")
+        assert not _looks_absolute("data/arkrag/x.json")
+        assert not _looks_absolute("runs/r-20261030T114331Z-f487c2")
+        assert not _looks_absolute("generations/g-20261030T114823Z-606ea9/reports/gates.json")
+        assert not _looks_absolute("C:relative-only-on-windows")
+        assert not _looks_absolute("")
+        assert not _looks_absolute("每块最多 22 块 / 每场景最多 1 块")
