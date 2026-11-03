@@ -32,8 +32,25 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from arkrag import cache, config, extract, gates, graph, index, release, source  # noqa: E402
+from arkrag import atomic, cache, config, extract, gates, graph, index, release, source  # noqa: E402
 from arkrag.agent_tasks import AGENT_MODEL  # noqa: E402
+
+
+def _write_chunks(chunks: list[dict]):
+    """把这一代的块正文写成 JSONL 流。
+
+    返回的是 `atomic.atomic_write_stream(path, writer)` 要的 `writer(fh)`，
+    不是生成器——那条通道要求调用方把内容灌进它给的句柄，这样原子替换与
+    冻结保护才都还在（见 `atomic.atomic_write_stream` 的 docstring）。
+
+    逐行 `json.dumps(..., ensure_ascii=False)`，键顺序交给 sort_keys——
+    块记录是消费者只读数据，稳定序列化比"字段顺序好看"重要。
+    """
+    def _writer(fh) -> None:
+        for rec in chunks:
+            fh.write(json.dumps(rec, ensure_ascii=False, sort_keys=True) + "\n")
+
+    return _writer
 
 
 def build_probes(idx, chunks: list[dict], built: dict, *, count: int = 200) -> list[dict]:
@@ -49,10 +66,20 @@ def build_probes(idx, chunks: list[dict], built: dict, *, count: int = 200) -> l
     by_id = {c["chunk_id"]: c for c in chunks}
     probes: list[dict] = []
 
+    # 切词必须用**建库时那一份**整词名表。不传的话同一个字符串会切出另一套 token：
+    # 整词名（如「教宗」）在建库时被并成一个 token，不传时只剩单字与邻接 bigram，
+    # 于是探针能挑到「教能」这种倒排里存在、但指向同一个 bigram 落在的**别的块**的词。
+    # 实测：不传 → 200 条探针里 58 条指向错块（L6.3 判 FAIL）；传 → 0 条。
+    # 这不是索引坏了，是探针和索引对同一段文本做了两次不同的分词。
+    name_table = index._as_table(idx.name_terms)
+
     for rec in rng.sample(chunks, min(count, len(chunks))):
         toks = [
             t
-            for t in index.tokenize(f"{rec.get('title','')} {rec.get('chapter','')} {rec['text']}")
+            for t in index.tokenize(
+                f"{rec.get('title','')} {rec.get('chapter','')} {rec['text']}",
+                name_terms=name_table,
+            )
             if len(t) >= 2
         ]
         rare = sorted(toks, key=lambda t: len(idx.postings.get(t, ())))
@@ -212,6 +239,30 @@ def build(args: argparse.Namespace) -> int:
     )
     gen.advance(release.BUILDING)
     run.event("build", "候选目录已就位", generation_id=gen.generation_id, path=str(gen.dir))
+
+    # 这一代吃进去的块正文必须跟着它走。
+    #
+    # 以前块正文只有一份全局文件 `data/arkrag/chunks.jsonl`（L1 的最新产物），
+    # 而世代目录里没有。于是「这一代声称吃了哪些块」与「消费者实际能读到的
+    # 块正文」是两份数据：下一次 L2 重建一覆盖全局文件，所有老世代的引用偏移
+    # 就全错位，而**没有任何门会红**——引用校验拿到对不上的切片只会把引用
+    # 静默剔除、置信度降低，表现为"答得短"而不是"服务坏了"（实测 K2 候选：
+    # 17 块正文变了 + 17 块新增，Gold Set 冒出 1 条引用硬失败）。
+    #
+    # 现在块正文跟世代一起走，`pipeline.resolve_chunks()` 只认自带的那份，
+    # 并用 `chunk_manifest_hash` 证明它就是本代那一批。
+    try:
+        atomic.atomic_write_stream(
+            gen.chunks_path,
+            _write_chunks(chunks),
+        )
+    except OSError as exc:
+        gen.fail("chunks_snapshot_failed", detail=str(exc))
+        run.error("build", "块正文落盘失败", str(exc))
+        run.finish("failed", reason="chunks_snapshot_failed", generation_id=gen.generation_id)
+        print(f"块正文落盘失败：{exc}", file=sys.stderr)
+        return 1
+    run.event("build", "块正文已随世代落盘", path=str(gen.chunks_path), chunks=len(chunks))
 
     # 图模型分派（E 阶段）。默认 legacy，旧路径的行为逐字节不变：
     # `graph.build_graph` 一行没改，`ark-rag-1` 产物还是原来那份。

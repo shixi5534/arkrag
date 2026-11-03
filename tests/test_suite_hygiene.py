@@ -272,7 +272,37 @@ class TestSuiteSizeIsMonotonic:
     # 之前读掉请求体，否则未读字节让 `close()` 发 RST，客户端收到
     # `ConnectionAbortedError: [WinError 10053]` 而不是那条 413/503。
     # 这条缺陷只在全量跑时偶发，最容易被当成 flaky 放过。
-    N = 1251
+    # 1251 → 1269：新增 tests/test_chunk_snapshot.py 的 14 个用例，
+    # 该文件进入 `TEST_FILES` 后让四个 parametrize（本文件 61/130/150/184 行）
+    # 各多一项（+4）。1251 + 14 + 4 = 1269，与 `--collect-only` 实测一致。
+    # 这次换来的门是「引用偏移必须落在它自己那个块的正文上」：
+    #   ① 世代必须自带块正文，或借来的全局文件必须能复现本代
+    #      `chunk_manifest_hash`——否则消费者拿错块，`text[start:end]`
+    #      切出另一句话，引用被静默剔除（实测 q-sc-000024，17 块正文变了
+    #      + 17 块新增，Gold Set 冒出 1 条引用硬失败）；
+    #   ② 图扩展登记证据偏移时，宿主块载入不回来就不许登记——
+    #      退回当前单元等于把 A 块的偏移套在 B 块正文上。
+    # 两条都不崩、只是让答案变短，是典型的静默失效。
+    # 1269 → 1287：新增 tests/test_baseline_cache_inventory.py 的 14 个用例，
+    # 该文件进入 `TEST_FILES` 后让四个 parametrize（本文件 61/130/150/184 行）
+    # 各多一项（+4）。1269 + 14 + 4 = 1287，与 `--collect-only` 实测一致。
+    # 这次换来的门是「冻结目录的追加与篡改必须分开判」：
+    #   `data/arkrag/cache` 的正常运行就是「新抽取记录以新键追加」，
+    #   而旧版 `--verify` 只比整体摘要，于是每跑一次合法抽取就红一次——
+    #   这条门等于要求「永不抽取」。实测触发点是 K2：34 条新抽取入库后
+    #   `count 13801->13835`，校验 FAIL。现在按逐文件清单分判：
+    #   · 冻结过的记录被改/被删 → 红（含「同长度翻一个字节」与
+    #     「改清单想掩盖」两种绕法）；
+    #   · 多出新文件 → 只报数量，不判红。
+    # 1287 → 1289：`tests/test_server.py` 的「块正文缺块阻断就绪」拆成两条
+    # （`test_truncated_generation_chunks_blocks_ready`、
+    # `test_chunks_cover_check_reports_which_blocks_are_missing`），并新增
+    # `test_global_chunk_file_is_no_longer_what_the_consumer_reads`；
+    # 该文件已在 `TEST_FILES` 里，不再产生 parametrize 增量。+2 = 1289。
+    # 为什么值得拆：原用例把「身份」与「覆盖」两件事混在一句断言里，
+    # `resolve_chunks()` 落地后截断先被身份校验 fail-closed 拦下，
+    # 逐块比对那一步**从来没被执行过**，却一直跟着用例一起算通过。
+    N = 1289
 
     def test_declared_count_matches_actual(self) -> None:
         """用 pytest 自己数一遍当前收集到的用例数，与本文件登记值比对。"""

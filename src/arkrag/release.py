@@ -340,6 +340,19 @@ class Generation:
         return self.dir / "index" / "lexical.json"
 
     @property
+    def chunks_path(self) -> Path:
+        """这一代实际吃进去的块正文（T1 子集，JSONL）。
+
+        为什么必须放在世代目录里：块正文是**引用校验的判据**。引用偏移
+        (`evidence_start/end`) 是在这一代自己的块正文上算出来的；如果消费者
+        从别处拿块正文，`text[start:end] == evidence` 就会对不上，而那种对不上
+        会被下游当成「引用不成立」静默剔除——表现为答得短，而不是报错。
+        快照里的 `chunk_manifest_hash` 已经能唯一标识这一批块，但**身份不等于
+        位置**：没有这份文件，谁也不知道该去哪个路径取那一批块。
+        """
+        return self.dir / "chunks.jsonl"
+
+    @property
     def reports_dir(self) -> Path:
         return self.dir / "reports"
 
@@ -613,6 +626,33 @@ def verify_generation(gen: Generation) -> list[str]:
                 problems.append(
                     f"probe_digest 不符：Manifest={manifest['probe_digest'][:16]} 回读重放={replayed[:16]}"
                 )
+
+    # 块正文身份：世代自带块文件时，它必须就是 Manifest 记的那一批。
+    #
+    # 只在这一代**有**该文件时检查——旧世代（K2 之前建的）没有，不能因此判红，
+    # 它们由 `pipeline.resolve_chunks()` 在消费侧 fail-closed（借全局文件但必须
+    # 能复现本代 hash）。这里管的是新形态：文件在盘上不等于内容对。
+    if gen.chunks_path.exists():
+        try:
+            records = [
+                json.loads(line)
+                for line in gen.chunks_path.read_text("utf-8").splitlines()
+                if line.strip()
+            ]
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+            problems.append(f"世代自带块正文不可解析：{exc}")
+        else:
+            t1 = [r for r in records if config.in_t1(str(r.get("category") or ""))]
+            if not t1:
+                problems.append(f"世代自带块正文为空（{gen.chunks_path}）")
+            want = str(manifest.get("chunk_manifest_hash") or "")
+            if want:
+                got = chunk_manifest_hash(t1)
+                if got != want:
+                    problems.append(
+                        f"世代自带块正文与 Manifest 不符："
+                        f"chunk_manifest_hash Manifest={want[:16]} 文件={got[:16]}"
+                    )
 
     return problems
 

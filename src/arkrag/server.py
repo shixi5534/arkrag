@@ -368,10 +368,17 @@ class _CoverCache:
             except OSError:
                 return (0, 0)
 
+        gen = release.Generation(gid)
+        try:
+            chunks_path = pipeline_mod.resolve_chunks(gen, gen.load())
+        except Exception:
+            # 定位不出块正文时用 (0,0)：缓存里那条一定也是"不可用"，
+            # 而下次若有文件补上，stamp 变成真实值自然就失配重算了。
+            chunks_path = Path("")
         return (
             gid,
-            stamp(release.Generation(gid).index_path),
-            stamp(config.chunks_path()),
+            stamp(gen.index_path),
+            stamp(chunks_path),
         )
 
     def get(self, gid: str) -> tuple[bool, str]:
@@ -654,14 +661,32 @@ class AppState:
 
 def _compute_chunks_cover(gid: str) -> tuple[bool, str]:
     """真算一次覆盖关系。逻辑从 `AppState._check_chunks_cover` 原样挪到这里，
-    只由 `_CoverCache` 在缓存未命中时调用。"""
+    只由 `_CoverCache` 在缓存未命中时调用。
+
+    **块正文用 `pipeline.resolve_chunks()` 定，不自己挑文件。** 覆盖检查要问的
+    是「消费者实际会拿到的那份块正文覆盖不覆盖索引」，而"消费者读哪份"这件事
+    只有 `resolve_chunks()` 一处定义。这里若写成 `config.chunks_path()`，就又是
+    两份判定：K2 实测该文件（L1 最新产物，13781 块）与候选世代（13798 块）不是
+    同一批，而 `resolve_chunks()` 已经会 fail-closed 拒掉它——覆盖检查跟着拒，
+    两边说的是同一句话。
+    """
+    gen = release.Generation(gid)
     try:
-        idx, _meta = index_mod.load_index(release.Generation(gid).index_path)
+        idx, _meta = index_mod.load_index(gen.index_path)
     except Exception as exc:
         return False, f"索引读不出来：{exc}"
     want = {str(v) for v in idx.doc_id.values()}
+    try:
+        manifest = gen.load()
+    except Exception as exc:
+        return False, f"Manifest 读不出来：{exc}"
+    try:
+        chunks_path = pipeline_mod.resolve_chunks(gen, manifest)
+    except pipeline_mod.ChunksUnavailable as exc:
+        return False, f"块正文不可用：{exc}"
+    except Exception as exc:
+        return False, f"块正文定位失败：{exc}"
     have: set[str] = set()
-    chunks_path = config.chunks_path()
     try:
         with Path(chunks_path).open(encoding="utf-8") as fh:
             for line in fh:
@@ -678,7 +703,7 @@ def _compute_chunks_cover(gid: str) -> tuple[bool, str]:
     if missing:
         sample = ", ".join(sorted(missing)[:3])
         return False, f"索引有 {len(want)} 块，块正文缺 {len(missing)} 块（如 {sample}）"
-    return True, f"索引 {len(want)} 块均在块正文中（块文件共 {len(have)} 条）"
+    return True, f"索引 {len(want)} 块均在块正文中（块正文 {config.rel_to_root(chunks_path)}，共 {len(have)} 条）"
 
 
 def _gate_rows(gen: release.Generation) -> tuple[list[dict], str]:

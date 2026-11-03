@@ -38,7 +38,7 @@ from pathlib import Path
 
 import pytest
 
-from arkrag import config, gates, release, server
+from arkrag import config, gates, pipeline, release, server
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -415,20 +415,73 @@ class TestReadyChecks:
             assert checks["gates_pass"]["ok"] is False
             assert "空" in checks["gates_pass"]["detail"]
 
-    def test_missing_chunk_text_blocks_ready(self, servable):
-        """块正文缺块必须阻断——否则引用会被静默剔除，表现为"答得短"。"""
-        gid, data_dir = servable
+    def test_truncated_generation_chunks_blocks_ready(self, servable):
+        """块正文被截断必须阻断——它是引用校验的判据。
+
+        结尾**不是**「缺某块」，而是「与 Manifest 不符」：`resolve_chunks()` 先
+        核 `chunk_manifest_hash`，对不上就 fail-closed，根本不会走到逐块比对。
+        这是有意为之——身份对不上时，讨论"缺哪几块"没有意义。
+
+        第一版这条用例截的是全局 `data/chunks.jsonl`，而缺陷 A 修复后消费者改读
+        世代自带的 `<gen>/chunks.jsonl`，于是它打到了一个没人读的文件上。
+        """
+        gid, _data_dir = servable
+        gen = release.Generation(gid)
+        chunks_path = Path(pipeline.resolve_chunks(gen, gen.load()))
+        assert chunks_path == gen.chunks_path, "消费者必须读世代自带的块正文"
         with _serve(gid) as client:
             assert client.get("/ready")[2]["ready"] is True
-            keep = CHUNKS[:-1]
-            with (data_dir / "chunks.jsonl").open("w", encoding="utf-8", newline="\n") as fh:
-                for c in keep:
+            with chunks_path.open("w", encoding="utf-8", newline="\n") as fh:
+                for c in CHUNKS[:-1]:
                     fh.write(json.dumps(c, ensure_ascii=False) + "\n")
             status, _h, body = client.get("/ready")
             assert status == 503
             checks = {c["id"]: c for c in body["checks"]}
             assert checks["chunks_cover_generation"]["ok"] is False
-            assert CHUNKS[-1]["chunk_id"] in checks["chunks_cover_generation"]["detail"]
+            detail = checks["chunks_cover_generation"]["detail"]
+            assert "不符" in detail, detail
+
+    def test_chunks_cover_check_reports_which_blocks_are_missing(self, servable, tmp_path, monkeypatch):
+        """覆盖校验单独有效：块正文合法但少了索引里的某些块时，必须点名缺哪几块。
+
+        直接打 `server._compute_chunks_cover()` 并让 `resolve_chunks()` 交回一份
+        **少一块**的文件——绕开身份校验，专门验证逐块比对这一步本身。若不这样拆，
+        截断永远先被身份校验拦下，这条判定就永远没被执行过。
+        """
+        gid, _data_dir = servable
+        gen = release.Generation(gid)
+        short = tmp_path / "short-chunks.jsonl"
+        with short.open("w", encoding="utf-8", newline="\n") as fh:
+            for c in CHUNKS[:-1]:
+                fh.write(json.dumps(c, ensure_ascii=False) + "\n")
+        monkeypatch.setattr(server.pipeline_mod, "resolve_chunks", lambda g, m: short)
+        ok, detail = server._compute_chunks_cover(gid)
+        assert ok is False
+        assert CHUNKS[-1]["chunk_id"] in detail, detail
+        assert "缺 1 块" in detail, detail
+        # 同一条判定在块齐时必须是绿的，否则它只是个恒假断言
+        monkeypatch.setattr(server.pipeline_mod, "resolve_chunks", lambda g, m: gen.chunks_path)
+        ok2, detail2 = server._compute_chunks_cover(gid)
+        assert ok2 is True, detail2
+
+    def test_global_chunk_file_is_no_longer_what_the_consumer_reads(self, servable):
+        """截断全局 `data/chunks.jsonl` 不再影响就绪——证明接线真的生效了。
+
+        这条是缺陷 A 的**反向证据**：修之前消费者读全局文件，截它必红；
+        修之后世代自带块正文，全局文件被截了也不该影响这一代的就绪状态。
+        若哪天有人把 `resolve_chunks()` 改回读全局文件，这条立刻变红。
+        """
+        gid, data_dir = servable
+        gen = release.Generation(gid)
+        chunks_path = Path(pipeline.resolve_chunks(gen, gen.load()))
+        assert chunks_path != data_dir / "chunks.jsonl", "消费者不该读全局块文件"
+        with _serve(gid) as client:
+            assert client.get("/ready")[2]["ready"] is True
+            with (data_dir / "chunks.jsonl").open("w", encoding="utf-8", newline="\n") as fh:
+                fh.write(json.dumps(CHUNKS[0], ensure_ascii=False) + "\n")
+            status, _h, body = client.get("/ready")
+            assert status == 200, body
+            assert body["ready"] is True
 
     def test_tampered_artifact_blocks_ready_after_cache_warm(self, servable):
         """产物被改之后，第二次 `/ready` 必须变红。

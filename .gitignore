@@ -21,6 +21,13 @@ data/arkrag/agent_outbox/
 data/arkrag/generations/*/graph/
 data/arkrag/generations/*/index/
 
+# 世代自带的块正文（T1 子集 JSONL，每代约 40 MB）。它必须跟着世代走——引用
+# 偏移是在这一代自己的块正文上算出来的，消费者从别处拿块正文会让
+# `text[start:end] == evidence` 静默对不上（见 src/arkrag/pipeline.py 的
+# resolve_chunks 与 docs/k阶段实测.md）。体积与原 data/arkrag/chunks.jsonl 同级，
+# 同样不入库；可由 L2 产物 + 该代 Manifest 的 chunk_manifest_hash 重算。
+data/arkrag/generations/*/chunks.jsonl
+
 # FTS5 检索库：单个 212 MB，可由 generations/*/index/lexical.json 重算
 # （scripts/build_fts_index.py，36 秒）。与 data/arkrag/index/ 同理不入库。
 # 注意：它刻意放在世代目录之外（见 docs/h3-FTS5迁移.md §2.4），

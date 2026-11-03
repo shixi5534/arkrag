@@ -822,7 +822,14 @@ class Retriever:
                     # （真实语料实测：105 条引用里 24 条这样坏掉）。所以按锚点自己的
                     # chunk_id 找单元再登记。
                     host_id = str(rec.get("chunk_id") or "")
-                    target = (ensure(host_id) if host_id else None) or unit
+                    # 宿主块必须自己载入得回来。**不许退回 unit**：退回等于把
+                    # A 块的偏移登记到 B 块的正文上，下游 text[start:end] 必然
+                    # 对不上，而这条坏引用会被当成「引用不成立」静默剔除，表现
+                    # 为「答得短」而不是「服务坏了」（实测：q-sc-000024）。
+                    # 此时已经没有正确的偏移可用，只能不登记。
+                    target = ensure(host_id) if host_id else None
+                    if target is None:
+                        continue
                     _push_span(target, rec)
                     brief = _assertion_brief(rec, self.display_name)
                     if brief not in target["assertions"]:

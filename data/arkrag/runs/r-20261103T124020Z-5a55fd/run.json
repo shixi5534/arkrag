@@ -1,0 +1,9 @@
+{
+  "run_id": "r-20261103T124020Z-5a55fd",
+  "finished_at": "2026-11-03T12:42:29Z",
+  "status": "failed",
+  "pid": 38784,
+  "git_revision": "bfa2ce7068e435ff9fe4d3b47ea56577d5c291c3",
+  "reason": "gate_fail",
+  "generation_id": "g-20261103T124101Z-fa22ae"
+}

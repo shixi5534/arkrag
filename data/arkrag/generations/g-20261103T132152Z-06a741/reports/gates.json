@@ -1,0 +1,306 @@
+[
+  {
+    "name": "L4.1 实体类型闭合（六选一）",
+    "stage": "L4",
+    "threshold": "词表外 0",
+    "measured": "词表外 0/6583",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L4.10 词表使用覆盖（仅申报）",
+    "stage": "L4",
+    "threshold": "申报值",
+    "measured": "已用 48/48",
+    "verdict": "PASS",
+    "note": "长期未用的关系名说明词表与语料不匹配，是 D-17 那类裁剪讨论的依据"
+  },
+  {
+    "name": "L4.11 纯称谓/亲属词成实体（仅申报）",
+    "stage": "L4",
+    "threshold": "申报值",
+    "measured": "实体 15 个，涉及边 80 条（爷爷 20边, 老板 17边, 奶奶 8边, 老爷 6边, 妹妹 5边, 母亲 5边）",
+    "verdict": "PASS",
+    "note": "「爷爷」「老板」在剧情里确实是反复出现的一个角色，删与留是结构决策；要删得先扩充 GENERIC_PERSON_NOUNS 的亲属/敬称部分再重跑，不能在建图后摘点"
+  },
+  {
+    "name": "L4.12 实体 id 不含名字（身份与展示名分离）",
+    "stage": "L4",
+    "threshold": "命中 0",
+    "measured": "0/6583",
+    "verdict": "PASS",
+    "note": "id 含名字 = 改一个展示名就换一个身份，合并/拆分历史随之断掉；"
+  },
+  {
+    "name": "L4.13 合并检查有记录（merged_from 与规则计数同时存在）",
+    "stage": "L4",
+    "threshold": "两者皆非空（无合并时允许均为空）",
+    "measured": "merged_from 条目 527  规则计数 21 项",
+    "verdict": "PASS",
+    "note": "并了却没记按哪条规则并的，事后无法复核是否误并；规则计数 {'rejected:type_conflict': 60, 'rejected:member_index': 0, 'rejected:generic_anchor': 9, 'rejected:ambiguous_alias': 479, 'rejected:component_conflict': 0, 'rejected:relation_conflict': 39, 'candidates': 7110, 'entities': 6583, 'duplicate_candidate': 0, 'alias_merged': 492, 'alias_dropped_unknown': 1605, 'alias_ambiguous_rejected': 472, 'fullname_merged': 35, 'fullname_rejected_member': 31, 'alias_chain_merged': 26, 'already_same_group': 125, 'ambiguous_aliases': 201, 'alias_pending': 370, 'alias_generic_pending': 29, 'alias_conflict_pending': 98, 'aliases': 2233}"
+  },
+  {
+    "name": "L4.2 噪声名残留（现有名字重跑判据）",
+    "stage": "L4",
+    "threshold": "残留 0",
+    "measured": "残留 0/6583",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L4.3 噪声名剔除率（仅申报）",
+    "stage": "L4",
+    "threshold": "申报值",
+    "measured": "原始唯一名 7141，剔除 31 (0.43%)  {'generic_noun': 19, 'descriptive_suffix': 7, 'event_particle': 1, 'descriptive_prefix': 3, 'event_clause': 1}",
+    "verdict": "PASS",
+    "note": "剔得太少要怀疑判据失效，剔得太多要怀疑误杀；两个方向都没有绝对阈值"
+  },
+  {
+    "name": "L4.4 成员误并（集体/成员不得并成本体）",
+    "stage": "L4",
+    "threshold": "误并 0",
+    "measured": "误并 0",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L4.4b 职位泛称并合（仅申报）",
+    "stage": "L4",
+    "threshold": "申报值",
+    "measured": "泛称锚点吸收专名 6 例（办事处干员 <- 阿平; 医疗干员 <- 敏敏; 巴别塔成员 <- 兄弟; 老工匠 <- 科瓦尔）；专名吸收角色式别名 17 例（Ace <- Ace队长; 凯恩 <- 记者; 列维 <- 学者）",
+    "verdict": "PASS",
+    "note": "前者是「一群人被当成一个人」，后者更可能是「同一个人的战地标签」，两类必须分开判，判别依据是同一标签在不同块里是否指向不同个体"
+  },
+  {
+    "name": "L4.5 别名质量（噪声/争用，仅申报）",
+    "stage": "L4",
+    "threshold": "申报值",
+    "measured": "条目 1671  噪声 24  争用别名 0",
+    "verdict": "PASS",
+    "note": "泛称别名（队长/老师）被多个实体共用是数据的真实状态，不是归一化缺陷"
+  },
+  {
+    "name": "L4.5b 歧义别名参与合并（被多方主张的别名不得当别名）",
+    "stage": "L4",
+    "threshold": "残留 0",
+    "measured": "图上残留 0",
+    "verdict": "PASS",
+    "note": "多方主张的别名已同时从合并与 aliases 中剔除（建图期 alias_ambiguous_rejected）"
+  },
+  {
+    "name": "L4.6 关系名闭合（封闭表）",
+    "stage": "L4",
+    "threshold": "词表外 0",
+    "measured": "词表外 0，已用 48/48",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L4.7 方向对成对完整率（词表结构）",
+    "stage": "L4",
+    "threshold": ">= 0.95",
+    "measured": "1.00（11/11 对齐全）",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L4.8 逆谓词双向重复（仅申报）",
+    "stage": "L4",
+    "threshold": "申报值",
+    "measured": "570 对，其中证据逐字相同 24 对",
+    "verdict": "PASS",
+    "note": "两视角并存合法；证据相同的那批应由消费端去重，不在建图期删"
+  },
+  {
+    "name": "L4.9 互斥关系共存（仅申报）",
+    "stage": "L4",
+    "threshold": "申报值",
+    "measured": "127 组，其中同块共现 12 组",
+    "verdict": "PASS",
+    "note": "跨块共存基本都是剧情里的立场反转；同块共现才可能是抽错"
+  },
+  {
+    "name": "L5.1 规模（实体/边/类型分布）",
+    "stage": "L5",
+    "threshold": "申报值",
+    "measured": "实体 6583  边 28636  类型 {'角色': 2675, '物品': 1225, '地点': 1224, '组织': 942, '概念': 384, '事件': 133}",
+    "verdict": "PASS",
+    "note": "规模本身不做判定；它是其它所有比率的基数"
+  },
+  {
+    "name": "L5.10 聚合边只存派生统计（可回溯到具体观察）",
+    "stage": "L5",
+    "threshold": "无 assertion_ids 0 / support 不符 0 / 不可回溯 0",
+    "measured": "边 28636  缺 ids 0  support 不符 0  不可回溯 0",
+    "verdict": "PASS",
+    "note": "聚合边一旦自己带『一条证据 + 一个置信度』，就成了无法追问出处的事实来源——旧模型正是这样；实测全部可回溯"
+  },
+  {
+    "name": "L5.11 观察守恒（每条断言恰好被一条边引用一次）",
+    "stage": "L5",
+    "threshold": "未引用 0 / 重复引用 0 / 未知引用 0 / support 不符 0",
+    "measured": "断言 62924  边 28636  support_sum 62924",
+    "verdict": "PASS",
+    "note": "丢一条观察不会报错，只会让某个事实突然只有一处出处；实测守恒"
+  },
+  {
+    "name": "L5.2 平均度数",
+    "stage": "L5",
+    "threshold": "> 6",
+    "measured": "8.70",
+    "verdict": "PASS",
+    "note": "度数是图能不能撑起「沿边扩展」的唯一指标，低度数的图等价于一份实体表"
+  },
+  {
+    "name": "L5.3 孤立实体率",
+    "stage": "L5",
+    "threshold": "<= 0.20",
+    "measured": "855 (13.0%)",
+    "verdict": "PASS",
+    "note": "孤立实体只能靠词面命中被检索到，永远不会经图扩展被找到"
+  },
+  {
+    "name": "L5.4 自环与悬空边",
+    "stage": "L5",
+    "threshold": "自环 0 / 悬空 0",
+    "measured": "自环 0  悬空 0",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L5.5 边证据可定位（逐字回查来源块）",
+    "stage": "L5",
+    "threshold": "未定位 0 / 空证据 0",
+    "measured": "未定位 0  空证据 0  共 28636 条",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L5.6 边置信度下限",
+    "stage": "L5",
+    "threshold": ">= 0.5",
+    "measured": "低于下限 0  最低 0.50  中位 0.80",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L5.7 提及次数（每个实体至少 1 次）",
+    "stage": "L5",
+    "threshold": "0 例低于 1",
+    "measured": "低于 1 的实体 0",
+    "verdict": "PASS",
+    "note": "提及为 0 意味着这个实体是被推断出来的、正文里从未出现——那不该存在"
+  },
+  {
+    "name": "L5.7b 世界内编码漏成实体名/别名",
+    "stage": "L5",
+    "threshold": "0 例",
+    "measured": "实体名 0 / 别名 0",
+    "verdict": "PASS",
+    "note": "L1.2b 把日志行/编号判为合法正文后，唯一真风险就是它们被当成实体；实测全清"
+  },
+  {
+    "name": "L5.8 指纹覆盖（语料/图/版本三件套）",
+    "stage": "L5",
+    "threshold": "全部非空且与当前语料一致",
+    "measured": "corpus_fp=188e3218448d6bb4 graph_fp=1d276c22c613dc9f prompt=v2 norm=n2 ent=ev2",
+    "verdict": "PASS",
+    "note": "指纹不全的图无法判断是否与当前语料同源，等于不可复现；实体合并规则版本（ev）同样必须进图，否则同一指纹会对应两张结构不同的图"
+  },
+  {
+    "name": "L5.9 逐观察证据可定位（断言在自己的块里能查到原文）",
+    "stage": "L5",
+    "threshold": "定位失败 0 / evidence_all 不符 0",
+    "measured": "断言 62924  定位失败 0  evidence_all 不符 0",
+    "verdict": "PASS",
+    "note": "证据定位是回答可核对的唯一依据；实测全部可定位"
+  },
+  {
+    "name": "L6.1 新鲜度三查（块数/语料指纹/构建时间）",
+    "stage": "L6",
+    "threshold": "不一致项 0",
+    "measured": "0",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L6.2 索引图指纹与当前图一致",
+    "stage": "L6",
+    "threshold": "相等",
+    "measured": "index=1d276c22c613dc9f graph=1d276c22c613dc9f",
+    "verdict": "PASS",
+    "note": "图重建后索引未重建 = 检索命中已合并掉的旧实体名"
+  },
+  {
+    "name": "L6.3 检索正确性（稀疏词回查来源块）",
+    "stage": "L6",
+    "threshold": "命中率 1.00",
+    "measured": "196/196",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L6.3b 实体名检索质量（top-20，仅申报）",
+    "stage": "L6",
+    "threshold": "申报值",
+    "measured": "166/200  中位名次 2",
+    "verdict": "PASS",
+    "note": "常见名捞不回自己那块属正常排序结果；此值只反映检索手感，不参与判定"
+  },
+  {
+    "name": "L6.4 别名倒排覆盖（实体名+别名->id）",
+    "stage": "L6",
+    "threshold": "未解析 0",
+    "measured": "实体名 6583/6583  条目 8254（图内别名 1671，丢失 0）",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L6.4c 待审别名不得进入检索（pending 只能留档）",
+    "stage": "L6",
+    "threshold": "泄漏 0",
+    "measured": "待审 562  泄漏 0",
+    "verdict": "PASS",
+    "note": "检索表只收 review ∈ {auto, approved} 的别名（identity.to_dict() 保证）"
+  },
+  {
+    "name": "L6.5 图邻接覆盖（边两端可达）",
+    "stage": "L6",
+    "threshold": "悬空边 0",
+    "measured": "节点 5728  邻接项 57272",
+    "verdict": "PASS",
+    "note": ""
+  },
+  {
+    "name": "L6.6 孤立实体（有实体无边，仅申报）",
+    "stage": "L6",
+    "threshold": "申报值，L5 已判 <=0.20",
+    "measured": "855 (13.0%)",
+    "verdict": "PASS",
+    "note": "D32钢战士; Elias; Machinist; PRTS系统"
+  },
+  {
+    "name": "L6.7 向量通道状态显式申报",
+    "stage": "L6",
+    "threshold": "非空且声明原因",
+    "measured": "not_built_no_embedding_backend",
+    "verdict": "PASS",
+    "note": "embedding_model=None dim=None"
+  },
+  {
+    "name": "L6.8 邻接方向完整性（出/入分列，反向换逆谓词，两端落位正确）",
+    "stage": "L6",
+    "threshold": "方向伪装 0 / 反向沿用原谓词 0 / 落位错误 0",
+    "measured": "实体 5728  出 42001  入 15271  伪装 0  反向语义问题 0  落位错误 0",
+    "verdict": "PASS",
+    "note": "反向边沿用原谓词会把「凯尔希 隶属 罗德岛」读成「罗德岛 隶属 凯尔希」——检索侧看不出来，因为它只拿到邻居和关系名；实测方向干净"
+  },
+  {
+    "name": "L6.8a 无逆谓词的反向边（仅申报，不得用于方向性表述）",
+    "stage": "L6",
+    "threshold": "申报值",
+    "measured": "5206 条",
+    "verdict": "PASS",
+    "note": "词表没给逆谓词（创建/前往/使用…），反向只能当无向邻接用；要用于方向性回答必须先补逆谓词或人工裁决"
+  }
+]

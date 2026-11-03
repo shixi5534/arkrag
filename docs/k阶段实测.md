@@ -1,6 +1,6 @@
-# K 阶段实测（K1 全量重建前检查）
+# K 阶段实测
 
-> 本文件记录 K 阶段的实测数据。当前覆盖 **K1**；K2/K3/K4 完成后追加。
+> 本文件记录 K 阶段的实测数据。当前覆盖 **K1、K2**；K3/K4 完成后追加。
 > 与前几个阶段一样，只写实际跑出来的数，不写"预计"。
 
 ## 0. 口径
@@ -176,3 +176,303 @@ py -3 scripts/snapshot_baseline.py --verify # 11 项产物一致性
 3. **`check_resumable` 只验到"非 READY 不能发布"这一层**。真正的"从中断恢复"（构建中途进程被杀、下次从断点续跑）还没有对应的实操演练——那需要 `build_generation.py` 有断点续跑的路径，当前它是一次性事务。
 4. **`DRAIN_CAP = 1 MiB` 是经验值**，没有实测依据。选它是因为：正常查询的 payload 是几百字节，1 MiB 足够覆盖任何正常客户端；同时它把最坏情况的排空成本钉在 1 MiB。若将来允许上传类接口，这个值得重新评估。
 5. **`_route_post()` 现在无条件先读请求体**，意味着一个声明了 1 MiB 的合法但无用的 POST 会先被读完才被 404 掉。可以加"只对已知路由读"，但那样就得让每个拒绝点自己记着读——正是这次要消除的形态。当前取"永远先读"。
+
+## K2 实测：全量重建
+
+### 0. 口径
+
+1. **构建环境**：`$env:ARKRAG_ARTIFACT_DIR="data/arkrag/staging/k2"`。不用
+   `ARKRAG_ALLOW_LEGACY_WRITE=1`——那是「我知道我在覆盖冻结产物」的放行口，而本次
+   要做的恰恰是「不覆盖任何冻结产物，另建一份」。
+2. **所有数字都是本次实跑读数**，没有引用、估算或推算值。
+3. **`scene_fp` / `chunk_fp` / `chunk_manifest_hash` 这类身份值的变化，必须给出解释**
+   才算通过；解释不了就是未解释的产物身份漂移，按 K2 硬门第 5 条不许发布。
+4. **召回指标的差异必须先过显著性检验**才能说"更好/更差"。本节只报观测值。
+5. **失败候选」留在盘上**，不删——它们是「这次真的失败了」的证据。
+
+### 1. L1 场景层（EXIT=0，十一门全 PASS）
+
+| 项 | 值 |
+|---|---|
+| `corpus_fp` | `188e3218448d6bb4`（**与已发布世代一致**） |
+| `scene_fp` | `184b619b8c620a2a`（`4eafae` 记的是 `20b49bb036087012`） |
+| 来源状态 | `verified_zip` |
+| 场景 / 轮次 | 2,291 / 422,975 |
+
+**`scene_fp` 变化已查明**：逐场景比对 2,291 个 scene_id，only old 0 / only new 0，
+但 2,291 个**全部 changed**。唯一差异是 D 阶段给 turn 加了 `ordinal` 字段
+（旧 turn keys `['kind','masked','node_id','prop','speaker','text']`，
+新 = 那六个 + `ordinal`，`ordinal None => 0`）。`corpus_fp` 未变说明**正文没变**。
+
+这正是分层指纹的意义：`corpus_fp` 变了才是"上游数据变了"，`scene_fp` 变了只说明
+"这一层的记录形状变了"。
+
+### 2. L2 分块层（EXIT=0，八门全 PASS）
+
+| 项 | 值 |
+|---|---|
+| 全量块 | **13,803** |
+| T1 块 | **13,798**（线上世代是 13,781） |
+| `chunk_fp` | `d29d74aa792176ff` |
+| T1 分片 | 69（S00–S68） |
+
+八门实测：L2.1a 原文轮次覆盖 422,975/422,975 漏 **0**；L2.1b 渲染冗余率 1.219（仅申报）；
+L2.1c 顺序/正文异常 **0**；L2.2 无原因短块 **0**；L2.3 最大块 1,000（≤1,800）；
+L2.4 跨场景块 **0**；L2.5 内容哈希重复 **0**；L2.6 分片均衡 min 198 / max 229。
+
+**13,798 正是 D 阶段那次一直没上线的分块**（D 阶段因 34 块缓存缺口而停在 13,781）。
+
+### 3. 抽取缺口：34 块，无一块可复用
+
+`run_l3_agent.py --status`（staging）：
+
+```
+合计 13764/13803 块已入库
+来源分层 current 0 legacy 13764 adopted 0 miss 39 invalid 0
+```
+
+T1 范围 13,798 里缺 **34** 块（另 5 块在 T1 范围外，`obt/guide`）。
+
+**形态**：17 对「一个正文变了的主块 + 一个新增的短尾块」。主块 `chunk_id` 与旧世代
+相同但 `content_key` 变了；尾块是新 id。
+
+| 例 | 新 ck | 旧 ck | 字数 |
+|---|---|---|---|
+| `activities/a001/level_a001_01_end#000` | `b18a5342ff82021344cb505b` | `469728ddd0774c367533` | 887 vs 992 |
+| `activities/a001/level_a001_01_end#001`（新增） | `47020d5c05669e4813e1cc13` | — | 121 |
+
+**没有一块能 `adopt_legacy`**：缓存键绑 `content_key`，正文变了键就变了
+（`来源分层 adopted 0` 就是这个意思）。
+
+抽取自产出 34 条后 → `13798/13803`（T1 全齐），`miss 5` 是范围外那 5 块，与线上同构。
+`--ingest` 回执：`读到 34 行 合法 34 去重 0 冲突 0 隔离 0 缺块 0 命中 0 新入库 34
+硬错误 0 / 原始实体 162 原始关系 129`。
+
+抽取过程中被抓到的唯一一条真错：`activities/act16mini/level_act16mini_st02#009`
+里我写 `莱伊：矿场的人都叫我莱伊。`，而该块说话人标签实际是 **`劫车人`**
+（`劫车人：矿场的人都叫我莱伊。`），直到最后两行才改成 `莱伊`。本地校验器按
+"evidence 必须是块正文逐字子串"拦下了它——若直接写进 outbox 会被 `EVIDENCE_NOT_FOUND` 拒收。
+
+### 4. 构建：先失败一次，原因在我的探针
+
+首次 `build_generation.py --graph-model identity --no-publish` → 候选 `fa22ae`：
+
+```
+FAIL L6.3 检索正确性（稀疏词回查来源块） 实测[153/197]
+  教能->activities/act52side/level_act52side_06_beg#003; 宗是->...; 起武->...; 间同->...
+```
+
+同代其余 37 门全 PASS；`4eafae` 与 `55dfd7` 的 L6.3 都是 199/199。
+
+**根因**：`build_probes()` 调 `index.tokenize(f"{title} {chapter} {text}")` 时
+**没传 `name_terms`**，而 `index.build()` 每块 `index.add(..., name_terms=table)` **传了**。
+`tokenize_t2` 对专名区间内侧不连跨边界双字（`index.py` 的 `cuts` 逻辑），于是同一段
+文本在两侧切出两套 token——探针能挑到「倒排里存在、但那个 bigram 实际落在别的块」的词。
+
+定量（同随机种子 20261029，抽 200 块）：
+
+| 传 `name_terms` | 抽样 199 条里指向错块 |
+|---|---|
+| 否 | **58** |
+| 是 | **0** |
+
+索引本身完全正确。这条例子的价值在于：**门禁报的是索引的错，实际是探针的错**。
+若按"索引坏了"去查，会一路查到倒排结构、分词器、建库流程，最后大概会修一个没坏的东西。
+
+### 5. 候选世代（`g-20261103T132152Z-06a741`）
+
+| 项 | `4eafae`（旧） | `06a741`（新） |
+|---|---|---|
+| `chunk_count` | 13,781 | **13,798** |
+| `entity_count` | 6,582 | **6,583** |
+| `edge_count` | 28,625 | **28,636** |
+| `assertion_count` | 62,910 | **62,924** |
+| `coverage_status` | complete | complete |
+| `chunk_manifest_hash` | `34e6971d86c72935…` | `e9cf0a92b5a9c369…` |
+| `index_content_digest` | `c1fef3588e662271…` | `f8419d479ad3a2ee…` |
+| `probe_digest` | `46e600c1f3a9ec9e…` | `b800a2a2b2e273b0…` |
+| `graph_build_fp` | `1d276c22c613dc9f` | `1d276c22c613dc9f`（**相同**） |
+| `index_build_fp` | `bb5c93f8f1a75d42` | `4f1fc2958f70e526` |
+| 门禁行数 | 30（ark-rag-1） | **38 全 PASS** |
+| `verify_generation` | 0 问题 | **0 问题** |
+| 目录字节 | 254,005,061 | **302,419,455**（288.4 MiB，含自带 `chunks.jsonl` 68,935,400 B） |
+
+`graph_build_fp` 两代完全相同——图构建的输入（抽取记录）对已抽的 13,764 块没变，
+新增 34 块只带来 +1 实体 / +11 边。**这是「同样输入给同样产物」的证据。**
+
+`index_build_fp` / `index_content_digest` / `probe_digest` 全都变了，解释见 §8。
+
+### 6. Gold Set 评测（320 题）
+
+| 指标 | `4eafae` | `06a741` | Δ |
+|---|---|---|---|
+| Recall@20 | 0.7019 | 0.6989 | −0.0030 |
+| Recall@5 | 0.5108 | 0.5008 | −0.0100 |
+| MRR | 0.4394 | 0.4312 | −0.0082 |
+| 引用定位正确率 | 1.0000 (1,589) | 1.0000 (1,642) | — |
+| 核心引用覆盖率 | 0.1867 | 0.1700 | −0.0167 |
+| 拒答率 | 0.8500 | 0.8562 | +0.0062 |
+| 方向题 | 0.6771 | 0.6354 | −0.0417 |
+| **引用校验硬失败** | 0 | **0**（修复前 1） | — |
+
+分类（新世代）：adversarial 16 拒1 引用5.06 / alias 48 拒6 4.50 / cross_chunk 32 拒5 3.12 /
+direct_relation 48 拒0 5.98 / multihop 48 拒0 6.94 / negative_abstain 32 拒4 4.72 /
+single_chunk 64 拒16 4.08 / time_conflict 32 拒0 6.66。
+
+**这批差异尚未做显著性检验**。按本项目纪律，只能说「在 n=300 上观察到这些差，未检验」，
+不许说成「K2 更差」或「K2 更好」。K3 要做的事正是这个。
+
+### 7. 两个缺陷及其修复
+
+#### 7.1 缺陷 A：世代不自带块正文（架构级）
+
+`q-sc-000024` 一条引用硬失败：`chunk_id=activities/a001/level_a001_01_end#000`、
+`start=95 end=114`、`evidence="可萝尔：刚才，有个人，从窗户外飞了过去"`，
+而 `text[95:114] = "尼：是这样没错......唔，我们两个"`。证据确实在该块正文里，
+位置在 **966**——不是块错了，是**偏移和正文不是同一版**。
+
+根因：`pipeline.load_generation()` 从 `config.chunks_path()`（全局
+`data/arkrag/chunks.jsonl`，被 legacy-baseline 冻结的 L1 旧产物）读块正文，
+而 `build_generation.py` 建库时用的是 staging 的新分块。**世代目录里没有自己的
+`chunks.jsonl`**（九个旧世代全部没有）。
+
+量化（`_tmp_serving_gap` 的结论）：
+
+| 项 | 值 |
+|---|---|
+| 索引块数（世代声称） | 13,798 |
+| 服务端块文件 | 13,786（T1 13,781） |
+| **索引有、服务端无** | **17 块** |
+| **两侧都有但正文变了** | **17 块** |
+
+后 17 块是「不报错」的那种坏：索引按新正文建、偏移按新正文记，服务端拿旧正文比对 →
+必然对不上 → 引用被静默剔除、置信度降低，**表现为「答得短」而不是「服务坏了」**。
+
+`chunk_manifest_hash` 能唯一标识每一代那批块（`4eafae` 的 `34e6971d…` 只能由
+frozen T1 复现，`27be38` 的 `e9cf0a92…` 只能由 staging T1 复现），**但这层身份
+没有任何消费者用来定位块文件**。
+
+严重性：线上 `55dfd7` 是同样形态，它今天能工作只因为「全局 `chunks.jsonl` 恰好就是
+它那一批」。下一次 L2 重建一覆盖全局文件，线上立刻静默错位——而 38 门全 PASS、
+`verify_generation` 0 问题，**门禁和自检都只在这一代自己的产物内比对，从没人问
+「消费者拿哪份块正文」**。
+
+唯一拦住它的是 `/ready` 的 `chunks_cover_generation`（J 阶段设成阻断项）。
+对候选跑七项：`ready=False`，只有这一项 FAIL（「索引有 13798 块，块正文缺 17 块」）。
+
+修复（五处）：`Generation.chunks_path` 属性 / `pipeline.resolve_chunks()` fail-closed /
+`build_generation.py` 落盘块正文 / `release.verify_generation` 增查 / `server` 改用同一定位。
+
+#### 7.2 缺陷 B：图扩展把外块偏移登记到当前块
+
+`retrieve.build_context()` 原写 `target = (ensure(host_id) if host_id else None) or unit`。
+宿主块载入不回来时（缺陷 A 造成的缺 17 块），`or unit` 把该断言的偏移登记到**当前
+图扩展命中的那个单元**上。
+
+实测断言 `a-6b8d3ac8bf188882`：属 `…#001`（新增块，缺失）、`start/end=95/114`，
+被登记到 `…#000`（旧块，992 字）→ `text[95:114]` 切出另一句话。
+
+改为「宿主块载入不回来就不登记」。没有正确偏移可用时，唯一诚实的做法是不给出。
+
+### 8. `tokenizer_version` 从 `t1` 变 `t2` 是已知的
+
+`index_build_fp` / `index_content_digest` / `probe_digest` 全变，原因有三层叠加：
+
+1. 块数 13,781 → 13,798（+17）；
+2. **分词器 `t1` → `t2`**：`TOKENIZER_VERSION = "t2"` 是 F 阶段 `ada2ce2`
+   （2026-10-31 15:41）引入的，而已发布世代都是 F 之前建的，索引里记的是 `t1`；
+3. 索引文件字节数 127.2 MB → 106.7 MB（`t2` 生成的词项更少）。
+
+**所以这不是未解释的产物身份漂移**，而是「F 阶段的分词器变更第一次真正进到产物里」。
+
+### 9. 顺带修掉：基线校验把「合法追加」判成篡改
+
+34 条新抽取入库后 `snapshot_baseline.py --verify` FAIL：
+
+```
+缓存目录已变: data/arkrag/cache count 13801->13835 digest a244f0362aa4->78353ab867af
+```
+
+而 `legacy.guard_frozen_artifact()` 的 docstring 明确写着**刻意不拦这个目录**，
+理由是「缓存目录里新记录以新键追加写入是正常运行」。两条规矩打架的结果是：
+**每跑一次合法抽取，这条门就红一次**——它只有在「永不抽取」时才是绿的。
+
+**先证明差异是纯追加**：冻结块 `content_key` 13,786 个、staging 新增 34 个；按记录里的
+`content_key` 给 13,835 个缓存文件分堆，属于新增集合的正好 **34** 个，其余 **13,801** 个
+重算摘要 = `a244f0362aa423dc`，**与基线逐字相同**。
+
+修法：给基线补逐文件清单 `data/releases/legacy-baseline/cache-inventory.json`
+（相对名 / 字节 / SHA-256），校验分两类判：冻结过的被改/被删 → 红；多出新文件 → 只报数量。
+
+清单不能用来掩盖篡改：`cache_inventory_digest(rows)` 必须逐字等于 Manifest 里的
+`digest`（与 `legacy.dir_digest()` 同算法）。**Manifest 一字未动**——`created_at`、
+artifacts、gates 冻结副本、metrics 全部原样，只多写一个文件。
+
+补清单也不靠猜：Manifest 里那个 `digest` 早就把清单摘要冻结住了，补出来的必须能
+重算回它（实测 13,801 条 → `a244f0362aa423dc`，逐字相同）。
+
+### 10. 顺带修掉：一条用例打在了没人读的文件上
+
+`test_missing_chunk_text_blocks_ready` 截断的是**全局** `data/chunks.jsonl`，
+而缺陷 A 修复后消费者改读世代自带的 `chunks.jsonl` → 它打到了一个没人读的文件上，
+既拦不住真问题，也测不到它想测的东西。
+
+改成打 `resolve_chunks()` 真正返回的文件后，暴露更深的问题：截断会被**身份校验**
+先拦下（`chunk_manifest_hash` 不符，fail-closed），逐块比对那一步**从来没被执行过**，
+却一直跟着用例一起算通过。
+
+拆成三条：①截断被身份校验拦下；②直接调 `server._compute_chunks_cover()` 验证
+「块齐时绿、少一块时点名缺哪块」；③反向验证截断全局文件**不再**影响就绪
+（这是接线真的生效的证据）。
+
+### 11. 回归门
+
+| 命令 | 结果 |
+|---|---|
+| `py -3 -m pytest tests -q` | **1288 passed, 1 skipped** in 1073.80s（1289 collected），EXIT=0 |
+| `py -3 scripts/snapshot_baseline.py --verify` | **PASS 产物 11 项全部一致**，附「新增 34 条缓存记录（正常追加，不计入失败）」，EXIT=0 |
+| `py -3 scripts/k1_checks.py` | **九项全 PASS**，可服务世代 8 个，回滚演练 `06a741 → e0aacc` 成功，EXIT=0 |
+| `py -3 scripts/ask.py --evaluate --limit 320`（`06a741`） | 见 §6，引用硬失败 **0**，EXIT=0 |
+| `py -3 scripts/ask.py --evaluate --limit 320`（`4eafae` 复测） | 与 I/J 阶段逐位相同，**证明修复没改变旧世代行为** |
+
+### 12. 新增与改动文件
+
+| 文件 | 变化 |
+|---|---|
+| `src/arkrag/pipeline.py` | +`ChunksUnavailable` / +`resolve_chunks()` / `load_generation()` 改调它 |
+| `src/arkrag/release.py` | +`Generation.chunks_path` / `verify_generation()` 增查块正文身份 |
+| `src/arkrag/retrieve.py` | `build_context()` 删掉 `or unit` 回退 |
+| `src/arkrag/server.py` | `_compute_chunks_cover()` / `_CoverCache.key()` 改用 `resolve_chunks()` |
+| `scripts/build_generation.py` | 块正文随世代落盘 / `build_probes()` 补 `name_terms` |
+| `scripts/snapshot_baseline.py` | 缓存目录改按逐文件清单比对 |
+| `data/releases/legacy-baseline/cache-inventory.json` | 新增（13,801 条 / 1,945,066 B） |
+| `tests/test_chunk_snapshot.py` | 新增 14 用例 |
+| `tests/test_baseline_cache_inventory.py` | 新增 14 用例 |
+| `tests/test_server.py` | 58 → 63 用例（拆一条 + 补两条） |
+
+卫生门 `tests/test_suite_hygiene.py` 的 `N`：1251 → 1269 → 1287 → **1289**。
+
+### 13. 复现命令
+
+```bash
+# 1. L1 / L2 跑进 staging（不碰冻结产物）
+$env:ARKRAG_ARTIFACT_DIR="data/arkrag/staging/k2"
+py -3 scripts/run_l1.py
+py -3 scripts/run_l2.py
+py -3 scripts/run_l3_agent.py --status          # 期望 13764/13803
+py -3 scripts/run_l3_agent.py --plan --label K2 --batch-size 4
+# ... 抽取产出 data/arkrag/agent_outbox/K2.part*.jsonl ...
+py -3 scripts/run_l3_agent.py --ingest --label K2
+# 2. 建候选（不发布）
+py -3 scripts/build_generation.py --graph-model identity --no-publish
+# 3. 验收
+py -3 scripts/release_cli.py verify <gid>
+py -3 scripts/ask.py --evaluate --gold-set data/goldset/gold-v1.json --limit 320 --generation <gid>
+py -3 scripts/snapshot_baseline.py --verify
+```
+
+### 14. 遗留
+
+见台账「K2 阶段」§11，五条：召回差异未做显著性检验 / `_compute_chunks_cover` 冷启动
+约 6 秒 / 块正文每代多占 68.9 MiB 且旧世代仍借全局文件 / `fa22ae` 与 `27be38` 留盘待
+K4 决定去留 / 「自己分词时要记得传 `name_terms`」这条只修了 `build_probes()`。

@@ -47,7 +47,67 @@ def _read_jsonl(path: Path) -> list[dict]:
     return out
 
 
-# ---------------------------------------------------------------- 载入世代
+# ---------------------------------------------------------------- 块正文来源
+class ChunksUnavailable(RuntimeError):
+    """块正文找不到、或找到的那份证明不了是这一代吃进去的那批。
+
+    为什么必须是异常而不是返回 None：块正文是**引用校验的判据**。
+    拿错块不会报错——`text[start:end] != evidence` 只会让引用被静默剔除、
+    置信度降低，表现为「答得短」。这种形态没人会去查，必须在这里拒。
+    """
+
+
+def resolve_chunks(gen, manifest: dict) -> Path:
+    """决定这一代该从哪个文件读块正文，并**证明**那份文件就是它那一批。
+
+    两代形态：
+
+    1. 世代自带 `<gen>/chunks.jsonl`（K2 起的新形态）。直接用它，但仍要核
+       `chunk_manifest_hash`——文件在盘上不等于内容对。
+    2. 旧世代没有自带块文件。此时**不许默认"全局块文件就是它的"**：全局
+       `data/arkrag/chunks.jsonl` 是 L1 的最新产物，下一次 L2 重建就会覆盖它，
+       而世代不会跟着变。只有当它的 T1 子集能复现本代 `chunk_manifest_hash`
+       时才允许借用——那不是猜测，是同一批块的证明。
+
+    两种情况都证明不了就抛 `ChunksUnavailable`，由调用方决定怎么呈现。
+    """
+    want = str(manifest.get("chunk_manifest_hash") or "")
+
+    def t1_of(records: list[dict]) -> list[dict]:
+        return [r for r in records if config.in_t1(str(r.get("category") or ""))]
+
+    own = gen.chunks_path
+    if own.exists():
+        records = t1_of(_read_jsonl(own))
+        if want:
+            got = release.chunk_manifest_hash(records)
+            if got != want:
+                raise ChunksUnavailable(
+                    f"世代自带块正文与 Manifest 不符："
+                    f"chunk_manifest_hash Manifest={want[:16]} 实际={got[:16]}"
+                    f"（{own}，{len(records)} 块）"
+                )
+        if not records:
+            raise ChunksUnavailable(f"世代自带块正文是空的：{own}")
+        return own
+
+    # ---- 旧世代：只有能证明是同一批块时才借全局文件
+    shared = Path(config.chunks_path())
+    if not shared.exists():
+        raise ChunksUnavailable(f"找不到块文件 {shared}（引用校验需要块正文）")
+    records = t1_of(_read_jsonl(shared))
+    if want:
+        got = release.chunk_manifest_hash(records)
+        if got != want:
+            raise ChunksUnavailable(
+                f"这一代的块正文不在 {shared} 里："
+                f"chunk_manifest_hash Manifest={want[:16]} 该文件实测={got[:16]}"
+                f"（差 {len(records)} 块的那批）。拒绝用错块做引用校验——"
+                "请给这一代补上自带的 chunks.jsonl，或从中断点重建。"
+            )
+    return shared
+
+
 def load_generation(generation_id: str) -> dict:
     """读出评测/回答需要的全部产物。缺任何一件都抛 `SystemExit(2)`。
 
@@ -79,10 +139,11 @@ def load_generation(generation_id: str) -> dict:
     assertions = _read_jsonl(gen.assertion_path)
     idx, idx_meta = index_mod.load_index(gen.index_path)
 
+    try:
+        chunks_path = resolve_chunks(gen, manifest)
+    except ChunksUnavailable as exc:
+        raise SystemExit(f"[2] {exc}") from exc
     chunks: dict[str, dict] = {}
-    chunks_path = config.chunks_path()
-    if not chunks_path.exists():
-        raise SystemExit(f"[2] 找不到块文件 {chunks_path}（引用校验需要块正文）")
     for rec in _read_jsonl(chunks_path):
         cid = str(rec.get("chunk_id") or "")
         if cid:

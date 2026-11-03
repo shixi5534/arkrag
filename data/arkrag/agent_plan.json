@@ -4037,5 +4037,66 @@
         "outbox": "data/arkrag/agent_outbox/S68.part09.jsonl"
       }
     ]
+  },
+  "K2": {
+    "label": "K2",
+    "cached_before": 13764,
+    "pending": 34,
+    "batches": [
+      {
+        "tag": "K2.part00",
+        "blocks": 4,
+        "inbox": "data/arkrag/agent_inbox/K2.part00.jsonl",
+        "outbox": "data/arkrag/agent_outbox/K2.part00.jsonl"
+      },
+      {
+        "tag": "K2.part01",
+        "blocks": 4,
+        "inbox": "data/arkrag/agent_inbox/K2.part01.jsonl",
+        "outbox": "data/arkrag/agent_outbox/K2.part01.jsonl"
+      },
+      {
+        "tag": "K2.part02",
+        "blocks": 4,
+        "inbox": "data/arkrag/agent_inbox/K2.part02.jsonl",
+        "outbox": "data/arkrag/agent_outbox/K2.part02.jsonl"
+      },
+      {
+        "tag": "K2.part03",
+        "blocks": 4,
+        "inbox": "data/arkrag/agent_inbox/K2.part03.jsonl",
+        "outbox": "data/arkrag/agent_outbox/K2.part03.jsonl"
+      },
+      {
+        "tag": "K2.part04",
+        "blocks": 4,
+        "inbox": "data/arkrag/agent_inbox/K2.part04.jsonl",
+        "outbox": "data/arkrag/agent_outbox/K2.part04.jsonl"
+      },
+      {
+        "tag": "K2.part05",
+        "blocks": 4,
+        "inbox": "data/arkrag/agent_inbox/K2.part05.jsonl",
+        "outbox": "data/arkrag/agent_outbox/K2.part05.jsonl"
+      },
+      {
+        "tag": "K2.part06",
+        "blocks": 4,
+        "inbox": "data/arkrag/agent_inbox/K2.part06.jsonl",
+        "outbox": "data/arkrag/agent_outbox/K2.part06.jsonl"
+      },
+      {
+        "tag": "K2.part07",
+        "blocks": 4,
+        "inbox": "data/arkrag/agent_inbox/K2.part07.jsonl",
+        "outbox": "data/arkrag/agent_outbox/K2.part07.jsonl"
+      },
+      {
+        "tag": "K2.part08",
+        "blocks": 2,
+        "inbox": "data/arkrag/agent_inbox/K2.part08.jsonl",
+        "outbox": "data/arkrag/agent_outbox/K2.part08.jsonl"
+      }
+    ]
   }
 }
