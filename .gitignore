@@ -21,6 +21,12 @@ data/arkrag/agent_outbox/
 data/arkrag/generations/*/graph/
 data/arkrag/generations/*/index/
 
+# FTS5 检索库：单个 212 MB，可由 generations/*/index/lexical.json 重算
+# （scripts/build_fts_index.py，36 秒）。与 data/arkrag/index/ 同理不入库。
+# 注意：它刻意放在世代目录之外（见 docs/h3-FTS5迁移.md §2.4），
+# 因此不受上面两条 generations 规则覆盖，需要单独一行。
+data/arkrag/fts/
+
 # 运行日志：机器相关、每次不同，由 runs/<run_id>/ 现场生成。
 data/arkrag/runs/*/events.jsonl
 

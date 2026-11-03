@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import json
 import threading
+from collections import deque
 from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
 
 from . import atomic, cache, config, contracts, llm, prompt
@@ -197,7 +198,7 @@ def run_shard(
     contract_rejects: dict[str, int] = {}
     layers = {"current": 0, "legacy": 0}
 
-    pending = list(chunks)
+    pending = deque(chunks)
     inflight: dict = {}
     stopped = False
 
@@ -231,7 +232,10 @@ def run_shard(
         while pending or inflight:
             # 只在还没熔断时补充新任务
             while not stopped and pending and len(inflight) < window:
-                c = pending.pop(0)
+                # `deque.popleft()` 是 O(1)；原先是 `list.pop(0)`，每次搬动整个
+                # 剩余队列。13,781 块时累计约 9,500 万次元素搬移，且全部发生在
+                # 持锁的判断之间——不是主要瓶颈，但是没有理由留着。
+                c = pending.popleft()
                 fut = pool.submit(
                     extract_chunk,
                     client,

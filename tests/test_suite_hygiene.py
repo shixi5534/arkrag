@@ -205,7 +205,24 @@ class TestSuiteSizeIsMonotonic:
     少掉一个门要有人签字，不能让"少跑了几个测试"静默发生。
     """
 
-    N = 936
+    # 936 -> 948（H1）：新增 tests/test_ask_generation_selection.py 的 8 个用例，
+    # 且该文件进入 `TEST_FILES` 后自身让三个 parametrize 各多一项，故 +12。
+    # 这次上调不是"为了让门变绿"：上调换来的是一条能变红的用例
+    # （默认世代曾静默取最旧的那个），见该文件的 docstring。
+    #
+    # 948 -> 1019（H2）：新增 tests/test_query_context.py（23 个）与
+    # tests/test_index_norm_table.py（40 个），两个文件进入 `TEST_FILES` 后
+    # 又让三个 parametrize 各多两项（+6），另加 2 个显式登记的用例。
+    # 这里换来的门同样是能变红的：一个是"复用预建结构与就地重建逐位相同"，
+    # 一个是"预建归一化表与旧实现分数逐位相同"——两者都是纯优化改动，
+    # 唯一能证明没改坏排序的证据就是这类等价性断言。
+    # 1019 -> 1056（H3）：新增 tests/test_search_backend.py（9 个）与
+    # tests/test_fts_backend.py（20 个），合计 29 个用例；两个文件进入
+    # `TEST_FILES` 后又让四个 parametrize（本文件 61/130/150/184 行）各多两项（+8）。
+    # 1019 + 29 + 8 = 1056，与 `--collect-only` 实测一致。
+    # 这里换来的门：FTS 后端与 JSON 后端 top-20 逐位相同、SQLite 库结构完备、
+    # 建库只从已发布 lexical.json 翻译而不重新分词（否则两份索引会静默不同）。
+    N = 1056
 
     def test_declared_count_matches_actual(self) -> None:
         """用 pytest 自己数一遍当前收集到的用例数，与本文件登记值比对。"""

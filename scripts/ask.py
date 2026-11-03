@@ -32,6 +32,7 @@ import argparse
 import json
 import random
 import sys
+import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -126,20 +127,39 @@ def build_pipeline(loaded: dict, *, top_k: int, graph_depth: int) -> dict:
         loaded["adjacency"],
         chunks=loaded["chunks"],
         assertions=loaded["assertions"],
+        vocab=vocab,
     )
     answerer = answer_mod.ExtractiveAnswerer()
     return {"retriever": retriever, "answerer": answerer, "top_k": top_k,
             "graph_depth": graph_depth}
 
 
-def ask_once(pipeline: dict, question: str) -> dict:
-    """一问一答的完整链路。返回答案 + 每一层的中间量（供排查与评测）。"""
+def ask_once(pipeline: dict, question: str, *, timings: dict | None = None) -> dict:
+    """一问一答的完整链路。返回答案 + 每一层的中间量（供排查与评测）。
+
+    `timings` 传入一个 dict 时，逐阶段毫秒数写进它（H1 性能基线要用）。
+    默认 `None` → 不测时间，返回结构与原来完全一致：**计时是可选旁路，
+    不是返回值的一部分**，否则每个读 `result["search"]` 的调用方都得改。
+    """
     retriever = pipeline["retriever"]
     entities = pipeline.get("entities") or retriever.graph.get("entities") or []
+    _t0 = time.perf_counter()
     qa = query_mod.analyze_query(
-        question, entities=entities, aliases=retriever.graph.get("alias_index"), vocab=vocab
+        question,
+        entities=entities,
+        aliases=retriever.graph.get("alias_index"),
+        vocab=vocab,
+        # 复用 `Retriever` 建好的只读结构。**这一行是 H2 的主要提速点**
+        # （每问省约 98 ms 的图级重建，见 `query.QueryContext` 的实测表）。
+        # 必须传 `retriever.query_context` 而不是自己造：那样又变回每问重建。
+        context=getattr(retriever, "query_context", None),
     )
+    if timings is not None:
+        timings["query_ms"] = (time.perf_counter() - _t0) * 1000.0
     if not qa.get("should_answer", True):
+        if timings is not None:
+            timings["total_ms"] = (time.perf_counter() - _t0) * 1000.0
+            timings["abstained_by_query"] = 1
         return {
             "query_analysis": qa,
             "search": {"hits": [], "stats": {"skipped_reason": qa.get("reason")}},
@@ -153,6 +173,9 @@ def ask_once(pipeline: dict, question: str) -> dict:
         }
 
     found = retriever.search(qa, top_k=pipeline["top_k"])
+    if timings is not None:
+        timings["search_ms"] = (time.perf_counter() - _t0) * 1000.0 - timings["query_ms"]
+    _t1 = time.perf_counter()
     seed_ids = [c["entity_id"] for c in qa.get("entity_candidates") or []]
     expanded = retriever.expand(
         seed_ids,
@@ -160,7 +183,15 @@ def ask_once(pipeline: dict, question: str) -> dict:
         query_analysis=qa,
         seed_chunk_ids=[h["chunk_id"] for h in found["hits"]],
     )
+    if timings is not None:
+        timings["expand_ms"] = (time.perf_counter() - _t1) * 1000.0
+        timings["expand_nodes"] = int(expanded["stats"].get("nodes_visited") or 0)
+        timings["expand_edges"] = int(expanded["stats"].get("expansions") or 0)
+    _t2 = time.perf_counter()
     context = retriever.build_context(found["hits"], expanded["expansions"], query_analysis=qa)
+    if timings is not None:
+        timings["context_ms"] = (time.perf_counter() - _t2) * 1000.0
+    _t3 = time.perf_counter()
     ans = pipeline["answerer"].answer(
         question,
         context,
@@ -169,6 +200,12 @@ def ask_once(pipeline: dict, question: str) -> dict:
         query_analysis=qa,
         retrieval_stats=found["stats"],
     )
+    if timings is not None:
+        timings["answer_ms"] = (time.perf_counter() - _t3) * 1000.0
+        timings["total_ms"] = (time.perf_counter() - _t0) * 1000.0
+        timings["context_tokens"] = int(context["stats"].get("tokens_used") or 0)
+        timings["context_units"] = int(context["stats"].get("units") or 0)
+        timings["candidates"] = int(found["stats"].get("candidates") or 0)
     return {
         "query_analysis": qa,
         "search": found,
@@ -472,12 +509,42 @@ def evaluate(gold_path: Path, *, limit: int, generation_id: str = "") -> dict:
 
 
 def _latest_identity_generation() -> str:
-    """没指定 `--generation` 时取最近一个 ark-rag-3 世代。"""
+    """没指定 `--generation` 时取**最新**一个 ark-rag-3 世代。
+
+    原实现写成 `for info in release.list_generations(): ... return`——只要遇到第一个
+    ark-rag-3 就返回了。而 `list_generations()` 按目录名升序遍历，目录名以
+    `g-<时间戳>-<hash>` 开头，升序即**最旧在前**。于是"取最新"实际取到的是最旧那个。
+
+    这个缺陷当时看不出后果：磁盘上三个 ark-rag-3 世代内容完全一致
+    （`index_content_digest` / `probe_digest` / `graph_build_fp` / `chunk_manifest_hash`
+    全部相同，见 `docs/h阶段实测.md`），跑谁的数字都一样。**但只要出现第四个内容不同的
+    世代，`--evaluate` 不带 `--generation` 就会静默评测一个旧世代**，报告照常打印七个
+    指标、看不出任何异常——与台账里 `--limit` 只测一类、`focus_tier` 被当过滤属同一族。
+
+    修法：按 `created_at` 取最大者，缺失时退回 `generation_id` 字典序
+    （该 id 形如 `g-<UTC 时间戳>-<hash>`，字典序即时间序）。两种键用同一个 `max`。
+
+    另修一处同源隐患：原实现对 `list_generations()` 返回的每一项直接 `.load()`，
+    而该函数会把「无 Manifest」「Manifest 损坏」的目录也列出来，此时 `.load()`
+    抛 `FileNotFoundError`——一个缺 Manifest 的残留目录能让整个默认路径报错退出。
+    这里先看 `list_generations()` 已给的 status，缺 Manifest 的直接跳过。
+    """
+    candidates: list[tuple[str, str]] = []
     for info in release.list_generations():
-        manifest = release.Generation(info["generation_id"]).load()
-        if str(manifest.get("graph_schema") or "") == config.GRAPH_SCHEMA_IDENTITY:
-            return str(info["generation_id"])
-    raise SystemExit("[2] 找不到任何 ark-rag-3 世代，请用 --generation 指定")
+        gid = str(info.get("generation_id") or "")
+        status = str(info.get("status") or "")
+        if not gid or status.startswith("(无 Manifest") or status.startswith("(Manifest 损坏"):
+            continue
+        manifest = release.Generation(gid).load()
+        if str(manifest.get("graph_schema") or "") != config.GRAPH_SCHEMA_IDENTITY:
+            continue
+        created = str(info.get("created_at") or manifest.get("created_at") or "")
+        candidates.append((created, gid))
+    if not candidates:
+        raise SystemExit("[2] 找不到任何 ark-rag-3 世代，请用 --generation 指定")
+    # 先按 created_at 排；为空者用 gid 顶替，两种键都单调于创建时间
+    candidates.sort(key=lambda row: (row[0] or row[1], row[1]))
+    return candidates[-1][1]
 
 
 def print_evaluation(report: dict) -> None:

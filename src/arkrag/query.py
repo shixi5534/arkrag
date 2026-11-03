@@ -270,6 +270,53 @@ def _drop_stopwords(
     return kept, dropped, blocked
 
 
+class QueryContext:
+    """问句解析的**只读预构建部分**：它只依赖图，与问句无关，因此可以跨问句复用。
+
+    ## 为什么需要它（H2 实测，不是猜测）
+
+    这三个结构原先在 `analyze_query` 里**每个问句重建一次**：
+
+    | 结构 | 每问耗时 | 320 题合计 |
+    |---|---|---|
+    | `_alias_owner_map`（遍历 6,582 实体 / 8,254 文本） | 48.2 ms | 15,423.6 ms |
+    | `NameTable`（构建 8,177 项 trie） | 49.8 ms | 15,925.2 ms |
+    | `_relation_lookup` | 0.1 ms | 34.8 ms |
+
+    全量 `analyze_query` 每 320 题 29,523.8 ms，其中 **96% 花在反复重建这三样**。
+    它们在同一个世代内是不变的——实体表和词表都由 Manifest 锁定，世代一换就是
+    另一个进程。所以"每问重建"没有任何一处是为了正确性。
+
+    H1 基线里 query 阶段热查 P95 = 161.5 ms，与 search 的 251.4 ms 同一量级；
+    这不是"解析问句慢"，是**每问把整张图重读一遍**。
+
+    ## 为什么不做成模块级全局缓存
+
+    `functools.lru_cache` 需要可哈希的 key。把 `entities`（6,582 个 dict）转成
+    内容指纹要遍历一遍，代价与本函数相当，等于没省；用 `id(entities)` 作 key 则
+    会在对象被回收后**命中另一个世代的图**——那是"键相同、内容不同"的静默错配，
+    比慢更坏。
+
+    所以这里只提供**显式构造**：调用方（`Retriever` / `ask.build_pipeline`）在
+    管线建立时建一次，之后每问传同一个实例。生命周期跟着管线走，谁也不会误用
+    到别的世代上。
+    """
+
+    __slots__ = ("claims", "name_table", "rel_table", "dropped_synonyms", "term_count")
+
+    def __init__(self, entities, aliases=None, vocab=None) -> None:
+        self.claims = _alias_owner_map(entities, aliases)
+        table_terms = set(self.claims)
+        self.name_table = index_mod.NameTable(table_terms) if table_terms else None
+        self.rel_table, self.dropped_synonyms = _relation_lookup(
+            vocab if vocab is not None else _EMPTY_VOCAB
+        )
+        self.term_count = len(table_terms)
+
+    def __repr__(self) -> str:  # 便于排查"这问句用的是哪张表"
+        return f"<QueryContext terms={self.term_count} relations={len(self.rel_table)}>"
+
+
 def analyze_query(
     text: str,
     *,
@@ -277,6 +324,7 @@ def analyze_query(
     aliases=None,
     vocab=None,
     max_chars: int = QUERY_MAX_CHARS,
+    context: "QueryContext | None" = None,
 ) -> dict:
     """把问句解析成检索与扩展可直接消费的结构。
 
@@ -294,6 +342,11 @@ def analyze_query(
         对象。缺属性时按空处理，不抛错（便于测试只给最小对象）。
     max_chars
         超长阈值，默认 `QUERY_MAX_CHARS`。
+    context
+        可选的 `QueryContext`。传了就复用它的实体/别名/专名表/关系表，**跳过
+        重建**——这是 H2 的主要提速点（每问省约 98 ms，见 `QueryContext` 的
+        实测表）。不传则按原样就地重建，行为与引入 `QueryContext` 之前逐位相同；
+        保留这条路径是为了让单元测试能只给最小的 `entities` 而不用先造上下文。
 
     返回
     ----
@@ -322,9 +375,20 @@ def analyze_query(
         )
 
     # ---- 实体候选：NameTable 单次扫描（先做，标记检测要拿它的区间做遮挡）----
-    claims = _alias_owner_map(entities, aliases)
-    table_terms = set(claims)
-    name_table = index_mod.NameTable(table_terms) if table_terms else None
+    if context is not None:
+        # 复用调用方预算好的只读结构。注意 `context` 与 `entities`/`aliases` 必须
+        # 来自同一张图：传错世代的 `QueryContext` 只会让候选识别用旧名字，报错
+        # 是不可能的（名字照样能匹配上），所以调用方要保证成对使用。
+        claims = context.claims
+        term_count = context.term_count
+        name_table = context.name_table
+        rel_table = context.rel_table
+        dropped_synonyms = context.dropped_synonyms
+    else:
+        claims = _alias_owner_map(entities, aliases)
+        term_count = len(claims)
+        name_table = index_mod.NameTable(set(claims)) if claims else None
+        rel_table, dropped_synonyms = _relation_lookup(vocab)
     spans = name_table.spans_in_chunk(normalized) if name_table else []
     entity_spans = [(s, e) for s, e in spans]
 
@@ -374,7 +438,6 @@ def analyze_query(
     )
 
     # ---- 关系提示 --------------------------------------------------------
-    rel_table, dropped_synonyms = _relation_lookup(vocab)
     relation_hits, relation_skipped = _find_terms(normalized, rel_table, blocked=entity_spans)
 
     # ---- 停用词：带守卫地删 ----------------------------------------------
@@ -416,7 +479,7 @@ def analyze_query(
             "relation_hint_count": len(relation_hits),
             "time_marker_count": len(time_hits),
             "negation_marker_count": len(negation_hits),
-            "name_table_terms": len(table_terms),
+            "name_table_terms": term_count,
             "query_chars": len(normalized),
         },
     }
@@ -465,5 +528,6 @@ __all__ = [
     "DEFAULT_NEGATION_MARKERS",
     "DEFAULT_TIME_MARKERS",
     "DEFAULT_GRAPH_CUES",
+    "QueryContext",
     "analyze_query",
 ]

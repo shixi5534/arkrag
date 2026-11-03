@@ -54,6 +54,7 @@ from collections import defaultdict
 
 from . import adjacency as adjacency_mod
 from . import index as index_mod
+from . import query as query_mod
 
 # 默认预算。每个数字都写在这里，调用方可逐个覆盖；没有任何一个藏在下游函数里。
 DEFAULT_BUDGET: dict = {
@@ -134,6 +135,8 @@ class Retriever:
         chunks=None,
         assertions=None,
         budget: dict | None = None,
+        query_context=None,
+        vocab=None,
     ) -> None:
         self.index = index
         self.graph = graph or {}
@@ -145,6 +148,21 @@ class Retriever:
         self.entities_by_name: dict[str, dict] = {}
         self.alias_index: dict[str, str] = {}
         self._build_entity_tables()
+
+        # 问句解析的只读预构建结构（`query.QueryContext`）。这里**惰性构造**：
+        # 不传就用本图的 entities + 默认词表建一份，之后每问复用。
+        #
+        # 为什么放在 Retriever 上而不是 query 模块里做全局缓存：这些结构必须与
+        # 本实例的 `graph` 成对，`Retriever` 已经绑定了那张图，生命周期天然对齐。
+        # 见 `query.QueryContext` 的实测表（每问省约 98 ms）。
+        if query_context is not None:
+            self.query_context = query_context
+        else:
+            self.query_context = query_mod.QueryContext(
+                self.graph.get("entities") or [],
+                self.graph.get("alias_index"),
+                vocab,
+            )
 
         self.edges_by_id: dict[str, dict] = {}
         for edge in self.graph.get("edges") or []:

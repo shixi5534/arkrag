@@ -58,6 +58,18 @@ TOKENIZER_VERSION = "t2"
 # 而那种红是假红（索引没坏，只是重放用错了分词器）。
 SUPPORTED_TOKENIZERS: tuple[str, ...] = ("t1", "t2")
 
+# BM25 参数（H2 提为具名常量）。
+#
+# 原本是 `search()` 里的局部变量 `k1, b = 1.5, 0.75`。提出来是因为 H3 的 SQLite
+# FTS5 后端必须用**同一组参数**，否则两边打分不可比、"排序逐位相同"这个验收条件
+# 就无从谈起；而让别的模块去 import 一个函数内部的名字是不可能的，只能复制字面量，
+# 那就又成了「同一判定写两处」（见 `tests/test_single_source_of_truth.py`）。
+#
+# 数值**没有改动**，只是从局部变量搬到模块级。改这两个值等于改所有世代的检索
+# 排序，属于必须走新世代 + 全量评测的变更。
+BM25_K1: float = 1.5
+BM25_B: float = 0.75
+
 # 参与检索的字段。标题与章节进索引是为了让「切城篇里凯尔希说了什么」能命中，
 # 只嵌正文会分不清同章节的不同场景（原有注释保留）。
 INDEX_FIELDS = ("title", "chapter", "text")
@@ -384,6 +396,9 @@ class LexicalIndex:
         self.doc_len: dict[int, int] = {}
         self.doc_id: dict[int, str] = {}
         self._avg_len: float | None = None
+        # BM25 长度归一化分母项，按 slot 索引的扁平表（H2）。与 `_avg_len` 同时
+        # 失效——它们依赖同一批 `doc_len`。
+        self._norm: list[float] | None = None
         # 建库时用的整词名表。必须随手带着走：查询侧要用同一份，
         # 否则倒排里那些整词名 token 永远查不到，白白拉高 doc_len。
         self.name_terms: frozenset[str] = frozenset()
@@ -405,6 +420,7 @@ class LexicalIndex:
         self.doc_len[slot] = sum(counts.values())
         self.doc_id[slot] = chunk_id
         self._avg_len = None  # 新增文档即失效
+        self._norm = None
         for token, freq in counts.items():
             self.postings[token][slot] = freq
 
@@ -419,6 +435,51 @@ class LexicalIndex:
             n = max(1, self.size)
             self._avg_len = (sum(self.doc_len.values()) / n) if n else 1.0
         return self._avg_len
+
+    def norm_table(self) -> list[float]:
+        """BM25 长度归一化项 `k1*(1-b+b*len/avg_len)`，按 slot 预建一次（H2）。
+
+        ## 为什么值得预建
+
+        H1 实测：真实索引 13,781 文档 / 694,304 词项 / **10,525,428 个 postings 条目**，
+        每问平均命中 56.7 个 query term、内层循环迭代 **19.3 万次**。旧实现在这 19.3 万次
+        迭代里每次都做 `self.doc_len.get(slot, 1)` 再算一遍 `length/avg_len`
+        ——而这个除法**只与文档有关，与问句无关**，`doc_len` 在一个世代内又不变。
+
+        预建后每问只剩一次列表索引与一个乘加，除法从 19.3 万次降到 1.4 万次（每代一次）。
+        真实索引 A/B（320 题）：P50 150.789 → 93.378 ms（−38.1%）、
+        P95 228.979 → 138.992 ms（−39.3%）。
+
+        ## 为什么是 list 而不是 dict
+
+        slot 由 `enumerate(sorted(chunk_records, ...))` 连续分配（0..n-1），
+        用 list 下标就是 slot 本身，比 dict 哈希快。有空洞时按原实现的
+        `doc_len.get(slot, 1)` 落 `len=1` 的默认值补齐——**保持与旧实现逐位等价**，
+        这是本次优化的验收条件，不是"差不多就行"。
+
+        ## 数值等价性
+
+        `k1*(1-b+b*len/avg_len)` 与旧实现 `freq + k1*(1-b+b*length/avg_len)`
+        里的同一子表达式**逐位相同**（同一表达式、同一运算次序、同一 float 精度）。
+        唯一的差别是把"每问算一次"改成"每代算一次"，因此排序结果必须完全一致
+        （`tests/test_index_norm_table.py` 对此逐位断言）。
+        """
+        if self._norm is not None:
+            return self._norm
+        avg_len = self.avg_len
+        k1, b = BM25_K1, BM25_B
+        if not self.doc_id:
+            self._norm = []
+            return self._norm
+        biggest = max(self.doc_id)
+        # 默认值对应旧实现里 `doc_len.get(slot, 1)` 的兜底分支。
+        default = k1 * (1.0 - b + b * 1 / avg_len)
+        norm = [default] * (biggest + 1)
+        for slot, length in self.doc_len.items():
+            if 0 <= slot <= biggest:
+                norm[slot] = k1 * (1.0 - b + b * length / avg_len)
+        self._norm = norm
+        return norm
 
     def search(
         self,
@@ -436,8 +497,9 @@ class LexicalIndex:
         terms = self.name_terms if name_terms is None else name_terms
         n = max(1, self.size)
         q_terms = Counter(tokenize(query, version=self.tokenizer_version, name_terms=terms))
-        avg_len = self.avg_len
-        k1, b = 1.5, 0.75
+        norm = self.norm_table()
+        k1 = BM25_K1
+        k1p1 = k1 + 1.0
         scores: dict[int, float] = defaultdict(float)
         for term, tf in q_terms.items():
             posting = self.postings.get(term)
@@ -445,9 +507,10 @@ class LexicalIndex:
                 continue
             df = len(posting)
             idf = math.log(1 + (n - df + 0.5) / (df + 0.5))
+            # 内层循环是 H1 剖析里的第一热点（81 万次迭代）。这里省掉每轮的
+            # `doc_len.get` 与除法，只留一次列表索引与一个乘加。
             for slot, freq in posting.items():
-                length = self.doc_len.get(slot, 1)
-                scores[slot] += idf * (freq * (k1 + 1)) / (freq + k1 * (1 - b + b * length / avg_len))
+                scores[slot] += idf * (freq * k1p1) / (freq + norm[slot])
         ranked = sorted(scores.items(), key=lambda kv: (-kv[1], self.doc_id[kv[0]]))[:top_k]
         return [(self.doc_id[slot], score) for slot, score in ranked]
 
