@@ -271,6 +271,10 @@ def sanitize_text(text: Any, *, settings: Settings | None = None) -> str:
 def _error_payload(exc: ApiError, *, settings: Settings | None = None) -> dict:
     body = {"error": {"code": exc.code, "message": sanitize_text(exc.message, settings=settings)}}
     for key, value in exc.extra.items():
+        # 下划线开头的键是服务端内部用的处置指令（如 `_drain` 表示请求体读没读完），
+        # 不该出现在对外响应里——调用方看到一个 `_drain` 字段只会困惑。
+        if key.startswith("_"):
+            continue
         body["error"][key] = value
     return body
 
@@ -782,7 +786,38 @@ def _fit_payload(payload: dict, limit_bytes: int) -> tuple[dict, list[str]]:
 
 
 class _BodyReader:
-    """按上限读请求体。超限立刻 413，**不读到内存里再判断**。"""
+    """按上限读请求体。超限立刻 413，**不读到内存里再判断**。
+
+    ## 为什么超限时还要把请求体读掉
+
+    只回 413 然后就关连接，在 Windows 上会让客户端收到 `ConnectionAbortedError:
+    [WinError 10053]`，而不是那条 413——因为接收缓冲区里还有未读字节，`close()`
+    发的是 RST 而不是 FIN，客户端的内核会把已到达的响应一起丢掉。
+
+    实测形态：`test_oversized_body_is_refused_before_reading` 单跑通过、全量跑
+    偶发失败，报的正是 10053。单跑通过是因为那时客户端早把几百字节发完、
+    数据已在缓冲区里被读走；全量跑时机不同就露出来。这种"只在测试里偶发"的
+    失败最容易被当成 flaky 忽略掉，但线上同一个路径会把 413 变成连接重置，
+    调用方看到的是"服务挂了"而不是"你的请求太大了"。
+
+    所以超限时**先读掉**至多 `DRAIN_CAP` 字节（丢弃，不进内存累积），再抛 413。
+    上限存在的原因是不能被一个声明了 10 GB 的请求拖住；超过就不读了，
+    此时连接确实会被重置——但那已经是明确的滥用流量，不是正常客户端。
+    """
+
+    DRAIN_CAP = 1024 * 1024
+
+    @staticmethod
+    def _drain(handler: BaseHTTPRequestHandler, remaining: int) -> int:
+        """读掉至多 `remaining` 字节并丢弃，返回实际读掉的字节数。"""
+        dropped = 0
+        while remaining > 0:
+            piece = handler.rfile.read(min(remaining, 65536))
+            if not piece:
+                break
+            dropped += len(piece)
+            remaining -= len(piece)
+        return dropped
 
     @staticmethod
     def read(handler: BaseHTTPRequestHandler, settings: Settings) -> bytes:
@@ -796,9 +831,17 @@ class _BodyReader:
         if length < 0:
             raise ApiError(400, "bad_content_length", "Content-Length 为负")
         if length > settings.max_body_bytes:
+            can_drain = length <= _BodyReader.DRAIN_CAP
+            if can_drain:
+                _BodyReader._drain(handler, length)
             raise ApiError(
-                413, "payload_too_large",
-                f"请求体 {length} 字节超过上限 {settings.max_body_bytes}",
+                413,
+                "payload_too_large",
+                "请求体 %d 字节超过上限 %d" % (length, settings.max_body_bytes),
+                # 声明了但没读掉的请求体，连接不能复用。
+                # 键名以 `_` 开头：这是给 `_fail()` 看的处置指令，
+                # `_error_payload()` 会把它从对外响应里剔掉。
+                _drain=("done" if can_drain else "skipped_too_large"),
             )
         chunks: list[bytes] = []
         remaining = length
@@ -812,7 +855,12 @@ class _BodyReader:
 
 
 def _json_body(handler: BaseHTTPRequestHandler, settings: Settings) -> dict:
-    raw = _BodyReader.read(handler, settings)
+    # 优先用 `_route_post()` 提前读好的字节：请求体必须在任何拒绝分支之前就读掉，
+    # 否则 401/503/404/429 这些"还没轮到解析请求体"的响应会留下未读字节，
+    # 连接被 RST，客户端看到的是连接重置而不是那个错误码。
+    raw = getattr(handler, "_raw_body", None)
+    if raw is None:
+        raw = _BodyReader.read(handler, settings)
     if not raw:
         return {}
     try:
@@ -887,6 +935,11 @@ class Handler(BaseHTTPRequestHandler):
         headers = {}
         if exc.status == 429 and "retry_after_s" in exc.extra:
             headers["Retry-After"] = str(max(1, int(float(exc.extra["retry_after_s"]) + 0.999)))
+        if exc.extra.get("_drain") == "skipped_too_large":
+            # 请求体没读完，这条连接不能复用：让客户端知道要重开，
+            # 否则下一个请求会读到上一条请求残留的字节。
+            headers["Connection"] = "close"
+            self.close_connection = True
         self._send(exc.status, _error_payload(exc, settings=self.state.settings), extra_headers=headers)
 
     def _guard(self, fn: Callable[[], None]) -> None:
@@ -964,6 +1017,17 @@ class Handler(BaseHTTPRequestHandler):
     def _route_post(self) -> None:
         parsed = urlparse(self.path)
         path = parsed.path
+        # 请求体必须在**任何**拒绝分支之前读掉。
+        #
+        # 实测踩到的形态：`_require_admin()` 在 `_json_body()` 之前跑，所以没配口令时
+        # 直接 503、请求体一字未读，连接被 RST，客户端看到的是
+        # `ConnectionAbortedError: [WinError 10053]` 而不是那条 503。
+        # 单跑那条测试能过、全量跑偶发失败——因为是否存在未读字节取决于时序。
+        #
+        # 这既不是 413 也不是 401 的个性问题，而是所有"还没到解析请求体就拒绝"的
+        # 错误路径的共性问题。放在路由入口统一读一次，就不用逐个拒绝点记得做这件事。
+        # 读失败（413/400）时异常直接抛给 `_guard`，`_json_body()` 不会再读第二次。
+        self._raw_body = _BodyReader.read(self, self.state.settings)
         self.state.check_rate(self._client())
         if path == "/query":
             return self._query()

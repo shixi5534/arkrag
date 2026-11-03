@@ -25,12 +25,14 @@
 from __future__ import annotations
 
 import argparse
+import http.client
 import importlib.util
 import json
 import os
 import threading
 import time
 import urllib.error
+import urllib.parse
 import urllib.request
 from pathlib import Path
 
@@ -188,6 +190,31 @@ class Client:
 
     def post(self, path: str, body=None, headers: dict | None = None, raw: bytes | None = None):
         return self._call("POST", path, body, headers, raw)
+
+    def post_raw(self, path: str, body: bytes, *, content_length: int | None = None):
+        """发一个**声明长度与实际字节无关**的请求，用来测"只发头不发体"。
+
+        `urllib` 会按实际字节改 `Content-Length`，这条路测不到"声明 5 MB 但一个
+        字节都不发"。所以这里直接走 `http.client` 手工拼头。
+        """
+        parsed = urllib.parse.urlsplit(self.base)
+        conn = http.client.HTTPConnection(parsed.hostname, parsed.port, timeout=30)
+        try:
+            conn.putrequest("POST", path, skip_accept_encoding=True)
+            conn.putheader("Content-Type", "application/json")
+            conn.putheader("Content-Length", str(content_length if content_length is not None else len(body)))
+            conn.endheaders()
+            if body:
+                conn.send(body)
+            resp = conn.getresponse()
+            text = resp.read().decode("utf-8")
+            try:
+                payload = json.loads(text)
+            except json.JSONDecodeError:
+                payload = {"raw": text}
+            return resp.status, {k: v for k, v in resp.getheaders()}, payload
+        finally:
+            conn.close()
 
     def _call(self, method, path, body, headers, raw=None):
         hdrs = dict(headers or {})
@@ -570,6 +597,53 @@ class TestQueryEndpoint:
             status, _h, body = client.post("/query", payload)
             assert status == 413
             assert body["error"]["code"] == "payload_too_large"
+
+    def test_oversized_body_still_delivers_the_413(self, servable):
+        """超限时客户端必须**真的收到 413**，而不是连接被重置。
+
+        实测踩到的形态：`test_oversized_body_is_refused_before_reading` 单跑通过、
+        全量跑偶发失败，报 `ConnectionAbortedError: [WinError 10053]`。原因是只回
+        413 就关连接，接收缓冲区里还有未读字节，`close()` 发 RST 而不是 FIN，
+        客户端内核把已到达的 413 一起丢掉。
+
+        单跑通过正是这条缺陷最容易被放过的地方——它看起来像 flaky。但线上同一个
+        路径会把"请求太大"变成"服务挂了"。所以这里单独钉一条：用一个会完整
+        发出请求体的客户端（不是流式半发），断言状态码真的读到了。
+        """
+        gid, _data = servable
+        with _serve(gid, max_body_bytes=256) as client:
+            payload = {"question": "凯" * 400}
+            # 连续发三次：若第一次留下半读的连接，后续会读到脏字节或直接重置
+            for _ in range(3):
+                status, headers, body = client.post("/query", payload)
+                assert status == 413, "超限必须回 413，实际 %r" % (status,)
+                assert body["error"]["code"] == "payload_too_large"
+                # 连接被复用也没问题（服务端已把请求体读掉）
+                assert headers.get("Content-Type", "").startswith("application/json")
+
+    def test_413_does_not_leak_internal_drain_directive(self, servable):
+        """`_drain` 是服务端内部处置指令，不该出现在对外错误体里。"""
+        gid, _data = servable
+        with _serve(gid, max_body_bytes=256) as client:
+            _status, _h, body = client.post("/query", {"question": "凯" * 400})
+            assert "_drain" not in body["error"]
+            assert not [k for k in body["error"] if k.startswith("_")]
+
+    def test_unreasonably_large_body_closes_the_connection(self, servable):
+        """声明超出排空上限的请求体：仍回 413，但要显式关连接。
+
+        排空是为了让客户端读得到响应，但不能被一个声明了 10 GB 的请求拖住。
+        超过上限就不读，改发 `Connection: close`——重开连接是调用方的责任，
+        这只是明确告知，不是让服务端陪着耗。
+        """
+        gid, _data = servable
+        with _serve(gid, max_body_bytes=256) as client:
+            # 只发头、不发体：服务端看到 Content-Length 超限就会拒，
+            # 且因为超过排空上限，直接标记 close。
+            status, headers, body = client.post_raw("/query", b"", content_length=5 * 1024 * 1024)
+            assert status == 413
+            assert body["error"]["code"] == "payload_too_large"
+            assert headers.get("Connection", "").lower() == "close"
 
     def test_response_is_degraded_in_documented_order(self, servable):
         """超响应上限时按 context.units → citations → channels → hits 顺序降级。"""

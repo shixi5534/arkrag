@@ -250,7 +250,29 @@ class TestSuiteSizeIsMonotonic:
     #   ③ 管理接口在没配 token 时必须 503 fail-closed，而不是"没人认证就当管理员"；
     #   ④ 参数越界必须 400 而不是夹紧——夹紧会让调用方以为自己的参数生效了；
     #   ⑤ 校验缓存必须按**产物**失效，否则产物被换掉后探针只会说好话。
-    N = 1208
+    # 1208 -> 1248（K）：新增 tests/test_k1_checks.py 的 36 个用例，
+    # 该文件进入 `TEST_FILES` 后让四个 parametrize 各多一项（+4）。
+    # 1208 + 36 + 4 = 1248，与 `--collect-only` 实测一致。
+    # 这次换来的门是"检查本身必须能失败"：`scripts/k1_checks.py` 的九项
+    # 每一项都被构造了一个本该拦住它的场景，并断言它确实返回 ok=False。
+    # 一个永远返回 True 的检查函数比没有更糟——它会在台账里多出九行 PASS，
+    # 而没人知道那九行是怎么来的。这个文件还钉住了 K1 首轮的两处自伤错误：
+    #   ① 把 16 位展示指纹 `prompt.prompt_fingerprint()` 当成 64 位
+    #      `fingerprint.prompt_digest()`，两者前 16 位相同，报出的不一致像是
+    #      产物坏了；
+    #   ② 把 `invalid_cache_report()["total"]` 当成"坏了几条"，于是把
+    #      `total=13801 / ok=13801 / invalid=0` 报成"13801 条非法记录"——
+    #      一条假重大发现。
+    #
+    # 1248 → 1251：`tests/test_server.py` 新增 3 个用例
+    # （`test_oversized_body_still_delivers_the_413`、`test_413_does_not_leak_internal_drain_directive`、
+    # `test_unreasonably_large_body_closes_the_connection`），该文件已在 `TEST_FILES` 里，
+    # 不再产生 parametrize 增量。1248 + 3 = 1251，与 `--collect-only` 实测一致。
+    # 这次换来的门是"错误响应必须真的到达客户端"：`_route_post()` 在**任何**拒绝分支
+    # 之前读掉请求体，否则未读字节让 `close()` 发 RST，客户端收到
+    # `ConnectionAbortedError: [WinError 10053]` 而不是那条 413/503。
+    # 这条缺陷只在全量跑时偶发，最容易被当成 flaky 放过。
+    N = 1251
 
     def test_declared_count_matches_actual(self) -> None:
         """用 pytest 自己数一遍当前收集到的用例数，与本文件登记值比对。"""
