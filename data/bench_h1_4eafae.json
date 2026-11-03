@@ -11,7 +11,7 @@
     "graph_depth": 1,
     "questions": 320,
     "warm_reps": 3,
-    "gold_set": "E:\\图rag\\data\\goldset\\gold-v1.json",
+    "gold_set": "data/goldset/gold-v1.json",
     "category_mix": {
       "adversarial": 16,
       "alias": 48,
@@ -235,7 +235,7 @@
   "build": {
     "available": true,
     "run_id": "r-20261031T035149Z-d7c94b",
-    "events_path": "E:\\图rag\\data\\arkrag\\runs\\r-20261031T035149Z-d7c94b\\events.jsonl",
+    "events_path": "data/arkrag/runs/r-20261031T035149Z-d7c94b/events.jsonl",
     "event_count": 10,
     "total_span_s": 176.0,
     "by_stage_s": {

@@ -27,6 +27,12 @@ data/arkrag/generations/*/index/
 # 因此不受上面两条 generations 规则覆盖，需要单独一行。
 data/arkrag/fts/
 
+# 向量矩阵：bge-m3 1024 维 × 13,781 块 = 56.4 MB，可由 scripts/build_vectors.py
+# 重算（约 610 秒，依赖本机 Ollama 的 bge-m3 模型）。命名用「模型 slug + 索引内容
+# 摘要」而非世代 id，所以内容相同的多个世代共用同一份（见 src/arkrag/vector_store.py
+# 的 vector_paths 注释）。与上面同理不入库。
+data/arkrag/vectors/
+
 # 运行日志：机器相关、每次不同，由 runs/<run_id>/ 现场生成。
 data/arkrag/runs/*/events.jsonl
 
@@ -51,3 +57,8 @@ data/arkrag/staging/
 _commit_msg*.txt
 _*.tmp
 _*.log
+
+# I2 盲特征重排的逐题特征缓存（2.45 MB，可由 scripts/rerank_blind.py 重算约 5 分钟）。
+# 同目录下的小体积扫描结果（sweep_*.json / eval_fusion_*.json / rerank_blind.json）
+# 是结论的证据，应当入库。
+data/rerank_features.json

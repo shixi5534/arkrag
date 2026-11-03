@@ -79,10 +79,85 @@ DEFAULT_BUDGET: dict = {
 # 那块的正文更相关。给一半权重正好让它能顶掉弱匹配，顶不掉强匹配。
 ENTITY_CHANNEL_WEIGHT = 0.5
 
+# 候选池深度倍数：`index.search` 拉 `top_k * 本值` 个候选再合并排序。
+#
+# 为什么可以放大到 10：词法检索的成本在**扫描倒排**，不在排序截断。
+# H1 实测 `top_k` 从 5 到 100，耗时恒定在 180–210 ms（H2 预建归一化表后约 67 ms），
+# 即「多拉候选」几乎不花钱。
+#
+# 为什么值得放大：多拉的候选在 `bm25 + 0.5*entity` 合并之后，能捞回一批被实体
+# 通道分数挤到 20 名之后的块。320 题实测（输出固定 top_k=20）：
+#     mult=3（原值）  R@20 0.6575  MRR 0.4123
+#     mult=5          R@20 0.6775  MRR 0.4221  (+0.0200 / +0.0098)
+#     mult=10         R@20 0.6842  MRR 0.4392  (+0.0267 / +0.0269)  ← 采纳
+#     mult=20         R@20 0.6817  MRR 0.4385  (+0.0242 / +0.0262)
+#     mult=50         R@20 0.6817  MRR 0.4384
+# 10 是唯一同时最大化 R@20 与 MRR 的点；20/50 略回落（候选池已覆盖全部相关块，
+# 再深只是把弱匹配也拉进来争名次）。
+CANDIDATE_POOL_MULT = 10
+
+# 说话人加成权重。
+#
+# 信号是什么：`chunks.jsonl` 的 `speakers` 字段是**结构化**的"这个块里谁在说话"。
+# 剧情是对话体，问句问到的对象若正是该块的说话人之一，那这块几乎必然相关。
+# 这比实体通道的字面子串匹配强得多——后者只说明"正文里提到了这个名字"，
+# 一个块提三次「凯尔希」不代表它在讲凯尔希的这件事（实体通道单路 MRR 仅 0.2255
+# 就是证据）。
+#
+# 为什么是 0.1 而且只给 speakers：`chunks.jsonl` 13,786 块中 97.1% 有 speakers，
+# 320 题里有 206 题的问句能命中某个块的 speakers（64%）。扫描实测（320 题，
+# 输出固定 top_k=20，baseline 为不加任何结构化加成）：
+#     ws=0.1  R@20 0.7019 (+0.0177)  MRR 0.4394 (+0.0002)  ← 采纳，唯一两者都不劣
+#     ws=0.2  R@20 0.7003 (+0.0161)  MRR 0.4336 (−0.0056)
+#     ws=0.3  R@20 0.6964 (+0.0122)  MRR 0.4289 (−0.0103)
+#     ws=0.5  R@20 0.6819 (−0.0023)  MRR 0.4076 (−0.0316)
+# 权重再大就开始把"提到了这个人"的块硬抬到头部，伤害精度。
+# `title`、`chapter` 加成在任何权重下都只降不升，故不实现。
+#
+# 显著性（配对符号检验，n=300）：R@20 更好 8 题 / 更差 1 题 / 持平 291 题，
+# 双侧 p=0.0391，bootstrap 95% 区间 [+0.00167, +0.03611] 不跨 0 → 显著；
+# MRR 更好 22 / 更差 12 / 持平 266，p=0.1214，区间 [−0.00458, +0.00432] 跨 0
+# → **不显著**。所以准确说法是「召回显著提升，头部精度无显著变化（没有变差）」，
+# 不许说成「两项都提升」。
+SPEAKER_BOOST_WEIGHT = 0.1
+
 # 上下文单元的固定来源标记，避免各处手写字符串拼错。
 SOURCE_BM25 = "bm25"
 SOURCE_ENTITY = "entity"
+SOURCE_SPEAKER = "speaker"
 SOURCE_GRAPH = "graph"
+
+
+def _speaker_set(rec: dict) -> set[str]:
+    """从块记录取说话人集合，兼容 list 与 JSON/`repr` 字符串两种形态。
+
+    `chunks.jsonl` 里 `speakers` 目前是**字符串形式的 Python list**
+    （如 `"['可萝尔', '村民']"`，单引号），不是严格 JSON。所以先试 JSON，
+    失败再退回字面量解析，两条都不成就当没有——**不猜、不部分解析**：
+    猜错的说话人会让加成把无关块抬进头部，比没有加成更糟。
+    """
+    raw = rec.get("speakers")
+    if isinstance(raw, (list, tuple, set)):
+        return {str(s).strip() for s in raw if str(s).strip()}
+    if not isinstance(raw, str) or not raw.strip():
+        return set()
+    text = raw.strip()
+    parsed = None
+    if text.startswith("["):
+        try:
+            import json as _json
+
+            parsed = _json.loads(text)
+        except ValueError:
+            try:
+                import ast
+
+                parsed = ast.literal_eval(text)
+            except (ValueError, SyntaxError):
+                parsed = None
+    if isinstance(parsed, (list, tuple, set)):
+        return {str(s).strip() for s in parsed if str(s).strip()}
+    return set()
 
 
 def estimate_tokens(text: str, *, tokenizer_version: str = index_mod.TOKENIZER_VERSION,
@@ -215,21 +290,92 @@ class Retriever:
         ent = self.entities_by_id.get(str(entity_id)) or {}
         return str(ent.get("name") or entity_id)
 
+    def _speaker_boost(
+        self, entity_candidates, allowed: set[str]
+    ) -> dict[str, float]:
+        """说话人加成：问句实体命中了某块的 `speakers` 就给分。
+
+        **只用结构化字段做精确相等匹配**，不做子串模糊匹配——模糊匹配正是实体
+        通道已有的信息（"正文里出现了这个名字"），再做一遍不会带来新信号。
+        剧情是对话体，`speakers` 列的是这个块里真正开口的人，命中它就说明
+        问句问的对象当场在场。
+
+        归一化：`命中实体的权重之和 / 问句里最强实体的权重`。**这个值可以超过 1.0，
+        上界是"问句里同时命中该块的实体数"**——这是刻意保留的，不是缺陷：
+
+        * 分子是"有几个问句实体在这个块里真的开口了"，分母只取最强的那一个。
+          两个问句实体都在同一块说话，比只有一个在场更能说明该块相关，
+          这个单调性正是要被排序看到的东西。
+        * 实测：把分数夹到 1.0 后 R@20 从 0.7019 掉到 0.6919（`Δ` 少一半），
+          而按实体去重（防止同一实体的规范名+别名重复计票）对分数**毫无影响**
+          （0.7019 不变）。所以「超过 1.0」全部来自多实体同时在场，不是别名重复。
+        * 因此 `SPEAKER_BOOST_WEIGHT` 的实际强度随命中实体数放大。这是已知且
+          被实测支持的取舍：ws=0.1 是唯一让 R@20 与 MRR 都不劣的值，
+          而 ws≥0.5 时两项一起掉——放大效应已在扫描里体现，没有失控。
+
+        只在 `allowed`（已进入候选池的 chunk）里算，不扫全表：
+        13,786 个块逐个解析 speakers 每题要几十毫秒，而候选池只有几百个。
+        """
+        if not entity_candidates or not allowed:
+            return {}
+        # 实体 -> (该实体的全部称呼, 该实体的候选权重)
+        # 按实体去重（而非按别名累加）：同一实体的规范名与别名可能同时出现在
+        # 某块的 speakers 里（如 ["凯尔希", "凯尔希医生"]），按别名累加会让这一块
+        # 白拿双倍票。去重实测对指标**零影响**（R@20 0.7019 不变），
+        # 纯粹是防止一种讲不通的计票方式。
+        by_entity: dict[str, tuple[set[str], float]] = {}
+        for cand in entity_candidates:
+            eid = str(cand.get("entity_id") or "")
+            ent = self.entities_by_id.get(eid) or {}
+            terms = {str(ent.get("name") or cand.get("name") or "").strip()}
+            for item in ent.get("aliases") or []:
+                t = item.get("text") if isinstance(item, dict) else item
+                if str(t or "").strip():
+                    terms.add(str(t).strip())
+            terms.discard("")
+            if not terms:
+                continue
+            weight = float(cand.get("score") or 0.0)
+            # 同一实体可能以多个候选出现（多个别名各成一票），取最大权重
+            prev = by_entity.get(eid)
+            if prev is None or weight > prev[1]:
+                merged_terms = terms | (prev[0] if prev else set())
+                by_entity[eid] = (merged_terms, weight)
+            else:
+                prev[0].update(terms)
+        if not by_entity:
+            return {}
+        strongest = max(w for _terms, w in by_entity.values()) or 1.0
+        best: dict[str, float] = {}
+        for cid in allowed:
+            rec = self.chunks.get(cid) or {}
+            speakers = _speaker_set(rec)
+            if not speakers:
+                continue
+            # 每个实体最多贡献一次：只要它的任一个称呼在 speakers 里就算命中
+            hit = sum(w for terms, w in by_entity.values() if terms & speakers)
+            if hit > 0:
+                best[cid] = hit / strongest
+        return best
+
     # ------------------------------------------------------------ 检索
     def search(self, query_analysis: dict, *, top_k: int = 20) -> dict:
-        """BM25 命中，两路加权合并。
+        """BM25 命中，两路加权合并 + 说话人结构化加成。
 
         通道与公式（写清是为了让分数可复算）：
 
-        * `bm25`：`index.search(retrieval_query, top_k=top_k*3)`，再按该路最高分
-          归一到 `[0,1]`。
+        * `bm25`：`index.search(retrieval_query, top_k=top_k*CANDIDATE_POOL_MULT)`，
+          再按该路最高分归一到 `[0,1]`。
         * `entity`：把每个实体候选的**规范名 + 权威别名**拼成一个查询串分别检索，
           每路同样归一，按候选 `score` 加权取该 chunk 的最大值。
-        * 合并：`final = bm25_norm + ENTITY_CHANNEL_WEIGHT * entity_norm`。
-          `ENTITY_CHANNEL_WEIGHT = 0.5` 的理由见常量注释。
+        * `speaker`：问句实体与块的 `speakers`（结构化字段）精确相等的比例，
+          见 `_speaker_boost`。
+        * 合并：`final = bm25_norm + ENTITY_CHANNEL_WEIGHT * entity_norm
+          + SPEAKER_BOOST_WEIGHT * speaker_norm`。
+          两个权重的取值理由与实测见各自常量注释。
 
         返回 `{hits:[{chunk_id, score, sources:[{channel, score}]}], stats:{...}}`。
-        两路的原始分都留在 `sources` 里，谁贡献了多少可以逐条查。
+        三路的原始分都留在 `sources` 里，谁贡献了多少可以逐条查。
         """
         top_k = max(1, int(top_k))
         offset = 0
@@ -249,7 +395,19 @@ class Retriever:
             or query_analysis.get("normalized_query")
             or ""
         )
-        bm25_raw = self.index.search(text, top_k=top_k * 3) if text else []
+        # 候选池深度 = `top_k * CANDIDATE_POOL_MULT`。这个倍数不是随手取的：
+        # `index.search` 的成本在扫描倒排（与 top_k 几乎无关，H1 实测 P50 在
+        # k=5..100 之间恒定 180–210 ms，H2 预建归一化表后降到约 67 ms），
+        # 所以「多拉候选」几乎是免费的；而多拉的候选在合并、排序之后能捞回
+        # 一批被实体通道分数挤出前 20 的块。实测（320 题，输出固定 top_k=20）：
+        #     mult=3（原值）  R@20 0.6575  MRR 0.4123
+        #     mult=5          R@20 0.6775  MRR 0.4221
+        #     mult=10         R@20 0.6842  MRR 0.4392  ← 采纳
+        #     mult=20         R@20 0.6817  MRR 0.4385
+        # 10 是拐点：再深不再涨（候选池已覆盖全部相关块），且 R@20 略回落。
+        # 注意这**不是**评测技巧：用户看到的仍是前 20 条，只是内部多看几眼再排。
+        depth = top_k * CANDIDATE_POOL_MULT
+        bm25_raw = self.index.search(text, top_k=depth) if text else []
         bm25 = _norm_scores(bm25_raw)
 
         entity_best: dict[str, float] = {}
@@ -267,7 +425,7 @@ class Retriever:
                 continue
             entity_channels += 1
             weight = float(cand.get("score") or 0.0)
-            for cid, score in _norm_scores(self.index.search(probe, top_k=top_k * 3)).items():
+            for cid, score in _norm_scores(self.index.search(probe, top_k=depth)).items():
                 entity_best[cid] = max(entity_best.get(cid, 0.0), score * weight)
 
         merged: dict[str, dict] = {}
@@ -279,12 +437,25 @@ class Retriever:
             merged.setdefault(cid, {"chunk_id": cid, "sources": []})["sources"].append(
                 {"channel": SOURCE_ENTITY, "score": round(score, 6)}
             )
+
+        # ---- 说话人通道：结构化精确匹配，不是字面子串 ----
+        # 只在已进入候选池的块里算（bm25 ∪ entity），不扫全表。
+        speaker_best = self._speaker_boost(
+            query_analysis.get("entity_candidates") or (), set(merged)
+        )
+        for cid, score in speaker_best.items():
+            merged.setdefault(cid, {"chunk_id": cid, "sources": []})["sources"].append(
+                {"channel": SOURCE_SPEAKER, "score": round(score, 6)}
+            )
+
         hits: list[dict] = []
         for cid, item in merged.items():
             total = 0.0
             for src in item["sources"]:
                 if src["channel"] == SOURCE_BM25:
                     total += src["score"]
+                elif src["channel"] == SOURCE_SPEAKER:
+                    total += SPEAKER_BOOST_WEIGHT * src["score"]
                 else:
                     total += ENTITY_CHANNEL_WEIGHT * src["score"]
             hits.append(
@@ -306,10 +477,13 @@ class Retriever:
                 "bm25_top_score": round(max(bm25.values()), 6) if bm25 else 0.0,
                 "entity_channels": entity_channels,
                 "entity_top_score": round(max(entity_best.values()), 6) if entity_best else 0.0,
+                "speaker_boosted": len(speaker_best),
+                "speaker_weight": SPEAKER_BOOST_WEIGHT,
                 "candidates": len(merged),
                 "top_score": top_score,
                 "top_k": top_k,
                 "entity_weight": ENTITY_CHANNEL_WEIGHT,
+                "candidate_pool_depth": depth,
                 "skipped_reason": "",
                 "queried_text": text,
             },
