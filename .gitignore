@@ -36,6 +36,13 @@ data/arkrag/vectors/
 # 运行日志：机器相关、每次不同，由 runs/<run_id>/ 现场生成。
 data/arkrag/runs/*/events.jsonl
 
+# 服务端运行期产物：查询日志与审计流水。都是"跑了就有、内容每次不同"的
+# 现场记录，不是可复现的结论。queries.jsonl 默认只写 `query_sha256`
+# 不写问句原文（见 src/arkrag/server.py 的 `_log_query_record`），
+# 但即便如此它仍是运行痕迹而非证据，不入库。
+data/arkrag/logs/
+data/arkrag/audit/
+
 # 锁文件是运行期同步副产物，永远不该入库。
 *.lock
 data/arkrag/*.lock

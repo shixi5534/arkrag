@@ -461,10 +461,16 @@ def verify_generation(gen: Generation) -> list[str]:
         )
 
     # 图与索引必须绑同一份图：索引里的 graph_fp 记的是它建时的图指纹。
+    #
+    # `UnicodeDecodeError` 必须一起接住：产物被截断或翻字节后 `read_text("utf-8")`
+    # 抛的是它（`ValueError` 的子类，不是 `OSError`）。只接 OSError/JSONDecodeError
+    # 的话，一份坏掉的索引会让 `verify_generation` 自己崩掉——而它的职责正是
+    # "报告这份产物不合格"。实测：把 lexical.json 第 100 字节翻转，旧代码直接抛
+    # `UnicodeDecodeError`，`/ready` 于是返回 500 而不是"未就绪 + 原因"。
     try:
         graph = json.loads(gen.graph_path.read_text("utf-8"))
         idx_payload_meta = json.loads(gen.index_path.read_text("utf-8")).get("meta") or {}
-    except (OSError, json.JSONDecodeError) as exc:
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
         return problems + [f"产物不可解析：{exc}"]
 
     graph_fp = graph.get("fingerprint") or ""

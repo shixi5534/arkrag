@@ -241,7 +241,16 @@ class TestSuiteSizeIsMonotonic:
     #   ③ 块删了而向量还在 → 检索可能返回不存在的 chunk_id。
     #   ④ 同一通道输出重复项 → RRF 若按出现次数累加就是奖励上游 bug。
     #   ⑤ 通道缺席若不显式申报 → `channels_used` 少一行而没人会去数。
-    N = 1146
+    # 1146 -> 1208（J）：新增 tests/test_server.py 的 58 个用例，
+    # 该文件进入 `TEST_FILES` 后让四个 parametrize 各多一项（+4）。
+    # 1146 + 58 + 4 = 1208，与 `--collect-only` 实测一致。
+    # 这里换来的门全部是"服务能坏但测试不会叫"的形态：
+    #   ① `/health` 与 `/ready` 必须是两个答案——进程活着不代表数据齐；
+    #   ② 就绪检查的每一项都要能单独变红（挡住 Manifest、产物、门禁报告、块覆盖）；
+    #   ③ 管理接口在没配 token 时必须 503 fail-closed，而不是"没人认证就当管理员"；
+    #   ④ 参数越界必须 400 而不是夹紧——夹紧会让调用方以为自己的参数生效了；
+    #   ⑤ 校验缓存必须按**产物**失效，否则产物被换掉后探针只会说好话。
+    N = 1208
 
     def test_declared_count_matches_actual(self) -> None:
         """用 pytest 自己数一遍当前收集到的用例数，与本文件登记值比对。"""
