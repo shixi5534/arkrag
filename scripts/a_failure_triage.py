@@ -78,6 +78,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from arkrag import answer as answer_mod  # noqa: E402
+from arkrag import config  # noqa: E402
 from arkrag import pipeline as pipeline_mod  # noqa: E402
 from arkrag import release, retrieve  # noqa: E402
 
@@ -525,7 +526,10 @@ def triage(args) -> int:
     out_json = Path(args.out_json) if args.out_json else out_jsonl.with_suffix(".json")
     out_json.write_text(
         json.dumps({"schema": "a-triage-v1", "generation": args.generation,
-                    "gold_set": str(args.gold_set), "probe_set": args.probe_set,
+                    # 相对仓库根写：绝对机台路径进 git 后换机器就错，
+                    # `tests/test_portable_paths.py` 会为此判红（已实测踩过）。
+                    "gold_set": config.rel_to_root(args.gold_set),
+                    "probe_set": args.probe_set,
                     "pool": args.pool, "top_k": EVAL_TOP_K,
                     "graph_depth": EVAL_GRAPH_DEPTH,
                     "items_evaluated": len(rows), "summary": summary},

@@ -1,7 +1,7 @@
 {
  "schema": "a-triage-v1",
  "generation": "g-20261103T132152Z-06a741",
- "gold_set": "E:\\图rag\\data\\goldset\\gold-v1.json",
+ "gold_set": "data/goldset/gold-v1.json",
  "split_policy": "pre-split-diagnostic（320 题未划分 train/dev/test，本文件是划分前诊断，不可作验收基线、不可作基线）",
  "probe_set": "all",
  "pool": 200,

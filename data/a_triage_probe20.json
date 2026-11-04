@@ -1,7 +1,7 @@
 {
  "schema": "a-triage-v1",
  "generation": "g-20261103T132152Z-06a741",
- "gold_set": "E:\\图rag\\data\\goldset\\gold-v1.json",
+ "gold_set": "data/goldset/gold-v1.json",
  "probe_set": "union",
  "pool": 200,
  "top_k": 20,
