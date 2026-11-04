@@ -547,6 +547,69 @@ class TestRollbackTestedCanFail:
         assert not _result_ok(res)
         assert "键集" in res["detail"]
 
+    def test_probe_dir_is_unique_per_run_and_cleaned_up(self, monkeypatch):
+        """探针目录必须每次运行独一份，且跑完删掉。
+
+        原先写死成 `data/arkrag/_k1_rollback_probe/`，两个进程同时跑这一项就
+        共用同一个 `current.json`：A 刚写完"当前是候选世代"，B 已经把它回滚成
+        `e0aacc`，A 接着在 B 的指针上再回滚一次——要么被"已经是当前世代"拒掉
+        （判成"回滚命令不可用"），要么被接受（判成"回滚到自身未被拒"）。
+        两种都是假结论，且**单独跑永远绿**：实测并发 4 份 `--only rollback_tested`
+        修正前 0/4 通过、修正后 4/4 通过。
+
+        这条用例钉住的就是"不再共享"这个性质，不是"用了 mkdtemp"这个实现：
+        跑两次拿到两个不同的目录，都不在 `CIRCUIT_OPEN_PATH` 的同级目录下，
+        且跑完都不存在。
+        """
+        seen: list[str] = []
+
+        def _fake_rollback(gid, **kw):
+            seen.append(str(k1.release.CURRENT_PATH))
+            pointer = {
+                "generation_id": gid,
+                "status": k1.release.PUBLISHED,
+                "published_at": "2026-11-03T00:00:00Z",
+                "previous_generation": "",
+                "rolled_back": True,
+                "source_fingerprint": "",
+                "graph_artifact_id": "",
+                "index_artifact_id": "",
+                "gate_report_hash": "",
+            }
+            target = Path(k1.release.CURRENT_PATH)
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text(json.dumps(pointer), encoding="utf-8")
+            return pointer
+
+        monkeypatch.setattr(k1.release, "rollback", _fake_rollback)
+        ctx = _empty_ctx(
+            generations=[
+                _gen("g-20260101T000000Z-aaaaaa", "PUBLISHED"),
+                _gen("g-20260102T000000Z-bbbbbb", "READY"),
+            ]
+        )
+        original = k1.release.CURRENT_PATH
+        try:
+            k1.check_rollback_tested(ctx)
+            first_run = list(seen)
+            k1.check_rollback_tested(ctx)
+            second_run = list(seen)[len(first_run):]
+        finally:
+            k1.release.CURRENT_PATH = original
+
+        assert first_run and second_run, (first_run, second_run)
+        dirs_first = {Path(p).parent for p in first_run}
+        dirs_second = {Path(p).parent for p in second_run}
+        # 一次检查里 `rollback` 会被调两次（真回滚 + 回滚到自身的探针），
+        # 所以按"每次检查"看目录集合，而不是按"每次调用"。
+        assert len(dirs_first) == 1, f"同一次检查里换了探针目录：{dirs_first}"
+        assert len(dirs_second) == 1, f"同一次检查里换了探针目录：{dirs_second}"
+        assert dirs_first != dirs_second, f"两次运行共用了同一个探针目录：{dirs_first}"
+        shared = Path(k1.config.CIRCUIT_OPEN_PATH).parent.resolve()
+        for d in dirs_first | dirs_second:
+            assert d.resolve().parent != shared, f"探针目录落在冻结目录里：{d}"
+            assert not d.exists(), f"探针目录没被清掉：{d}"
+
     def test_real_pointer_is_never_written(self):
         """整个检查跑完后，真实指针的字节必须没变。
 

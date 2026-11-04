@@ -49,6 +49,7 @@ import shutil
 import subprocess
 import time
 from dataclasses import dataclass, field
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -867,3 +868,365 @@ def prune_old(*, keep: int = 2, dry_run: bool = True) -> list[str]:
         for gid in victims:
             shutil.rmtree(GENERATIONS_DIR / gid, ignore_errors=True)
     return victims
+
+
+# ---------------------------------------------------------------- 观察期与归档
+
+# 归档根。默认与 `generations/` 同级（`data/arkrag/archive/<gid>/`），
+# 而不是放进 `generations/` 里面：`list_generations()` 遍历的是
+# `GENERATIONS_DIR.iterdir()` 且按 `GEN_ID_RE` 过滤，把归档目录塞进去会被当成
+# 一个新世代列出来（目录名同样是 `g-…` 形态），于是"盘上有几代"这件事开始说谎。
+ARCHIVE_DIR = config.DATA_DIR / "archive"
+
+# 观察期天数默认值。计划 K4 第 4 条只写"新版稳定运行约定观察期后才归档旧版"，
+# 没有给数字；这里的 7 天是**本项目自己定的约定**，理由三条：
+#
+# 1. 一周覆盖完整的工作日+周末流量形态。Gold Set 探针与灰度对照都是在某个
+#    时间窗里取的样，出现过的失效（拒答翻转、引用定位失败）里有相当一部分
+#    只在周末的低并发分布下显形——3 天窗口会整段跳过周末。
+# 2. 归档是**不可逆的重量级动作**：现场一代 137–288 MB，动作是"复制一遍 +
+#    逐字节核对 + 删原件"。多留一周磁盘的代价远小于把还在出问题的旧版归档掉。
+# 3. 7 是整数天，用 `_now()` 的秒级 UTC 时间戳判定时不需要月长/闰年特判。
+#
+# 可用 `ARKRAG_OBSERVATION_DAYS` 覆盖（演练与测试要用），但默认值必须写在
+# 代码里：只从环境变量取的话，"没人设过"就等于"没有观察期"，那是 fail-open。
+OBSERVATION_DAYS = 7
+ENV_OBSERVATION_DAYS = "ARKRAG_OBSERVATION_DAYS"
+
+
+def _observation_days() -> int:
+    """观察期天数。环境变量非法时抛 ReleaseError（由调用方 fail-closed）。"""
+    raw = os.environ.get(ENV_OBSERVATION_DAYS)
+    if raw is None or not str(raw).strip():
+        return OBSERVATION_DAYS
+    try:
+        value = int(str(raw).strip())
+    except ValueError:
+        raise ReleaseError(
+            f"{ENV_OBSERVATION_DAYS}={raw!r} 不是整数，拒绝猜一个观察期天数"
+        ) from None
+    if value < 0:
+        raise ReleaseError(f"{ENV_OBSERVATION_DAYS}={raw!r} 为负数，观察期不能是负的")
+    return value
+
+
+def _parse_utc(value: str) -> datetime | None:
+    """把 `_now()`/`publish()` 产出的时间戳解析成带时区的 UTC 时间。
+
+    `_now()` 的格式是 `time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())`——
+    **带 Z 后缀**（Zulu/UTC）。`datetime.fromisoformat()` 在 3.11 之后能直接吃
+    它，但这里仍显式把 `Z` 换成 `+00:00` 再解析：解析逻辑不该依赖某个小版本的
+    宽松行为，换台机器换条 Python 就"观察期算不出来"是不可接受的。
+    解析不了返回 None，由调用方 fail-closed，**不**猜当前时间。
+    """
+    text = str(value or "").strip()
+    if not text:
+        return None
+    if text.endswith(("Z", "z")):
+        text = text[:-1] + "+00:00"
+    try:
+        dt = datetime.fromisoformat(text)
+    except ValueError:
+        return None
+    if dt.tzinfo is None:  # 不带时区的一律按 UTC 解释（与 _now() 同口径）
+        dt = dt.replace(tzinfo=timezone.utc)
+    return dt.astimezone(timezone.utc)
+
+
+def observation_status(*, now: str | None = None) -> dict:
+    """当前线上世代是否已过观察期（计划 K4 第 4 条）。
+
+    返回 `{'generation_id','published_at','days_elapsed','required_days','complete','reason'}`。
+
+    ## 为什么一切异常都落到 `complete=False`
+
+    这个函数的返回值决定"旧版能不能被归档"。把不确定性往"已满"那边倒是
+    fail-open：指针坏掉、`published_at` 是空串、时间格式换了个写法——任何一处
+    都会让**刚上线几分钟**的新版被判成"已过观察期"，旧版随即被复制归档并从
+    世代目录删掉。反过来（判成"未满"）的代价只是多留几天磁盘。
+    所以：`published_at` 缺失或无法解析 → `complete=False` 并写明原因，
+    **不当作 0 天，也不当作已满**；`now` 早于 `published_at`（时钟回拨/手改
+    时间戳）同样按未满处理，因为时间线本身已经不可信。
+
+    `now` 可注入是为可测：否则要验证"满 7 天"就得真等 7 天。
+    """
+    out: dict = {
+        "generation_id": "",
+        "published_at": "",
+        "days_elapsed": None,
+        "required_days": OBSERVATION_DAYS,
+        "complete": False,
+        "reason": "",
+    }
+    try:
+        required = _observation_days()
+    except ReleaseError as exc:
+        out["reason"] = f"观察期配置无效：{exc}（按未满处理）"
+        return out
+    out["required_days"] = required
+
+    # 指针文件本身坏掉时 `read_current()` 抛 ReleaseError——这里不吞它：
+    # "指针不可解析"和"指针里没写时间"不是同一件事，前者必须让人去修文件，
+    # 后者只是这一代没记发布时间。
+    cur = read_current() or {}
+    if not cur:
+        out["reason"] = "没有发布指针（current.json 不存在）：无法判定观察期，按未满处理"
+        return out
+    gid = str(cur.get("generation_id") or "")
+    published = str(cur.get("published_at") or "")
+    out["generation_id"] = gid
+    out["published_at"] = published
+    if not gid:
+        out["reason"] = "发布指针缺 generation_id：无法判定观察期起点，按未满处理"
+        return out
+
+    start = _parse_utc(published)
+    if start is None:
+        out["reason"] = (
+            f"发布指针的 published_at={published!r} 缺失或无法解析："
+            f"无法判定观察期起点，按未满处理（不当作 0 天，也不当作已满）"
+        )
+        return out
+
+    now_text = _now() if now is None else str(now)
+    now_dt = _parse_utc(now_text)
+    if now_dt is None:
+        out["reason"] = f"now={now_text!r} 无法解析：无法判定观察期，按未满处理"
+        return out
+
+    days = (now_dt - start).total_seconds() / 86400.0
+    out["days_elapsed"] = round(days, 4)
+    if days < 0:
+        out["reason"] = (
+            f"published_at={published} 晚于当前时间 {now_text}（差 {-days:.2f} 天）："
+            f"时间线不可信，按未满处理"
+        )
+        return out
+    if days >= required:
+        out["complete"] = True
+        out["reason"] = f"线上世代 {gid} 已运行 {days:.2f} 天，达到观察期 {required} 天"
+    else:
+        out["reason"] = (
+            f"线上世代 {gid} 仅运行 {days:.2f} 天，未达观察期 {required} 天"
+            f"（还差 {required - days:.2f} 天），旧版不得归档"
+        )
+    return out
+
+
+def _heavy_artifacts(gen: Generation) -> list[Path]:
+    """这一代的"重量级产物"清单（图/索引整个目录 + 世代自带块正文）。
+
+    以 `Generation` 的属性为准，而不是硬编码文件名：`graph/` 里除了
+    `graph.json` 还有 ark-rag-3 的 `assertions.jsonl`（68.7 MB）与
+    `adjacency.json`（26.4 MB），只搬 `graph.json` 会留下两个更大的文件在
+    世代目录里，"归档"就成了把目录变小一点而已。
+    `index/` 同理（可能还有词表/分片）。`chunks.jsonl` 在 `gen.dir` 根下。
+    """
+    out: list[Path] = []
+    for directory in (gen.graph_path.parent, gen.index_path.parent):
+        if directory.is_dir():
+            out.extend(sorted(p for p in directory.rglob("*") if p.is_file()))
+    if gen.chunks_path.is_file():
+        out.append(gen.chunks_path)
+    return out
+
+
+def archive_old(
+    generation_id: str,
+    *,
+    dry_run: bool = True,
+    archive_root: Path | None = None,
+) -> dict:
+    """把旧世代的重量级产物归档到 `archive/<gid>/`，再从世代目录删掉。默认只演练。
+
+    ## 与 `prune_old()` 的职责边界（两者不能互相替代）
+
+    `prune_old()` 清的是 **FAILED**：那些跑不出产物的世代，留着只为留证，
+    证据价值随轮次衰减，所以它可以**直接删**（连归档都不做）。
+    本函数归档的是 **还能服务/曾经服务过的** 世代：它会先复制、逐字节核对、
+    写一份 `archive-manifest.json`，然后才允许删原目录里的重量级产物。
+
+    因此"目标是 FAILED"在这里是**拒绝理由**，不是候选条件：失败世代的产物
+    本身可能就是事后定位缺陷的证据（`verify_generation()` 对它们必然不过），
+    把一份坏产物复制进归档区再删原件，等于用"归档"这个动作给坏证据盖上
+    "已妥善保存"的章。失败世代该由 `prune_old()` 按其规则处理。
+
+    ## 为什么观察期检查放在最前面（计划 K4 第 4 条）
+
+    归档的全部风险来自"删原件"这一步：复制再核对只能保证归档副本是好的，
+    保证不了**新版真的稳定**。观察期未满就归档 = 一旦新版出问题，回滚目标
+    已经被搬走并删掉图/索引，回滚过去只剩一个读不出产物的目录。
+    判据一律走 `observation_status()`，`complete=False` 就拒绝——包括
+    `published_at` 缺失这种"判不出来"的情形（fail-closed）。
+
+    ## 顺序不许颠倒
+
+        复制 -> 逐文件核对 SHA-256 -> 写 archive-manifest.json -> 才删原件
+
+    任何一步失败都不删原件。反过来（先删后复制/边删边复制）意味着中途失败
+    就同时失去原产物和完整备份。
+
+    ## 保留什么
+
+    `manifest.json` 与 `reports/gates.json` 不删。Manifest 是这一代在
+    `list_generations()` 里存在的唯一依据——删了它，这一代就从列表里消失，
+    而 `current.json`/回滚历史里可能仍然提到这个 id，指针就查不到东西了。
+    `reports/gates.json` 是 Manifest 里 `gate_report_hash` 的被引对象，也是
+    "这一代当时过了哪些门"的唯一记录，体积可忽略。
+
+    默认 `dry_run=True`（与 `prune_old()` 一致）：演练只回答"会搬哪些文件、
+    多少字节"，盘上一个字节都不动。
+
+    ## 归档之后这一代的 `verify_generation()` 必然不过
+
+    这是设计结果，不是缺陷：图/索引已搬走，`artifact_digests()` 会因为文件
+    不存在而报"回读失败"。这一代的完整性证据此后以 `archive-manifest.json`
+    为唯一依据（每个文件的相对路径、字节数、SHA-256、原路径）。
+    所以归档是**不可逆**的动作——要复原必须人工按 archive-manifest 搬回来，
+    这也正是"观察期未满一律拒绝"必须存在的理由。
+    """
+    gen = Generation(generation_id)
+    root = Path(archive_root) if archive_root is not None else ARCHIVE_DIR
+    dest = root / generation_id
+    cur = read_current() or {}
+
+    # 逐条收集拒绝理由，一条都不许被合并成"不满足条件"：
+    # 事后看日志的人必须能分辨是"观察期没过"还是"这一代自己就坏了"。
+    problems: list[str] = []
+
+    if not gen.dir.exists():
+        raise ReleaseError(f"归档目标不存在：{gen.dir}")
+
+    if cur.get("generation_id") == generation_id:
+        problems.append(
+            f"目标是当前线上世代（current.json 指向 {generation_id}）："
+            f"线上版本不得归档，先发布下一代再考虑"
+        )
+
+    status = ""
+    if gen.manifest_path.exists():
+        try:
+            status = gen.status()
+        except ReleaseError as exc:
+            problems.append(f"Manifest 读不出状态：{exc}")
+    else:
+        problems.append(f"目标缺 Manifest（{gen.manifest_path}）：无法证明它是什么，拒绝归档")
+    if status == FAILED:
+        problems.append(
+            f"目标状态是 FAILED：失败世代留作失败证据，不是归档对象"
+            f"（其清理归 prune_old() 管，见其 docstring）"
+        )
+
+    observation = observation_status()
+    if not observation["complete"]:
+        problems.append(f"观察期未满：{observation['reason']}")
+
+    if not problems and status != FAILED:
+        # 坏版本不许归档：它的产物自检不过，说明"原件"本身就不是可复原的证据；
+        # 更糟的是把一个 verify 不过的目录搬走，等于让后来人以为它当年是好的。
+        try:
+            verify_problems = verify_generation(gen)
+        except ReleaseError as exc:
+            verify_problems = [str(exc)]
+        if verify_problems:
+            problems.append(
+                f"目标自检不过（{len(verify_problems)} 项），坏版本不得归档："
+                + "; ".join(verify_problems[:6])
+            )
+
+    if dest.exists():
+        problems.append(f"归档目标已存在（{dest}）：拒绝覆盖已有归档，先人工确认")
+
+    if problems:
+        raise ReleaseError(
+            f"{generation_id} 不满足归档条件（{len(problems)} 项），拒绝归档",
+            detail=" | ".join(problems),
+        )
+
+    files = _heavy_artifacts(gen)
+    if not files:
+        raise ReleaseError(
+            f"{generation_id} 没有可归档的重量级产物（graph/ index/ chunks.jsonl 都不在）",
+            detail=f"目标目录 {gen.dir}",
+        )
+
+    plan = [
+        {
+            "path": p.relative_to(gen.dir).as_posix(),
+            "bytes": p.stat().st_size,
+            "sha256": sha256_file(p),
+            "source": str(p),
+        }
+        for p in files
+    ]
+    total_bytes = sum(item["bytes"] for item in plan)
+    result: dict = {
+        "generation_id": generation_id,
+        "dry_run": dry_run,
+        "archive_root": str(root),
+        "archive_dir": str(dest),
+        "files": plan,
+        "file_count": len(plan),
+        "total_bytes": total_bytes,
+        "kept": ["manifest.json", "reports/gates.json"],
+        "observation": observation,
+        "removed": [],
+    }
+    if dry_run:
+        return result
+
+    # ---- 真归档：复制 -> 核对 -> 写 archive-manifest -> 才删原件 ----
+    created_root = not root.exists()
+    try:
+        for item in plan:
+            src = gen.dir / item["path"]
+            dst = dest / item["path"]
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(src, dst)
+
+        # 逐文件核对：不比"复制了几份"，比"归档副本的字节是不是原件那些字节"。
+        for item in plan:
+            dst = dest / item["path"]
+            if not dst.is_file():
+                raise ReleaseError(f"归档副本缺失：{item['path']} -> {dst}")
+            got_bytes = dst.stat().st_size
+            got_sha = sha256_file(dst)
+            if got_bytes != item["bytes"] or got_sha != item["sha256"]:
+                raise ReleaseError(
+                    f"归档副本核对失败：{item['path']} "
+                    f"原件 {item['bytes']}B/{item['sha256'][:16]} "
+                    f"副本 {got_bytes}B/{got_sha[:16]}"
+                )
+
+        archive_manifest = {
+            "generation_id": generation_id,
+            "archived_at": _now(),
+            "source_dir": str(gen.dir),
+            "archive_dir": str(dest),
+            "status": status,
+            "observation": observation,
+            "total_bytes": total_bytes,
+            "files": plan,
+            "kept": ["manifest.json", "reports/gates.json"],
+        }
+        atomic.atomic_write_json(dest / "archive-manifest.json", archive_manifest)
+    except BaseException:
+        # 复制/核对/写清单任一步失败：**原件一个字节都不动**。
+        # 只清掉我们自己刚造出来、且已知不完整的归档副本（否则下次会被
+        # "归档目标已存在"挡住，人还得先去手工删）。
+        shutil.rmtree(dest, ignore_errors=True)
+        if created_root:
+            shutil.rmtree(root, ignore_errors=True)
+        raise
+
+    # ---- 核对全部通过，才删原件 ----
+    for item in plan:
+        src = gen.dir / item["path"]
+        src.unlink(missing_ok=True)
+        result["removed"].append(item["path"])
+    for directory in (gen.graph_path.parent, gen.index_path.parent):
+        if directory.is_dir() and not any(directory.iterdir()):
+            directory.rmdir()
+
+    result["archive_manifest"] = str(dest / "archive-manifest.json")
+    return result

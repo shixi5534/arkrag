@@ -26,7 +26,7 @@
       "id": "gray_candidate",
       "name": "灰度查询（候选，不发指针）",
       "ok": true,
-      "detail": "题 18 / 答 17 / 拒 1 / 引用 94 条（定位失败 0）/ 单题 195.0 ms",
+      "detail": "题 18 / 答 17 / 拒 1 / 引用 94 条（定位失败 0）/ 单题 203.0 ms",
       "data": {
         "probes": 18,
         "answered": 17,
@@ -34,15 +34,15 @@
         "abstain_agree": 17,
         "citations": 94,
         "cite_bad": 0,
-        "total_ms": 3510.7,
-        "per_query_ms": 195.0
+        "total_ms": 3654.2,
+        "per_query_ms": 203.0
       }
     },
     {
       "id": "gray_baseline",
       "name": "灰度查询（上一代，对照）",
       "ok": true,
-      "detail": "题 18 / 答 17 / 拒 1 / 引用 88 条（定位失败 0）/ 单题 162.5 ms",
+      "detail": "题 18 / 答 17 / 拒 1 / 引用 88 条（定位失败 0）/ 单题 168.2 ms",
       "data": {
         "probes": 18,
         "answered": 17,
@@ -50,8 +50,8 @@
         "abstain_agree": 17,
         "citations": 88,
         "cite_bad": 0,
-        "total_ms": 2924.3,
-        "per_query_ms": 162.5
+        "total_ms": 3027.8,
+        "per_query_ms": 168.2
       }
     },
     {
@@ -101,7 +101,7 @@
       "id": "rollback_probe",
       "name": "回滚后固定探针",
       "ok": true,
-      "detail": "题 18 / 引用定位失败 0 / 回答器世代标识全对=True / 单题 62.8 ms",
+      "detail": "题 18 / 引用定位失败 0 / 回答器世代标识全对=True / 单题 163.8 ms",
       "data": {
         "probes": 18,
         "answered": 17,
@@ -109,8 +109,8 @@
         "abstain_agree": 17,
         "citations": 88,
         "cite_bad": 0,
-        "total_ms": 1129.9,
-        "per_query_ms": 62.8
+        "total_ms": 2949.2,
+        "per_query_ms": 163.8
       }
     },
     {
@@ -138,6 +138,79 @@
       "ok": true,
       "detail": "线上仍是 g-20261030T154606Z-55dfd7（PUBLISHED）",
       "data": {}
+    },
+    {
+      "id": "observation_window",
+      "name": "观察期判定正确且 fail-closed（不判是否已满）",
+      "ok": true,
+      "detail": "线上 g-20261030T154606Z-55dfd7 已 4.7932 天 / 要求 7 天 / complete=False；独立算 4.7932 天 → 一致；fail-closed 三例（无 published_at / 格式非法 / 无指针）complete 全 False=True",
+      "data": {
+        "observation": {
+          "generation_id": "g-20261030T154606Z-55dfd7",
+          "published_at": "2026-10-30T15:49:29Z",
+          "days_elapsed": 4.7932,
+          "required_days": 7,
+          "complete": false,
+          "reason": "线上世代 g-20261030T154606Z-55dfd7 仅运行 4.79 天，未达观察期 7 天（还差 2.21 天），旧版不得归档"
+        },
+        "independent_days": 4.7932,
+        "pointer_restored": true,
+        "fail_closed": {
+          "missing_published_at": {
+            "complete": false,
+            "days": null,
+            "reason": "发布指针的 published_at='' 缺失或无法解析：无法判定观察期起点，按未满处理（不当作 0 天，也不当作已满）"
+          },
+          "unparsable_published_at": {
+            "complete": false,
+            "days": null,
+            "reason": "发布指针的 published_at='2026/01/01 00:00' 缺失或无法解析：无法判定观察期起点，按未满处理（不当作 0 天，也不当作已满）"
+          },
+          "no_pointer_at_all": {
+            "complete": false,
+            "days": null,
+            "reason": "没有发布指针（current.json 不存在）：无法判定观察期，按未满处理"
+          }
+        },
+        "problems": []
+      }
+    },
+    {
+      "id": "archive_refused_during_observation",
+      "name": "观察期未满时归档被拒且盘上零改动",
+      "ok": true,
+      "detail": "真实 g-20261031T035231Z-4eafae：拒绝=True（4 个文件/242.2 MB SHA-256 前后一致）；合成世代：对照组（30 天）拿到计划 3 个文件、观察期 5.0 天时 dry_run=False 拒绝=True、产物零改动=True",
+      "data": {
+        "real_target": {
+          "generation_id": "g-20261031T035231Z-4eafae",
+          "refused": true,
+          "detail": "g-20261031T035231Z-4eafae 不满足归档条件（1 项），拒绝归档；观察期未满：线上世代 g-20261030T154606Z-55dfd7 仅运行 4.79 天，未达观察期 7 天（还差 2.21 天），旧版不得归档",
+          "files_checked": 4,
+          "bytes_checked": 253991034,
+          "bytes_unchanged": true
+        },
+        "synthetic": {
+          "generation_id": "g-20260101T000000Z-abc123",
+          "verify_problems": [],
+          "control_days": 30.0,
+          "control_plan_files": 3,
+          "control_plan_bytes": 3183,
+          "observation": {
+            "generation_id": "g-20260102T000000Z-0a11ce",
+            "published_at": "2026-10-30T10:51:41Z",
+            "days_elapsed": 5.0,
+            "required_days": 7,
+            "complete": false,
+            "reason": "线上世代 g-20260102T000000Z-0a11ce 仅运行 5.00 天，未达观察期 7 天（还差 2.00 天），旧版不得归档"
+          },
+          "refused": true,
+          "detail": "g-20260101T000000Z-abc123 不满足归档条件（1 项），拒绝归档；观察期未满：线上世代 g-20260102T000000Z-0a11ce 仅运行 5.00 天，未达观察期 7 天（还差 2.00 天），旧版不得归档",
+          "files_checked": 5,
+          "unchanged": true,
+          "archive_dir_created": false
+        },
+        "problems": []
+      }
     },
     {
       "id": "prod_servable",

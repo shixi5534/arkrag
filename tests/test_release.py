@@ -27,6 +27,9 @@ def sandbox(tmp_path, monkeypatch):
     monkeypatch.setattr(release, "GENERATIONS_DIR", gen_dir)
     monkeypatch.setattr(release, "RUNS_DIR", runs_dir)
     monkeypatch.setattr(release, "CURRENT_PATH", current)
+    # 归档根也必须指到临时目录：`archive_old()` 默认写 `ARCHIVE_DIR`，
+    # 不隔离的话任何一条真归档的用例都会往真实的归档区里搬真实产物。
+    monkeypatch.setattr(release, "ARCHIVE_DIR", tmp_path / "archive")
     gen_dir.mkdir()
     runs_dir.mkdir()
     return tmp_path
@@ -688,3 +691,212 @@ class TestPruneOnlyTouchesFailed:
         assert gens["published"].dir.is_dir(), "PUBLISHED 世代被 prune 删掉了"
         assert gens["failed_new"].dir.is_dir(), "最近 1 个 FAILED 应留作证据，却被删了"
         assert not gens["failed_old"].dir.exists(), "该清的 FAILED 没被清掉"
+
+
+# ---------------------------------------------------------------- 观察期与归档
+
+# 计划 K4 第 4 条「新版稳定运行约定观察期后才归档旧版」的两条判据：
+#   · `observation_status()` —— 判得出"过没过观察期"，且判不出来时必须往
+#     **未满**那边倒（fail-closed）；
+#   · `archive_old()` —— 观察期未满一律拒绝，且拒绝时盘上一个字节都不动。
+#
+# 这里每个用例都盯着"能不能变红"：把 `archive_old()` 里的观察期检查删掉，
+# 下面必须有一条用例变红；把 `observation_status()` 的缺字段分支改成
+# `complete=True`，也必须有一条变红。
+
+
+def _pointer(gid: str, published_at) -> None:
+    """写一份发布指针。`published_at` 传 None 就是"这一代没记发布时间"。"""
+    payload = {"generation_id": gid, "status": release.PUBLISHED, "previous_generation": ""}
+    if published_at is not None:
+        payload["published_at"] = published_at
+    release.CURRENT_PATH.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
+
+
+def _tree_digests(root) -> dict:
+    """逐文件 (字节数, SHA-256)。用来证明"盘上一个字节都没少"。"""
+    out = {}
+    for path in sorted(root.rglob("*")):
+        if path.is_file():
+            out[path.relative_to(root).as_posix()] = (path.stat().st_size, release.sha256_file(path))
+    return out
+
+
+class TestObservationWindow:
+    """观察期判定：算得对，且判不出来时不许当"已满"。"""
+
+    def test_complete_when_published_long_enough(self, sandbox):
+        _pointer("g-20260101T000000Z-aaaaaa", "2026-01-01T00:00:00Z")
+        st = release.observation_status(now="2026-01-09T00:00:00Z")
+        # `_now()` 产出的就是带 Z 的 UTC 秒级时间戳，必须能解析（不是"猜"格式）。
+        assert st["complete"] is True
+        assert st["days_elapsed"] == 8.0
+        assert st["required_days"] == release.OBSERVATION_DAYS
+        assert st["generation_id"] == "g-20260101T000000Z-aaaaaa"
+        assert st["published_at"] == "2026-01-01T00:00:00Z"
+        assert "达到观察期" in st["reason"]
+
+    def test_incomplete_when_published_recently(self, sandbox):
+        _pointer("g-20260101T000000Z-aaaaaa", "2026-01-01T00:00:00Z")
+        st = release.observation_status(now="2026-01-05T12:00:00Z")
+        assert st["complete"] is False
+        assert st["days_elapsed"] == 4.5
+        assert "未达观察期" in st["reason"]
+
+    def test_missing_published_at_is_not_treated_as_complete(self, sandbox):
+        """缺 `published_at`：既不能当 0 天，也不能当已满——必须 fail-closed。"""
+        _pointer("g-20260101T000000Z-aaaaaa", None)
+        st = release.observation_status(now="2030-01-01T00:00:00Z")
+        assert st["complete"] is False
+        assert st["days_elapsed"] is None
+        assert "缺失或无法解析" in st["reason"]
+
+    def test_unparsable_published_at_is_not_treated_as_complete(self, sandbox):
+        _pointer("g-20260101T000000Z-aaaaaa", "2026/01/01 00:00")
+        st = release.observation_status(now="2030-01-01T00:00:00Z")
+        assert st["complete"] is False
+        assert st["days_elapsed"] is None
+        assert "2026/01/01 00:00" in st["reason"]
+
+    def test_no_pointer_is_not_treated_as_complete(self, sandbox):
+        st = release.observation_status(now="2030-01-01T00:00:00Z")
+        assert st["complete"] is False
+        assert "没有发布指针" in st["reason"]
+
+    def test_clock_going_backwards_is_not_treated_as_complete(self, sandbox):
+        """`now` 早于 `published_at`（时钟回拨/手改时间戳）时时间线不可信。"""
+        _pointer("g-20260101T000000Z-aaaaaa", "2026-06-01T00:00:00Z")
+        st = release.observation_status(now="2026-01-01T00:00:00Z")
+        assert st["complete"] is False
+        assert "时间线不可信" in st["reason"]
+
+
+class TestArchiveOnlyAfterObservation:
+    """`archive_old()` 的拒绝理由，每条都必须能单独触发。
+
+    为什么逐条写：合并成一句"不满足归档条件"，事后看日志的人分不清是
+    "观察期没过"（等几天再来）还是"这一代自己坏了"（永远不该归档）。
+    """
+
+    def test_refuses_while_observation_incomplete_and_deletes_nothing(self, sandbox):
+        """计划 K4 第 4 条本身：观察期未满 → 拒绝，且盘上一个字节都不许少。
+
+        这条是本次改动的核心门。把 `archive_old()` 里的观察期判断删掉，
+        它就会去复制+删原件，下面的字节核对立刻变红。
+        """
+        gen = _build_generation("g-20260102T000000Z-bbbbbb")
+        other = _build_generation("g-20260101T000000Z-aaaaaa")
+        release.publish(other)                      # 指针指向别的世代
+        before = _tree_digests(gen.dir)
+        with pytest.raises(release.ReleaseError) as err:
+            release.archive_old(gen.generation_id, dry_run=False, archive_root=sandbox / "arch")
+        assert "观察期未满" in err.value.detail
+        assert _tree_digests(gen.dir) == before, "拒绝归档时仍然改动了原目录字节"
+        assert not (sandbox / "arch" / gen.generation_id).exists(), "被拒绝时不得留下归档目录"
+
+    def test_refuses_current_generation(self, sandbox):
+        gen = _build_generation("g-20260101T000000Z-aaaaaa")
+        release.publish(gen)                        # 它自己就是线上
+        _pointer(gen.generation_id, "2026-01-01T00:00:00Z")   # 观察期已过也没用
+        with pytest.raises(release.ReleaseError) as err:
+            release.archive_old(gen.generation_id, dry_run=False, archive_root=sandbox / "arch")
+        assert "当前线上世代" in err.value.detail
+        assert gen.graph_path.is_file(), "线上世代的图被搬走了"
+
+    def test_refuses_failed_generation(self, sandbox):
+        """FAILED 是失败证据，归 `prune_old()` 管，不是归档对象。"""
+        gen = _build_generation("g-20260102T000000Z-bbbbbb")
+        gen.fail("boom")
+        other = _build_generation("g-20260101T000000Z-aaaaaa")
+        release.publish(other)
+        _pointer(other.generation_id, "2026-01-01T00:00:00Z")
+        with pytest.raises(release.ReleaseError) as err:
+            release.archive_old(gen.generation_id, dry_run=False, archive_root=sandbox / "arch")
+        assert "FAILED" in err.value.detail
+        assert gen.graph_path.is_file()
+
+    def test_refuses_generation_that_does_not_verify(self, sandbox):
+        """自检不过的坏版本不许归档：它可能正是要留作证据的那一份。"""
+        gen = _build_generation("g-20260102T000000Z-bbbbbb")
+        other = _build_generation("g-20260101T000000Z-aaaaaa")
+        release.publish(other)
+        _pointer(other.generation_id, "2026-01-01T00:00:00Z")
+        # 门禁报告被删：Manifest 记着 gate_report_hash，盘上没有这份字节。
+        gen.gate_report_path.unlink()
+        assert release.verify_generation(gen), "构造失败：这一代本该自检不过"
+        with pytest.raises(release.ReleaseError) as err:
+            release.archive_old(gen.generation_id, dry_run=False, archive_root=sandbox / "arch")
+        assert "自检不过" in err.value.detail
+        assert gen.graph_path.is_file()
+
+    def test_refuses_missing_generation(self, sandbox):
+        with pytest.raises(release.ReleaseError) as err:
+            release.archive_old("g-20260109T000000Z-ffffff", archive_root=sandbox / "arch")
+        assert "不存在" in str(err.value)
+
+    def test_dry_run_touches_nothing(self, sandbox):
+        gen = _build_generation("g-20260102T000000Z-bbbbbb")
+        other = _build_generation("g-20260101T000000Z-aaaaaa")
+        release.publish(other)
+        _pointer(other.generation_id, "2026-01-01T00:00:00Z")
+        before = _tree_digests(gen.dir)
+        # 不传 archive_root：默认必须在 generations 同级（data/arkrag/archive）
+        plan = release.archive_old(gen.generation_id)
+        assert plan["dry_run"] is True
+        assert plan["archive_root"] == str(release.ARCHIVE_DIR)
+        assert plan["archive_root"] == str(release.GENERATIONS_DIR.parent / "archive")
+        assert plan["file_count"] >= 2, f"演练没列出产物：{plan['files']}"
+        assert plan["removed"] == []
+        assert _tree_digests(gen.dir) == before
+        assert not release.ARCHIVE_DIR.exists()
+
+    def test_real_archive_copies_verifies_then_deletes(self, sandbox):
+        gen = _build_generation("g-20260102T000000Z-bbbbbb")
+        other = _build_generation("g-20260101T000000Z-aaaaaa")
+        release.publish(other)
+        _pointer(other.generation_id, "2026-01-01T00:00:00Z")
+        original = _tree_digests(gen.dir)
+        result = release.archive_old(
+            gen.generation_id, dry_run=False, archive_root=sandbox / "arch"
+        )
+        dest = sandbox / "arch" / gen.generation_id
+        # 1) 归档副本逐字节等于原件
+        archived = _tree_digests(dest)
+        for item in result["files"]:
+            assert archived[item["path"]] == (item["bytes"], item["sha256"])
+            assert item["bytes"] == original[item["path"]][0]
+            assert item["sha256"] == original[item["path"]][1]
+        # 2) 重量级产物已从世代目录删掉，Manifest 与门禁报告保留
+        assert not gen.graph_path.exists()
+        assert not gen.index_path.exists()
+        assert gen.manifest_path.is_file(), "Manifest 被删了：这一代将从 list_generations() 消失"
+        assert gen.gate_report_path.is_file(), "门禁报告被删了：Manifest 的 gate_report_hash 没有被引对象"
+        # 3) archive-manifest.json 内容正确
+        man = json.loads((dest / "archive-manifest.json").read_text("utf-8"))
+        assert man["generation_id"] == gen.generation_id
+        assert man["total_bytes"] == sum(item["bytes"] for item in man["files"])
+        assert man["total_bytes"] == result["total_bytes"]
+        assert man["kept"] == ["manifest.json", "reports/gates.json"]
+        assert {f["path"] for f in man["files"]} == {"graph/graph.json", "index/lexical.json"}
+        for item in man["files"]:
+            assert item["source"] == str(gen.dir / item["path"])
+            assert release.sha256_file(dest / item["path"]) == item["sha256"]
+        # 4) 归档后仍有 Manifest：这一代在列表里还在（否则指针里的 id 查不到东西）
+        assert gen.generation_id in {g["generation_id"] for g in release.list_generations()}
+
+    def test_failed_copy_leaves_originals_untouched(self, sandbox):
+        """复制/核对中途失败 → 原件一个字节都不动，且不留半份归档。
+
+        用"归档根是个普通文件"模拟目标目录建不出来：此时 `mkdir` 抛错，
+        必须已经什么都没删。
+        """
+        gen = _build_generation("g-20260102T000000Z-bbbbbb")
+        other = _build_generation("g-20260101T000000Z-aaaaaa")
+        release.publish(other)
+        _pointer(other.generation_id, "2026-01-01T00:00:00Z")
+        before = _tree_digests(gen.dir)
+        blocker = sandbox / "arch"
+        blocker.write_bytes(b"i am a file, not a directory")   # mkdir 必然失败
+        with pytest.raises((release.ReleaseError, OSError)):
+            release.archive_old(gen.generation_id, dry_run=False, archive_root=blocker)
+        assert _tree_digests(gen.dir) == before, "归档失败却删了原件"

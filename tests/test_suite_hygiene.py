@@ -314,7 +314,75 @@ class TestSuiteSizeIsMonotonic:
     # 原有用例（`test_prune_is_dry_run_by_default`）只在空目录里断言「演练不删东西」，
     # 空目录下任何候选条件都为空，**永远发现不了这个缺陷**；新用例造
     # PUBLISHED / READY / FAILED 三代并跑到真实 prune，才能把这条拦住。
-    N = 1291
+    # 1291 → 1470：补齐 K 阶段对照计划查出的四处漏项，一共 +179。逐笔核过：
+    #   · `tests/test_k2_perf.py` 38 个（性能评测门）；
+    #   · `tests/test_k2_gray.py` 54 个（真 HTTP 双实例灰度）；
+    #   · `tests/test_k3_thresholds.py` 61 个（阈值登记与审批记录强制校验）；
+    #   · `tests/test_release.py` +14 个（观察期判定与归档顺序），该文件已在
+    #     `TEST_FILES` 里，不产生 parametrize 增量；
+    #   · 前三个是**新文件**，进入 `TEST_FILES` 后让四个 parametrize
+    #     （本文件 61/130/150/184 行）各多三项（+12）。
+    #   38 + 54 + 61 + 14 + 12 = 179，1291 + 179 = 1470，与 `--collect-only` 实测一致。
+    # 这四道门换来的都是「原来根本不存在判定」：
+    #   · 性能：K 阶段此前一次性能评测都没跑过（`k阶段实测.md` 里「性能」
+    #     「bench」「P95」各 0 处），DoD 的「查询和构建性能有持续记录」无从谈起。
+    #     门只放**确定性事实**（字节数、词条数、文档数、探针 digest、RSS 上界、
+    #     冷加载打开过哪些文件），时序只申报不入 `all_passed`——实测同一批题
+    #     连跑两次，候选热查 P95 从 167.671 ms 跳到 544.19 ms（3.2 倍），
+    #     只有并发负载变了。把时序做成门就是让门随机红。
+    #   · 灰度：K4 那个「灰度」是进程内对 18 题跑探针，不是 HTTP。现在起两个
+    #     真 `serve.py` 实例逐题交替问，判据是拒答翻转、引用可定位、世代标识
+    #     三处核对；实测 20 题、40 次请求全 200、翻转 0、引用 184 条全部可定位。
+    #   · 审批：K3 第 5 条「超阈值必须人工审批」此前从未被执行过一次。
+    #     现在阈值（8 条 delta）与审批记录（七必填字段、`approved_by` 是
+    #     `auto`/`TBD` 判无效、`measured` 与实测差 >1e-9 判记录不符）由
+    #     `data/k3_thresholds.json` 与 `data/k3_approvals.json` 承担。
+    #   · 观察期：K4 第 4 条「观察期后才归档旧版」此前没有观察期也没有归档动作。
+    #     现在 `observation_status()` fail-closed（无 `published_at`／格式非法／
+    #     无指针一律按未满），`archive_old()` 七条拒绝理由逐条独立，
+    #     复制 → 逐文件核 SHA-256 → 写清单 → 最后才删原件，任一步失败不删任何东西。
+    # 1470 → 1471：`tests/test_k1_checks.py` 新增
+    # `test_probe_dir_is_unique_per_run_and_cleaned_up` 一条。该文件已在
+    # `TEST_FILES` 里，不产生 parametrize 增量。1470 + 1 = 1471，
+    # 与 `--collect-only` 实测一致。
+    # 这次换来的门是「回滚演练的探针目录每次运行独一份」：`check_rollback_tested()`
+    # 原先把探针目录写死在 `data/arkrag/_k1_rollback_probe/`，任一进程同时跑这一项
+    # 就共用同一个 `current.json`，于是 A 写在 B 的指针上、互相把对方的一步
+    # 当成自己的结果。**单独跑永远绿，只有并发时才红**，而且红得不像并发问题：
+    # 实测并发 4 份 `--only rollback_tested`，修正前 0/4 通过，两种错法各两次——
+    # 「回滚到当前世代未被拒，previous_generation 会退化成指向自身」×2 与
+    # 「release.rollback 拒绝执行：… 已经是当前世代，无需回滚」×2。
+    # 这条第一次出现是真事故：2026-11-04 15:19 跑 `k1_checks.py`，另一个子代理
+    # 正在跑全量 pytest（其中 `test_real_pointer_is_never_written` 也调这一项），
+    # 检查报了「回滚命令已实测」红，而代码本身是对的（`release.py:772` 正确地拒绝
+    # 回滚到自身）。修法 `tempfile.mkdtemp(prefix="k1_rollback_probe_")` 后
+    # 并发 4/4 通过。
+    # 1471 → 1506：`tests/test_k2_publish_check.py` 新增 31 个用例；该文件是新文件，
+    # 进入 `TEST_FILES` 后让四个 parametrize（本文件 61/130/150/184 行）各多一项（+4）。
+    # 31 + 4 = 35，1471 + 35 = 1506，与 `--collect-only` 实测一致。
+    # 这次换来的门是「发布前必须证明那五道门真跑过、而且跑的是这一代」：
+    # `docs/升级计划_GraphRAG架构.md:420-428` 的 K2 构建顺序末尾是
+    # 「… → 候选 READY → 灰度查询 → 正式发布」，五道门各自写报告，但**没有任何一处
+    # 要求发布前对账**——`release.publish()` 只查状态 READY、覆盖完整、
+    # `verify_generation()`，它看不到那五份报告。也就是说一个 READY 世代可以带着
+    # 五份「根本没跑」或「跑的是上一代」的报告直接上线，而没人会发现。
+    # `scripts/k2_publish_check.py` 把清单变成六条可失败判据（五份在场／各自
+    # all_passed／都绑同一世代／候选 READY／候选自检干净／报告不早于候选建成）。
+    # 三份报告没有 `generated_at` 字段，对它们只能记 `undetermined`——
+    # 用例专门钉住「无法判定不等于通过」（`test_three_reports_without_timestamp_are_
+    # undetermined_not_pass`），因为把不知道写成知道，正是这道门本来要防的事。
+    # 1506 → 1511：`tests/test_k2_publish_check.py` 再加 5 条，钉的是「这道清单
+    # 真的接在发布路径上了」。该文件已在 `TEST_FILES` 里，不产生 parametrize 增量。
+    # 1506 + 5 = 1511，与 `--collect-only` 实测一致。
+    # 为什么光有清单门不够：清单脚本写好了却没人调用，它只是一份没人拦的报告。
+    # 这 5 条在 tmp 沙箱里跑 `release_cli.cmd_publish()`，证明缺报告 / 报告绑上一代 /
+    # 报告自己没过 三种形状都会**拒绝且不写指针**；同时留两条反向对照
+    # （全齐则真发布、清单过了但覆盖不全仍被 `release.publish()` 拒），
+    # 证明它们不是「凡发布必红」。反向实测：把 `cmd_publish()` 里清单那 25 行
+    # 短路掉，5 条全红（`5 failed, 31 passed`），还原后 36 passed。
+    # 踩过的坑写进用例注释：`release_cli` 里的 `import k2_publish_check` 与本文件
+    # `spec_from_file_location` 载的是**两份模块实例**，只 patch 一处等于没 patch。
+    N = 1511
 
     def test_declared_count_matches_actual(self) -> None:
         """用 pytest 自己数一遍当前收集到的用例数，与本文件登记值比对。"""

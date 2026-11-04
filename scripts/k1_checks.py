@@ -35,6 +35,7 @@ import os
 import shutil
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
@@ -714,8 +715,19 @@ def check_rollback_tested(ctx: dict) -> dict:
     data["simulated_current"] = newer["generation_id"]
     data["rollback_target"] = older["generation_id"]
 
-    tmp_dir = Path(config.CIRCUIT_OPEN_PATH).parent / "_k1_rollback_probe"
-    tmp_dir.mkdir(parents=True, exist_ok=True)
+    # 探针目录必须**每次运行独一份**。原先写死成
+    # `data/arkrag/_k1_rollback_probe/`，于是任意两个进程同时跑这一项就会
+    # 共用同一个 `current.json`：A 刚写完"当前是候选世代"，B 已经把它回滚成
+    # `e0aacc` 并读出"当前是 e0aacc"，A 接着在 B 的指针上再回滚一次——
+    # 这一次要么被"已经是当前世代"拒掉（判成"回滚命令不可用"），要么
+    # 干脆被接受（判成"回滚到自身未被拒"）。两条都是**假结论**，而且只在
+    # 并发时出现：单独跑永远绿。实测并发 4 份 `--only rollback_tested`
+    # → 0/4 通过，两种错法各出现两次。
+    #
+    # 用 `tempfile.mkdtemp()` 而不是在 `data/arkrag` 下加进程号：进程号会被
+    # 复用，而这个目录出现在冻结基线目录里本身就不该。`mkdtemp` 保证
+    # 唯一且落在系统临时区；`finally` 里整目录清掉。
+    tmp_dir = Path(tempfile.mkdtemp(prefix="k1_rollback_probe_"))
     tmp_pointer = tmp_dir / "current.json"
     original = release.CURRENT_PATH
     problems: list[str] = []

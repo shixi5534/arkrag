@@ -1552,3 +1552,854 @@ py -3 -c "import json;d=json.load(open('data/k4_drill.json',encoding='utf-8'));[
 4. **本次演练的 Manifest 隔离靠「整目录备份 + 逐份比对还原」**，世代变多时
    `__enter__` 的耗时会线性涨（12 份现在可忽略）。若哪天世代到三位数，改成
    「只备份与演练相关的那几代」更合适。
+
+## K 阶段补做：对照计划查出的四处漏项
+
+### 0. 为什么会有这一节
+
+K1–K4 的代码与演练在 `c33719c` 提交之后，拿 `docs/升级计划_GraphRAG架构.md` 的 K 阶段条目
+**逐句**核对，查出四处**只有计划文字、代码里没有任何判定**的地方。计划原文（行号取自该文件
+`Select-String` 的实测输出）：
+
+| 计划行 | 原文 | 属于 |
+|---|---|---|
+| 424 | `→ 新 Assertion Graph → 新索引 → 全量硬门 → Gold Set 评测 → 性能评测` | K2 构建顺序 |
+| 425 | `→ 候选 READY → 灰度查询 → 正式发布` | K2 构建顺序 |
+| 436 | `- 超阈值必须人工审批` | K3 五条判据的第 5 条 |
+| 443 | `- 新版稳定运行约定观察期后才归档旧版` | K4 六条要求的第 4 条 |
+
+「只有文字」不是印象，是数出来的。**在本节追加之前**，两份文档里这些关键词的出现次数
+（`[IO.File]::ReadAllText` + `[regex]::Matches` 逐词计数）：
+
+| 关键词 | `docs/k阶段实测.md` | `docs/升级台账.md` |
+|---|---|---|
+| 性能 | 0 | 2 |
+| bench | 0 | 9 |
+| P95 | 0 | 25 |
+| 人工审批 | 0 | 0 |
+| 观察期 | 0 | 0 |
+| 正式发布 | 0 | 0 |
+| 灰度查询 | 2 | 0 |
+
+这张表里有两处**不能照字面读**，必须说清，否则它会反过来骗人：
+
+1. **`k阶段实测.md` 里 `灰度查询` 不是 0，是 2。** 那 2 处在 1246/1247 行，是 K4 §2 探针
+   输出的两行标签（`[PASS] 灰度查询（候选，不发指针）`），指「拿固定题集问候选、不发指针」，
+   **不是** K2 计划里的「灰度查询 → 正式发布」这一整个环节。同名不同物。
+2. **台账里 `性能` 2 处、`bench` 9 处、`P95` 25 处，全部来自 H 阶段**（`scripts/bench_h1.py` /
+   `bench_h3.py` 的索引层基线，见台账「## H 阶段」）。那是「单个索引后端快不快」的尺子，
+   **不是** K2 要求的「整代构建完成后候选 vs 上一代」的性能评测——后者在 K 阶段一次都没量过。
+   所以 `k阶段实测.md` 里 `性能`/`bench`/`P95` 三个 0 才是这条漏项的真凭据。
+
+四处漏项的共同点：**它们都是「流程节点」，不是「代码路径」**。写计划时它们是一串箭头里的
+一个词，落地时最容易被当成「反正会有人做」。而一条从未被执行过一次的判据，等于没有——
+K3 那处尤其典型：本轮实测恰好「略降但不显著」，**从未触发过阈值**，所以「超阈值要审批」
+这条规则在补做之前既没定义过阈值、也没定义过审批记录长什么样。
+
+本轮给每处各补一道**能失败的门**（不是补一段说明文字）。下面 4 节逐处说清「门判什么」与
+「本次实测读数」，§7–§9 是文件清单、复现命令与遗留。
+
+### 1. K2 性能评测：门只放确定性事实
+
+#### 1.1 口径
+
+`scripts/k2_perf.py`，默认 40 题、热查重复 2 次、`top_k=20`、`graph_depth=1`。
+每代各起 **2 个全新子进程**（一个是整代测量、一个是索引路径证明）——冷启动成本与峰值 RSS
+只有在全新进程里才是真的；同一进程先后载入两代，第二代踩第一代的页缓存，量出来的是
+「我们的测量方法」而不是「这一代有多重」。
+
+关键设计：**门分成两类，只有一类算数**。
+
+| 类别 | 放什么 | 是否进 `all_passed` |
+|---|---|---|
+| 硬门 `checks`（7 项：`generations_ok` / `index_size_delta` / `cold_load_path` / `index_binding` / `rss_ceiling` / `report_fields` / `p95_backstop`） | 索引与加载字节、探针 digest、冷加载走的函数、峰值 RSS 上界、报告字段完整性，外加唯一碰时序的兜底门 `p95_backstop`（阈值 2×，只为抓「慢了十倍」这种灾难） | **是** |
+| 申报项 `declared`（22 项） | 冷/热 P50/P95/P99、加载耗时、构建耗时 | **否**，字段里写死 `enforced=False` |
+
+`p95_backstop` 是 7 硬门里**唯一**碰时序的那一条，所以门数是 7 而不是 6——它虽在硬门里，
+阈值取得极宽（2×），作用只是保险丝，不是性能判据（§1.4 末段）。
+
+理由是这条脚本最要紧的一条纪律：**单题耗时在本机不可复现到具体值**。同一份代码、同一批题，
+重跑一次 P95 就能挪几十毫秒（`docs/k阶段实测.md` K4 §3 已记 15–44 ms/题的浮动）。把「候选
+不许比上一代慢 5%」做成门，等于让门随机变红；随机红的门活不过两周，它会被顺手放宽，
+然后连「慢了十倍」也拦不住。所以时序只申报，兜底门取 2×，只为抓灾难性回退。
+
+#### 1.2 实跑结果（`py -3 scripts/k2_perf.py`，EXIT=0）
+
+```
+K2 性能评测（候选 vs 上一代）  Python 3.14.3  win32
+候选 g-20261103T132152Z-06a741
+上一代 g-20261031T035231Z-4eafae
+题量 40  热查重复 2  top_k 20  graph_depth 1
+------------------------------------------------------------------------------
+确定性事实（硬门，条件不成立必红）
+[PASS] 两代可加载且产物齐备             候选 g-20261103T132152Z-06a741 schema=ark-rag-3 status=READY / 上一代 g-20261031T035231Z-4eafae schema=ark-rag-3 status=READY / 5 件产物均 > 0 字节：True
+[PASS] 索引字节与成因核对              lexical.json 候选 106,685,068 B → 上一代 127,244,898 B，缩小 16.16%（n=2 代）；倒排词条 390,508 ← 694,304（43.76% 更少，成因 t1→t2）；文档数 13798 ← 13781（+17 块，文件反而更小）；每千词条字节 候选 0.273 KiB vs 上一代 0.183 KiB
+[PASS] 冷加载只走 load_index       audit hook 实测：06a741 打开 1 份 JSON / 106,685,068 B（lexical.json 106,685,068 B）；4eafae 打开 1 份 JSON / 127,244,898 B（lexical.json 127,244,898 B）；graph.json 打开次数 候选 0 / 上一代 0（n=2 代 × 1 次冷加载）
+[PASS] 索引内容绑定 Manifest        probe_digest 重算一致：候选 b800a2a2b2e273b0、上一代 46e600c1f3a9ec9e（n=2 代 × 10 条固定探针 top-10）
+[PASS] 峰值 RSS 上界              峰值 RSS 候选 1563.63 MiB / 上一代 1719.73 MiB（比 0.909×，n=2 进程）；上界 4096.0 MiB、相对上限 1.5×
+[PASS] 每代报告字段完整性              候选 13 字段齐 + 冷/热各 4 项分位齐（n=40 题）/ 上一代同（n=40 题）
+[PASS] 热查 P95 兜底（2×）          热查 P95 候选 130.687 ms / 上一代 89.402 ms = 1.462×（阈值 2.0×，n=候选 40 题 / 上一代 40 题）
+------------------------------------------------------------------------------
+申报项（时序数字，只记录不判红，不进 all_passed）
+  候选   冷查 n=40 P50 73.715 P95 138.987 P99 165.89 min 33.992 max 165.89
+  候选   热查 n=40 P50 72.658 P95 130.687 P99 157.719 min 34.303 max 157.719
+  候选   加载 12216.52 ms（含五件产物）  管线构造 196.11 ms
+  候选   RSS 起始 26.69 MiB  加载后 1359.62 MiB  就绪 1375.5 MiB  峰值 1563.63 MiB
+  候选   题量 n=40  类别 adversarial=3  alias=6  cross_chunk=4  direct_relation=6  multihop=6  negative_abstain=4  single_chunk=7  time_conflict=4
+  候选   构建 run r-20261103T132055Z-fbdfeb 总跨度 196.0 s （11 条事件，取自事件日志不重跑）
+  候选   索引路径 data/arkrag/generations/g-20261103T132152Z-06a741/chunks.jsonl
+  上一代 冷查 n=40 P50 51.726 P95 93.795 P99 192.51 min 26.314 max 192.51
+  上一代 热查 n=40 P50 48.916 P95 89.402 P99 97.882 min 26.645 max 97.882
+  上一代 加载 7757.55 ms（含五件产物）  管线构造 96.72 ms
+  上一代 RSS 起始 26.8 MiB  加载后 1502.34 MiB  就绪 1508.13 MiB  峰值 1719.73 MiB
+  上一代 题量 n=40  类别 adversarial=3  alias=6  cross_chunk=4  direct_relation=6  multihop=6  negative_abstain=4  single_chunk=7  time_conflict=4
+  上一代 构建 run r-20261031T035149Z-d7c94b 总跨度 176.0 s （10 条事件，取自事件日志不重跑）
+  上一代 索引路径 data/arkrag/chunks.jsonl
+  申报项合计 22 项，全部 enforced=False
+  LLM token/成本：不可测（本机无 LLM 端点，抽取式回答器），一律 null
+------------------------------------------------------------------------------
+硬门 7/7 通过（申报项 22 项不参与判定）
+报告已写 data/k2_perf.json
+```
+
+#### 1.3 确定性事实：这四组数可以当结论
+
+| 事实 | 候选 `06a741` | 上一代 `4eafae` | 关系 |
+|---|---|---|---|
+| `lexical.json` 字节 | 106,685,068 B | 127,244,898 B | 缩小 **16.16%** |
+| 倒排词条 | 390,508 | 694,304 | 少 **43.76%**（成因 `t1→t2`） |
+| 文档数 | 13798 | 13781 | +17 块 |
+| 每千词条字节 | 0.273 KiB | 0.183 KiB | 词条单位更贵、总量更省 |
+| 峰值 RSS | 1563.63 MiB | 1719.73 MiB | **0.909×** |
+| 冷加载打开的 JSON | 1 份（只有 `lexical.json`） | 1 份（同） | `graph.json` 打开 **0** 次 |
+| 探针 digest | `b800a2a2b2e273b0` | `46e600c1f3a9ec9e` | 各代自洽 |
+
+这四组为什么能当结论：**它们不随机器忙不忙变**。`127,244,898 B → 106,685,068 B` 换个时间
+再跑还是这两个数；`graph.json 打开 0 次` 是 audit hook 抓到的真实 `open()` 调用，不是推断；
+探针 digest 是把 10 条固定探针的 top-10 重算一遍比对，索引被换掉一位数就会红。
+
+这三组数字与 K3 §12 的读数**逐个对得上**（同两个世代、同两份文件）：`127,244,898 B` 与
+`106,685,068 B`、`694,304` 与 `390,508` 词项、`13781` 与 `13798` 文档，与 K3 §12
+「=== 倒排规模 ===」那四行逐字相同。**这一致性是跨脚本的交叉验证**：两个脚本独立读同一份
+`lexical.json`，各算各的，得到的字节数与词项数完全相同。
+
+但 **`−16.16%`（字节）与 `−43.76%`（词项）不是同一件事的两种说法**，是两个不同量纲，
+K3 §12 已论证：同一批正文在 `t1/t2` 下的 token 数只差 **7.29%**（`t2/t1 = 0.9271`），
+词项多掉的那 36 个百分点来自 `t2` 的两处口径变化（专名整词入表、专名边界不连双字）。
+所以本节只能说「**字节**缩小 16.16%」，不能说「索引瘦身 16.16%」，更不能把 43.76% 混进来。
+
+`文档 +17 块而文件更小` 不是矛盾，是 `tokenizer_version t1→t2` 的必然：词条少了 43.76%，
+多 17 个文档的增量远不足以抵掉词表收缩。**这条必须连 `t1→t2` 一起写**，否则「词条少了
+43.76%」会被误读成语料缩水。
+
+#### 1.4 时序读数是「本次读数」，不是性能结论——本次方向还与早先一次相反
+
+这是本节最必须说清的一条。**下面这些数字只能当「我跑这一次看到了什么」，不能当结论**：
+
+| 项 | 候选本次 | 上一代本次 |
+|---|---|---|
+| 冷查 P50 / P95 | 73.715 / 138.987 ms | 51.726 / 93.795 ms |
+| 热查 P50 / P95 | 72.658 / 130.687 ms | 48.916 / 89.402 ms |
+| 加载（含五件产物） | 12216.52 ms | 7757.55 ms |
+| 管线构造 | 196.11 ms | 96.72 ms |
+
+**本次候选在热查 P95 上比上一代慢 1.462×，在冷查与加载上也慢。** 这与早先一次在干净环境
+（无并发）下的读数**方向相反**——据 Lead 转述，那次读到候选热查 P95 127.403 ms / 上一代
+223.186 ms = `0.571×`，是候选明显更快。两次的差别不在代码，在**当时机器上有别的进程在抢
+CPU 与内存**。
+
+> **这三个数的出处要说清**：`127.403` / `223.186` / `0.571×` 是 Lead 转述的「早先一次干净
+> 环境读数」，**不是本节任何一条命令的输出**，仓库里也没有留档（`scripts/` / `tests/` /
+> `docs/` / `data/` 全文搜这三个数，只搜到本节与台账里对它们的转述本身）。本节自己实跑、
+> 能指回 `py -3 scripts/k2_perf.py` 输出的只有 `130.687` / `89.402` / `1.462×`。
+> 留着旧读数只为说明「方向上会翻」，**不能拿它当性能证据**。
+
+同一批题、同一份代码，候选热查 P95 曾被观测到从 167.671 ms 跳到 544.19 ms（3.2 倍），
+只因当时有别的进程在跑。所以：
+
+* **「候选热查比上一代快多少」这个问题，本轮的读数回答不了。** 要回答它，必须在无并发时
+  重跑，并且把「当时机器负载」一起记下来（`k2_gray.py` 就是这么做的——它先读
+  `GlobalMemoryStatusEx` 拿到「可用 16232 MiB / 总 32543 MiB / 负载 50%」再决定模式）。
+* **兜底门 `p95_backstop` 仍然有意义**：阈值 2×，本次 1.462× 过了。它的用处不是判断
+  「快慢」，是判断「有没有慢到十倍」。若将来候选真慢了十倍，1.462× 这种量级的噪声淹不掉它。
+* **别把申报项当门读**。报告里 22 项全部 `enforced=False`，这句是写给未来的自己和读者看的：
+  它们进不了 `all_passed`，所以「硬门 7/7 通过」**不代表**「性能没退化」，只代表
+  「7 条确定性事实成立」。
+
+### 2. K2 灰度查询：两个真 HTTP 实例，逐题交替问
+
+#### 2.1 口径
+
+`scripts/k2_gray.py` 起**两个真的 `serve.py` 实例**（`--generation … --port 0`，端口由系统分配），
+**逐题交替**打两代（不是先把一代问完再问另一代——交替才能让两代吃到同一时刻的机器状态）。
+它**只按 `--generation` 显式指定世代启动，不写发布指针，不调 `/admin/rollback`**。
+
+「灰度」在这里的含义必须精确：**它是「候选可以在真 HTTP 上服务、且行为与基线逐题一致」**，
+不是「已经对部分流量放量」。放量需要改指针或网关，本轮没做（§9 遗留 ④）。
+
+#### 2.2 实跑结果（`py -3 scripts/k2_gray.py`，EXIT=0）
+
+```
+K2 灰度查询：两代真实 HTTP 实例，逐题比对
+[i] 候选 g-20261103T132152Z-06a741
+[i] 基线 g-20261031T035231Z-4eafae
+[i] 只按 --generation 显式指定世代启动；不写发布指针，不调 /admin/rollback
+[i] 可用物理内存 16232 MiB（总 32543 MiB，负载 50%） 来源 GlobalMemoryStatusEx
+[i] 模式 concurrent（门槛 6144 MiB：两个实例同时活着）
+[i] 起服务（serve.py --generation … --port 0，模式 concurrent）
+[i] candidate g-20261103T132152Z-06a741 端口 56650 启动 401 ms / 就绪 19777 ms / 阻断项不符 0
+[i] baseline g-20261031T035231Z-4eafae 端口 56652 启动 401 ms / 就绪 21053 ms / 阻断项不符 0
+[i] candidate 热身（管道构建 g-20261103T132152Z-06a741）：8130 ms
+[i] baseline 热身（管道构建 g-20261031T035231Z-4eafae）：8124 ms
+[PASS] 探针题数固定               固定探针 20 题（期望 20），题集一致且全部在 Gold Set 中
+[PASS] 两代探针皆 200            两代共 40 次探针请求全部 200
+[PASS] 世代标识三处核对             candidate 三处标识均 = g-20261103T132152Z-06a741；baseline 三处标识均 = g-20261031T035231Z-4eafae
+[PASS] 拒答决策不翻转              翻转 0 题（20 题两代一致）；另：Gold Set 标注应拒答的题被答了（两代相同，非灰度回归） 候选 ['q-na-000013'] / 基线 ['q-na-000013']
+[PASS] 引用可定位                引用 184 条全部可在本题命中块上定位（越界/对不上 0，引到命中块外 0）
+
+灰度判据：5/5 通过
+结论：候选 g-20261103T132152Z-06a741 与基线 g-20261031T035231Z-4eafae 在同一批 20 题上无拒答翻转、引用全部可定位、世代标识正确（模式 concurrent）
+报告已写 data/k2_gray.json
+```
+
+#### 2.3 五条判据各拦什么
+
+| 判据 | 它拦什么 | 本次读数 |
+|---|---|---|
+| `probe_set_fixed` | 题集被悄悄换掉、或题不在 Gold Set 里 | 固定探针 20 题（期望 20） |
+| `probes_answered` | 候选起得来但服务不通（4xx/5xx/超时） | 两代共 40 次请求**全部 200** |
+| `generation_identity` | 服务自称的世代与实际载入的不是同一代（静默回落到旧版） | 三处标识全对，两代各三处 |
+| `abstain_flip` | 换世代把某题「该答/该拒」结论翻了 | **翻转 0 题**（20 题两代一致） |
+| `citation_locate` | 引用指向不存在的块，或指到本题命中块之外 | **184 条全部可定位**，越界 0 |
+
+`拒答翻转 0` 是灰度最重要的一条：它是用户能直接感知到的行为变化。20 题里两代回答/拒答
+逐题相同。
+
+`引用可定位 184 条` 的分母是 20 题的两次回答加起来（候选 + 基线逐题引用的总数），
+`越界/对不上 0`、`引到命中块外 0`——两个 0 是分开判的：前者是「块 id 不存在」，
+后者是「块存在但不是这一题检索命中过的块」。后者更严，因为它拦的是「引用了别处的正确块」
+这种看着没问题、实则不可定位的引用。
+
+#### 2.4 报告里另外三条硬事实
+
+```
+mode=concurrent
+production_pointer_untouched=True
+production_pointer={"before":"g-20261030T154606Z-55dfd7","after":"g-20261030T154606Z-55dfd7"}
+servers: candidate port 56650 boot 401ms ready 19777ms peak_rss 1487 MiB
+         baseline  port 56652 boot 401ms ready 21053ms peak_rss 1723 MiB
+```
+
+`production_pointer_untouched=true`，且 `before` 与 `after` 都是 `55dfd7`——**演练前后线上
+指针逐字相同**。这是「灰度 ≠ 发布」的凭据：整个过程中线上那一代一次都没被碰过。
+
+`模式 concurrent（门槛 6144 MiB）` 是**先测可用内存再选模式**：两个实例同时活着要预留余量，
+可用内存不够就退化成串行模式（并如实标注），而不是硬起两个实例把机器打爆——那样量出来的
+「候选慢」其实是自己造的。
+
+`就绪 19777 / 21053 ms` 是进程从启动到能服务的时长，含管道构建（热身 8130 / 8124 ms 是
+其中一次显式热身）。**这个数字同样是本次读数**：它受页缓存与磁盘负载影响，不要当启动性能。
+
+### 3. K3 超阈值人工审批：阈值登记表与审批记录强制校验
+
+#### 3.1 口径
+
+`scripts/k3_thresholds.py` 把计划 K3 第 5 条「超阈值必须人工审批」变成一道**会变红的门**。
+
+三条要点：
+
+1. **指标自己算，不抄别人打印好的数字。** 指标从 `data/k3_recall_pairs.json` 重算——
+   否则阈值比对的是二手数字，跨了也看不出来。
+2. **阈值只有一个事实源**：`data/k3_thresholds.json`（`schema=k3-thresholds-1`）。脚本
+   **只读不写**阈值，代码里不写死任何阈值常量。
+3. **三种结局**：未跨阈值 → PASS（不需要审批）；跨了 + 有该指标的**有效**审批记录 → PASS；
+   跨了 + 没有有效审批 → **FAIL**，并点名指标、实测多少、阈值多少、差多少。
+
+「有效审批」的定义（`approval_policy`）不是「记录存在」就算：
+
+* 七个字段齐全：`metric` / `measured` / `threshold` / `approved_by` / `approved_at` /
+  `decision` / `rationale`；
+* `approved_by` 必须是**自然人**——空串、`TBD`、`agent`、`auto` 之类占位符一律无效。
+  **审批是人做的动作，程序不能自批。**
+* `approved_at` 可解析为日期；`decision` 是明确的通过/拒绝；
+* `measured` 与本次实测差 ≤ `1e-9`——**审批只能覆盖它当时看到的那一次实测，换一次实测就失效**。
+* `direction: "red_line"` 的行（未解释差异数）**不接受审批**：归因能力跟不上改动时，
+  签字不能替代归因。
+
+#### 3.2 实跑结果（`py -3 scripts/k3_thresholds.py`，EXIT=0）
+
+```
+==============================================================================
+K3 第 5 条判据：超阈值必须人工审批
+==============================================================================
+阈值唯一事实源：data/k3_thresholds.json（schema=k3-thresholds-1）
+旧代 g-20261031T035231Z-4eafae
+新代 g-20261103T132152Z-06a741
+
+== 分母 ==
+  共同题 320；有 gold 可评 300（无 gold 剔除 20）
+  delta 判据 8 条；absolute 申报 9 条
+  审批记录 0 条（可用 0，非对象被丢弃 0）
+
+== 召回指标（两套口径逐条分开，Δ = 新 − 旧）==
+  口径 A（丢弃 null）
+    R@5   n=300  旧 0.510833 → 新 0.500833 Δ -0.010000
+    R@20  n=300  旧 0.701944 → 新 0.698889 Δ -0.003056
+    RR    n=229  旧 0.570038 → 新 0.561904 Δ -0.008134
+  口径 B（0 填充，与 ask.py 同口径）
+    R@5   n=300  旧 0.510833 → 新 0.500833 Δ -0.010000
+    R@20  n=300  旧 0.701944 → 新 0.698889 Δ -0.003056
+    RR    n=300  旧 0.439430 → 新 0.431197 Δ -0.008233
+
+== 结构量 ==
+  实体数          旧        6,582 → 新        6,583  Δ +0.0152%
+  边数           旧       28,625 → 新       28,636  Δ +0.0384%
+  词法索引字节       旧  127,244,898 → 新  106,685,068  Δ -16.1577%
+  未解释差异 0（红线 0）
+
+== delta 判据（逐指标）==
+  [PASS] r20_delta                阈值 -0.0200  实测 -0.003056  未跨阈值，不需要审批（距线尚有 0.016944（实测 -0.003056 vs 阈值 -0.020000））
+  [PASS] r5_delta                 阈值 -0.0300  实测 -0.010000  未跨阈值，不需要审批（距线尚有 0.020000（实测 -0.010000 vs 阈值 -0.030000））
+  [PASS] rr_delta                 阈值 -0.0200  实测 -0.008233  未跨阈值，不需要审批（距线尚有 0.011767（实测 -0.008233 vs 阈值 -0.020000））
+  [PASS] entity_count_drop_pct    阈值 -1.0000  实测 +0.015193  未跨阈值，不需要审批（距线尚有 1.015193（实测 +0.015193 vs 阈值 -1.000000））
+  [PASS] entity_count_rise_pct    阈值 +5.0000  实测 +0.015193  未跨阈值，不需要审批（距线尚有 4.984807（实测 +0.015193 vs 阈值 +5.000000））
+  [PASS] edge_count_drop_pct      阈值 -2.0000  实测 +0.038428  未跨阈值，不需要审批（距线尚有 2.038428（实测 +0.038428 vs 阈值 -2.000000））
+  [PASS] lexical_bytes_drop_pct   阈值 -25.0000  实测 -16.157685  未跨阈值，不需要审批（距线尚有 8.842315（实测 -16.157685 vs 阈值 -25.000000））
+  [PASS] unexplained_differences  阈值 +0.0000  实测 +0.000000  未跨阈值，不需要审批（距线尚有 0.000000（实测 +0.000000 vs 阈值 +0.000000））
+
+== absolute 声明（F4 的绝对门，K3 不重复判，只申报差距）==
+  [申报] recall_at_20                     当前 0.6989（n=300） vs ≥ 0.9000 → 未达标 -0.2011
+  [申报] recall_at_5                      当前 0.5008（n=300） vs ≥ 0.7500 → 未达标 -0.2492
+  [申报] mrr                              当前 0.4312（n=300）；本行不设绝对阈值，仅申报基线
+  [申报] citation_localization            无实测输入（本门不评估这项，也不假装通过）
+  [申报] key_fact_citation_coverage       无实测输入（本门不评估这项，也不假装通过）
+  [申报] unanswerable_refusal             无实测输入（本门不评估这项，也不假装通过）
+  [申报] directional_accuracy             无实测输入（本门不评估这项，也不假装通过）
+  [申报] hard_integrity_errors            无实测输入（本门不评估这项，也不假装通过）
+  [申报] failed_artifact_published        无实测输入（本门不评估这项，也不假装通过）
+
+结论：8/8 条 delta 判据成立（本轮无指标跨阈值，因此未发生人工审批；这不是「审批流程已验证通过」）
+
+写盘：k3_threshold_gate.json（all_passed=True）
+```
+
+#### 3.3 本轮没有任何指标跨阈值 —— 这句话决定这一节能说什么、不能说什么
+
+8 条 delta 判据**全部未跨阈值**，最近的一条是 `lexical_bytes_drop_pct`：实测 −16.157685%，
+阈值 −25.0000%，**距线 8.842315 个百分点**。其余七条距线都在 0.011 以上（`unexplained_differences`
+实测 0、阈值 0，判据是「未**超过** 0」，所以 0 不构成跨线）。
+
+因此 `data/k3_approvals.json` 的 `approvals` 是**空数组**（文件 5 行、706 B）：
+
+```json
+{ "schema": "k3-approvals-1", "note": "…本轮没有发生人工审批，一条记录都不该有。空数组不是「审批流程已验证通过」，只是「没有该审批的事」…", "approvals": [] }
+```
+
+脚本自己把这句话印在结论行里，本节照抄不改写：
+
+> **本轮无指标跨阈值，因此未发生人工审批；这不是「审批流程已验证通过」。**
+
+这条区分不是文字游戏，它决定这道门的**证据等级**：
+
+| 已验证 | **未验证** |
+|---|---|
+| 阈值表存在且被逐条读取（8 条 delta + 9 条 absolute） | 跨阈值时是否真的会变红（没有一次跨线让它红过） |
+| 「未跨 → PASS」这条路径 | 「跨了 + 有效审批 → PASS」这条路径 |
+| 「距线多少」的算术 | 审批记录格式校验在真实记录上的表现 |
+| 审批目录为空的处理（`审批记录 0 条，可用 0，非对象被丢弃 0`） | 七字段校验、`approved_by` 占位符拒绝、`measured` 差 ≤1e-9 这些规则**在真实数据上的**行为 |
+
+**它目前只被验证到「能拦」的一半**：未跨的时候放行是对的，跨了的时候会不会拦住——
+只有 `tests/test_k3_thresholds.py` 的 61 条用例做得到（它们构造跨线场景与伪审批记录），
+**真实盘面上一次都没发生过**。§9 遗留 ②。
+
+#### 3.4 两套口径为什么必须分开印
+
+`R@5` / `R@20` 在口径 A 与口径 B 下逐位相同，**`RR` 不同**：
+
+| 口径 | n | 旧 RR | 新 RR | Δ |
+|---|---|---|---|---|
+| A（丢弃 null） | 229 | 0.570038 | 0.561904 | −0.008134 |
+| B（未命中填 0，与 `ask.py` 同口径） | 300 | 0.439430 | 0.431197 | −0.008233 |
+
+阈值表里 `rr_delta` 那行**写明按口径 B 判**（与 `scripts/ask.py` 的评测器同口径），口径 A
+只作申报。理由很硬：**门判的和线上量的必须是同一件事**。若门用口径 A（分母只算有金标的
+229 题）判，而线上监控用口径 B（300 题、未命中填 0），那门永远是宽松的那一侧，跨线也看不出来。
+
+口径 A 的 n=229 与口径 B 的 n=300 相差 71——这就是「丢弃 null」与「填 0」的差别，两个数
+都不是错的，但**混着用就会得出相反的结论**。
+
+### 4. K4 观察期与归档：机制先拦住，真实归档尚未发生
+
+#### 4.1 缺口与补法
+
+计划 K4 第 4 条是「新版稳定运行约定观察期后才归档旧版」。原来 K4 的 15 门里**没有一门**
+碰这件事：归档函数不存在，观察期天数没有定义，`data/arkrag/archive/` 这个目录从来没被创建过。
+
+本轮加了两样东西、两道门：
+
+| 加的东西 | 位置 | 作用 |
+|---|---|---|
+| `OBSERVATION_DAYS = 7` + `_observation_days()` | `src/arkrag/release.py` | 观察期天数的唯一定义，可用环境变量 `ARKRAG_OBSERVATION_DAYS` 覆盖（演练与测试要用），但**默认值必须写在代码里**；非整数或负数直接抛 `ReleaseError`，不猜 |
+| `observation_status()` | 同上 | 返回 `{generation_id, published_at, days_elapsed, required_days, complete, reason}` |
+| `archive_old()` | 同上 | 归档旧版；观察期未满必须拒绝 |
+| 门 `observation_window` | `scripts/k4_drill.py` | 观察期判定正确且 **fail-closed** |
+| 门 `archive_refused_during_observation` | 同上 | 观察期未满时归档被拒，且**盘上零改动** |
+
+`observation_status()` 的核心设计是**一切异常都落到 `complete=False`**（fail-closed）：
+
+> 把不确定性往「已满」那边倒是 fail-open：指针坏掉、`published_at` 是空串、时间格式换了
+> 个写法——任何一处都会让**刚上线几分钟**的新版被判成「已过观察期」，旧版随即被复制归档
+> 并从世代目录删掉。反过来（判成「未满」）的代价只是多留几天磁盘。
+
+所以：`published_at` 缺失或无法解析 → `complete=False` 并写明原因，**不当作 0 天，
+也不当作已满**；`now` 早于 `published_at`（时钟回拨/手改时间戳）同样按未满处理，
+因为时间线本身已经不可信。
+
+两道门是**故意分开**的：观察期算得再准，只要 `archive_old()` 忘了调它，旧版照样会被搬走。
+所以 `observation_window` 判「算得对不对」，`archive_refused_during_observation` 判
+「有没有真的拿它去拦」。
+
+#### 4.2 实跑结果（`py -3 scripts/k4_drill.py`，EXIT=0，17/17）
+
+门数从 15 加到 17，两道新门：
+
+```
+[PASS] 观察期判定正确且 fail-closed（不判是否已满） 线上 g-20261030T154606Z-55dfd7 已 4.6444 天 / 要求 7 天 / complete=False；独立算 4.6444 天 → 一致；fail-closed 三例（无 published_at / 格式非法 / 无指针）complete 全 False=True
+[PASS] 观察期未满时归档被拒且盘上零改动           真实 g-20261031T035231Z-4eafae：拒绝=True（4 个文件/242.2 MB SHA-256 前后一致）；合成世代：对照组（30 天）拿到计划 3 个文件、观察期 5.0 天时 dry_run=False 拒绝=True、产物零改动=True
+
+K4 检查：17/17 通过
+结论：K4 灰度验收与回滚演练全过
+报告已写 data/k4_drill.json
+```
+
+线上那一代的观察期读数（`data/k4_drill.json` 的 `observation_window.data.observation`）：
+
+```json
+{"generation_id":"g-20261030T154606Z-55dfd7","published_at":"2026-10-30T15:49:29Z",
+ "days_elapsed":4.6444,"required_days":7,"complete":false,
+ "reason":"线上世代 g-20261030T154606Z-55dfd7 仅运行 4.64 天，未达观察期 7 天（还差 2.36 天），旧版不得归档"}
+```
+
+三门课都在这里：
+
+1. **主判据不判「是否已满」**。门名写的是「观察期判定正确且 fail-closed（**不判是否已满**）」。
+   若把「线上必须已满 7 天」当判据，这门从加上的第一天就是红的（线上才 4.6444 天），
+   红久了必被加白名单。所以门判的是：`days_elapsed` 算得对（**用原始字节里的
+   `published_at` 独立算一遍**，不经过 `observation_status()` 内部函数，两路都是 4.6444 天）、
+   `required_days` 与 `OBSERVATION_DAYS` 吻合、`complete` 与实际一致。
+2. **fail-closed 三例逐例验**：无 `published_at` / 格式非法（`2026/01/01 00:00`）/ 完全没有指针。
+   三例 `complete` 全 `False`。这三例是「坏输入不会变成放行」的证据。
+3. **归档门要证明的是「拒了 **且** 盘上没少一个字节」**。只证明「返回了拒绝」不够——
+   函数可能先把文件搬走再报拒绝。真实那一代 `4eafae`：4 个文件 / 242.2 MB，
+   **SHA-256 前后一致**。另一半是 `dry_run=False` 的**真实调用**：合成世代在观察期
+   `5.0 天`时被拒、产物零改动；对照组（把观察期覆盖成 30 天）能拿到计划里的 3 个文件，
+   证明「拒绝」不是因为「这个函数根本不干活」。
+
+#### 4.3 但「机制能拦」不是「真的归档过」
+
+这一节最必须写清的一句：**历史上从未真的归档过一次**。证据两条：
+
+* `data/arkrag/archive/` 目录**从未被创建**（`Test-Path` → `False`）；
+* `git log --all -- data/arkrag/archive` 查出 **0 条**提交——它连被误提交过一次都没有。
+
+所以本轮补的全是**阻止不该发生的动作**的那一侧：
+
+| 已验证 | **未验证** |
+|---|---|
+| 观察期未满时拒绝归档（真实世代 + 合成世代，两次） | 观察期满后**真的**归档一次 |
+| 拒绝时盘上 SHA-256 不变（4 文件 / 242.2 MB） | 归档完成后的目录结构、`archive/` 里的 Manifest、旧版能否从归档恢复 |
+| fail-closed 三例（坏指针不会放行） | 归档后 `prune_old()` 与新指针的相互作用 |
+
+这与 §3 是同一类状态：**门是红的必要条件已经具备，绿的那条路径没走过。**
+两者都不是「写个 TODO 等以后」，而是「日志里明确记着还没走」——`archive_old()` 的真实调用
+在本轮只发生在 `dry_run=True` 与「被拒绝」两种情形下。
+
+#### 4.4 另外 15 门本次读数
+
+新增两门之外，15 门与 K4 §2 同（判据是 17 个 `ok` 布尔值，它们每次都必须一致）：
+
+```
+[PASS] 灰度查询（候选，不发指针）   题 18 / 答 17 / 拒 1 / 引用 94 条（定位失败 0）/ 单题 75.1 ms
+[PASS] 灰度查询（上一代，对照）     题 18 / 答 17 / 拒 1 / 引用 88 条（定位失败 0）/ 单题 59.9 ms
+[PASS] 拒答结论逐题稳定            翻转 0 题（两代回答/拒答一致）
+[PASS] 回滚只切指针、不重建历史      回滚到 g-20261031T035231Z-4eafae 完成；12 份 Manifest 改动 0
+[PASS] 演练未改坏任何世代 Manifest   备份 12 份 / 还原 1 份：['g-20261103T132152Z-06a741']
+[PASS] 线上指针未被演练改动         线上仍是 g-20261030T154606Z-55dfd7（PUBLISHED）
+[PASS] 回滚后固定探针              题 18 / 引用定位失败 0 / 回答器世代标识全对=True / 单题 62.4 ms
+[PASS] Gold Set 冒烟（40 题，候选）  R@20 0.7436 / R@5 0.5897 / MRR 0.4591 / 引用定位 1.0000 / 硬失败 0
+```
+
+`12 份 Manifest 改动 0` 与 `备份 12 份 / 还原 1 份` 两条与 K4 §2/§8 逐字相同——**加了两道门
+之后，原有 15 门的结论一个都没变**。这是加门而不是改判据的证据。
+
+单题耗时 `75.1 / 59.9 / 62.4 ms` 是本次读数（K4 §3 已记同样两代测到过
+`76.0 / 65.2`、`202.3 / 162.2`、`193.7 / 151.5` 等一串值），不作比较。
+
+### 5. 顺带修掉：`k1_checks` 的回滚门在并发下会假红
+
+这不是四处漏项之一，是本轮验收时**跑出来的真事故**，所以记在这里。
+
+#### 5.1 现象
+
+2026-11-04 15:19 跑 `py -3 scripts/k1_checks.py`，九项里**回滚那一项红**：
+
+```
+[FAIL] 回滚命令已实测   回滚到当前世代未被拒，previous_generation 会退化成指向自身
+```
+
+而当时另一个子代理正在跑全量 `pytest`。单独重跑这一项是绿的。
+
+#### 5.2 根因：探针目录是写死的共享路径
+
+`scripts/k1_checks.py` 原第 717 行：
+
+```python
+tmp_dir = Path(config.CIRCUIT_OPEN_PATH).parent / "_k1_rollback_probe"
+```
+
+于是**任意两个进程同时跑这一项就共用同一个 `current.json`**。这一项要做两件事：
+先回滚一次（`A → B`），再回滚到自身（必须被拒）。两个进程交错时，A 写完
+「当前是候选世代」，B 已经把它回滚成 `e0aacc` 并读出「当前是 e0aacc」，A 接着在
+B 的指针上再回滚一次——这一次要么被「已经是当前世代」拒掉，要么干脆被接受。
+
+写 `_race_probe.py` 并发 4 份 `--only rollback_tested` 实测，**修正前 0/4 通过**，
+两种错法各出现两次：
+
+```
+#0 exit=1 回滚到当前世代未被拒，previous_generation 会退化成指向自身
+#1 exit=1 release.rollback 拒绝执行：g-20261030T150101Z-e0aacc 已经是当前世代，无需回滚
+#2 exit=1 release.rollback 拒绝执行：g-20261030T150101Z-e0aacc 已经是当前世代，无需回滚
+#3 exit=1 回滚到当前世代未被拒，previous_generation 会退化成指向自身
+通过 0 / 4
+```
+
+**`release.rollback()` 本身是对的**（`src/arkrag/release.py:772` 正确地拒绝回滚到自身，
+单元级复现也正确拒绝）。错的是这道检查自己的脚手架——它把「两个进程互不干扰」
+这个前提当成了默认成立。
+
+#### 5.3 修法与自证
+
+改成每次运行独一份：
+
+```python
+tmp_dir = Path(tempfile.mkdtemp(prefix="k1_rollback_probe_"))
+```
+
+不用「在 `data/arkrag` 下加进程号」：进程号会被复用，而且这个目录本来就不该出现在
+冻结基线目录里（`snapshot_baseline.py` 会扫到它）。`mkdtemp` 保证唯一且落在系统临时区，
+`finally` 里整目录清掉。
+
+修正后并发 **4/4 通过**：
+
+```
+并发 4 份 scripts/k1_checks.py --only rollback_tested
+  #0 exit=0 ok  [PASS] 回滚命令已实测
+  #1 exit=0 ok  [PASS] 回滚命令已实测
+  #2 exit=0 ok  [PASS] 回滚命令已实测
+  #3 exit=0 ok  [PASS] 回滚命令已实测
+通过 4 / 4
+结论：探针目录每次运行独一份，并发下互不影响
+```
+
+这段并发复现被固化成 `scripts/k1_race_check.py`（不靠一次性临时脚本）：
+
+```
+py -3 scripts/k1_race_check.py            # 并发 4 份，EXIT=0 表示 4/4 通过
+py -3 scripts/k1_race_check.py --n 8      # 改并发份数
+```
+
+它的退出码判据就是「全部通过 = 0，有任一份没通过 = 1」，不含任何「先看看输出」的余地。
+
+新增用例 `tests/test_k1_checks.py::TestRollbackTestedCanFail::test_probe_dir_is_unique_per_run_and_cleaned_up`
+钉住的性质是「两次运行拿到两个不同目录、都不在 `CIRCUIT_OPEN_PATH` 同级、跑完都不存在」，
+不是「用了 `mkdtemp`」这个实现。
+
+**反向实测一**（把 `k1_checks.py` 那一行改回共享路径后跑单测）：`AssertionError: 两次运行
+共用了同一个探针目录：{WindowsPath('E:/图rag/data/arkrag/_k1_rollback_probe')}`，
+`1 failed, 36 deselected`，`exit=1`。还原后 `scripts/k1_checks.py` SHA-256 前后同为
+`5c692d83e99fc3940a3f27db66944c96623a3c8bc0b0f2fd92bffa10172af486`，逐字节一致；
+重跑 `-k Rollback` → `5 passed`。
+
+**反向实测二**（同样的改法，跑 `scripts/k1_race_check.py`）：
+
+```
+并发 4 份 scripts/k1_checks.py --only rollback_tested
+  #0 exit=1 FAIL  [FAIL] 回滚命令已实测
+  #1 exit=1 FAIL  [FAIL] 回滚命令已实测
+  #2 exit=1 FAIL  [FAIL] 回滚命令已实测
+  #3 exit=1 FAIL  [FAIL] 回滚命令已实测
+通过 0 / 4
+结论：有并发冲突。…
+EXIT=1
+```
+
+还原后 `scripts/k1_checks.py` SHA-256 又是 `5c692d83…af486`（逐字节一致）。
+两次反向实测覆盖两种入口：单测（钉实现约束）与并发脚本（钉真实场景）。
+
+#### 5.4 为什么这算「真事故」而不是「测试环境的噪声」
+
+因为它**红的方向是错的**：报的是「回滚命令不可用」，而回滚命令一直是好的。一条会在
+并发下报假红、且假红内容指向错误结论的门，比没有门更糟——下一次它真红的时候，
+第一反应会是「又是那个假红」。
+
+另有一条纪律值得记下来：`tests/test_k1_checks.py::test_real_pointer_is_never_written`
+**也调这一项**（它要证明真实指针一个字节没动），所以「跑全量 pytest」与「手动跑
+`k1_checks.py`」天然就会撞车。这不是罕见场景，是日常场景。
+
+### 6. 发布前清单门：五道门都跑过、而且跑的是这一代，才允许发布
+
+#### 6.1 为什么另加一道门
+
+`release.publish()` 自己只查三件事：状态是 `READY`、`coverage_status` 完整、
+`verify_generation()` 没有不符项。它**看不到那五份门报告**——`data/k2_hard_gates.json`、
+`data/k2_perf.json`、`data/k2_gray.json`、`data/k3_threshold_gate.json`、`data/k4_drill.json`。
+也就是说，在这个门之前，「五道门全过」只是五份文件里各自写着 `all_passed: true`，
+没有任何东西阻止一次越过它们的发布：报告可以缺、可以绑在上一代上、可以自己就是红的。
+
+这不是假设。K4 演练暴露过一次同类事故：`publish()` 会改写目标世代的 Manifest
+（K4 §8），当时是靠演练里的 `_ManifestGuard` 把 `06a741` 认回来。**靠人记得去比对
+五份报告不是机制**，所以补一道门。
+
+#### 6.2 五份报告的世代字段名不一样，不许统一改它们
+
+这是这道门最容易写错的地方：五份报告不是同一个脚本产出的，各自把「我是哪一代」写在
+不同位置。消费者必须逐份按登记的字段路径取，**不许为了好写去改那五份报告的格式**——
+它们是各自门的产出物，改动等于让已经跑过的门报告失效。
+
+| 报告 | 世代字段 | 顶层键 |
+|---|---|---|
+| `data/k2_hard_gates.json` | `generation_id` | `generation_id` / `baseline_generation_id` / `checks`(8) / `all_passed` |
+| `data/k2_perf.json` | `generation_id` | 11 键，含 `generated_at` |
+| `data/k2_gray.json` | `generation_id` | 17 键，含 `generated_at` / `production_pointer_untouched` |
+| `data/k3_threshold_gate.json` | **`generations.new`** | `schema` / `thresholds_file` / `generations` / `checks`(8，键是 `metric` 不是 `id`) / `all_passed` |
+| `data/k4_drill.json` | **`candidate`** | `candidate` / `baseline` / `probes`(18) / `checks`(17) / `all_passed` |
+
+`REPORTS` 登记表里每条写 `key` / `label` / `path` / `gid_field`（点号路径）/ `producer`
+（失败时告诉人该跑哪个脚本）。`tests/test_k2_publish_check.py` 有一条用例专门
+**钉住这五个 `gid_field` 名**——将来谁改了报告格式却忘了改登记表，那条用例会红。
+
+#### 6.3 六条判据，三态，`all_passed` 只统计 FAIL
+
+| 判据 | 红在什么情况 |
+|---|---|
+| `reports_present` | 五份报告有缺的、或 JSON 读不出来（detail 点名缺哪个文件、该跑哪个脚本） |
+| `reports_passed` | 某份报告自己 `all_passed` 不是 `True`（**`None` 不算过**，缺字段不能当通过） |
+| `reports_bind` | 某份报告绑的不是本次要发布的世代（detail 同时打出「要发布的是」和两个 id） |
+| `candidate_status` | 候选状态不是 `READY` |
+| `candidate_verify` | `verify_generation()` 有不符合项（截断到 8 条但仍报总数） |
+| `reports_not_stale` | 报告 `generated_at` 早于候选 `created_at` |
+
+三态是关键：`pass` / `fail` / `undetermined`。`all_passed` **只统计 `fail`**；
+`undetermined` 的 `ok` 是 `False` 但**不使门失败**。这样「不知道」既不被写成通过，
+也不被当成红——把不知道写成知道，正是这道门本来要防的事。
+
+`reports_not_stale` 目前就是 `undetermined`：只有 `k2_perf` 与 `k2_gray` 有
+`generated_at`，另三份报告没有时间戳字段。这条**现在无法判定**，脚本如实这么写，
+用例 `test_three_reports_without_timestamp_are_undetermined_not_pass` 钉住它。
+
+六条判据都是纯函数，返回 `(verdict, detail, data)`；`evaluate()` **六条永远全跑**，
+不是遇到第一条红就返回——一次说清所有问题，省得改一条跑一次。
+
+#### 6.4 实跑
+
+```
+$ py -3 scripts/k2_publish_check.py
+==============================================================================
+发布前清单门  Python 3.14.3  win32
+要发布的世代 g-20261103T132152Z-06a741
+报告目录 data
+口径：五份门报告各自绑的世代字段不同（见 REPORTS 登记表），逐份比对
+------------------------------------------------------------------------------
+逐份报告
+  data/k2_hard_gates.json                  世代字段 generation_id      = g-20261103T132152Z-06a741  all_passed=True  generated_at=None
+  data/k2_perf.json                        世代字段 generation_id      = g-20261103T132152Z-06a741  all_passed=True  generated_at=2026-11-04T10:20:59Z
+  data/k2_gray.json                        世代字段 generation_id      = g-20261103T132152Z-06a741  all_passed=True  generated_at=2026-11-04T10:03:51Z
+  data/k3_threshold_gate.json              世代字段 generations.new    = g-20261103T132152Z-06a741  all_passed=True  generated_at=None
+  data/k4_drill.json                       世代字段 candidate          = g-20261103T132152Z-06a741  all_passed=True  generated_at=None
+------------------------------------------------------------------------------
+清单判定
+[PASS] 五份门报告在场且可解析                  5/5 份报告在场且可解析
+[PASS] 每份报告自身 all_passed=True       5/5 份报告 all_passed=True
+[PASS] 每份报告绑的是本次要发布的世代              5/5 份都绑 g-20261103T132152Z-06a741
+[PASS] 候选状态是 READY                  候选 g-20261103T132152Z-06a741 状态 READY
+[PASS] 候选 verify_generation() 无不符项  候选 g-20261103T132152Z-06a741 自检 0 项不符
+[无法判定] 报告不早于候选建成                    2 份可比且都不早于候选建成；另 3 份无时间戳字段，本条对其无法判定：data/k2_hard_gates.json；data/k3_threshold_gate.json；data/k4_drill.json
+------------------------------------------------------------------------------
+清单 5/6 条成立（另有 1 条无法判定，不计为通过）
+报告已写 data/k2_publish_check.json
+==============================================================================
+EXIT=0
+```
+
+`data/k2_publish_check.json` 顶层 10 键，`all_passed=true`、`failed=[]`、
+`undetermined=["reports_not_stale"]`。退出码：0=可发布 / 1=有不成立 / 2=硬错误。
+
+#### 6.5 接进发布路径，以及那一次真的把线上切了
+
+只写一个清单脚本是不够的——脚本写好了没人调用，它只是一份没人拦的报告。所以
+`scripts/release_cli.py` 的 `cmd_publish()` 改成**先过清单**，`PublishCheckError` →
+「拒绝发布：发布前清单门无法判定」返回 1；`not verdict["all_passed"]` →
+「拒绝发布：发布前清单 N 条不成立」+ 逐条 + 「这道清单没有跳过开关」返回 1；
+有 `undetermined` 则打印「清单通过（另有 N 条无法判定…）」+ 逐条（**必须说出来**，
+否则「清单全过」会被读成六条都验过了）。这些都过了才 `release.publish()`。
+
+判定只写一处：清单脚本里的 `evaluate_generation()`，发布路径调它。按纪律不许
+「发布路径与门各写一套」。
+
+**踩了一次真事故**：验证接线的第一反应是跑 `py -3 scripts/release_cli.py publish
+g-20261103T132152Z-06a741`，结果它**真的发布了**——`current.json` 被切成 `06a741`、
+`published_at=2026-11-04T09:38:57Z`，`06a741/manifest.json` 被改成 `PUBLISHED`，
+还多出一个 `data/arkrag/runs/r-20261104T093830Z-266954/`。已用
+`git checkout -- data/arkrag/current.json data/arkrag/generations/g-20261103T132152Z-06a741/manifest.json`
+（两者都被 git 跟踪）加删除那个 run 目录逐字节还原：`current -> 55dfd7 PUBLISHED`、
+`06a741 -> READY` 且 `published_at` 键不存在、`git status --porcelain -- data/arkrag` 为空。
+
+教训写在这里：**`release_cli publish <gid>` 会真的切线上指针，不许当「测一下清单」跑。**
+要验证拦截只能跑清单脚本本身（改报告 → 跑 → 还原），或者在 tmp 沙箱里跑（用例里的
+`pub_sandbox` 夹具 monkeypatch `release.GENERATIONS_DIR` / `RUNS_DIR` / `CURRENT_PATH`）。
+
+#### 6.6 用例，以及反向实测它们确实能红
+
+`tests/test_k2_publish_check.py` 共 **36 条**：31 条测清单本身（缺报告 / 坏 JSON /
+单份红 / 字段缺失不算过 / 绑上一代 / 三个非 `generation_id` 字段都读对 / 候选六种
+非 READY 状态 / 自检不符截断 / 三份无时间戳必须 `undetermined` / 补时间戳转 pass /
+早于候选建成则红 / 六条全跑 / 钉住五个 `gid_field`），**5 条测发布路径本身**：
+
+* `test_publish_refused_when_a_report_is_missing` —— 缺 `k2_perf` → 拒、err 里含该跑的
+  脚本名、不写指针、候选状态仍是 `READY`
+* `test_publish_refused_when_a_report_binds_another_generation` —— 报告绑上一代 → 拒
+* `test_publish_refused_when_a_report_failed_itself` —— 报告自己红 → 拒
+* `test_publish_proceeds_and_says_which_checks_were_undetermined` —— 全齐则真发布，
+  且输出必须写明「另有 1 条无法判定」
+* `test_publish_still_lets_release_checks_reject_after_checklist_passes` —— 清单过了但
+  覆盖不全，`release.publish()` 仍拒（证明清单不是发布判定的替代品）
+
+这 5 条写错过一轮，两个真原因：①`release_cli` 里的 `import k2_publish_check` 与本文件
+`spec_from_file_location` 载的是**两份模块实例**，只 patch 一处等于没 patch（症状是
+`0/5 份绑对世代`）；②`_build_generation()` 用 `_now()` 造 `created_at`，而夹具里写死了
+`generated_at`，于是「报告早于候选建成」误红。
+
+反向实测：把 `cmd_publish()` 里清单那 25 行（1011 字符）短路掉，
+`pytest tests/test_k2_publish_check.py -q -k publish` → **`5 failed, 31 passed`**，
+红的正是那 5 条；还原后 `36 passed`。`scripts/release_cli.py` 改前/还原后 SHA-256
+同为 `51bdc509…c49867`。
+
+反向脚本本身也踩了一次：第一版用 `path.write_text()` 还原，Windows 下把 LF 换成 CRLF，
+于是「逐字节一致」判 False——**那不是内容没还原，是换行被改了**。修法：`read_bytes()` /
+`write_bytes()` 全程按字节。这一条对以后所有反向实测都适用。
+
+### 7. 新增与改动文件
+
+行数为 `[IO.File]::ReadAllLines(...).Count` 的实测值；改动文件的增删行为 `git diff --numstat`。
+
+| 路径 | 行数 / 增删 | 性质 |
+|---|---|---|
+| `scripts/k2_perf.py` | 811 行 | 新增：性能评测，7 硬门 + 22 申报项 |
+| `tests/test_k2_perf.py` | 475 行（38 用例） | 新增 |
+| `data/k2_perf.json` | 1165 行 / 36,540 B | 新增产物 |
+| `scripts/k2_gray.py` | 1093 行 | 新增：两实例逐题交替 |
+| `tests/test_k2_gray.py` | 608 行（54 用例） | 新增 |
+| `data/k2_gray.json` | 2739 行 / 115,745 B | 新增产物 |
+| `scripts/k3_thresholds.py` | 615 行 | 新增：阈值审批门 |
+| `tests/test_k3_thresholds.py` | 472 行（61 用例） | 新增 |
+| `data/k3_thresholds.json` | 215 行 / 11,358 B | 新增：阈值**唯一事实源** |
+| `data/k3_approvals.json` | 5 行 / 706 B | 新增：审批记录（`approvals: []` 空） |
+| `data/k3_threshold_gate.json` | 303 行 / 8,906 B | 新增产物 |
+| `src/arkrag/release.py` | +363 / −0 | 改动：`observation_status()` / `archive_old()` / `OBSERVATION_DAYS=7` |
+| `scripts/k4_drill.py` | 889 行（+476 / −1） | 改动：13→17 门 |
+| `tests/test_release.py` | +212 / −0（+14 用例，现采 70 条） | 改动 |
+| `scripts/k1_checks.py` | 961 行（+14 / −2） | 改动：回滚探针目录改 `tempfile.mkdtemp()`（§5） |
+| `scripts/k1_race_check.py` | 新增（并发复现 §5 的修复） | 新增：4 份并发跑回滚那一项，全过 0 / 有不过 1 |
+| `scripts/k2_publish_check.py` | 558 行 | 新增：发布前清单门，6 判据三态（§6） |
+| `tests/test_k2_publish_check.py` | 622 行（36 用例） | 新增：31 条清单 + 5 条发布路径（§6.6） |
+| `data/k2_publish_check.json` | 168 行 / 4,780 B | 新增产物 |
+| `scripts/release_cli.py` | 202 行（+42 / −2） | 改动：`cmd_publish()` 先过发布前清单（§6.5） |
+| `tests/test_k1_checks.py` | 720 行（+63 / −0，+1 用例，现采 37 条） | 改动：钉住探针目录每次独一份（§5） |
+| `tests/test_suite_hygiene.py` | +63 / −1（`N` 1291→1471→1511） | 改动：用例总数常量（§5 +1、§6 +40） |
+| `data/k4_drill.json` | 271 行（+82 / −9） | 改动：报告刷新 |
+
+用例增量逐笔对得上：38 + 54 + 61 + 14 = **167**；再加**三个新测试文件进入
+`TEST_FILES`** 后让 `tests/test_suite_hygiene.py` 里四个 parametrize（61/130/150/184 行）
+各多一项，**+12**；再加 §5 那条并发用例 **+1**；合计 **180**。1291 + 180 = **1471**。
+
+§6 的清单门再加两级：`tests/test_k2_publish_check.py` 先进 31 条，作为**新测试文件**
+又让那四个 parametrize 各多一项（**+4**）→ 1471 + 35 = **1506**；随后补 5 条发布路径
+用例（该文件已在 `TEST_FILES` 里，不产生 parametrize 增量）→ 1506 + 5 = **1511**。
+`tests/test_suite_hygiene.py:361` 的 `N = 1511` 与 `--collect-only` 实测一致。
+
+五个新测试文件单跑合计 38 + 54 + 61 + 70 + 36 = **259 条**（§5 那一条在
+`tests/test_k1_checks.py` 里，不在这五个之内）。
+
+口径上补一句：`k4_drill.py` 那两道新门**没有专门的测试文件**（`tests/` 下没有
+`test_k4_drill.py`），它们的判据由 `scripts/k4_drill.py` 自己每次运行断言，逻辑单元由
+`tests/test_release.py` 的 14 条覆盖——后者测的是 `observation_status()` / `archive_old()`
+本身，不是「演练脚本有没有正确调用它们」。这两者不是一回事（§4.1 末段）。
+
+### 8. 复现命令
+
+```powershell
+cd E:\图rag
+$env:PYTHONIOENCODING="utf-8"
+
+py -3 scripts/k2_perf.py           # 性能评测；本次 EXIT=0，硬门 7/7
+py -3 scripts/k2_gray.py           # 灰度；本次 EXIT=0，5/5（会起两个 HTTP 实例，端口 56650/56652）
+py -3 scripts/k3_thresholds.py     # 阈值审批；本次 EXIT=0，8/8
+py -3 scripts/k4_drill.py          # K4 演练；本次 EXIT=0，17/17
+py -3 scripts/k2_publish_check.py  # 发布前清单；本次 EXIT=0，5/6 + 1 条无法判定（§6）
+py -3 scripts/k1_checks.py         # K1 九项；本次 EXIT=0，9/9（回滚那项已在 §5 修好）
+py -3 scripts/k1_race_check.py     # 并发 4 份跑回滚那一项；EXIT=0 表示 4/4（§5）
+
+py -3 -m pytest tests/test_k2_perf.py tests/test_k2_gray.py tests/test_k3_thresholds.py tests/test_release.py -q
+py -3 -m pytest tests/test_k2_publish_check.py -q     # 36 passed（§6.6）
+py -3 -m pytest tests -q           # 1510 passed, 1 skipped（1511 collected）
+```
+
+注意：
+
+* `k2_perf.py` 的**时序数字要在无并发时重跑**才有比较意义；同机同时跑 pytest 会把 P95 推高
+  （§1.4 的两次方向相反就是这个原因）。判据（7 个 `ok`）不受影响。
+* `k2_gray.py` 会真的起两个 `serve.py` 进程，需要可用内存 ≥ 6144 MiB（不够会退化成串行模式
+  并如实标注）；跑完端口自动释放，不写发布指针。
+* `k4_drill.py` 全程在隔离指针上操作，`finally` 里还原；真实线上指针一次都不写。
+* PowerShell 下 `py -3 -m py_compile scripts/k*.py` **不会展开通配符**，别当它跑通了。
+* **不许用 `py -3 scripts/release_cli.py publish <gid>` 去试清单门拦不拦**——它会真的切线上指针（§6.5 那次事故）。要试就改报告后跑 `scripts/k2_publish_check.py`，或在 tmp 沙箱里跑用例。
+
+### 9. 遗留
+
+1. **性能时序不可复现，只能当「本次读数」。** 同一批题、同一份代码，候选热查 P95 本次读到
+   130.687 ms（`py -3 scripts/k2_perf.py` 输出）；`tests/test_suite_hygiene.py:331` 记着另一次
+   观测从 167.671 ms 跳到 544.19 ms（3.2 倍）。方向上本次甚至与 Lead 转述的早先干净环境读数
+   **相反**（本次候选慢 1.462×，那次据称候选快 0.571×）——但那一对数的原值（127.403 / 223.186）
+   本轮查不到留档，只能当传闻。**「候选到底比上一代快多少」这个问题，本轮没能力回答**——要回答
+   必须在无并发时重跑，并把当时的机器负载一起记下来。兜底门 2× 只保证「没慢到十倍」这一件事。
+
+2. **`k3_approvals.json` 是空的、`data/arkrag/archive/` 从未创建——两处都只到「机制能拦」。**
+   K3 的 8 条 delta 本轮全部未跨阈值（最近的 `lexical_bytes_drop_pct` 距线 8.842315
+   个百分点），所以一条审批记录都没有；K4 的线上世代才 4.6444 天 / 要求 7 天，所以一次
+   归档都没发生过（`git log --all` 0 条提交、目录不存在）。两处的**绿路径**（真的审批一次、
+   真的归档一次）都从未走过，只由 `tests/` 里的构造用例覆盖。换句话说：这两道门目前是
+   「红的时候会不会红」被验证了，「绿的时候对不对」还没被验证。
+
+3. **灰度里 `q-na-000013` 两代都答，而 Gold Set 标 `should_abstain=true`。** 两代一致
+   （候选与基线都在这个题上答了、各引 1 条、`gold命中0`），所以**不是灰度回归**，
+   `abstain_flip` 门判的是「换代前后是否翻转」而不是「是否符合 Gold 标注」，故未把它设成门。
+   这是 **Gold Set 质量问题**（该题标注与实际可答性冲突），另开一轮处理。
+   顺带记录：20 行探针输出逐行数下来，**15 题 `gold命中1`、5 题 `gold命中0`**
+   （`q-dr-000002` / `q-mh-000002` / `q-tc-000002` / `q-na-000013` / `q-na-000014`）——
+   命中 0 本身不等于答错（候选可能引到了别处正确块），但这 5 题值得在下轮复核标注。
+
+4. **本轮没做真实发布，线上仍是 `55dfd7`。** 计划 K2 的流程是「灰度查询 → 正式发布」，
+   本轮补的是前半段（灰度能在真 HTTP 上跑通、逐题一致），**后半段「正式发布」一行代码都没写**：
+   没有改指针、没有放量、没有发布后的观察。`k2_gray.json` 里
+   `production_pointer_untouched=true`、`before`/`after` 都是 `55dfd7`，就是这件事的凭据。
+   候选 `06a741` 至今仍是 READY 未发布。
+
+5. **`absolute` 那 9 条里 6 条「无实测输入」。** `citation_localization` /
+   `key_fact_citation_coverage` / `unanswerable_refusal` / `directional_accuracy` /
+   `hard_integrity_errors` / `failed_artifact_published` 六项在本门里**没有实测输入**，
+   脚本逐条印「本门不评估这项，也不假装通过」。它们属于 F4 的绝对门，K3 只申报差距——
+   这不是本轮引入的问题，但要写在这里，免得后来人以为 K3 把那六项也判过了。
+
+6. **`p95_backstop` 的 2× 阈值是拍的。** 取 2× 的理由是「只为抓灾难性回退」，但这个 2
+   没有数据支撑（本轮观测到的噪声量级是 1.462×）。等积累了几次干净环境读数之后应该回头
+   校准；现在它只是个极宽的保险丝，不能当性能门读。

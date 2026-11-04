@@ -32,7 +32,9 @@ import json
 import os
 import shutil
 import sys
+import tempfile
 import time
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -43,7 +45,8 @@ sys.path.insert(0, str(ROOT / "src"))
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
-from arkrag import atomic, config, pipeline, release  # noqa: E402
+from arkrag import index as index_mod  # noqa: E402
+from arkrag import atomic, config, pipeline, release, source  # noqa: E402
 
 CAND = sys.argv[1] if len(sys.argv) > 1 else "g-20261103T132152Z-06a741"
 # 回滚目标必须是**能被当前链路服务**的上一代，所以不能选线上那个 `55dfd7`：
@@ -128,6 +131,176 @@ class _ManifestGuard:
         return (f"备份 {len(self.saved)} 份 / 还原 {len(self.restored)} 份"
                 + (f"：{self.restored}" if self.restored else "（演练未改动任何 Manifest）")
                 + (f"；失败 {self.failed}" if self.failed else ""))
+
+
+def _tree_digests(root: Path) -> dict[str, tuple[int, str]]:
+    """目录下每个文件的 `{相对路径: (字节数, SHA-256)}`。用于"盘上一个字节都没少"的核对。
+
+    只比"文件还在"是不够的：一次失败的归档完全可能把文件复制过去、截断原件再
+    崩在中途，文件仍在而字节已变。字节数 + SHA-256 才能同时抓住"少了文件"和
+    "文件被改了"。
+    """
+    out: dict[str, tuple[int, str]] = {}
+    if not root.exists():
+        return out
+    for p in sorted(root.rglob("*")):
+        if p.is_file():
+            out[p.relative_to(root).as_posix()] = (p.stat().st_size, release.sha256_file(p))
+    return out
+
+
+def _heavy_digests(gen: release.Generation) -> dict[str, tuple[int, str]]:
+    """这一代重量级产物（graph/ + index/ + chunks.jsonl）的字节与摘要快照。"""
+    out: dict[str, tuple[int, str]] = {}
+    for directory in (gen.graph_path.parent, gen.index_path.parent):
+        if directory.is_dir():
+            for p in sorted(directory.rglob("*")):
+                if p.is_file():
+                    out[p.relative_to(gen.dir).as_posix()] = (p.stat().st_size, release.sha256_file(p))
+    if gen.chunks_path.is_file():
+        out["chunks.jsonl"] = (gen.chunks_path.stat().st_size, release.sha256_file(gen.chunks_path))
+    return out
+
+
+def _diff_digests(
+    before: dict[str, tuple[int, str]], after: dict[str, tuple[int, str]]
+) -> list[str]:
+    """两份 `{相对路径: (字节数, SHA-256)}` 的差异清单（空 = 逐字节完全一致）。
+
+    分开报三种差异（少了文件 / 多了文件 / 大小或摘要变了）：只比"文件还在不在"
+    抓不到"复制到一半把原件截断了"，而这恰恰是归档半途失败最可能留下的现场。
+    """
+    out: list[str] = []
+    for name in sorted(set(before) - set(after)):
+        out.append(f"少了 {name}（原 {before[name][0]}B）")
+    for name in sorted(set(after) - set(before)):
+        out.append(f"多了 {name}（{after[name][0]}B）")
+    for name in sorted(set(before) & set(after)):
+        if before[name] != after[name]:
+            out.append(
+                f"{name} 变了：{before[name][0]}B/{before[name][1][:16]} "
+                f"-> {after[name][0]}B/{after[name][1][:16]}"
+            )
+    return out
+
+
+def _build_verifyable_generation(root: Path, gid: str) -> release.Generation:
+    """在 `root` 下造一代**能通过 `verify_generation()`** 的产物。返回 `Generation`。
+
+    ## 为什么归档门必须用合成世代，而不是拿真实世代当靶子
+
+    归档门要证明的是"观察期未满时 `archive_old()` 拒绝，且盘上一个字节都没少"。
+    如果靶子是真实世代、又用 `dry_run=False` 去调，那么这条门**一旦抓到回归**
+    （有人把观察期判断删了），它自己就会把 254 MB 的真实产物复制走并删掉原件——
+    门在报警的同时完成了它正在报警的那次事故。
+
+    所以真归档（`dry_run=False`）那一半只在临时目录里的合成世代上跑：合成产物
+    很小、可以随时重建，`archive_old()` 真的搬走也伤不到任何真实数据。
+    真实世代那一半只用 `dry_run=True`（不写盘），核对 254 MB 原件字节前后一致。
+
+    产物必须真的能过 `verify_generation()`：否则拒绝理由会变成"目标自检不过"，
+    就算观察期判断被删掉，归档也会被另一条理由挡住，门就永远红不了——一条
+    永远红不了的门等于没有门。
+
+    调用方负责把它**排除在"当前线上世代"之外**（`archive_old()` 会因为"这是线上
+    世代"先拒绝，那样就算观察期判断被删了也照样被别的理由挡住），做法是让
+    `release.CURRENT_PATH` 指向另一份指针，见 `_write_pointer()`。
+    """
+    chunks = [
+        {
+            "chunk_id": f"k4/a#{i:03d}",
+            "content_key": f"k4probe{i}" * 4,
+            "text": f"凯尔希：第 {i} 段。阿米娅点了点头。",
+            "title": "演练章",
+            "chapter": "第一章",
+            "category": "obt/main",
+        }
+        for i in range(3)
+    ]
+    records = {
+        c["chunk_id"]: {
+            "entities": [{"name": "凯尔希", "type": "角色"}],
+            "relations": [],
+        }
+        for c in chunks
+    }
+    snap = release.capture_inputs(
+        chunks=chunks,
+        records=records,
+        source_fp="k4srcfp0000000000",
+        scenes=[
+            {
+                "doc_id": "k4/a",
+                "title": "演练章",
+                "chapter": "第一章",
+                "category": "obt/main",
+                "turns": [{"ordinal": 0, "node_id": 1, "kind": "dialogue", "speaker": "凯尔希", "text": "第 0 段。"}],
+            }
+        ],
+        source_status=source.VERIFIED_ZIP,
+    )
+    gen = release.Generation(gid, root=root)
+    gen.create(snapshot=snap, run_id="r-k4-archive")
+    gen.advance(release.BUILDING)
+    graph = {
+        "fingerprint": "k4graphfp0000000",
+        "corpus_fp": snap.source_fingerprint,
+        "entities": [{"id": "凯尔希", "name": "凯尔希", "type": "角色", "aliases": []}],
+        "edges": [],
+        "identities": {
+            "source_fp": snap.source_fingerprint,
+            "source_status": snap.source_status,
+            "scene_fp": snap.scene_fingerprint,
+            "chunk_fp": snap.chunk_fingerprint,
+            "chunk_manifest_hash": snap.chunk_manifest_hash,
+            "extraction_manifest_hash": snap.extraction_manifest_hash,
+        },
+    }
+    gen.graph_path.write_text(json.dumps(graph, ensure_ascii=False), encoding="utf-8")
+    idx, meta = index_mod.build(
+        chunks, graph, snap.source_fingerprint,
+        graph_artifact_id=release.sha256_file(gen.graph_path),
+    )
+    index_mod.save_index(idx, meta, gen.index_path)
+    gen.gate_report_path.write_text(
+        json.dumps([{"name": "K4.archive", "verdict": "PASS"}], ensure_ascii=False), encoding="utf-8"
+    )
+    gen.advance(
+        release.VALIDATING,
+        graph_build_fp=graph["fingerprint"],
+        graph_artifact_id=release.sha256_file(gen.graph_path),
+        index_artifact_id=release.sha256_file(gen.index_path),
+        index_build_fp=meta["index_build_fp"],
+        index_content_digest=meta["index_content_digest"],
+        probe_digest=meta["probe_digest"],
+        gate_report_hash=release.sha256_file(gen.gate_report_path),
+        stats={"entities": 1, "edges": 0},
+    )
+    gen.advance(release.READY)
+    # 世代自带的块正文：真归档要把它一起搬走，必须存在才能测到"搬了又被拒"。
+    gen.chunks_path.write_text(
+        "\n".join(json.dumps(c, ensure_ascii=False) for c in chunks) + "\n", encoding="utf-8"
+    )
+    return gen
+
+
+def _write_pointer(path: Path, generation_id: str, *, published_days_ago: float) -> Path:
+    """在 `path` 写一份发布指针，`published_at` 是 `published_days_ago` 天前。
+
+    归档门靠它把"观察期未满"造出来，而不必等 7 天：`archive_old()` 的观察期判断
+    只读指针里的 `published_at`，所以假指针足以驱动它，且完全不动真实指针。
+    """
+    published = datetime.now(timezone.utc) - timedelta(days=published_days_ago)
+    atomic.atomic_write_json(
+        path,
+        {
+            "generation_id": generation_id,
+            "status": release.PUBLISHED,
+            "published_at": published.strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "previous_generation": "",
+        },
+    )
+    return path
 
 
 
@@ -327,6 +500,308 @@ def main() -> int:
     record("prod_untouched", "线上指针未被演练改动",
            real_cur.get("generation_id") == PROD,
            f"线上仍是 {real_cur.get('generation_id')}（{real_cur.get('status')}）")
+
+    # ---- D1. 观察期判定（K4 第 4 条「新版稳定运行约定观察期后才归档旧版」） ----
+    #
+    # # 本门判的是什么，以及**不**判什么
+    #
+    # 不判"观察期已满"。按今天的真实数据它本就该是未满：线上 `55dfd7` 的
+    # `published_at = 2026-10-30T15:49:29Z`，跑到今天只有 5 天上下，7 天窗口没到。
+    # 把"未满"写成 FAIL 是**错的门**——那等于要求运维等满 7 天才能跑演练。
+    #
+    # 本门判两件事：
+    #   ① 读数与**独立算出**的一致：`days_elapsed` 与从原始 `current.json` 字节
+    #      自己算出来的天数吻合、`complete` 与 `days >= required` 吻合、
+    #      `required_days` 与 `release.OBSERVATION_DAYS` 吻合、`reason` 非空且
+    #      方向正确（未满必须说"未达观察期"）。不信它自己的算术，另算一遍比对。
+    #   ② fail-closed：`published_at` 缺失 / 格式非法 / 根本没有指针这三种
+    #      "判不出来"的情形，一律 `complete=False`。这条才是观察期判据的价值所在：
+    #      判不出来时偏向"已满"就等于刚上线几分钟的新版也放行归档。
+    #
+    # # 为什么这里读真实指针（而不是继续用隔离指针）
+    #
+    # C 段把 `release.CURRENT_PATH` 指到了 `k4_probe/current.json`，那段已经在
+    # finally 里还原；本门在其之后执行，所以读到的**就是**线上指针。这里显式
+    # 用演练开头存下的 `real_current` 去读原始字节，而不是用 `release.CURRENT_PATH`
+    # 或 `release.read_current()`：将来若有人改动 finally 的恢复顺序，本门会当场
+    # 判红（见下面的 `pointer_restored`），而不是静默地去审查一份探针指针。
+    pointer_restored = release.CURRENT_PATH == real_current
+    now_text = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    raw_pointer: dict = {}
+    obs_checks: dict = {}
+    try:
+        raw_pointer = json.loads(real_current.read_text("utf-8"))
+    except (OSError, ValueError) as exc:
+        obs_checks["read_pointer"] = f"读不出真指针：{exc}"
+
+    obs = release.observation_status(now=now_text)
+    # 独立算术：直接用原始字节里的 published_at，不经过 observation_status 的内部函数。
+    expected_days = None
+    expected_complete = None
+    expected_err = ""
+    try:
+        start_dt = datetime.fromisoformat(
+            str(raw_pointer.get("published_at") or "").replace("Z", "+00:00")
+        )
+        now_dt = datetime.fromisoformat(now_text.replace("Z", "+00:00"))
+        expected_days = (now_dt - start_dt).total_seconds() / 86400.0
+        expected_complete = expected_days >= obs["required_days"]
+    except (ValueError, TypeError) as exc:
+        expected_err = str(exc)
+
+    problems: list[str] = []
+    if not pointer_restored:
+        problems.append(f"真实指针未还原：CURRENT_PATH={release.CURRENT_PATH}")
+    if "read_pointer" in obs_checks:
+        problems.append(obs_checks["read_pointer"])
+    if obs["generation_id"] != str(raw_pointer.get("generation_id") or ""):
+        problems.append(
+            f"observation_status 读到的世代 {obs['generation_id'] or '(空)'} "
+            f"与真指针 {raw_pointer.get('generation_id') or '(空)'} 不符"
+        )
+    if obs["required_days"] != release.OBSERVATION_DAYS:
+        problems.append(
+            f"required_days={obs['required_days']} 与 OBSERVATION_DAYS={release.OBSERVATION_DAYS} 不符"
+        )
+    if expected_err:
+        problems.append(f"独立算术失败（真指针 published_at 不可用）：{expected_err}")
+    else:
+        got_days = obs["days_elapsed"]
+        if got_days is None:
+            problems.append(f"observation_status 未给出 days_elapsed（reason={obs['reason']}）")
+        elif abs(float(got_days) - expected_days) > 0.01:
+            problems.append(
+                f"days_elapsed 不符：observation_status={got_days} 独立算={expected_days:.4f}"
+            )
+        if obs["complete"] is not expected_complete:
+            problems.append(
+                f"complete 不符：observation_status={obs['complete']} "
+                f"独立算（{expected_days:.2f} 天 vs 要求 {obs['required_days']} 天）={expected_complete}"
+            )
+        # 方向性：未满时必须明说"未达观察期"，否则下游读到 complete=False
+        # 却不知道为什么，日志里就只剩一个没有理由的 False。
+        if expected_complete and "达到观察期" not in obs["reason"]:
+            problems.append(f"已满但 reason 未说明达到观察期：{obs['reason']}")
+        if not expected_complete and "未达观察期" not in obs["reason"]:
+            problems.append(f"未满但 reason 未说明未达观察期：{obs['reason']}")
+
+    # ---- fail-closed 三连：判不出来的一律不许判成"已满" ----
+    # 用一个**临时指针**（连同临时目录）造这三种情形，绝不改真指针一个字节。
+    fail_closed: dict = {}
+    obs_tmp = Path(tempfile.mkdtemp(prefix="k4_obs_"))
+    saved_current = release.CURRENT_PATH
+    try:
+        cases = {
+            "missing_published_at": {"generation_id": PROD, "status": release.PUBLISHED},
+            "unparsable_published_at": {
+                "generation_id": PROD,
+                "status": release.PUBLISHED,
+                "published_at": "2026/01/01 00:00",
+            },
+            "no_pointer_at_all": None,
+        }
+        for case, payload in cases.items():
+            probe_pointer = obs_tmp / f"{case}.json"
+            if payload is not None:
+                atomic.atomic_write_json(probe_pointer, payload)
+            release.CURRENT_PATH = probe_pointer
+            got = release.observation_status(now=now_text)
+            fail_closed[case] = got
+            if got["complete"]:
+                problems.append(f"{case}：observation_status 判成了已满（必须 fail-closed）")
+            if not str(got["reason"] or "").strip():
+                problems.append(f"{case}：complete=False 却没有给出 reason")
+    finally:
+        release.CURRENT_PATH = saved_current
+        shutil.rmtree(obs_tmp, ignore_errors=True)
+
+    fc_ok = all(
+        (not v["complete"]) and str(v["reason"] or "").strip() for v in fail_closed.values()
+    ) and len(fail_closed) == 3
+    record(
+        "observation_window",
+        "观察期判定正确且 fail-closed（不判是否已满）",
+        not problems and fc_ok,
+        f"线上 {obs['generation_id']} 已 {obs['days_elapsed']} 天 / 要求 {obs['required_days']} 天 / "
+        f"complete={obs['complete']}；独立算 {expected_days:.4f} 天 → "
+        f"{'一致' if not problems else '不一致：' + '; '.join(problems[:4])}；"
+        f"fail-closed 三例（无 published_at / 格式非法 / 无指针）complete 全 False={fc_ok}",
+        {
+            "observation": obs,
+            "independent_days": None if expected_days is None else round(expected_days, 4),
+            "pointer_restored": pointer_restored,
+            "fail_closed": {k: {"complete": v["complete"], "days": v["days_elapsed"],
+                                "reason": v["reason"]} for k, v in fail_closed.items()},
+            "problems": problems,
+        },
+    )
+
+    # ---- D1b. 观察期未满时 archive_old() 必须**真的拒绝**，且盘上不许少一个字节 ----
+    #
+    # 上一条门判"读数对不对"，这一条判"这个读数有没有被真正拿来拦人"。两者必须
+    # 分开：观察期算得再准，只要 `archive_old()` 忘了调它，旧版照样会被搬走。
+    #
+    # # 两半，各有各的理由
+    #
+    # ① **真实世代 + dry_run=True**：核对真实盘上的图/索引/块正文一个字节都没变。
+    #    这里只用 dry_run，绝不用 dry_run=False：真归档会复制 254 MB 再删原件，
+    #    而观察期未满时它本该被拒——如果它没被拒（也就是门抓到了回归），
+    #    `dry_run=False` 就会让**门自己**完成那次事故。核对原件字节必须真读真算
+    #    SHA-256，所以这一半是"真实数据、只读动作"。
+    #
+    # ② **合成世代 + dry_run=False**：这才是真正走到"删原件"那一步的路径。
+    #    靶子是临时目录里现造的一代（几百字节、可随时重建），所以就算它被误归档
+    #    也伤不到任何真实产物。合成产物必须能过 `verify_generation()`，否则拒绝
+    #    理由会变成"目标自检不过"，观察期判断被删掉门也红不了——见
+    #    `_build_verifyable_generation()` 的 docstring。
+    #
+    # ② 里还插了一个**对照组**：把指针改成"30 天前发布"，同一代就能顺利拿到归档
+    #    计划（仍是 dry_run，不写盘）。对照组证明"观察期未满"确实是当时**唯一**
+    #    的阻断理由，而不是这一代自己有别的问题——否则本门会因为别的原因变绿，
+    #    看起来在防观察期，实际什么都没防。
+    arch_problems: list[str] = []
+    arch_data: dict = {}
+
+    # -- ① 真实世代：只读核对 --------------------------------------------------
+    real_target = PREV
+    real_gen = release.Generation(real_target)
+    real_before = _heavy_digests(real_gen)
+    real_refused = False
+    real_detail = ""
+    try:
+        release.archive_old(real_target, dry_run=True)
+    except release.ReleaseError as exc:
+        real_refused = True
+        real_detail = str(exc) + (f"；{exc.detail}" if exc.detail else "")
+    if not real_refused:
+        arch_problems.append(
+            f"真实世代 {real_target} 在观察期未满时被放行：archive_old(dry_run=True) 没有拒绝"
+        )
+    elif "观察期未满" not in real_detail:
+        arch_problems.append(f"真实世代被拒了，但理由不是观察期：{real_detail}")
+    real_after = _heavy_digests(real_gen)
+    real_diff = _diff_digests(real_before, real_after)
+    if real_diff:
+        arch_problems.append(f"真实世代 {real_target} 的产物被改动了：{'; '.join(real_diff[:4])}")
+    if not real_before:
+        arch_problems.append(f"真实世代 {real_target} 没有可核对的重量级产物，本门形同虚设")
+    arch_data["real_target"] = {
+        "generation_id": real_target,
+        "refused": real_refused,
+        "detail": real_detail,
+        "files_checked": len(real_before),
+        "bytes_checked": sum(size for size, _ in real_before.values()),
+        "bytes_unchanged": not real_diff,
+    }
+
+    # -- ② 合成世代：真的走到删原件那一步 --------------------------------------
+    # 这里临时把 GENERATIONS_DIR / ARCHIVE_DIR / CURRENT_PATH 全指到临时目录，
+    # 跑完一律还原。三个都要换：只换指针的话 archive_old() 会去动真实世代目录。
+    synth_tmp = Path(tempfile.mkdtemp(prefix="k4_archive_"))
+    saved_generations_dir = release.GENERATIONS_DIR
+    saved_archive_dir = release.ARCHIVE_DIR
+    saved_current_path = release.CURRENT_PATH
+    synth_gid = "g-20260101T000000Z-abc123"
+    try:
+        synth_root = synth_tmp / "generations"
+        synth_root.mkdir(parents=True)
+        synth_archive = synth_tmp / "archive"
+        release.GENERATIONS_DIR = synth_root
+        release.ARCHIVE_DIR = synth_archive
+        synth_gen = _build_verifyable_generation(synth_root, synth_gid)
+        synth_pointer = synth_tmp / "current.json"
+
+        # 世代自检是干净的 —— 否则下面"被拒是因为观察期"这句话站不住。
+        synth_verify = release.verify_generation(synth_gen)
+        if synth_verify:
+            arch_problems.append(f"合成世代自检不过（门会因此误判）：{synth_verify}")
+
+        # 指针必须指向**另一个**世代，不能指向被归档的这一代本身。
+        # 否则 `archive_old()` 会先用"目标是当前线上世代"把它拒掉，就算有人把观察期
+        # 判断整段删掉，本门也会因为另一条理由而绿——那就成了一条永远红不了的门。
+        # 这个 id 不需要真实存在：`observation_status()` 只读指针，不读世代目录。
+        online_gid = "g-20260102T000000Z-0a11ce"
+
+        # 对照组：30 天前发布 → 同一代应当拿到归档计划（dry_run，不写盘）。
+        release.CURRENT_PATH = _write_pointer(synth_pointer, online_gid, published_days_ago=30)
+        control = release.observation_status()
+        control_plan = None
+        try:
+            control_plan = release.archive_old(synth_gid, dry_run=True)
+        except release.ReleaseError as exc:
+            arch_problems.append(
+                f"对照组失败：观察期已满（{control['days_elapsed']} 天）却仍被拒："
+                f"{exc}" + (f"；{exc.detail}" if exc.detail else "")
+            )
+        if control_plan is not None and control_plan["file_count"] < 2:
+            arch_problems.append(
+                f"对照组归档计划只包含 {control_plan['file_count']} 个文件，太少于预期"
+            )
+
+        # 正题：观察期未满（5 天 < 7 天），dry_run=False 也必须被拒，且不删不改。
+        release.CURRENT_PATH = _write_pointer(synth_pointer, online_gid, published_days_ago=5)
+        synth_obs = release.observation_status()
+        synth_before = _tree_digests(synth_gen.dir)
+        synth_refused = False
+        synth_detail = ""
+        try:
+            release.archive_old(synth_gid, dry_run=False)
+        except release.ReleaseError as exc:
+            synth_refused = True
+            synth_detail = str(exc) + (f"；{exc.detail}" if exc.detail else "")
+        else:
+            arch_problems.append(
+                "合成世代在观察期未满时被 archive_old(dry_run=False) 放行——"
+                "这正是要拦的动作，门必须红"
+            )
+        if synth_refused and "观察期未满" not in synth_detail:
+            arch_problems.append(f"合成世代被拒了，但理由不是观察期：{synth_detail}")
+        if synth_obs["complete"]:
+            arch_problems.append(
+                f"合成指针的观察期竟然判成已满（{synth_obs['days_elapsed']} 天）：门的前提不成立"
+            )
+        synth_after = _tree_digests(synth_gen.dir)
+        synth_diff = _diff_digests(synth_before, synth_after)
+        if synth_diff:
+            arch_problems.append(f"合成世代被拒后产物仍被改动：{'; '.join(synth_diff[:4])}")
+        if synth_archive.exists():
+            arch_problems.append(f"被拒却创建了归档目录：{synth_archive}")
+        arch_data["synthetic"] = {
+            "generation_id": synth_gid,
+            "verify_problems": synth_verify,
+            "control_days": control["days_elapsed"],
+            "control_plan_files": None if control_plan is None else control_plan["file_count"],
+            "control_plan_bytes": None if control_plan is None else control_plan["total_bytes"],
+            "observation": synth_obs,
+            "refused": synth_refused,
+            "detail": synth_detail,
+            "files_checked": len(synth_before),
+            "unchanged": not synth_diff,
+            "archive_dir_created": synth_archive.exists(),
+        }
+    finally:
+        release.GENERATIONS_DIR = saved_generations_dir
+        release.ARCHIVE_DIR = saved_archive_dir
+        release.CURRENT_PATH = saved_current_path
+        shutil.rmtree(synth_tmp, ignore_errors=True)
+
+    arch_data["problems"] = arch_problems
+    record(
+        "archive_refused_during_observation",
+        "观察期未满时归档被拒且盘上零改动",
+        not arch_problems,
+        f"真实 {real_target}：拒绝={real_refused}"
+        + f"（{len(real_before)} 个文件/"
+          f"{sum(size for size, _ in real_before.values()) / 1048576:.1f} MB "
+          f"SHA-256 前后{'一致' if not real_diff else '不一致'}）"
+        + f"；合成世代：对照组（30 天）拿到计划 "
+          f"{arch_data.get('synthetic', {}).get('control_plan_files')} 个文件、"
+          f"观察期 {arch_data.get('synthetic', {}).get('observation', {}).get('days_elapsed')} 天时"
+          f" dry_run=False 拒绝={arch_data.get('synthetic', {}).get('refused')}、"
+          f"产物零改动={arch_data.get('synthetic', {}).get('unchanged')}"
+        + ("" if not arch_problems else " → " + "; ".join(arch_problems[:4])),
+        arch_data,
+    )
 
     # ---- D2. 线上那一代**能不能被当前链路服务**（K4 的真缺口，必须显式记下来） ----
     #

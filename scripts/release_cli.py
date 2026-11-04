@@ -3,13 +3,21 @@
     py -3 scripts\\release_cli.py current           # 现在线上是哪一代
     py -3 scripts\\release_cli.py list              # 所有世代与状态
     py -3 scripts\\release_cli.py show <gid>        # 一代的 Manifest 与自检结果
-    py -3 scripts\\release_cli.py publish <gid>     # 把 READY 的一代切成线上
+    py -3 scripts\\release_cli.py publish <gid>     # 把 READY 的一代切成线上（先过发布前清单）
     py -3 scripts\\release_cli.py rollback <gid>    # 指针切回历史版本（不重建）
     py -3 scripts\\release_cli.py verify <gid>      # 只校验不改状态
     py -3 scripts\\release_cli.py prune --keep 2    # 清理旧 FAILED 世代（默认演练）
 
 `rollback` 只切指针。历史产物一个字节都不动——重跑几小时的抽取才能造回来的东西，
 不该在回滚时被"重新生成"一遍。
+
+`publish` 在调 `release.publish()` 之前**先过发布前清单门**
+（`scripts/k2_publish_check.py`）：五份门报告（K2 硬门 / K2 性能 / K2 灰度 /
+K3 阈值审批 / K4 演练）必须都在、都过、**都绑这一代**。没有这一步，「五道门都跑过」
+只是一句自觉——`release.publish()` 自己看不到那五份报告，一个 READY 世代照样能
+带着「根本没跑」或「跑的是上一代」的报告上线。
+
+这道清单**没有跳过开关**：需要跳过的时候，该做的是把那五道门跑完，而不是绕开门。
 """
 from __future__ import annotations
 
@@ -18,9 +26,13 @@ import json
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+_SCRIPTS = Path(__file__).resolve().parent
+sys.path.insert(0, str(_SCRIPTS.parent / "src"))
+sys.path.insert(0, str(_SCRIPTS))
 
 from arkrag import release  # noqa: E402
+
+import k2_publish_check as publish_check  # noqa: E402  （发布前清单门）
 
 
 def cmd_current(_args: argparse.Namespace) -> int:
@@ -93,6 +105,34 @@ def cmd_verify(args: argparse.Namespace) -> int:
 
 def cmd_publish(args: argparse.Namespace) -> int:
     gen = release.Generation(args.generation_id)
+
+    # 发布前清单门：必须先过，且它自己会写 data/k2_publish_check.json 留档。
+    # 顺序不能反——先 publish 再查清单，等于事故已经发生才补检查。
+    try:
+        verdict = publish_check.evaluate_generation(gen.generation_id)
+    except publish_check.PublishCheckError as exc:
+        print(f"拒绝发布：发布前清单门无法判定（{exc}）", file=sys.stderr)
+        return 1
+    if not verdict["all_passed"]:
+        print(f"拒绝发布：发布前清单 {len(verdict['failed'])} 条不成立", file=sys.stderr)
+        for item in verdict["failed"]:
+            print(f"  - {item['name']}: {item['detail']}", file=sys.stderr)
+        print(
+            "  清单明细见 data/k2_publish_check.json；"
+            "先把上面点名的门跑完再发布（这道清单没有跳过开关）",
+            file=sys.stderr,
+        )
+        return 1
+    undetermined = [r for r in verdict["checks"] if r["verdict"] == publish_check.UNDETERMINED]
+    if undetermined:
+        # 无法判定不算失败，但它必须被说出来——否则「清单全过」会被读成
+        # 「六条都验过了」，而实际有几条从来没被验过。
+        print(f"清单通过（另有 {len(undetermined)} 条无法判定，见 data/k2_publish_check.json）：")
+        for item in undetermined:
+            print(f"  · {item['name']}: {item['detail']}")
+    else:
+        print("清单通过：五份门报告都在、都过、都绑这一代")
+
     run = release.Run()
     try:
         pointer = release.publish(gen, run=run)

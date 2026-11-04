@@ -1,0 +1,215 @@
+{
+  "schema": "k3-thresholds-1",
+  "updated_at": "2026-11-04",
+  "source_of_truth": "本文件是 K3 阈值的唯一事实源。scripts/k3_thresholds.py 只读不写；docs/ 与脚本注释里不许再登记第二份数字——本项目已经因为「同一判定写两处、取最松者生效」出过三次同型事故（见 tests/test_single_source_of_truth.py）。",
+  "judged_by": "scripts/k3_thresholds.py",
+  "measured_semantics": "delta 行的 threshold 与实测值都指 Δ = 新代 − 旧代（百分比行单位是「占旧代的百分比」，用 (new-old)/old*100 计算）。审批记录里的 measured 必须等于这个 Δ，不是新代的绝对值。",
+  "approval_policy": {
+    "required_fields": ["metric", "measured", "threshold", "approved_by", "approved_at", "decision", "rationale"],
+    "approved_by": "必须是自然人。空串、TBD、agent、auto、bot、system、n/a 之类占位符一律判无效——审批是人做的动作，程序不能自批。",
+    "approved_at": "YYYY-MM-DD，且必须是可解析的真实日期。",
+    "decision": "approved / approve / accepted / 批准 / 通过 / 接受 为通过；rejected / reject / denied / 否决 / 拒绝 为拒绝（拒绝也不许放行）。",
+    "measured_tolerance": 1e-09,
+    "note": "measured 与本次实测差超过 1e-9 即判「记录与实际不符」→ FAIL。审批只能覆盖它当时看到的那一次实测，换成别的一次实测就失效。"
+  },
+  "calibers": {
+    "A": "scripts/k3_signif.py 口径：配对时两代任一为 null 就丢弃该题，RR 的 n=229（无 gold 的 20 题本就不参与，其余 71 题因未命中记为 null 被丢）。",
+    "B": "scripts/k3_signif_eval.py 口径：分母只取有 gold 的题（n=300），RR 未命中填 0.0（与 scripts/ask.py:278-279 的评测器一致）。"
+  },
+  "delta": [
+    {
+      "metric": "r20_delta",
+      "label": "R@20 Δ",
+      "unit": "比率（0-1）",
+      "direction": "lower_is_worse",
+      "threshold": -0.02,
+      "caliber": "A=B",
+      "owner": "Lenovo.ysc",
+      "reason": "R@20 是主召回指标，口径 A/B 逐位相同。0.02 相当于 300 题里 6 题的命中变化，是「能看出来的退化」的最小量级；本轮实测 −0.0031 距该线还有 0.0169。首次设定，无历史依据，待 K5 用多代数据校准。"
+    },
+    {
+      "metric": "r5_delta",
+      "label": "R@5 Δ",
+      "unit": "比率（0-1）",
+      "direction": "lower_is_worse",
+      "threshold": -0.03,
+      "caliber": "A=B",
+      "owner": "Lenovo.ysc",
+      "reason": "R@5 天然比 R@20 抖，阈值放宽到 0.03 以免把噪声当退化（0.03 ≈ 300 题里 9 题）。本轮实测 −0.0100。首次设定，无历史依据，待 K5 用多代数据校准。"
+    },
+    {
+      "metric": "rr_delta",
+      "label": "RR Δ（判据按口径 B）",
+      "unit": "比率（0-1）",
+      "direction": "lower_is_worse",
+      "threshold": -0.02,
+      "caliber": "B",
+      "declared_calibers": {
+        "A": "n=229，丢弃 null，仅申报不判",
+        "B": "n=300，未命中填 0，与 scripts/ask.py 评测器对齐——本行按此口径判"
+      },
+      "owner": "Lenovo.ysc",
+      "reason": "同一个 RR 在两套口径下数值不同（0 填充会把未命中题算进来，均值明显更低），所以必须选一套判、另一套只申报。这里按口径 B 判，因为上线后跑评测的是 scripts/ask.py 的评测器，阈值必须与它同口径，否则门判的和线上量的不是一件事。0.02 与 R@20 对齐。本轮实测口径 B −0.0082 / 口径 A −0.0081，两套都没跨。首次设定，无历史依据，待 K5 用多代数据校准。"
+    },
+    {
+      "metric": "entity_count_drop_pct",
+      "label": "实体数减少 %",
+      "unit": "%（占旧代）",
+      "direction": "lower_is_worse",
+      "threshold": -1.0,
+      "caliber": "manifest",
+      "owner": "Lenovo.ysc",
+      "reason": "对应 K3 判据 1「实体突然减少 → 优先怀疑过度合并」：实体成规模消失，最可能是合并规则变松或消歧把不同人并成一个。1% ≈ 当前规模下 66 个实体，小于这个量级可以逐条看，超过就必须有人签字确认不是误并。本轮实测 +0.015%（6582→6583），是增加不是减少。首次设定，无历史依据，待 K5 用多代数据校准。"
+    },
+    {
+      "metric": "entity_count_rise_pct",
+      "label": "实体数增加 %",
+      "unit": "%（占旧代）",
+      "direction": "higher_is_worse",
+      "threshold": 5.0,
+      "caliber": "manifest",
+      "owner": "Lenovo.ysc",
+      "reason": "对应 K3 判据 2「实体增加 → 检查是否停止误并或消歧退化」：增加本身不一定坏（可能是修好了误并），但一次性涨 5%（≈330 个实体）意味着合并策略发生了实质变化，必须有人的结论说明是「停止误并」还是「消歧退化」。本轮实测 +0.015%，属正常波动。首次设定，无历史依据，待 K5 用多代数据校准。"
+    },
+    {
+      "metric": "edge_count_drop_pct",
+      "label": "边数减少 %",
+      "unit": "%（占旧代）",
+      "direction": "lower_is_worse",
+      "threshold": -2.0,
+      "caliber": "manifest",
+      "owner": "Lenovo.ysc",
+      "reason": "对应 K3 判据 3「边数减少 → 区分去重 / 证据校验拒收 / 漏抽」：2% 以内可以落在「去重变严」的解释里（本轮实测 +0.038%，是增加）；超过 2%（≈570 条边）就意味着证据校验拒收或漏抽占了主导，归因结论必须由人确认后再发布。首次设定，无历史依据，待 K5 用多代数据校准。"
+    },
+    {
+      "metric": "lexical_bytes_drop_pct",
+      "label": "词法索引字节数减少 %",
+      "unit": "%（占旧代）",
+      "direction": "lower_is_worse",
+      "threshold": -25.0,
+      "caliber": "manifest",
+      "owner": "Lenovo.ysc",
+      "reason": "对应 K3 判据 4「索引体积变化 → 结合分词与存储格式解释」：体积下降通常来自词项裁剪或存储格式变化，本身可能是好事，但降幅过大意味着有大量词项被丢掉、稀疏检索会静默失灵。本轮实测 −16.16%（127,244,898 → 106,685,068 字节，词项 694,304 → 390,508）已由分词归一化解释；−25% 是「降得太多、必须有人看过」的线。首次设定，无历史依据，待 K5 用多代数据校准。"
+    },
+    {
+      "metric": "unexplained_differences",
+      "label": "未解释差异数（边 + 断言）",
+      "unit": "条",
+      "direction": "red_line",
+      "threshold": 0,
+      "caliber": "scripts/k3_attribution.py",
+      "owner": "Lenovo.ysc",
+      "reason": "硬红线，不是可批准的退化：K3 要求每条差异都落进 NEW_CHUNK / RENAME / NEW_ENTITY / GONE_ENTITY 之一，落不进就说明归因能力已经跟不上改动，此时「超阈值审批」不能替代归因——即使有人签字也不许放行（门对 red_line 行只认 0）。本轮实测 0。"
+    }
+  ],
+  "absolute": [
+    {
+      "metric": "recall_at_20",
+      "label": "金标准证据 Recall@20",
+      "unit": "比率（0-1）",
+      "direction": "at_least",
+      "threshold": 0.9,
+      "measured_from": "r20",
+      "k3_role": "申报，不判",
+      "owner": "Lenovo.ysc",
+      "source": "F4 质量门禁 absolute 门（docs/升级计划_GraphRAG架构.md:268-282）",
+      "reason": "这是 F 阶段的绝对门，K3 不重复判，只申报当前值与差距。未达标就写未达标，不许把现状写成通过。"
+    },
+    {
+      "metric": "recall_at_5",
+      "label": "金标准证据 Recall@5",
+      "unit": "比率（0-1）",
+      "direction": "at_least",
+      "threshold": 0.75,
+      "measured_from": "r5",
+      "k3_role": "申报，不判",
+      "owner": "Lenovo.ysc",
+      "source": "F4 质量门禁 absolute 门（docs/升级计划_GraphRAG架构.md:268-282）",
+      "reason": "同上：F4 的绝对门，K3 只申报差距，不在这里重判。"
+    },
+    {
+      "metric": "mrr",
+      "label": "MRR（本表用 RR 作代理）",
+      "unit": "比率（0-1）",
+      "direction": "baseline_only",
+      "threshold": null,
+      "measured_from": "rr",
+      "k3_role": "申报，不判",
+      "owner": "Lenovo.ysc",
+      "source": "F4 质量门禁（docs/升级计划_GraphRAG架构.md:268-282）",
+      "reason": "F4 原文是「建立基线后提升，不设虚假绝对值」，所以阈值登记为 null：只申报当前基线值与变化量，不给一个编出来的绝对线。"
+    },
+    {
+      "metric": "citation_localization",
+      "label": "引用定位正确率",
+      "unit": "比率（0-1）",
+      "direction": "at_least",
+      "threshold": 0.98,
+      "measured_from": null,
+      "k3_role": "申报，不判",
+      "owner": "Lenovo.ysc",
+      "source": "F4 质量门禁（docs/升级计划_GraphRAG架构.md:268-282）",
+      "reason": "F4 绝对门；本门没有这项的实测输入（需要 F 阶段的引用定位评测产物），因此不评估、也不假装通过。"
+    },
+    {
+      "metric": "key_fact_citation_coverage",
+      "label": "关键事实引用覆盖率",
+      "unit": "比率（0-1）",
+      "direction": "at_least",
+      "threshold": 0.95,
+      "measured_from": null,
+      "k3_role": "申报，不判",
+      "owner": "Lenovo.ysc",
+      "source": "F4 质量门禁（docs/升级计划_GraphRAG架构.md:268-282）",
+      "reason": "F4 绝对门；本门无实测输入，不评估。"
+    },
+    {
+      "metric": "unanswerable_refusal",
+      "label": "无依据问题拒答正确率",
+      "unit": "比率（0-1）",
+      "direction": "at_least",
+      "threshold": 0.9,
+      "measured_from": null,
+      "k3_role": "申报，不判",
+      "owner": "Lenovo.ysc",
+      "source": "F4 质量门禁（docs/升级计划_GraphRAG架构.md:268-282）",
+      "reason": "F4 绝对门；本门无实测输入，不评估。"
+    },
+    {
+      "metric": "directional_accuracy",
+      "label": "方向性问题正确率",
+      "unit": "比率（0-1）",
+      "direction": "at_least",
+      "threshold": 0.95,
+      "measured_from": null,
+      "k3_role": "申报，不判",
+      "owner": "Lenovo.ysc",
+      "source": "F4 质量门禁（docs/升级计划_GraphRAG架构.md:268-282）",
+      "reason": "F4 绝对门；本门无实测输入，不评估。"
+    },
+    {
+      "metric": "hard_integrity_errors",
+      "label": "硬完整性错误",
+      "unit": "条",
+      "direction": "at_most",
+      "threshold": 0,
+      "measured_from": null,
+      "k3_role": "申报，不判",
+      "owner": "Lenovo.ysc",
+      "source": "F4 质量门禁（docs/升级计划_GraphRAG架构.md:268-282）",
+      "reason": "F4 绝对门（必须为 0）。逐代读数在 data/arkrag/generations/<gid>/reports/gates.json，本门不重跑，不代替它下结论。"
+    },
+    {
+      "metric": "failed_artifact_published",
+      "label": "失败产物发布数",
+      "unit": "条",
+      "direction": "at_most",
+      "threshold": 0,
+      "measured_from": null,
+      "k3_role": "申报，不判",
+      "owner": "Lenovo.ysc",
+      "source": "F4 质量门禁（docs/升级计划_GraphRAG架构.md:268-282）",
+      "reason": "F4 绝对门（必须为 0）；归发布流程管，本门不评估。"
+    }
+  ]
+}

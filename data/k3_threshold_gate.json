@@ -1,0 +1,303 @@
+{
+  "schema": "k3-threshold-gate-1",
+  "thresholds_file": "k3_thresholds.json",
+  "generations": {
+    "old": "g-20261031T035231Z-4eafae",
+    "new": "g-20261103T132152Z-06a741"
+  },
+  "denominators": {
+    "n_common_questions": 320,
+    "n_graded_questions": 300,
+    "n_delta_metrics": 8,
+    "n_absolute_declared": 9,
+    "n_approval_records": 0,
+    "n_approval_records_usable": 0,
+    "n_approval_records_dropped_not_object": 0,
+    "n_unexplained": 0
+  },
+  "recall": {
+    "A": {
+      "n": {
+        "r5": 300,
+        "r20": 300,
+        "rr": 229
+      },
+      "old": {
+        "r5": 0.5108333333333334,
+        "r20": 0.7019444444444445,
+        "rr": 0.5700379047513581
+      },
+      "new": {
+        "r5": 0.5008333333333334,
+        "r20": 0.6988888888888889,
+        "rr": 0.5619042273658522
+      },
+      "delta": {
+        "r5": -0.010000000000000009,
+        "r20": -0.003055555555555589,
+        "rr": -0.008133677385505855
+      }
+    },
+    "B": {
+      "n": {
+        "r5": 300,
+        "r20": 300,
+        "rr": 300
+      },
+      "old": {
+        "r5": 0.5108333333333334,
+        "r20": 0.7019444444444445,
+        "rr": 0.43942985988612926
+      },
+      "new": {
+        "r5": 0.5008333333333334,
+        "r20": 0.6988888888888889,
+        "rr": 0.4311969362909765
+      },
+      "delta": {
+        "r5": -0.010000000000000009,
+        "r20": -0.003055555555555589,
+        "rr": -0.008232923595152764
+      }
+    }
+  },
+  "structure": {
+    "old": {
+      "generation_id": "g-20261031T035231Z-4eafae",
+      "entity_count": 6582,
+      "edge_count": 28625,
+      "lexical_bytes": 127244898
+    },
+    "new": {
+      "generation_id": "g-20261103T132152Z-06a741",
+      "entity_count": 6583,
+      "edge_count": 28636,
+      "lexical_bytes": 106685068
+    },
+    "delta_pct": {
+      "entity_count": 0.015192950470981464,
+      "edge_count": 0.03842794759825328,
+      "lexical_bytes": -16.15768515921165
+    }
+  },
+  "checks": [
+    {
+      "metric": "r20_delta",
+      "label": "R@20 Δ",
+      "direction": "lower_is_worse",
+      "threshold": -0.02,
+      "measured": -0.003055555555555589,
+      "caliber": "A=B",
+      "breached": false,
+      "approvals_seen": 0,
+      "ok": true,
+      "detail": "未跨阈值，不需要审批（距线尚有 0.016944（实测 -0.003056 vs 阈值 -0.020000））"
+    },
+    {
+      "metric": "r5_delta",
+      "label": "R@5 Δ",
+      "direction": "lower_is_worse",
+      "threshold": -0.03,
+      "measured": -0.010000000000000009,
+      "caliber": "A=B",
+      "breached": false,
+      "approvals_seen": 0,
+      "ok": true,
+      "detail": "未跨阈值，不需要审批（距线尚有 0.020000（实测 -0.010000 vs 阈值 -0.030000））"
+    },
+    {
+      "metric": "rr_delta",
+      "label": "RR Δ（判据按口径 B）",
+      "direction": "lower_is_worse",
+      "threshold": -0.02,
+      "measured": -0.008232923595152764,
+      "caliber": "B",
+      "breached": false,
+      "approvals_seen": 0,
+      "ok": true,
+      "detail": "未跨阈值，不需要审批（距线尚有 0.011767（实测 -0.008233 vs 阈值 -0.020000））"
+    },
+    {
+      "metric": "entity_count_drop_pct",
+      "label": "实体数减少 %",
+      "direction": "lower_is_worse",
+      "threshold": -1.0,
+      "measured": 0.015192950470981464,
+      "caliber": "manifest",
+      "breached": false,
+      "approvals_seen": 0,
+      "ok": true,
+      "detail": "未跨阈值，不需要审批（距线尚有 1.015193（实测 +0.015193 vs 阈值 -1.000000））"
+    },
+    {
+      "metric": "entity_count_rise_pct",
+      "label": "实体数增加 %",
+      "direction": "higher_is_worse",
+      "threshold": 5.0,
+      "measured": 0.015192950470981464,
+      "caliber": "manifest",
+      "breached": false,
+      "approvals_seen": 0,
+      "ok": true,
+      "detail": "未跨阈值，不需要审批（距线尚有 4.984807（实测 +0.015193 vs 阈值 +5.000000））"
+    },
+    {
+      "metric": "edge_count_drop_pct",
+      "label": "边数减少 %",
+      "direction": "lower_is_worse",
+      "threshold": -2.0,
+      "measured": 0.03842794759825328,
+      "caliber": "manifest",
+      "breached": false,
+      "approvals_seen": 0,
+      "ok": true,
+      "detail": "未跨阈值，不需要审批（距线尚有 2.038428（实测 +0.038428 vs 阈值 -2.000000））"
+    },
+    {
+      "metric": "lexical_bytes_drop_pct",
+      "label": "词法索引字节数减少 %",
+      "direction": "lower_is_worse",
+      "threshold": -25.0,
+      "measured": -16.15768515921165,
+      "caliber": "manifest",
+      "breached": false,
+      "approvals_seen": 0,
+      "ok": true,
+      "detail": "未跨阈值，不需要审批（距线尚有 8.842315（实测 -16.157685 vs 阈值 -25.000000））"
+    },
+    {
+      "metric": "unexplained_differences",
+      "label": "未解释差异数（边 + 断言）",
+      "direction": "red_line",
+      "threshold": 0,
+      "measured": 0.0,
+      "caliber": "scripts/k3_attribution.py",
+      "breached": false,
+      "approvals_seen": 0,
+      "ok": true,
+      "detail": "未跨阈值，不需要审批（距线尚有 0.000000（实测 +0.000000 vs 阈值 +0.000000））"
+    }
+  ],
+  "absolute_declared": [
+    {
+      "metric": "recall_at_20",
+      "label": "金标准证据 Recall@20",
+      "direction": "at_least",
+      "threshold": 0.9,
+      "measured": 0.6988888888888889,
+      "n": 300,
+      "k3_role": "申报，不判",
+      "ok": true,
+      "declared": true,
+      "met": false,
+      "detail": "当前 0.6989（n=300） vs ≥ 0.9000 → 未达标 -0.2011"
+    },
+    {
+      "metric": "recall_at_5",
+      "label": "金标准证据 Recall@5",
+      "direction": "at_least",
+      "threshold": 0.75,
+      "measured": 0.5008333333333334,
+      "n": 300,
+      "k3_role": "申报，不判",
+      "ok": true,
+      "declared": true,
+      "met": false,
+      "detail": "当前 0.5008（n=300） vs ≥ 0.7500 → 未达标 -0.2492"
+    },
+    {
+      "metric": "mrr",
+      "label": "MRR（本表用 RR 作代理）",
+      "direction": "baseline_only",
+      "threshold": null,
+      "measured": 0.4311969362909765,
+      "n": 300,
+      "k3_role": "申报，不判",
+      "ok": true,
+      "declared": true,
+      "met": null,
+      "detail": "当前 0.4312（n=300）；本行不设绝对阈值，仅申报基线"
+    },
+    {
+      "metric": "citation_localization",
+      "label": "引用定位正确率",
+      "direction": "at_least",
+      "threshold": 0.98,
+      "measured": null,
+      "n": null,
+      "k3_role": "申报，不判",
+      "ok": true,
+      "declared": true,
+      "met": null,
+      "detail": "无实测输入（本门不评估这项，也不假装通过）"
+    },
+    {
+      "metric": "key_fact_citation_coverage",
+      "label": "关键事实引用覆盖率",
+      "direction": "at_least",
+      "threshold": 0.95,
+      "measured": null,
+      "n": null,
+      "k3_role": "申报，不判",
+      "ok": true,
+      "declared": true,
+      "met": null,
+      "detail": "无实测输入（本门不评估这项，也不假装通过）"
+    },
+    {
+      "metric": "unanswerable_refusal",
+      "label": "无依据问题拒答正确率",
+      "direction": "at_least",
+      "threshold": 0.9,
+      "measured": null,
+      "n": null,
+      "k3_role": "申报，不判",
+      "ok": true,
+      "declared": true,
+      "met": null,
+      "detail": "无实测输入（本门不评估这项，也不假装通过）"
+    },
+    {
+      "metric": "directional_accuracy",
+      "label": "方向性问题正确率",
+      "direction": "at_least",
+      "threshold": 0.95,
+      "measured": null,
+      "n": null,
+      "k3_role": "申报，不判",
+      "ok": true,
+      "declared": true,
+      "met": null,
+      "detail": "无实测输入（本门不评估这项，也不假装通过）"
+    },
+    {
+      "metric": "hard_integrity_errors",
+      "label": "硬完整性错误",
+      "direction": "at_most",
+      "threshold": 0,
+      "measured": null,
+      "n": null,
+      "k3_role": "申报，不判",
+      "ok": true,
+      "declared": true,
+      "met": null,
+      "detail": "无实测输入（本门不评估这项，也不假装通过）"
+    },
+    {
+      "metric": "failed_artifact_published",
+      "label": "失败产物发布数",
+      "direction": "at_most",
+      "threshold": 0,
+      "measured": null,
+      "n": null,
+      "k3_role": "申报，不判",
+      "ok": true,
+      "declared": true,
+      "met": null,
+      "detail": "无实测输入（本门不评估这项，也不假装通过）"
+    }
+  ],
+  "all_passed": true,
+  "failed_metrics": [],
+  "note": "all_passed 只表示「K3 第 5 条判据成立」：没有指标跨阈值，或每个跨阈值的指标都有有效人工审批。它**不表示**审批流程被真实执行过——本轮没有指标跨阈值，因此没有发生任何人工审批。"
+}

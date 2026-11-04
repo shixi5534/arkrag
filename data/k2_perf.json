@@ -1,0 +1,1165 @@
+{
+  "generation_id": "g-20261103T132152Z-06a741",
+  "baseline_generation_id": "g-20261031T035231Z-4eafae",
+  "tool": "scripts/k2_perf.py",
+  "generated_at": "2026-11-04T10:20:59Z",
+  "environment": {
+    "python": "3.14.3",
+    "platform": "win32",
+    "cpu_count": 20,
+    "concurrency_warning": "读数可能受同机并发负载影响；正式读数需在无并发时重跑"
+  },
+  "config": {
+    "questions": 40,
+    "warm_reps": 2,
+    "top_k": 20,
+    "graph_depth": 1,
+    "gold_set": "data/goldset/gold-v1.json"
+  },
+  "checks": [
+    {
+      "id": "generations_ok",
+      "name": "两代可加载且产物齐备",
+      "ok": true,
+      "detail": "候选 g-20261103T132152Z-06a741 schema=ark-rag-3 status=READY / 上一代 g-20261031T035231Z-4eafae schema=ark-rag-3 status=READY / 5 件产物均 > 0 字节：True",
+      "data": {
+        "candidate": {
+          "generation_id": "g-20261103T132152Z-06a741",
+          "graph_schema": "ark-rag-3",
+          "status": "READY"
+        },
+        "baseline": {
+          "generation_id": "g-20261031T035231Z-4eafae",
+          "graph_schema": "ark-rag-3",
+          "status": "READY"
+        },
+        "problems": []
+      }
+    },
+    {
+      "id": "index_size_delta",
+      "name": "索引字节与成因核对",
+      "ok": true,
+      "detail": "lexical.json 候选 106,685,068 B → 上一代 127,244,898 B，缩小 16.16%（n=2 代）；倒排词条 390,508 ← 694,304（43.76% 更少，成因 t1→t2）；文档数 13798 ← 13781（+17 块，文件反而更小）；每千词条字节 候选 0.273 KiB vs 上一代 0.183 KiB",
+      "data": {
+        "candidate_bytes": 106685068,
+        "baseline_bytes": 127244898,
+        "shrink_pct": 16.16,
+        "candidate_term_count": 390508,
+        "baseline_term_count": 694304,
+        "candidate_doc_count": 13798,
+        "baseline_doc_count": 13781,
+        "candidate_tokenizer": "t2",
+        "baseline_tokenizer": "t1",
+        "expected_bytes": {
+          "g-20261103T132152Z-06a741": 106685068,
+          "g-20261031T035231Z-4eafae": 127244898
+        },
+        "problems": []
+      }
+    },
+    {
+      "id": "cold_load_path",
+      "name": "冷加载只走 load_index",
+      "ok": true,
+      "detail": "audit hook 实测：06a741 打开 1 份 JSON / 106,685,068 B（lexical.json 106,685,068 B）；4eafae 打开 1 份 JSON / 127,244,898 B（lexical.json 127,244,898 B）；graph.json 打开次数 候选 0 / 上一代 0（n=2 代 × 1 次冷加载）",
+      "data": {
+        "candidate": {
+          "opened_json_paths": [
+            "data/arkrag/generations/g-20261103T132152Z-06a741/index/lexical.json"
+          ],
+          "opened_json_count": 1,
+          "opened_json_bytes": 106685068,
+          "index_bytes": 106685068,
+          "opened_lexical": true,
+          "opened_graph": false
+        },
+        "baseline": {
+          "opened_json_paths": [
+            "data/arkrag/generations/g-20261031T035231Z-4eafae/index/lexical.json"
+          ],
+          "opened_json_count": 1,
+          "opened_json_bytes": 127244898,
+          "index_bytes": 127244898,
+          "opened_lexical": true,
+          "opened_graph": false
+        },
+        "problems": []
+      }
+    },
+    {
+      "id": "index_binding",
+      "name": "索引内容绑定 Manifest",
+      "ok": true,
+      "detail": "probe_digest 重算一致：候选 b800a2a2b2e273b0、上一代 46e600c1f3a9ec9e（n=2 代 × 10 条固定探针 top-10）",
+      "data": {
+        "candidate": {
+          "recomputed": "b800a2a2b2e273b02222a9d8a4460249935666197e2b7c5d543147a9a82b5467",
+          "meta": "b800a2a2b2e273b02222a9d8a4460249935666197e2b7c5d543147a9a82b5467",
+          "manifest": "b800a2a2b2e273b02222a9d8a4460249935666197e2b7c5d543147a9a82b5467"
+        },
+        "baseline": {
+          "recomputed": "46e600c1f3a9ec9e890109a72b0ea1d23ac73bfac846426ed11e5943677836b4",
+          "meta": "46e600c1f3a9ec9e890109a72b0ea1d23ac73bfac846426ed11e5943677836b4",
+          "manifest": "46e600c1f3a9ec9e890109a72b0ea1d23ac73bfac846426ed11e5943677836b4"
+        },
+        "problems": []
+      }
+    },
+    {
+      "id": "rss_ceiling",
+      "name": "峰值 RSS 上界",
+      "ok": true,
+      "detail": "峰值 RSS 候选 1564.03 MiB / 上一代 1719.68 MiB（比 0.909×，n=2 进程）；上界 4096.0 MiB、相对上限 1.5×",
+      "data": {
+        "candidate_peak_mib": 1564.03,
+        "baseline_peak_mib": 1719.68,
+        "ratio": 0.909,
+        "ceiling_mib": 4096.0,
+        "ratio_ceiling": 1.5,
+        "problems": []
+      }
+    },
+    {
+      "id": "report_fields",
+      "name": "每代报告字段完整性",
+      "ok": true,
+      "detail": "候选 13 字段齐 + 冷/热各 4 项分位齐（n=40 题）/ 上一代同（n=40 题）",
+      "data": {
+        "required_fields": [
+          "generation_id",
+          "graph_schema",
+          "load_total_ms",
+          "pipeline_ms",
+          "index_tokenizer",
+          "artifact_bytes",
+          "chunks_path",
+          "questions",
+          "category_mix",
+          "cold",
+          "warm",
+          "memory",
+          "tokens"
+        ],
+        "latency_fields": [
+          "n",
+          "p50_ms",
+          "p95_ms",
+          "p99_ms"
+        ],
+        "problems": []
+      }
+    },
+    {
+      "id": "p95_backstop",
+      "name": "热查 P95 兜底（2×）",
+      "ok": true,
+      "detail": "热查 P95 候选 313.46 ms / 上一代 230.006 ms = 1.363×（阈值 2.0×，n=候选 40 题 / 上一代 40 题）",
+      "data": {
+        "candidate_p95_ms": 313.46,
+        "baseline_p95_ms": 230.006,
+        "ratio": 1.363,
+        "threshold": 2.0
+      }
+    }
+  ],
+  "declared": [
+    {
+      "id": "g-20261103T132152Z-06a741:cold_p50_ms",
+      "name": "cold_p50_ms",
+      "generation_id": "g-20261103T132152Z-06a741",
+      "value": 169.202,
+      "unit": "ms",
+      "enforced": false,
+      "note": "nearest-rank；本机不可复现到具体值，仅供同环境重跑比较"
+    },
+    {
+      "id": "g-20261103T132152Z-06a741:cold_p95_ms",
+      "name": "cold_p95_ms",
+      "generation_id": "g-20261103T132152Z-06a741",
+      "value": 317.509,
+      "unit": "ms",
+      "enforced": false,
+      "note": "nearest-rank；本机不可复现到具体值，仅供同环境重跑比较"
+    },
+    {
+      "id": "g-20261103T132152Z-06a741:cold_p99_ms",
+      "name": "cold_p99_ms",
+      "generation_id": "g-20261103T132152Z-06a741",
+      "value": 368.718,
+      "unit": "ms",
+      "enforced": false,
+      "note": "nearest-rank；本机不可复现到具体值，仅供同环境重跑比较"
+    },
+    {
+      "id": "g-20261103T132152Z-06a741:warm_p50_ms",
+      "name": "warm_p50_ms",
+      "generation_id": "g-20261103T132152Z-06a741",
+      "value": 160.709,
+      "unit": "ms",
+      "enforced": false,
+      "note": "nearest-rank；本机不可复现到具体值，仅供同环境重跑比较"
+    },
+    {
+      "id": "g-20261103T132152Z-06a741:warm_p95_ms",
+      "name": "warm_p95_ms",
+      "generation_id": "g-20261103T132152Z-06a741",
+      "value": 313.46,
+      "unit": "ms",
+      "enforced": false,
+      "note": "nearest-rank；本机不可复现到具体值，仅供同环境重跑比较"
+    },
+    {
+      "id": "g-20261103T132152Z-06a741:warm_p99_ms",
+      "name": "warm_p99_ms",
+      "generation_id": "g-20261103T132152Z-06a741",
+      "value": 346.721,
+      "unit": "ms",
+      "enforced": false,
+      "note": "nearest-rank；本机不可复现到具体值，仅供同环境重跑比较"
+    },
+    {
+      "id": "g-20261103T132152Z-06a741:load_total_ms",
+      "name": "load_total_ms",
+      "generation_id": "g-20261103T132152Z-06a741",
+      "value": 14452.66,
+      "unit": "ms",
+      "enforced": false,
+      "note": "生产链路 pipeline.load_generation() 全程，含五件产物"
+    },
+    {
+      "id": "g-20261103T132152Z-06a741:index_ms",
+      "name": "index_ms",
+      "generation_id": "g-20261103T132152Z-06a741",
+      "value": 6004.97,
+      "unit": "ms",
+      "enforced": false,
+      "note": "全新进程首次 index.load_index()，页缓存冷"
+    },
+    {
+      "id": "g-20261103T132152Z-06a741:pipeline_ms",
+      "name": "pipeline_ms",
+      "generation_id": "g-20261103T132152Z-06a741",
+      "value": 253.88,
+      "unit": "ms",
+      "enforced": false,
+      "note": "Retriever 构造"
+    },
+    {
+      "id": "g-20261103T132152Z-06a741:peak_rss_mib",
+      "name": "peak_rss_mib",
+      "generation_id": "g-20261103T132152Z-06a741",
+      "value": 1564.03,
+      "unit": "MiB",
+      "enforced": false,
+      "note": "GetProcessMemoryInfo 进程高水位"
+    },
+    {
+      "id": "g-20261103T132152Z-06a741:build_total_span_s",
+      "name": "build_total_span_s",
+      "generation_id": "g-20261103T132152Z-06a741",
+      "value": 196.0,
+      "unit": "s",
+      "enforced": false,
+      "note": "时间戳精度为秒；total_span 是首末事件差，含进程启动前的等待，不等于纯计算耗时"
+    },
+    {
+      "id": "g-20261031T035231Z-4eafae:cold_p50_ms",
+      "name": "cold_p50_ms",
+      "generation_id": "g-20261031T035231Z-4eafae",
+      "value": 139.577,
+      "unit": "ms",
+      "enforced": false,
+      "note": "nearest-rank；本机不可复现到具体值，仅供同环境重跑比较"
+    },
+    {
+      "id": "g-20261031T035231Z-4eafae:cold_p95_ms",
+      "name": "cold_p95_ms",
+      "generation_id": "g-20261031T035231Z-4eafae",
+      "value": 240.225,
+      "unit": "ms",
+      "enforced": false,
+      "note": "nearest-rank；本机不可复现到具体值，仅供同环境重跑比较"
+    },
+    {
+      "id": "g-20261031T035231Z-4eafae:cold_p99_ms",
+      "name": "cold_p99_ms",
+      "generation_id": "g-20261031T035231Z-4eafae",
+      "value": 507.336,
+      "unit": "ms",
+      "enforced": false,
+      "note": "nearest-rank；本机不可复现到具体值，仅供同环境重跑比较"
+    },
+    {
+      "id": "g-20261031T035231Z-4eafae:warm_p50_ms",
+      "name": "warm_p50_ms",
+      "generation_id": "g-20261031T035231Z-4eafae",
+      "value": 129.234,
+      "unit": "ms",
+      "enforced": false,
+      "note": "nearest-rank；本机不可复现到具体值，仅供同环境重跑比较"
+    },
+    {
+      "id": "g-20261031T035231Z-4eafae:warm_p95_ms",
+      "name": "warm_p95_ms",
+      "generation_id": "g-20261031T035231Z-4eafae",
+      "value": 230.006,
+      "unit": "ms",
+      "enforced": false,
+      "note": "nearest-rank；本机不可复现到具体值，仅供同环境重跑比较"
+    },
+    {
+      "id": "g-20261031T035231Z-4eafae:warm_p99_ms",
+      "name": "warm_p99_ms",
+      "generation_id": "g-20261031T035231Z-4eafae",
+      "value": 297.817,
+      "unit": "ms",
+      "enforced": false,
+      "note": "nearest-rank；本机不可复现到具体值，仅供同环境重跑比较"
+    },
+    {
+      "id": "g-20261031T035231Z-4eafae:load_total_ms",
+      "name": "load_total_ms",
+      "generation_id": "g-20261031T035231Z-4eafae",
+      "value": 13618.69,
+      "unit": "ms",
+      "enforced": false,
+      "note": "生产链路 pipeline.load_generation() 全程，含五件产物"
+    },
+    {
+      "id": "g-20261031T035231Z-4eafae:index_ms",
+      "name": "index_ms",
+      "generation_id": "g-20261031T035231Z-4eafae",
+      "value": 8366.42,
+      "unit": "ms",
+      "enforced": false,
+      "note": "全新进程首次 index.load_index()，页缓存冷"
+    },
+    {
+      "id": "g-20261031T035231Z-4eafae:pipeline_ms",
+      "name": "pipeline_ms",
+      "generation_id": "g-20261031T035231Z-4eafae",
+      "value": 273.19,
+      "unit": "ms",
+      "enforced": false,
+      "note": "Retriever 构造"
+    },
+    {
+      "id": "g-20261031T035231Z-4eafae:peak_rss_mib",
+      "name": "peak_rss_mib",
+      "generation_id": "g-20261031T035231Z-4eafae",
+      "value": 1719.68,
+      "unit": "MiB",
+      "enforced": false,
+      "note": "GetProcessMemoryInfo 进程高水位"
+    },
+    {
+      "id": "g-20261031T035231Z-4eafae:build_total_span_s",
+      "name": "build_total_span_s",
+      "generation_id": "g-20261031T035231Z-4eafae",
+      "value": 176.0,
+      "unit": "s",
+      "enforced": false,
+      "note": "时间戳精度为秒；total_span 是首末事件差，含进程启动前的等待，不等于纯计算耗时"
+    }
+  ],
+  "measurements": {
+    "g-20261103T132152Z-06a741": {
+      "generation_id": "g-20261103T132152Z-06a741",
+      "graph_schema": "ark-rag-3",
+      "generation_status": "READY",
+      "load_total_ms": 14452.66,
+      "pipeline_ms": 253.88,
+      "index_tokenizer": "t2",
+      "index_chunk_count": 13798,
+      "artifact_bytes": {
+        "graph": 31613199,
+        "adjacency": 26416372,
+        "assertions": 68754389,
+        "index": 106685068,
+        "chunks": 68935400
+      },
+      "chunks_path": "data/arkrag/generations/g-20261103T132152Z-06a741/chunks.jsonl",
+      "questions": 40,
+      "category_mix": {
+        "adversarial": 3,
+        "alias": 6,
+        "cross_chunk": 4,
+        "direct_relation": 6,
+        "multihop": 6,
+        "negative_abstain": 4,
+        "single_chunk": 7,
+        "time_conflict": 4
+      },
+      "cold": {
+        "n": 40,
+        "p50_ms": 169.202,
+        "p95_ms": 317.509,
+        "p99_ms": 368.718,
+        "min_ms": 85.084,
+        "max_ms": 368.718,
+        "mean_ms": 188.373
+      },
+      "warm": {
+        "n": 40,
+        "p50_ms": 160.709,
+        "p95_ms": 313.46,
+        "p99_ms": 346.721,
+        "min_ms": 87.967,
+        "max_ms": 346.721,
+        "mean_ms": 181.366
+      },
+      "warm_reps": 2,
+      "top_k": 20,
+      "graph_depth": 1,
+      "memory": {
+        "at_start": {
+          "current_mib": 26.54,
+          "peak_mib": 26.54,
+          "source": "GetProcessMemoryInfo"
+        },
+        "after_load": {
+          "current_mib": 1359.25,
+          "peak_mib": 1476.27,
+          "source": "GetProcessMemoryInfo"
+        },
+        "after_pipeline": {
+          "current_mib": 1375.07,
+          "peak_mib": 1476.27,
+          "source": "GetProcessMemoryInfo"
+        },
+        "at_end": {
+          "current_mib": 1407.7,
+          "peak_mib": 1564.03,
+          "source": "GetProcessMemoryInfo"
+        }
+      },
+      "tokens": {
+        "context_tokens_p50": null,
+        "context_tokens_p95": null,
+        "llm_prompt_tokens": null,
+        "llm_completion_tokens": null,
+        "llm_cost_usd": null,
+        "llm_unavailable_reason": "本机无 LLM 端点（ARKRAG_LLM_BASE_URL / ARKRAG_LLM_MODEL 为空，arkrag.llm 缺配置直接抛 RuntimeError），回答器是抽取式 ExtractiveAnswerer；拿估算值当成本依据就是造假，故一律 null（同 bench_h1 口径 4）"
+      },
+      "per_question": [
+        {
+          "question_id": "q-sc-000046",
+          "category": "single_chunk",
+          "cold_total_ms": 163.249,
+          "warm_p50_ms": 136.585
+        },
+        {
+          "question_id": "q-sc-000033",
+          "category": "single_chunk",
+          "cold_total_ms": 111.869,
+          "warm_p50_ms": 110.906
+        },
+        {
+          "question_id": "q-sc-000005",
+          "category": "single_chunk",
+          "cold_total_ms": 210.994,
+          "warm_p50_ms": 188.86
+        },
+        {
+          "question_id": "q-sc-000035",
+          "category": "single_chunk",
+          "cold_total_ms": 145.628,
+          "warm_p50_ms": 123.031
+        },
+        {
+          "question_id": "q-sc-000028",
+          "category": "single_chunk",
+          "cold_total_ms": 296.543,
+          "warm_p50_ms": 277.581
+        },
+        {
+          "question_id": "q-sc-000057",
+          "category": "single_chunk",
+          "cold_total_ms": 141.336,
+          "warm_p50_ms": 139.822
+        },
+        {
+          "question_id": "q-sc-000038",
+          "category": "single_chunk",
+          "cold_total_ms": 131.844,
+          "warm_p50_ms": 138.306
+        },
+        {
+          "question_id": "q-al-000036",
+          "category": "alias",
+          "cold_total_ms": 173.788,
+          "warm_p50_ms": 175.486
+        },
+        {
+          "question_id": "q-al-000024",
+          "category": "alias",
+          "cold_total_ms": 195.519,
+          "warm_p50_ms": 182.862
+        },
+        {
+          "question_id": "q-al-000016",
+          "category": "alias",
+          "cold_total_ms": 120.322,
+          "warm_p50_ms": 120.611
+        },
+        {
+          "question_id": "q-al-000025",
+          "category": "alias",
+          "cold_total_ms": 117.638,
+          "warm_p50_ms": 110.358
+        },
+        {
+          "question_id": "q-al-000020",
+          "category": "alias",
+          "cold_total_ms": 213.025,
+          "warm_p50_ms": 201.495
+        },
+        {
+          "question_id": "q-al-000015",
+          "category": "alias",
+          "cold_total_ms": 144.968,
+          "warm_p50_ms": 126.3
+        },
+        {
+          "question_id": "q-dr-000027",
+          "category": "direct_relation",
+          "cold_total_ms": 107.708,
+          "warm_p50_ms": 95.217
+        },
+        {
+          "question_id": "q-dr-000021",
+          "category": "direct_relation",
+          "cold_total_ms": 249.596,
+          "warm_p50_ms": 245.434
+        },
+        {
+          "question_id": "q-dr-000040",
+          "category": "direct_relation",
+          "cold_total_ms": 215.581,
+          "warm_p50_ms": 204.563
+        },
+        {
+          "question_id": "q-dr-000018",
+          "category": "direct_relation",
+          "cold_total_ms": 178.719,
+          "warm_p50_ms": 181.001
+        },
+        {
+          "question_id": "q-dr-000017",
+          "category": "direct_relation",
+          "cold_total_ms": 109.96,
+          "warm_p50_ms": 103.916
+        },
+        {
+          "question_id": "q-dr-000007",
+          "category": "direct_relation",
+          "cold_total_ms": 161.761,
+          "warm_p50_ms": 136.945
+        },
+        {
+          "question_id": "q-mh-000035",
+          "category": "multihop",
+          "cold_total_ms": 262.739,
+          "warm_p50_ms": 234.321
+        },
+        {
+          "question_id": "q-mh-000015",
+          "category": "multihop",
+          "cold_total_ms": 184.657,
+          "warm_p50_ms": 180.695
+        },
+        {
+          "question_id": "q-mh-000007",
+          "category": "multihop",
+          "cold_total_ms": 145.429,
+          "warm_p50_ms": 145.584
+        },
+        {
+          "question_id": "q-mh-000024",
+          "category": "multihop",
+          "cold_total_ms": 180.642,
+          "warm_p50_ms": 189.77
+        },
+        {
+          "question_id": "q-mh-000020",
+          "category": "multihop",
+          "cold_total_ms": 205.306,
+          "warm_p50_ms": 191.584
+        },
+        {
+          "question_id": "q-mh-000006",
+          "category": "multihop",
+          "cold_total_ms": 270.634,
+          "warm_p50_ms": 240.558
+        },
+        {
+          "question_id": "q-cx-000019",
+          "category": "cross_chunk",
+          "cold_total_ms": 89.669,
+          "warm_p50_ms": 98.148
+        },
+        {
+          "question_id": "q-cx-000015",
+          "category": "cross_chunk",
+          "cold_total_ms": 143.434,
+          "warm_p50_ms": 115.098
+        },
+        {
+          "question_id": "q-cx-000007",
+          "category": "cross_chunk",
+          "cold_total_ms": 85.084,
+          "warm_p50_ms": 87.967
+        },
+        {
+          "question_id": "q-cx-000027",
+          "category": "cross_chunk",
+          "cold_total_ms": 99.317,
+          "warm_p50_ms": 105.6
+        },
+        {
+          "question_id": "q-na-000009",
+          "category": "negative_abstain",
+          "cold_total_ms": 326.402,
+          "warm_p50_ms": 313.46
+        },
+        {
+          "question_id": "q-na-000004",
+          "category": "negative_abstain",
+          "cold_total_ms": 317.509,
+          "warm_p50_ms": 341.826
+        },
+        {
+          "question_id": "q-na-000008",
+          "category": "negative_abstain",
+          "cold_total_ms": 248.96,
+          "warm_p50_ms": 255.07
+        },
+        {
+          "question_id": "q-na-000030",
+          "category": "negative_abstain",
+          "cold_total_ms": 147.125,
+          "warm_p50_ms": 160.301
+        },
+        {
+          "question_id": "q-tc-000012",
+          "category": "time_conflict",
+          "cold_total_ms": 144.619,
+          "warm_p50_ms": 132.056
+        },
+        {
+          "question_id": "q-tc-000002",
+          "category": "time_conflict",
+          "cold_total_ms": 283.654,
+          "warm_p50_ms": 273.098
+        },
+        {
+          "question_id": "q-tc-000031",
+          "category": "time_conflict",
+          "cold_total_ms": 255.546,
+          "warm_p50_ms": 253.316
+        },
+        {
+          "question_id": "q-tc-000008",
+          "category": "time_conflict",
+          "cold_total_ms": 368.718,
+          "warm_p50_ms": 346.721
+        },
+        {
+          "question_id": "q-ad-000013",
+          "category": "adversarial",
+          "cold_total_ms": 169.202,
+          "warm_p50_ms": 160.709
+        },
+        {
+          "question_id": "q-ad-000002",
+          "category": "adversarial",
+          "cold_total_ms": 275.076,
+          "warm_p50_ms": 290.709
+        },
+        {
+          "question_id": "q-ad-000016",
+          "category": "adversarial",
+          "cold_total_ms": 141.154,
+          "warm_p50_ms": 138.754
+        }
+      ],
+      "note": "本进程为该世代全新进程（口径 A）；时序数字只用于自测，正式读数需在无并发时重跑",
+      "build": {
+        "available": true,
+        "run_id": "r-20261103T132055Z-fbdfeb",
+        "events_path": "data/arkrag/runs/r-20261103T132055Z-fbdfeb/events.jsonl",
+        "event_count": 11,
+        "total_span_s": 196.0,
+        "by_stage_s": {
+          "start": {
+            "span_s": 0.0,
+            "steps": 1,
+            "first_message": "开始构建候选 Generation",
+            "last_message": "开始构建候选 Generation"
+          },
+          "snapshot": {
+            "span_s": 30.0,
+            "steps": 3,
+            "first_message": "读取块清单",
+            "last_message": "输入快照已固定"
+          },
+          "build": {
+            "span_s": 89.0,
+            "steps": 3,
+            "first_message": "候选目录已就位",
+            "last_message": "图与索引已写入候选目录"
+          },
+          "gate": {
+            "span_s": 0.0,
+            "steps": 1,
+            "first_message": "门禁计算完成",
+            "last_message": "门禁计算完成"
+          },
+          "verify": {
+            "span_s": 0.0,
+            "steps": 1,
+            "first_message": "回读候选产物",
+            "last_message": "回读候选产物"
+          },
+          "ready": {
+            "span_s": 0.0,
+            "steps": 1,
+            "first_message": "已到 READY，按 --no-publish 未切换指针",
+            "last_message": "已到 READY，按 --no-publish 未切换指针"
+          },
+          "run": {
+            "span_s": 0.0,
+            "steps": 1,
+            "first_message": "结束 status=ready",
+            "last_message": "结束 status=ready"
+          }
+        },
+        "note": "时间戳精度为秒；total_span 是首末事件差，含进程启动前的等待，不等于纯计算耗时"
+      }
+    },
+    "g-20261031T035231Z-4eafae": {
+      "generation_id": "g-20261031T035231Z-4eafae",
+      "graph_schema": "ark-rag-3",
+      "generation_status": "READY",
+      "load_total_ms": 13618.69,
+      "pipeline_ms": 273.19,
+      "index_tokenizer": "t1",
+      "index_chunk_count": 13781,
+      "artifact_bytes": {
+        "graph": 31601396,
+        "adjacency": 26406697,
+        "assertions": 68738043,
+        "index": 127244898,
+        "chunks": 40016871
+      },
+      "chunks_path": "data/arkrag/chunks.jsonl",
+      "questions": 40,
+      "category_mix": {
+        "adversarial": 3,
+        "alias": 6,
+        "cross_chunk": 4,
+        "direct_relation": 6,
+        "multihop": 6,
+        "negative_abstain": 4,
+        "single_chunk": 7,
+        "time_conflict": 4
+      },
+      "cold": {
+        "n": 40,
+        "p50_ms": 139.577,
+        "p95_ms": 240.225,
+        "p99_ms": 507.336,
+        "min_ms": 64.216,
+        "max_ms": 507.336,
+        "mean_ms": 159.336
+      },
+      "warm": {
+        "n": 40,
+        "p50_ms": 129.234,
+        "p95_ms": 230.006,
+        "p99_ms": 297.817,
+        "min_ms": 70.431,
+        "max_ms": 297.817,
+        "mean_ms": 145.414
+      },
+      "warm_reps": 2,
+      "top_k": 20,
+      "graph_depth": 1,
+      "memory": {
+        "at_start": {
+          "current_mib": 26.69,
+          "peak_mib": 26.69,
+          "source": "GetProcessMemoryInfo"
+        },
+        "after_load": {
+          "current_mib": 1503.4,
+          "peak_mib": 1719.68,
+          "source": "GetProcessMemoryInfo"
+        },
+        "after_pipeline": {
+          "current_mib": 1509.63,
+          "peak_mib": 1719.68,
+          "source": "GetProcessMemoryInfo"
+        },
+        "at_end": {
+          "current_mib": 1528.41,
+          "peak_mib": 1719.68,
+          "source": "GetProcessMemoryInfo"
+        }
+      },
+      "tokens": {
+        "context_tokens_p50": null,
+        "context_tokens_p95": null,
+        "llm_prompt_tokens": null,
+        "llm_completion_tokens": null,
+        "llm_cost_usd": null,
+        "llm_unavailable_reason": "本机无 LLM 端点（ARKRAG_LLM_BASE_URL / ARKRAG_LLM_MODEL 为空，arkrag.llm 缺配置直接抛 RuntimeError），回答器是抽取式 ExtractiveAnswerer；拿估算值当成本依据就是造假，故一律 null（同 bench_h1 口径 4）"
+      },
+      "per_question": [
+        {
+          "question_id": "q-sc-000046",
+          "category": "single_chunk",
+          "cold_total_ms": 137.969,
+          "warm_p50_ms": 127.855
+        },
+        {
+          "question_id": "q-sc-000033",
+          "category": "single_chunk",
+          "cold_total_ms": 111.142,
+          "warm_p50_ms": 96.162
+        },
+        {
+          "question_id": "q-sc-000005",
+          "category": "single_chunk",
+          "cold_total_ms": 145.073,
+          "warm_p50_ms": 168.852
+        },
+        {
+          "question_id": "q-sc-000035",
+          "category": "single_chunk",
+          "cold_total_ms": 113.519,
+          "warm_p50_ms": 129.234
+        },
+        {
+          "question_id": "q-sc-000028",
+          "category": "single_chunk",
+          "cold_total_ms": 240.225,
+          "warm_p50_ms": 222.159
+        },
+        {
+          "question_id": "q-sc-000057",
+          "category": "single_chunk",
+          "cold_total_ms": 113.889,
+          "warm_p50_ms": 106.492
+        },
+        {
+          "question_id": "q-sc-000038",
+          "category": "single_chunk",
+          "cold_total_ms": 128.115,
+          "warm_p50_ms": 127.243
+        },
+        {
+          "question_id": "q-al-000036",
+          "category": "alias",
+          "cold_total_ms": 120.727,
+          "warm_p50_ms": 122.481
+        },
+        {
+          "question_id": "q-al-000024",
+          "category": "alias",
+          "cold_total_ms": 165.291,
+          "warm_p50_ms": 153.211
+        },
+        {
+          "question_id": "q-al-000016",
+          "category": "alias",
+          "cold_total_ms": 113.134,
+          "warm_p50_ms": 96.935
+        },
+        {
+          "question_id": "q-al-000025",
+          "category": "alias",
+          "cold_total_ms": 106.58,
+          "warm_p50_ms": 113.67
+        },
+        {
+          "question_id": "q-al-000020",
+          "category": "alias",
+          "cold_total_ms": 164.975,
+          "warm_p50_ms": 160.199
+        },
+        {
+          "question_id": "q-al-000015",
+          "category": "alias",
+          "cold_total_ms": 128.311,
+          "warm_p50_ms": 112.202
+        },
+        {
+          "question_id": "q-dr-000027",
+          "category": "direct_relation",
+          "cold_total_ms": 82.713,
+          "warm_p50_ms": 82.608
+        },
+        {
+          "question_id": "q-dr-000021",
+          "category": "direct_relation",
+          "cold_total_ms": 201.899,
+          "warm_p50_ms": 191.208
+        },
+        {
+          "question_id": "q-dr-000040",
+          "category": "direct_relation",
+          "cold_total_ms": 151.823,
+          "warm_p50_ms": 153.844
+        },
+        {
+          "question_id": "q-dr-000018",
+          "category": "direct_relation",
+          "cold_total_ms": 151.663,
+          "warm_p50_ms": 139.341
+        },
+        {
+          "question_id": "q-dr-000017",
+          "category": "direct_relation",
+          "cold_total_ms": 82.291,
+          "warm_p50_ms": 80.481
+        },
+        {
+          "question_id": "q-dr-000007",
+          "category": "direct_relation",
+          "cold_total_ms": 112.073,
+          "warm_p50_ms": 109.85
+        },
+        {
+          "question_id": "q-mh-000035",
+          "category": "multihop",
+          "cold_total_ms": 201.815,
+          "warm_p50_ms": 183.138
+        },
+        {
+          "question_id": "q-mh-000015",
+          "category": "multihop",
+          "cold_total_ms": 131.318,
+          "warm_p50_ms": 124.956
+        },
+        {
+          "question_id": "q-mh-000007",
+          "category": "multihop",
+          "cold_total_ms": 136.91,
+          "warm_p50_ms": 131.954
+        },
+        {
+          "question_id": "q-mh-000024",
+          "category": "multihop",
+          "cold_total_ms": 187.46,
+          "warm_p50_ms": 176.701
+        },
+        {
+          "question_id": "q-mh-000020",
+          "category": "multihop",
+          "cold_total_ms": 173.227,
+          "warm_p50_ms": 153.889
+        },
+        {
+          "question_id": "q-mh-000006",
+          "category": "multihop",
+          "cold_total_ms": 507.336,
+          "warm_p50_ms": 175.397
+        },
+        {
+          "question_id": "q-cx-000019",
+          "category": "cross_chunk",
+          "cold_total_ms": 73.614,
+          "warm_p50_ms": 77.446
+        },
+        {
+          "question_id": "q-cx-000015",
+          "category": "cross_chunk",
+          "cold_total_ms": 104.514,
+          "warm_p50_ms": 105.316
+        },
+        {
+          "question_id": "q-cx-000007",
+          "category": "cross_chunk",
+          "cold_total_ms": 64.216,
+          "warm_p50_ms": 70.431
+        },
+        {
+          "question_id": "q-cx-000027",
+          "category": "cross_chunk",
+          "cold_total_ms": 98.211,
+          "warm_p50_ms": 95.206
+        },
+        {
+          "question_id": "q-na-000009",
+          "category": "negative_abstain",
+          "cold_total_ms": 239.474,
+          "warm_p50_ms": 235.062
+        },
+        {
+          "question_id": "q-na-000004",
+          "category": "negative_abstain",
+          "cold_total_ms": 280.8,
+          "warm_p50_ms": 297.817
+        },
+        {
+          "question_id": "q-na-000008",
+          "category": "negative_abstain",
+          "cold_total_ms": 212.582,
+          "warm_p50_ms": 208.086
+        },
+        {
+          "question_id": "q-na-000030",
+          "category": "negative_abstain",
+          "cold_total_ms": 152.62,
+          "warm_p50_ms": 119.796
+        },
+        {
+          "question_id": "q-tc-000012",
+          "category": "time_conflict",
+          "cold_total_ms": 145.549,
+          "warm_p50_ms": 119.614
+        },
+        {
+          "question_id": "q-tc-000002",
+          "category": "time_conflict",
+          "cold_total_ms": 215.364,
+          "warm_p50_ms": 192.875
+        },
+        {
+          "question_id": "q-tc-000031",
+          "category": "time_conflict",
+          "cold_total_ms": 162.95,
+          "warm_p50_ms": 170.591
+        },
+        {
+          "question_id": "q-tc-000008",
+          "category": "time_conflict",
+          "cold_total_ms": 239.927,
+          "warm_p50_ms": 230.006
+        },
+        {
+          "question_id": "q-ad-000013",
+          "category": "adversarial",
+          "cold_total_ms": 139.577,
+          "warm_p50_ms": 133.772
+        },
+        {
+          "question_id": "q-ad-000002",
+          "category": "adversarial",
+          "cold_total_ms": 205.512,
+          "warm_p50_ms": 202.244
+        },
+        {
+          "question_id": "q-ad-000016",
+          "category": "adversarial",
+          "cold_total_ms": 129.061,
+          "warm_p50_ms": 118.223
+        }
+      ],
+      "note": "本进程为该世代全新进程（口径 A）；时序数字只用于自测，正式读数需在无并发时重跑",
+      "build": {
+        "available": true,
+        "run_id": "r-20261031T035149Z-d7c94b",
+        "events_path": "data/arkrag/runs/r-20261031T035149Z-d7c94b/events.jsonl",
+        "event_count": 10,
+        "total_span_s": 176.0,
+        "by_stage_s": {
+          "start": {
+            "span_s": 0.0,
+            "steps": 1,
+            "first_message": "开始构建候选 Generation",
+            "last_message": "开始构建候选 Generation"
+          },
+          "snapshot": {
+            "span_s": 23.0,
+            "steps": 3,
+            "first_message": "读取块清单",
+            "last_message": "输入快照已固定"
+          },
+          "build": {
+            "span_s": 79.0,
+            "steps": 2,
+            "first_message": "候选目录已就位",
+            "last_message": "图与索引已写入候选目录"
+          },
+          "gate": {
+            "span_s": 0.0,
+            "steps": 1,
+            "first_message": "门禁计算完成",
+            "last_message": "门禁计算完成"
+          },
+          "verify": {
+            "span_s": 0.0,
+            "steps": 1,
+            "first_message": "回读候选产物",
+            "last_message": "回读候选产物"
+          },
+          "ready": {
+            "span_s": 0.0,
+            "steps": 1,
+            "first_message": "已到 READY，按 --no-publish 未切换指针",
+            "last_message": "已到 READY，按 --no-publish 未切换指针"
+          },
+          "run": {
+            "span_s": 0.0,
+            "steps": 1,
+            "first_message": "结束 status=ready",
+            "last_message": "结束 status=ready"
+          }
+        },
+        "note": "时间戳精度为秒；total_span 是首末事件差，含进程启动前的等待，不等于纯计算耗时"
+      }
+    }
+  },
+  "index_probes": {
+    "g-20261103T132152Z-06a741": {
+      "generation_id": "g-20261103T132152Z-06a741",
+      "index_path": "data/arkrag/generations/g-20261103T132152Z-06a741/index/lexical.json",
+      "index_bytes": 106685068,
+      "graph_path": "data/arkrag/generations/g-20261103T132152Z-06a741/graph/graph.json",
+      "index_ms": 6004.97,
+      "index_peak_mib": 1042.03,
+      "opened_json_paths": [
+        "data/arkrag/generations/g-20261103T132152Z-06a741/index/lexical.json"
+      ],
+      "opened_json_count": 1,
+      "opened_json_bytes": 106685068,
+      "opened_lexical": true,
+      "opened_graph": false,
+      "doc_count": 13798,
+      "term_count": 390508,
+      "tokenizer_version": "t2",
+      "meta_chunk_count": 13798,
+      "meta_probe_digest": "b800a2a2b2e273b02222a9d8a4460249935666197e2b7c5d543147a9a82b5467",
+      "manifest_probe_digest": "b800a2a2b2e273b02222a9d8a4460249935666197e2b7c5d543147a9a82b5467",
+      "recomputed_probe_digest": "b800a2a2b2e273b02222a9d8a4460249935666197e2b7c5d543147a9a82b5467",
+      "note": "index_ms 是全新进程里首次读取的耗时（页缓存冷）；audit hook 在整个进程内有效，进程结束即消失"
+    },
+    "g-20261031T035231Z-4eafae": {
+      "generation_id": "g-20261031T035231Z-4eafae",
+      "index_path": "data/arkrag/generations/g-20261031T035231Z-4eafae/index/lexical.json",
+      "index_bytes": 127244898,
+      "graph_path": "data/arkrag/generations/g-20261031T035231Z-4eafae/graph/graph.json",
+      "index_ms": 8366.42,
+      "index_peak_mib": 1284.75,
+      "opened_json_paths": [
+        "data/arkrag/generations/g-20261031T035231Z-4eafae/index/lexical.json"
+      ],
+      "opened_json_count": 1,
+      "opened_json_bytes": 127244898,
+      "opened_lexical": true,
+      "opened_graph": false,
+      "doc_count": 13781,
+      "term_count": 694304,
+      "tokenizer_version": "t1",
+      "meta_chunk_count": 13781,
+      "meta_probe_digest": "46e600c1f3a9ec9e890109a72b0ea1d23ac73bfac846426ed11e5943677836b4",
+      "manifest_probe_digest": "46e600c1f3a9ec9e890109a72b0ea1d23ac73bfac846426ed11e5943677836b4",
+      "recomputed_probe_digest": "46e600c1f3a9ec9e890109a72b0ea1d23ac73bfac846426ed11e5943677836b4",
+      "note": "index_ms 是全新进程里首次读取的耗时（页缓存冷）；audit hook 在整个进程内有效，进程结束即消失"
+    }
+  },
+  "all_passed": true
+}

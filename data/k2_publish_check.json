@@ -1,0 +1,167 @@
+{
+  "generation_id": "g-20261103T132152Z-06a741",
+  "tool": "scripts/k2_publish_check.py",
+  "candidate": {
+    "status": "READY",
+    "created_at": "2026-11-03T13:21:52Z",
+    "graph_artifact_id": "e44c1484dc0d9acd2456e277a79e5cccc38e021fd5b26dc5a6fbf126a9fb88ff",
+    "index_artifact_id": "ac6f027ecc6bca266d5b0ac220e7c19b1deb28ffa8c2a385e3e4d85c901ae304",
+    "verify_problems": []
+  },
+  "checks": [
+    {
+      "id": "reports_present",
+      "name": "五份门报告在场且可解析",
+      "verdict": "pass",
+      "ok": true,
+      "detail": "5/5 份报告在场且可解析",
+      "data": {
+        "have": 5,
+        "total": 5,
+        "missing": [],
+        "broken": []
+      }
+    },
+    {
+      "id": "reports_passed",
+      "name": "每份报告自身 all_passed=True",
+      "verdict": "pass",
+      "ok": true,
+      "detail": "5/5 份报告 all_passed=True",
+      "data": {
+        "passed": 5,
+        "judged": 5,
+        "not_true": []
+      }
+    },
+    {
+      "id": "reports_bind_generation",
+      "name": "每份报告绑的是本次要发布的世代",
+      "verdict": "pass",
+      "ok": true,
+      "detail": "5/5 份都绑 g-20261103T132152Z-06a741",
+      "data": {
+        "bound": 5,
+        "judged": 5,
+        "total": 5,
+        "want": "g-20261103T132152Z-06a741",
+        "mismatched": []
+      }
+    },
+    {
+      "id": "candidate_ready",
+      "name": "候选状态是 READY",
+      "verdict": "pass",
+      "ok": true,
+      "detail": "候选 g-20261103T132152Z-06a741 状态 READY",
+      "data": {
+        "status": "READY",
+        "want": "READY",
+        "generation_id": "g-20261103T132152Z-06a741"
+      }
+    },
+    {
+      "id": "candidate_verify",
+      "name": "候选 verify_generation() 无不符项",
+      "verdict": "pass",
+      "ok": true,
+      "detail": "候选 g-20261103T132152Z-06a741 自检 0 项不符",
+      "data": {
+        "problems": [],
+        "generation_id": "g-20261103T132152Z-06a741"
+      }
+    },
+    {
+      "id": "reports_not_stale",
+      "name": "报告不早于候选建成",
+      "verdict": "undetermined",
+      "ok": false,
+      "detail": "2 份可比且都不早于候选建成；另 3 份无时间戳字段，本条对其无法判定：data/k2_hard_gates.json；data/k3_threshold_gate.json；data/k4_drill.json",
+      "data": {
+        "checked": 2,
+        "undetermined": [
+          "data/k2_hard_gates.json",
+          "data/k3_threshold_gate.json",
+          "data/k4_drill.json"
+        ],
+        "stale": [],
+        "candidate_created_at": "2026-11-03T13:21:52Z"
+      }
+    }
+  ],
+  "passed": [
+    "reports_present",
+    "reports_passed",
+    "reports_bind_generation",
+    "candidate_ready",
+    "candidate_verify"
+  ],
+  "failed": [],
+  "undetermined": [
+    "reports_not_stale"
+  ],
+  "reports": [
+    {
+      "key": "k2_hard_gates",
+      "rel_path": "data/k2_hard_gates.json",
+      "gid_field": "generation_id",
+      "producer": "py -3 scripts/k2_hard_gates.py",
+      "exists": true,
+      "valid_json": true,
+      "generation_id": "g-20261103T132152Z-06a741",
+      "all_passed": true,
+      "generated_at": null,
+      "error": ""
+    },
+    {
+      "key": "k2_perf",
+      "rel_path": "data/k2_perf.json",
+      "gid_field": "generation_id",
+      "producer": "py -3 scripts/k2_perf.py",
+      "exists": true,
+      "valid_json": true,
+      "generation_id": "g-20261103T132152Z-06a741",
+      "all_passed": true,
+      "generated_at": "2026-11-04T10:20:59Z",
+      "error": ""
+    },
+    {
+      "key": "k2_gray",
+      "rel_path": "data/k2_gray.json",
+      "gid_field": "generation_id",
+      "producer": "py -3 scripts/k2_gray.py",
+      "exists": true,
+      "valid_json": true,
+      "generation_id": "g-20261103T132152Z-06a741",
+      "all_passed": true,
+      "generated_at": "2026-11-04T10:03:51Z",
+      "error": ""
+    },
+    {
+      "key": "k3_threshold_gate",
+      "rel_path": "data/k3_threshold_gate.json",
+      "gid_field": "generations.new",
+      "producer": "py -3 scripts/k3_thresholds.py",
+      "exists": true,
+      "valid_json": true,
+      "generation_id": "g-20261103T132152Z-06a741",
+      "all_passed": true,
+      "generated_at": null,
+      "error": ""
+    },
+    {
+      "key": "k4_drill",
+      "rel_path": "data/k4_drill.json",
+      "gid_field": "candidate",
+      "producer": "py -3 scripts/k4_drill.py",
+      "exists": true,
+      "valid_json": true,
+      "generation_id": "g-20261103T132152Z-06a741",
+      "all_passed": true,
+      "generated_at": null,
+      "error": ""
+    }
+  ],
+  "all_passed": true,
+  "note": "all_passed 只统计「不成立」的判据；undetermined 的判据既不算通过也不算失败。本门只证明五份报告都在、都过、都绑这一代，不证明这一代本身好。"
+}
