@@ -1,0 +1,4598 @@
+{
+ "script": "scripts/a_feature_inventory2.py",
+ "purpose": "共同邻居 / 关系词同行 两个在线信号的上界测量（纯测量，不改排序）",
+ "generated_at": "2026-11-04T14:56:13Z",
+ "git_commit": "a3a93ae41b8f61eef54fcccbe81f0f84e4c29779",
+ "python": "3.14.3",
+ "os": "Windows-11-10.0.26200-SP0",
+ "command": "py -3 scripts/a_feature_inventory2.py",
+ "generation": "g-20261103T132152Z-06a741",
+ "gold_set": "data/goldset/gold-v1.json",
+ "triage_source": "data/a_triage_all320.jsonl",
+ "pool": 200,
+ "eval_top_k": 20,
+ "n_questions": 136,
+ "baseline_in_top": 74,
+ "common_neighbor_available": 85,
+ "gold_has_common_neighbor": 78,
+ "single_dim_rerank": {
+  "cn_count": {
+   "rescued": 19,
+   "broken": 20,
+   "net": -1
+  },
+  "cn_unique": {
+   "rescued": 3,
+   "broken": 0,
+   "net": 3
+  },
+  "hop_line": {
+   "rescued": 16,
+   "broken": 4,
+   "net": 12
+  },
+  "rel_line_both": {
+   "rescued": 0,
+   "broken": 0,
+   "net": 0
+  }
+ },
+ "by_category": {
+  "single_chunk": {
+   "n": 12,
+   "gold_has_cn": 2,
+   "cn_available": 2,
+   "recall_by_dim": {
+    "cn_count": 7,
+    "cn_unique": 8,
+    "hop_line": 8,
+    "rel_line_both": 8
+   }
+  },
+  "alias": {
+   "n": 9,
+   "gold_has_cn": 1,
+   "cn_available": 1,
+   "recall_by_dim": {
+    "cn_count": 7,
+    "cn_unique": 6,
+    "hop_line": 6,
+    "rel_line_both": 6
+   }
+  },
+  "direct_relation": {
+   "n": 32,
+   "gold_has_cn": 24,
+   "cn_available": 26,
+   "recall_by_dim": {
+    "cn_count": 11,
+    "cn_unique": 12,
+    "hop_line": 14,
+    "rel_line_both": 12
+   }
+  },
+  "multihop": {
+   "n": 38,
+   "gold_has_cn": 35,
+   "cn_available": 35,
+   "recall_by_dim": {
+    "cn_count": 28,
+    "cn_unique": 24,
+    "hop_line": 34,
+    "rel_line_both": 21
+   }
+  },
+  "cross_chunk": {
+   "n": 12,
+   "gold_has_cn": 0,
+   "cn_available": 0,
+   "recall_by_dim": {
+    "cn_count": 9,
+    "cn_unique": 9,
+    "hop_line": 9,
+    "rel_line_both": 9
+   }
+  },
+  "time_conflict": {
+   "n": 19,
+   "gold_has_cn": 16,
+   "cn_available": 16,
+   "recall_by_dim": {
+    "cn_count": 6,
+    "cn_unique": 12,
+    "hop_line": 10,
+    "rel_line_both": 12
+   }
+  },
+  "adversarial": {
+   "n": 14,
+   "gold_has_cn": 0,
+   "cn_available": 5,
+   "recall_by_dim": {
+    "cn_count": 5,
+    "cn_unique": 6,
+    "hop_line": 5,
+    "rel_line_both": 6
+   }
+  }
+ },
+ "questions": [
+  {
+   "question_id": "q-sc-000003",
+   "category": "single_chunk",
+   "primary": "找到但未进前部",
+   "question": "下面这段原文来自哪一段剧情？「萨卡兹为一对萨科塔母女守夜。」请回答该段的标题。",
+   "gold_answer": "安魂教堂",
+   "best_gold_rank": 35,
+   "baseline_in_top": false,
+   "n_common_neighbors": 7,
+   "common_neighbor_names": [
+    "凯尔希",
+    "塞茜莉亚",
+    "奥伦",
+    "拉特兰",
+    "提卡兹",
+    "死魂灵",
+    "源石"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act16side/level_act16side_04_end#002": {
+     "cn_count": 1,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-sc-000007",
+   "category": "single_chunk",
+   "primary": "找到但未进前部",
+   "question": "下面这段原文来自哪一段剧情？「在战胜了“塑料”瑟奇亚克至今」请回答该段的标题。",
+   "gold_answer": "蓝耳酒窖",
+   "best_gold_rank": 36,
+   "baseline_in_top": false,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/act13d5/level_act13d5_06_end#002": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-sc-000014",
+   "category": "single_chunk",
+   "primary": "上下文未采用",
+   "question": "在剧情《甲板室》的正文里，出现了这样一句话：「好吧......真是坚强的孩子。」。这句话出自哪个文本块？请给出该块的标题。",
+   "gold_answer": "甲板室",
+   "best_gold_rank": 8,
+   "baseline_in_top": true,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/act17side/level_act17side_st10#003": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-sc-000020",
+   "category": "single_chunk",
+   "primary": "找到但未进前部",
+   "question": "下面这段原文来自哪一段剧情？「乌萨斯为什么会变成这样？」请回答该段的标题。",
+   "gold_answer": "枷锁之中",
+   "best_gold_rank": 109,
+   "baseline_in_top": false,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/act51side/level_act51side_02_beg#007": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-sc-000024",
+   "category": "single_chunk",
+   "primary": "上下文未采用",
+   "question": "下面这段原文来自哪一段剧情？「可萝尔还在等我们呢！」请回答该段的标题。",
+   "gold_answer": "黄金三角",
+   "best_gold_rank": 6,
+   "baseline_in_top": true,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/a001/level_a001_06_end#001": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-sc-000027",
+   "category": "single_chunk",
+   "primary": "上下文未采用",
+   "question": "在剧情《各自流亡》的正文里，出现了这样一句话：「格罗莫夫申请了那么多物资」。这句话出自哪个文本块？请给出该块的标题。",
+   "gold_answer": "各自流亡",
+   "best_gold_rank": 9,
+   "baseline_in_top": true,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/act51side/level_act51side_06_beg#007": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-sc-000031",
+   "category": "single_chunk",
+   "primary": "上下文未采用",
+   "question": "在剧情《或许有时》的正文里，出现了这样一句话：「怎么了，一惊一乍的，出什么事了？」。这句话出自哪个文本块？请给出该块的标题。",
+   "gold_answer": "或许有时",
+   "best_gold_rank": 7,
+   "baseline_in_top": true,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/act10mini/level_act10mini_st01#011": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-sc-000036",
+   "category": "single_chunk",
+   "primary": "上下文未采用",
+   "question": "在剧情《核心舱攻防战》的正文里，出现了这样一句话：「阿米娅：死魂灵。」。这句话出自哪个文本块？请给出该块的标题。",
+   "gold_answer": "核心舱攻防战",
+   "best_gold_rank": 5,
+   "baseline_in_top": true,
+   "n_common_neighbors": 10,
+   "common_neighbor_names": [
+    "W",
+    "凯尔希",
+    "博士",
+    "卡兹戴尔",
+    "妮芙",
+    "曼弗雷德",
+    "泥岩",
+    "特蕾西娅",
+    "船舱中的影子",
+    "萨卡兹"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "obt/main/level_main_14-15_beg#004": {
+     "cn_count": 2,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-sc-000041",
+   "category": "single_chunk",
+   "primary": "找到但未进前部",
+   "question": "在剧情《种因》的正文里，出现了这样一句话：「所以我不能，让你在这......」。这句话出自哪个文本块？请给出该块的标题。",
+   "gold_answer": "种因",
+   "best_gold_rank": 51,
+   "baseline_in_top": false,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/act31side/level_act31side_08_end#003": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-sc-000045",
+   "category": "single_chunk",
+   "primary": "上下文未采用",
+   "question": "下面这段原文来自哪一段剧情？「可我来高庭区根本没申请」请回答该段的标题。",
+   "gold_answer": "自由射手",
+   "best_gold_rank": 5,
+   "baseline_in_top": true,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/act18side/level_act18side_03_beg#000": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-sc-000056",
+   "category": "single_chunk",
+   "primary": "上下文未采用",
+   "question": "在剧情《商业联合》的正文里，出现了这样一句话：「这不可能，你？治疗我？」。这句话出自哪个文本块？请给出该块的标题。",
+   "gold_answer": "商业联合",
+   "best_gold_rank": 7,
+   "baseline_in_top": true,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/act13d5/level_act13d5_08_end#007": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-sc-000057",
+   "category": "single_chunk",
+   "primary": "上下文未采用",
+   "question": "下面这段原文来自哪一段剧情？「我在想......你觉得，国王是什么？」请回答该段的标题。",
+   "gold_answer": "捂住耳朵",
+   "best_gold_rank": 5,
+   "baseline_in_top": true,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "obt/main/level_main_12-12_beg#002": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-al-000006",
+   "category": "alias",
+   "primary": "上下文未采用",
+   "question": "「伦蒂尼姆市民自救军」是《城市的呼吸》中出现的称呼，它的规范名（规范实体名）是什么？",
+   "gold_answer": "自救军",
+   "best_gold_rank": 13,
+   "baseline_in_top": true,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "obt/main/level_main_10-04_beg#002": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-al-000013",
+   "category": "alias",
+   "primary": "上下文未采用",
+   "question": "在剧情正文里，「甲胄」被用来指代哪个角色或事物？请给出它的规范名。",
+   "gold_answer": "蒸汽甲胄",
+   "best_gold_rank": 9,
+   "baseline_in_top": true,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "obt/main/level_main_11-01_beg#004": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-al-000014",
+   "category": "alias",
+   "primary": "找到但未进前部",
+   "question": "在剧情正文里，「玛丽安娜·布莱克」被用来指代哪个角色或事物？请给出它的规范名。",
+   "gold_answer": "雅拉",
+   "best_gold_rank": 28,
+   "baseline_in_top": false,
+   "n_common_neighbors": 10,
+   "common_neighbor_names": [
+    "伊芙利特",
+    "克丽斯腾",
+    "克丽斯腾·莱特",
+    "哥伦比亚",
+    "斐尔迪南",
+    "杰克逊",
+    "梅兰德基金会",
+    "特里蒙",
+    "莱茵生命",
+    "赫默"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act25side/level_act25side_03_end#000": {
+     "cn_count": 5,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-al-000024",
+   "category": "alias",
+   "primary": "找到但未进前部",
+   "question": "在剧情正文里，「锡兰小姐」被用来指代哪个角色或事物？请给出它的规范名。",
+   "gold_answer": "锡兰",
+   "best_gold_rank": 46,
+   "baseline_in_top": false,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/act27side/level_act27side_05_beg#003": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-al-000026",
+   "category": "alias",
+   "primary": "上下文未采用",
+   "question": "在剧情正文里，「艾德文叔」被用来指代哪个角色或事物？请给出它的规范名。",
+   "gold_answer": "艾德文",
+   "best_gold_rank": 5,
+   "baseline_in_top": true,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "obt/memory/story_blackd_1_1#000": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-al-000031",
+   "category": "alias",
+   "primary": "找到但未进前部",
+   "question": "在剧情正文里，「萨卡兹们」被用来指代哪个角色或事物？请给出它的规范名。",
+   "gold_answer": "萨卡兹",
+   "best_gold_rank": 50,
+   "baseline_in_top": false,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/act11d0/level_act11d0_03_end#002": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-al-000034",
+   "category": "alias",
+   "primary": "上下文未采用",
+   "question": "「昂斯特议员」是《我如浮萍》中出现的称呼，它的规范名（规范实体名）是什么？",
+   "gold_answer": "昂斯特",
+   "best_gold_rank": 5,
+   "baseline_in_top": true,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/act10mini/level_act10mini_st02#003": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-al-000035",
+   "category": "alias",
+   "primary": "上下文未采用",
+   "question": "在剧情正文里，「地灵前辈」被用来指代哪个角色或事物？请给出它的规范名。",
+   "gold_answer": "地灵",
+   "best_gold_rank": 13,
+   "baseline_in_top": true,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "obt/memory/story_mint_1_1#001": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-al-000043",
+   "category": "alias",
+   "primary": "上下文未采用",
+   "question": "在剧情正文里，「青鬼」被用来指代哪个角色或事物？请给出它的规范名。",
+   "gold_answer": "星熊",
+   "best_gold_rank": 11,
+   "baseline_in_top": true,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/act44side/level_act44side_02_beg#000": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-dr-000001",
+   "category": "direct_relation",
+   "primary": "上下文未采用",
+   "question": "「凯尔希」对「伊利亚」处于哪种关系？",
+   "gold_answer": "交谈",
+   "best_gold_rank": 8,
+   "baseline_in_top": true,
+   "n_common_neighbors": 3,
+   "common_neighbor_names": [
+    "切尔诺伯格研究所",
+    "柳德米拉",
+    "科谢尼娅"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "obt/main/level_st_17-01#001": {
+     "cn_count": 1,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-dr-000002",
+   "category": "direct_relation",
+   "primary": "找到但未进前部",
+   "question": "「山海众」对「玉门」处于哪种关系？",
+   "gold_answer": "位于",
+   "best_gold_rank": 55,
+   "baseline_in_top": false,
+   "n_common_neighbors": 16,
+   "common_neighbor_names": [
+    "仇白",
+    "大炎",
+    "太合",
+    "太尉",
+    "孟铁衣",
+    "巡防营",
+    "左乐",
+    "左宣辽",
+    "截云",
+    "杜遥夜",
+    "槐天裴",
+    "沙渠"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act40side/level_act40side_07_beg#004": {
+     "cn_count": 2,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-dr-000003",
+   "category": "direct_relation",
+   "primary": "找到但未进前部",
+   "question": "「洛洛」对「费斯特」处于哪种关系？",
+   "gold_answer": "同行",
+   "best_gold_rank": 22,
+   "baseline_in_top": false,
+   "n_common_neighbors": 16,
+   "common_neighbor_names": [
+    "W",
+    "伦蒂尼姆",
+    "克洛维希娅",
+    "可露希尔",
+    "因陀罗",
+    "强尼",
+    "推进之王",
+    "比尔",
+    "洛克十七",
+    "玛格达尔",
+    "罗德岛",
+    "自救军"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "obt/main/level_main_14-03_beg#004": {
+     "cn_count": 5,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-dr-000004",
+   "category": "direct_relation",
+   "primary": "找到但未进前部",
+   "question": "根据剧情，「菈塔托丝」与「布朗陶」之间的关系是什么？请用词表里的一个关系词回答。",
+   "gold_answer": "隶属",
+   "best_gold_rank": 43,
+   "baseline_in_top": false,
+   "n_common_neighbors": 8,
+   "common_neighbor_names": [
+    "休露丝",
+    "希瓦艾什",
+    "维多利亚",
+    "莫希",
+    "诺希斯",
+    "谢拉格",
+    "阿克托斯",
+    "阿德颂"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act14side/level_act14side_06_beg#009": {
+     "cn_count": 5,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-dr-000006",
+   "category": "direct_relation",
+   "primary": "找到但未进前部",
+   "question": "根据剧情，「乌尔比安」与「海嗣」之间的关系是什么？请用词表里的一个关系词回答。",
+   "gold_answer": "交战",
+   "best_gold_rank": 28,
+   "baseline_in_top": false,
+   "n_common_neighbors": 26,
+   "common_neighbor_names": [
+    "乔迪",
+    "伊比利亚",
+    "信标塔",
+    "初生",
+    "加西亚",
+    "圣徒卡门",
+    "巢穴",
+    "布兰都斯",
+    "布雷奥甘",
+    "幽灵鲨",
+    "弥利亚留姆",
+    "技术院"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act17side/level_act17side_10_beg#008": {
+     "cn_count": 7,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-dr-000010",
+   "category": "direct_relation",
+   "primary": "上下文未采用",
+   "question": "根据剧情，「崔林特尔梅」与「莱塔尼亚」之间的关系是什么？请用词表里的一个关系词回答。",
+   "gold_answer": "位于",
+   "best_gold_rank": 6,
+   "baseline_in_top": true,
+   "n_common_neighbors": 6,
+   "common_neighbor_names": [
+    "巫王残党",
+    "洛里斯",
+    "薇薇安娜",
+    "赫尔昏佐伦",
+    "金律法卫",
+    "阿尔图罗"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act29side/level_act29side_01_beg#000": {
+     "cn_count": 1,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-dr-000011",
+   "category": "direct_relation",
+   "primary": "找到但未进前部",
+   "question": "根据剧情，「莱辛」与「埃芒加德」之间的关系是什么？请用词表里的一个关系词回答。",
+   "gold_answer": "交谈",
+   "best_gold_rank": 35,
+   "baseline_in_top": false,
+   "n_common_neighbors": 3,
+   "common_neighbor_names": [
+    "弗莱蒙特",
+    "米夏埃尔",
+    "黑键"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act29side/level_act29side_07_beg#008": {
+     "cn_count": 2,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": false,
+    "hop_line": true,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-dr-000012",
+   "category": "direct_relation",
+   "primary": "上下文未采用",
+   "question": "「乌萨斯远北地区」对「乌萨斯」处于哪种关系？",
+   "gold_answer": "位于",
+   "best_gold_rank": 10,
+   "baseline_in_top": true,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "obt/main/level_main_16-07_beg#000": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-dr-000014",
+   "category": "direct_relation",
+   "primary": "找到但未进前部",
+   "question": "「伦蒂尼姆」对「维多利亚」处于哪种关系？",
+   "gold_answer": "属于",
+   "best_gold_rank": 42,
+   "baseline_in_top": false,
+   "n_common_neighbors": 43,
+   "common_neighbor_names": [
+    "W",
+    "典范军",
+    "军事委员会",
+    "凯尔希",
+    "卡兹戴尔",
+    "号角",
+    "塔露拉",
+    "威灵顿公爵",
+    "布伦特伍德镇",
+    "开斯特公爵",
+    "戴菲恩",
+    "推进之王"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act37side/level_act37side_09_end#009": {
+     "cn_count": 2,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-dr-000016",
+   "category": "direct_relation",
+   "primary": "找到但未进前部",
+   "question": "「萨迪恩区」对「伦蒂尼姆」处于哪种关系？",
+   "gold_answer": "位于",
+   "best_gold_rank": 83,
+   "baseline_in_top": false,
+   "n_common_neighbors": 9,
+   "common_neighbor_names": [
+    "号角",
+    "曼弗雷德",
+    "洛洛",
+    "海蒂",
+    "深池",
+    "自救军",
+    "萨卡兹",
+    "诺伯特区",
+    "费斯特"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "obt/main/level_main_10-03_beg#000": {
+     "cn_count": 2,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-dr-000017",
+   "category": "direct_relation",
+   "primary": "上下文未采用",
+   "question": "「玉门」对「百灶」处于哪种关系？",
+   "gold_answer": "位于",
+   "best_gold_rank": 6,
+   "baseline_in_top": true,
+   "n_common_neighbors": 11,
+   "common_neighbor_names": [
+    "大炎",
+    "岁陵",
+    "巡防营",
+    "左宣辽",
+    "朔",
+    "望",
+    "梁洵",
+    "真龙",
+    "重岳",
+    "陈",
+    "魏彦吾"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act49side/level_act49side_10_beg#001": {
+     "cn_count": 2,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-dr-000018",
+   "category": "direct_relation",
+   "primary": "找到但未进前部",
+   "question": "根据剧情，「莱托中校」与「城防军」之间的关系是什么？请用词表里的一个关系词回答。",
+   "gold_answer": "领导",
+   "best_gold_rank": 34,
+   "baseline_in_top": false,
+   "n_common_neighbors": 2,
+   "common_neighbor_names": [
+    "军事委员会",
+    "自救军"
+   ],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "obt/main/level_main_11-06_end#005": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-dr-000019",
+   "category": "direct_relation",
+   "primary": "找到但未进前部",
+   "question": "「W」对「整合运动」处于哪种关系？",
+   "gold_answer": "隶属",
+   "best_gold_rank": 174,
+   "baseline_in_top": false,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "obt/main/level_main_01-12_beg#000": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-dr-000020",
+   "category": "direct_relation",
+   "primary": "找到但未进前部",
+   "question": "根据剧情，「萨卡兹」与「维多利亚」之间的关系是什么？请用词表里的一个关系词回答。",
+   "gold_answer": "交战",
+   "best_gold_rank": 97,
+   "baseline_in_top": false,
+   "n_common_neighbors": 46,
+   "common_neighbor_names": [
+    "W",
+    "伦蒂尼姆",
+    "典范军",
+    "军事委员会",
+    "凯尔希",
+    "卡兹戴尔",
+    "变形者集群",
+    "号角",
+    "塔楼骑士",
+    "奥伦",
+    "威灵顿公爵",
+    "孽茨雷"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "obt/main/level_main_10-06_beg#003": {
+     "cn_count": 4,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-dr-000022",
+   "category": "direct_relation",
+   "primary": "找到但未进前部",
+   "question": "根据剧情，「临光」与「杜宾」之间的关系是什么？请用词表里的一个关系词回答。",
+   "gold_answer": "同行",
+   "best_gold_rank": 136,
+   "baseline_in_top": false,
+   "n_common_neighbors": 7,
+   "common_neighbor_names": [
+    "Ace",
+    "博士",
+    "整合运动",
+    "梅菲斯特",
+    "罗德岛",
+    "阿米娅",
+    "陨星"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "obt/main/level_main_04-01_end#000": {
+     "cn_count": 5,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-dr-000023",
+   "category": "direct_relation",
+   "primary": "找到但未进前部",
+   "question": "「普瑞赛斯」对「源石」处于哪种关系？",
+   "gold_answer": "使用",
+   "best_gold_rank": 55,
+   "baseline_in_top": false,
+   "n_common_neighbors": 12,
+   "common_neighbor_names": [
+    "Abyss",
+    "Mon3tr",
+    "PCS",
+    "内化宇宙",
+    "凯尔希",
+    "华法琳",
+    "博士",
+    "拉特兰",
+    "泰拉",
+    "特雷西斯",
+    "阿米娅",
+    "预言家"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "obt/main/level_main_15-18_end#008": {
+     "cn_count": 4,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-dr-000024",
+   "category": "direct_relation",
+   "primary": "上下文未采用",
+   "question": "根据剧情，「萨卡兹」与「卡兹戴尔」之间的关系是什么？请用词表里的一个关系词回答。",
+   "gold_answer": "源自",
+   "best_gold_rank": 5,
+   "baseline_in_top": true,
+   "n_common_neighbors": 44,
+   "common_neighbor_names": [
+    "Misery",
+    "W",
+    "万国峰会",
+    "以勒什",
+    "伊内丝",
+    "伦蒂尼姆",
+    "军事委员会",
+    "军旗",
+    "凯尔希",
+    "博卓卡斯替",
+    "可露希尔",
+    "塞茜莉亚"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act11d0/level_act11d0_sub-1-2_end#000": {
+     "cn_count": 4,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-dr-000025",
+   "category": "direct_relation",
+   "primary": "找到但未进前部",
+   "question": "根据剧情，「乌萨斯」与「源石」之间的关系是什么？请用词表里的一个关系词回答。",
+   "gold_answer": "使用",
+   "best_gold_rank": 72,
+   "baseline_in_top": false,
+   "n_common_neighbors": 9,
+   "common_neighbor_names": [
+    "凯尔希",
+    "博士",
+    "卡兹戴尔",
+    "史尔特尔",
+    "感染者",
+    "整合运动",
+    "泰拉",
+    "特雷西斯",
+    "阿米娅"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "obt/main/level_main_16-12_beg#002": {
+     "cn_count": 2,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-dr-000026",
+   "category": "direct_relation",
+   "primary": "上下文未采用",
+   "question": "根据剧情，「近卫局」与「整合运动」之间的关系是什么？请用词表里的一个关系词回答。",
+   "gold_answer": "交战",
+   "best_gold_rank": 12,
+   "baseline_in_top": true,
+   "n_common_neighbors": 14,
+   "common_neighbor_names": [
+    "W",
+    "乌萨斯",
+    "九",
+    "年",
+    "星熊",
+    "梅菲斯特",
+    "米莎",
+    "罗德岛",
+    "诗怀雅",
+    "阿米娅",
+    "陈",
+    "魏彦吾"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "obt/main/level_main_05-07_end#002": {
+     "cn_count": 2,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-dr-000028",
+   "category": "direct_relation",
+   "primary": "找到但未进前部",
+   "question": "根据剧情，「普瑞赛斯」与「凯尔希」之间的关系是什么？请用词表里的一个关系词回答。",
+   "gold_answer": "创建",
+   "best_gold_rank": 48,
+   "baseline_in_top": false,
+   "n_common_neighbors": 11,
+   "common_neighbor_names": [
+    "Abyss",
+    "Mon3tr",
+    "华法琳",
+    "博士",
+    "泰拉",
+    "源石",
+    "特雷西斯",
+    "石棺",
+    "罗德岛",
+    "阿米娅",
+    "预言家"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "obt/main/level_main_15-18_end#008": {
+     "cn_count": 5,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-dr-000032",
+   "category": "direct_relation",
+   "primary": "找到但未进前部",
+   "question": "「闪灵」对「赦罪师」处于哪种关系？",
+   "gold_answer": "敌对",
+   "best_gold_rank": 62,
+   "baseline_in_top": false,
+   "n_common_neighbors": 13,
+   "common_neighbor_names": [
+    "W",
+    "伦蒂尼姆",
+    "凯尔希",
+    "夜莺",
+    "奎萨图什塔",
+    "源石",
+    "特雷西斯",
+    "玛嘉烈",
+    "罗德岛",
+    "萨卡兹",
+    "萨卢斯",
+    "血魔大君"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "obt/memory/story_shining_1_1#003": {
+     "cn_count": 1,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-dr-000034",
+   "category": "direct_relation",
+   "primary": "上下文未采用",
+   "question": "「Mon3tr」对「凯尔希」处于哪种关系？",
+   "gold_answer": "交谈",
+   "best_gold_rank": 20,
+   "baseline_in_top": true,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "obt/main/level_st_17-04#008": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-dr-000035",
+   "category": "direct_relation",
+   "primary": "上下文未采用",
+   "question": "「煌」对「迷迭香」处于哪种关系？",
+   "gold_answer": "同行",
+   "best_gold_rank": 16,
+   "baseline_in_top": true,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "obt/main/level_main_15-12_end#007": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-dr-000037",
+   "category": "direct_relation",
+   "primary": "找到但未进前部",
+   "question": "「左乐」对「司岁台」处于哪种关系？",
+   "gold_answer": "隶属",
+   "best_gold_rank": 49,
+   "baseline_in_top": false,
+   "n_common_neighbors": 22,
+   "common_neighbor_names": [
+    "克洛丝",
+    "夕",
+    "大炎",
+    "大荒城",
+    "天镜阁",
+    "太傅",
+    "太合",
+    "尚冢",
+    "山海众",
+    "岁兽",
+    "巡防营",
+    "年"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act15side/level_act15side_07_end#001": {
+     "cn_count": 8,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-dr-000038",
+   "category": "direct_relation",
+   "primary": "上下文未采用",
+   "question": "根据剧情，「拉普兰德」与「萨卢佐家族」之间的关系是什么？请用词表里的一个关系词回答。",
+   "gold_answer": "隶属",
+   "best_gold_rank": 6,
+   "baseline_in_top": true,
+   "n_common_neighbors": 8,
+   "common_neighbor_names": [
+    "卡彭",
+    "德克萨斯",
+    "德米特里",
+    "拉维妮娅",
+    "沃尔西尼",
+    "瓦拉赫",
+    "贝洛内家族",
+    "阿尔贝托"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act21side/level_act21side_07_beg#003": {
+     "cn_count": 2,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-dr-000039",
+   "category": "direct_relation",
+   "primary": "上下文未采用",
+   "question": "「整合运动」对「切尔诺伯格」处于哪种关系？",
+   "gold_answer": "敌对",
+   "best_gold_rank": 8,
+   "baseline_in_top": true,
+   "n_common_neighbors": 28,
+   "common_neighbor_names": [
+    "Ace",
+    "Guard",
+    "W",
+    "乌萨斯",
+    "乌萨斯帝国",
+    "九",
+    "凯尔希",
+    "切尔诺伯格区级医院",
+    "博士",
+    "塔露拉",
+    "天灾",
+    "感染者"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "obt/main/level_main_00-07_beg#000": {
+     "cn_count": 6,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-dr-000041",
+   "category": "direct_relation",
+   "primary": "找到但未进前部",
+   "question": "「天灾」对「切尔诺伯格」处于哪种关系？",
+   "gold_answer": "破坏",
+   "best_gold_rank": 22,
+   "baseline_in_top": false,
+   "n_common_neighbors": 3,
+   "common_neighbor_names": [
+    "感染者",
+    "整合运动",
+    "移动城市"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "obt/main/level_main_01-06_beg#001": {
+     "cn_count": 2,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": false,
+    "hop_line": true,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-dr-000042",
+   "category": "direct_relation",
+   "primary": "找到但未进前部",
+   "question": "「空」对「企鹅物流」处于哪种关系？",
+   "gold_answer": "隶属",
+   "best_gold_rank": 33,
+   "baseline_in_top": false,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "obt/memory/story_sora_2_1#009": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-dr-000043",
+   "category": "direct_relation",
+   "primary": "上下文未采用",
+   "question": "「巨构」对「冰原」处于哪种关系？",
+   "gold_answer": "位于",
+   "best_gold_rank": 7,
+   "baseline_in_top": true,
+   "n_common_neighbors": 1,
+   "common_neighbor_names": [
+    "凯尔希"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "obt/rogue/rogue_3/monthrecord/month_record_rogue_3_7_2#001": {
+     "cn_count": 1,
+     "cn_unique": 1,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-dr-000044",
+   "category": "direct_relation",
+   "primary": "上下文未采用",
+   "question": "根据剧情，「均」与「书刀」之间的关系是什么？请用词表里的一个关系词回答。",
+   "gold_answer": "持有",
+   "best_gold_rank": 6,
+   "baseline_in_top": true,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/act49side/level_act49side_08_beg#002": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-dr-000045",
+   "category": "direct_relation",
+   "primary": "找到但未进前部",
+   "question": "根据剧情，「塔露拉」与「整合运动」之间的关系是什么？请用词表里的一个关系词回答。",
+   "gold_answer": "领导",
+   "best_gold_rank": 78,
+   "baseline_in_top": false,
+   "n_common_neighbors": 40,
+   "common_neighbor_names": [
+    "Ace",
+    "Guard",
+    "W",
+    "“皇帝的利刃”",
+    "临光",
+    "乌萨斯",
+    "九",
+    "伊万",
+    "伦蒂尼姆",
+    "凯尔希",
+    "切尔诺伯格",
+    "博卓卡斯替"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "obt/main/level_st_07-03#002": {
+     "cn_count": 7,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-dr-000048",
+   "category": "direct_relation",
+   "primary": "找到但未进前部",
+   "question": "根据剧情，「叙拉古」与「莱塔尼亚」之间的关系是什么？请用词表里的一个关系词回答。",
+   "gold_answer": "离开",
+   "best_gold_rank": 133,
+   "baseline_in_top": false,
+   "n_common_neighbors": 7,
+   "common_neighbor_names": [
+    "哥伦比亚",
+    "多利",
+    "柳德米拉",
+    "狂欢节",
+    "英格丽",
+    "莱昂图索",
+    "萨卡兹"
+   ],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/act29side/level_act29side_03_beg#003": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-mh-000002",
+   "category": "multihop",
+   "primary": "找到但未进前部",
+   "question": "已知「岳羽由加莉」通过唯一一个中间实体与「整合运动」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "gold_answer": "阿米娅",
+   "best_gold_rank": 29,
+   "baseline_in_top": false,
+   "n_common_neighbors": 2,
+   "common_neighbor_names": [
+    "博士",
+    "阿米娅"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act54side/level_act54side_st02#004": {
+     "cn_count": 2,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": false,
+    "hop_line": true,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-mh-000003",
+   "category": "multihop",
+   "primary": "找到但未进前部",
+   "question": "从「凯尔希」出发，经过一个中间实体可以到达「安东尼奥」。这个中间实体叫什么？",
+   "gold_answer": "华法琳",
+   "best_gold_rank": 135,
+   "baseline_in_top": false,
+   "n_common_neighbors": 4,
+   "common_neighbor_names": [
+    "华法琳",
+    "塔露拉",
+    "歌蕾蒂娅",
+    "玻利瓦尔"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "obt/main/level_main_07-05_end#003": {
+     "cn_count": 1,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": false,
+    "hop_line": true,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-mh-000004",
+   "category": "multihop",
+   "primary": "上下文未采用",
+   "question": "从「厄尔苏拉」出发，经过一个中间实体可以到达「切尔诺伯格」。这个中间实体叫什么？",
+   "gold_answer": "伊内丝",
+   "best_gold_rank": 14,
+   "baseline_in_top": true,
+   "n_common_neighbors": 3,
+   "common_neighbor_names": [
+    "W",
+    "伊内丝",
+    "凯尔希"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "obt/main/level_main_13-07_end#004": {
+     "cn_count": 1,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-mh-000005",
+   "category": "multihop",
+   "primary": "上下文未采用",
+   "question": "从「霜叶」出发，经过一个中间实体可以到达「乔迪」。这个中间实体叫什么？",
+   "gold_answer": "凯尔希",
+   "best_gold_rank": 20,
+   "baseline_in_top": true,
+   "n_common_neighbors": 1,
+   "common_neighbor_names": [
+    "凯尔希"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act17side/level_act17side_10_end#001": {
+     "cn_count": 1,
+     "cn_unique": 1,
+     "hop_line": 1,
+     "rel_line_both": 0
+    },
+    "obt/main/level_main_04-02_beg#000": {
+     "cn_count": 1,
+     "cn_unique": 1,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-mh-000006",
+   "category": "multihop",
+   "primary": "找到但未进前部",
+   "question": "从「月见夜」出发，经过一个中间实体可以到达「龙门」。这个中间实体叫什么？",
+   "gold_answer": "罗德岛",
+   "best_gold_rank": 41,
+   "baseline_in_top": false,
+   "n_common_neighbors": 2,
+   "common_neighbor_names": [
+    "罗德岛",
+    "阿米娅"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "obt/memory/story_midn_1_1#005": {
+     "cn_count": 1,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": true,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-mh-000008",
+   "category": "multihop",
+   "primary": "上下文未采用",
+   "question": "从「夏栎」出发，经过一个中间实体可以到达「沃伦姆德」。这个中间实体叫什么？",
+   "gold_answer": "罗德岛",
+   "best_gold_rank": 7,
+   "baseline_in_top": true,
+   "n_common_neighbors": 1,
+   "common_neighbor_names": [
+    "罗德岛"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act11d0/level_act11d0_02_end#000": {
+     "cn_count": 1,
+     "cn_unique": 1,
+     "hop_line": 0,
+     "rel_line_both": 0
+    },
+    "obt/memory/story_quercu_1_1#009": {
+     "cn_count": 1,
+     "cn_unique": 1,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-mh-000009",
+   "category": "multihop",
+   "primary": "上下文未采用",
+   "question": "已知「铃兰」通过唯一一个中间实体与「监正会」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "gold_answer": "罗德岛",
+   "best_gold_rank": 8,
+   "baseline_in_top": true,
+   "n_common_neighbors": 1,
+   "common_neighbor_names": [
+    "罗德岛"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act11d0/level_act11d0_04_end#000": {
+     "cn_count": 1,
+     "cn_unique": 1,
+     "hop_line": 0,
+     "rel_line_both": 0
+    },
+    "activities/act13side/level_act13side_10_end#014": {
+     "cn_count": 1,
+     "cn_unique": 1,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": false,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-mh-000010",
+   "category": "multihop",
+   "primary": "上下文未采用",
+   "question": "从「Scout」出发，经过一个中间实体可以到达「企鹅物流」。这个中间实体叫什么？",
+   "gold_answer": "罗德岛",
+   "best_gold_rank": 9,
+   "baseline_in_top": true,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "obt/main/level_main_02-04_beg#000": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-mh-000011",
+   "category": "multihop",
+   "primary": "上下文未采用",
+   "question": "从「文月」出发，经过一个中间实体可以到达「霜叶」。这个中间实体叫什么？",
+   "gold_answer": "阿米娅",
+   "best_gold_rank": 19,
+   "baseline_in_top": true,
+   "n_common_neighbors": 3,
+   "common_neighbor_names": [
+    "凯尔希",
+    "罗德岛",
+    "阿米娅"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act6d5/level_act6d5_st02#000": {
+     "cn_count": 2,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    },
+    "obt/main/level_main_04-08_beg#000": {
+     "cn_count": 1,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-mh-000012",
+   "category": "multihop",
+   "primary": "找到但未进前部",
+   "question": "从「柳德米拉」出发，经过一个中间实体可以到达「妮芙」。这个中间实体叫什么？",
+   "gold_answer": "阿米娅",
+   "best_gold_rank": 41,
+   "baseline_in_top": false,
+   "n_common_neighbors": 4,
+   "common_neighbor_names": [
+    "凯尔希",
+    "源石技艺",
+    "罗德岛",
+    "阿米娅"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "obt/memory/story_crosly_1_1#000": {
+     "cn_count": 3,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    },
+    "obt/rogue/rogue_4/monthrecord/month_record_rogue_4_8_1#000": {
+     "cn_count": 1,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": false,
+    "hop_line": true,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-mh-000013",
+   "category": "multihop",
+   "primary": "上下文未采用",
+   "question": "已知「希尔达」通过唯一一个中间实体与「蜜莓」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "gold_answer": "罗德岛",
+   "best_gold_rank": 12,
+   "baseline_in_top": true,
+   "n_common_neighbors": 1,
+   "common_neighbor_names": [
+    "罗德岛"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "obt/main/level_main_15-11_beg#004": {
+     "cn_count": 1,
+     "cn_unique": 1,
+     "hop_line": 0,
+     "rel_line_both": 0
+    },
+    "obt/memory/story_glider_1_1#007": {
+     "cn_count": 1,
+     "cn_unique": 1,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-mh-000014",
+   "category": "multihop",
+   "primary": "找到但未进前部",
+   "question": "从「莱欧斯」出发，经过一个中间实体可以到达「赤霄」。这个中间实体叫什么？",
+   "gold_answer": "阿米娅",
+   "best_gold_rank": 74,
+   "baseline_in_top": false,
+   "n_common_neighbors": 1,
+   "common_neighbor_names": [
+    "阿米娅"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act36side/level_act36side_08_beg#003": {
+     "cn_count": 1,
+     "cn_unique": 1,
+     "hop_line": 0,
+     "rel_line_both": 0
+    },
+    "obt/main/level_main_08-16_end#006": {
+     "cn_count": 1,
+     "cn_unique": 1,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-mh-000015",
+   "category": "multihop",
+   "primary": "上下文未采用",
+   "question": "已知「嘉维尔」通过唯一一个中间实体与「W」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "gold_answer": "凯尔希",
+   "best_gold_rank": 14,
+   "baseline_in_top": true,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/act12d0/level_act12d0_09_end#004": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-mh-000016",
+   "category": "multihop",
+   "primary": "找到但未进前部",
+   "question": "已知「慎楼」通过唯一一个中间实体与「太傅」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "gold_answer": "梁洵",
+   "best_gold_rank": 41,
+   "baseline_in_top": false,
+   "n_common_neighbors": 2,
+   "common_neighbor_names": [
+    "太合",
+    "梁洵"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act40side/level_act40side_09_beg#003": {
+     "cn_count": 1,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": false,
+    "hop_line": true,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-mh-000018",
+   "category": "multihop",
+   "primary": "找到但未进前部",
+   "question": "从「岳羽由加莉」出发，经过一个中间实体可以到达「思绪」。这个中间实体叫什么？",
+   "gold_answer": "阿米娅",
+   "best_gold_rank": 33,
+   "baseline_in_top": false,
+   "n_common_neighbors": 1,
+   "common_neighbor_names": [
+    "阿米娅"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act54side/level_act54side_st02#004": {
+     "cn_count": 1,
+     "cn_unique": 1,
+     "hop_line": 1,
+     "rel_line_both": 0
+    },
+    "obt/rogue/rogue_4/monthrecord/month_record_rogue_4_4_2#000": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-mh-000020",
+   "category": "multihop",
+   "primary": "上下文未采用",
+   "question": "从「雷尔金」出发，经过一个中间实体可以到达「高卢」。这个中间实体叫什么？",
+   "gold_answer": "乌萨斯",
+   "best_gold_rank": 19,
+   "baseline_in_top": true,
+   "n_common_neighbors": 1,
+   "common_neighbor_names": [
+    "乌萨斯"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act33side/level_act33side_01_end#004": {
+     "cn_count": 1,
+     "cn_unique": 1,
+     "hop_line": 1,
+     "rel_line_both": 0
+    },
+    "obt/main/level_main_16-10_beg#005": {
+     "cn_count": 1,
+     "cn_unique": 1,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-mh-000022",
+   "category": "multihop",
+   "primary": "找到但未进前部",
+   "question": "已知「阿斯卡纶」通过唯一一个中间实体与「城防炮」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "gold_answer": "曼弗雷德",
+   "best_gold_rank": 83,
+   "baseline_in_top": false,
+   "n_common_neighbors": 1,
+   "common_neighbor_names": [
+    "曼弗雷德"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "obt/main/level_main_10-13_beg#000": {
+     "cn_count": 1,
+     "cn_unique": 1,
+     "hop_line": 1,
+     "rel_line_both": 0
+    },
+    "obt/main/level_st_14-02#008": {
+     "cn_count": 1,
+     "cn_unique": 1,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": true,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-mh-000023",
+   "category": "multihop",
+   "primary": "找到但未进前部",
+   "question": "从「苦艾」出发，经过一个中间实体可以到达「特雷西斯」。这个中间实体叫什么？",
+   "gold_answer": "罗德岛",
+   "best_gold_rank": 105,
+   "baseline_in_top": false,
+   "n_common_neighbors": 1,
+   "common_neighbor_names": [
+    "罗德岛"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "obt/memory/story_absin_1_1#000": {
+     "cn_count": 1,
+     "cn_unique": 1,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-mh-000025",
+   "category": "multihop",
+   "primary": "上下文未采用",
+   "question": "已知「卡珊卓拉」通过唯一一个中间实体与「米奥」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "gold_answer": "缇缇",
+   "best_gold_rank": 14,
+   "baseline_in_top": true,
+   "n_common_neighbors": 2,
+   "common_neighbor_names": [
+    "缇缇",
+    "赞索斯"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act48side/level_act48side_06_beg#000": {
+     "cn_count": 1,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    },
+    "activities/act48side/level_act48side_st02#000": {
+     "cn_count": 1,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-mh-000026",
+   "category": "multihop",
+   "primary": "找到但未进前部",
+   "question": "从「禾生」出发，经过一个中间实体可以到达「神农」。这个中间实体叫什么？",
+   "gold_answer": "黍",
+   "best_gold_rank": 43,
+   "baseline_in_top": false,
+   "n_common_neighbors": 2,
+   "common_neighbor_names": [
+    "大荒城",
+    "黍"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act31side/level_act31side_01_end#004": {
+     "cn_count": 2,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    },
+    "activities/act31side/level_act31side_08_beg#002": {
+     "cn_count": 1,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-mh-000027",
+   "category": "multihop",
+   "primary": "上下文未采用",
+   "question": "从「梓兰」出发，经过一个中间实体可以到达「杰斯顿」。这个中间实体叫什么？",
+   "gold_answer": "安东尼",
+   "best_gold_rank": 16,
+   "baseline_in_top": true,
+   "n_common_neighbors": 1,
+   "common_neighbor_names": [
+    "安东尼"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act15d0/level_act15d0_08_end#001": {
+     "cn_count": 1,
+     "cn_unique": 1,
+     "hop_line": 1,
+     "rel_line_both": 0
+    },
+    "obt/memory/story_f12yin_1_1#002": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-mh-000028",
+   "category": "multihop",
+   "primary": "上下文未采用",
+   "question": "已知「老科利」通过唯一一个中间实体与「珀耳」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "gold_answer": "锡人",
+   "best_gold_rank": 9,
+   "baseline_in_top": true,
+   "n_common_neighbors": 2,
+   "common_neighbor_names": [
+    "卡兹戴尔",
+    "锡人"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act17mini/level_act17mini_st06#008": {
+     "cn_count": 2,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    },
+    "obt/rogue/rogue_4/endbook/endbook_rogue_4_1_3#001": {
+     "cn_count": 2,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-mh-000029",
+   "category": "multihop",
+   "primary": "找到但未进前部",
+   "question": "已知「左乐」通过唯一一个中间实体与「雷姆必拓」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "gold_answer": "克洛丝",
+   "best_gold_rank": 83,
+   "baseline_in_top": false,
+   "n_common_neighbors": 2,
+   "common_neighbor_names": [
+    "克洛丝",
+    "罗德岛"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act15side/level_act15side_04_end#005": {
+     "cn_count": 2,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    },
+    "activities/act15side/level_act15side_06_beg#001": {
+     "cn_count": 1,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": false,
+    "hop_line": true,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-mh-000030",
+   "category": "multihop",
+   "primary": "上下文未采用",
+   "question": "已知「红豆」通过唯一一个中间实体与「埃芒加德」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "gold_answer": "泥岩",
+   "best_gold_rank": 10,
+   "baseline_in_top": true,
+   "n_common_neighbors": 1,
+   "common_neighbor_names": [
+    "泥岩"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act17mini/level_act17mini_st06#002": {
+     "cn_count": 1,
+     "cn_unique": 1,
+     "hop_line": 0,
+     "rel_line_both": 0
+    },
+    "obt/rogue/month_chat_rogue_1_1/month_chat_rogue_1_1_3#000": {
+     "cn_count": 1,
+     "cn_unique": 1,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-mh-000031",
+   "category": "multihop",
+   "primary": "找到但未进前部",
+   "question": "已知「迪伦」通过唯一一个中间实体与「特雷西斯」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "gold_answer": "罗德岛",
+   "best_gold_rank": 121,
+   "baseline_in_top": false,
+   "n_common_neighbors": 2,
+   "common_neighbor_names": [
+    "博士",
+    "罗德岛"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act8mini/level_act8mini_st01#000": {
+     "cn_count": 2,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": false,
+    "hop_line": true,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-mh-000032",
+   "category": "multihop",
+   "primary": "找到但未进前部",
+   "question": "从「甘比诺」出发，经过一个中间实体可以到达「狂欢节」。这个中间实体叫什么？",
+   "gold_answer": "拉普兰德",
+   "best_gold_rank": 46,
+   "baseline_in_top": false,
+   "n_common_neighbors": 2,
+   "common_neighbor_names": [
+    "叙拉古",
+    "拉普兰德"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act38side/level_act38side_st01#009": {
+     "cn_count": 2,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    },
+    "activities/act5d0/level_act5d0_ex02_end#001": {
+     "cn_count": 2,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-mh-000034",
+   "category": "multihop",
+   "primary": "找到但未进前部",
+   "question": "从「薇尔丽芙」出发，经过一个中间实体可以到达「龙门」。这个中间实体叫什么？",
+   "gold_answer": "莫斯提马",
+   "best_gold_rank": 28,
+   "baseline_in_top": false,
+   "n_common_neighbors": 2,
+   "common_neighbor_names": [
+    "莫斯提马",
+    "蕾缪安"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act16side/level_act16side_02_beg#005": {
+     "cn_count": 2,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": false,
+    "hop_line": true,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-mh-000035",
+   "category": "multihop",
+   "primary": "上下文未采用",
+   "question": "已知「老船夫」通过唯一一个中间实体与「林雨霞」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "gold_answer": "老鲤",
+   "best_gold_rank": 14,
+   "baseline_in_top": true,
+   "n_common_neighbors": 1,
+   "common_neighbor_names": [
+    "老鲤"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act15side/level_act15side_01_end#002": {
+     "cn_count": 1,
+     "cn_unique": 1,
+     "hop_line": 0,
+     "rel_line_both": 0
+    },
+    "activities/act23side/level_act23side_04_end#001": {
+     "cn_count": 1,
+     "cn_unique": 1,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-mh-000036",
+   "category": "multihop",
+   "primary": "上下文未采用",
+   "question": "从「艾丝黛尔」出发，经过一个中间实体可以到达「龙门贫民区」。这个中间实体叫什么？",
+   "gold_answer": "罗德岛",
+   "best_gold_rank": 8,
+   "baseline_in_top": true,
+   "n_common_neighbors": 1,
+   "common_neighbor_names": [
+    "罗德岛"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "obt/main/level_main_02-04_beg#000": {
+     "cn_count": 1,
+     "cn_unique": 1,
+     "hop_line": 0,
+     "rel_line_both": 0
+    },
+    "obt/memory/story_estell_1_1#001": {
+     "cn_count": 1,
+     "cn_unique": 1,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-mh-000037",
+   "category": "multihop",
+   "primary": "上下文未采用",
+   "question": "从「莉莉娅」出发，经过一个中间实体可以到达「切尔诺伯格」。这个中间实体叫什么？",
+   "gold_answer": "凯尔希",
+   "best_gold_rank": 15,
+   "baseline_in_top": true,
+   "n_common_neighbors": 1,
+   "common_neighbor_names": [
+    "凯尔希"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act18d0/level_act18d0_02_beg#003": {
+     "cn_count": 1,
+     "cn_unique": 1,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-mh-000038",
+   "category": "multihop",
+   "primary": "上下文未采用",
+   "question": "从「格拉尼」出发，经过一个中间实体可以到达「沃伦姆德」。这个中间实体叫什么？",
+   "gold_answer": "罗德岛",
+   "best_gold_rank": 8,
+   "baseline_in_top": true,
+   "n_common_neighbors": 2,
+   "common_neighbor_names": [
+    "整合运动",
+    "罗德岛"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/a001/level_a001_03_end#000": {
+     "cn_count": 1,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    },
+    "activities/act11d0/level_act11d0_02_end#000": {
+     "cn_count": 1,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-mh-000039",
+   "category": "multihop",
+   "primary": "找到但未进前部",
+   "question": "从「山海众」出发，经过一个中间实体可以到达「莫佚」。这个中间实体叫什么？",
+   "gold_answer": "左乐",
+   "best_gold_rank": 30,
+   "baseline_in_top": false,
+   "n_common_neighbors": 4,
+   "common_neighbor_names": [
+    "左乐",
+    "槐天裴",
+    "睚",
+    "陈"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act23side/level_act23side_02_end#000": {
+     "cn_count": 1,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    },
+    "activities/act49side/level_act49side_01_end#005": {
+     "cn_count": 1,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": true,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-mh-000041",
+   "category": "multihop",
+   "primary": "上下文未采用",
+   "question": "已知「生态园」通过唯一一个中间实体与「生态科」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "gold_answer": "缪尔赛思",
+   "best_gold_rank": 12,
+   "baseline_in_top": true,
+   "n_common_neighbors": 1,
+   "common_neighbor_names": [
+    "缪尔赛思"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act47side/level_act47side_st02#005": {
+     "cn_count": 1,
+     "cn_unique": 1,
+     "hop_line": 1,
+     "rel_line_both": 0
+    },
+    "obt/memory/story_kafka_1_1#005": {
+     "cn_count": 1,
+     "cn_unique": 1,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-mh-000042",
+   "category": "multihop",
+   "primary": "找到但未进前部",
+   "question": "已知「特蕾西娅」通过唯一一个中间实体与「萨尔贡」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "gold_answer": "博士",
+   "best_gold_rank": 23,
+   "baseline_in_top": false,
+   "n_common_neighbors": 6,
+   "common_neighbor_names": [
+    "Mantra",
+    "凯尔希",
+    "博士",
+    "巴别塔",
+    "罗德岛",
+    "赫德雷"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act25side/level_act25side_09_end#009": {
+     "cn_count": 1,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": true,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-mh-000043",
+   "category": "multihop",
+   "primary": "找到但未进前部",
+   "question": "已知「Guard」通过唯一一个中间实体与「文明的存续」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "gold_answer": "阿米娅",
+   "best_gold_rank": 21,
+   "baseline_in_top": false,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "obt/main/level_main_tr28_end#002": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-mh-000045",
+   "category": "multihop",
+   "primary": "上下文未采用",
+   "question": "从「莱伊」出发，经过一个中间实体可以到达「灰礼帽」。这个中间实体叫什么？",
+   "gold_answer": "阿米娅",
+   "best_gold_rank": 16,
+   "baseline_in_top": true,
+   "n_common_neighbors": 2,
+   "common_neighbor_names": [
+    "博士",
+    "阿米娅"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act16mini/level_act16mini_st06#005": {
+     "cn_count": 2,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    },
+    "obt/main/level_main_12-03_end#003": {
+     "cn_count": 1,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-mh-000046",
+   "category": "multihop",
+   "primary": "上下文未采用",
+   "question": "已知「米格鲁」通过唯一一个中间实体与「格雷伊」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "gold_answer": "博士",
+   "best_gold_rank": 14,
+   "baseline_in_top": true,
+   "n_common_neighbors": 4,
+   "common_neighbor_names": [
+    "博士",
+    "工程部",
+    "玻利瓦尔",
+    "罗德岛"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act8mini/level_act8mini_st03#002": {
+     "cn_count": 2,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    },
+    "obt/memory/story_greyy2_1_1#001": {
+     "cn_count": 2,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-mh-000047",
+   "category": "multihop",
+   "primary": "上下文未采用",
+   "question": "从「弥利亚留姆」出发，经过一个中间实体可以到达「信标塔」。这个中间实体叫什么？",
+   "gold_answer": "海嗣",
+   "best_gold_rank": 17,
+   "baseline_in_top": true,
+   "n_common_neighbors": 5,
+   "common_neighbor_names": [
+    "乌尔比安",
+    "图利娅",
+    "布雷奥甘",
+    "海嗣",
+    "阿戈尔"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act34side/level_act34side_04_beg#003": {
+     "cn_count": 2,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    },
+    "activities/act34side/level_act34side_07_end#011": {
+     "cn_count": 2,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-cx-000001",
+   "category": "cross_chunk",
+   "primary": "上下文未采用",
+   "question": "「以勒什」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "gold_answer": "act33side、main_ep14",
+   "best_gold_rank": 6,
+   "baseline_in_top": true,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/act33side/level_act33side_01_end#003": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    },
+    "obt/main/level_main_14-11_beg#004": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-cx-000002",
+   "category": "cross_chunk",
+   "primary": "上下文未采用",
+   "question": "「扎罗」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "gold_answer": "act21side、act38side、memory_whitw2",
+   "best_gold_rank": 17,
+   "baseline_in_top": true,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/act38side/level_act38side_02_beg#003": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    },
+    "obt/memory/story_whitw2_1_1#000": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-cx-000004",
+   "category": "cross_chunk",
+   "primary": "上下文未采用",
+   "question": "「海洋」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "gold_answer": "act17side、memory_deepcl、rogue_rogue_6",
+   "best_gold_rank": 19,
+   "baseline_in_top": true,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/act17side/level_act17side_st09#000": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    },
+    "obt/memory/story_deepcl_2_1#004": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    },
+    "obt/rogue/rogue_6/endbook/endbook_rogue_6_3_3#004": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-cx-000012",
+   "category": "cross_chunk",
+   "primary": "上下文未采用",
+   "question": "「工程部干员」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "gold_answer": "act13mini、memory_pudd",
+   "best_gold_rank": 15,
+   "baseline_in_top": true,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/act13mini/level_act13mini_st06#000": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    },
+    "obt/memory/story_pudd_1_1#003": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-cx-000016",
+   "category": "cross_chunk",
+   "primary": "找到但未进前部",
+   "question": "「银行」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "gold_answer": "act28side、memory_tinman",
+   "best_gold_rank": 72,
+   "baseline_in_top": false,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/act28side/level_act28side_03_end#005": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    },
+    "obt/memory/story_tinman_1_1#006": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-cx-000019",
+   "category": "cross_chunk",
+   "primary": "找到但未进前部",
+   "question": "「弗雷德」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "gold_answer": "main_ep09、memory_peper",
+   "best_gold_rank": 84,
+   "baseline_in_top": false,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "obt/main/level_main_09-02_end#000": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    },
+    "obt/memory/story_peper_1_1#004": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-cx-000020",
+   "category": "cross_chunk",
+   "primary": "上下文未采用",
+   "question": "「恐鱼」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "gold_answer": "act17side、act18d3、rogue_rogue_2",
+   "best_gold_rank": 8,
+   "baseline_in_top": true,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/act17side/level_act17side_01_beg#002": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    },
+    "activities/act18d3/level_act18d3_05_end#001": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    },
+    "obt/rogue/rogue_2/monthrecord/month_chat_rogue_2_2_3#000": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-cx-000022",
+   "category": "cross_chunk",
+   "primary": "上下文未采用",
+   "question": "「杰克」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "gold_answer": "memory_dagda、memory_jaksel、memory_tiger",
+   "best_gold_rank": 8,
+   "baseline_in_top": true,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "obt/memory/story_dagda_1_1#002": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    },
+    "obt/memory/story_jaksel_1_1#000": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    },
+    "obt/memory/story_tiger_1_1#000": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-cx-000026",
+   "category": "cross_chunk",
+   "primary": "找到但未进前部",
+   "question": "「蒂比」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "gold_answer": "act43side、memory_tippi",
+   "best_gold_rank": 22,
+   "baseline_in_top": false,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/act43side/level_act43side_01_beg#002": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    },
+    "obt/memory/story_tippi_1_1#000": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-cx-000027",
+   "category": "cross_chunk",
+   "primary": "上下文未采用",
+   "question": "「动力炉」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "gold_answer": "act11d0、act28side",
+   "best_gold_rank": 6,
+   "baseline_in_top": true,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/act11d0/level_act11d0_06_end#003": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    },
+    "activities/act28side/level_act28side_04_beg#005": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-cx-000029",
+   "category": "cross_chunk",
+   "primary": "上下文未采用",
+   "question": "「收音机」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "gold_answer": "act22side、memory_confes、rogue_rogue_4",
+   "best_gold_rank": 16,
+   "baseline_in_top": true,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/act22side/level_act22side_07_end#003": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    },
+    "obt/memory/story_confes_1_1#004": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    },
+    "obt/rogue/rogue_4/endbook/endbook_rogue_4_1_3#002": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-cx-000031",
+   "category": "cross_chunk",
+   "primary": "上下文未采用",
+   "question": "「切斯特」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "gold_answer": "act14side、act30side、act46side",
+   "best_gold_rank": 9,
+   "baseline_in_top": true,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/act14side/level_act14side_02_end#002": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    },
+    "activities/act30side/level_act30side_st02#008": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    },
+    "activities/act46side/level_act46side_03_beg#002": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-tc-000001",
+   "category": "time_conflict",
+   "primary": "上下文未采用",
+   "question": "同两个实体「萨卢佐家族」与「贝洛内家族」之间先后出现「同盟」与「敌对」两种相反关系。这是抽取矛盾还是剧情演进？请说明理由。",
+   "gold_answer": "时序演进",
+   "best_gold_rank": 8,
+   "baseline_in_top": true,
+   "n_common_neighbors": 7,
+   "common_neighbor_names": [
+    "卢比奥",
+    "德克萨斯",
+    "德米特里",
+    "拉普兰德",
+    "拉维妮娅",
+    "瓦拉赫",
+    "罗塞蒂家族"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act21side/level_act21side_06_end#001": {
+     "cn_count": 4,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    },
+    "activities/act38side/level_act38side_st04#002": {
+     "cn_count": 3,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-tc-000002",
+   "category": "time_conflict",
+   "primary": "找到但未进前部",
+   "question": "同两个实体「歌蕾蒂娅」与「深海猎人」之间先后出现「隶属」与「背叛」两种相反关系。这是抽取矛盾还是剧情演进？请说明理由。",
+   "gold_answer": "时序演进",
+   "best_gold_rank": 34,
+   "baseline_in_top": false,
+   "n_common_neighbors": 16,
+   "common_neighbor_names": [
+    "乌尔比安",
+    "克莱门莎",
+    "凯尔希",
+    "初生",
+    "圣徒卡门",
+    "奥卢斯",
+    "布兰都斯",
+    "布雷奥甘",
+    "幽灵鲨",
+    "斯卡蒂",
+    "海嗣",
+    "深海教会"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act18d3/level_act18d3_03_beg#000": {
+     "cn_count": 1,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    },
+    "obt/main/level_spst_14-01#003": {
+     "cn_count": 5,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-tc-000004",
+   "category": "time_conflict",
+   "primary": "找到但未进前部",
+   "question": "「莱昂图索」与「贝洛内家族」在剧情不同阶段分别被描述为「隶属」和「背叛」。这两条记录应如何理解？",
+   "gold_answer": "时序演进",
+   "best_gold_rank": 36,
+   "baseline_in_top": false,
+   "n_common_neighbors": 10,
+   "common_neighbor_names": [
+    "卢比奥",
+    "叙拉古",
+    "市政厅",
+    "德克萨斯",
+    "德米特里",
+    "拉维妮娅",
+    "瓦拉赫",
+    "罗塞蒂家族",
+    "西西里夫人",
+    "贝纳尔多"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act21side/level_act21side_09_end#003": {
+     "cn_count": 4,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-tc-000005",
+   "category": "time_conflict",
+   "primary": "上下文未采用",
+   "question": "「重岳」与「玉门」在剧情不同阶段分别被描述为「离开」和「驻守」。这两条记录应如何理解？",
+   "gold_answer": "时序演进",
+   "best_gold_rank": 12,
+   "baseline_in_top": true,
+   "n_common_neighbors": 16,
+   "common_neighbor_names": [
+    "《武典》",
+    "仇白",
+    "令",
+    "大江",
+    "大炎",
+    "孟铁衣",
+    "岁陵",
+    "左乐",
+    "左宣辽",
+    "截云",
+    "朔",
+    "望"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act23side/level_act23side_st03#000": {
+     "cn_count": 1,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    },
+    "obt/memory/story_chyue_1_1#005": {
+     "cn_count": 1,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": true,
+    "hop_line": false,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-tc-000008",
+   "category": "time_conflict",
+   "primary": "找到但未进前部",
+   "question": "同两个实体「特蕾西娅」与「特雷西斯」之间先后出现「同盟」与「敌对」两种相反关系。这是抽取矛盾还是剧情演进？请说明理由。",
+   "gold_answer": "时序演进",
+   "best_gold_rank": 52,
+   "baseline_in_top": false,
+   "n_common_neighbors": 33,
+   "common_neighbor_names": [
+    "Logos",
+    "W",
+    "伊内丝",
+    "伦蒂尼姆",
+    "军事委员会",
+    "凯尔希",
+    "博士",
+    "卡兹戴尔",
+    "变形者集群",
+    "埃芒加德",
+    "孽茨雷",
+    "尤莉叶"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act33side/level_act33side_07_beg#004": {
+     "cn_count": 8,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    },
+    "obt/main/level_main_15-01_end#001": {
+     "cn_count": 9,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-tc-000010",
+   "category": "time_conflict",
+   "primary": "找到但未进前部",
+   "question": "「特雷西斯」与「特蕾西娅」在剧情不同阶段分别被描述为「交战」和「保护」。这两条记录应如何理解？",
+   "gold_answer": "时序演进",
+   "best_gold_rank": 49,
+   "baseline_in_top": false,
+   "n_common_neighbors": 33,
+   "common_neighbor_names": [
+    "Logos",
+    "W",
+    "伊内丝",
+    "伦蒂尼姆",
+    "军事委员会",
+    "凯尔希",
+    "博士",
+    "卡兹戴尔",
+    "变形者集群",
+    "埃芒加德",
+    "孽茨雷",
+    "尤莉叶"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act33side/level_act33side_07_beg#004": {
+     "cn_count": 8,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    },
+    "obt/main/level_main_14-08_beg#000": {
+     "cn_count": 8,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-tc-000011",
+   "category": "time_conflict",
+   "primary": "上下文未采用",
+   "question": "「缪尔赛思」与「塞雷娅」在剧情不同阶段分别被描述为「敌对」和「同盟」。这两条记录应如何理解？",
+   "gold_answer": "时序演进",
+   "best_gold_rank": 8,
+   "baseline_in_top": true,
+   "n_common_neighbors": 23,
+   "common_neighbor_names": [
+    "Mechanist",
+    "万星园",
+    "伊芙利特",
+    "克丽斯腾",
+    "克丽斯腾·莱特",
+    "克罗德",
+    "博士",
+    "哥伦比亚",
+    "多萝西",
+    "娜斯提",
+    "安东尼",
+    "小贾斯汀"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act15d0/level_act15d0_st02#001": {
+     "cn_count": 4,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    },
+    "activities/act25side/level_act25side_10_beg#003": {
+     "cn_count": 2,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-tc-000012",
+   "category": "time_conflict",
+   "primary": "上下文未采用",
+   "question": "「八幡海铃」与「弗朗西斯」在剧情不同阶段分别被描述为「同盟」和「敌对」。这两条记录应如何理解？",
+   "gold_answer": "时序演进",
+   "best_gold_rank": 5,
+   "baseline_in_top": true,
+   "n_common_neighbors": 2,
+   "common_neighbor_names": [
+    "丰川祥子",
+    "老爷"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act45side/level_act45side_03_end#001": {
+     "cn_count": 1,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    },
+    "activities/act45side/level_act45side_08_beg#000": {
+     "cn_count": 1,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-tc-000014",
+   "category": "time_conflict",
+   "primary": "找到但未进前部",
+   "question": "「特雷西斯」与「特蕾西娅」在剧情不同阶段分别被描述为「敌对」和「同盟」。这两条记录应如何理解？",
+   "gold_answer": "时序演进",
+   "best_gold_rank": 43,
+   "baseline_in_top": false,
+   "n_common_neighbors": 33,
+   "common_neighbor_names": [
+    "Logos",
+    "W",
+    "伊内丝",
+    "伦蒂尼姆",
+    "军事委员会",
+    "凯尔希",
+    "博士",
+    "卡兹戴尔",
+    "变形者集群",
+    "埃芒加德",
+    "孽茨雷",
+    "尤莉叶"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act33side/level_act33side_07_beg#004": {
+     "cn_count": 8,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    },
+    "obt/main/level_main_14-19_beg#002": {
+     "cn_count": 7,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-tc-000016",
+   "category": "time_conflict",
+   "primary": "上下文未采用",
+   "question": "「爱国者」与「整合运动」在剧情不同阶段分别被描述为「效忠」和「背叛」。这两条记录应如何理解？",
+   "gold_answer": "时序演进",
+   "best_gold_rank": 7,
+   "baseline_in_top": true,
+   "n_common_neighbors": 16,
+   "common_neighbor_names": [
+    "Guard",
+    "“皇帝的利刃”",
+    "乌萨斯",
+    "乌萨斯帝国",
+    "凯尔希",
+    "切尔诺伯格",
+    "塔露拉",
+    "核心城",
+    "浮士德",
+    "游击队",
+    "罗德岛",
+    "赫德雷"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "obt/main/level_main_07-16_beg#001": {
+     "cn_count": 6,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    },
+    "obt/main/level_st_07-03#004": {
+     "cn_count": 5,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-tc-000017",
+   "category": "time_conflict",
+   "primary": "上下文未采用",
+   "question": "「西西里夫人」与「莱昂图索」在剧情不同阶段分别被描述为「同盟」和「敌对」。这两条记录应如何理解？",
+   "gold_answer": "时序演进",
+   "best_gold_rank": 6,
+   "baseline_in_top": true,
+   "n_common_neighbors": 14,
+   "common_neighbor_names": [
+    "卡彭",
+    "卢比奥",
+    "叙拉古",
+    "安东尼奥",
+    "德克萨斯",
+    "德米特里",
+    "拉维妮娅",
+    "新沃尔西尼",
+    "灰厅",
+    "狂欢节",
+    "罗塞蒂家族",
+    "贝洛内家族"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act21side/level_act21side_09_end#003": {
+     "cn_count": 3,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    },
+    "activities/act21side/level_act21side_st04#002": {
+     "cn_count": 4,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-tc-000018",
+   "category": "time_conflict",
+   "primary": "上下文未采用",
+   "question": "「安东尼奥」与「英格丽」在剧情不同阶段分别被描述为「保护」和「交战」。这两条记录应如何理解？",
+   "gold_answer": "时序演进",
+   "best_gold_rank": 6,
+   "baseline_in_top": true,
+   "n_common_neighbors": 11,
+   "common_neighbor_names": [
+    "卡彭",
+    "唐克雷蒂家族",
+    "威尼斯家族",
+    "威尼斯载具公司",
+    "拉普兰德",
+    "拉维妮娅",
+    "新沃尔西尼",
+    "甘比诺",
+    "翁贝托",
+    "老威尼斯",
+    "西西里夫人"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act38side/level_act38side_04_beg#004": {
+     "cn_count": 3,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    },
+    "activities/act38side/level_act38side_10_end#000": {
+     "cn_count": 2,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-tc-000019",
+   "category": "time_conflict",
+   "primary": "上下文未采用",
+   "question": "「霜星」与「塔露拉」在剧情不同阶段分别被描述为「交战」和「保护」。这两条记录应如何理解？",
+   "gold_answer": "时序演进",
+   "best_gold_rank": 18,
+   "baseline_in_top": true,
+   "n_common_neighbors": 20,
+   "common_neighbor_names": [
+    "乌萨斯",
+    "凯尔希",
+    "切尔诺伯格",
+    "博卓卡斯替",
+    "博士",
+    "幻影弩手",
+    "感染者游击队",
+    "整合运动",
+    "柳德米拉",
+    "梅菲斯特",
+    "浮士德",
+    "游击队萨卡兹"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "obt/main/level_main_08-06_beg#000": {
+     "cn_count": 1,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    },
+    "obt/main/level_st_07-03#003": {
+     "cn_count": 3,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": true,
+    "hop_line": false,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-tc-000023",
+   "category": "time_conflict",
+   "primary": "上下文未采用",
+   "question": "同两个实体「凯尔希」与「霍尔海雅」之间先后出现「同盟」与「敌对」两种相反关系。这是抽取矛盾还是剧情演进？请说明理由。",
+   "gold_answer": "时序演进",
+   "best_gold_rank": 6,
+   "baseline_in_top": true,
+   "n_common_neighbors": 11,
+   "common_neighbor_names": [
+    "伊芙利特",
+    "保存者",
+    "克丽斯腾",
+    "克丽斯腾·莱特",
+    "博士",
+    "塞雷娅",
+    "杰克逊",
+    "特里蒙",
+    "罗德岛",
+    "赫默",
+    "锡人"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act25side/level_act25side_07_end#006": {
+     "cn_count": 3,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    },
+    "activities/act25side/level_act25side_st03#018": {
+     "cn_count": 5,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-tc-000026",
+   "category": "time_conflict",
+   "primary": "上下文未采用",
+   "question": "同两个实体「乌萨斯」与「罗德岛」之间先后出现「敌对」与「同盟」两种相反关系。这是抽取矛盾还是剧情演进？请说明理由。",
+   "gold_answer": "时序演进",
+   "best_gold_rank": 16,
+   "baseline_in_top": true,
+   "n_common_neighbors": 45,
+   "common_neighbor_names": [
+    "Guard",
+    "Raidian",
+    "伊西多",
+    "凛冬",
+    "凯尔希",
+    "切尔诺伯格",
+    "博士",
+    "卡兹戴尔",
+    "卡西米尔",
+    "古米",
+    "史尔特尔",
+    "塔露拉"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "obt/main/level_main_07-04_end#000": {
+     "cn_count": 6,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    },
+    "obt/main/level_main_17-02_beg#008": {
+     "cn_count": 4,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-tc-000027",
+   "category": "time_conflict",
+   "primary": "找到但未进前部",
+   "question": "同两个实体「赫德雷」与「W」之间先后出现「同盟」与「敌对」两种相反关系。这是抽取矛盾还是剧情演进？请说明理由。",
+   "gold_answer": "时序演进",
+   "best_gold_rank": 29,
+   "baseline_in_top": false,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "obt/main/level_main_10-09_end#004": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    },
+    "obt/main/level_main_14-12_beg#001": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-tc-000028",
+   "category": "time_conflict",
+   "primary": "上下文未采用",
+   "question": "同两个实体「W」与「凯尔希」之间先后出现「敌对」与「同盟」两种相反关系。这是抽取矛盾还是剧情演进？请说明理由。",
+   "gold_answer": "时序演进",
+   "best_gold_rank": 14,
+   "baseline_in_top": true,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "obt/main/level_st_07-03#009": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-tc-000030",
+   "category": "time_conflict",
+   "primary": "上下文未采用",
+   "question": "同两个实体「萨尔贡」与「米诺斯」之间先后出现「同盟」与「敌对」两种相反关系。这是抽取矛盾还是剧情演进？请说明理由。",
+   "gold_answer": "时序演进",
+   "best_gold_rank": 15,
+   "baseline_in_top": true,
+   "n_common_neighbors": 8,
+   "common_neighbor_names": [
+    "伊萨科斯",
+    "克瑞斯拉的竖琴",
+    "帕拉斯",
+    "得利斯木",
+    "暴雨",
+    "玛拉帕夏",
+    "第一神殿",
+    "缇缇"
+   ],
+   "gold_block_has_common_neighbor": true,
+   "gold_feats": {
+    "activities/act48side/level_act48side_06_end#004": {
+     "cn_count": 2,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    },
+    "activities/act48side/level_act48side_st01#004": {
+     "cn_count": 1,
+     "cn_unique": 0,
+     "hop_line": 1,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-tc-000032",
+   "category": "time_conflict",
+   "primary": "找到但未进前部",
+   "question": "「魏彦吾」与「陈」在剧情不同阶段分别被描述为「敌对」和「同盟」。这两条记录应如何理解？",
+   "gold_answer": "时序演进",
+   "best_gold_rank": 23,
+   "baseline_in_top": false,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/act49side/level_act49side_09_beg#004": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-ad-000001",
+   "category": "adversarial",
+   "primary": "上下文未采用",
+   "question": "「卡拉顿城镇议会」与「卡拉」名字相近，它们是同一个实体吗？若不是，请说明区别。",
+   "gold_answer": "不是同一个实体：「卡拉顿城镇议会」的类型是组织，「卡拉」的类型是角色；且所引原文只出现「卡拉」，没有出现「卡拉顿城镇议会」。",
+   "best_gold_rank": 7,
+   "baseline_in_top": true,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/act54side/level_act54side_03_beg#001": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-ad-000002",
+   "category": "adversarial",
+   "primary": "上下文未采用",
+   "question": "「整合运动士兵」与「整合运动」名字相近，它们是同一个实体吗？若不是，请说明区别。",
+   "gold_answer": "不是同一个实体：「整合运动士兵」的类型是角色，「整合运动」的类型是组织；且所引原文只出现「整合运动」，没有出现「整合运动士兵」。",
+   "best_gold_rank": 17,
+   "baseline_in_top": true,
+   "n_common_neighbors": 3,
+   "common_neighbor_names": [
+    "九",
+    "切尔诺伯格",
+    "塔露拉"
+   ],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/a001/level_a001_04_beg#002": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": true,
+    "hop_line": false,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-ad-000003",
+   "category": "adversarial",
+   "primary": "上下文未采用",
+   "question": "「提卡兹之根」与「提卡兹」名字相近，它们是同一个实体吗？若不是，请说明区别。",
+   "gold_answer": "不是同一个实体：「提卡兹之根」的类型是物品，「提卡兹」的类型是角色；且所引原文只出现「提卡兹」，没有出现「提卡兹之根」。",
+   "best_gold_rank": 5,
+   "baseline_in_top": true,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/act25side/level_act25side_10_end#006": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-ad-000005",
+   "category": "adversarial",
+   "primary": "找到但未进前部",
+   "question": "「玻利瓦尔第二独立国」与「玻利瓦尔」名字相近，它们是同一个实体吗？若不是，请说明区别。",
+   "gold_answer": "不是同一个实体：「玻利瓦尔第二独立国」的类型是组织，「玻利瓦尔」的类型是地点；且所引原文只出现「玻利瓦尔」，没有出现「玻利瓦尔第二独立国」。",
+   "best_gold_rank": 101,
+   "baseline_in_top": false,
+   "n_common_neighbors": 1,
+   "common_neighbor_names": [
+    "杜宾"
+   ],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/act12side/level_act12side_01_end#002": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-ad-000006",
+   "category": "adversarial",
+   "primary": "找到但未进前部",
+   "question": "有两个名字相近的实体：「咖啡店」与「咖啡」。它们指同一个东西吗？请给出判断依据。",
+   "gold_answer": "不是同一个实体：「咖啡店」的类型是地点，「咖啡」的类型是物品；且所引原文只出现「咖啡」，没有出现「咖啡店」。",
+   "best_gold_rank": 21,
+   "baseline_in_top": false,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/act12side/level_act12side_st04#004": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-ad-000007",
+   "category": "adversarial",
+   "primary": "找到但未进前部",
+   "question": "有两个名字相近的实体：「莱茵生命观测站」与「莱茵生命」。它们指同一个东西吗？请给出判断依据。",
+   "gold_answer": "不是同一个实体：「莱茵生命观测站」的类型是地点，「莱茵生命」的类型是组织；且所引原文只出现「莱茵生命」，没有出现「莱茵生命观测站」。",
+   "best_gold_rank": 123,
+   "baseline_in_top": false,
+   "n_common_neighbors": 2,
+   "common_neighbor_names": [
+    "埃琳娜",
+    "谢拉格"
+   ],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/act15d0/level_act15d0_01_beg#004": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-ad-000008",
+   "category": "adversarial",
+   "primary": "上下文未采用",
+   "question": "有两个名字相近的实体：「卡拉顿」与「卡拉」。它们指同一个东西吗？请给出判断依据。",
+   "gold_answer": "不是同一个实体：「卡拉顿」的类型是地点，「卡拉」的类型是角色；且所引原文只出现「卡拉」，没有出现「卡拉顿」。",
+   "best_gold_rank": 7,
+   "baseline_in_top": true,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/act54side/level_act54side_03_beg#001": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-ad-000009",
+   "category": "adversarial",
+   "primary": "找到但未进前部",
+   "question": "「新沃尔西尼警察局」与「新沃尔西尼」名字相近，它们是同一个实体吗？若不是，请说明区别。",
+   "gold_answer": "不是同一个实体：「新沃尔西尼警察局」的类型是组织，「新沃尔西尼」的类型是地点；且所引原文只出现「新沃尔西尼」，没有出现「新沃尔西尼警察局」。",
+   "best_gold_rank": 77,
+   "baseline_in_top": false,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/act20mini/level_act20mini_st01#000": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-ad-000010",
+   "category": "adversarial",
+   "primary": "找到但未进前部",
+   "question": "有两个名字相近的实体：「第四集团军军队哗变事件」与「第四集团军」。它们指同一个东西吗？请给出判断依据。",
+   "gold_answer": "不是同一个实体：「第四集团军军队哗变事件」的类型是事件，「第四集团军」的类型是组织；且所引原文只出现「第四集团军」，没有出现「第四集团军军队哗变事件」。",
+   "best_gold_rank": 41,
+   "baseline_in_top": false,
+   "n_common_neighbors": 1,
+   "common_neighbor_names": [
+    "雅科夫·彼得洛夫"
+   ],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/act18d0/level_act18d0_02_beg#005": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-ad-000011",
+   "category": "adversarial",
+   "primary": "找到但未进前部",
+   "question": "有两个名字相近的实体：「银行行长」与「银行」。它们指同一个东西吗？请给出判断依据。",
+   "gold_answer": "不是同一个实体：「银行行长」的类型是角色，「银行」的类型是组织；且所引原文只出现「银行」，没有出现「银行行长」。",
+   "best_gold_rank": 41,
+   "baseline_in_top": false,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/act28side/level_act28side_03_end#005": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-ad-000012",
+   "category": "adversarial",
+   "primary": "上下文未采用",
+   "question": "有两个名字相近的实体：「船长阿方索历险记」与「船长阿方索」。它们指同一个东西吗？请给出判断依据。",
+   "gold_answer": "不是同一个实体：「船长阿方索历险记」的类型是物品，「船长阿方索」的类型是角色；且所引原文只出现「船长阿方索」，没有出现「船长阿方索历险记」。",
+   "best_gold_rank": 9,
+   "baseline_in_top": true,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/act17side/level_act17side_07_end#000": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-ad-000013",
+   "category": "adversarial",
+   "primary": "上下文未采用",
+   "question": "「行裕物流」与「行裕」名字相近，它们是同一个实体吗？若不是，请说明区别。",
+   "gold_answer": "不是同一个实体：「行裕物流」的类型是组织，「行裕」的类型是地点；且所引原文只出现「行裕」，没有出现「行裕物流」。",
+   "best_gold_rank": 12,
+   "baseline_in_top": true,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/act15side/level_act15side_st01#000": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": true,
+    "cn_unique": true,
+    "hop_line": true,
+    "rel_line_both": true
+   }
+  },
+  {
+   "question_id": "q-ad-000014",
+   "category": "adversarial",
+   "primary": "找到但未进前部",
+   "question": "「圣骏堡电力调度中心」与「圣骏堡」名字相近，它们是同一个实体吗？若不是，请说明区别。",
+   "gold_answer": "不是同一个实体：「圣骏堡电力调度中心」的类型是组织，「圣骏堡」的类型是地点；且所引原文只出现「圣骏堡」，没有出现「圣骏堡电力调度中心」。",
+   "best_gold_rank": 81,
+   "baseline_in_top": false,
+   "n_common_neighbors": 0,
+   "common_neighbor_names": [],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/act18d0/level_act18d0_03_end#004": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  },
+  {
+   "question_id": "q-ad-000016",
+   "category": "adversarial",
+   "primary": "找到但未进前部",
+   "question": "有两个名字相近的实体：「圣堂巡卫」与「圣堂」。它们指同一个东西吗？请给出判断依据。",
+   "gold_answer": "不是同一个实体：「圣堂巡卫」的类型是组织，「圣堂」的类型是地点；且所引原文只出现「圣堂」，没有出现「圣堂巡卫」。",
+   "best_gold_rank": 57,
+   "baseline_in_top": false,
+   "n_common_neighbors": 1,
+   "common_neighbor_names": [
+    "费德里科"
+   ],
+   "gold_block_has_common_neighbor": false,
+   "gold_feats": {
+    "activities/act26side/level_act26side_01_beg#001": {
+     "cn_count": 0,
+     "cn_unique": 0,
+     "hop_line": 0,
+     "rel_line_both": 0
+    }
+   },
+   "rerank_in_top": {
+    "cn_count": false,
+    "cn_unique": false,
+    "hop_line": false,
+    "rel_line_both": false
+   }
+  }
+ ]
+}
