@@ -1,0 +1,154 @@
+{
+ "schema": "a-triage-v1",
+ "generation": "g-20261103T132152Z-06a741",
+ "gold_set": "E:\\图rag\\data\\goldset\\gold-v1.json",
+ "probe_set": "union",
+ "pool": 200,
+ "top_k": 20,
+ "graph_depth": 1,
+ "items_evaluated": 20,
+ "summary": {
+  "by_category": {
+   "adversarial": {
+    "n": 3,
+    "n_with_gold": 3,
+    "pool_hit": 1.0,
+    "top_k_hit": 1.0,
+    "context_hit": 0.0,
+    "answer_cover": 0.0,
+    "abstain_ok": 1.0,
+    "coverage_ok": 0.0,
+    "primary_dist": {
+     "上下文未采用": 3
+    },
+    "synonym_flagged": 0,
+    "annotation_flagged": 0
+   },
+   "alias": {
+    "n": 2,
+    "n_with_gold": 2,
+    "pool_hit": 1.0,
+    "top_k_hit": 1.0,
+    "context_hit": 1.0,
+    "answer_cover": 1.0,
+    "abstain_ok": 1.0,
+    "coverage_ok": 0.0,
+    "primary_dist": {
+     "抽取缺事实": 1
+    },
+    "synonym_flagged": 0,
+    "annotation_flagged": 0
+   },
+   "cross_chunk": {
+    "n": 2,
+    "n_with_gold": 2,
+    "pool_hit": 1.0,
+    "top_k_hit": 1.0,
+    "context_hit": 0.0,
+    "answer_cover": 0.0,
+    "abstain_ok": 1.0,
+    "coverage_ok": 0.0,
+    "primary_dist": {
+     "上下文未采用": 2
+    },
+    "synonym_flagged": 0,
+    "annotation_flagged": 0
+   },
+   "direct_relation": {
+    "n": 2,
+    "n_with_gold": 2,
+    "pool_hit": 1.0,
+    "top_k_hit": 0.5,
+    "context_hit": 0.0,
+    "answer_cover": 0.5,
+    "abstain_ok": 1.0,
+    "coverage_ok": 0.0,
+    "primary_dist": {
+     "上下文未采用": 1,
+     "找到但未进前部": 1
+    },
+    "synonym_flagged": 1,
+    "annotation_flagged": 0
+   },
+   "multihop": {
+    "n": 2,
+    "n_with_gold": 2,
+    "pool_hit": 1.0,
+    "top_k_hit": 0.5,
+    "context_hit": 0.5,
+    "answer_cover": 0.5,
+    "abstain_ok": 1.0,
+    "coverage_ok": 0.0,
+    "primary_dist": {
+     "找到但未进前部": 1
+    },
+    "synonym_flagged": 1,
+    "annotation_flagged": 0
+   },
+   "negative_abstain": {
+    "n": 5,
+    "n_with_gold": 3,
+    "pool_hit": 1.0,
+    "top_k_hit": 1.0,
+    "context_hit": 1.0,
+    "answer_cover": 0.0,
+    "abstain_ok": 0.8,
+    "coverage_ok": 0.0,
+    "primary_dist": {
+     "回答未覆盖": 2,
+     "抽取缺事实": 1,
+     "引用或拒答错误": 1
+    },
+    "synonym_flagged": 0,
+    "annotation_flagged": 0
+   },
+   "single_chunk": {
+    "n": 2,
+    "n_with_gold": 2,
+    "pool_hit": 1.0,
+    "top_k_hit": 1.0,
+    "context_hit": 1.0,
+    "answer_cover": 0.0,
+    "abstain_ok": 0.5,
+    "coverage_ok": 0.5,
+    "primary_dist": {
+     "引用或拒答错误": 1,
+     "回答未覆盖": 1
+    },
+    "synonym_flagged": 0,
+    "annotation_flagged": 0
+   },
+   "time_conflict": {
+    "n": 2,
+    "n_with_gold": 2,
+    "pool_hit": 1.0,
+    "top_k_hit": 0.5,
+    "context_hit": 0.0,
+    "answer_cover": 0.0,
+    "abstain_ok": 1.0,
+    "coverage_ok": 0.0,
+    "primary_dist": {
+     "上下文未采用": 1,
+     "找到但未进前部": 1
+    },
+    "synonym_flagged": 1,
+    "annotation_flagged": 0
+   }
+  },
+  "primary_dist_total": {
+   "上下文未采用": 7,
+   "回答未覆盖": 3,
+   "找到但未进前部": 3,
+   "引用或拒答错误": 2,
+   "抽取缺事实": 2
+  },
+  "n_failed": 17,
+  "n_total": 20
+ },
+ "split_policy": "pre-split-diagnostic（20 题固定探针，K1/K4 口径，非保留集）",
+ "generated_at": "2026-11-04T13:04:00Z",
+ "git_commit": "d39fbbf3171ca7fe950fe3d2cd7559008b6ade0c",
+ "python": "3.14.3",
+ "os": "Windows-11-10.0.26200-SP0",
+ "notes": "K1 20 题固定探针（data/k2_gray.json 的 probe_set.question_ids），K4 18 题为其子集。逐题明细见 data/a_triage_probe20.jsonl。"
+}

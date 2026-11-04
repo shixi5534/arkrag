@@ -1,0 +1,234 @@
+{
+ "schema": "a-triage-v1",
+ "generation": "g-20261103T132152Z-06a741",
+ "gold_set": "E:\\图rag\\data\\goldset\\gold-v1.json",
+ "split_policy": "pre-split-diagnostic（320 题未划分 train/dev/test，本文件是划分前诊断，不可作验收基线、不可作基线）",
+ "probe_set": "all",
+ "pool": 200,
+ "top_k": 20,
+ "graph_depth": 1,
+ "items_evaluated": 320,
+ "generated_at": "2026-11-04T13:04:00Z",
+ "git_commit": "d39fbbf3171ca7fe950fe3d2cd7559008b6ade0c",
+ "python": "3.14.3",
+ "os": "Windows-11-10.0.26200-SP0",
+ "command": "py -3 scripts/a_failure_triage.py --probe-set all --pool 200",
+ "notes": "逐题明细见 data/a_triage_all320.jsonl（320 行 × 40 字段）。本文件只含聚合。",
+ "contamination_note": "生成时 gold-v1.json 的 320 条全部没有 split 字段，仓库无 holdout。工程师A 已看过全 320 题逐题结果，因此后续由 B 划出的保留集对 A 不等于『从未见过』。后续实验须只在 B 划出的调参集上做，动保留集须在台账记预算。",
+ "summary": {
+  "by_category": {
+   "adversarial": {
+    "n": 16,
+    "n_with_gold": 16,
+    "pool_hit": 0.9375,
+    "top_k_hit": 0.4375,
+    "context_hit": 0.0625,
+    "answer_cover": 0.0,
+    "abstain_ok": 0.9375,
+    "coverage_ok": 0.0,
+    "primary_dist": {
+     "找到但未进前部": 8,
+     "上下文未采用": 6,
+     "抽取缺事实": 1,
+     "检索未找到": 1
+    },
+    "synonym_flagged": 9,
+    "annotation_flagged": 0
+   },
+   "alias": {
+    "n": 48,
+    "n_with_gold": 48,
+    "pool_hit": 0.9792,
+    "top_k_hit": 0.9167,
+    "context_hit": 0.7917,
+    "answer_cover": 0.875,
+    "abstain_ok": 0.875,
+    "coverage_ok": 0.0417,
+    "primary_dist": {
+     "引用或拒答错误": 31,
+     "上下文未采用": 6,
+     "抽取缺事实": 5,
+     "找到但未进前部": 3,
+     "检索未找到": 1
+    },
+    "synonym_flagged": 4,
+    "annotation_flagged": 0
+   },
+   "cross_chunk": {
+    "n": 32,
+    "n_with_gold": 32,
+    "pool_hit": 1.0,
+    "top_k_hit": 0.9062,
+    "context_hit": 0.625,
+    "answer_cover": 0.0,
+    "abstain_ok": 0.8438,
+    "coverage_ok": 0.0,
+    "primary_dist": {
+     "抽取缺事实": 16,
+     "上下文未采用": 9,
+     "回答未覆盖": 4,
+     "找到但未进前部": 3
+    },
+    "synonym_flagged": 3,
+    "annotation_flagged": 0
+   },
+   "direct_relation": {
+    "n": 48,
+    "n_with_gold": 48,
+    "pool_hit": 1.0,
+    "top_k_hit": 0.5833,
+    "context_hit": 0.3333,
+    "answer_cover": 0.7083,
+    "abstain_ok": 1.0,
+    "coverage_ok": 0.3125,
+    "primary_dist": {
+     "找到但未进前部": 20,
+     "上下文未采用": 12,
+     "引用或拒答错误": 1
+    },
+    "synonym_flagged": 20,
+    "annotation_flagged": 0
+   },
+   "multihop": {
+    "n": 48,
+    "n_with_gold": 48,
+    "pool_hit": 0.9792,
+    "top_k_hit": 0.625,
+    "context_hit": 0.2083,
+    "answer_cover": 0.5625,
+    "abstain_ok": 1.0,
+    "coverage_ok": 0.0,
+    "primary_dist": {
+     "上下文未采用": 21,
+     "找到但未进前部": 17,
+     "引用或拒答错误": 7,
+     "回答未覆盖": 2,
+     "检索未找到": 1
+    },
+    "synonym_flagged": 16,
+    "annotation_flagged": 0
+   },
+   "negative_abstain": {
+    "n": 32,
+    "n_with_gold": 12,
+    "pool_hit": 1.0,
+    "top_k_hit": 1.0,
+    "context_hit": 1.0,
+    "answer_cover": 0.0,
+    "abstain_ok": 0.4375,
+    "coverage_ok": 0.0,
+    "primary_dist": {
+     "引用或拒答错误": 17,
+     "抽取缺事实": 8,
+     "回答未覆盖": 4
+    },
+    "synonym_flagged": 0,
+    "annotation_flagged": 0
+   },
+   "single_chunk": {
+    "n": 64,
+    "n_with_gold": 64,
+    "pool_hit": 1.0,
+    "top_k_hit": 0.9375,
+    "context_hit": 0.8125,
+    "answer_cover": 0.0,
+    "abstain_ok": 0.75,
+    "coverage_ok": 0.5156,
+    "primary_dist": {
+     "回答未覆盖": 42,
+     "引用或拒答错误": 10,
+     "上下文未采用": 8,
+     "找到但未进前部": 4
+    },
+    "synonym_flagged": 0,
+    "annotation_flagged": 0
+   },
+   "time_conflict": {
+    "n": 32,
+    "n_with_gold": 32,
+    "pool_hit": 1.0,
+    "top_k_hit": 0.7812,
+    "context_hit": 0.4062,
+    "answer_cover": 0.0,
+    "abstain_ok": 1.0,
+    "coverage_ok": 0.0312,
+    "primary_dist": {
+     "回答未覆盖": 13,
+     "上下文未采用": 12,
+     "找到但未进前部": 7
+    },
+    "synonym_flagged": 7,
+    "annotation_flagged": 0
+   }
+  },
+  "by_answer_form": {
+   "needs_entity": {
+    "n": 192,
+    "n_with_gold": 172,
+    "pool_hit": 0.9826,
+    "top_k_hit": 0.7035,
+    "context_hit": 0.4477,
+    "answer_cover": 0.5988,
+    "primary_dist": {
+     "引用或拒答错误": 56,
+     "找到但未进前部": 48,
+     "上下文未采用": 45,
+     "抽取缺事实": 14,
+     "回答未覆盖": 6,
+     "检索未找到": 3
+    }
+   },
+   "needs_judgment": {
+    "n": 32,
+    "n_with_gold": 32,
+    "pool_hit": 1.0,
+    "top_k_hit": 0.7812,
+    "context_hit": 0.4062,
+    "answer_cover": 0.0,
+    "primary_dist": {
+     "回答未覆盖": 13,
+     "上下文未采用": 12,
+     "找到但未进前部": 7
+    }
+   },
+   "needs_list": {
+    "n": 32,
+    "n_with_gold": 32,
+    "pool_hit": 1.0,
+    "top_k_hit": 0.9062,
+    "context_hit": 0.625,
+    "answer_cover": 0.0,
+    "primary_dist": {
+     "抽取缺事实": 16,
+     "上下文未采用": 9,
+     "回答未覆盖": 4,
+     "找到但未进前部": 3
+    }
+   },
+   "needs_metadata": {
+    "n": 64,
+    "n_with_gold": 64,
+    "pool_hit": 1.0,
+    "top_k_hit": 0.9375,
+    "context_hit": 0.8125,
+    "answer_cover": 0.0,
+    "primary_dist": {
+     "回答未覆盖": 42,
+     "引用或拒答错误": 10,
+     "上下文未采用": 8,
+     "找到但未进前部": 4
+    }
+   }
+  },
+  "primary_dist_total": {
+   "上下文未采用": 74,
+   "引用或拒答错误": 66,
+   "回答未覆盖": 65,
+   "找到但未进前部": 62,
+   "抽取缺事实": 30,
+   "检索未找到": 3
+  },
+  "n_failed": 300,
+  "n_total": 320
+ }
+}
