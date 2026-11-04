@@ -453,6 +453,118 @@ class TestBuildContext:
         assert json.loads(json.dumps(ctx, ensure_ascii=False))["stats"]["units"] >= 1
 
 
+class TestContextOrderComesFromScore:
+    """上下文单元的顺序**唯一**来自 `score`，不是 `hits` 的先后。
+
+    守的失效模式（2026-11-05 Lead 真跑排序改动时踩到，形态与「注释替真代码
+    把门撑住」同类）：`build_context` 里
+
+        key=lambda u: (0 if direct(u) else 1, -u["score"], u["chunk_id"])
+
+    只读 `hit["score"]`，**完全不读 hits 的顺序**。于是任何在 `search()` 层
+    **重排 hits 却不同步更新 score** 的改动，会让 R@5 / R@20 上涨、下游一点
+    不动——这是**假增益**，而指标报告会显示「优化成功」。实测：只重排 hits
+    不改 score 时，四个配置输出逐位相同。
+
+    三条用例合起来才是一道门（少一条都会退化成空门）：
+
+    1. 打乱 hits 顺序、score 不变 → 单元顺序与 `context_digest` 都不许变。
+    2. **反向控制**：只改 score、顺序不变 → 单元顺序必须跟着 score 变。
+       没有这一条，第 1 条可能只是在断言一个恒真的东西（比如实现永远按
+       chunk_id 排），门就变噪音了。
+    3. 同分时按 `chunk_id` 升序，与输入顺序无关。同分不定序会让同样的输入
+       两次跑出不同上下文，那是另一种不可复现。
+
+    反向实测做法（本门要变红时）：把 `build_context` 里那行 `ordered = sorted(...)`
+    临时改成 `ordered = list(units.values())`（即按 hits 首次出现的顺序），
+    第 1、3 条应立刻变红。
+    """
+
+    def _hits(self) -> list[dict]:
+        """同通道、同「直接证据」身份、score 互不相同的一组命中。"""
+
+        def hit(cid: str, score: float) -> dict:
+            return {"chunk_id": cid, "score": score,
+                    "sources": [{"channel": retrieve.SOURCE_BM25, "score": score}]}
+
+        return [hit("doc/a#000", 1.40), hit("doc/a#001", 1.50), hit("doc/b#000", 1.10)]
+
+    def test_reordering_hits_without_changing_score_does_not_move_units(self):
+        ret, qa = _make_retriever()
+        hits = self._hits()
+        base = ret.build_context(hits, [], query_analysis=qa)
+        base_ids = [u["chunk_id"] for u in base["units"]]
+
+        # 三种打乱方式，score 一律不动
+        permutations = [
+            list(reversed(hits)),
+            hits[1:] + hits[:1],
+            [hits[2], hits[0], hits[1]],
+        ]
+        for perm in permutations:
+            ctx = ret.build_context(perm, [], query_analysis=qa)
+            ids = [u["chunk_id"] for u in ctx["units"]]
+            assert ids == base_ids, (
+                "只改了 hits 的顺序、score 没动，上下文单元顺序却变了。"
+                "这说明 build_context 读了 hits 的先后——"
+                "在 search() 层重排 hits 就成了假增益：R@20 涨、下游不动。"
+                f"\n输入顺序 {[h['chunk_id'] for h in perm]}\n得到 {ids}\n基线 {base_ids}"
+            )
+            assert ctx["context_digest"] == base["context_digest"], (
+                "顺序没变，摘要却变了——摘要应当只由最终留在上下文里的内容决定"
+            )
+
+    def test_changing_score_alone_does_move_units(self):
+        """反向控制：证明上一条不是恒真断言。
+
+        把 score 映射成「保持为正但大小顺序整体颠倒」（`CEILING - score`），
+        hits 的先后原样不动，输出单元顺序必须整体反过来。如果这条不成立，
+        说明实现根本不看 score，那么第 1 条通过也毫无意义。
+
+        **为什么不直接用负数取反**（我第一版就这么写，跑红了，错在方法不在实现）：
+        `build_context` 里 unit 的分数初值是 0.0，累积用的是
+        `max(unit["score"], hit["score"])`——**负分会被夹回 0**。一取反，
+        所有单元同分，排序退回 `chunk_id` 定序，这条用例就变成在测 tie-break
+        而不是在测「顺序是否跟随 score」。两个单元时它甚至会**恰好**
+        等于整体反转，给出一个假的「通过」。
+        """
+        ret, qa = _make_retriever()
+        hits = self._hits()
+        base_ids = [u["chunk_id"] for u in ret.build_context(hits, [], query_analysis=qa)["units"]]
+
+        ceiling = 10.0  # 大于本组任意 score，保证映射后仍严格为正
+        inverted = []
+        for h in hits:
+            item = dict(h)
+            item["score"] = ceiling - float(h["score"])
+            item["sources"] = [{"channel": retrieve.SOURCE_BM25, "score": item["score"]}]
+            inverted.append(item)
+        inverted_ids = [u["chunk_id"]
+                        for u in ret.build_context(inverted, [], query_analysis=qa)["units"]]
+        assert inverted_ids == list(reversed(base_ids)), (
+            "把 score 的大小顺序整体颠倒后，单元顺序却没跟着颠倒——"
+            "说明 build_context 不按 score 排序，那么"
+            "「重排 hits 不影响上下文顺序」这条断言就是空的"
+            f"\n期望 {list(reversed(base_ids))}\n得到 {inverted_ids}"
+        )
+
+    def test_equal_scores_break_ties_by_chunk_id_not_input_order(self):
+        ret, qa = _make_retriever()
+
+        def tied(cid: str) -> dict:
+            return {"chunk_id": cid, "score": 0.5,
+                    "sources": [{"channel": retrieve.SOURCE_BM25, "score": 0.5}]}
+
+        forward = [tied("doc/a#001"), tied("doc/a#000")]
+        backward = [tied("doc/a#000"), tied("doc/a#001")]
+        first = [u["chunk_id"] for u in ret.build_context(forward, [], query_analysis=qa)["units"]]
+        second = [u["chunk_id"] for u in ret.build_context(backward, [], query_analysis=qa)["units"]]
+        assert first == ["doc/a#000", "doc/a#001"], (
+            f"同分时应当按 chunk_id 升序，得到 {first}"
+        )
+        assert first == second, "同分块在两个输入顺序下排出了不同结果：同样输入不可复现"
+
+
 class TestEstimateTokens:
     def test_monotonic_in_text_length(self):
         short = retrieve.estimate_tokens("凯尔希")

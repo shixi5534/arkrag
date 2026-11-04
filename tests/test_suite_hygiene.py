@@ -468,7 +468,36 @@ class TestSuiteSizeIsMonotonic:
     #   ② 把 `GOLD_SET_PATH` 指回 `gold-v1.json`（常量仍是 v2 的）→ 同一命令
     #      **2 failed, 3 passed, exit 1**（`test_real_gold_set_passes` +
     #      `test_gate_points_at_v2_not_v1`）；恢复后 5 passed, exit 0。
-    N = 1573
+    # 1573 → 1576（build_context 顺序门）：一笔。
+    #   · `tests/test_retrieve.py` 新增 `TestContextOrderComesFromScore` 三个用例
+    #     （该文件已在 `TEST_FILES` 里，不产生 parametrize 增量）；
+    #   1573 + 3 = 1576，与 `--collect-only` 实测一致（`test_retrieve.py` 由 26 涨到 29）。
+    # 这一笔换来的门是「排序改动的假增益会被拦住」。Lead 2026-11-05 真跑排序改动时
+    # 踩到：`build_context` 的 `key=lambda u: (0 if direct(u) else 1, -u["score"],
+    # u["chunk_id"])` **只读 `hit["score"]`，完全不读 hits 的先后**。他在 `search()`
+    # 层重排 hits 却不同步更新 score，四个配置输出逐位相同——加成对上下文零影响；
+    # 而 R@5/R@20 会涨，指标报告显示「优化成功」。这是**假增益**，比一个不红的门
+    # 更危险：它长得像通过。三条用例缺一不可：
+    #   · `test_reordering_hits_without_changing_score_does_not_move_units`：
+    #     三种打乱 + score 不动 → 单元顺序与 `context_digest` 都不许变。
+    #   · `test_changing_score_alone_does_move_units`：**反向控制**。若没有这一条，
+    #     上一条可能只是在断言一个恒真的东西（比如实现永远按 chunk_id 排）。
+    #     这条自己踩过坑，写进用例注释了：第一版用「score 取反」，看着是绿的，
+    #     其实是假的——`unit["score"]` 初值 0.0 且用 `max()` 累积，**负分被夹回
+    #     0**，同分后退回 chunk_id 定序，两单元时恰好等于整体反转。改成
+    #     `CEILING - score`（保正、大小顺序整体颠倒）才有判别力。
+    #   · `test_equal_scores_break_ties_by_chunk_id_not_input_order`：同分按
+    #     `chunk_id` 升序、与输入顺序无关，否则同样输入两次跑出不同上下文。
+    # 反向实测（日志 `%TEMP%\gate0\logs\reverse_context_order_gate.txt`）：
+    #   ① 改前 `py -3 -m pytest tests/test_retrieve.py -q -k ContextOrderComesFromScore`
+    #      → **3 passed, exit 0**；
+    #   ② 把 `ordered = sorted(...)` 临时改成 `ordered = list(units.values())`
+    #      （即按 hits 出现顺序）→ 同一命令 **3 failed, exit 1**，
+    #      报错原文「只改了 hits 的顺序、score 没动，上下文单元顺序却变了……」
+    #      并打印输入顺序 `['doc/b#000','doc/a#001','doc/a#000']` 对基线
+    #      `['doc/a#000','doc/a#001','doc/b#000']`——红在正确原因上；
+    #   ③ 恢复后 **3 passed, exit 0**，`git diff src/arkrag/retrieve.py` 为空。
+    N = 1576
 
     def test_declared_count_matches_actual(self) -> None:
         """用 pytest 自己数一遍当前收集到的用例数，与本文件登记值比对。"""
