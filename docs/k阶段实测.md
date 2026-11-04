@@ -2392,7 +2392,7 @@ py -3 -m pytest tests -q           # 1510 passed, 1 skipped（1511 collected）
    本轮补的是前半段（灰度能在真 HTTP 上跑通、逐题一致），**后半段「正式发布」一行代码都没写**：
    没有改指针、没有放量、没有发布后的观察。`k2_gray.json` 里
    `production_pointer_untouched=true`、`before`/`after` 都是 `55dfd7`，就是这件事的凭据。
-   候选 `06a741` 至今仍是 READY 未发布。
+   候选 `06a741` 至今仍是 READY 未发布。**用户 2026-11-04 已明确决定：先不发布，K 阶段到此为止。**候选 `06a741` 保持 READY、随时可发；观察期那套机制等线上这一代满 7 天（2026-11-06）再单独谈归档。
 
 5. **`absolute` 那 9 条里 6 条「无实测输入」。** `citation_localization` /
    `key_fact_citation_coverage` / `unanswerable_refusal` / `directional_accuracy` /
