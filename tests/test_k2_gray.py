@@ -509,6 +509,49 @@ def test_wait_ready_fails_fast_when_verdict_is_computed_not_ready(tmp_path):
 
 # ---------------------------------------------------------------- 端到端（桩）
 
+def test_stub_server_parses_chinese_listen_line_with_poisoned_pipe_encoding(
+        stub_script, monkeypatch):
+    """**Gate 0 回归门**：父进程的环境里是 `PYTHONIOENCODING=gbk` 时，仍然要能起服务。
+
+    事故形状：`ServerProc.start()` 起子进程时没传 `env=`，子进程按 cp936 写管道，
+    本模块按 UTF-8 解码 → 「监听 http://…」的正则永不命中 → 干等满
+    `BOOT_TIMEOUT_S=90` 才报「没打出监听地址」。门红了，但红的方向是假的：
+    桩服务其实已经把监听地址打印出来了。
+
+    这里故意把父进程环境毒化成 `gbk`（真实机器上可能就是从某个老批处理继承来的），
+    并要求服务照常起来。`ServerProc` 必须**强制覆盖**成 UTF-8，而不是 `setdefault`。
+
+    **反向实测**：把 `ServerProc.start()` 里的 `env=subproc.child_env()` 去掉，这条用例
+    就在 `boot_timeout_s` 后抛 `ServeError` 变红（用 20 秒的显式短超时看红，不是把
+    `BOOT_TIMEOUT_S` 调小——默认值 90 秒是产品契约，不许为跑测方便改）。
+    """
+    monkeypatch.setenv("PYTHONIOENCODING", "gbk")
+    proc = K2.ServerProc("g-test-candidate", argv=[
+        sys.executable, "-u", str(stub_script),
+        "--generation", "g-test-candidate", "--host", "127.0.0.1", "--port", "0",
+    ], boot_timeout_s=20.0)
+    proc.start()
+    try:
+        assert proc.port > 0
+        assert proc.base == f"http://127.0.0.1:{proc.port}"
+        # 「监听」这两个字必须真的从管道里完整读出来了，不是被替换成 \ufffd 后瞎猜的。
+        listen_line = next(ln for ln in proc.lines if "监听" in ln)
+        assert "http://127.0.0.1:%d" % proc.port in listen_line
+        assert "\ufffd" not in listen_line
+    finally:
+        proc.stop()
+
+
+def test_boot_timeout_default_is_still_90():
+    """默认值不许为了「跑得快」被改小——`BOOT_TIMEOUT_S=90` 是产品契约。
+
+    真实世代冷启动要载入 121 MB 倒排 + 13798 块，实测 ~70 s。把它调小会让真跑变假红。
+    省时间的办法只有一个：测试里显式传 `boot_timeout_s=`。
+    """
+    assert K2.BOOT_TIMEOUT_S == 90.0
+    assert K2.ServerProc("g-x").boot_timeout_s == 90.0
+
+
 def test_probe_one_records_answer_citations_and_gold_hit(stub):
     item = {"question": "正常问题", "gold_chunk_ids": ["chunk/one"]}
     rec = K2.probe_one(stub, item, {})

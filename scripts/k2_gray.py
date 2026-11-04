@@ -124,7 +124,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 
-from arkrag import atomic, config  # noqa: E402
+from arkrag import atomic, config, subproc  # noqa: E402
 
 # pytest 捕获期间 `sys.stdout` 是它自己的对象，不一定有 `reconfigure`。守卫必须有。
 if hasattr(sys.stdout, "reconfigure"):
@@ -339,10 +339,15 @@ class ServerProc:
 
     # -- 起 ---------------------------------------------------------------
     def start(self) -> "ServerProc":
+        # `env=` 不是可选项。子进程 stdout 默认是 cp936，我们下面按 UTF-8 解码，
+        # 少了这一行中文就会变成 \ufffd，`pump()` 里那条「监听 http://…」的正则永不命中，
+        # 于是每个用例都要干等满 `boot_timeout_s` 才报「没打出监听地址」——门红了，
+        # 但红的方向是假的（脚本其实打印了）。2026-11-04 Gate 0 事故就这一行。
         proc = subprocess.Popen(
             self.argv, cwd=str(ROOT),
             stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
-            encoding="utf-8", errors="replace", bufsize=1,
+            encoding=subproc.PIPE_ENCODING, errors="replace", bufsize=1,
+            env=subproc.child_env(),
         )
         self.proc = proc
         self.pid = proc.pid
