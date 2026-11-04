@@ -46,7 +46,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT / "src") not in sys.path:
     sys.path.insert(0, str(ROOT / "src"))
 
-from arkrag import config  # noqa: E402
+from arkrag import config, subproc  # noqa: E402
 
 GENERATION = "g-20261103T132152Z-06a741"
 SPEAKER_RE = re.compile(r"^[^：:]{1,12}[：:]")
@@ -402,7 +402,8 @@ def os_name() -> str:
 def _git_revision() -> str:
     try:
         out = subprocess.run(["git", "rev-parse", "HEAD"], cwd=str(ROOT),
-                             capture_output=True, text=True, timeout=10)
+                             capture_output=True, text=True, timeout=10,
+                             env=subproc.child_env())
         return out.stdout.strip() if out.returncode == 0 else ""
     except (OSError, subprocess.SubprocessError):
         return ""

@@ -56,7 +56,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT / "src") not in sys.path:
     sys.path.insert(0, str(ROOT / "src"))
 
-from arkrag import provenance  # noqa: E402
+from arkrag import provenance, subproc  # noqa: E402
 
 SCRIPT = ROOT / "scripts" / "check_report_provenance.py"
 DATA = ROOT / "data"
@@ -117,6 +117,16 @@ def _good() -> dict:
 
 
 def _cli(*paths: str) -> subprocess.CompletedProcess:
+    """跑检查命令。
+
+    **必须传 `env=subproc.child_env()`**：这个 CLI 打印中文（「不存在」「缺」等），
+    而下面的断言就是在找这些中文。父进程按 UTF-8 解码子进程输出，子进程若是默认
+    cp936，中文会变成 `\\ufffd`，于是 `assert "不存在" in proc.stdout` 失败——
+    实测（2026-11-05，不设 PYTHONIOENCODING）：
+        FAILED test_cli_exits_nonzero_for_a_missing_file
+        assert '\\u4e0d\\u5b58\\u5728' in '...nope.json unknown   \\ufffd\\ufffd\\ufffd\\ufffd...'
+    CLI 明明打印了「不存在」，测试说它没打印。与 Gate 0 的 K2 事故完全同形。
+    """
     return subprocess.run(
         [sys.executable, str(SCRIPT), *paths],
         cwd=str(ROOT),
@@ -125,6 +135,7 @@ def _cli(*paths: str) -> subprocess.CompletedProcess:
         encoding="utf-8",
         errors="replace",
         timeout=120,
+        env=subproc.child_env(),
     )
 
 

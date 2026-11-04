@@ -55,7 +55,7 @@ if str(ROOT / "src") not in sys.path:
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from arkrag import config, pipeline as pipeline_mod, query as query_mod, retrieve, vocab  # noqa: E402
+from arkrag import config, pipeline as pipeline_mod, query as query_mod, retrieve, vocab, subproc  # noqa: E402
 
 SCHEMA = "arkrag.a-ranking-replay/1"
 DEFAULT_GENERATION = "g-20261103T132152Z-06a741"
@@ -360,7 +360,8 @@ def _git_commit() -> str:
         import subprocess
 
         return subprocess.run(
-            ["git", "rev-parse", "HEAD"], cwd=str(ROOT), capture_output=True, text=True, timeout=10
+            ["git", "rev-parse", "HEAD"], cwd=str(ROOT), capture_output=True, text=True, timeout=10,
+            env=subproc.child_env(),
         ).stdout.strip()
     except Exception:
         return ""

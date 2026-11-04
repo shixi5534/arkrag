@@ -24,13 +24,14 @@ if str(ROOT / "src") not in sys.path:
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from arkrag import pipeline as pipeline_mod, query as query_mod, retrieve, vocab  # noqa: E402
+from arkrag import pipeline as pipeline_mod, query as query_mod, retrieve, subproc, vocab  # noqa: E402
 
 
 def _git_revision() -> str:
     try:
         return subprocess.run(["git", "rev-parse", "HEAD"], cwd=str(ROOT),
-                              capture_output=True, text=True, timeout=10).stdout.strip()
+                              capture_output=True, text=True, timeout=10,
+                              env=subproc.child_env()).stdout.strip()
     except Exception:
         return ""
 

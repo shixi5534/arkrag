@@ -53,7 +53,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from arkrag import config, pipeline, query as query_mod, retrieve, vocab  # noqa: E402
+from arkrag import config, pipeline, query as query_mod, retrieve, vocab, subproc  # noqa: E402
 
 CAND = "g-20261103T132152Z-06a741"
 TRIAGE = ROOT / "data" / "a_triage_all320.jsonl"
@@ -275,7 +275,8 @@ def _git_commit() -> str:
     try:
         import subprocess
         out = subprocess.run(["git", "rev-parse", "HEAD"], cwd=str(ROOT),
-                             capture_output=True, text=True, timeout=10)
+                             capture_output=True, text=True, timeout=10,
+                             env=subproc.child_env())
         return (out.stdout or "").strip() or "unknown"
     except Exception:
         return "unknown"

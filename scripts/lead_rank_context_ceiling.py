@@ -51,6 +51,11 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+if str(ROOT / "src") not in sys.path:
+    sys.path.insert(0, str(ROOT / "src"))
+
+from arkrag import subproc  # noqa: E402
+
 DATA = ROOT / "data"
 
 TRIAGE = DATA / "a_triage_all320.jsonl"
@@ -77,6 +82,7 @@ def _git_revision() -> str:
             cwd=str(ROOT),
             capture_output=True,
             text=True,
+            env=subproc.child_env(),
         )
         return (out.stdout or "").strip() or "unknown"
     except Exception:
