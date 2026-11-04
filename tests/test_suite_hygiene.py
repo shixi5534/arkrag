@@ -497,7 +497,134 @@ class TestSuiteSizeIsMonotonic:
     #      并打印输入顺序 `['doc/b#000','doc/a#001','doc/a#000']` 对基线
     #      `['doc/a#000','doc/a#001','doc/b#000']`——红在正确原因上；
     #   ③ 恢复后 **3 passed, exit 0**，`git diff src/arkrag/retrieve.py` 为空。
-    N = 1576
+    # 1576 → 1631（P0 门报告可追溯）：一次性记两笔。
+    #   · `tests/test_provenance.py` 36 个（新文件，进入 `TEST_FILES` 后让四个
+    #     parametrize（本文件 61/130/150/184 行）各多一项，+4）；
+    #   · `tests/test_chunks_source.py` 11 个（新文件，同样 +4）。
+    #   36 + 4 + 11 + 4 = 55，1576 + 55 = 1631，与 `--collect-only` 实测一致
+    #   （本文件同时从 190 涨到 198，正是那 +8）。
+    # 这两笔换来的门是「门报告的结论可追溯到哪份代码、哪套数据、哪个时刻」——
+    # 在此之前，`data/` 下九份门报告里只有 `k2_perf.json` 与 `k2_gray.json` 带
+    # `generated_at`，`k2_hard_gates.json` / `k3_threshold_gate.json` /
+    # `k4_drill.json` 三份**一样也没有**；而 `scripts/k2_publish_check.py` 的
+    # `check_reports_freshness()` 对查不到时间戳的报告记 `undetermined` 之后，
+    # **整道门仍然能过**——「查不了」被安静地当成「不用查」。
+    #   · `TestUnknownIsNotPass`（7 条参数化）：七个必填字段逐个删掉，逐次都必须
+    #     判 `unknown`，且 `gate_ok()` 必须为 False。这条对付的正是上面那个形状：
+    #     缺信息不等于没问题。另有一条 `test_fail_outranks_unknown` 钉住
+    #     `_fold()` 的优先级——FAIL 要压过 UNKNOWN，否则「有一个字段填错了」
+    #     会被「另一个字段没填」稀释成 unknown。
+    #   · `TestMissingInputIsDistinguishable`：`verify()` 必须能在 `fields` 里点名
+    #     缺的是哪个字段，且 `missing`（没填）与 `invalid`（填了但不合法）是两个
+    #     名单。P1-c 那次 `gold_assertion_ids` 在 triage 行里恒为 None、导致全部
+    #     落到「无法判定」，就是这个形状：判据没取到输入，安静地降级成一个
+    #     看起来合理的类别，不报错、不崩、退出码 0。
+    #   · `TestCaliberAndDownstream`：含 recall / R@n 的行必须带 `caliber`，取值只
+    #     允许 `gold_only` / `equiv_v2`；`equiv_v1_wide` 已作废，出现即 FAIL；
+    #     只报 R@20 而没有下游量的行必须 FAIL。反例是 Lead 的六配置表：
+    #     `hop0.5` 的 R@20=0.7379 排全场第二，但真进上下文净增 0、引用覆盖 51→48。
+    #     只看 R@20 的报告会推荐它。
+    #   · `TestReverseProbeRefusesStaleEvidence`：退出码非 0 时产物一律无效、
+    #     每轮开始先清上一轮产物。同族事故已经三次（Gate 0 的管道退出码被
+    #     `Select-Object` 掩盖；我自己那轮 patch 锚点写错让脚本崩了、harness 却
+    #     读到上一轮残留 JSON 报「结论没变」；邻接表字段名写错导致回放与现状逐位
+    #     相同），所以把它做成工具 `src/arkrag/reverse_probe.py`，harness 自己也用它。
+    # 第二笔（`test_chunks_source.py`）换来的门是「块正文来源不许选错那一份」。
+    # 同一个坑踩过三次：D 阶段 13,798 vs 13,781；P1-b 结构报告分子读全局 13,786、
+    # 分母读世代 13,798；P1-c 脚本路径写错又带一句 `if not path.exists(): 回退到
+    # 全局`。三次都不报错。`pipeline.resolve_chunks()` 是仓库已有的正解（它会核
+    # `chunk_manifest_hash`，`exists()` 检查抓不到这一层）。门分两层：
+    #   · 新增违规点位立刻红（`test_no_new_offender_beyond_registered_debt`）；
+    #   · **修好一个点位忘了删登记也红**（`test_debt_registry_matches_measured`）——
+    #     只做「新增就红」的登记表会越积越厚，最后没人相信里面有活条目；
+    #     「修好了也要改登记」才让这份名单有下行压力。
+    #   另有 `test_allowed_and_debt_do_not_overlap` 防「为了让门绿把债塞进白名单」，
+    #   `test_allowed_entries_point_at_real_calls` 防死条目让门悄悄变宽，
+    #   `TestGateItselfCanFail` 四条合成源码用例证明判据不是恒真。
+    # 反向实测六笔（日志 `%TEMP%\gate0\logs\reverse_p0_gates.txt`，脚本
+    # `tmp_b_p0_reverse.py`；harness 自己用 `reverse_probe.run()` 跑，自证两条规矩）：
+    #   A 去掉 `_fold()` 的 UNKNOWN 分支 → `-k test_each_field_missing` **7 failed,
+    #     exit 1**；恢复到 36 passed, exit 0。
+    #   B `verify()` 里不再 `missing.append(name)` → `test_verify_names_the_missing_field`
+    #     **1 failed, exit 1**；恢复绿。
+    #   C `reverse_probe.run()` 的 `if proc.returncode != EXIT_OK` 改成 `if False`
+    #     → `test_probe_rejects_artifacts_when_command_fails` **1 failed, exit 1**；恢复绿。
+    #   D `cleared = clear(arts)` 改成 `cleared = []` → `test_probe_clears_previous_artifacts`
+    #     **1 failed, exit 1**；恢复绿。
+    #   E 作废口径分支改成 `if False` → `test_retired_wide_caliber_is_fail_not_unknown`
+    #     **1 failed, exit 1**；恢复绿。
+    #   F 缺下游量分支改成 `if False` → `test_recall_without_downstream_is_fail`
+    #     **1 failed, exit 1**；恢复绿。
+    # 1631 → 1666（P0 门报告体检命令 `scripts/check_report_provenance.py`）：一笔。
+    #   · `tests/test_report_provenance.py` 31 个（新文件，进入 `TEST_FILES` 后让四个
+    #     parametrize（本文件 61/130/150/184 行）各多一项，+4）；
+    #   31 + 4 = 35，1631 + 35 = 1666，与 `--collect-only` 实测一致（本文件由 198
+    #   涨到 202，正是那 +4）。
+    # 这一笔换来的门是「报告的可追溯性有一个能跑、有退出码的判据，而不是一段
+    # 写在文档里的要求」。`tests/test_provenance.py` 守的是**判据**本身；
+    # 这个文件守的是**仓库里那九份真实报告**，两者缺一不可：
+    #   · `test_debt_registry_matches_actual_state`：某份报告补上七字段后必须从
+    #     `REPORTS_AWAITING_PROVENANCE` 删掉。没有这条，名单只会越来越长，
+    #     最后没人相信里面有活条目。
+    #   · `test_no_unregistered_noncompliant_report`：新报告不许绕开登记。
+    #     **这条第一版写成了空转**：它遍历的是「已登记名单」，所以永远不可能
+    #     发现未登记项——第一版反向实测里替它变红的是旁边那条名单覆盖用例。
+    #     现在两条都从 `_gate_reports_on_disk()`（磁盘实测）出发，分工是
+    #     「有没有被漏掉」与「漏掉的里面有没有不合格的」，各自独立变红（见下 M1/M2）。
+    #   · `TestCliExitCodes`：命令的退出码必须跟着报告翻身——缺 `git_commit`
+    #     的报告退出码 1 且 stdout 点名缺哪项；报告文件不存在也非零
+    #     （「不存在」不能算通过）。
+    #   · `test_cli_reports_relative_paths_only`：输出里不许出现机台绝对路径
+    #     （2026-11-04 真发生过一次入库 JSON 带 `E:\...` 被 portable_paths 判红）。
+    # 实测的存量债（2026-11-05 体检，写进 `docs/p0_门报告可追溯.md`）：
+    #   `k2_hard_gates.json` / `k2_publish_check.json` / `k3_threshold_gate.json` /
+    #   `k4_drill.json` / `p1c_leak_audit.json` 五份连 `generated_at` 都没有；
+    #   `k2_perf.json` / `k2_gray.json` 有 `generated_at` 但没有代码版本。
+    #   七份全部 `verdict=unknown`、`gate_ok=False`——按新规矩它们都**不算通过**，
+    #   这与「P0 之前的门能过」正是同一件事的两面。
+    # 反向实测五笔（日志 `%TEMP%\gate0\logs\reverse_report_provenance.txt`，
+    # 脚本 `tmp_b_p0_report_reverse.py`）：
+    #   J 删 `provenance._fold()` 的 UNKNOWN 分支 →
+    #     `-k test_a_report_missing_a_field_is_unknown` **7 failed, 24 deselected,
+    #     exit 1**（七条参数化全红，报错原文 `- unknown / + pass`——缺字段被判成了
+    #     通过）；恢复后 7 passed, exit 0。
+    #     注：我第一版注释这里写的是「5 failed，前两条仍绿」，那是凭预期写的、
+    #     没有实测（日志 tail 把汇总行截掉了）。补跑 `tmp_b_p0_j_count.py` 得到
+    #     真实数字是七条全红。**这正是本项目第三次栽的那种「记录比实测好看」
+    #     ——现在这行数字有对应的完整日志。**
+    #   K 把 `scripts/check_report_provenance.py` 的退出码改成恒 `return EXIT_OK`
+    #     → `-k test_cli_exits_nonzero_for_a_noncompliant_report` **1 failed, exit 1**
+    #     （报错 `assert 0 == 1`，脚本明明打印了「缺 1 项：git_commit」却退出 0）；
+    #     恢复绿。
+    #   L 给 `data/k2_perf.json` 临时补上七字段、但**不删**债表登记 →
+    #     `-k test_debt_registry_matches_actual_state` **1 failed, exit 1**
+    #     （报错「这些报告已经满足七字段了，请从 REPORTS_AWAITING_PROVENANCE
+    #     删掉：['k2_perf.json']」）；恢复绿。
+    #   M1 往 `data/` 放一份新的、无七字段、未登记的门报告 →
+    #     `-k test_no_unregistered_noncompliant_report` **1 failed, exit 1**
+    #     （报错点名 `['_gate0_fake_gate_report.json']`）；
+    #   M2 同一份假报告，改跑 `-k test_audited_set_covers_every_gate_report_on_disk`
+    #     → **1 failed, exit 1**。两条各自独立变红，证明分工真的修好了；
+    #     跑完假报告已删除，`[Z]` 恢复后 31 passed, exit 0。
+    #
+    # 1666 → 1669：`tests/test_provenance.py` 36 → 39（同文件新增 3 条，该文件
+    # 已在 `TEST_FILES` 里，不产生 parametrize 增量）。算术：1666 + 3 = 1669，
+    # 与 `--collect-only` 实测一致。
+    # 这 3 条换来的是「缺输入伪装成通过」的**第二种形态**——它不是「判据没取到
+    # 输入后降级成无法判定」（那是 P1-c 那次），而是「判据根本没看这一行，
+    # 却报告检查过了」：
+    #   `provenance.collect(generation_id="g-x", inputs=["data/goldset/gold-v2.json"])`
+    #   产出的 `inputs` 是纯字符串列表，而旧 `judge_inputs()` 只遍历
+    #   `isinstance(row, dict)` 的行 → 字符串行**一条都不检查** → 返回
+    #   `("pass", "inputs 1 个文件都已登记 sha16")`。**一个 sha16 都没登记，
+    #   却报「都已登记」。**
+    #   反向实测四段（日志 `%TEMP%\gate0\logs\reverse_inputs_shape.txt`，
+    #   脚本 `tmp_b_p0_inputs_shape.py`，用「退回旧实现」而不是「删掉新代码」）：
+    #     [1] 修好之后 → 3 passed, exit 0；
+    #     [2] 退回旧实现（只检查 dict 行）→ **2 failed, 1 passed, exit 1**；
+    #     [3] 恢复后 → 3 passed, exit 0；
+    #     [4] 全文件 → 39 passed, exit 0。
+    N = 1669
 
     def test_declared_count_matches_actual(self) -> None:
         """用 pytest 自己数一遍当前收集到的用例数，与本文件登记值比对。"""
