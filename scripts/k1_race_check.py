@@ -28,6 +28,9 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "src"))
+
+from arkrag import subproc  # noqa: E402
 
 
 def one(index: int) -> tuple[int, int, str]:
@@ -38,9 +41,13 @@ def one(index: int) -> tuple[int, int, str]:
         # 必须显式 utf-8：Windows 下子进程输出是 UTF-8 字节，按 cp936 解码会在读线程里
         # 抛 UnicodeDecodeError，而且抛在终于还原之前（这个坑踩过一次）。
         text=True,
-        encoding="utf-8",
+        encoding=subproc.PIPE_ENCODING,
         errors="replace",
         cwd=str(ROOT),
+        # 但「父进程按 UTF-8 读」只有在子进程也按 UTF-8 写时才成立。k1_checks 打印的是
+        # 中文结论行（`[ok] …`），少了 env 就会读成 \ufffd，这里挑「最后一个 [ 开头的行」
+        # 仍能挑到，但内容不可读——和 K2 同源，一起堵掉。
+        env=subproc.child_env(),
     )
     last = ""
     for line in (proc.stdout + proc.stderr).splitlines():

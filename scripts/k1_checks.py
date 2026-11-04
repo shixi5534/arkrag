@@ -49,6 +49,7 @@ from arkrag import (  # noqa: E402
     legacy,
     prompt,
     release,
+    subproc,
     vocab,
 )
 
@@ -326,8 +327,12 @@ def _run_pytest(paths: tuple[str, ...]) -> dict:
         cwd=str(ROOT),
         capture_output=True,
         text=True,
-        encoding="utf-8",
+        encoding=subproc.PIPE_ENCODING,
         errors="replace",
+        # pytest 的摘要行是中文（「1 passed」「1 failed」之间的那些字），子进程默认按
+        # cp936 写管道，我们按 UTF-8 读，摘要就会变成一串 \ufffd。判据虽然看的是
+        # returncode，但人要靠这一行判断「红在哪」，不能让它不可读。
+        env=subproc.child_env(),
     )
     tail = [line for line in (started.stdout or "").strip().splitlines() if line.strip()]
     return {
@@ -459,8 +464,10 @@ def check_old_artifacts_backed_up(ctx: dict) -> dict:
             cwd=str(ROOT),
             capture_output=True,
             text=True,
-            encoding="utf-8",
+            encoding=subproc.PIPE_ENCODING,
             errors="replace",
+            # 同上：`snapshot_baseline.py --verify` 的摘要行是中文，不传 env 会读成乱码。
+            env=subproc.child_env(),
         )
         data["snapshot_verify_returncode"] = run.returncode
         tail = [ln for ln in (run.stdout or "").strip().splitlines() if ln.strip()]
