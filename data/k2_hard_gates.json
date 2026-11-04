@@ -1,0 +1,124 @@
+{
+  "generation_id": "g-20261103T132152Z-06a741",
+  "baseline_generation_id": "g-20261031T035231Z-4eafae",
+  "checks": [
+    {
+      "id": "lost_turns",
+      "name": "无轮次静默丢失",
+      "ok": true,
+      "detail": "T1 场景 2289 / 轮次 422778 / 丢失 0；白名单外 197 轮按设计不收录（obt/guide）",
+      "data": {
+        "t1_scenes": 2289,
+        "t1_turns": 422778,
+        "lost": 0,
+        "out_of_scope_turns": 197,
+        "out_of_scope_categories": [
+          "obt/guide"
+        ],
+        "t1_categories": [
+          "obt/main",
+          "activities",
+          "obt/memory",
+          "obt/roguelike",
+          "obt/rogue"
+        ]
+      }
+    },
+    {
+      "id": "dupe_chunks",
+      "name": "无重复 Chunk 身份",
+      "ok": true,
+      "detail": "块 13798 / 重复 chunk_id 0 / 重复 content_key 0",
+      "data": {}
+    },
+    {
+      "id": "bad_cache",
+      "name": "无非法缓存",
+      "ok": true,
+      "detail": "缓存 13835 条 / 合法 13835 / 非法 0",
+      "data": {}
+    },
+    {
+      "id": "evidence_spans",
+      "name": "所有 Assertion 证据可定位",
+      "ok": true,
+      "detail": "断言 62924 / 偏移不符 0 / 宿主块缺失 0",
+      "data": {}
+    },
+    {
+      "id": "identity_delta",
+      "name": "无未解释产物身份变化",
+      "ok": true,
+      "detail": "变化字段 9 / 有解释 9 / 未解释 0",
+      "data": {
+        "changed": [
+          "graph_artifact_id",
+          "index_artifact_id",
+          "assertion_artifact_id",
+          "adjacency_artifact_id",
+          "gate_report_hash",
+          "index_content_digest",
+          "probe_digest",
+          "chunk_manifest_hash",
+          "index_build_fp"
+        ],
+        "explanations": {
+          "graph_artifact_id": "图/断言/邻接产物随块集变化",
+          "index_artifact_id": "索引随分词器与块集变化",
+          "assertion_artifact_id": "图/断言/邻接产物随块集变化",
+          "adjacency_artifact_id": "图/断言/邻接产物随块集变化",
+          "gate_report_hash": "门禁行数 30->38（ark-rag-3 新增 E 门）",
+          "index_content_digest": "分词器 t1->t2 + 块集 13781->13798，图指纹未变",
+          "probe_digest": "分词器 t1->t2 + 块集 13781->13798，图指纹未变",
+          "chunk_manifest_hash": "块集变化（34 块新增或正文变更）",
+          "index_build_fp": "分词器 t1->t2 + 块集 13781->13798，图指纹未变"
+        }
+      }
+    },
+    {
+      "id": "no_failed_publish",
+      "name": "无失败 Generation 被发布",
+      "ok": true,
+      "detail": "指针 = g-20261030T154606Z-55dfd7（PUBLISHED） / 本 schema 已发布自检不过 0 个 / ark-rag-1 历史发布 2 个按旧字段表判不过（无 graph_artifact_id、source_status 未记录，D4 之前）：['g-20261030T114823Z-606ea9', 'g-20261030T115103Z-7b0fd3']",
+      "data": {
+        "pointer": "指针 = g-20261030T154606Z-55dfd7（PUBLISHED）",
+        "identity_published_fail": [],
+        "legacy_exceptions": [
+          [
+            "g-20261030T114823Z-606ea9",
+            "(空)",
+            2
+          ],
+          [
+            "g-20261030T115103Z-7b0fd3",
+            "(空)",
+            2
+          ]
+        ]
+      }
+    },
+    {
+      "id": "index_graph_bind",
+      "name": "索引与图绑定同一 Manifest",
+      "ok": true,
+      "detail": "graph_fp 一致=True / artifact_id 一致=True / meta.chunk_count=13798→块 13798 一致=True / 倒排文档 13798 一致=True",
+      "data": {}
+    },
+    {
+      "id": "risk_register",
+      "name": "8/46 例风险有处理结论",
+      "ok": true,
+      "detail": "k阶段风险处置.md：逐条处置 54 行（KEPT 21, PENDING 28, SPLIT 5） / 未归类 0",
+      "data": {
+        "rows": 54,
+        "tally": {
+          "SPLIT": 5,
+          "KEPT": 21,
+          "PENDING": 28
+        },
+        "missing": []
+      }
+    }
+  ],
+  "all_passed": true
+}

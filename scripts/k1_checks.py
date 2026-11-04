@@ -907,6 +907,12 @@ def print_report(report: dict) -> None:
 
 
 def main(argv: list[str] | None = None) -> int:
+    # Windows 控制台默认 cp936，不重配置会把中文写成乱码字节，
+    # 且 `> file` 重定向后文件不是 UTF-8（本项目脚本一律要求输出可原样粘贴进文档）。
+    # 放在 `main()` 里而不是模块顶层：本文件会被 `tests/test_k1_checks.py` 用
+    # importlib 加载，那时 `sys.stdout` 是 pytest 的捕获对象，不该被重配置。
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
     ap = argparse.ArgumentParser(description="K1 全量重建前检查（计划 §K1 九项）")
     ap.add_argument("--json", action="store_true", help="输出机读 JSON")
     ap.add_argument("--only", default="", help="逗号分隔的检查 id，只跑这些")
