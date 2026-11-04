@@ -38,6 +38,14 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
+# 本脚本会打印 U+2212（减号 −）与 Δ 一类的排印字符。Windows 控制台默认 cp936，
+# 它编不出 U+2212，于是 `print` 自己抛 UnicodeEncodeError、进程以 1 退出——
+# 看起来像「评测脚本跑挂了」，其实是控制台编码。2026-11-04 Gate 0 实测：
+# 同样的字符串在 cp936 控制台下 rc=1，reconfigure 之后 rc=0。
+# 守卫是必要的：pytest 捕获期间 `sys.stdout` 可能是不可重配置的文本流。
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+
 from arkrag import (  # noqa: E402
     embedding,
     fusion,

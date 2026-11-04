@@ -382,7 +382,57 @@ class TestSuiteSizeIsMonotonic:
     # 短路掉，5 条全红（`5 failed, 31 passed`），还原后 36 passed。
     # 踩过的坑写进用例注释：`release_cli` 里的 `import k2_publish_check` 与本文件
     # `spec_from_file_location` 载的是**两份模块实例**，只 patch 一处等于没 patch。
-    N = 1511
+    # 1511 → 1550（Gate 0）：一次性记四笔，逐笔核过。
+    #   · `tests/test_subprocess_encoding.py` 20 个（新文件，进入 `TEST_FILES`
+    #     后让四个 parametrize（本文件 61/130/150/184 行）各多一项，+4）；
+    #   · `tests/test_regression_entry.py` 9 个（新文件，同理 +4）；
+    #   · `tests/test_k2_gray.py` +2 个，该文件已在 `TEST_FILES` 里，
+    #     不产生 parametrize 增量。
+    #   20 + 9 + 4 + 4 + 2 = 39，1511 + 39 = 1550，与 `--collect-only` 实测一致。
+    # 这四笔换来的门都是「门会报红，但红的方向是假的」这一类——
+    # 也就是本项目历史上三次事故的共同形状。它们彼此独立，各自能变红：
+    #   ① `test_k2_gray.py::test_stub_server_parses_chinese_listen_line_with_
+    #      poisoned_pipe_encoding`：把父进程的 `PYTHONIOENCODING` 毒化成 `gbk`
+    #      （模拟 Windows 控制台默认 cp936 的真实条件），仍必须解析出中文
+    #      「监听」那一行的端口。修之前这个用例就是全量回归里 4 failed / 8 errors
+    #      的真身：子进程按 GBK 写出字节、父进程按 UTF-8 解出 `\ufffd\ufffd\ufffd\ufffd`，
+    #      `re.search(r"监听 http://[^:\s]+:(\d+)", line)` 永远不命中，每个用例
+    #      干等满 90 秒才抛 `ServeError`，报错原文还写着「没打出监听地址」——
+    #      **脚本其实打印了**。它不是「慢」，它是把「读不到」报成了「没写」。
+    #      （`BOOT_TIMEOUT_S` 保持 90 秒不变，用例走显式 `boot_timeout_s=20.0`。
+    #      另有一条 `test_boot_timeout_default_is_still_90` 钉住这个默认值，
+    #      防止有人为了「让它快一点」把产品契约改掉。）
+    #   ② `test_subprocess_encoding.py` 的 AST 门
+    #      （`test_subprocess_calls_declare_pipe_encoding`）：凡是
+    #     `subprocess.run/Popen/call/check_output/check_call` 且父进程用 UTF-8
+    #      解码子进程输出的地方，必须显式传 `env=subproc.child_env()`。这条门是
+    #      **结构性**的——①②③④ 四道门都只是「当前这几处坏了」，只有它是
+    #      「以后新加一处也不会坏」。白名单三条（`git rev-parse` / `git ls-files` /
+    #      `--collect-only` 数数）都只读 ASCII，理由逐条写在 `ENV_WHITELIST` 里；
+    #      `test_whitelist_points_at_real_calls` 防死条目让门悄悄变宽。
+    #   ③ 同文件的控制台门
+    #      （`test_scripts_never_print_chars_the_console_cannot_encode`）：
+    #      脚本自己往 cp936 控制台写它编不出的字符（U+2212 / U+26A0 / U+2194 等）
+    #      会让 `print` 抛 `UnicodeEncodeError`、进程以 1 退出——**与一个真实的
+    #      业务失败无法区分**。实测 `scripts/eval_fusion.py:297` 的减号 − 就是这种，
+    #      而它在 pytest 里跑是绿的（pytest 捕获 stdout，写进内存缓冲，不碰控制台
+    #      编码），只有被当命令行工具直接跑时才崩——所以只有 AST 门抓得住。
+    #      这道门自己踩过一次坑，写进用例注释了：第一版用
+    #      `"reconfigure" in source` 判断，反向实测 **19 passed 没变红**，因为
+    #      我给 eval_fusion 加的中文注释里就有「reconfigure」这个词，注释替真代码
+    #      把门撑住了。改成 AST 识别真实调用后，删掉那两行 → `2 failed, 18 passed`。
+    #   ④ `test_regression_entry.py` + `scripts/regression.py`：回归入口必须
+    #      **以 pytest 的退出码为自己的退出码**。这条门针对的不是代码缺陷，是
+    #      **调用链**：`py -3 -m pytest tests -q | Select-Object -Last 40` 这样写，
+    #      `$LASTEXITCODE` 是管道右侧 `Select-Object` 的 0，于是「1498 passed /
+    #      4 failed」那次的外层命令报了成功。它同时钉住 Lead 特别要求的那条：
+    #      摘要里出现 `0 failed` 不许判红——裸匹配 `"failed" in text` 会把
+    #      「1511 passed, 0 failed」读成失败，那比漏判更糟，因为它会训练人
+    #      忽略这道门。反向实测两笔：把 `return returncode` 改成 `return 0` →
+    #      `test_entry_exits_nonzero_when_pytest_fails` 红（1 failed, 19.27s）；
+    #      把 `summary_looks_bad` 改成裸匹配 → `test_zero_failed_summary_is_not_bad`
+    #      红（0.29s）。
+    N = 1550
 
     def test_declared_count_matches_actual(self) -> None:
         """用 pytest 自己数一遍当前收集到的用例数，与本文件登记值比对。"""

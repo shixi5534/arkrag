@@ -79,6 +79,8 @@ sys.path.insert(0, str(ROOT / "src"))
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
+from arkrag import subproc  # noqa: E402
+
 DEFAULT_THRESHOLDS = ROOT / "data" / "k3_thresholds.json"
 DEFAULT_APPROVALS = ROOT / "data" / "k3_approvals.json"
 DEFAULT_PAIRS = ROOT / "data" / "k3_recall_pairs.json"
@@ -217,8 +219,14 @@ def read_unexplained() -> int:
         raise GateError(f"归因脚本不存在：{ATTRIBUTION}")
     proc = subprocess.run(
         [sys.executable, str(ATTRIBUTION)],
-        cwd=str(ROOT), capture_output=True, encoding="utf-8", errors="replace",
+        cwd=str(ROOT), capture_output=True, encoding=subproc.PIPE_ENCODING, errors="replace",
         timeout=600,
+        # 归因脚本打印的是中文判据行，我们按 UTF-8 解码，就必须让子进程也按 UTF-8 写管道。
+        # 这里以前**碰巧**能跑：`k3_attribution.py` 自己 reconfigure 了 stdout。那是隐式契约，
+        # 谁把它删了，这道门就会报「归因脚本没有打印「未解释合计」行」而脚本其实打印了
+        # —— 正是 K2 那种红方向为假的形状。2026-11-04 实测过：注释掉那一行 reconfigure，
+        # 本脚本立刻 exit=2，而归因脚本自身退出码仍是 0、那行字也确实打出来了。
+        env=subproc.child_env(),
     )
     text = (proc.stdout or "") + (proc.stderr or "")
     hits = re.findall(r"未解释合计（边 \+ 断言）：(\d+)", text)
