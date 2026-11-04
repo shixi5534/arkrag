@@ -432,7 +432,43 @@ class TestSuiteSizeIsMonotonic:
     #      `test_entry_exits_nonzero_when_pytest_fails` 红（1 failed, 19.27s）；
     #      把 `summary_looks_bad` 改成裸匹配 → `test_zero_failed_summary_is_not_bad`
     #      红（0.29s）。
-    N = 1550
+    # 1550 → 1573（P1-a 切分落文件）：一次性记两笔。
+    #   · `tests/test_make_split.py` 17 个（新文件，进入 `TEST_FILES` 后让四个
+    #     parametrize（本文件 61/130/150/184 行）各多一项，+4）；
+    #   · `tests/test_k1_checks.py` +2 个（`test_gate_points_at_v2_not_v1` 与
+    #     `test_v1_file_still_present_and_untouched`），该文件已在 `TEST_FILES` 里，
+    #     不产生 parametrize 增量。
+    #   17 + 4 + 2 = 23，1550 + 23 = 1573，与 `--collect-only` 实测一致
+    #   （把新文件临时移走后实测 1552 = 1550 + 2，带回来后 1573，账对得上；
+    #   同时本文件从 186 涨到 190，正是那 +4）。
+    # 这两笔换来的门是「切分规则本身有守门人」——在此之前，切分只存在于一次性的
+    # 试算脚本里，改一个 `ceil` 成 `round`、或者把分层键里的 `should_abstain`
+    # 去掉，都不会有任何测试变红，而这两种改动都会让「每类都要有代表」这句话失效：
+    #   · `test_ceil_keeps_small_strata_in_holdout`：`n=2, ratio=0.30` 时 `round`
+    #     给出 0 条进 holdout，holdout 就缺了这一整类。用 `ceil` 才保证小层至少
+    #     有一条。这是「每类都要有代表」的算术前提，不是风格偏好。
+    #   · `test_split_is_deterministic` / `test_bucket_is_stable_and_depends_on_tag`：
+    #     切分靠 `sha256(SPLIT_SEED|tag|question_id)` 排序，不靠任何全局状态。
+    #     改拼串方式等于重新切分，已入库的 holdout 就不再是同一批题——而这件事
+    #     没有任何运行时症状，只有指纹会变。
+    #   · `test_v1_half_is_byte_identical_except_split_and_origin` +
+    #     `test_self_check_catches_tampered_v1_item`：v2 里 `origin=v1` 的那 320 条
+    #     必须除 `split`/`origin` 外逐字段等于 `gold-v1.json` 原件。**这条最要紧**：
+    #     `gold_set_fixed` 门只算 `gold-v2.json` 整个文件的 sha256，它看得见「文件
+    #     变了」，却看不见「变的是 v1 那半还是新增那半」——有人顺手改一条 v1 题的
+    #     `required`，恰好又同步更新了哈希常量，门是绿的，历史基线却已经漂移。
+    #   · `test_gate_points_at_v2_not_v1`：换签只改 sha 常量、忘了改 `GOLD_SET_PATH`，
+    #     门会「通过」在 v1 上，绿得毫无意义。
+    # 反向实测两笔（日志 `%TEMP%\gate0\logs\reverse_gold_v2_gate.txt`）：
+    #   ① 把 `GOLD_SET_SHA256_16` 的最后一位 `4b9` 改成 `4ba` →
+    #      `py -3 -m pytest tests/test_k1_checks.py -q -k GoldSet` →
+    #      **1 failed, 4 passed, exit 1**，`check_gold_set_fixed()` 的 detail 是
+    #      「sha256 前 16 位 069375f8e355e4b9 ≠ 冻结值 069375f8e355e4ba」——
+    #      红在正确的原因上；恢复后 5 passed, exit 0。
+    #   ② 把 `GOLD_SET_PATH` 指回 `gold-v1.json`（常量仍是 v2 的）→ 同一命令
+    #      **2 failed, 3 passed, exit 1**（`test_real_gold_set_passes` +
+    #      `test_gate_points_at_v2_not_v1`）；恢复后 5 passed, exit 0。
+    N = 1573
 
     def test_declared_count_matches_actual(self) -> None:
         """用 pytest 自己数一遍当前收集到的用例数，与本文件登记值比对。"""

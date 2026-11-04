@@ -62,19 +62,28 @@ TESTS = ROOT / "tests"
 # Gold Set 的固定承诺。**这个常量就是"Gold Set 已固定"这句话的实体**。
 # 取值时刻：2026-11-03 K1 首次实跑，sha256(gold-v1.json) 前 16 位。
 # 换题库必须显式改这一行（改一行代码是有人签字的动作，改一个文件不是）。
-GOLD_SET_PATH = ROOT / "data" / "goldset" / "gold-v1.json"
-GOLD_SET_SHA256_16 = "76d66073ff87aab1"
-GOLD_SET_BYTES = 284356
-GOLD_SET_TOTAL = 320
+#
+# 2026-11-04 P1-a：题库从 v1（320 题）换成 v2（640 题，含切分与新增批）。
+# **这次换签是 Lead 批准的动作**，理由是 v1 没有 split 字段、无法把调参集与
+# 验收集分开，A 调参等于看答案。三件事同时成立才算换签完成：
+#   1. gold-v1.json 一个字节没动（它仍是历史对照锚点，`gold_set_fixed` 换成 v2
+#      之后，v1 的完整性由 tests/test_make_split.py 的 `test_gold_v1_is_untouched`
+#      守着：sha256 前 16 位 76d66073ff87aab1、284356 字节）；
+#   2. 下面三个常量与 gold-v2.json 实测一致；
+#   3. 有人做过反向实测：把 GOLD_SET_SHA256_16 故意改错一位，门必须变红。
+GOLD_SET_PATH = ROOT / "data" / "goldset" / "gold-v2.json"
+GOLD_SET_SHA256_16 = "069375f8e355e4b9"
+GOLD_SET_BYTES = 601492
+GOLD_SET_TOTAL = 640
 GOLD_SET_QUOTAS = {
-    "single_chunk": 64,
-    "alias": 48,
-    "direct_relation": 48,
-    "multihop": 48,
-    "cross_chunk": 32,
-    "time_conflict": 32,
-    "negative_abstain": 32,
-    "adversarial": 16,
+    "single_chunk": 128,
+    "alias": 96,
+    "direct_relation": 96,
+    "multihop": 96,
+    "cross_chunk": 64,
+    "time_conflict": 64,
+    "negative_abstain": 64,
+    "adversarial": 32,
 }
 
 # 磁盘余量下限的推导（不拍脑袋）：
@@ -378,7 +387,11 @@ def check_gold_set_fixed(ctx: dict) -> dict:
     """4. Gold Set 固定：字节、条数、类别配额三项都必须与冻结值一致。
 
     只查 sha256 不够——有人可能只改了 `total` 而字节数刚好相同（换题不换长）。
-    三项一起查，任一不符即红。配额表本身也来自 `gold-v1-report.json` 的实测。
+    三项一起查，任一不符即红。配额表本身也来自 `gold-v2.json` 的实测。
+
+    `gold-v1.json` 从 2026-11-04 起不再是被查对象：题库换成 v2（v1 的 320 条原样
+    搬入 + 320 条全新题，每题带 `split`）。v1 文件仍在库、仍能跑，它是历史对照
+    锚点；它的完整性由 `tests/test_make_split.py::test_gold_v1_is_untouched` 守。
     """
     data: dict = {
         "path": config.rel_to_root(GOLD_SET_PATH),

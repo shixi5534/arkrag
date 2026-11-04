@@ -263,8 +263,28 @@ class TestGoldSetCanFail:
         """反向对照：在当前盘上这份题库上必须是绿。"""
         res = k1.check_gold_set_fixed(_empty_ctx())
         assert _result_ok(res), res["detail"]
-        assert res["data"]["actual_total"] == 320
-        assert res["data"]["actual_sha256_16"] == "76d66073ff87aab1"
+        assert res["data"]["actual_total"] == 640
+        assert res["data"]["actual_sha256_16"] == "069375f8e355e4b9"
+
+    def test_gate_points_at_v2_not_v1(self):
+        """换签必须真的换了指向。
+
+        这条用例的存在理由：2026-11-04 把题库从 v1 换到 v2 时，只改 sha 常量而忘了
+        改 `GOLD_SET_PATH`，门会「通过」在 v1 上——看起来绿灯，实际评测用的仍是那套
+        没有 split 字段的老题。指错了方向的红绿灯比没有红绿灯更糟。
+        """
+        assert k1.GOLD_SET_PATH.name == "gold-v2.json"
+        res = k1.check_gold_set_fixed(_empty_ctx())
+        assert res["data"]["path"] == "data/goldset/gold-v2.json"
+
+    def test_v1_file_still_present_and_untouched(self):
+        """v1 必须还在库里且字节未变——历史对照与回滚都要靠它。"""
+        import hashlib
+
+        path = k1.ROOT / "data" / "goldset" / "gold-v1.json"
+        blob = path.read_bytes()
+        assert hashlib.sha256(blob).hexdigest()[:16] == "76d66073ff87aab1"
+        assert len(blob) == 284356
 
 
 # ---------------------------------------------------------------- 5 旧产物已备份
