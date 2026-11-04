@@ -831,7 +831,27 @@ def list_generations() -> list[dict]:
 
 
 def prune_old(*, keep: int = 2, dry_run: bool = True) -> list[str]:
-    """归档旧的 FAILED/非发布世代目录。默认只演练不删除。
+    """归档旧的 FAILED 世代目录。默认只演练不删除。
+
+    ## 为什么候选条件必须是 `status == FAILED`，而不是 `!= PUBLISHED`
+
+    旧实现在这里写的是 `status != PUBLISHED`，于是 READY 的世代全都算"可清候选"，
+    再按 `keep` 从最近往里留 N 个。实测（12 个世代，线上指针 `55dfd7`、
+    `previous` 为 `606ea9`）：`prune_old(keep=2)` 拟清 7 个，其中 5 个是 READY
+    可服务世代，含**上一代** `g-20261031T035231Z-4eafae`。真跑一次
+    `dry_run=False` 就把上一代和多个候选一起删了，直接违反计划 K4 第一条
+    「保留至少上一代完整有效 Generation」。
+
+    根因是「保留集合」被当成了「候选集合的过滤器」：`keep_ids` 只有
+    `current` 与 `previous` 两个 id，而**上一代可服务世代未必在这两个 id 里**
+    （现场就是：`current=55dfd7`/`previous=606ea9`，真正的上一代 `4eafae`
+    两个都不是）。任何靠"从候选里挑 N 个留着"的写法都会在 keep 之外
+    再丢世代——因为候选集合本身就不该包含 READY。
+
+    READY 是**可服务但未发布**的合法状态，它存在的意义就是随时能切上线；
+    能清的只有 FAILED——那些已经跑不出产物、留着只为留证。所以：
+    候选只收 FAILED，`keep` 的含义收窄为"最近 N 个 FAILED 留作证据"，
+    READY/PUBLISHED 一个都不进候选，也就永远不会被删。
 
     删除前必须确认：不是当前版本、不是保留世代、且它自己的 Manifest 在。
     计划 K4 明确要求"删除旧产物前验证备份和 Manifest"。
@@ -839,7 +859,7 @@ def prune_old(*, keep: int = 2, dry_run: bool = True) -> list[str]:
     cur = read_current() or {}
     keep_ids = {cur.get("generation_id", ""), cur.get("previous_generation", "")}
     candidates = [
-        g for g in list_generations() if g["generation_id"] not in keep_ids and g["status"] != PUBLISHED
+        g for g in list_generations() if g["generation_id"] not in keep_ids and g["status"] == FAILED
     ]
     candidates.sort(key=lambda g: g.get("created_at", ""), reverse=True)
     victims = [g["generation_id"] for g in candidates[keep:]]

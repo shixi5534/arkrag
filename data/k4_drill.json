@@ -1,0 +1,198 @@
+{
+  "candidate": "g-20261103T132152Z-06a741",
+  "baseline": "g-20261030T154606Z-55dfd7",
+  "probes": [
+    "q-ad-000001",
+    "q-ad-000002",
+    "q-ad-000003",
+    "q-al-000001",
+    "q-al-000002",
+    "q-cx-000001",
+    "q-cx-000002",
+    "q-dr-000001",
+    "q-dr-000002",
+    "q-mh-000001",
+    "q-mh-000002",
+    "q-na-000001",
+    "q-na-000002",
+    "q-na-000003",
+    "q-sc-000001",
+    "q-sc-000002",
+    "q-tc-000001",
+    "q-tc-000002"
+  ],
+  "checks": [
+    {
+      "id": "gray_candidate",
+      "name": "灰度查询（候选，不发指针）",
+      "ok": true,
+      "detail": "题 18 / 答 17 / 拒 1 / 引用 94 条（定位失败 0）/ 单题 195.0 ms",
+      "data": {
+        "probes": 18,
+        "answered": 17,
+        "abstained": 1,
+        "abstain_agree": 17,
+        "citations": 94,
+        "cite_bad": 0,
+        "total_ms": 3510.7,
+        "per_query_ms": 195.0
+      }
+    },
+    {
+      "id": "gray_baseline",
+      "name": "灰度查询（上一代，对照）",
+      "ok": true,
+      "detail": "题 18 / 答 17 / 拒 1 / 引用 88 条（定位失败 0）/ 单题 162.5 ms",
+      "data": {
+        "probes": 18,
+        "answered": 17,
+        "abstained": 1,
+        "abstain_agree": 17,
+        "citations": 88,
+        "cite_bad": 0,
+        "total_ms": 2924.3,
+        "per_query_ms": 162.5
+      }
+    },
+    {
+      "id": "abstain_stable",
+      "name": "拒答结论逐题稳定",
+      "ok": true,
+      "detail": "翻转 0 题（两代回答/拒答一致）",
+      "data": {
+        "flipped": []
+      }
+    },
+    {
+      "id": "k4_precondition",
+      "name": "保留至少上一代完整有效 Generation",
+      "ok": true,
+      "detail": "回滚目标 g-20261031T035231Z-4eafae 自检 0 问题；隔离指针起始 = g-20261031T035231Z-4eafae",
+      "data": {
+        "target": "g-20261031T035231Z-4eafae"
+      }
+    },
+    {
+      "id": "publish_prev",
+      "name": "发布后 previous_generation 指向有效上一代",
+      "ok": true,
+      "detail": "指针 g-20261103T132152Z-06a741 / previous g-20261031T035231Z-4eafae（该代自检 0 问题）",
+      "data": {
+        "previous": "g-20261031T035231Z-4eafae"
+      }
+    },
+    {
+      "id": "rollback_pointer_only",
+      "name": "回滚只切指针、不重建历史",
+      "ok": true,
+      "detail": "回滚到 g-20261031T035231Z-4eafae 完成；12 份 Manifest 改动 0",
+      "data": {
+        "changed_manifests": []
+      }
+    },
+    {
+      "id": "rollback_pointer_shape",
+      "name": "回滚指针键集含 rolled_back",
+      "ok": true,
+      "detail": "指针 = g-20261031T035231Z-4eafae / rolled_back = True",
+      "data": {}
+    },
+    {
+      "id": "rollback_probe",
+      "name": "回滚后固定探针",
+      "ok": true,
+      "detail": "题 18 / 引用定位失败 0 / 回答器世代标识全对=True / 单题 62.8 ms",
+      "data": {
+        "probes": 18,
+        "answered": 17,
+        "abstained": 1,
+        "abstain_agree": 17,
+        "citations": 88,
+        "cite_bad": 0,
+        "total_ms": 1129.9,
+        "per_query_ms": 62.8
+      }
+    },
+    {
+      "id": "rollback_reversible",
+      "name": "回滚可逆（再切回候选）",
+      "ok": true,
+      "detail": "指针 = g-20261103T132152Z-06a741 / previous = g-20261031T035231Z-4eafae",
+      "data": {}
+    },
+    {
+      "id": "manifest_isolated",
+      "name": "演练未改坏任何世代 Manifest（隔离生效）",
+      "ok": true,
+      "detail": "备份 12 份 / 还原 1 份：['g-20261103T132152Z-06a741']",
+      "data": {
+        "restored": [
+          "g-20261103T132152Z-06a741"
+        ],
+        "failed": []
+      }
+    },
+    {
+      "id": "prod_untouched",
+      "name": "线上指针未被演练改动",
+      "ok": true,
+      "detail": "线上仍是 g-20261030T154606Z-55dfd7（PUBLISHED）",
+      "data": {}
+    },
+    {
+      "id": "prod_servable",
+      "name": "线上世代可被当前链路服务（申报项）",
+      "ok": true,
+      "detail": "g-20261030T154606Z-55dfd7 可服务=False：世代 g-20261030T154606Z-55dfd7 的 graph_schema=ark-rag-1，本工具只支持 ark-rag-3（ark-rag-1 没有断言，做不了带方向的扩展与可定位引用） → 回滚目标只能用 g-20261031T035231Z-4eafae",
+      "data": {
+        "servable": false,
+        "reason": "世代 g-20261030T154606Z-55dfd7 的 graph_schema=ark-rag-1，本工具只支持 ark-rag-3（ark-rag-1 没有断言，做不了带方向的扩展与可定位引用）"
+      }
+    },
+    {
+      "id": "gold_smoke",
+      "name": "Gold Set 冒烟（40 题，候选）",
+      "ok": true,
+      "detail": "R@20 0.7436 / R@5 0.5897 / MRR 0.4591 / 引用定位 1.0000 / 硬失败 0",
+      "data": {
+        "metrics": {
+          "recall_at_20": 0.74359,
+          "recall_at_5": 0.589744,
+          "mrr": 0.459085,
+          "citation_location_accuracy": 1.0,
+          "required_citation_coverage": 0.205128,
+          "abstain_accuracy": 0.875,
+          "direction_accuracy": 0.583333
+        },
+        "citation_verify_failures": 0
+      }
+    },
+    {
+      "id": "legacy_not_mixed",
+      "name": "Legacy JSON 未与新模型静默混用",
+      "ok": true,
+      "detail": "graph_schema=ark-rag-3（需 ark-rag-3）/ schema_version=ark-rag-1 / entity_rule=— normalizer=n2",
+      "data": {
+        "graph_schema": "ark-rag-3",
+        "versions": {
+          "schema_version": "ark-rag-1",
+          "prompt_version": "v2",
+          "prompt_sha256": "75835665be8edb9b147c3453827b14dbdf7fbde09e0648c4a7fbb2382c4846f1",
+          "vocab_sha": "3924032c55075071",
+          "normalizer_version": "n2"
+        }
+      }
+    },
+    {
+      "id": "prune_safe",
+      "name": "删除旧产物前只清 FAILED、且备份已验证",
+      "ok": true,
+      "detail": "dry-run 拟清 0 个：[]；其中非 FAILED 0",
+      "data": {
+        "plan": [],
+        "unsafe": []
+      }
+    }
+  ],
+  "all_passed": true
+}

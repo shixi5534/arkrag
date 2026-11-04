@@ -608,3 +608,83 @@ class TestListing:
         assert isinstance(victims, list)
         # 演练不删任何东西：现有目录都还在
         assert len(list(release.GENERATIONS_DIR.iterdir())) == 0
+
+
+def _seed_three_kinds(prefix: str = "") -> dict[str, release.Generation]:
+    """造 PUBLISHED / READY / FAILED 齐备的一组世代，`created_at` 显式递增。
+
+    为什么要显式写 `created_at`：`_now()` 只到秒，同一次测试里建的四代
+    `created_at` 往往完全相同，`prune_old()` 的排序就退化成"目录名顺序"，
+    于是用例在断言一条**碰巧**成立的不变式。这里给它们明确的先后，
+    让"最近 N 个"有确定含义。
+
+    为什么不用手工造目录：`_build_generation()` 会写出能通过
+    `verify_generation()` 的真实图/索引/门禁报告，于是 `publish()` 能真的
+    走完发布路径。手工造一个只有 Manifest 的目录，`publish()` 会在
+    `artifact_digests()` 里因为产物文件缺失抛 `ReleaseError` 早退——
+    那样测到的就不是 prune，而是"发布拒绝半成品"。
+    """
+    out: dict[str, release.Generation] = {}
+
+    published = _build_generation(f"g-20260101T000000Z-{prefix}aa0001")
+    published.update(created_at="2026-01-01T00:00:00Z")
+    release.publish(published)          # -> PUBLISHED，并成为 current
+    out["published"] = published
+
+    ready = _build_generation(f"g-20260102T000000Z-{prefix}bb0002")
+    ready.update(created_at="2026-01-02T00:00:00Z")
+    assert ready.status() == release.READY
+    out["ready"] = ready
+
+    failed_old = _build_generation(f"g-20260103T000000Z-{prefix}cc0003")
+    failed_old.update(created_at="2026-01-03T00:00:00Z")
+    failed_old.fail("boom-old")
+    out["failed_old"] = failed_old
+
+    failed_new = _build_generation(f"g-20260104T000000Z-{prefix}dd0004")
+    failed_new.update(created_at="2026-01-04T00:00:00Z")
+    failed_new.fail("boom-new")
+    out["failed_new"] = failed_new
+
+    return out
+
+
+class TestPruneOnlyTouchesFailed:
+    """`prune_old()` 只许清 FAILED。
+
+    ## 这条门为什么必须存在（它挡住的是真实事故）
+
+    旧实现的候选条件是 `status != PUBLISHED`，于是 **READY 也算可清候选**，
+    再"从候选里留最近 keep 个"。现场实测（12 个世代，`current=55dfd7`、
+    `previous=606ea9`）：`prune_old(keep=2)` 拟清 7 个，其中 5 个是 READY
+    可服务世代，**包含上一代 `g-20261031T035231Z-4eafae`**。真跑
+    `dry_run=False` 会一次性删掉上一代和多个候选，直接违反计划 K4
+    「保留至少上一代完整有效 Generation」。
+
+    旧用例 `test_prune_is_dry_run_by_default` 只断言"演练不删东西"，
+    而且跑在**空目录**里——没有任何候选可清，缺陷永远暴露不出来。
+    下面两条把世代摆成 READY/PUBLISHED/FAILED 齐备，让"清错东西"
+    这件事有东西可清、也就有断言可红。
+    """
+
+    def test_dry_run_lists_only_failed(self, sandbox):
+        gens = _seed_three_kinds()
+        victims = release.prune_old(keep=1, dry_run=True)
+        # 只有 FAILED 能进候选：READY 与 PUBLISHED 一个都不许出现在名单里，
+        # 哪怕它们比某些 FAILED 更旧。
+        assert set(victims) <= {gens["failed_new"].generation_id, gens["failed_old"].generation_id}, (
+            f"dry-run 名单里出现了非 FAILED 世代：{victims}"
+        )
+        # keep=1 的含义是"最近 1 个 FAILED 留作证据"，所以最旧的那个 FAILED 才是待清对象。
+        assert victims == [gens["failed_old"].generation_id]
+
+    def test_real_prune_keeps_ready_and_published(self, sandbox):
+        gens = _seed_three_kinds()
+        removed = release.prune_old(keep=1, dry_run=False)
+        # 真删：只该少掉那个最旧的 FAILED
+        assert removed == [gens["failed_old"].generation_id]
+        # READY 与 PUBLISHED 的目录必须原样还在——这是 K4 第一条要求的底线
+        assert gens["ready"].dir.is_dir(), "READY 世代被 prune 删掉了"
+        assert gens["published"].dir.is_dir(), "PUBLISHED 世代被 prune 删掉了"
+        assert gens["failed_new"].dir.is_dir(), "最近 1 个 FAILED 应留作证据，却被删了"
+        assert not gens["failed_old"].dir.exists(), "该清的 FAILED 没被清掉"

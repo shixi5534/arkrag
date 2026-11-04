@@ -302,7 +302,19 @@ class TestSuiteSizeIsMonotonic:
     # 为什么值得拆：原用例把「身份」与「覆盖」两件事混在一句断言里，
     # `resolve_chunks()` 落地后截断先被身份校验 fail-closed 拦下，
     # 逐块比对那一步**从来没被执行过**，却一直跟着用例一起算通过。
-    N = 1289
+    # 1289 → 1291：`tests/test_release.py` 新增 `TestPruneOnlyTouchesFailed`
+    # 两条（`test_dry_run_lists_only_failed`、`test_real_prune_keeps_ready_and_published`）。
+    # 该文件已在 `TEST_FILES` 里，不再产生 parametrize 增量。1289 + 2 = 1291，
+    # 与 `--collect-only` 实测一致。
+    # 这次换来的门是「退役只许清 FAILED」：`prune_old()` 旧实现把
+    # `status != PUBLISHED` 当选人条件，于是 READY（可服务）也进了候选。
+    # 实测 keep=2 时拟清 7 个、其中 5 个非 FAILED，含上一代
+    # `g-20261031T035231Z-4eafae`——真跑一次就同时删掉上一代与多个 READY 候选，
+    # 违反计划 K4 的「保留至少上一代完整有效 Generation」。
+    # 原有用例（`test_prune_is_dry_run_by_default`）只在空目录里断言「演练不删东西」，
+    # 空目录下任何候选条件都为空，**永远发现不了这个缺陷**；新用例造
+    # PUBLISHED / READY / FAILED 三代并跑到真实 prune，才能把这条拦住。
+    N = 1291
 
     def test_declared_count_matches_actual(self) -> None:
         """用 pytest 自己数一遍当前收集到的用例数，与本文件登记值比对。"""
