@@ -76,7 +76,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
-from arkrag import config, pipeline, release  # noqa: E402
+from arkrag import answer, config, pipeline, release  # noqa: E402
 
 ROOT = config.ROOT
 GENERATION = "g-20261103T132152Z-06a741"
@@ -90,6 +90,19 @@ ZERO = "\u0000"
 CATEGORIES = ["alias", "direct_relation", "multihop", "time_conflict",
               "cross_chunk", "adversarial"]
 RELATION_WORDS = ("隶属", "背叛", "同盟", "敌对", "交战", "保护")
+
+# 布尔答案的候选词。判它是因为「否」「没有」这类答案会在断言里以**子串**形式
+# 出现（「火龙并没有被源石感染」里的「没有」），机器判据在这里必然误命中，
+# 所以这类题只能判「无法判定」，不能判「答案有断言支持」。
+BOOLEAN_ANSWERS = frozenset({"是", "否", "没有", "未发生", "发生", "有"})
+
+A_CLASS_VERDICTS = (
+    "carrier_ok",        # required 那句就落在承载答案的行上 → 不改
+    "move_safe",         # 答案行同时含问句里的别名 → 可改 required 指向答案行
+    "needs_extra",       # 答案行不含别名 → 不能移动，只能追加 required 或接受跨行
+    "boolean_answer",    # 布尔答案，机器只匹配到子串 → 无法判定
+    "no_support",        # gold 块里没有任何断言含答案 → 抽取缺口，不是标注问题
+)
 
 
 def read_jsonl(path: Path) -> list[dict]:
@@ -214,6 +227,153 @@ def a_class_ids(v1_items: list[dict], corpus: dict,
                 out.append(qid)
                 break
     return sorted(out)
+
+
+def _line_span(text: str, needle: str) -> tuple[int, int, str] | None:
+    """`needle` 在 `text` 里首次出现位置所在整行（左闭右开）。找不到返回 None。"""
+    i = text.find(needle)
+    if i < 0:
+        return None
+    left, right = answer._line_bounds(text, i, i + len(needle))
+    return left, right, text[left:right]
+
+
+def _assertion_line(text: str, a: dict) -> tuple[int, int, str]:
+    """一条断言 evidence 所在的整行。`answer._line_bounds` 会把 span 扩到整行。"""
+    left, right = answer._line_bounds(
+        text, int(a.get("evidence_start") or 0), int(a.get("evidence_end") or 0))
+    return left, right, text[left:right]
+
+
+def a_class_requirements(v1_items: list[dict], corpus: dict,
+                         states: dict[str, list[dict]],
+                         a_ids: list[str],
+                         split_map: dict[str, str]) -> dict:
+    """P1-c 剩余：A 类那 27 条「gold 引用指错行」的题，逐条判能不能只改 required 指向。
+
+    ## 为什么不能沿用「两个名字都在块里」那个判据
+
+    P1-c 前一轮在 `direct_relation` 上用过「候选块里有等价断言 ⇒ 真漏标」，结果
+    那个判据在该类上**恒为真**（96/96），差点据此推翻 P2 的前提。这一轮换判据：
+
+    **答案是否被某条断言支持**（`needle in evidence_text`），
+    **以及 required 标的那一行是不是承载答案的那一行**（整行区间是否重叠）。
+
+    两个问题都要回答，缺一个就会把「引用口径窄」误判成「gold 指错行」。
+
+    ## 四态（必须分开，因为补救动作完全不同）
+
+    | 判定 | 含义 | 该做什么 |
+    |---|---|---|
+    | `carrier_ok` | required 那句就落在承载答案的那一行上 | **不改**。required 带说话人前缀、断言不带，是引用口径窄，不是 gold 缺陷 |
+    | `move_safe` | 答案在**同块另一行**，且那一行**也含**问句里的别名 | 改 required 指向那一行——安全，那一行同时证明「别名在这」和「答案是什么」 |
+    | `needs_extra` | 答案在同块另一行，但那一行**不含**别名 | **不能移动**。挪过去就丢掉「别名出现」这个唯一证据，而块里没有任何一行同时给出两者。只能追加一条 required，或接受跨行 |
+    | `boolean_answer` | 答案是否/没有这类布尔词 | **无法判定**。机器会把断言里的「没有」当成命中，判据在这里失效 |
+
+    `move_safe` 与 `needs_extra` 混成一种是这一轮最容易犯的错：它们都表现为
+    「答案在别处」，但一个能靠改指向解决、另一个改了反而更糟。
+    """
+    rows = []
+    for it in v1_items:
+        qid = str(it["question_id"])
+        if qid not in a_ids:
+            continue
+        question = str(it.get("question") or "")
+        aliases = [x for x in QUOTED.findall(question) if x]
+        needles = [str(it.get("answer") or "")] + [
+            str(x) for x in it.get("acceptable_answers") or []]
+        needles = [n for n in needles if n]
+        longest = max(needles, key=len, default="")
+        is_bool = any(n in BOOLEAN_ANSWERS for n in needles) and len(longest) <= 3
+
+        supports = []
+        for cid in it.get("gold_chunk_ids") or []:
+            cid = str(cid)
+            chunk_text = str((corpus["chunks"].get(cid) or {}).get("text") or "")
+            for a in corpus["by_chunk"].get(cid) or []:
+                ev = str(a.get("evidence_text") or "")
+                hit = [n for n in needles if n in ev]
+                if not hit:
+                    continue
+                left, right, line = _assertion_line(chunk_text, a)
+                supports.append({
+                    "chunk_id": cid,
+                    "assertion_id": str(a.get("assertion_id") or ""),
+                    "evidence_text": ev,
+                    "matched": hit,
+                    "line": line.strip()[:160],
+                    "span": [left, right],
+                    "line_has_alias": [x for x in aliases if x in line],
+                })
+
+        req_rows = []
+        for req in it.get("required_citations") or []:
+            cid = str(req.get("chunk_id") or "")
+            ev = str(req.get("evidence") or "")
+            chunk_text = str((corpus["chunks"].get(cid) or {}).get("text") or "")
+            span = _line_span(chunk_text, ev) if ev else None
+            same_chunk = [s for s in supports if s["chunk_id"] == cid]
+            on_line = [s for s in same_chunk
+                       if span and s["span"][0] < span[1] and span[0] < s["span"][1]]
+            others = [s for s in same_chunk if s not in on_line]
+            if on_line:
+                verdict = "carrier_ok"
+                reason = "承载答案的断言就在 required 那一行上（前缀差异属引用口径窄）"
+            elif is_bool:
+                verdict = "boolean_answer"
+                reason = "布尔答案，断言里以子串形式出现，机器判据失效"
+            elif others and any(s["line_has_alias"] for s in others):
+                verdict = "move_safe"
+                reason = "答案在同块另一行且那一行也含别名，可安全改指向"
+            elif others:
+                verdict = "needs_extra"
+                reason = "答案在同块另一行但那一行不含别名，改指向会丢证据"
+            else:
+                verdict = "no_support"
+                reason = "gold 块里没有任何断言含答案（抽取缺口，不是标注问题）"
+            req_rows.append({
+                "chunk_id": cid,
+                "evidence": ev[:120],
+                "line": (span[2].strip()[:160] if span else None),
+                "found_in_text": span is not None,
+                "verdict": verdict,
+                "reason": reason,
+                "supporters_on_same_line": [
+                    {"assertion_id": s["assertion_id"], "evidence_text": s["evidence_text"],
+                     "line": s["line"]} for s in on_line],
+                "supporters_other_line": [
+                    {"assertion_id": s["assertion_id"], "evidence_text": s["evidence_text"],
+                     "line": s["line"], "line_has_alias": s["line_has_alias"]}
+                    for s in others],
+            })
+
+        # 题级取最坏的一行：只要有一行的判定要求「改 gold」，这条题就是待改题。
+        order = ("no_support", "move_safe", "needs_extra", "boolean_answer", "carrier_ok")
+        worst = next((v for v in order
+                      if any(r["verdict"] == v for r in req_rows)), "carrier_ok")
+        rows.append({
+            "question_id": qid,
+            "category": it.get("category"),
+            "split": split_map.get(qid, "<none>"),
+            "question": question,
+            "aliases": aliases,
+            "answer": it.get("answer"),
+            "acceptable_answers": list(it.get("acceptable_answers") or []),
+            "is_boolean_answer": is_bool,
+            "verdict": worst,
+            "requirements": req_rows,
+            "assertions_in_gold_chunks": len(supports),
+        })
+    return {
+        "rows": rows,
+        "tally": dict(Counter(r["verdict"] for r in rows)),
+        "by_split": {
+            split: dict(Counter(r["verdict"] for r in rows if r["split"] == split))
+            for split in ("dev", "holdout")
+        },
+        "dev_n": sum(1 for r in rows if r["split"] == "dev"),
+        "holdout_n": sum(1 for r in rows if r["split"] == "holdout"),
+    }
 
 
 def judge_one(item: dict, corpus: dict, gold_v2_by_id: dict[str, dict]) -> dict:
@@ -531,7 +691,7 @@ def direct_relation_equivalence(corpus: dict, gold_items: list[dict]) -> dict:
     return {"questions": questions, "v1_wide": v1, "v2_strict": v2}
 
 
-def render_doc(rows: list[dict], meta: dict, equiv: dict,
+def render_doc(rows: list[dict], meta: dict, equiv: dict, a_req: dict,
                a_ids: list[str], split_map: dict[str, str]) -> str:
     tot = Counter(r["verdict"] for r in rows)
     cnt = Counter((r["category"], r["verdict"]) for r in rows)
@@ -780,6 +940,111 @@ def render_doc(rows: list[dict], meta: dict, equiv: dict,
     L.append("  代价：报告里必须同时给两套数，否则看的人会以为指标突然涨了。\n")
     L.append("**本表不预设任何一边，且这项的优先级是 P0 收尾**（量级 1.3pt，不插队到门报告之前）。")
     L.append("在定案之前，`direct_relation` 的 R@5 / R@20 **可以**与其他类比，但要注明是按哪个口径算的。\n")
+
+    L.append("## 十、A 类 27 条：能不能只改 required 指向（dev 21 / holdout 6）\n")
+    L.append("P1-b 那 27 条「gold 引用指错行」的题，要回答的问题不是「有没有别的块也提到这"
+             "件事」（那个判据在 `direct_relation` 上恒为真，已作废），而是两个：\n")
+    L.append("1. **答案是否被某条断言支持**（`needle in evidence_text`）；")
+    L.append("2. **required 标的那一行是不是承载答案的那一行**（整行区间是否重叠）。\n")
+    L.append("两个问题都要回答。只答第一个会把「引用口径窄」误判成「gold 指错行」；")
+    L.append("只答第二个会把「证据本质跨行」误判成「可以挪一行」。\n")
+    L.append("### 10.1 四态与它们各自的补救动作\n")
+    L.append("| 判定 | 含义 | 该做什么 |")
+    L.append("|---|---|---|")
+    L.append("| `carrier_ok` | required 那句就落在承载答案的那一行上 | **不改**。required 带说话人前缀、"
+             "断言不带，是引用口径窄，不是 gold 缺陷 |")
+    L.append("| `move_safe` | 答案在同块另一行，且那一行**也含**问句里的别名 | 改 required "
+             "指向那一行——安全，那一行同时证明「别名在这」与「答案是什么」 |")
+    L.append("| `needs_extra` | 答案在同块另一行，但那一行**不含**别名 | **不能移动**。挪过去就丢掉"
+             "「别名出现」这个唯一证据，而块里没有任何一行同时给出两者。只能追加一条 required，或接受跨行 |")
+    L.append("| `boolean_answer` | 答案是否/没有这类布尔词 | **无法判定**。机器会把断言里的「没有」"
+             "当成命中（例：「火龙并没有被源石感染」），判据在这里失效 |")
+    L.append("")
+    L.append(f"### 10.2 判定结果（{a_req['dev_n']} dev / {a_req['holdout_n']} holdout）\n")
+    L.append("| 划分 | " + " | ".join(f"`{v}`" for v in A_CLASS_VERDICTS) + " | 合计 |")
+    L.append("|---|---|---|---|---|---|---|")
+    for split, label in (("dev", "**dev（可改侧）**"), ("holdout", "holdout（只记录不改）")):
+        tally = a_req["by_split"].get(split) or {}
+        cells = " | ".join(str(tally.get(v, 0)) for v in A_CLASS_VERDICTS)
+        L.append(f"| {label} | {cells} | {sum(tally.values())} |")
+    L.append("")
+    dev_tally = a_req["by_split"].get("dev") or {}
+    if not dev_tally.get("move_safe"):
+        L.append("**关键结论：dev 侧 `move_safe` = 0。** 也就是说，dev 那 "
+                 f"{a_req['dev_n']} 条里**没有一条能靠「只把 required 指向改到答案那一行」"
+                 "救回来**——凡是答案在别处的，那一行都不含别名。")
+        L.append("这一条如果没分开判，很容易被写成「dev 侧 15 条可改」，"
+                 "而实际上把它们改过去会**让引用更难被断言支持**（丢掉了别名这条证据）。\n")
+    L.append("### 10.3 逐题表\n")
+    L.append("| 题号 | 划分 | 类别 | 答案 | 判定 | required 指向的那一行 | 承载答案的断言 |")
+    L.append("|---|---|---|---|---|---|---|")
+    for r in a_req["rows"]:
+        req = r["requirements"][0] if r["requirements"] else {}
+        sup = (req.get("supporters_on_same_line") or req.get("supporters_other_line") or [{}])[0]
+        req_line = (req.get("line") or "（未在块正文里找到）").replace("|", "\\|")[:44]
+        sup_text = (sup.get("evidence_text") or "—").replace("|", "\\|")[:34]
+        L.append(f"| `{r['question_id']}` | {r['split']} | {r['category']} | "
+                 f"{r['answer']} | {r['verdict']} | {req_line} | {sup_text} |")
+    L.append("")
+    L.append("### 10.4 哪些已判「不是 gold 问题」的，理由是哪一条\n")
+    carrier = [r for r in a_req["rows"] if r["verdict"] == "carrier_ok"]
+    if carrier:
+        L.append(f"`carrier_ok` {len(carrier)} 条："
+                 + "、".join(f"`{r['question_id']}`" for r in carrier) + "。")
+        L.append("这些题的 required 确实指向承载答案的那一行，只是 gold 把说话人前缀"
+                 "（「杜林青年：」这类）也写进了 reference，而断言从冒号后面开始。"
+                 "**这是引用口径窄，改它是改指标不是改标注。**\n")
+    extra = [r for r in a_req["rows"] if r["verdict"] == "needs_extra"]
+    if extra:
+        L.append(f"`needs_extra` {len(extra)} 条全部是别名题，逐条核过**别名确实都在 required 那句里**：")
+        L.append("、".join(f"`{r['question_id']}`" for r in extra) + "。")
+        L.append("它们的共同形态是：问「X 被用来指代谁」，X 出现在一句里，答案出现在另一句里，"
+                 "两句之间没有一行同时含两者。**这在现有 gold schema 下只能追加 required，"
+                 "不能移动。**\n")
+
+    L.append("### 10.5 这四条判据各自怎么变红（反向实测）\n")
+    L.append("判定逻辑会直接导致改 gold，所以每条判据都必须有能变红的用例。"
+             "用例在 `tests/test_p1c_leak_audit.py`，反向实测每次改一处实现、跑一条用例、再还原：\n")
+    L.append("| 改坏的地方 | 变红的用例 | 实测 |")
+    L.append("|---|---|---|")
+    L.append("| 删掉 `move_safe` 分支（让它落到 `needs_extra`） | "
+             "`test_alias_on_the_answer_line_is_what_makes_it_safe_to_move` | "
+             "改前 0 / 改后 1（报错里 `+ needs_extra`）/ 还原 0 |")
+    L.append("| 把 `move_safe` 条件放宽成「只要答案在别的行就算可挪」 | "
+             "`test_answer_on_a_line_without_the_alias_must_not_be_moved` | "
+             "改前 0 / 改后 1（报错里 `+ move_safe`）/ 还原 0 |")
+    L.append("| 把「承载答案的断言与 required 同一行」的区间判据改成恒假 | "
+             "`test_the_answer_sitting_on_the_required_line_needs_no_change` | "
+             "改前 0 / 改后 1（报错里 `+ no_support`）/ 还原 0 |")
+    L.append("| 清空 `BOOLEAN_ANSWERS` | `test_boolean_answers_are_not_judged_by_substring` | "
+             "改前 0 / 改后 1（报错里 `+ no_support`）/ 还原 0 |")
+    L.append("")
+    L.append("**其中第二条第一次没做成实测**：第一版的用例选择器写成了 "
+             "`needs_extra or zero_move_safe`，那不是有效的 `-k` 表达式，"
+             "只选中一条恰好绿的用例，于是记成「没变红」。重做时把它指向真正该红的"
+             "那一条，才拿到 0 / 1 / 0。**「没变红」先怀疑选择器与用例，再怀疑门。**\n")
+
+    L.append("## 十一、这张表自己的变更日志\n")
+    L.append("本表被改过三轮，每轮结论都变过，所以记账。**三轮都没有改动任何 gold 文件。**\n")
+    L.append("| 版本 | 改了什么 | 结论怎么变 | 触发原因 |")
+    L.append("|---|---|---|---|")
+    L.append("| v1 | 首版：59 条逐条判 | 2 真漏标 / 56 不是漏标 / 1 无法判定 | — |")
+    L.append("| v2 | `direct_relation` 那 2 条改判；补 V1 宽 / V2 严双口径对照 | "
+             "**0 / 58 / 1** | 判据在 `direct_relation` 上恒为真（96/96），"
+             "与 gold 挖掘自己的构造条件冲突；V1 宽口径还差点导出 +30pt 的假增益 |")
+    L.append("| v3 | 新增第十节：A 类 27 条「能不能只改 required 指向」四态判定 | "
+             "dev 21 条里 **`move_safe` 0 条** | P1-b 留的待办；四态是必需的，"
+             "因为 `move_safe` 与 `needs_extra` 的补救动作相反 |")
+    L.append("")
+    L.append("**每一版的错都在「判据选错」，不在「算错」**：")
+    L.append("- v1 的错：用「块里有等价断言」判漏标，该判据在 `direct_relation` 上恒真；")
+    L.append("- v2 的错（自查出来的）：先用 V1 宽口径算增益，量级比 V2 严口径大 20 倍；")
+    L.append("- v3 的错（自查出来的）：第一版把 `move_safe` 与 `needs_extra` 合成一种")
+    L.append("  `move_required`，会报出「dev 侧 15 条可改」，而实际一条都不能只改指向。\n")
+    L.append("影响题数（按 Lead 要求拆两个数）：**dev 影响 0 题 / holdout 影响 0 题**——")
+    L.append("三轮下来结论是「不改任何 gold」。holdout 侧那 6 条（alias 5 + na 1）")
+    L.append("按裁决只记录不改，若将来要动必须走保留集使用预算并记「动完哪些历史结论失效」。\n")
+    L.append("技术复核（A）：待。批准（Lead）：待。**审核人空缺即表示尚未提交任何 gold 改动。**\n")
     return "\n".join(L) + "\n"
 
 
@@ -795,13 +1060,14 @@ def build() -> tuple[str, dict]:
     a_ids = a_class_ids(gold_v1["items"], corpus, states)
     rows = [judge_one(c, corpus, gold_v2_by_id) for c in candidates(triage_rows, split_map)]
     equiv = direct_relation_equivalence(corpus, gold_v2["items"])
+    a_req = a_class_requirements(gold_v1["items"], corpus, states, a_ids, split_map)
 
     meta = {
         "chunks_source": corpus["chunks_source"],
         "chunks_loaded": len(corpus["chunks"]),
         "chunk_manifest_hash": corpus["chunk_manifest_hash"],
     }
-    doc = render_doc(rows, meta, equiv, a_ids, split_map)
+    doc = render_doc(rows, meta, equiv, a_req, a_ids, split_map)
     payload = {
         "n": len(rows),
         "chunks_source": corpus["chunks_source"],
@@ -813,6 +1079,7 @@ def build() -> tuple[str, dict]:
         "direct_relation_equivalence": equiv,
         "a_class_loose": a_ids,
         "a_class_split": {q: split_map.get(q, "<none>") for q in a_ids},
+        "a_class_requirements": a_req,
         "rows": rows,
     }
     return doc, payload
@@ -837,10 +1104,21 @@ def main(argv: list[str] | None = None) -> int:
     print("wrote", config.rel_to_root(JSON_OUT))
     print("块正文来源:", payload["chunks_source"], "块数:", payload["chunks_loaded"])
     print("判定:", payload["verdicts"], "| 划分:", payload["split"])
-    print("direct_relation 等价:", payload["direct_relation_equivalence"])
+    equiv = payload["direct_relation_equivalence"]
+    for caliber in ("v1_wide", "v2_strict"):
+        block = equiv[caliber]
+        print(f"direct_relation 等价({caliber}): "
+              f"{block['with_equivalent_non_gold_chunk']}/{equiv['questions']} 题"
+              f"（dev {block['dev']} / holdout {block['holdout']}），"
+              f"总等价块 {block['total_blocks_triple']}，"
+              f"扣 gold 后富余 {block['extra_blocks_triple']}，"
+              f"gold 落在等价集合内 {block['gold_chunk_among_sites']}/{equiv['questions']}")
     print("A 类 27 条:", len(payload["a_class_loose"]),
           "| dev", sum(1 for v in payload["a_class_split"].values() if v == "dev"),
           "holdout", sum(1 for v in payload["a_class_split"].values() if v == "holdout"))
+    req = payload["a_class_requirements"]
+    print("A 类 required 判定: 全部", req["tally"], "| dev", req["by_split"].get("dev"),
+          "| holdout", req["by_split"].get("holdout"))
     return 0
 
 

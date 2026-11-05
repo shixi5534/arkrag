@@ -1245,6 +1245,986 @@
     "q-na-000006": "holdout",
     "q-na-000007": "dev"
   },
+  "a_class_requirements": {
+    "rows": [
+      {
+        "question_id": "q-al-000001",
+        "category": "alias",
+        "split": "holdout",
+        "question": "在剧情正文里，「机密仓库」被用来指代哪个角色或事物？请给出它的规范名。",
+        "aliases": [
+          "机密仓库"
+        ],
+        "answer": "仓库",
+        "acceptable_answers": [
+          "仓库"
+        ],
+        "is_boolean_answer": false,
+        "verdict": "carrier_ok",
+        "requirements": [
+          {
+            "chunk_id": "activities/act46side/level_act46side_06_end#003",
+            "evidence": "角峰：我也是奉命办事，前方是机密仓库，没有喀兰贸易的授权，任何人都不能入内",
+            "line": "角峰：我也是奉命办事，前方是机密仓库，没有喀兰贸易的授权，任何人都不能入内。",
+            "found_in_text": true,
+            "verdict": "carrier_ok",
+            "reason": "承载答案的断言就在 required 那一行上（前缀差异属引用口径窄）",
+            "supporters_on_same_line": [
+              {
+                "assertion_id": "a-3957511355a66372",
+                "evidence_text": "前方是机密仓库，没有喀兰贸易的授权",
+                "line": "角峰：我也是奉命办事，前方是机密仓库，没有喀兰贸易的授权，任何人都不能入内。"
+              }
+            ],
+            "supporters_other_line": []
+          }
+        ],
+        "assertions_in_gold_chunks": 1
+      },
+      {
+        "question_id": "q-al-000002",
+        "category": "alias",
+        "split": "dev",
+        "question": "在剧情正文里，「热情的村民」被用来指代哪个角色或事物？请给出它的规范名。",
+        "aliases": [
+          "热情的村民"
+        ],
+        "answer": "繁藏",
+        "acceptable_answers": [
+          "繁藏"
+        ],
+        "is_boolean_answer": false,
+        "verdict": "needs_extra",
+        "requirements": [
+          {
+            "chunk_id": "obt/memory/story_gyuki_1_1#000",
+            "evidence": "热情的村民：哟，这不是小缠丸嘛",
+            "line": "热情的村民：哟，这不是小缠丸嘛！怎么了，这是有空回来看看？",
+            "found_in_text": true,
+            "verdict": "needs_extra",
+            "reason": "答案在同块另一行但那一行不含别名，改指向会丢证据",
+            "supporters_on_same_line": [],
+            "supporters_other_line": [
+              {
+                "assertion_id": "a-52e319dae19e6917",
+                "evidence_text": "缠丸：繁藏阿伯，没时间跟你聊了",
+                "line": "缠丸：繁藏阿伯，没时间跟你聊了，我有急事回家去！",
+                "line_has_alias": []
+              }
+            ]
+          }
+        ],
+        "assertions_in_gold_chunks": 1
+      },
+      {
+        "question_id": "q-al-000003",
+        "category": "alias",
+        "split": "dev",
+        "question": "「卡奇」是《下坠》中出现的称呼，它的规范名（规范实体名）是什么？",
+        "aliases": [
+          "卡奇"
+        ],
+        "answer": "卡奇·叙光",
+        "acceptable_answers": [
+          "卡奇·叙光"
+        ],
+        "is_boolean_answer": false,
+        "verdict": "carrier_ok",
+        "requirements": [
+          {
+            "chunk_id": "activities/act20side/level_act20side_02_beg#001",
+            "evidence": "杜林青年：自我介绍一下，我叫卡奇·叙光，是这座城市的设计代表",
+            "line": "杜林青年：自我介绍一下，我叫卡奇·叙光，是这座城市的设计代表。",
+            "found_in_text": true,
+            "verdict": "carrier_ok",
+            "reason": "承载答案的断言就在 required 那一行上（前缀差异属引用口径窄）",
+            "supporters_on_same_line": [
+              {
+                "assertion_id": "a-041b243a23a5c1f7",
+                "evidence_text": "自我介绍一下，我叫卡奇·叙光，是这座城市的设计代表。",
+                "line": "杜林青年：自我介绍一下，我叫卡奇·叙光，是这座城市的设计代表。"
+              }
+            ],
+            "supporters_other_line": []
+          }
+        ],
+        "assertions_in_gold_chunks": 1
+      },
+      {
+        "question_id": "q-al-000004",
+        "category": "alias",
+        "split": "dev",
+        "question": "「冷饮店店主」是《爱之歌》中出现的称呼，它的规范名（规范实体名）是什么？",
+        "aliases": [
+          "冷饮店店主"
+        ],
+        "answer": "汤姆",
+        "acceptable_answers": [
+          "汤姆"
+        ],
+        "is_boolean_answer": false,
+        "verdict": "needs_extra",
+        "requirements": [
+          {
+            "chunk_id": "activities/act27side/level_act27side_08_end#005",
+            "evidence": "冷饮店店主：......",
+            "line": "冷饮店店主：......",
+            "found_in_text": true,
+            "verdict": "needs_extra",
+            "reason": "答案在同块另一行但那一行不含别名，改指向会丢证据",
+            "supporters_on_same_line": [],
+            "supporters_other_line": [
+              {
+                "assertion_id": "a-49c5b6be3be90065",
+                "evidence_text": "汤姆爷爷......",
+                "line": "雪雉：汤姆爷爷......",
+                "line_has_alias": []
+              }
+            ]
+          }
+        ],
+        "assertions_in_gold_chunks": 1
+      },
+      {
+        "question_id": "q-al-000006",
+        "category": "alias",
+        "split": "dev",
+        "question": "「伦蒂尼姆市民自救军」是《城市的呼吸》中出现的称呼，它的规范名（规范实体名）是什么？",
+        "aliases": [
+          "伦蒂尼姆市民自救军"
+        ],
+        "answer": "自救军",
+        "acceptable_answers": [
+          "自救军"
+        ],
+        "is_boolean_answer": false,
+        "verdict": "carrier_ok",
+        "requirements": [
+          {
+            "chunk_id": "obt/main/level_main_10-04_beg#002",
+            "evidence": "费斯特：我们隶属于......伦蒂尼姆市民自救军",
+            "line": "费斯特：我们隶属于......伦蒂尼姆市民自救军。",
+            "found_in_text": true,
+            "verdict": "carrier_ok",
+            "reason": "承载答案的断言就在 required 那一行上（前缀差异属引用口径窄）",
+            "supporters_on_same_line": [
+              {
+                "assertion_id": "a-3973f2ee17d688e0",
+                "evidence_text": "我们隶属于......伦蒂尼姆市民自救军",
+                "line": "费斯特：我们隶属于......伦蒂尼姆市民自救军。"
+              }
+            ],
+            "supporters_other_line": []
+          }
+        ],
+        "assertions_in_gold_chunks": 1
+      },
+      {
+        "question_id": "q-al-000009",
+        "category": "alias",
+        "split": "dev",
+        "question": "「卡提亚」是《爱之歌》中出现的称呼，它的规范名（规范实体名）是什么？",
+        "aliases": [
+          "卡提亚"
+        ],
+        "answer": "卡提亚·瑙曼",
+        "acceptable_answers": [
+          "卡提亚·瑙曼"
+        ],
+        "is_boolean_answer": false,
+        "verdict": "carrier_ok",
+        "requirements": [
+          {
+            "chunk_id": "activities/act27side/level_act27side_08_beg#005",
+            "evidence": "卡恩：还有，卡提亚·瑙曼关于源石与天灾的研究资料，连阿黛尔都没有见过，为什么会出现在你与莱塔尼亚军方的书信里",
+            "line": "卡恩：还有，卡提亚·瑙曼关于源石与天灾的研究资料，连阿黛尔都没有见过，为什么会出现在你与莱塔尼亚军方的书信里！",
+            "found_in_text": true,
+            "verdict": "carrier_ok",
+            "reason": "承载答案的断言就在 required 那一行上（前缀差异属引用口径窄）",
+            "supporters_on_same_line": [
+              {
+                "assertion_id": "a-fd36e62fc4932b10",
+                "evidence_text": "卡提亚·瑙曼关于源石与天灾的研究资料",
+                "line": "卡恩：还有，卡提亚·瑙曼关于源石与天灾的研究资料，连阿黛尔都没有见过，为什么会出现在你与莱塔尼亚军方的书信里！"
+              }
+            ],
+            "supporters_other_line": []
+          }
+        ],
+        "assertions_in_gold_chunks": 1
+      },
+      {
+        "question_id": "q-al-000010",
+        "category": "alias",
+        "split": "dev",
+        "question": "在剧情正文里，「办事处干员B」被用来指代哪个角色或事物？请给出它的规范名。",
+        "aliases": [
+          "办事处干员B"
+        ],
+        "answer": "佩德罗",
+        "acceptable_answers": [
+          "佩德罗"
+        ],
+        "is_boolean_answer": false,
+        "verdict": "needs_extra",
+        "requirements": [
+          {
+            "chunk_id": "obt/memory/story_greyy2_1_1#003",
+            "evidence": "办事处干员B：莉塔，还是我来说吧",
+            "line": "办事处干员B：莉塔，还是我来说吧。",
+            "found_in_text": true,
+            "verdict": "needs_extra",
+            "reason": "答案在同块另一行但那一行不含别名，改指向会丢证据",
+            "supporters_on_same_line": [],
+            "supporters_other_line": [
+              {
+                "assertion_id": "a-93cad4b9d1017af8",
+                "evidence_text": "谢谢佩德罗叔叔。",
+                "line": "格雷伊：......谢谢佩德罗叔叔。",
+                "line_has_alias": []
+              }
+            ]
+          }
+        ],
+        "assertions_in_gold_chunks": 1
+      },
+      {
+        "question_id": "q-al-000012",
+        "category": "alias",
+        "split": "dev",
+        "question": "在剧情正文里，「艾尔斯」被用来指代哪个角色或事物？请给出它的规范名。",
+        "aliases": [
+          "艾尔斯"
+        ],
+        "answer": "断崖",
+        "acceptable_answers": [
+          "断崖"
+        ],
+        "is_boolean_answer": false,
+        "verdict": "needs_extra",
+        "requirements": [
+          {
+            "chunk_id": "activities/act11d0/level_act11d0_04_beg#000",
+            "evidence": "卡达：既然灰喉姐和艾尔斯把我从山上救下来了，我一定会好好帮忙的",
+            "line": "卡达：既然灰喉姐和艾尔斯把我从山上救下来了，我一定会好好帮忙的！",
+            "found_in_text": true,
+            "verdict": "needs_extra",
+            "reason": "答案在同块另一行但那一行不含别名，改指向会丢证据",
+            "supporters_on_same_line": [],
+            "supporters_other_line": [
+              {
+                "assertion_id": "a-cb73c74bbb8f45fa",
+                "evidence_text": "卡达干员，断崖干员，现在情况有变。",
+                "line": "灰喉：卡达干员，断崖干员，现在情况有变。",
+                "line_has_alias": []
+              }
+            ]
+          }
+        ],
+        "assertions_in_gold_chunks": 1
+      },
+      {
+        "question_id": "q-al-000014",
+        "category": "alias",
+        "split": "dev",
+        "question": "在剧情正文里，「玛丽安娜·布莱克」被用来指代哪个角色或事物？请给出它的规范名。",
+        "aliases": [
+          "玛丽安娜·布莱克"
+        ],
+        "answer": "雅拉",
+        "acceptable_answers": [
+          "雅拉"
+        ],
+        "is_boolean_answer": false,
+        "verdict": "needs_extra",
+        "requirements": [
+          {
+            "chunk_id": "activities/act25side/level_act25side_03_end#000",
+            "evidence": "杰克逊：能让曾经红极一时的玛丽安娜·布莱克女士充当导游，是我特里蒙之行的又一大收获",
+            "line": "杰克逊：能让曾经红极一时的玛丽安娜·布莱克女士充当导游，是我特里蒙之行的又一大收获。",
+            "found_in_text": true,
+            "verdict": "needs_extra",
+            "reason": "答案在同块另一行但那一行不含别名，改指向会丢证据",
+            "supporters_on_same_line": [],
+            "supporters_other_line": [
+              {
+                "assertion_id": "a-3aa5abeb1b991a27",
+                "evidence_text": "多谢你，雅拉主任。",
+                "line": "杰克逊：多谢你，雅拉主任。今天太过兴师动众，希望没有给你带来不便。",
+                "line_has_alias": []
+              }
+            ]
+          }
+        ],
+        "assertions_in_gold_chunks": 1
+      },
+      {
+        "question_id": "q-al-000018",
+        "category": "alias",
+        "split": "dev",
+        "question": "「不反」是《双飞燕》中出现的称呼，它的规范名（规范实体名）是什么？",
+        "aliases": [
+          "不反"
+        ],
+        "answer": "源石",
+        "acceptable_answers": [
+          "源石"
+        ],
+        "is_boolean_answer": false,
+        "verdict": "needs_extra",
+        "requirements": [
+          {
+            "chunk_id": "activities/act49side/level_act49side_05_beg#000",
+            "evidence": "储君涕泣，名之“不反”",
+            "line": "逾年，真龙以身殉，术乃成。储君涕泣，名之“不反”。",
+            "found_in_text": true,
+            "verdict": "needs_extra",
+            "reason": "答案在同块另一行但那一行不含别名，改指向会丢证据",
+            "supporters_on_same_line": [],
+            "supporters_other_line": [
+              {
+                "assertion_id": "a-3df8679377b7adcd",
+                "evidence_text": "便能动用这枚源石的极大威能",
+                "line": "真龙：先祖以生命为引，将人殉的代价系于当朝真龙一身。后世真龙以捐躯做交换，便能动用这枚源石的极大威能。",
+                "line_has_alias": []
+              }
+            ]
+          }
+        ],
+        "assertions_in_gold_chunks": 1
+      },
+      {
+        "question_id": "q-al-000022",
+        "category": "alias",
+        "split": "dev",
+        "question": "「强壮的男人」是《惊弓一夜》中出现的称呼，它的规范名（规范实体名）是什么？",
+        "aliases": [
+          "强壮的男人"
+        ],
+        "answer": "老于",
+        "acceptable_answers": [
+          "老于"
+        ],
+        "is_boolean_answer": false,
+        "verdict": "needs_extra",
+        "requirements": [
+          {
+            "chunk_id": "obt/memory/story_haak_1_1#000",
+            "evidence": "强壮的男人：你个蠢蛋，我们去医院岂不是自投罗网，那些大夫都精明得很，一看到伤势就知道不对劲了......",
+            "line": "强壮的男人：你个蠢蛋，我们去医院岂不是自投罗网，那些大夫都精明得很，一看到伤势就知道不对劲了......",
+            "found_in_text": true,
+            "verdict": "needs_extra",
+            "reason": "答案在同块另一行但那一行不含别名，改指向会丢证据",
+            "supporters_on_same_line": [],
+            "supporters_other_line": [
+              {
+                "assertion_id": "a-64c20f6c8ec04a28",
+                "evidence_text": "魁梧的男人：老于",
+                "line": "魁梧的男人：老于，这......这可怎么办？",
+                "line_has_alias": []
+              }
+            ]
+          }
+        ],
+        "assertions_in_gold_chunks": 1
+      },
+      {
+        "question_id": "q-al-000023",
+        "category": "alias",
+        "split": "holdout",
+        "question": "在剧情正文里，「惟任先生」被用来指代哪个角色或事物？请给出它的规范名。",
+        "aliases": [
+          "惟任先生"
+        ],
+        "answer": "惟任刑警",
+        "acceptable_answers": [
+          "惟任刑警"
+        ],
+        "is_boolean_answer": false,
+        "verdict": "needs_extra",
+        "requirements": [
+          {
+            "chunk_id": "activities/act44side/level_act44side_01_beg#003",
+            "evidence": "值班警察：惟任先生还没——",
+            "line": "值班警察：惟任先生还没——",
+            "found_in_text": true,
+            "verdict": "needs_extra",
+            "reason": "答案在同块另一行但那一行不含别名，改指向会丢证据",
+            "supporters_on_same_line": [],
+            "supporters_other_line": [
+              {
+                "assertion_id": "a-fe9430df27fbb0fe",
+                "evidence_text": "不如你也来叫一声如何，惟任刑警？",
+                "line": "三船：不如你也来叫一声如何，惟任刑警？",
+                "line_has_alias": []
+              }
+            ]
+          }
+        ],
+        "assertions_in_gold_chunks": 1
+      },
+      {
+        "question_id": "q-al-000027",
+        "category": "alias",
+        "split": "holdout",
+        "question": "「卢宁中尉」是《初次握手》中出现的称呼，它的规范名（规范实体名）是什么？",
+        "aliases": [
+          "卢宁中尉"
+        ],
+        "answer": "普拉多",
+        "acceptable_answers": [
+          "普拉多"
+        ],
+        "is_boolean_answer": false,
+        "verdict": "carrier_ok",
+        "requirements": [
+          {
+            "chunk_id": "obt/main/level_main_17-11_end#007",
+            "evidence": "阿洛伊泽：用我父亲的名义，去卢宁府上邀请普拉多·卢宁中尉前来一叙",
+            "line": "阿洛伊泽：用我父亲的名义，去卢宁府上邀请普拉多·卢宁中尉前来一叙。他是我在近卫军的同僚，我有事要和他商议。",
+            "found_in_text": true,
+            "verdict": "carrier_ok",
+            "reason": "承载答案的断言就在 required 那一行上（前缀差异属引用口径窄）",
+            "supporters_on_same_line": [
+              {
+                "assertion_id": "a-9250255af603bc1e",
+                "evidence_text": "去卢宁府上邀请普拉多·卢宁中尉前来一叙",
+                "line": "阿洛伊泽：用我父亲的名义，去卢宁府上邀请普拉多·卢宁中尉前来一叙。他是我在近卫军的同僚，我有事要和他商议。"
+              }
+            ],
+            "supporters_other_line": []
+          }
+        ],
+        "assertions_in_gold_chunks": 1
+      },
+      {
+        "question_id": "q-al-000028",
+        "category": "alias",
+        "split": "dev",
+        "question": "「外勤干员A」是《两难》中出现的称呼，它的规范名（规范实体名）是什么？",
+        "aliases": [
+          "外勤干员A"
+        ],
+        "answer": "吉拉",
+        "acceptable_answers": [
+          "吉拉"
+        ],
+        "is_boolean_answer": false,
+        "verdict": "needs_extra",
+        "requirements": [
+          {
+            "chunk_id": "obt/memory/story_shotst_2_1#002",
+            "evidence": "外勤干员A：流星姐，怎么了，是不是做噩梦了",
+            "line": "外勤干员A：流星姐，怎么了，是不是做噩梦了？没事的，没事的，我们都在这里。",
+            "found_in_text": true,
+            "verdict": "needs_extra",
+            "reason": "答案在同块另一行但那一行不含别名，改指向会丢证据",
+            "supporters_on_same_line": [],
+            "supporters_other_line": [
+              {
+                "assertion_id": "a-a78b42106b628313",
+                "evidence_text": "吉拉，你去附近寻找幸存村民，组织他们一起灭火",
+                "line": "流星：吉拉，你去附近寻找幸存村民，组织他们一起灭火，阿烽，准备好药物，这么大的火情一定有人受伤，快！",
+                "line_has_alias": []
+              }
+            ]
+          }
+        ],
+        "assertions_in_gold_chunks": 1
+      },
+      {
+        "question_id": "q-al-000032",
+        "category": "alias",
+        "split": "holdout",
+        "question": "「盐风主教」是《礼仪广场》中出现的称呼，它的规范名（规范实体名）是什么？",
+        "aliases": [
+          "盐风主教"
+        ],
+        "answer": "昆图斯",
+        "acceptable_answers": [
+          "昆图斯"
+        ],
+        "is_boolean_answer": false,
+        "verdict": "needs_extra",
+        "requirements": [
+          {
+            "chunk_id": "activities/act17side/level_act17side_10_end#005",
+            "evidence": "盐风主教：......什么",
+            "line": "盐风主教：......什么？你又想和她交谈？这个杂种能告诉你什么......",
+            "found_in_text": true,
+            "verdict": "needs_extra",
+            "reason": "答案在同块另一行但那一行不含别名，改指向会丢证据",
+            "supporters_on_same_line": [],
+            "supporters_other_line": [
+              {
+                "assertion_id": "a-e1dbb4d8411cb634",
+                "evidence_text": "你不理解，昆图斯。",
+                "line": "阿玛雅：你不理解，昆图斯。",
+                "line_has_alias": []
+              }
+            ]
+          }
+        ],
+        "assertions_in_gold_chunks": 1
+      },
+      {
+        "question_id": "q-al-000033",
+        "category": "alias",
+        "split": "dev",
+        "question": "「迪亚兹·冈萨雷斯」是《反艺术运动》中出现的称呼，它的规范名（规范实体名）是什么？",
+        "aliases": [
+          "迪亚兹·冈萨雷斯"
+        ],
+        "answer": "迪亚兹",
+        "acceptable_answers": [
+          "迪亚兹"
+        ],
+        "is_boolean_answer": false,
+        "verdict": "needs_extra",
+        "requirements": [
+          {
+            "chunk_id": "activities/act32side/level_act32side_06_beg#000",
+            "evidence": "带队的军官：迪亚兹·冈萨雷斯，我记得你，从辛嘉斯的军队退伍后，你来到多索雷斯成为市消防局的一员",
+            "line": "带队的军官：迪亚兹·冈萨雷斯，我记得你，从辛嘉斯的军队退伍后，你来到多索雷斯成为市消防局的一员。",
+            "found_in_text": true,
+            "verdict": "needs_extra",
+            "reason": "答案在同块另一行但那一行不含别名，改指向会丢证据",
+            "supporters_on_same_line": [],
+            "supporters_other_line": [
+              {
+                "assertion_id": "a-76b96d54ad84d067",
+                "evidence_text": "迪亚兹：特克诺，你带着社区里的老人和孩子离开这里",
+                "line": "迪亚兹：特克诺，你带着社区里的老人和孩子离开这里，去罗德岛的办事处找埃内斯托。",
+                "line_has_alias": []
+              }
+            ]
+          }
+        ],
+        "assertions_in_gold_chunks": 1
+      },
+      {
+        "question_id": "q-al-000034",
+        "category": "alias",
+        "split": "dev",
+        "question": "「昂斯特议员」是《我如浮萍》中出现的称呼，它的规范名（规范实体名）是什么？",
+        "aliases": [
+          "昂斯特议员"
+        ],
+        "answer": "昂斯特",
+        "acceptable_answers": [
+          "昂斯特"
+        ],
+        "is_boolean_answer": false,
+        "verdict": "carrier_ok",
+        "requirements": [
+          {
+            "chunk_id": "activities/act10mini/level_act10mini_st02#003",
+            "evidence": "鬼祟的黑衣人：这是那个昂斯特议员的宅子",
+            "line": "鬼祟的黑衣人：这是那个昂斯特议员的宅子！",
+            "found_in_text": true,
+            "verdict": "carrier_ok",
+            "reason": "承载答案的断言就在 required 那一行上（前缀差异属引用口径窄）",
+            "supporters_on_same_line": [
+              {
+                "assertion_id": "a-bbbd0841d5b00192",
+                "evidence_text": "这是那个昂斯特议员的宅子！",
+                "line": "鬼祟的黑衣人：这是那个昂斯特议员的宅子！"
+              }
+            ],
+            "supporters_other_line": []
+          }
+        ],
+        "assertions_in_gold_chunks": 1
+      },
+      {
+        "question_id": "q-al-000036",
+        "category": "alias",
+        "split": "dev",
+        "question": "「刺客」是《阴影显现》中出现的称呼，它的规范名（规范实体名）是什么？",
+        "aliases": [
+          "刺客"
+        ],
+        "answer": "阿斯卡纶",
+        "acceptable_answers": [
+          "阿斯卡纶"
+        ],
+        "is_boolean_answer": false,
+        "verdict": "needs_extra",
+        "requirements": [
+          {
+            "chunk_id": "activities/act33side/level_act33side_07_end#002",
+            "evidence": "沉默的刺客收起了袖刃，缓缓退回阴影中",
+            "line": "沉默的刺客收起了袖刃，缓缓退回阴影中。",
+            "found_in_text": true,
+            "verdict": "needs_extra",
+            "reason": "答案在同块另一行但那一行不含别名，改指向会丢证据",
+            "supporters_on_same_line": [],
+            "supporters_other_line": [
+              {
+                "assertion_id": "a-1e06681330ff5801",
+                "evidence_text": "抱歉，我打扰到你休息了吗，阿斯卡纶？",
+                "line": "特蕾西娅：抱歉，我打扰到你休息了吗，阿斯卡纶？",
+                "line_has_alias": []
+              }
+            ]
+          }
+        ],
+        "assertions_in_gold_chunks": 1
+      },
+      {
+        "question_id": "q-al-000037",
+        "category": "alias",
+        "split": "dev",
+        "question": "在剧情正文里，「白角魔王」被用来指代哪个角色或事物？请给出它的规范名。",
+        "aliases": [
+          "白角魔王"
+        ],
+        "answer": "奎萨图什塔",
+        "acceptable_answers": [
+          "奎萨图什塔"
+        ],
+        "is_boolean_answer": false,
+        "verdict": "needs_extra",
+        "requirements": [
+          {
+            "chunk_id": "obt/main/level_main_14-11_beg#004",
+            "evidence": "闪灵：那个活在传说中的白角魔王，击败无数强敌，在晨昏倒影下建起一座不灭的卡兹戴尔的英雄——早就死了",
+            "line": "闪灵：那个活在传说中的白角魔王，击败无数强敌，在晨昏倒影下建起一座不灭的卡兹戴尔的英雄——早就死了。",
+            "found_in_text": true,
+            "verdict": "needs_extra",
+            "reason": "答案在同块另一行但那一行不含别名，改指向会丢证据",
+            "supporters_on_same_line": [],
+            "supporters_other_line": [
+              {
+                "assertion_id": "a-59b1ba81b8b8e56c",
+                "evidence_text": "奎萨图什塔，真正的你，早就死了数千年",
+                "line": "闪灵：奎萨图什塔，真正的你，早就死了数千年。",
+                "line_has_alias": []
+              }
+            ]
+          }
+        ],
+        "assertions_in_gold_chunks": 1
+      },
+      {
+        "question_id": "q-al-000038",
+        "category": "alias",
+        "split": "dev",
+        "question": "「碧翠克斯」是《有口难言》中出现的称呼，它的规范名（规范实体名）是什么？",
+        "aliases": [
+          "碧翠克斯"
+        ],
+        "answer": "诗怀雅",
+        "acceptable_answers": [
+          "诗怀雅"
+        ],
+        "is_boolean_answer": false,
+        "verdict": "needs_extra",
+        "requirements": [
+          {
+            "chunk_id": "obt/main/level_main_05-02_beg#000",
+            "evidence": "听好，我的代号是诗怀雅，或者叫我碧翠克斯·施怀雅警官，懂吗",
+            "line": "诗怀雅：*龙门粗口*，说过多少次了，我不姓施！听好，我的代号是诗怀雅，或者叫我碧翠克斯·施怀雅警官，懂吗？",
+            "found_in_text": true,
+            "verdict": "needs_extra",
+            "reason": "答案在同块另一行但那一行不含别名，改指向会丢证据",
+            "supporters_on_same_line": [],
+            "supporters_other_line": [
+              {
+                "assertion_id": "a-c210068e95e26938",
+                "evidence_text": "诗怀雅，你没有这个权力",
+                "line": "陈：诗怀雅，你没有这个权力。",
+                "line_has_alias": []
+              }
+            ]
+          }
+        ],
+        "assertions_in_gold_chunks": 1
+      },
+      {
+        "question_id": "q-al-000042",
+        "category": "alias",
+        "split": "holdout",
+        "question": "「炼糖厂」是《无暇哀悼》中出现的称呼，它的规范名（规范实体名）是什么？",
+        "aliases": [
+          "炼糖厂"
+        ],
+        "answer": "制醇厂",
+        "acceptable_answers": [
+          "制醇厂"
+        ],
+        "is_boolean_answer": false,
+        "verdict": "needs_extra",
+        "requirements": [
+          {
+            "chunk_id": "obt/main/level_main_10-07_end#003",
+            "evidence": "阿米娅：炼糖厂",
+            "line": "阿米娅：炼糖厂？听起来好耳熟......",
+            "found_in_text": true,
+            "verdict": "needs_extra",
+            "reason": "答案在同块另一行但那一行不含别名，改指向会丢证据",
+            "supporters_on_same_line": [],
+            "supporters_other_line": [
+              {
+                "assertion_id": "a-7daea7fb30d80f75",
+                "evidence_text": "通知费斯特，我们的第一目标是制醇厂",
+                "line": "克洛维希娅：通知费斯特，我们的第一目标是制醇厂。",
+                "line_has_alias": []
+              },
+              {
+                "assertion_id": "a-b09ecaf4b6f655d4",
+                "evidence_text": "我们的第一目标是制醇厂",
+                "line": "克洛维希娅：通知费斯特，我们的第一目标是制醇厂。",
+                "line_has_alias": []
+              }
+            ]
+          }
+        ],
+        "assertions_in_gold_chunks": 2
+      },
+      {
+        "question_id": "q-al-000044",
+        "category": "alias",
+        "split": "dev",
+        "question": "「韦恩议员」是《交叉航线》中出现的称呼，它的规范名（规范实体名）是什么？",
+        "aliases": [
+          "韦恩议员"
+        ],
+        "answer": "韦恩",
+        "acceptable_answers": [
+          "韦恩"
+        ],
+        "is_boolean_answer": false,
+        "verdict": "carrier_ok",
+        "requirements": [
+          {
+            "chunk_id": "activities/act47side/level_act47side_06_end#002",
+            "evidence": "雅拉：如果是为了我和韦恩议员的那几次会面，我相信您之前已经表示过谢意了......用您从谢拉格带回的那些特色纪念品",
+            "line": "雅拉：如果是为了我和韦恩议员的那几次会面，我相信您之前已经表示过谢意了......用您从谢拉格带回的那些特色纪念品。",
+            "found_in_text": true,
+            "verdict": "carrier_ok",
+            "reason": "承载答案的断言就在 required 那一行上（前缀差异属引用口径窄）",
+            "supporters_on_same_line": [
+              {
+                "assertion_id": "a-8b3706f3542e2ff7",
+                "evidence_text": "我和韦恩议员的那几次会面",
+                "line": "雅拉：如果是为了我和韦恩议员的那几次会面，我相信您之前已经表示过谢意了......用您从谢拉格带回的那些特色纪念品。"
+              }
+            ],
+            "supporters_other_line": []
+          }
+        ],
+        "assertions_in_gold_chunks": 1
+      },
+      {
+        "question_id": "q-al-000045",
+        "category": "alias",
+        "split": "dev",
+        "question": "「阿尔图罗小姐」是《鸢尾花》中出现的称呼，它的规范名（规范实体名）是什么？",
+        "aliases": [
+          "阿尔图罗小姐"
+        ],
+        "answer": "阿尔图罗",
+        "acceptable_answers": [
+          "阿尔图罗"
+        ],
+        "is_boolean_answer": false,
+        "verdict": "needs_extra",
+        "requirements": [
+          {
+            "chunk_id": "activities/act16side/level_act16side_st02#004",
+            "evidence": "因为我恰好在几年前......真的见到过那位比安多恩名气还要大得多的通缉犯，阿尔图罗小姐",
+            "line": "奥伦：你会有的。因为我恰好在几年前......真的见到过那位比安多恩名气还要大得多的通缉犯，阿尔图罗小姐。",
+            "found_in_text": true,
+            "verdict": "needs_extra",
+            "reason": "答案在同块另一行但那一行不含别名，改指向会丢证据",
+            "supporters_on_same_line": [],
+            "supporters_other_line": [
+              {
+                "assertion_id": "a-ea1b2d8ddc0cab8f",
+                "evidence_text": "费德里科，你和阿尔图罗是什么关系？",
+                "line": "奥伦：......费德里科，你和阿尔图罗是什么关系？",
+                "line_has_alias": []
+              }
+            ]
+          }
+        ],
+        "assertions_in_gold_chunks": 1
+      },
+      {
+        "question_id": "q-na-000003",
+        "category": "negative_abstain",
+        "split": "dev",
+        "question": "原文写道「阿芙朵嘉：杜林人从来没有前往地面过」。据此判断：「杜林人」前往这件事是否发生？",
+        "aliases": [
+          "阿芙朵嘉：杜林人从来没有前往地面过",
+          "杜林人"
+        ],
+        "answer": "否",
+        "acceptable_answers": [
+          "否",
+          "没有",
+          "未发生"
+        ],
+        "is_boolean_answer": true,
+        "verdict": "carrier_ok",
+        "requirements": [
+          {
+            "chunk_id": "activities/act20side/level_act20side_06_end#000",
+            "evidence": "阿芙朵嘉：杜林人从来没有前往地面过",
+            "line": "阿芙朵嘉：杜林人从来没有前往地面过！",
+            "found_in_text": true,
+            "verdict": "carrier_ok",
+            "reason": "承载答案的断言就在 required 那一行上（前缀差异属引用口径窄）",
+            "supporters_on_same_line": [
+              {
+                "assertion_id": "a-c91ce2d19fd1374e",
+                "evidence_text": "杜林人从来没有前往地面过！",
+                "line": "阿芙朵嘉：杜林人从来没有前往地面过！"
+              }
+            ],
+            "supporters_other_line": []
+          }
+        ],
+        "assertions_in_gold_chunks": 1
+      },
+      {
+        "question_id": "q-na-000004",
+        "category": "negative_abstain",
+        "split": "dev",
+        "question": "原文写道「学者猫：它只是沾染了活性源石粉尘，只要不长期在源石环境中，火龙就不会导致活性源石粉尘扩散了喵」。据此判断：「火龙」导致这件事是否发生？",
+        "aliases": [
+          "学者猫：它只是沾染了活性源石粉尘，只要不长期在源石环境中，火龙就不会导致活性源石粉尘扩散了喵",
+          "火龙"
+        ],
+        "answer": "否",
+        "acceptable_answers": [
+          "否",
+          "没有",
+          "未发生"
+        ],
+        "is_boolean_answer": true,
+        "verdict": "boolean_answer",
+        "requirements": [
+          {
+            "chunk_id": "activities/act24side/level_act24side_09_end#004",
+            "evidence": "学者猫：它只是沾染了活性源石粉尘，只要不长期在源石环境中，火龙就不会导致活性源石粉尘扩散了喵",
+            "line": "学者猫：它只是沾染了活性源石粉尘，只要不长期在源石环境中，火龙就不会导致活性源石粉尘扩散了喵。",
+            "found_in_text": true,
+            "verdict": "boolean_answer",
+            "reason": "布尔答案，断言里以子串形式出现，机器判据失效",
+            "supporters_on_same_line": [],
+            "supporters_other_line": [
+              {
+                "assertion_id": "a-99939f309e6ec0f0",
+                "evidence_text": "火龙并没有被源石感染",
+                "line": "学者猫：之前从学者那里了解到，火龙并没有被源石感染，是因为源石的影响它才性情暴躁，扩散源石粉尘喵。",
+                "line_has_alias": [
+                  "火龙"
+                ]
+              }
+            ]
+          }
+        ],
+        "assertions_in_gold_chunks": 1
+      },
+      {
+        "question_id": "q-na-000006",
+        "category": "negative_abstain",
+        "split": "holdout",
+        "question": "据原文「年轻的贵族：只是这几个月来，选帝侯几乎没有离开过他的高塔」，「选帝侯」是否离开？",
+        "aliases": [
+          "年轻的贵族：只是这几个月来，选帝侯几乎没有离开过他的高塔",
+          "选帝侯"
+        ],
+        "answer": "否",
+        "acceptable_answers": [
+          "否",
+          "没有",
+          "未发生"
+        ],
+        "is_boolean_answer": true,
+        "verdict": "carrier_ok",
+        "requirements": [
+          {
+            "chunk_id": "activities/act29side/level_act29side_st01#000",
+            "evidence": "年轻的贵族：只是这几个月来，选帝侯几乎没有离开过他的高塔",
+            "line": "年轻的贵族：只是这几个月来，选帝侯几乎没有离开过他的高塔。医生去得越来越少，代表着其他家族的术师反倒越来越多。",
+            "found_in_text": true,
+            "verdict": "carrier_ok",
+            "reason": "承载答案的断言就在 required 那一行上（前缀差异属引用口径窄）",
+            "supporters_on_same_line": [
+              {
+                "assertion_id": "a-8a3ad4c7294c3f99",
+                "evidence_text": "选帝侯几乎没有离开过他的高塔",
+                "line": "年轻的贵族：只是这几个月来，选帝侯几乎没有离开过他的高塔。医生去得越来越少，代表着其他家族的术师反倒越来越多。"
+              }
+            ],
+            "supporters_other_line": []
+          }
+        ],
+        "assertions_in_gold_chunks": 1
+      },
+      {
+        "question_id": "q-na-000007",
+        "category": "negative_abstain",
+        "split": "dev",
+        "question": "原文写道「菈玛莲：将军，我想昨日叙旧时我们已经达成了共识——女妖不会参与其中」。据此判断：「女妖」参与其中这件事是否发生？",
+        "aliases": [
+          "菈玛莲：将军，我想昨日叙旧时我们已经达成了共识——女妖不会参与其中",
+          "女妖"
+        ],
+        "answer": "否",
+        "acceptable_answers": [
+          "否",
+          "没有",
+          "未发生"
+        ],
+        "is_boolean_answer": true,
+        "verdict": "boolean_answer",
+        "requirements": [
+          {
+            "chunk_id": "activities/act33side/level_act33side_01_end#001",
+            "evidence": "菈玛莲：将军，我想昨日叙旧时我们已经达成了共识——女妖不会参与其中",
+            "line": "菈玛莲：将军，我想昨日叙旧时我们已经达成了共识——女妖不会参与其中。",
+            "found_in_text": true,
+            "verdict": "boolean_answer",
+            "reason": "布尔答案，断言里以子串形式出现，机器判据失效",
+            "supporters_on_same_line": [],
+            "supporters_other_line": [
+              {
+                "assertion_id": "a-666bb452d9db6f35",
+                "evidence_text": "你还没有表达女妖王庭的态度。",
+                "line": "特雷西斯：你还没有表达女妖王庭的态度。",
+                "line_has_alias": [
+                  "女妖"
+                ]
+              }
+            ]
+          }
+        ],
+        "assertions_in_gold_chunks": 1
+      }
+    ],
+    "tally": {
+      "carrier_ok": 9,
+      "needs_extra": 16,
+      "boolean_answer": 2
+    },
+    "by_split": {
+      "dev": {
+        "needs_extra": 13,
+        "carrier_ok": 6,
+        "boolean_answer": 2
+      },
+      "holdout": {
+        "carrier_ok": 3,
+        "needs_extra": 3
+      }
+    },
+    "dev_n": 21,
+    "holdout_n": 6
+  },
   "rows": [
     {
       "question_id": "q-al-000014",

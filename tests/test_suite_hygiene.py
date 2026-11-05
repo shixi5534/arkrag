@@ -684,7 +684,62 @@ class TestSuiteSizeIsMonotonic:
     #      B 筛选 `signal_applied`→`signal_boosted` → **2 failed**（分桶数与
     #        `test_caliber_filters_on_applied_not_boosted`）；
     #      D `bucket_of(None)` 落进 0-1 → 1 failed；`[Z]` 恢复 28 passed。
-    N = 1724
+    # 1724 → 1741：P1-c 剩余（A 类 27 条「gold 引用指错行」的 required 判定）
+    # 从临时脚本搬进 `scripts/p1c_leak_audit.py`，并加 `tests/test_p1c_leak_audit.py`。
+    # 算术：1724 + 13 + 4 = 1741。13 是新文件的用例数；+4 来自新文件进
+    # `TEST_FILES` 后让四个 parametrize（本文件 61/130/150/184 行）各多一项。
+    # 与 `--collect-only` 实测 1741 一致（本文件自身 206 → 210，多出的 4 就是
+    # parametrize 增量）。
+    # 这里换来的门是「A 类那 27 条到底能不能只改 required 指向」：
+    #    · 这道门守的是**改 gold 的第一步**。P1-c 的判定会直接导致改标注，而改
+    #      gold 是改代码改 hash 的动作（要 Lead 签字）；一条判错的 `move_safe`
+    #      会让「别名出现」这个唯一证据从 gold 里消失，事后无法回头核对。
+    #    · `TestFourVerdicts::test_alias_on_the_answer_line_is_what_makes_it_safe_to_move`
+    #      与 `test_answer_on_a_line_without_the_alias_must_not_be_moved` 成对存在，
+    #      钉住 `move_safe` 与 `needs_extra` 的分界：两者都表现为「答案在同块
+    #      另一行」，但那一行**含不含别名**决定「能挪」还是「挪了更糟」。把这两态
+    #      混成一种，就会把它们一起报成「dev 侧 15 条可改」——而实测 dev 侧
+    #      `move_safe` 是 **0 条**。
+    #    · `test_the_answer_sitting_on_the_required_line_needs_no_change` 钉住
+    #      「引用口径窄 ≠ gold 缺陷」：gold 把说话人前缀（「杜林青年：」）也写进了
+    #      reference，断言从冒号后面开始，改它等于改指标不是改标注。
+    #    · `test_boolean_answers_are_not_judged_by_substring` 钉住布尔答案那 2 条
+    #      （`q-na-000004`/`q-na-000007`）：答案「否」会匹配到断言「火龙并没有被
+    #      源石感染」里的「没有」，机器判据在这里必然误命中，只能判无法判定。
+    #    · `TestRealRun` 把结论钉死：59 条候选 0 真漏标 / 58 不是漏标 / 1 无法判定；
+    #      A 类 27 条 dev 21 / holdout 6；dev 侧 `{needs_extra: 13, carrier_ok: 6,
+    #      boolean_answer: 2}`；holdout 只记录不改。
+    #    · `test_chunks_come_from_the_generation_not_the_corpus_root` 钉住块正文来源
+    #      必须是代内的 13798 块（这个坑本项目踩过三次：D 阶段 13,798 vs 13,781、
+    #      P1-b 结构报告 13,786 vs 13,798、P1-c 第一版路径写错还静默回退）。
+    # 反向实测四笔（日志 `%TEMP%\gate0\logs\reverse_p1c_a27.txt` 与
+    # `reverse_p1c_a27_B.txt`），每笔都是改前 0 / 改后 1 / 还原 0，且**指名道姓**
+    # 红在预期那一条上：
+    #    A 删掉 `move_safe` 分支 → `test_alias_on_the_answer_line_is_what_makes_it_safe_to_move`
+    #      （报错里 `+ needs_extra`）；
+    #    B 把 `move_safe` 条件放宽成「只要答案在别的行就算可挪」→
+    #      `test_answer_on_a_line_without_the_alias_must_not_be_moved`（`+ move_safe`）；
+    #    C 把「承载答案的断言与 required 同行」的区间判据改成恒假 →
+    #      `test_the_answer_sitting_on_the_required_line_needs_no_change`（`+ no_support`）；
+    #    D 清空 `BOOLEAN_ANSWERS` → `test_boolean_answers_are_not_judged_by_substring`
+    #      （`+ no_support`）。
+    #    **B 第一次没做成实测**：用例选择器写成 `"needs_extra or zero_move_safe"`，
+    #    那不是有效的 `-k` 表达式，只选中一条恰好绿的用例，于是记成「没变红」。
+    #    重做时才拿到 0/1/0。**「没变红」先怀疑选择器与用例，再怀疑门。**
+    # 1741 → 1743：`tests/test_p1c_leak_audit.py` 再加两条（该文件已在
+    # `TEST_FILES` 里，不产生 parametrize 增量）。算术：1741 + 2 = 1743，
+    # 与 `--collect-only` 实测一致（本文件自身仍是 210）。
+    #    · `test_change_log_declares_zero_gold_changes_and_two_impact_counts`：
+    #      判定表里有「变更日志」一节，且必须同时写「dev 影响 0 题 / holdout 影响
+    #      0 题」与「审核人空缺」。这张表被改过三轮、每轮结论都变过；不记账的话
+    #      下一个人分不清哪一版是真的，而「改了 0 题」这句话必须和「审核人尚未
+    #      签字」写在一起——两件事互为证据（Lead 的裁决格式要求 dev / holdout
+    #      分开写、审核人空缺不许提交）。
+    #    · `test_gold_files_are_untouched`：钉住 `gold-v1.json`（284356 字节 /
+    #      `76d66073ff87aab1`）与 `gold-v2.json`（601492 字节 / `069375f8e355e4b9`）
+    #      一字节未动。三轮判定下来对 gold 的影响是 **0 题**，这条用例让那个「0」
+    #      不是一句声明，而是一个可复算的断言。
+    N = 1743
 
     def test_declared_count_matches_actual(self) -> None:
         """用 pytest 自己数一遍当前收集到的用例数，与本文件登记值比对。"""
