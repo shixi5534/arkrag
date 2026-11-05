@@ -121,6 +121,29 @@ CANDIDATE_POOL_MULT = 10
 # 不许说成「两项都提升」。
 SPEAKER_BOOST_WEIGHT = 0.1
 
+# 两端点同行共现加成权重（P2 第一轮，配置名 `cooc0.1`）。
+#
+# 信号是什么：问句解析出的**两个端点实体**的规范名，**同时出现在候选块的同一行**。
+# 这是「这个块直接讲了这两个人之间的这件事」的强证据，比实体通道的
+# 「块里提到了这个名字」精确得多——一个块提三次「凯尔希」不代表它在讲凯尔希的这件事。
+#
+# 为什么 0.1 够用：`cooc` 是**稀疏信号**。实测（dev 350 应答题）前 20 内命中块数分布
+# 为 0 块 215 题 / 1-3 块 40 / 4-9 块 57 / ≥10 块 38，均值 2.90。稀疏意味着
+# 可以给得起权重而不至于把大片噪声块抬上来；0.1 已能把目标块从第 6-9 名推进前 5。
+#
+# **为什么取 0.1 不取 0.3**（dev 350 真管线实测）：
+#     cooc0.1  进 ctx 189→195 (+6)、覆盖 58→63 (+5)、**覆盖回退 0 题**
+#     cooc0.3  进 ctx 189→198 (+9)、覆盖 58→65 (+7)、**覆盖回退 2 题**
+#              （`q-sc-000015`、`q-tc-000003`；机制是 `answer.py` 的
+#               `MAX_CLAIMS = 5` claim 截断——gold 单元后移后被同块兄弟单元挤出）
+# 判据纪律是「净额为正不能抵消某一维的回退」，故取零回退的 0.1。
+# 0.3 留作第二档，须先单独解决 claim 截断。
+#
+# **不许把本信号在对话体语料上推广成「跨行共现」**：`hop_line` 被判死刑正是因为
+# 它的「同一行」前提在对话体（`X：` / `Y：` 交替分行）上判反了，详见
+# `docs/a_P2_cooc实验方案与hop根因.md` §2.4。
+COOC_BOOST_WEIGHT = 0.1
+
 # 上下文单元的固定来源标记，避免各处手写字符串拼错。
 SOURCE_BM25 = "bm25"
 SOURCE_ENTITY = "entity"
@@ -358,6 +381,48 @@ class Retriever:
                 best[cid] = hit / strongest
         return best
 
+    def _cooc_boost(
+        self, entity_candidates, allowed: set[str]
+    ) -> tuple[dict[str, int], list[str]]:
+        """两端点**同行共现**：问句的前两个实体规范名同时出现在块的同一行。
+
+        与 `_speaker_boost` 的区别：后者看结构化 `speakers` 字段（"谁在这块开口"），
+        这个看正文行（"这块哪一行同时写了这两个人"）。两者互补，都只在候选池里算。
+
+        为什么只要"前两个实体"：问句通常有两个端点（"A 与 B 处于哪种关系"），
+        `analyze_query` 已按权重排序，前两个即最可能的端点对。**不枚举所有两两组合**
+        ——组合数会随候选数平方增长，而实测稀疏性（dev 350 前 20 内 0 块 215 题）
+        说明单对信号已经够用。
+
+        返回 `(命中表, 端点名列表)`；端点名回传是为了让调用方能把信号记进 stats，
+        便于事后归因"这一题到底有没有端点对"。
+        """
+        names: list[str] = []
+        seen: set[str] = set()
+        for cand in (entity_candidates or []):
+            eid = str(cand.get("entity_id") or "")
+            ent = self.entities_by_id.get(eid) or {}
+            nm = str(ent.get("name") or cand.get("name") or "").strip()
+            if nm and nm not in seen:
+                seen.add(nm)
+                names.append(nm)
+            if len(names) >= 2:
+                break
+        if len(names) < 2:
+            return {}, names
+
+        best: dict[str, int] = {}
+        for cid in allowed:
+            rec = self.chunks.get(cid) or {}
+            text = str(rec.get("text") or "")
+            if not text:
+                continue
+            for line in text.splitlines():
+                if all(n in line for n in names):
+                    best[cid] = 1
+                    break
+        return best, names
+
     # ------------------------------------------------------------ 检索
     def search(self, query_analysis: dict, *, top_k: int = 20) -> dict:
         """BM25 命中，两路加权合并 + 说话人结构化加成。
@@ -370,12 +435,16 @@ class Retriever:
           每路同样归一，按候选 `score` 加权取该 chunk 的最大值。
         * `speaker`：问句实体与块的 `speakers`（结构化字段）精确相等的比例，
           见 `_speaker_boost`。
+        * `cooc`：问句**前两个实体**的规范名同时出现在块正文的**同一行**，
+          见 `_cooc_boost`。命中格给 `COOC_BOOST_WEIGHT`（常数，非比例）。
         * 合并：`final = bm25_norm + ENTITY_CHANNEL_WEIGHT * entity_norm
-          + SPEAKER_BOOST_WEIGHT * speaker_norm`。
-          两个权重的取值理由与实测见各自常量注释。
+          + SPEAKER_BOOST_WEIGHT * speaker_norm + cooc_bonus`。
+          各权重的取值理由与实测见各自常量注释。
 
-        返回 `{hits:[{chunk_id, score, sources:[{channel, score}]}], stats:{...}}`。
-        三路的原始分都留在 `sources` 里，谁贡献了多少可以逐条查。
+        返回 `{hits:[{chunk_id, score, cooc_boost, sources:[{channel, score}]}], stats:{...}}`。
+        三路的原始分都留在 `sources` 里，谁贡献了多少可以逐条查；`cooc_boost`
+        单独列出（`0.0` 或 `COOC_BOOST_WEIGHT`），因为它不在 `sources` 通道体系里，
+        混进 `score` 后无法反推是哪个信号抬的。
         """
         top_k = max(1, int(top_k))
         offset = 0
@@ -448,6 +517,14 @@ class Retriever:
                 {"channel": SOURCE_SPEAKER, "score": round(score, 6)}
             )
 
+        # ---- 两端点同行共现通道：P2 第一轮新增（`COOC_BOOST_WEIGHT`）----
+        # 与说话人通道同理，只在已进入候选池的块里算（bm25 ∪ entity），不扫全表。
+        # **必须在这里算、在下面的 hits.sort() 之前加成**：若改成「先切 top_k 再重排」，
+        # 深池里名次靠后的块（实测有 rank 43 的 gold）永远进不来，信号等于没用。
+        cooc_best, cooc_names = self._cooc_boost(
+            query_analysis.get("entity_candidates") or (), set(merged)
+        )
+
         hits: list[dict] = []
         for cid, item in merged.items():
             total = 0.0
@@ -458,10 +535,13 @@ class Retriever:
                     total += SPEAKER_BOOST_WEIGHT * src["score"]
                 else:
                     total += ENTITY_CHANNEL_WEIGHT * src["score"]
+            cooc = COOC_BOOST_WEIGHT if cooc_best.get(cid) else 0.0
+            total += cooc
             hits.append(
                 {
                     "chunk_id": cid,
                     "score": round(total, 6),
+                    "cooc_boost": cooc,
                     "sources": sorted(item["sources"], key=lambda s: s["channel"]),
                 }
             )
@@ -479,6 +559,9 @@ class Retriever:
                 "entity_top_score": round(max(entity_best.values()), 6) if entity_best else 0.0,
                 "speaker_boosted": len(speaker_best),
                 "speaker_weight": SPEAKER_BOOST_WEIGHT,
+                "cooc_endpoints": cooc_names,
+                "cooc_boosted": len(cooc_best),
+                "cooc_weight": COOC_BOOST_WEIGHT,
                 "candidates": len(merged),
                 "top_score": top_score,
                 "top_k": top_k,
