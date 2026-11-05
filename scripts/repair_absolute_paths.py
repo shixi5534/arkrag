@@ -31,12 +31,13 @@ from __future__ import annotations
 
 import argparse
 import json
+import subprocess
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from arkrag import atomic, config, legacy  # noqa: E402
+from arkrag import atomic, config, legacy, subproc  # noqa: E402
 
 #: 参与改写的文件（相对仓库根）
 TARGETS = (
@@ -100,13 +101,77 @@ def rewrite_paths(obj, *, changed: list[tuple[str, str, str]], prefix: str = "")
     return obj
 
 
+def _discovered_targets() -> list[str]:
+    """git 跟踪的 `data/` 下 JSON/JSONL 文件（相对仓库根，正斜杠）。
+
+    ## 为什么要有这一条
+
+    第一版 `TARGETS` 是**写死的名单**（16 个 ledger + `agent_plan.json`）。
+    2026-11-05 全量回归实测到 `data/a_p3_rollback_equivalence.json` 里有 4 处
+    `E:\\图rag\\...`，这道门判红，而本脚本演练却说「没有需要改写的绝对路径」——
+    因为它只按名单找文件，**新入库的文件永远不会被它看见**。
+
+    覆盖面靠人记得加名单，等于没有覆盖面。所以改成自动发现：凡 git 跟踪的
+    `data/**/*.json|jsonl` 全部纳入（`FROZEN_EXEMPT` 里的冻结基线仍然跳过）。
+    与 `tests/test_portable_paths.py::_git_tracked_data_files()` 同源——那条门怎么
+    认定「入库文件」，本脚本就怎么认定，两者不各说各话。
+    """
+    try:
+        out = subprocess.run(
+            ["git", "ls-files", "data/"],
+            cwd=config.ROOT,
+            capture_output=True,
+            text=True,
+            timeout=60,
+            check=False,
+            env=subproc.child_env(),
+        )
+    except (OSError, subprocess.SubprocessError):
+        return []
+    if out.returncode != 0:
+        return []
+    found = [
+        rel for rel in out.stdout.split()
+        if rel.endswith((".json", ".jsonl")) and rel not in FROZEN_EXEMPT
+    ]
+    return found
+
+
+def _targets() -> list[str]:
+    """硬编码名单 + 自动发现，去重保序。名单仍然保留：它记录了历史修复顺序。"""
+    merged: dict[str, None] = {}
+    for rel in (*TARGETS, *_discovered_targets()):
+        merged.setdefault(rel, None)
+    return list(merged)
+
+
 def repair_one(rel: str, *, apply: bool) -> tuple[int, list[tuple[str, str, str]]]:
     """改写一个文件，返回 (改动数, 改动清单)。文件不存在时返回 (0, [])。"""
     path = config.ROOT / rel
     if not path.exists():
         return 0, []
-    doc = json.loads(path.read_text("utf-8"))
     changed: list[tuple[str, str, str]] = []
+    if rel.endswith(".jsonl"):
+        # JSONL 必须逐行解析：整文件 json.loads 会 `Extra data: line 2 column 1`。
+        # 自动发现会扫到 .jsonl，所以这里必须分开处理，不能假定「都是单体 JSON」。
+        rows: list[object] = []
+        for line in path.read_text("utf-8").splitlines():
+            if not line.strip():
+                continue
+            try:
+                rows.append(json.loads(line))
+            except json.JSONDecodeError:
+                rows.append(line)  # 解析不了的行原样保留，不猜、不丢弃
+        for index, row in enumerate(rows):
+            rewrite_paths(row, changed=changed, prefix=f"line{index + 1}")
+        if changed and apply:
+            text = "".join(
+                (row if isinstance(row, str) else json.dumps(row, ensure_ascii=False)) + "\n"
+                for row in rows
+            )
+            atomic.atomic_write_text(path, text)
+        return len(changed), changed
+    doc = json.loads(path.read_text("utf-8"))
     rewrite_paths(doc, changed=changed)
     if changed and apply:
         # 走 atomic 通道：既拿到「同目录临时文件 + fsync + os.replace」，
@@ -129,7 +194,9 @@ def main(argv: list[str] | None = None) -> int:
 
     total = 0
     touched: list[str] = []
-    for rel in TARGETS:
+    targets = _targets()
+    print(f"待扫描 {len(targets)} 个入库 JSON（名单 {len(TARGETS)} + 自动发现）")
+    for rel in targets:
         count, changed = repair_one(rel, apply=args.apply)
         if not count:
             continue

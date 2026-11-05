@@ -163,10 +163,14 @@ def classify_gate(ans, gold_item, by_chunk, chunks, focus, hints, kept) -> str:
             admit = False
         if cid not in kept:
             incl = False
-    if not admit:
-        return "闸门1b 断言在但被相关度过滤"
+    # 因果顺序：块没进上下文时，`_assertion_relevant` 根本没机会执行——那条断言
+    # 不进 `unit["assertions"]` 是因为**块不在**，不是因为被判不相关。先判 1b
+    # 会把「检索层没送进来」错记成「准入门挡掉」，于是把 P2 的活算进 P3 的口径，
+    # 分母也跟着虚增（v1 上 29 vs 19）。必须先判 incl。
     if not incl:
         return "闸门2 块没进上下文"
+    if not admit:
+        return "闸门1b 断言在但被相关度过滤"
     return "闸门3 块在手没发引用"
 
 

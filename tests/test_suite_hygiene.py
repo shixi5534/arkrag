@@ -817,7 +817,37 @@ class TestSuiteSizeIsMonotonic:
     # 模块级纯函数，用例喂合成输入：改坏实现必然红，与磁盘无关。
     # 这与「注释替真代码把门撑住」是同族：**门必须直接调用被判定的东西。**
     # ------------------------------------------------------------------
-    N = 1789
+    # ------------------------------------------------------------------
+    # N: 1789 -> 1796（2026-11-05，闸门判定顺序必须是因果顺序）
+    #
+    # 算术 1789 + 3 + 4 = 1796：
+    #   · 新增 `tests/test_gate_order.py`，3 条用例；
+    #   · 该文件**不在** `TEST_FILES` 的旧名单里，所以本文件四个 parametrize
+    #     各 +1，共 +4。
+    # 与 `py -3 -m pytest tests --collect-only -q` 实测 1796 一致。
+    #
+    # 这次换来的门（逐条写明，只报数字不算）：
+    #   · `test_block_missing_from_context_is_gate2_even_when_admission_also_fails`：
+    #     块不在上下文、断言又过不了准入判据时，必须记**闸门2**而不是闸门1b。
+    #     块不在上下文时 `_assertion_relevant()` 一次都没被调用，说它「被准入
+    #     挡掉」是给没发生的事编因果；后果是把 P2 的活算进 P3，分母虚增
+    #     （v1 上 29 vs 19，多出的 10 道里 5 道 multihop 的 required 块
+    #     `in_context=False`）。把 `classify_gate` 改回「先 admit 后 incl」
+    #     → 1 failed。
+    #   · `test_block_in_context_with_blocked_assertion_is_gate1b`：反例侧控制，
+    #     块在上下文时被挡才叫闸门1b。没有它，「先判 incl」可以被写成
+    #     「永远返回闸门2」而这条门仍是绿的。
+    #   · `test_admission_passes_when_endpoint_is_a_focus_entity`：端点落在焦点
+    #     实体上时准入必须过（变成闸门3）。没有它，「闸门1b」可能只是
+    #     「准入判据对谁都返回 False」的假象。
+    #
+    # 反向实测（命令级）：改前 `py -3 -m pytest tests/test_gate_order.py -q`
+    #   → 3 passed 退出码 0；把 `scripts/lead_gate_recheck.py::classify_gate`
+    #   的两段判定换回「先 admit 后 incl」→ **1 failed, 2 passed 退出码 1**，
+    #   红的正是第一条；`Copy-Item` 还原 → 3 passed 退出码 0，
+    #   `git diff --stat` 显示该文件只剩本次 6 插 2 删的改动，实验改动没留下。
+    # ------------------------------------------------------------------
+    N = 1796
 
     def test_declared_count_matches_actual(self) -> None:
         """用 pytest 自己数一遍当前收集到的用例数，与本文件登记值比对。"""

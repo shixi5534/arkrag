@@ -7,7 +7,7 @@
       "citations": 2014,
       "abstained": 30,
       "tag": "改动前源码",
-      "src": "E:\\图rag\\tmp_a_orig"
+      "src": "tmp_a_orig"
     },
     {
       "sha256": "7d228f25efaa724b51ee641244431fad967721a946ddcf8cfac7fae80fe4333a",
@@ -15,7 +15,7 @@
       "citations": 2014,
       "abstained": 30,
       "tag": "改动后源码(whole_line=False)",
-      "src": "E:\\图rag\\src"
+      "src": "src"
     },
     {
       "sha256": "569650a267f80fc4e4fa279cb8c4a88fc734399f67738510503e33633d10f36e",
@@ -23,7 +23,7 @@
       "citations": 2014,
       "abstained": 30,
       "tag": "改动后源码(whole_line=True)",
-      "src": "E:\\图rag\\src"
+      "src": "src"
     },
     {
       "sha256": "569650a267f80fc4e4fa279cb8c4a88fc734399f67738510503e33633d10f36e",
@@ -31,10 +31,11 @@
       "citations": 2014,
       "abstained": 30,
       "tag": "改动后源码(whole_line=True)第二次",
-      "src": "E:\\图rag\\src"
+      "src": "src"
     }
   ],
   "rollback_bitwise_identical": true,
   "whole_line_reproducible": true,
-  "conclusion": "回滚 = 把 CITATION_WHOLE_LINE 设 False，且已证与改动前逐位一致"
+  "conclusion": "回滚 = 把 CITATION_WHOLE_LINE 设 False，且已证与改动前逐位一致",
+  "src_note": "src 为仓库相对路径；tmp_a_orig 是回滚校验用的临时副本目录，校验完成后已删除，sha256 与 citations/abstained 数是它的可核对证据"
 }
