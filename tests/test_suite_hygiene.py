@@ -624,7 +624,67 @@ class TestSuiteSizeIsMonotonic:
     #     [2] 退回旧实现（只检查 dict 行）→ **2 failed, 1 passed, exit 1**；
     #     [3] 恢复后 → 3 passed, exit 0；
     #     [4] 全文件 → 39 passed, exit 0。
-    N = 1669
+    # 1669 → 1724：两笔账。
+    # ① `tests/test_provenance.py` 39 → 61（同文件 +22，该文件已在 `TEST_FILES`
+    #    里，不产生 parametrize 增量）。这 22 条对应 Lead 2026-11-05 的三条新判据：
+    #    · 信号密度 `TestSignalDensityIsObservable`（7 条）：A 的 P2 第一轮实测
+    #      cooc 加成在密度 `boosted/units` 4+ 的 35 题上净增益为 0（常数加成在
+    #      命中块数远超上下文容量、units 中位 5 时全体同加同量，相对顺序不变，
+    #      等于没加）。报告里没有这个数，下一轮调参就还会拿「R@20 涨了」当成功。
+    #      缺 `signal_boosted`/`context_units`/`density` 任一 → unknown；
+    #      `density` 与 `boosted/units` 不一致 → fail（手填的漂亮数字不算）；
+    #      `context_units=0` → fail（没有上下文单元的行不该进指标）。
+    #    · `TestSignalDensityBlock`（6 条）：构造器本身。`signal_boosted` 取各信号
+    #      计数的 **max 不取 sum**——同一块被两路加成仍只是一块，求和会把密度
+    #      1.4 说成 2.4、跨过「2–4 只救 1 题」那一档，结论就反了。
+    #    · 耗时 `TestDurationNeedsCpuTime`（4 条）：只报墙钟不报 CPU → unknown。
+    #      实测反例：一次全量回归报 24141.60s，而进程 CPU 累计只有 ~778s——机器
+    #      休眠 6 小时。判 unknown 不判 fail：那个数**可能**是真的，只是无法证实。
+    #      `p95_ms`/`median_ms`/`qps` 不误伤（单请求延迟天生是墙钟，睡眠期间没有
+    #      请求在跑）。
+    #    · 并列召回 `TestParallelRecallMetricsNeedContainment`（5 条）：
+    #      `any_gold +6` / `all_gold +4` / `covered +5` 不是三份独立证据——
+    #      `required_citations` 块集恒等于 `gold_chunk_ids`，实测三个增益题集的
+    #      差集只有 `q-tc-000023` 一题。2 个以上带 `gain_ids` 的行没给
+    #      `relation_table` → unknown；手填一张与实际集合矛盾的表 → fail。
+    #      反向实测六笔（日志 `%TEMP%\gate0\logs\reverse_density_duration_gain.txt`）：
+    #      A 两个判据调用改恒 PASS → **6 failed**（逐条点名，不是「有红就行」）；
+    #      B 一致性检查 `if False` → 1 failed；C 耗时 unknown→pass → 1 failed；
+    #      D 缺表分支 unknown→pass → 1 failed；E 矛盾比对 `if False` → 1 failed；
+    #      F `max`→`sum` → 1 failed；`[Z]` 恢复后 61 passed, exit 0。
+    # ② 新增 `tests/test_signal_density_audit.py` 29 条（新文件进 `TEST_FILES`，
+    #    让四个 parametrize（本文件 61/130/150/184 行）各多一项 +4）。
+    #    算术：1669 + 22 + 29 + 4 = 1724，与 `--collect-only` 实测一致
+    #    （本文件自身 202 → 206，多出的 4 就是 parametrize 增量）。
+    # 这里换来的门是「密度分桶必须可复算，且两种分母不许合并」：
+    #    · `TestRealReport::test_bucket_counts_match_the_lead_table` 把
+    #      `boost_applied_only` 口径下 0-1/1-2/2-4/4+ 的 n 钉死成 38/41/21/35
+    #      （合计 135 = 真正把加成写进 score 的题数，不是 350、也不是 141）。
+    #      我第一次跑出 253/41/21/35（全 350 题做分母），与 Lead 的表差 215 题；
+    #      第二次跑出 44/41/21/35（用 `signal_boosted>0` 筛，多 6 道「命中了但增幅
+    #      被夹成零」的题）。**两次都是「分母口径不同」，每个数都真、合起来意思
+    #      不对**——这就是本项目栽过四次的同一个坑，所以两种口径必须同时出现。
+    #    · `test_the_4plus_bucket_gains_nothing`：整条门的结论就一句——密度 4+ 的
+    #      35 题，`any_gold`/`all_gold`/`covered` 三个指标净增益都是 0。
+    #    · `test_gain_set_difference_is_the_one_known_question`：并列召回指标的
+    #      增益差集只有 `q-tc-000023`，独立复现 Lead 的数。
+    #    · `test_self_check_catches_wrong_caliber_declaration`：桶表两口径齐全、
+    #      只有 `calibers` 那行声明少一个，必须被点名。**这条是被反向实测逼出来
+    #      的**——我最初只写了 `test_self_check_catches_single_caliber_report`，
+    #      而它会被「桶表缺口径」那条判据兜住，于是把声明检查关掉它照样绿
+    #      （`[C]` 笔 returncode=0）。补了这条之后 `[C-补]` 才指名道姓变红
+    #      （日志 `%TEMP%\gate0\logs\reverse_density_caliber_decl.txt`：
+    #      改前 1 passed exit 0 / 改后 1 failed exit 1 / 恢复 1 passed exit 0）。
+    #      **反向实测没变红不等于门是坏的，等于那条用例测的不是那个判据。**
+    #    另三笔（日志 `%TEMP%\gate0\logs\reverse_signal_density_audit.txt`）：
+    #      A 砍成单一口径 → **4 failed**（`test_report_declares_both_calibers`、
+    #        `test_bucket_counts_match_the_lead_table`、
+    #        `test_the_4plus_bucket_gains_nothing`、
+    #        `test_self_check_catches_single_caliber_report`）；
+    #      B 筛选 `signal_applied`→`signal_boosted` → **2 failed**（分桶数与
+    #        `test_caliber_filters_on_applied_not_boosted`）；
+    #      D `bucket_of(None)` 落进 0-1 → 1 failed；`[Z]` 恢复 28 passed。
+    N = 1724
 
     def test_declared_count_matches_actual(self) -> None:
         """用 pytest 自己数一遍当前收集到的用例数，与本文件登记值比对。"""

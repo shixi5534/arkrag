@@ -142,6 +142,40 @@ DOWNSTREAM_KEYS: tuple[str, ...] = (
     "downstream_metric",
 )
 
+#: 「排序加成」类指标：出现这些键时，同一行必须同时给下面三个数。
+#: 名字带 `signal_` 前缀而不是直接复用 `cooc_boosted`，是为了让这类判据能覆盖
+#: A 之后可能加的其它信号（hop_line / speaker / entity），不必每加一个信号就改门。
+BOOST_KEYS: tuple[str, ...] = (
+    "cooc_boosted",
+    "hop_boosted",
+    "speaker_boosted",
+    "entity_boosted",
+    "signal_boosted",
+)
+
+#: 信号密度必须能反查的三件套（缺一即 unknown）。
+#:
+#: 只报 `density` 不够：0.8 可能是 4/5，也可能是 8/10，后者在「密度 4+ 无效」的
+#: 分界另一侧——同一个 0.8 在两个不同的结论区间里。
+DENSITY_FIELDS: tuple[str, ...] = ("signal_boosted", "context_units", "density")
+
+#: 「一次运行的累计耗时」。出现这些键时，同一行必须另有 CPU 时间。
+WALL_CLOCK_KEYS: tuple[str, ...] = (
+    "elapsed_s",
+    "wall_s",
+    "duration_s",
+    "total_s",
+    "wall_clock_s",
+)
+
+#: 认可的 CPU / 进程时间。`process_time` 是 Python 的 `time.process_time()`。
+CPU_KEYS: tuple[str, ...] = (
+    "cpu_s",
+    "cpu_time_s",
+    "process_time_s",
+    "process_s",
+)
+
 _ISO_RE = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$")
 _SHA16_RE = re.compile(r"^[0-9a-f]{16}$")
 _COMMIT_RE = re.compile(r"^[0-9a-f]{7,40}$")
@@ -528,6 +562,118 @@ def _has_any(row: dict, keys: tuple[str, ...]) -> bool:
     return any(k in row and not _blank(row.get(k)) for k in keys)
 
 
+# ---------------------------------------------------------------- 信号密度
+
+
+def density_of(boosted, units):
+    """`boosted / units`。`units` 为 0（或非数）时返回 `None`，不返回 0 也不抛。
+
+    返回 `None` 而不是 0：0 会被读成「密度真的是零」，而真实情况是「这道题没有
+    上下文单元」——两者在统计分桶里落点完全不同。
+    """
+    try:
+        b = float(boosted)
+        u = float(units)
+    except (TypeError, ValueError):
+        return None
+    if u <= 0:
+        return None
+    return round(b / u, 4)
+
+
+def _judge_density(row: dict) -> tuple[str, str, list[str]]:
+    """「排序加成」行必须带 `signal_boosted` / `context_units` / `density`。
+
+    ## 为什么要这条
+
+    A 的 P2 第一轮真跑实测：cooc 加成的成败完全由密度 `boosted / units` 决定，
+    与题型无关。密度 0–1 救 2、1–2 救 3、2–4 救 1、**4+ 的 35 题一分没挣到**；
+    `direct_relation` 内部混杂检验同向，所以是密度效应不是题型效应。机制：命中
+    给常数加成，命中块数远超上下文容量（units 中位 5）时全体同加同量 → 相对
+    顺序不变 → 等于没加。与 `hop_line` 的「20/20 全抬」是同一条规律。
+
+    报告里没有这个数，下一轮调参的人就还会拿「R@20 涨了」当成功。
+
+    ## 为什么 `context_units` 是必填而不是「上层补算」
+
+    `units` 只有 `build_context()` 之后才知道，`search()` 内部算不出来。所以这个
+    字段**只能**在上层（`ask_once` / pipeline）填，`search().stats` 里不该有它。
+    把它当成可选字段，就会有人塞进 `search()` 造出时有时无的值。
+    """
+    if not _has_any(row, BOOST_KEYS):
+        return PASS, "不含排序加成键，密度检查不适用", []
+    missing = [name for name in DENSITY_FIELDS if _blank(row.get(name))]
+    if missing:
+        return UNKNOWN, (
+            "本行报了排序加成，却缺 " + "、".join(missing) + "。"
+            "实测反例：cooc 加成在密度 `boosted/units` 4+ 的 35 道题上净增益为 0"
+            "（常数加成在命中块数远超上下文容量时互相抵消），所以不报密度就没法"
+            "判断这次「涨了」是不是只涨在低密度题上"
+        ), missing
+    expected = density_of(row.get("signal_boosted"), row.get("context_units"))
+    if expected is None:
+        return FAIL, (
+            f"context_units={row.get('context_units')!r} 无法当分母（密度定义是 "
+            "signal_boosted / context_units，分母必须 > 0）；没有上下文单元的行"
+            "不该出现在指标里"
+        ), []
+    reported = density_of(row.get("density"), 1)
+    if reported is None or abs(reported - expected) > 1e-6:
+        return FAIL, (
+            f"density={row.get('density')!r} 与 "
+            f"signal_boosted/context_units={expected} 不一致——"
+            "派生量要能被反查，手填的漂亮数字不算"
+        ), []
+    return PASS, f"密度三件套齐全，density={expected}", []
+
+
+# ---------------------------------------------------------------- 耗时：墙钟 vs CPU
+
+
+def _judge_duration(row: dict) -> tuple[str, str, list[str]]:
+    """只报墙钟耗时的行判 unknown：那个数**可能是**真的，只是无法证实。
+
+    ## 实测反例（2026-11-05）
+
+    `py -3 scripts/regression.py tests -q` 报 24141.60s（6:42:21），而该进程 CPU
+    累计只有 ~778s（13 分钟）——机器中途休眠了 6 小时。P0 的主题正是「有个数字
+    不等于那个数字是测量的」，这段墙钟若进性能报告，会把一次 13 分钟的回归说成
+    6 小时 42 分。
+
+    ## 为什么 unknown 而不是 fail
+
+    报告里能看到这个数字、也看不到 CPU 时间，这是「查不了」。判 fail 会暗示
+    「这个数一定是假的」，而我们并不知道——CLI 在插着电的机器上跑，它就是真的。
+
+    ## 为什么单请求延迟不算
+
+    `p95_ms` / `median_ms` / `qps` 天生是墙钟，且不会被休眠污染（睡眠期间没有
+    请求在跑）。把这类行也要求配 CPU 时间就是误伤，误伤会教人忽略这道门。
+    """
+    if not _has_any(row, WALL_CLOCK_KEYS):
+        return PASS, "不含累计耗时键，墙钟/CPU 检查不适用", []
+    has_cpu = _has_any(row, CPU_KEYS)
+    if not has_cpu:
+        return UNKNOWN, (
+            "本行只报了墙钟耗时，没有 CPU 时间。实测反例：一次全量回归报 "
+            "24141.60s，而进程 CPU 累计只有 ~778s——机器中途休眠了 6 小时，"
+            "墙钟被休眠污染。请补 " + str(list(CPU_KEYS)) + " 中任一项"
+        ), ["cpu_s"]
+    wall = row.get([k for k in WALL_CLOCK_KEYS if not _blank(row.get(k))][0])
+    cpu = row.get([k for k in CPU_KEYS if not _blank(row.get(k))][0])
+    try:
+        w = float(wall)
+        c = float(cpu)
+    except (TypeError, ValueError):
+        return FAIL, f"耗时不是数：wall={wall!r} cpu={cpu!r}", []
+    if c > w + 1.0:
+        return FAIL, (
+            f"CPU 时间 {c} 大于墙钟 {w}——这在单进程里不可能，说明两个数不是同一次"
+            "运行采到的（多进程会超 1 倍以上，那时请用 process 级累计并注明）"
+        ), []
+    return PASS, f"墙钟 {w}s / CPU {c}s", []
+
+
 def verify_metric_row(row: dict) -> dict:
     """检查**一行指标**是否合规：口径 + 下游量。
 
@@ -548,17 +694,38 @@ def verify_metric_row(row: dict) -> dict:
                 "missing": [], "caliber": None, "has_recall": False, "has_downstream": False}
     has_recall = _has_any(row, RECALL_KEYS)
     has_down = _has_any(row, DOWNSTREAM_KEYS)
+
+    # 密度与耗时两条判据**不依赖 recall**：一行可以只报加成、只报耗时。所以它们
+    # 放在 recall 的「不适用就直接放行」分支之前，否则这类行永远不会被检查。
+    density_verdict, density_detail, density_missing = _judge_density(row)
+    duration_verdict, duration_detail, duration_missing = _judge_duration(row)
+
     if not has_recall:
-        return {"verdict": PASS, "detail": "不含 recall 键，不适用口径检查",
-                "missing": [], "caliber": row.get("caliber"),
+        parts = [
+            (density_verdict, density_detail, density_missing),
+            (duration_verdict, duration_detail, duration_missing),
+        ]
+        verdict = _fold([p[0] for p in parts])
+        details = [p[1] for p in parts if p[0] != PASS]
+        missing = [name for p in parts for name in p[2]]
+        return {"verdict": verdict,
+                "detail": ("；".join(details) if details else "不含 recall 键，不适用口径检查"),
+                "missing": missing, "caliber": row.get("caliber"),
                 "has_recall": False, "has_downstream": has_down}
     caliber_verdict, caliber_detail = judge_caliber(row.get("caliber"))
+    extras = [
+        (density_verdict, density_detail, density_missing),
+        (duration_verdict, duration_detail, duration_missing),
+    ]
     if caliber_verdict != PASS:
         # `missing` 与 `verify()` 同形：判不了的时候必须能反查到缺的是哪一项。
         # P1-c 那次的教训是「缺输入」安静地变成了「无法判定」，两种输出要分得开。
-        return {"verdict": caliber_verdict,
-                "detail": f"{caliber_detail}；本行含 recall 键，口径是硬要求",
-                "missing": ["caliber"] if caliber_verdict == UNKNOWN else [],
+        extra_detail = "；".join(p[1] for p in extras if p[0] != PASS)
+        extra_missing = [name for p in extras for name in p[2]]
+        return {"verdict": _fold([caliber_verdict] + [p[0] for p in extras]),
+                "detail": (f"{caliber_detail}；本行含 recall 键，口径是硬要求"
+                           + (f"；{extra_detail}" if extra_detail else "")),
+                "missing": (["caliber"] if caliber_verdict == UNKNOWN else []) + extra_missing,
                 "caliber": row.get("caliber"), "has_recall": True, "has_downstream": has_down}
     if not has_down:
         return {
@@ -569,13 +736,17 @@ def verify_metric_row(row: dict) -> dict:
                 "只有 R@n 的行会给出相反的建议。请补 "
                 f"{list(DOWNSTREAM_KEYS)} 中至少一项"
             ),
-            "missing": ["downstream"],
+            "missing": ["downstream"] + [name for p in extras for name in p[2]],
             "caliber": row.get("caliber"),
             "has_recall": True,
             "has_downstream": False,
         }
-    return {"verdict": PASS, "detail": f"{caliber_detail}，且并列了下游量",
-            "missing": [], "caliber": row.get("caliber"),
+    extra_detail = "；".join(p[1] for p in extras if p[0] != PASS)
+    return {"verdict": _fold([PASS] + [p[0] for p in extras]),
+            "detail": (f"{caliber_detail}，且并列了下游量"
+                       + (f"；{extra_detail}" if extra_detail else "")),
+            "missing": [name for p in extras for name in p[2]],
+            "caliber": row.get("caliber"),
             "has_recall": True, "has_downstream": True}
 
 
@@ -592,6 +763,171 @@ def verify_metric_rows(rows) -> dict:
     detail = f"{len(rows)} 行指标，{len(bad)} 行不合规、{len(unknown_rows)} 行无法判定" if rows else "没有指标行"
     return {"verdict": verdict, "rows": results, "bad": bad,
             "unknown_rows": unknown_rows, "detail": detail}
+
+
+# ---------------------------------------------------------------- 密度三件套的构造器
+
+
+def signal_density_block(search_stats, context_stats) -> dict:
+    """从一次问答的两段 stats 拼出 `{signal_boosted, context_units, density}`。
+
+    ## 为什么必须由「上层」来填
+
+    `signal_boosted`（这题命中给加成的块数）在 `search()` 内部就知道，但
+    `context_units`（真正进了上下文的单元数）只有 `build_context()` 之后才知道。
+    所以这两个数的比值**不可能**在 `search()` 里算出来——硬塞进去会造出一个
+    「有时有、有时是 0」的字段，而 0 会被读成「密度真的是零」。
+
+    调用方（`ask_once` 的调用者 / 评测脚本）拿 `result["search"]["stats"]` 与
+    `result["context"]["stats"]` 各一份喂进来即可。
+
+    ## 为什么加成数取 max 而不是求和
+
+    `search().stats` 里每个信号各自一个计数（`cooc_boosted` / `speaker_boosted`
+    / ...）。加成的**效果**是这些加量叠加进同一个 score，所以「这题有多少块被
+    加成过」取最大值而不是求和——同一块被两个信号同时加成，仍只是一块。
+    求和会把「两块各被两路加成」算成 4，密度虚高一倍，正好把 4+ 无效区间填满。
+
+    取不到任何加成计数时返回 `signal_boosted=0`：这是真实的「这次没有加成」，
+    不是「不知道」。`density_of(0, n)` 给 0.0，落在「0–1 无效」区间的左端，
+    是诚实的位置。
+    """
+    counts = []
+    if isinstance(search_stats, dict):
+        for key in BOOST_KEYS:
+            value = search_stats.get(key)
+            if _blank(value):
+                continue
+            try:
+                counts.append(int(value))
+            except (TypeError, ValueError):
+                continue
+    boosted = max(counts) if counts else 0
+    units = 0
+    if isinstance(context_stats, dict):
+        try:
+            units = int(context_stats.get("units") or 0)
+        except (TypeError, ValueError):
+            units = 0
+    return {
+        "signal_boosted": boosted,
+        "context_units": units,
+        "density": density_of(boosted, units),
+    }
+
+
+# ---------------------------------------------------------------- 并列召回指标的包含关系
+
+
+def compute_gain_set_relations(rows) -> list[dict]:
+    """两两算增益题集的交集/差集。**这是「多个召回指标并列」时唯一诚实的写法。**
+
+    返回 `[{a, b, intersection_n, only_a, only_b, nested}, ...]`，`a`/`b` 取每行的
+    `metric` 名（没有就用 `row_<i>`）。`nested` 表示其中一个是另一个的子集。
+    """
+    named = []
+    for i, row in enumerate(rows or []):
+        if not isinstance(row, dict):
+            continue
+        ids = row.get("gain_ids")
+        if not isinstance(ids, (list, tuple)) or not ids:
+            continue
+        name = str(row.get("metric") or f"row_{i}")
+        named.append((name, set(str(x) for x in ids)))
+    out = []
+    for i in range(len(named)):
+        for j in range(i + 1, len(named)):
+            na, sa = named[i]
+            nb, sb = named[j]
+            out.append({
+                "a": na,
+                "b": nb,
+                "intersection_n": len(sa & sb),
+                "only_a": sorted(sa - sb),
+                "only_b": sorted(sb - sa),
+                "nested": (sa <= sb) or (sb <= sa),
+            })
+    return out
+
+
+def verify_gain_sets(rows) -> dict:
+    """并列的召回指标必须给出增益题集的包含关系。
+
+    ## 真实案例（2026-11-05）
+
+    A 的 P2 第一轮报 `any_gold +6` / `all_gold +4` / `covered +5`。这不是三份独立
+    证据：`required_citations` 的块集恒等于 `gold_chunk_ids`（gold-v2 640 题、
+    gold-v1 320 题均 0 例外），所以「所有 required 块在上下文」等价于「所有 gold
+    块在上下文」，`covered` 只比 `all_gold` 多一层「回答层发不发引用」；单 gold
+    块题占 217/350 = 62.0%，其上 `any_gold` 与 `all_gold` **数学恒等**。
+
+    三个增益题集的实际差集只有一题（`q-tc-000023`）。
+
+    只并列三个 +N，读者会以为三个机制同时改善 —— 与 `hop0.5` 的 R@20 虚高同类：
+    **数字真，但读者会得出错误结论**。
+
+    ## 判据
+
+    * 少于两个带 `gain_ids` 的行 → 不适用（pass）；
+    * 有 ≥2 行但没有任何一行给 `relation_table` → unknown（不是 fail：报告可能
+      只是没写，我们不知道它到底是不是嵌套）；
+    * 给了 `relation_table` 但与实际集合算出来的不一致 → fail（手填糊弄）；
+    * 一致 → pass，并在 `nested_pairs` 里点名哪几对是嵌套关系。
+    """
+    if not isinstance(rows, (list, tuple)):
+        return {"verdict": FAIL, "applicable": False, "nested_pairs": [],
+                "detail": f"指标集合应为 list，拿到 {type(rows).__name__}"}
+    gain_rows = [
+        r for r in rows
+        if isinstance(r, dict) and isinstance(r.get("gain_ids"), (list, tuple)) and r.get("gain_ids")
+    ]
+    if len(gain_rows) < 2:
+        return {"verdict": PASS, "applicable": False, "nested_pairs": [],
+                "detail": f"只有 {len(gain_rows)} 行带增益题集，不涉及并列"}
+    expected = compute_gain_set_relations(gain_rows)
+    nested = [f"{e['a']} ⊇ {e['b']}" if not e["only_b"] else f"{e['b']} ⊇ {e['a']}"
+              for e in expected if e["nested"]]
+    provided = None
+    for row in gain_rows:
+        table = row.get("relation_table")
+        if isinstance(table, list) and table:
+            provided = table
+            break
+    if provided is None:
+        return {"verdict": UNKNOWN, "applicable": True, "nested_pairs": nested,
+                "detail": (
+                    "并列了 " + str(len(gain_rows)) + " 个召回类指标，却没有给增益题集的"
+                    "包含关系。真实案例：any_gold +6 / all_gold +4 / covered +5 三者"
+                    "实际差集只有一题（q-tc-000023）——required_citations 的块集恒等于"
+                    "gold_chunk_ids，这个嵌套是结构性的，不是三个机制同时改善。"
+                    "请用 compute_gain_set_relations() 生成 relation_table"
+                )}
+    mismatches = []
+    for exp in expected:
+        got = None
+        for item in provided:
+            if not isinstance(item, dict):
+                continue
+            if {str(item.get("a")), str(item.get("b"))} == {exp["a"], exp["b"]}:
+                got = item
+                break
+        if got is None:
+            mismatches.append(f"{exp['a']}×{exp['b']} 缺失")
+            continue
+        if int(got.get("intersection_n", -1)) != exp["intersection_n"]:
+            mismatches.append(
+                f"{exp['a']}×{exp['b']} 交集应为 {exp['intersection_n']}，表里写 {got.get('intersection_n')}"
+            )
+        if sorted(str(x) for x in got.get("only_a") or []) != exp["only_a"]:
+            mismatches.append(f"{exp['a']}×{exp['b']} only_a 与实测不符")
+        if sorted(str(x) for x in got.get("only_b") or []) != exp["only_b"]:
+            mismatches.append(f"{exp['a']}×{exp['b']} only_b 与实测不符")
+    if mismatches:
+        return {"verdict": FAIL, "applicable": True, "nested_pairs": nested,
+                "detail": "relation_table 与实际增益集不符：" + "；".join(mismatches)}
+    return {"verdict": PASS, "applicable": True, "nested_pairs": nested,
+            "detail": f"并列 {len(gain_rows)} 个召回指标，包含关系已给出"
+                      + (f"（嵌套：{'、'.join(nested)}）" if nested else "")}
 
 
 # ---------------------------------------------------------------- 与发布门对接

@@ -477,3 +477,270 @@ class TestReverseProbeRefusesStaleEvidence:
             f"中文没读回来（stdout={result['stdout']!r}）：子进程管道编码没设"
         )
         assert "\ufffd" not in result["stdout"]
+
+
+# ---------------------------------------------------------------- 门 6：信号密度可观测
+
+
+class TestSignalDensityIsObservable:
+    """「排序加成」类指标必须同时带 `signal_boosted` / `context_units` / `density`。
+
+    ## 为什么这条必须是门
+
+    A 的 P2 第一轮真跑（`data/a_p2_round1.json`）实测：cooc 加成的成败**完全由
+    密度 `boosted / units` 决定**，与题型无关：
+
+    | 密度 boosted/units | n | 救 | 丢 | 净 |
+    |---|---|---|---|---|
+    | 0–1.0 | 38 | 2 | 0 | +2 |
+    | 1.0–2.0 | 41 | 3 | 0 | +3 |
+    | 2.0–4.0 | 21 | 1 | 0 | +1 |
+    | 4.0+ | 35 | **0** | **0** | **0** |
+
+    `direct_relation` 内部混杂检验同向（0–2 → +4、2–4 → +1、4+ → 0），所以是
+    密度效应不是题型效应。机制：命中给常数加成，命中块数远超上下文容量
+    （units 中位 5）时全体同加同量 → 相对顺序不变 → 等于没加。
+
+    **只要报告里不出现这个数，下一轮调参的人就还会拿「R@20 涨了」当成功**，而
+    涨的那些题全落在低密度区间。所以密度必须是报告里的可见字段，不是跑完再去算。
+
+    ## 为什么三个数缺一不可
+
+    `density` 是派生量，只报 `density` 无法反查（0.8 可能是 4/5，也可能是 8/10，
+    后者在「4+ 无效」的分界另一侧）。`context_units` 必须等 `build_context()`
+    之后才知道，`search()` 内部算不出来——所以这个字段只能在上层（`ask_once` /
+    pipeline）填。把它硬塞进 `search()` 的返回会造出一个时有时无的字段。
+
+    ## 怎么变红
+
+    把 `verify_metric_row()` 里 `_judge_density()` 那段删掉 →
+    `test_boost_row_without_density_is_unknown` 红；
+    把一致性检查删掉 → `test_inconsistent_density_is_fail` 红。
+    """
+
+    def test_boost_row_without_density_is_unknown(self) -> None:
+        row = {"cooc_boosted": 7, "r20": 0.79, "caliber": "gold_only", "context_hits": 162}
+        result = provenance.verify_metric_row(row)
+        assert result["verdict"] == provenance.UNKNOWN
+        assert result["missing"] == ["signal_boosted", "context_units", "density"]
+
+    def test_boost_row_with_all_three_passes(self) -> None:
+        row = {"cooc_boosted": 7, "signal_boosted": 7, "context_units": 5, "density": 1.4}
+        result = provenance.verify_metric_row(row)
+        assert result["verdict"] == provenance.PASS
+        assert result["missing"] == []
+
+    def test_partially_filled_density_is_unknown_naming_only_what_is_missing(self) -> None:
+        row = {"cooc_boosted": 7, "signal_boosted": 7}
+        result = provenance.verify_metric_row(row)
+        assert result["verdict"] == provenance.UNKNOWN
+        assert result["missing"] == ["context_units", "density"]
+
+    def test_inconsistent_density_is_fail(self) -> None:
+        """三个数都填了，但 7/5=1.4 被写成 4.0——数字好看，含义不对。"""
+        row = {"cooc_boosted": 7, "signal_boosted": 7, "context_units": 5, "density": 4.0}
+        result = provenance.verify_metric_row(row)
+        assert result["verdict"] == provenance.FAIL
+        assert "1.4" in result["detail"]
+
+    def test_zero_units_does_not_divide_by_zero(self) -> None:
+        """`context_units=0` 时不能崩，也不能算 pass——那是「没有上下文」的异常行。"""
+        row = {"cooc_boosted": 3, "signal_boosted": 3, "context_units": 0, "density": 0.0}
+        assert provenance.verify_metric_row(row)["verdict"] == provenance.FAIL
+
+    def test_row_without_boost_is_not_applicable(self) -> None:
+        """纯吞吐、纯召回的行不该被这条门误伤。误伤会教人忽略这道门。"""
+        row = {"r20": 0.78, "caliber": "gold_only", "context_hits": 162}
+        assert provenance.verify_metric_row(row)["verdict"] == provenance.PASS
+
+    def test_density_helper_computes_the_ratio(self) -> None:
+        assert provenance.density_of(7, 5) == 1.4
+        assert provenance.density_of(0, 5) == 0.0
+        assert provenance.density_of(3, 0) is None
+
+
+# ---------------------------------------------------------------- 门 7：耗时必须能区分墙钟与 CPU
+
+
+class TestDurationNeedsCpuTime:
+    """只报墙钟耗时的指标行不算数。
+
+    ## 实测反例（Lead 2026-11-05）
+
+    `py -3 scripts/regression.py tests -q` 报 **24141.60s（6:42:21）**，而该进程的
+    CPU 累计只有 **~778s（13 分钟）**——机器中途休眠了 6 小时。P0 的主题正是
+    「有个数字不等于那个数字是测量的」，这段墙钟若进性能报告，会把一次 13 分钟
+    的回归说成 6 小时 42 分。
+
+    ## 为什么判 unknown 而不是 fail
+
+    报告里能看到这个数字、也看不到 CPU 时间，这是「查不了」——那个数**可能是**
+    真的耗时，只是无法证实。判 fail 会暗示「这个数一定是假的」，而我们并不知道。
+
+    ## 怎么变红
+
+    把 `verify_metric_row()` 里 `_judge_duration()` 那段删掉 →
+    `test_wall_clock_only_is_unknown` 红。
+    """
+
+    def test_wall_clock_only_is_unknown(self) -> None:
+        row = {"elapsed_s": 24141.60}
+        result = provenance.verify_metric_row(row)
+        assert result["verdict"] == provenance.UNKNOWN
+        assert result["missing"] == ["cpu_s"]
+
+    def test_wall_clock_with_cpu_time_passes(self) -> None:
+        row = {"elapsed_s": 24141.60, "cpu_s": 778.0}
+        assert provenance.verify_metric_row(row)["verdict"] == provenance.PASS
+
+    def test_detail_mentions_the_sleep_case(self) -> None:
+        result = provenance.verify_metric_row({"wall_s": 24141.60})
+        assert "休眠" in result["detail"]
+
+    def test_percentile_latency_is_not_a_run_duration(self) -> None:
+        """单请求延迟分位数天生是墙钟，不该被要求配 CPU 时间。
+
+        区分「一次运行的累计耗时」与「单次请求延迟」——前者会被机器休眠污染，
+        后者不会（睡眠期间根本没有请求在跑）。
+        """
+        for row in ({"p95_ms": 42.0}, {"median_ms": 145.87}, {"qps": 118.0}):
+            assert provenance.verify_metric_row(row)["verdict"] == provenance.PASS
+
+
+# ---------------------------------------------------------------- 门 8：并列召回指标必须给包含关系
+
+
+class TestParallelRecallMetricsNeedContainment:
+    """多个召回类指标并列时，必须给增益题集的交集/差集（或包含关系）。
+
+    ## 真实案例（Lead 2026-11-05，commit 4820aa2）
+
+    A 的 P2 第一轮报了三行增益：`any_gold +6` / `all_gold +4` / `covered +5`。
+    这三个数**不是三份独立证据**：`required_citations` 的块集恒等于
+    `gold_chunk_ids`（gold-v2 640 题 0 例外、gold-v1 320 题 0 例外），所以
+    「所有 required 块在上下文」等价于「所有 gold 块在上下文」，`covered` 比
+    `all_gold` 只多一层「回答层发不发引用」；而单 gold 块题占 217/350 = 62.0%，
+    在其上 `any_gold` 与 `all_gold` **数学恒等**。
+
+    实测：三个增益题集的实际差集只有一题（`q-tc-000023`）。
+
+    若报告只并列三个 +N，读者会以为三个机制同时改善；这与 `hop0.5` 的 R@20
+    虚高是同一类误导：**数字真，但读者会得出错误结论**。
+
+    ## 判据
+
+    同一块里出现 2 个以上带 `gain_ids` 的指标行时，必须同时提供
+    `relation_table`（用 `compute_gain_set_relations()` 算），且它要与实际增益集
+    一致；算出来不一致 → fail。只有一张「几个指标都涨了」的表格 → unknown。
+
+    ## 怎么变红
+
+    把 `verify_gain_sets()` 里的 `applicable` 判据删掉 →
+    `test_two_parallel_gain_rows_without_relation_table_are_unknown` 红；
+    把一致性比对删掉 → `test_a_relation_table_that_contradicts_the_sets_is_fail` 红。
+    """
+
+    def _rows(self) -> list:
+        return [
+            {"metric": "any_gold", "gain_ids": ["q-a", "q-b", "q-c", "q-d", "q-e", "q-f"]},
+            {"metric": "all_gold", "gain_ids": ["q-a", "q-b", "q-c", "q-d", "q-e"]},
+            {"metric": "covered", "gain_ids": ["q-a", "q-b", "q-c", "q-d", "q-e"]},
+        ]
+
+    def test_two_parallel_gain_rows_without_relation_table_are_unknown(self) -> None:
+        result = provenance.verify_gain_sets(self._rows())
+        assert result["verdict"] == provenance.UNKNOWN
+        assert "q-tc-000023" in result["detail"], (
+            "失败信息里必须带那个真实案例，否则下次还会有人把嵌套口径并列着报"
+        )
+
+    def test_computed_relation_table_passes(self) -> None:
+        rows = self._rows()
+        table = provenance.compute_gain_set_relations(rows)
+        for row in rows:
+            row["relation_table"] = table
+        result = provenance.verify_gain_sets(rows)
+        assert result["verdict"] == provenance.PASS
+        assert result["nested_pairs"], "any_gold 是 all_gold 的超集，必须被算成嵌套"
+
+    def test_compute_relations_reports_intersection_and_difference(self) -> None:
+        table = provenance.compute_gain_set_relations(self._rows())
+        assert table[0]["a"] == "any_gold"
+        assert table[0]["b"] == "all_gold"
+        assert table[0]["only_a"] == ["q-f"]
+        assert table[0]["only_b"] == []
+        assert table[0]["intersection_n"] == 5
+
+    def test_a_single_gain_row_is_not_applicable(self) -> None:
+        result = provenance.verify_gain_sets([{"metric": "any_gold", "gain_ids": ["q-a"]}])
+        assert result["verdict"] == provenance.PASS
+        assert result["applicable"] is False
+
+    def test_a_relation_table_that_contradicts_the_sets_is_fail(self) -> None:
+        """手填一张「三行都一样」的表来糊弄门 → 必须 fail。"""
+        rows = self._rows()
+        fake = [{"a": "any_gold", "b": "all_gold", "intersection_n": 6,
+                 "only_a": [], "only_b": []}]
+        for row in rows:
+            row["relation_table"] = fake
+        assert provenance.verify_gain_sets(rows)["verdict"] == provenance.FAIL
+
+
+# ---------------------------------------------------------------- 门 6b：密度三件套的构造器
+
+
+class TestSignalDensityBlock:
+    """`signal_density_block()` 从两段 stats 拼出三件套。
+
+    ## 为什么这条要单独测
+
+    上面那道门管的是「报告里有没有这三个数」，这道管的是「这三个数算得对不对」。
+    门只检查存在性的话，填错值照样过——而错值恰好会让分桶结论反向：把
+    `signal_boosted` 求和而不是取 max，密度会虚高一倍，4+ 无效区间被填满，
+    结论就变成「加成对高密度题也有用」。
+
+    ## 怎么变红
+
+    把 `max(counts)` 改成 `sum(counts)` → `test_summing_boosts_would_inflate_density` 红。
+    """
+
+    def test_reads_boosted_from_search_and_units_from_context(self) -> None:
+        block = provenance.signal_density_block(
+            {"cooc_boosted": 7, "cooc_weight": 0.1, "candidates": 211},
+            {"units": 5, "tokens_used": 1234},
+        )
+        assert block == {"signal_boosted": 7, "context_units": 5, "density": 1.4}
+
+    def test_no_boost_signal_means_zero_not_unknown(self) -> None:
+        """没有任何加成计数 → 0，不是 None。0 是「这次没加成」的真实值。"""
+        block = provenance.signal_density_block({"candidates": 211}, {"units": 5})
+        assert block["signal_boosted"] == 0
+        assert block["density"] == 0.0
+
+    def test_missing_stats_do_not_raise(self) -> None:
+        block = provenance.signal_density_block(None, None)
+        assert block == {"signal_boosted": 0, "context_units": 0, "density": None}
+
+    def test_summing_boosts_would_inflate_density(self) -> None:
+        """同一块被两路加成，仍只是一块——取 max 不取和。
+
+        求和会把密度 1.4 说成 2.4，跨过「2–4 只救 1 题」那一档，结论就变了。
+        """
+        block = provenance.signal_density_block(
+            {"cooc_boosted": 7, "speaker_boosted": 5}, {"units": 5}
+        )
+        assert block["signal_boosted"] == 7
+        assert block["density"] == 1.4
+
+    def test_zero_units_gives_none_density_not_zero(self) -> None:
+        """没有上下文单元时密度是「未定义」，不是 0——后者会混进 0–1 分桶。"""
+        block = provenance.signal_density_block({"cooc_boosted": 3}, {"units": 0})
+        assert block["context_units"] == 0
+        assert block["density"] is None
+
+    def test_the_block_it_produces_passes_the_density_gate(self) -> None:
+        """构造器的输出喂回门必须合格——两个函数不许各说各话。"""
+        block = provenance.signal_density_block({"cooc_boosted": 7}, {"units": 5})
+        row = {"r20": 0.79, "caliber": "gold_only", "context_hits": 162}
+        row.update(block)
+        assert provenance.verify_metric_row(row)["verdict"] == provenance.PASS

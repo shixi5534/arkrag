@@ -1,0 +1,382 @@
+{
+  "schema": "ark-signal-density-1",
+  "generated_at": "2026-11-05T01:46:24Z",
+  "generation_id": "g-20261103T132152Z-06a741",
+  "git_commit": "34d77a18e89423307e544cee50556331618c48bd",
+  "code_sha256_16": "d31a41711c079334",
+  "dataset": {
+    "gold_path": "data/goldset/gold-v2.json",
+    "gold_sha16": "069375f8e355e4b9",
+    "split_path": "data/goldset/split-v2.json",
+    "split_sha16": "3d586b36efc7ce85",
+    "gold_total": 640
+  },
+  "inputs": [
+    {
+      "path": "data/a_p2_round1.json",
+      "sha16": "63570f789f4fcbad",
+      "bytes": 419776
+    }
+  ],
+  "environment": {
+    "python": "3.14.3",
+    "platform": "win32",
+    "os": "Windows-11-10.0.26200-SP0",
+    "machine": "AMD64",
+    "cpu_count": 20
+  },
+  "source_report": "data/a_p2_round1.json",
+  "calibers": [
+    "all_questions",
+    "boost_applied_only"
+  ],
+  "buckets": [
+    {
+      "low": 0.0,
+      "high": 1.0,
+      "name": "0-1"
+    },
+    {
+      "low": 1.0,
+      "high": 2.0,
+      "name": "1-2"
+    },
+    {
+      "low": 2.0,
+      "high": 4.0,
+      "name": "2-4"
+    },
+    {
+      "low": 4.0,
+      "high": null,
+      "name": "4+"
+    }
+  ],
+  "bucket_summary": {
+    "cooc0.1": {
+      "all_questions": [
+        {
+          "bucket": "0-1",
+          "n": 253,
+          "any_gold": {
+            "saved": 2,
+            "lost": 0,
+            "net": 2
+          },
+          "all_gold": {
+            "saved": 2,
+            "lost": 0,
+            "net": 2
+          },
+          "covered": {
+            "saved": 2,
+            "lost": 0,
+            "net": 2
+          }
+        },
+        {
+          "bucket": "1-2",
+          "n": 41,
+          "any_gold": {
+            "saved": 3,
+            "lost": 0,
+            "net": 3
+          },
+          "all_gold": {
+            "saved": 2,
+            "lost": 1,
+            "net": 1
+          },
+          "covered": {
+            "saved": 2,
+            "lost": 0,
+            "net": 2
+          }
+        },
+        {
+          "bucket": "2-4",
+          "n": 21,
+          "any_gold": {
+            "saved": 1,
+            "lost": 0,
+            "net": 1
+          },
+          "all_gold": {
+            "saved": 1,
+            "lost": 0,
+            "net": 1
+          },
+          "covered": {
+            "saved": 1,
+            "lost": 0,
+            "net": 1
+          }
+        },
+        {
+          "bucket": "4+",
+          "n": 35,
+          "any_gold": {
+            "saved": 0,
+            "lost": 0,
+            "net": 0
+          },
+          "all_gold": {
+            "saved": 0,
+            "lost": 0,
+            "net": 0
+          },
+          "covered": {
+            "saved": 0,
+            "lost": 0,
+            "net": 0
+          }
+        }
+      ],
+      "boost_applied_only": [
+        {
+          "bucket": "0-1",
+          "n": 38,
+          "any_gold": {
+            "saved": 2,
+            "lost": 0,
+            "net": 2
+          },
+          "all_gold": {
+            "saved": 2,
+            "lost": 0,
+            "net": 2
+          },
+          "covered": {
+            "saved": 2,
+            "lost": 0,
+            "net": 2
+          }
+        },
+        {
+          "bucket": "1-2",
+          "n": 41,
+          "any_gold": {
+            "saved": 3,
+            "lost": 0,
+            "net": 3
+          },
+          "all_gold": {
+            "saved": 2,
+            "lost": 1,
+            "net": 1
+          },
+          "covered": {
+            "saved": 2,
+            "lost": 0,
+            "net": 2
+          }
+        },
+        {
+          "bucket": "2-4",
+          "n": 21,
+          "any_gold": {
+            "saved": 1,
+            "lost": 0,
+            "net": 1
+          },
+          "all_gold": {
+            "saved": 1,
+            "lost": 0,
+            "net": 1
+          },
+          "covered": {
+            "saved": 1,
+            "lost": 0,
+            "net": 1
+          }
+        },
+        {
+          "bucket": "4+",
+          "n": 35,
+          "any_gold": {
+            "saved": 0,
+            "lost": 0,
+            "net": 0
+          },
+          "all_gold": {
+            "saved": 0,
+            "lost": 0,
+            "net": 0
+          },
+          "covered": {
+            "saved": 0,
+            "lost": 0,
+            "net": 0
+          }
+        }
+      ]
+    }
+  },
+  "parallel_recall": [
+    {
+      "metric": "any_gold",
+      "gain": 6,
+      "lose": 0,
+      "net": 6,
+      "gain_ids": [
+        "q-dr-000010",
+        "q-dr-000038",
+        "q-tc-000023",
+        "q-dr-900003",
+        "q-dr-900020",
+        "q-dr-900046"
+      ],
+      "lose_ids": [],
+      "relation_table": [
+        {
+          "a": "any_gold",
+          "b": "all_gold",
+          "intersection_n": 5,
+          "only_a": [
+            "q-tc-000023"
+          ],
+          "only_b": [],
+          "nested": true
+        },
+        {
+          "a": "any_gold",
+          "b": "covered",
+          "intersection_n": 5,
+          "only_a": [
+            "q-tc-000023"
+          ],
+          "only_b": [],
+          "nested": true
+        },
+        {
+          "a": "all_gold",
+          "b": "covered",
+          "intersection_n": 5,
+          "only_a": [],
+          "only_b": [],
+          "nested": true
+        }
+      ]
+    },
+    {
+      "metric": "all_gold",
+      "gain": 5,
+      "lose": 1,
+      "net": 4,
+      "gain_ids": [
+        "q-dr-000010",
+        "q-dr-000038",
+        "q-dr-900003",
+        "q-dr-900020",
+        "q-dr-900046"
+      ],
+      "lose_ids": [
+        "q-tc-000007"
+      ],
+      "relation_table": [
+        {
+          "a": "any_gold",
+          "b": "all_gold",
+          "intersection_n": 5,
+          "only_a": [
+            "q-tc-000023"
+          ],
+          "only_b": [],
+          "nested": true
+        },
+        {
+          "a": "any_gold",
+          "b": "covered",
+          "intersection_n": 5,
+          "only_a": [
+            "q-tc-000023"
+          ],
+          "only_b": [],
+          "nested": true
+        },
+        {
+          "a": "all_gold",
+          "b": "covered",
+          "intersection_n": 5,
+          "only_a": [],
+          "only_b": [],
+          "nested": true
+        }
+      ]
+    },
+    {
+      "metric": "covered",
+      "gain": 5,
+      "lose": 0,
+      "net": 5,
+      "gain_ids": [
+        "q-dr-000010",
+        "q-dr-000038",
+        "q-dr-900003",
+        "q-dr-900020",
+        "q-dr-900046"
+      ],
+      "lose_ids": [],
+      "relation_table": [
+        {
+          "a": "any_gold",
+          "b": "all_gold",
+          "intersection_n": 5,
+          "only_a": [
+            "q-tc-000023"
+          ],
+          "only_b": [],
+          "nested": true
+        },
+        {
+          "a": "any_gold",
+          "b": "covered",
+          "intersection_n": 5,
+          "only_a": [
+            "q-tc-000023"
+          ],
+          "only_b": [],
+          "nested": true
+        },
+        {
+          "a": "all_gold",
+          "b": "covered",
+          "intersection_n": 5,
+          "only_a": [],
+          "only_b": [],
+          "nested": true
+        }
+      ]
+    }
+  ],
+  "gain_set_relations": [
+    {
+      "a": "any_gold",
+      "b": "all_gold",
+      "intersection_n": 5,
+      "only_a": [
+        "q-tc-000023"
+      ],
+      "only_b": [],
+      "nested": true
+    },
+    {
+      "a": "any_gold",
+      "b": "covered",
+      "intersection_n": 5,
+      "only_a": [
+        "q-tc-000023"
+      ],
+      "only_b": [],
+      "nested": true
+    },
+    {
+      "a": "all_gold",
+      "b": "covered",
+      "intersection_n": 5,
+      "only_a": [],
+      "only_b": [],
+      "nested": true
+    }
+  ]
+}
