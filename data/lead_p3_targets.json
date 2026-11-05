@@ -1,0 +1,1242 @@
+{
+  "generated_at": "2026-11-05T13:32:16Z",
+  "git_commit": "70dc3b1b39db103f29d9e18f92eeaa8b92d9acda",
+  "python": "3.14.3",
+  "os": "Windows-11-10.0.26200-SP0",
+  "command": "py -3 scripts/lead_p3_targets.py --json data/lead_p3_targets.json",
+  "generation": "g-20261103T132152Z-06a741",
+  "gold_set": "data/goldset/gold-v2.json",
+  "1_题型路由": {
+    "问题总数": 640,
+    "骨架总数": 25,
+    "跨类骨架数": 0,
+    "跨类骨架": {},
+    "每类骨架数": {
+      "adversarial": 2,
+      "alias": 2,
+      "cross_chunk": 2,
+      "direct_relation": 2,
+      "multihop": 2,
+      "negative_abstain": 11,
+      "single_chunk": 2,
+      "time_conflict": 2
+    },
+    "每类题数": {
+      "adversarial": 32,
+      "alias": 96,
+      "cross_chunk": 64,
+      "direct_relation": 96,
+      "multihop": 96,
+      "negative_abstain": 64,
+      "single_chunk": 128,
+      "time_conflict": 64
+    },
+    "每类骨架示例": {
+      "single_chunk": "在剧情《T》的正文里，出现了这样一句话：「Q」。这句话出自哪个文本块？请给出该块的标题。",
+      "alias": "在剧情正文里，「Q」被用来指代哪个角色或事物？请给出它的规范名。",
+      "direct_relation": "「Q」对「Q」处于哪种关系？",
+      "multihop": "已知「Q」通过唯一一个中间实体与「Q」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+      "cross_chunk": "「Q」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+      "time_conflict": "同两个实体「Q」与「Q」之间先后出现「Q」与「Q」两种相反关系。这是抽取矛盾还是剧情演进？请说明理由。",
+      "negative_abstain": "原文写道「Q」。据此判断：「Q」参与其中这件事是否发生？",
+      "adversarial": "「Q」与「Q」名字相近，它们是同一个实体吗？若不是，请说明区别。"
+    },
+    "判据": "跨类骨架数 == 0 ⇒ 纯规则路由可行，不需要模型"
+  },
+  "2_cross_chunk章节包": {
+    "题数": 38,
+    "按gold块chapter字段_精确命中": 38,
+    "按gold块chunk_id路径截_精确命中": 7,
+    "按断言端点拼_同序精确命中": 24,
+    "按断言端点拼_集合相等": 24,
+    "至少命中一个gold章节": 38,
+    "字段法与断言法皆成立": 24,
+    "候选章节数中位": 2.0,
+    "候选章节数最大": 5,
+    "逐题": [
+      {
+        "question_id": "q-cx-000001",
+        "answer": "act33side、main_ep14",
+        "gold_chapters": "act33side、main_ep14",
+        "path_chapters": "act33side、main",
+        "predicted_chapters_sorted": "act33side、main_ep14",
+        "predicted_chapters_set_equal": true,
+        "ok_by_gold_chunk_field": true,
+        "ok_by_chunk_id_path": false,
+        "ok_by_assertion_ordered": true,
+        "ok_by_assertion_set": true,
+        "n_predicted": 2
+      },
+      {
+        "question_id": "q-cx-000003",
+        "answer": "main_ep16、main_st17",
+        "gold_chapters": "main_ep16、main_st17",
+        "path_chapters": "main",
+        "predicted_chapters_sorted": "main_ep16、main_st17",
+        "predicted_chapters_set_equal": true,
+        "ok_by_gold_chunk_field": true,
+        "ok_by_chunk_id_path": false,
+        "ok_by_assertion_ordered": true,
+        "ok_by_assertion_set": true,
+        "n_predicted": 2
+      },
+      {
+        "question_id": "q-cx-000004",
+        "answer": "act17side、memory_deepcl、rogue_rogue_6",
+        "gold_chapters": "act17side、memory_deepcl、rogue_rogue_6",
+        "path_chapters": "act17side、memory、rogue",
+        "predicted_chapters_sorted": "act17side、memory_deepcl、rogue_rogue_6",
+        "predicted_chapters_set_equal": true,
+        "ok_by_gold_chunk_field": true,
+        "ok_by_chunk_id_path": false,
+        "ok_by_assertion_ordered": true,
+        "ok_by_assertion_set": true,
+        "n_predicted": 3
+      },
+      {
+        "question_id": "q-cx-000005",
+        "answer": "main_ep14、main_st11",
+        "gold_chapters": "main_ep14、main_st11",
+        "path_chapters": "main",
+        "predicted_chapters_sorted": "main_ep14",
+        "predicted_chapters_set_equal": false,
+        "ok_by_gold_chunk_field": true,
+        "ok_by_chunk_id_path": false,
+        "ok_by_assertion_ordered": false,
+        "ok_by_assertion_set": false,
+        "n_predicted": 1
+      },
+      {
+        "question_id": "q-cx-000006",
+        "answer": "act17d0、act24side",
+        "gold_chapters": "act17d0、act24side",
+        "path_chapters": "act17d0、act24side",
+        "predicted_chapters_sorted": "act17d0",
+        "predicted_chapters_set_equal": false,
+        "ok_by_gold_chunk_field": true,
+        "ok_by_chunk_id_path": true,
+        "ok_by_assertion_ordered": false,
+        "ok_by_assertion_set": false,
+        "n_predicted": 1
+      },
+      {
+        "question_id": "q-cx-000007",
+        "answer": "memory_huang、memory_weedy",
+        "gold_chapters": "memory_huang、memory_weedy",
+        "path_chapters": "memory",
+        "predicted_chapters_sorted": "memory_huang、memory_weedy",
+        "predicted_chapters_set_equal": true,
+        "ok_by_gold_chunk_field": true,
+        "ok_by_chunk_id_path": false,
+        "ok_by_assertion_ordered": true,
+        "ok_by_assertion_set": true,
+        "n_predicted": 2
+      },
+      {
+        "question_id": "q-cx-000008",
+        "answer": "rogue_rogue_6、roguelike_level_rogue6_ending_4",
+        "gold_chapters": "rogue_rogue_6、roguelike_level_rogue6_ending_4",
+        "path_chapters": "rogue、roguelike",
+        "predicted_chapters_sorted": "rogue_rogue_6、roguelike_level_rogue6_ending_4",
+        "predicted_chapters_set_equal": true,
+        "ok_by_gold_chunk_field": true,
+        "ok_by_chunk_id_path": false,
+        "ok_by_assertion_ordered": true,
+        "ok_by_assertion_set": true,
+        "n_predicted": 2
+      },
+      {
+        "question_id": "q-cx-000009",
+        "answer": "act40side、act49side",
+        "gold_chapters": "act40side、act49side",
+        "path_chapters": "act40side、act49side",
+        "predicted_chapters_sorted": "act40side、act49side",
+        "predicted_chapters_set_equal": true,
+        "ok_by_gold_chunk_field": true,
+        "ok_by_chunk_id_path": true,
+        "ok_by_assertion_ordered": true,
+        "ok_by_assertion_set": true,
+        "n_predicted": 2
+      },
+      {
+        "question_id": "q-cx-000010",
+        "answer": "main_ep16、main_spst16",
+        "gold_chapters": "main_ep16、main_spst16",
+        "path_chapters": "main",
+        "predicted_chapters_sorted": "main_ep16、main_spst16",
+        "predicted_chapters_set_equal": true,
+        "ok_by_gold_chunk_field": true,
+        "ok_by_chunk_id_path": false,
+        "ok_by_assertion_ordered": true,
+        "ok_by_assertion_set": true,
+        "n_predicted": 2
+      },
+      {
+        "question_id": "q-cx-000011",
+        "answer": "act27side、act3d0、memory_bryota、memory_buildr",
+        "gold_chapters": "act27side、act3d0、memory_bryota、memory_buildr",
+        "path_chapters": "act27side、act3d0、memory",
+        "predicted_chapters_sorted": "act27side、act3d0、memory_bryota",
+        "predicted_chapters_set_equal": false,
+        "ok_by_gold_chunk_field": true,
+        "ok_by_chunk_id_path": false,
+        "ok_by_assertion_ordered": false,
+        "ok_by_assertion_set": false,
+        "n_predicted": 3
+      },
+      {
+        "question_id": "q-cx-000014",
+        "answer": "act7mini、memory_bluep、memory_glacus、memory_indigo",
+        "gold_chapters": "act7mini、memory_bluep、memory_glacus、memory_indigo",
+        "path_chapters": "act7mini、memory",
+        "predicted_chapters_sorted": "act7mini、memory_bluep、memory_glacus、memory_indigo",
+        "predicted_chapters_set_equal": true,
+        "ok_by_gold_chunk_field": true,
+        "ok_by_chunk_id_path": false,
+        "ok_by_assertion_ordered": true,
+        "ok_by_assertion_set": true,
+        "n_predicted": 4
+      },
+      {
+        "question_id": "q-cx-000016",
+        "answer": "act28side、memory_tinman",
+        "gold_chapters": "act28side、memory_tinman",
+        "path_chapters": "act28side、memory",
+        "predicted_chapters_sorted": "act28side",
+        "predicted_chapters_set_equal": false,
+        "ok_by_gold_chunk_field": true,
+        "ok_by_chunk_id_path": false,
+        "ok_by_assertion_ordered": false,
+        "ok_by_assertion_set": false,
+        "n_predicted": 1
+      },
+      {
+        "question_id": "q-cx-000017",
+        "answer": "memory_mitm、memory_nymph",
+        "gold_chapters": "memory_mitm、memory_nymph",
+        "path_chapters": "memory",
+        "predicted_chapters_sorted": "memory_mitm、memory_nymph",
+        "predicted_chapters_set_equal": true,
+        "ok_by_gold_chunk_field": true,
+        "ok_by_chunk_id_path": false,
+        "ok_by_assertion_ordered": true,
+        "ok_by_assertion_set": true,
+        "n_predicted": 2
+      },
+      {
+        "question_id": "q-cx-000020",
+        "answer": "act17side、act18d3、rogue_rogue_2",
+        "gold_chapters": "act17side、act18d3、rogue_rogue_2",
+        "path_chapters": "act17side、act18d3、rogue",
+        "predicted_chapters_sorted": "act17side、act18d3、rogue_rogue_2",
+        "predicted_chapters_set_equal": true,
+        "ok_by_gold_chunk_field": true,
+        "ok_by_chunk_id_path": false,
+        "ok_by_assertion_ordered": true,
+        "ok_by_assertion_set": true,
+        "n_predicted": 3
+      },
+      {
+        "question_id": "q-cx-000021",
+        "answer": "act14mini、act16d5、memory_saga",
+        "gold_chapters": "act14mini、act16d5、memory_saga",
+        "path_chapters": "act14mini、act16d5、memory",
+        "predicted_chapters_sorted": "act14mini、act16d5、memory_saga",
+        "predicted_chapters_set_equal": true,
+        "ok_by_gold_chunk_field": true,
+        "ok_by_chunk_id_path": false,
+        "ok_by_assertion_ordered": true,
+        "ok_by_assertion_set": true,
+        "n_predicted": 3
+      },
+      {
+        "question_id": "q-cx-000022",
+        "answer": "memory_dagda、memory_jaksel、memory_tiger",
+        "gold_chapters": "memory_dagda、memory_jaksel、memory_tiger",
+        "path_chapters": "memory",
+        "predicted_chapters_sorted": "memory_dagda、memory_jaksel、memory_tiger",
+        "predicted_chapters_set_equal": true,
+        "ok_by_gold_chunk_field": true,
+        "ok_by_chunk_id_path": false,
+        "ok_by_assertion_ordered": true,
+        "ok_by_assertion_set": true,
+        "n_predicted": 3
+      },
+      {
+        "question_id": "q-cx-000024",
+        "answer": "act42side、memory_graceb",
+        "gold_chapters": "act42side、memory_graceb",
+        "path_chapters": "act42side、memory",
+        "predicted_chapters_sorted": "act42side、memory_graceb",
+        "predicted_chapters_set_equal": true,
+        "ok_by_gold_chunk_field": true,
+        "ok_by_chunk_id_path": false,
+        "ok_by_assertion_ordered": true,
+        "ok_by_assertion_set": true,
+        "n_predicted": 2
+      },
+      {
+        "question_id": "q-cx-000026",
+        "answer": "act43side、memory_tippi",
+        "gold_chapters": "act43side、memory_tippi",
+        "path_chapters": "act43side、memory",
+        "predicted_chapters_sorted": "act43side、memory_tippi",
+        "predicted_chapters_set_equal": true,
+        "ok_by_gold_chunk_field": true,
+        "ok_by_chunk_id_path": false,
+        "ok_by_assertion_ordered": true,
+        "ok_by_assertion_set": true,
+        "n_predicted": 2
+      },
+      {
+        "question_id": "q-cx-000027",
+        "answer": "act11d0、act28side",
+        "gold_chapters": "act11d0、act28side",
+        "path_chapters": "act11d0、act28side",
+        "predicted_chapters_sorted": "act11d0、act28side",
+        "predicted_chapters_set_equal": true,
+        "ok_by_gold_chunk_field": true,
+        "ok_by_chunk_id_path": true,
+        "ok_by_assertion_ordered": true,
+        "ok_by_assertion_set": true,
+        "n_predicted": 2
+      },
+      {
+        "question_id": "q-cx-000029",
+        "answer": "act22side、memory_confes、rogue_rogue_4",
+        "gold_chapters": "act22side、memory_confes、rogue_rogue_4",
+        "path_chapters": "act22side、memory、rogue",
+        "predicted_chapters_sorted": "act22side、memory_confes",
+        "predicted_chapters_set_equal": false,
+        "ok_by_gold_chunk_field": true,
+        "ok_by_chunk_id_path": false,
+        "ok_by_assertion_ordered": false,
+        "ok_by_assertion_set": false,
+        "n_predicted": 2
+      },
+      {
+        "question_id": "q-cx-000030",
+        "answer": "act29side、act42side",
+        "gold_chapters": "act29side、act42side",
+        "path_chapters": "act29side、act42side",
+        "predicted_chapters_sorted": "act29side",
+        "predicted_chapters_set_equal": false,
+        "ok_by_gold_chunk_field": true,
+        "ok_by_chunk_id_path": true,
+        "ok_by_assertion_ordered": false,
+        "ok_by_assertion_set": false,
+        "n_predicted": 1
+      },
+      {
+        "question_id": "q-cx-000032",
+        "answer": "act38side、main_ep14",
+        "gold_chapters": "act38side、main_ep14",
+        "path_chapters": "act38side、main",
+        "predicted_chapters_sorted": "act38side、main_ep14",
+        "predicted_chapters_set_equal": true,
+        "ok_by_gold_chunk_field": true,
+        "ok_by_chunk_id_path": false,
+        "ok_by_assertion_ordered": true,
+        "ok_by_assertion_set": true,
+        "n_predicted": 2
+      },
+      {
+        "question_id": "q-cx-900002",
+        "answer": "act18d3、act36side、act52side",
+        "gold_chapters": "act18d3、act36side、act52side",
+        "path_chapters": "act18d3、act36side、act52side",
+        "predicted_chapters_sorted": "act18d3、act36side、act52side",
+        "predicted_chapters_set_equal": true,
+        "ok_by_gold_chunk_field": true,
+        "ok_by_chunk_id_path": true,
+        "ok_by_assertion_ordered": true,
+        "ok_by_assertion_set": true,
+        "n_predicted": 3
+      },
+      {
+        "question_id": "q-cx-900005",
+        "answer": "act21side、act38side、memory_demetr、memory_vigil",
+        "gold_chapters": "act21side、act38side、memory_demetr、memory_vigil",
+        "path_chapters": "act21side、act38side、memory",
+        "predicted_chapters_sorted": "act21side、memory_demetr、memory_vigil",
+        "predicted_chapters_set_equal": false,
+        "ok_by_gold_chunk_field": true,
+        "ok_by_chunk_id_path": false,
+        "ok_by_assertion_ordered": false,
+        "ok_by_assertion_set": false,
+        "n_predicted": 3
+      },
+      {
+        "question_id": "q-cx-900008",
+        "answer": "memory_bstalk、memory_flower",
+        "gold_chapters": "memory_bstalk、memory_flower",
+        "path_chapters": "memory",
+        "predicted_chapters_sorted": "memory_bstalk、memory_flower",
+        "predicted_chapters_set_equal": true,
+        "ok_by_gold_chunk_field": true,
+        "ok_by_chunk_id_path": false,
+        "ok_by_assertion_ordered": true,
+        "ok_by_assertion_set": true,
+        "n_predicted": 2
+      },
+      {
+        "question_id": "q-cx-900011",
+        "answer": "act51side、memory_headb2",
+        "gold_chapters": "act51side、memory_headb2",
+        "path_chapters": "act51side、memory",
+        "predicted_chapters_sorted": "act51side、memory_headb2",
+        "predicted_chapters_set_equal": true,
+        "ok_by_gold_chunk_field": true,
+        "ok_by_chunk_id_path": false,
+        "ok_by_assertion_ordered": true,
+        "ok_by_assertion_set": true,
+        "n_predicted": 2
+      },
+      {
+        "question_id": "q-cx-900012",
+        "answer": "act26side、memory_spuria",
+        "gold_chapters": "act26side、memory_spuria",
+        "path_chapters": "act26side、memory",
+        "predicted_chapters_sorted": "act26side、memory_spuria",
+        "predicted_chapters_set_equal": true,
+        "ok_by_gold_chunk_field": true,
+        "ok_by_chunk_id_path": false,
+        "ok_by_assertion_ordered": true,
+        "ok_by_assertion_set": true,
+        "n_predicted": 2
+      },
+      {
+        "question_id": "q-cx-900013",
+        "answer": "act34side、act52side、main_ep15",
+        "gold_chapters": "act34side、act52side、main_ep15",
+        "path_chapters": "act34side、act52side、main",
+        "predicted_chapters_sorted": "act34side、main_ep15",
+        "predicted_chapters_set_equal": false,
+        "ok_by_gold_chunk_field": true,
+        "ok_by_chunk_id_path": false,
+        "ok_by_assertion_ordered": false,
+        "ok_by_assertion_set": false,
+        "n_predicted": 2
+      },
+      {
+        "question_id": "q-cx-900014",
+        "answer": "act14side、act30side、memory_blackd",
+        "gold_chapters": "act14side、act30side、memory_blackd",
+        "path_chapters": "act14side、act30side、memory",
+        "predicted_chapters_sorted": "act14side、memory_blackd",
+        "predicted_chapters_set_equal": false,
+        "ok_by_gold_chunk_field": true,
+        "ok_by_chunk_id_path": false,
+        "ok_by_assertion_ordered": false,
+        "ok_by_assertion_set": false,
+        "n_predicted": 2
+      },
+      {
+        "question_id": "q-cx-900016",
+        "answer": "act15side、act31side、act40side、act49side",
+        "gold_chapters": "act15side、act31side、act40side、act49side",
+        "path_chapters": "act15side、act31side、act40side、act49side",
+        "predicted_chapters_sorted": "act11mini、act15side、act31side、act40side、act49side",
+        "predicted_chapters_set_equal": false,
+        "ok_by_gold_chunk_field": true,
+        "ok_by_chunk_id_path": true,
+        "ok_by_assertion_ordered": false,
+        "ok_by_assertion_set": false,
+        "n_predicted": 5
+      },
+      {
+        "question_id": "q-cx-900017",
+        "answer": "main_ep12、main_st12、memory_morgan",
+        "gold_chapters": "main_ep12、main_st12、memory_morgan",
+        "path_chapters": "main、memory",
+        "predicted_chapters_sorted": "main_ep12、main_st12",
+        "predicted_chapters_set_equal": false,
+        "ok_by_gold_chunk_field": true,
+        "ok_by_chunk_id_path": false,
+        "ok_by_assertion_ordered": false,
+        "ok_by_assertion_set": false,
+        "n_predicted": 2
+      },
+      {
+        "question_id": "q-cx-900018",
+        "answer": "act22side、act41side",
+        "gold_chapters": "act22side、act41side",
+        "path_chapters": "act22side、act41side",
+        "predicted_chapters_sorted": "act22side",
+        "predicted_chapters_set_equal": false,
+        "ok_by_gold_chunk_field": true,
+        "ok_by_chunk_id_path": true,
+        "ok_by_assertion_ordered": false,
+        "ok_by_assertion_set": false,
+        "n_predicted": 1
+      },
+      {
+        "question_id": "q-cx-900021",
+        "answer": "act7d5、memory_blitz、memory_melan",
+        "gold_chapters": "act7d5、memory_blitz、memory_melan",
+        "path_chapters": "act7d5、memory",
+        "predicted_chapters_sorted": "act7d5、memory_blitz、memory_melan",
+        "predicted_chapters_set_equal": true,
+        "ok_by_gold_chunk_field": true,
+        "ok_by_chunk_id_path": false,
+        "ok_by_assertion_ordered": true,
+        "ok_by_assertion_set": true,
+        "n_predicted": 3
+      },
+      {
+        "question_id": "q-cx-900022",
+        "answer": "main_ep11、main_ep14",
+        "gold_chapters": "main_ep11、main_ep14",
+        "path_chapters": "main",
+        "predicted_chapters_sorted": "main_ep11、main_ep14",
+        "predicted_chapters_set_equal": true,
+        "ok_by_gold_chunk_field": true,
+        "ok_by_chunk_id_path": false,
+        "ok_by_assertion_ordered": true,
+        "ok_by_assertion_set": true,
+        "n_predicted": 2
+      },
+      {
+        "question_id": "q-cx-900024",
+        "answer": "main_ep11、main_ep12",
+        "gold_chapters": "main_ep11、main_ep12",
+        "path_chapters": "main",
+        "predicted_chapters_sorted": "main_ep11、main_ep12",
+        "predicted_chapters_set_equal": true,
+        "ok_by_gold_chunk_field": true,
+        "ok_by_chunk_id_path": false,
+        "ok_by_assertion_ordered": true,
+        "ok_by_assertion_set": true,
+        "n_predicted": 2
+      },
+      {
+        "question_id": "q-cx-900026",
+        "answer": "act29side、act41side、memory_lessng",
+        "gold_chapters": "act29side、act41side、memory_lessng",
+        "path_chapters": "act29side、act41side、memory",
+        "predicted_chapters_sorted": "act29side、memory_lessng",
+        "predicted_chapters_set_equal": false,
+        "ok_by_gold_chunk_field": true,
+        "ok_by_chunk_id_path": false,
+        "ok_by_assertion_ordered": false,
+        "ok_by_assertion_set": false,
+        "n_predicted": 2
+      },
+      {
+        "question_id": "q-cx-900027",
+        "answer": "act15d0、main_ep13、main_ep14、memory_plosis",
+        "gold_chapters": "act15d0、main_ep13、main_ep14、memory_plosis",
+        "path_chapters": "act15d0、main、memory",
+        "predicted_chapters_sorted": "act15d0、main_ep13、main_ep14、memory_plosis",
+        "predicted_chapters_set_equal": true,
+        "ok_by_gold_chunk_field": true,
+        "ok_by_chunk_id_path": false,
+        "ok_by_assertion_ordered": true,
+        "ok_by_assertion_set": true,
+        "n_predicted": 4
+      },
+      {
+        "question_id": "q-cx-900030",
+        "answer": "memory_sqrrel、rogue_rogue_5",
+        "gold_chapters": "memory_sqrrel、rogue_rogue_5",
+        "path_chapters": "memory、rogue",
+        "predicted_chapters_sorted": "memory_sqrrel",
+        "predicted_chapters_set_equal": false,
+        "ok_by_gold_chunk_field": true,
+        "ok_by_chunk_id_path": false,
+        "ok_by_assertion_ordered": false,
+        "ok_by_assertion_set": false,
+        "n_predicted": 1
+      }
+    ],
+    "判据": "chapter 必须读块记录字段而不是从 chunk_id 路径截（路径里 main 线只剩 main，真实章节是 main_ep14/main_st17/memory_whitw2）。「按 gold 块拼」证明答案可从元数据机械生成；「按断言端点拼」是不用 gold 时的上界，且只能比集合、不能比顺序。"
+  },
+  "3_multihop中间实体": {
+    "题数": 57,
+    "可解析双端点": 57,
+    "候选集含gold答案": 57,
+    "候选唯一": 25,
+    "候选唯且正确": 25,
+    "加权top1可产出": 57,
+    "加权top1正确": 45,
+    "候选数中位": 2,
+    "候选数最大": 6,
+    "required_in_context为真": 0,
+    "当前answer_hits_gold": 25,
+    "判据": "中间实体可从邻接表机械求；但 multihop 的 required 块全部不在上下文，所以这一路只能抬答案质量，抬不动引用覆盖。",
+    "逐题": [
+      {
+        "question_id": "q-mh-000001",
+        "answer": "阿米娅",
+        "n_candidates": 2,
+        "contains_answer": true,
+        "top1": "阿米娅",
+        "required_in_context": false,
+        "answer_hits_gold_now": true
+      },
+      {
+        "question_id": "q-mh-000003",
+        "answer": "华法琳",
+        "n_candidates": 4,
+        "contains_answer": true,
+        "top1": "歌蕾蒂娅",
+        "required_in_context": false,
+        "answer_hits_gold_now": false
+      },
+      {
+        "question_id": "q-mh-000004",
+        "answer": "伊内丝",
+        "n_candidates": 3,
+        "contains_answer": true,
+        "top1": "凯尔希",
+        "required_in_context": false,
+        "answer_hits_gold_now": true
+      },
+      {
+        "question_id": "q-mh-000005",
+        "answer": "凯尔希",
+        "n_candidates": 1,
+        "contains_answer": true,
+        "top1": "凯尔希",
+        "required_in_context": false,
+        "answer_hits_gold_now": true
+      },
+      {
+        "question_id": "q-mh-000006",
+        "answer": "罗德岛",
+        "n_candidates": 2,
+        "contains_answer": true,
+        "top1": "阿米娅",
+        "required_in_context": false,
+        "answer_hits_gold_now": false
+      },
+      {
+        "question_id": "q-mh-000008",
+        "answer": "罗德岛",
+        "n_candidates": 1,
+        "contains_answer": true,
+        "top1": "罗德岛",
+        "required_in_context": false,
+        "answer_hits_gold_now": true
+      },
+      {
+        "question_id": "q-mh-000009",
+        "answer": "罗德岛",
+        "n_candidates": 1,
+        "contains_answer": true,
+        "top1": "罗德岛",
+        "required_in_context": false,
+        "answer_hits_gold_now": true
+      },
+      {
+        "question_id": "q-mh-000010",
+        "answer": "罗德岛",
+        "n_candidates": 2,
+        "contains_answer": true,
+        "top1": "阿米娅",
+        "required_in_context": false,
+        "answer_hits_gold_now": false
+      },
+      {
+        "question_id": "q-mh-000012",
+        "answer": "阿米娅",
+        "n_candidates": 4,
+        "contains_answer": true,
+        "top1": "阿米娅",
+        "required_in_context": false,
+        "answer_hits_gold_now": false
+      },
+      {
+        "question_id": "q-mh-000013",
+        "answer": "罗德岛",
+        "n_candidates": 1,
+        "contains_answer": true,
+        "top1": "罗德岛",
+        "required_in_context": false,
+        "answer_hits_gold_now": false
+      },
+      {
+        "question_id": "q-mh-000014",
+        "answer": "阿米娅",
+        "n_candidates": 1,
+        "contains_answer": true,
+        "top1": "阿米娅",
+        "required_in_context": false,
+        "answer_hits_gold_now": true
+      },
+      {
+        "question_id": "q-mh-000015",
+        "answer": "凯尔希",
+        "n_candidates": 4,
+        "contains_answer": true,
+        "top1": "凯尔希",
+        "required_in_context": false,
+        "answer_hits_gold_now": false
+      },
+      {
+        "question_id": "q-mh-000016",
+        "answer": "梁洵",
+        "n_candidates": 2,
+        "contains_answer": true,
+        "top1": "梁洵",
+        "required_in_context": false,
+        "answer_hits_gold_now": true
+      },
+      {
+        "question_id": "q-mh-000017",
+        "answer": "煌",
+        "n_candidates": 2,
+        "contains_answer": true,
+        "top1": "煌",
+        "required_in_context": false,
+        "answer_hits_gold_now": true
+      },
+      {
+        "question_id": "q-mh-000018",
+        "answer": "阿米娅",
+        "n_candidates": 1,
+        "contains_answer": true,
+        "top1": "阿米娅",
+        "required_in_context": false,
+        "answer_hits_gold_now": false
+      },
+      {
+        "question_id": "q-mh-000020",
+        "answer": "乌萨斯",
+        "n_candidates": 1,
+        "contains_answer": true,
+        "top1": "乌萨斯",
+        "required_in_context": false,
+        "answer_hits_gold_now": false
+      },
+      {
+        "question_id": "q-mh-000021",
+        "answer": "小黑",
+        "n_candidates": 1,
+        "contains_answer": true,
+        "top1": "小黑",
+        "required_in_context": false,
+        "answer_hits_gold_now": true
+      },
+      {
+        "question_id": "q-mh-000024",
+        "answer": "坎黛拉",
+        "n_candidates": 2,
+        "contains_answer": true,
+        "top1": "埃内斯托",
+        "required_in_context": false,
+        "answer_hits_gold_now": true
+      },
+      {
+        "question_id": "q-mh-000025",
+        "answer": "缇缇",
+        "n_candidates": 2,
+        "contains_answer": true,
+        "top1": "缇缇",
+        "required_in_context": false,
+        "answer_hits_gold_now": true
+      },
+      {
+        "question_id": "q-mh-000026",
+        "answer": "黍",
+        "n_candidates": 2,
+        "contains_answer": true,
+        "top1": "黍",
+        "required_in_context": false,
+        "answer_hits_gold_now": true
+      },
+      {
+        "question_id": "q-mh-000029",
+        "answer": "克洛丝",
+        "n_candidates": 2,
+        "contains_answer": true,
+        "top1": "罗德岛",
+        "required_in_context": false,
+        "answer_hits_gold_now": false
+      },
+      {
+        "question_id": "q-mh-000033",
+        "answer": "塔露拉",
+        "n_candidates": 1,
+        "contains_answer": true,
+        "top1": "塔露拉",
+        "required_in_context": false,
+        "answer_hits_gold_now": false
+      },
+      {
+        "question_id": "q-mh-000034",
+        "answer": "莫斯提马",
+        "n_candidates": 2,
+        "contains_answer": true,
+        "top1": "莫斯提马",
+        "required_in_context": false,
+        "answer_hits_gold_now": false
+      },
+      {
+        "question_id": "q-mh-000035",
+        "answer": "老鲤",
+        "n_candidates": 1,
+        "contains_answer": true,
+        "top1": "老鲤",
+        "required_in_context": false,
+        "answer_hits_gold_now": false
+      },
+      {
+        "question_id": "q-mh-000036",
+        "answer": "罗德岛",
+        "n_candidates": 1,
+        "contains_answer": true,
+        "top1": "罗德岛",
+        "required_in_context": false,
+        "answer_hits_gold_now": false
+      },
+      {
+        "question_id": "q-mh-000037",
+        "answer": "凯尔希",
+        "n_candidates": 1,
+        "contains_answer": true,
+        "top1": "凯尔希",
+        "required_in_context": false,
+        "answer_hits_gold_now": true
+      },
+      {
+        "question_id": "q-mh-000038",
+        "answer": "罗德岛",
+        "n_candidates": 2,
+        "contains_answer": true,
+        "top1": "罗德岛",
+        "required_in_context": false,
+        "answer_hits_gold_now": true
+      },
+      {
+        "question_id": "q-mh-000041",
+        "answer": "缪尔赛思",
+        "n_candidates": 1,
+        "contains_answer": true,
+        "top1": "缪尔赛思",
+        "required_in_context": false,
+        "answer_hits_gold_now": false
+      },
+      {
+        "question_id": "q-mh-000042",
+        "answer": "博士",
+        "n_candidates": 6,
+        "contains_answer": true,
+        "top1": "凯尔希",
+        "required_in_context": false,
+        "answer_hits_gold_now": false
+      },
+      {
+        "question_id": "q-mh-000043",
+        "answer": "阿米娅",
+        "n_candidates": 2,
+        "contains_answer": true,
+        "top1": "阿米娅",
+        "required_in_context": false,
+        "answer_hits_gold_now": true
+      },
+      {
+        "question_id": "q-mh-000044",
+        "answer": "煌",
+        "n_candidates": 1,
+        "contains_answer": true,
+        "top1": "煌",
+        "required_in_context": false,
+        "answer_hits_gold_now": false
+      },
+      {
+        "question_id": "q-mh-000045",
+        "answer": "阿米娅",
+        "n_candidates": 2,
+        "contains_answer": true,
+        "top1": "阿米娅",
+        "required_in_context": false,
+        "answer_hits_gold_now": false
+      },
+      {
+        "question_id": "q-mh-000047",
+        "answer": "海嗣",
+        "n_candidates": 5,
+        "contains_answer": true,
+        "top1": "图利娅",
+        "required_in_context": false,
+        "answer_hits_gold_now": true
+      },
+      {
+        "question_id": "q-mh-900001",
+        "answer": "陈",
+        "n_candidates": 2,
+        "contains_answer": true,
+        "top1": "陈",
+        "required_in_context": false,
+        "answer_hits_gold_now": true
+      },
+      {
+        "question_id": "q-mh-900005",
+        "answer": "阿米娅",
+        "n_candidates": 1,
+        "contains_answer": true,
+        "top1": "阿米娅",
+        "required_in_context": false,
+        "answer_hits_gold_now": false
+      },
+      {
+        "question_id": "q-mh-900006",
+        "answer": "光头马丁",
+        "n_candidates": 1,
+        "contains_answer": true,
+        "top1": "光头马丁",
+        "required_in_context": false,
+        "answer_hits_gold_now": false
+      },
+      {
+        "question_id": "q-mh-900008",
+        "answer": "陈",
+        "n_candidates": 1,
+        "contains_answer": true,
+        "top1": "陈",
+        "required_in_context": false,
+        "answer_hits_gold_now": true
+      },
+      {
+        "question_id": "q-mh-900009",
+        "answer": "伊西多",
+        "n_candidates": 4,
+        "contains_answer": true,
+        "top1": "伊西多",
+        "required_in_context": false,
+        "answer_hits_gold_now": false
+      },
+      {
+        "question_id": "q-mh-900010",
+        "answer": "里凯莱",
+        "n_candidates": 5,
+        "contains_answer": true,
+        "top1": "克莱芒",
+        "required_in_context": false,
+        "answer_hits_gold_now": false
+      },
+      {
+        "question_id": "q-mh-900013",
+        "answer": "阿米娅",
+        "n_candidates": 2,
+        "contains_answer": true,
+        "top1": "阿米娅",
+        "required_in_context": false,
+        "answer_hits_gold_now": false
+      },
+      {
+        "question_id": "q-mh-900014",
+        "answer": "斯普莉雅",
+        "n_candidates": 1,
+        "contains_answer": true,
+        "top1": "斯普莉雅",
+        "required_in_context": false,
+        "answer_hits_gold_now": false
+      },
+      {
+        "question_id": "q-mh-900018",
+        "answer": "阿黛尔",
+        "n_candidates": 3,
+        "contains_answer": true,
+        "top1": "阿黛尔",
+        "required_in_context": false,
+        "answer_hits_gold_now": false
+      },
+      {
+        "question_id": "q-mh-900019",
+        "answer": "陈",
+        "n_candidates": 1,
+        "contains_answer": true,
+        "top1": "陈",
+        "required_in_context": false,
+        "answer_hits_gold_now": false
+      },
+      {
+        "question_id": "q-mh-900021",
+        "answer": "罗德岛",
+        "n_candidates": 1,
+        "contains_answer": true,
+        "top1": "罗德岛",
+        "required_in_context": false,
+        "answer_hits_gold_now": false
+      },
+      {
+        "question_id": "q-mh-900022",
+        "answer": "特菲",
+        "n_candidates": 2,
+        "contains_answer": true,
+        "top1": "特菲",
+        "required_in_context": false,
+        "answer_hits_gold_now": true
+      },
+      {
+        "question_id": "q-mh-900026",
+        "answer": "凯尔希",
+        "n_candidates": 1,
+        "contains_answer": true,
+        "top1": "凯尔希",
+        "required_in_context": false,
+        "answer_hits_gold_now": true
+      },
+      {
+        "question_id": "q-mh-900031",
+        "answer": "泰拉",
+        "n_candidates": 3,
+        "contains_answer": true,
+        "top1": "凯尔希",
+        "required_in_context": false,
+        "answer_hits_gold_now": false
+      },
+      {
+        "question_id": "q-mh-900033",
+        "answer": "星熊",
+        "n_candidates": 3,
+        "contains_answer": true,
+        "top1": "吉星",
+        "required_in_context": false,
+        "answer_hits_gold_now": true
+      },
+      {
+        "question_id": "q-mh-900034",
+        "answer": "凯尔希",
+        "n_candidates": 4,
+        "contains_answer": true,
+        "top1": "博士",
+        "required_in_context": false,
+        "answer_hits_gold_now": false
+      },
+      {
+        "question_id": "q-mh-900037",
+        "answer": "罗德岛",
+        "n_candidates": 1,
+        "contains_answer": true,
+        "top1": "罗德岛",
+        "required_in_context": false,
+        "answer_hits_gold_now": true
+      },
+      {
+        "question_id": "q-mh-900038",
+        "answer": "杜宾",
+        "n_candidates": 2,
+        "contains_answer": true,
+        "top1": "杜宾",
+        "required_in_context": false,
+        "answer_hits_gold_now": true
+      },
+      {
+        "question_id": "q-mh-900039",
+        "answer": "阿米娅",
+        "n_candidates": 5,
+        "contains_answer": true,
+        "top1": "阿米娅",
+        "required_in_context": false,
+        "answer_hits_gold_now": false
+      },
+      {
+        "question_id": "q-mh-900042",
+        "answer": "罗德岛",
+        "n_candidates": 1,
+        "contains_answer": true,
+        "top1": "罗德岛",
+        "required_in_context": false,
+        "answer_hits_gold_now": true
+      },
+      {
+        "question_id": "q-mh-900043",
+        "answer": "戴菲恩",
+        "n_candidates": 3,
+        "contains_answer": true,
+        "top1": "戴菲恩",
+        "required_in_context": false,
+        "answer_hits_gold_now": false
+      },
+      {
+        "question_id": "q-mh-900045",
+        "answer": "罗德岛",
+        "n_candidates": 1,
+        "contains_answer": true,
+        "top1": "罗德岛",
+        "required_in_context": false,
+        "answer_hits_gold_now": false
+      },
+      {
+        "question_id": "q-mh-900046",
+        "answer": "芙蓉",
+        "n_candidates": 4,
+        "contains_answer": true,
+        "top1": "芙蓉",
+        "required_in_context": false,
+        "answer_hits_gold_now": true
+      },
+      {
+        "question_id": "q-mh-900047",
+        "answer": "陈",
+        "n_candidates": 1,
+        "contains_answer": true,
+        "top1": "陈",
+        "required_in_context": false,
+        "answer_hits_gold_now": false
+      }
+    ]
+  },
+  "4_闸门2归因": {
+    "闸门2题数": 203,
+    "三层归因": {
+      "容量层_前20但全被预算截断": 80,
+      "检索层_gold不在前20": 77,
+      "部分层_多块题只进一部分": 46
+    },
+    "按类": {
+      "adversarial": {
+        "容量层_前20但全被预算截断": 6,
+        "检索层_gold不在前20": 12
+      },
+      "alias": {
+        "容量层_前20但全被预算截断": 7,
+        "检索层_gold不在前20": 5
+      },
+      "cross_chunk": {
+        "容量层_前20但全被预算截断": 8,
+        "部分层_多块题只进一部分": 18,
+        "检索层_gold不在前20": 6
+      },
+      "direct_relation": {
+        "容量层_前20但全被预算截断": 13,
+        "检索层_gold不在前20": 20
+      },
+      "multihop": {
+        "部分层_多块题只进一部分": 11,
+        "检索层_gold不在前20": 20,
+        "容量层_前20但全被预算截断": 26
+      },
+      "single_chunk": {
+        "检索层_gold不在前20": 7,
+        "容量层_前20但全被预算截断": 8
+      },
+      "time_conflict": {
+        "检索层_gold不在前20": 7,
+        "容量层_前20但全被预算截断": 12,
+        "部分层_多块题只进一部分": 17
+      }
+    },
+    "样例": {
+      "检索层_gold不在前20": [
+        "q-sc-000007",
+        "q-sc-000020",
+        "q-al-000014",
+        "q-al-000024",
+        "q-al-000031",
+        "q-dr-000004",
+        "q-dr-000006",
+        "q-dr-000011"
+      ],
+      "容量层_前20但全被预算截断": [
+        "q-sc-000024",
+        "q-sc-000027",
+        "q-sc-000031",
+        "q-sc-000036",
+        "q-sc-000045",
+        "q-sc-000056",
+        "q-sc-000057",
+        "q-al-000006"
+      ],
+      "部分层_多块题只进一部分": [
+        "q-mh-000001",
+        "q-mh-000017",
+        "q-mh-000024",
+        "q-mh-000033",
+        "q-mh-000044",
+        "q-cx-000003",
+        "q-cx-000008",
+        "q-cx-000009"
+      ]
+    },
+    "判据": "三层对应三种完全不同的活：检索层=排序/召回；容量层=预算或填充；部分层=多块题的第二块名次。混成一个「闸门2 203」会导致修错地方。"
+  },
+  "5_按类表": {
+    "列": [
+      "n",
+      "required_in_context",
+      "covered",
+      "answer_hits_gold",
+      "答案对但未覆盖",
+      "其中required在上下文"
+    ],
+    "表": {
+      "adversarial": {
+        "n": 19,
+        "required_in_context": 1,
+        "covered": 0,
+        "answer_hits_gold": 0,
+        "答案对但未覆盖": 0,
+        "其中required在上下文": 0
+      },
+      "alias": {
+        "n": 57,
+        "required_in_context": 45,
+        "covered": 2,
+        "answer_hits_gold": 52,
+        "答案对但未覆盖": 50,
+        "其中required在上下文": 40
+      },
+      "cross_chunk": {
+        "n": 38,
+        "required_in_context": 6,
+        "covered": 0,
+        "answer_hits_gold": 0,
+        "答案对但未覆盖": 0,
+        "其中required在上下文": 0
+      },
+      "direct_relation": {
+        "n": 57,
+        "required_in_context": 24,
+        "covered": 23,
+        "answer_hits_gold": 45,
+        "答案对但未覆盖": 22,
+        "其中required在上下文": 1
+      },
+      "multihop": {
+        "n": 57,
+        "required_in_context": 0,
+        "covered": 0,
+        "answer_hits_gold": 25,
+        "答案对但未覆盖": 25,
+        "其中required在上下文": 0
+      },
+      "negative_abstain": {
+        "n": 8,
+        "required_in_context": 8,
+        "covered": 0,
+        "answer_hits_gold": 0,
+        "答案对但未覆盖": 0,
+        "其中required在上下文": 0
+      },
+      "single_chunk": {
+        "n": 76,
+        "required_in_context": 61,
+        "covered": 61,
+        "answer_hits_gold": 61,
+        "答案对但未覆盖": 0,
+        "其中required在上下文": 0
+      },
+      "time_conflict": {
+        "n": 38,
+        "required_in_context": 2,
+        "covered": 2,
+        "answer_hits_gold": 0,
+        "答案对但未覆盖": 0,
+        "其中required在上下文": 0
+      }
+    },
+    "合计": {
+      "n": 350,
+      "required_in_context": 147,
+      "covered": 88,
+      "answer_hits_gold": 183,
+      "答案对但未覆盖": 97,
+      "其中required在上下文": 41
+    },
+    "判据": "「答案对但未覆盖」才是回答层真缺口；其中 required 已在上下文的才可能靠改回答救回。"
+  }
+}
