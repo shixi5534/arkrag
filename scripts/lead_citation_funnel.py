@@ -451,6 +451,85 @@ def section_required_line_split(answerable, by_chunk, chunks) -> dict:
     }
 
 
+def section_line_collapse(answerable, by_chunk, chunks) -> dict:
+    """整行引用会带来什么副作用：同一行上的多条断言会被去重塌缩成一条。
+
+    为什么需要这一节
+    ================
+    `retrieve.py:926-941 _push_span()` 按 `(evidence, start, end)` 去重登记，
+    `scripts/ask.py:283-298` 也把 citations 收成 `(chunk_id, evidence)` 的集合。
+    一旦把引用单位从「断言短语」改成「断言所在整行」，**同一行上的多条断言会变成
+    完全相同的一串三元组**，于是引用条数下降。
+
+    这不影响覆盖率（required 仍然被包含），但影响两件事：
+    1. 引用条数会掉，而 `citation_location_accuracy` 是逐条核的，
+       条数变化会改变「分母」——报告里必须写清。
+    2. 如果一行上有多条语义不同的断言，塌缩后可能只留下其中一条，
+       claim 与引用的对应关系变粗，P3 做事实级校验时要重新设计粒度。
+
+    本节只量「会塌缩多少」，不做改动、不给建议。
+    """
+    affected = []          # 受影响的 required 条（改粒度前不达标、改后达标）
+    line_cost = []         # (题号, chunk, 该行的 token 估算, 行内断言条数)
+    for it in answerable:
+        for rc in it.get("required_citations") or []:
+            cid, req = rc["chunk_id"], rc["evidence"]
+            text = chunks.get(cid, "")
+            if any(req in (rec.get("evidence_text") or "") for rec in by_chunk.get(cid) or []):
+                continue  # 本来就达标，不涉及
+            for rec in by_chunk.get(cid) or []:
+                s, e = int(rec.get("evidence_start", -1)), int(rec.get("evidence_end", -1))
+                if s < 0 or e <= s or e > len(text):
+                    continue
+                left, right = _line_bounds(text, s, e)
+                if req not in text[left:right]:
+                    continue
+                same = [b for b in by_chunk.get(cid) or []
+                        if b.get("evidence_start") is not None
+                        and b.get("evidence_end") is not None
+                        and _line_bounds(text, int(b["evidence_start"]), int(b["evidence_end"]))
+                        == (left, right)]
+                affected.append({
+                    "question_id": it["question_id"],
+                    "category": it["category"],
+                    "chunk_id": cid,
+                    "assertions_on_line": len(same),
+                })
+                line_cost.append({
+                    "question_id": it["question_id"],
+                    "chunk_id": cid,
+                    "line_chars": right - left,
+                    "assertions_on_line": len(same),
+                    "max_assertion_chars": max((len(b.get("evidence_text") or "") for b in same),
+                                               default=0),
+                })
+                break
+
+    hist = collections.Counter(a["assertions_on_line"] for a in affected)
+    ratio = [c["line_chars"] / c["max_assertion_chars"]
+             for c in line_cost if c["max_assertion_chars"]]
+    ratio_sorted = sorted(ratio)
+
+    def pct(p: float) -> float:
+        if not ratio_sorted:
+            return 0.0
+        idx = min(len(ratio_sorted) - 1, int(round(p * (len(ratio_sorted) - 1))))
+        return round(ratio_sorted[idx], 2)
+
+    return {
+        "受影响 required 条数": len(affected),
+        "行内断言条数分布": dict(sorted(hist.items())),
+        "会塌缩的条数（同行断言 >=2）": sum(v for k, v in hist.items() if k >= 2),
+        "塌缩比例": round(sum(v for k, v in hist.items() if k >= 2) / len(affected), 4)
+                    if affected else 0.0,
+        "整行长度 / 该行最长断言 字数比": {
+            "p50": pct(0.50), "p90": pct(0.90), "max": round(max(ratio), 2) if ratio else 0.0,
+        },
+        "说明": ("整行引用不影响 required 是否被包含，只影响引用条数与粒度；"
+                 "报告里必须写明引用条数变化，不许只报覆盖率"),
+    }
+
+
 def section_speaker_lines(by_chunk, chunks) -> dict:
     """检验「说话人标签行被抽取器系统性跳过」这个猜想（结论：不成立）。"""
     tag_total = tag_mined = other_total = other_mined = 0
@@ -543,6 +622,7 @@ def main(argv: list[str] | None = None) -> int:
         out["5_四闸门漏斗"] = section_funnel(answerable, by_chunk, triage)
         out["6_整行引用假设"] = section_line_hypothesis(answerable, by_chunk, chunks, triage)
     out["6b_required行是否被抽成断言"] = section_required_line_split(answerable, by_chunk, chunks)
+    out["6c_整行引用的塌缩代价"] = section_line_collapse(answerable, by_chunk, chunks)
     if not args.skip_heavy:
         out["7_说话人标签行"] = section_speaker_lines(by_chunk, chunks)
 
