@@ -1,0 +1,777 @@
+{
+  "generated_at": "2026-11-05T11:31:07Z",
+  "git_commit": "dc1c99e3a5d2f4fdcc34b2e38e56f7987880ec29",
+  "python": "3.14.3",
+  "os": "Windows-11-10.0.26200-SP0",
+  "command": "py -3 scripts/lead_title_path_bound.py",
+  "generation": "g-20261103T132152Z-06a741",
+  "gold_set": "data/goldset/gold-v2.json",
+  "1_口径": {
+    "split": "dev 且非应拒 且 gold 块非空",
+    "触发词": [
+      "请给出该块的标题",
+      "请回答该段的标题",
+      "出自哪个文本块",
+      "来自哪一段剧情"
+    ],
+    "答案在问句里": "整串子串判定，不做同义归一 => 泄露是下界、干净是上界",
+    "块正文来源": "世代自带 chunks.jsonl（不回退全局文件）"
+  },
+  "2_总量": {
+    "dev_应答题": 350,
+    "触发题数": 76,
+    "非标题题数": 274,
+    "非标题题含引文数": 158,
+    "语料块数": 13798
+  },
+  "3_问句骨架": {
+    "不同骨架数": 2,
+    "分布": {
+      "在剧情<T>的正文里，出现了这样一句话：<Q>。这句话出自哪个文本块？请给出该块的标题。": 46,
+      "下面这段原文来自哪一段剧情？<Q>请回答该段的标题。": 30
+    }
+  },
+  "4_语料级定位": {
+    "有命中": 76,
+    "唯一title": 76,
+    "零命中": 0,
+    "title歧义": 0
+  },
+  "5_可行集（两层）": {
+    "语料级可行": 76,
+    "语料级_干净": 30,
+    "语料级_含问句泄露": 46,
+    "上下文内可行": 61,
+    "上下文内_干净": 22,
+    "上下文内_含问句泄露": 39,
+    "可取上下文来源": "取 per_question.base[*].required_in_context（cooc0.0 基线档）"
+  },
+  "6_模板交叉": {
+    "模板A": 46,
+    "模板B": 30,
+    "语料级_干净 == 模板B ∩ 可行": true,
+    "语料级_泄露 == 模板A ∩ 可行": true,
+    "上下文内_干净 == 模板B ∩ 可行": true,
+    "上下文内_泄露 == 模板A ∩ 可行": true
+  },
+  "7_引文行含全部required": {
+    "满足": 76,
+    "不满足": 0,
+    "不满足题号": []
+  },
+  "8_上下文缺口归因": {
+    "gap_total": 15,
+    "in_context_false": 15,
+    "in_context_true": 0,
+    "unknown": 0,
+    "ids": [
+      "q-sc-000007",
+      "q-sc-000020",
+      "q-sc-000024",
+      "q-sc-000027",
+      "q-sc-000031",
+      "q-sc-000036",
+      "q-sc-000045",
+      "q-sc-000056",
+      "q-sc-000057",
+      "q-sc-900004",
+      "q-sc-900013",
+      "q-sc-900015",
+      "q-sc-900023",
+      "q-sc-900033",
+      "q-sc-900063"
+    ]
+  },
+  "9_逐题": [
+    {
+      "question_id": "q-sc-000005",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "最后的怯薛",
+      "gold": "最后的怯薛",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-000007",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "蓝耳酒窖",
+      "gold": "蓝耳酒窖",
+      "template": "B"
+    },
+    {
+      "question_id": "q-sc-000009",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "红日留驻",
+      "gold": "红日留驻",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-000010",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "野蛮肇事者",
+      "gold": "野蛮肇事者",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-000012",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "牺牲与代价",
+      "gold": "牺牲与代价",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-000013",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "地堡防线",
+      "gold": "地堡防线",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-000015",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "耶拉冈德在上",
+      "gold": "耶拉冈德在上",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-000016",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "沉默者之怒-1",
+      "gold": "沉默者之怒-1",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-000017",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "干员间切磋指南",
+      "gold": "干员间切磋指南",
+      "template": "B"
+    },
+    {
+      "question_id": "q-sc-000018",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "问道",
+      "gold": "问道",
+      "template": "B"
+    },
+    {
+      "question_id": "q-sc-000020",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "枷锁之中",
+      "gold": "枷锁之中",
+      "template": "B"
+    },
+    {
+      "question_id": "q-sc-000021",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "归乡",
+      "gold": "归乡",
+      "template": "B"
+    },
+    {
+      "question_id": "q-sc-000022",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "礼仪广场",
+      "gold": "礼仪广场",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-000023",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "自光辉中奔涌",
+      "gold": "自光辉中奔涌",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-000024",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "黄金三角",
+      "gold": "黄金三角",
+      "template": "B"
+    },
+    {
+      "question_id": "q-sc-000026",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "嘉维尔之拳",
+      "gold": "嘉维尔之拳",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-000027",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "各自流亡",
+      "gold": "各自流亡",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-000028",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "火山制造",
+      "gold": "火山制造",
+      "template": "B"
+    },
+    {
+      "question_id": "q-sc-000029",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "万物有灵",
+      "gold": "万物有灵",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-000030",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "完整的缺损",
+      "gold": "完整的缺损",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-000031",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "或许有时",
+      "gold": "或许有时",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-000032",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "失乐园",
+      "gold": "失乐园",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-000033",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "向死寻生",
+      "gold": "向死寻生",
+      "template": "B"
+    },
+    {
+      "question_id": "q-sc-000034",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "护身符",
+      "gold": "护身符",
+      "template": "B"
+    },
+    {
+      "question_id": "q-sc-000035",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "一问之答",
+      "gold": "一问之答",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-000036",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "核心舱攻防战",
+      "gold": "核心舱攻防战",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-000037",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "不治的命运",
+      "gold": "不治的命运",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-000038",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "毗牟题，或解答",
+      "gold": "毗牟题，或解答",
+      "template": "B"
+    },
+    {
+      "question_id": "q-sc-000039",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "留下的人",
+      "gold": "留下的人",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-000042",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "第一次接触",
+      "gold": "第一次接触",
+      "template": "B"
+    },
+    {
+      "question_id": "q-sc-000045",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "自由射手",
+      "gold": "自由射手",
+      "template": "B"
+    },
+    {
+      "question_id": "q-sc-000046",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "蒙眬",
+      "gold": "蒙眬",
+      "template": "B"
+    },
+    {
+      "question_id": "q-sc-000047",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "柳暗花明",
+      "gold": "柳暗花明",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-000048",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "降生",
+      "gold": "降生",
+      "template": "B"
+    },
+    {
+      "question_id": "q-sc-000049",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "补票！",
+      "gold": "补票！",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-000050",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "黄沙尽头",
+      "gold": "黄沙尽头",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-000052",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "复航",
+      "gold": "复航",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-000056",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "商业联合",
+      "gold": "商业联合",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-000057",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "捂住耳朵",
+      "gold": "捂住耳朵",
+      "template": "B"
+    },
+    {
+      "question_id": "q-sc-000059",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "崩落",
+      "gold": "崩落",
+      "template": "B"
+    },
+    {
+      "question_id": "q-sc-000060",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "凛刃出匣",
+      "gold": "凛刃出匣",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-000061",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "升华之夜",
+      "gold": "升华之夜",
+      "template": "B"
+    },
+    {
+      "question_id": "q-sc-000062",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "“何谓存续？”",
+      "gold": "“何谓存续？”",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-000064",
+      "n_quotes": 1,
+      "corpus_hit": 2,
+      "unique_title": true,
+      "title": "“卡托加区欢迎你”",
+      "gold": "“卡托加区欢迎你”",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-900002",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "共融",
+      "gold": "共融",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-900003",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "历史的航向",
+      "gold": "历史的航向",
+      "template": "B"
+    },
+    {
+      "question_id": "q-sc-900004",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "一波又起",
+      "gold": "一波又起",
+      "template": "B"
+    },
+    {
+      "question_id": "q-sc-900005",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "命途何在",
+      "gold": "命途何在",
+      "template": "B"
+    },
+    {
+      "question_id": "q-sc-900011",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "新秩序",
+      "gold": "新秩序",
+      "template": "B"
+    },
+    {
+      "question_id": "q-sc-900012",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "无法再一次踏入的河",
+      "gold": "无法再一次踏入的河",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-900013",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "缺席的人",
+      "gold": "缺席的人",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-900015",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "过去与现在的终点",
+      "gold": "过去与现在的终点",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-900017",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "凌绝顶",
+      "gold": "凌绝顶",
+      "template": "B"
+    },
+    {
+      "question_id": "q-sc-900019",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "在卡兹戴尔",
+      "gold": "在卡兹戴尔",
+      "template": "B"
+    },
+    {
+      "question_id": "q-sc-900020",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "降生",
+      "gold": "降生",
+      "template": "B"
+    },
+    {
+      "question_id": "q-sc-900021",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "未定型的现在",
+      "gold": "未定型的现在",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-900022",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "惊愕",
+      "gold": "惊愕",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-900023",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "试飞日",
+      "gold": "试飞日",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-900025",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "凌绝顶",
+      "gold": "凌绝顶",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-900028",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "无畏·3",
+      "gold": "无畏·3",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-900029",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "烤串与预言",
+      "gold": "烤串与预言",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-900030",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "疑惑之影",
+      "gold": "疑惑之影",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-900031",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "生灵火花",
+      "gold": "生灵火花",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-900033",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "血潮翻涌",
+      "gold": "血潮翻涌",
+      "template": "B"
+    },
+    {
+      "question_id": "q-sc-900034",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "“狼之主”",
+      "gold": "“狼之主”",
+      "template": "B"
+    },
+    {
+      "question_id": "q-sc-900036",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "高空拒阻行动",
+      "gold": "高空拒阻行动",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-900037",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "瑟瑟秋华",
+      "gold": "瑟瑟秋华",
+      "template": "B"
+    },
+    {
+      "question_id": "q-sc-900041",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "走出那条长长的走廊",
+      "gold": "走出那条长长的走廊",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-900042",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "狂奔的瓶树",
+      "gold": "狂奔的瓶树",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-900043",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "漫游症",
+      "gold": "漫游症",
+      "template": "B"
+    },
+    {
+      "question_id": "q-sc-900047",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "月光沉沦",
+      "gold": "月光沉沦",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-900048",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "禁飞区",
+      "gold": "禁飞区",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-900054",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "“堕天”",
+      "gold": "“堕天”",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-900057",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "告别时刻",
+      "gold": "告别时刻",
+      "template": "A"
+    },
+    {
+      "question_id": "q-sc-900062",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "分身有术",
+      "gold": "分身有术",
+      "template": "B"
+    },
+    {
+      "question_id": "q-sc-900063",
+      "n_quotes": 1,
+      "corpus_hit": 1,
+      "unique_title": true,
+      "title": "乐园",
+      "gold": "乐园",
+      "template": "B"
+    }
+  ],
+  "10_限制": [
+    "只读 dev，验收集 260 一行未读",
+    "「答案在问句里」用整串子串，未展开 acceptable_answers",
+    "语料级唯一只是必要条件：块若没进上下文，通路仍不生效（15 道即是）",
+    "可行集用 gold 核算上界，实现不得读取 gold"
+  ]
+}
