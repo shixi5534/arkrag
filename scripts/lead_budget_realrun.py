@@ -154,11 +154,11 @@ def run_one(loaded: dict, items: list[dict], budget: int) -> list[dict]:
                 "question_id": str(it.get("question_id") or ""),
                 "category": str(it.get("category") or ""),
                 "origin": str(it.get("origin") or ""),
-                "any_gold": bool(gold & set(hits)),
+                "gold_in_hits": bool(gold & set(hits)),
                 "all_gold": bool(gold) and gold.issubset(in_ctx),
                 "gold_first_rank": first_rank,
                 "required_in_context": bool(gold) and gold.issubset(in_ctx),
-                "any_gold_in_context": bool(gold) and bool(gold & in_ctx),
+                "any_gold": bool(gold) and bool(gold & in_ctx),
                 "covered": cov,
                 "answer_hits_gold": hits_gold,
                 "correct_coverage": bool(cov and hits_gold),
@@ -181,6 +181,7 @@ def summarize(rows: list[dict]) -> dict:
     n = len(rows)
     return {
         "n": n,
+        "gold_in_hits": sum(r["gold_in_hits"] for r in rows),
         "any_gold": sum(r["any_gold"] for r in rows),
         "all_gold": sum(r["all_gold"] for r in rows),
         "required_in_context": sum(r["required_in_context"] for r in rows),
@@ -250,12 +251,15 @@ def main(argv: list[str] | None = None) -> int:
 
     print()
     print("== 1 三档汇总（dev 350 应答题，TITLE_ANSWER_PATH 取仓库默认）")
-    hdr = f"{'预算':>6} {'any_gold':>9} {'all_gold':>9} {'covered':>8} {'correct':>8} {'ansHit':>7} {'abst':>5} {'引用条':>7} {'坏条':>4} {'单元':>5} {'已用tok':>8} {'p50ms':>7}"
+    # 表头必须与下面 print 的取值顺序逐列对齐：hit20=gold_in_hits（检索层）、
+    # any=进上下文的至少一块、all=全部块进上下文。三个名字不许混写——
+    # 第一版本节表头曾把 any 标成 all_gold，读到的人会以为「全部 gold 都进了」。
+    hdr = f"{'预算':>6} {'hit20':>9} {'any':>7} {'all':>7} {'covered':>8} {'correct':>8} {'ansHit':>7} {'abst':>5} {'引用条':>7} {'坏条':>4} {'单元':>5} {'已用tok':>8} {'p50ms':>7}"
     print(hdr)
     for b in BUDGETS:
         s = summarize(per_budget[b])
         print(
-            f"{b:>6} {s['any_gold']:>9} {s['all_gold']:>9} {s['covered']:>8} "
+            f"{b:>6} {s['gold_in_hits']:>9} {s['any_gold']:>7} {s['all_gold']:>7} {s['covered']:>8} "
             f"{s['correct_coverage']:>8} {s['answer_hits_gold']:>7} {s['abstained']:>5} "
             f"{s['citations']:>7} {s['cite_bad']:>4} {s['avg_units']:>5} {s['avg_tokens']:>8} {s['p50_ms']:>7}"
         )
@@ -266,7 +270,7 @@ def main(argv: list[str] | None = None) -> int:
         if b == BASE_BUDGET:
             continue
         print(f"-- {BASE_BUDGET} -> {b}")
-        for key in ("any_gold", "all_gold", "covered", "correct_coverage", "answer_hits_gold", "abstained"):
+        for key in ("gold_in_hits", "any_gold", "all_gold", "covered", "correct_coverage", "answer_hits_gold", "abstained"):
             d = delta(base, per_budget[b], key)
             tail = ""
             if d["gain"] or d["lose"]:
@@ -308,11 +312,11 @@ def main(argv: list[str] | None = None) -> int:
         for r in base
         if r["gold_first_rank"] is not None
         and r["gold_first_rank"] <= 5
-        and not r["any_gold_in_context"]
+        and not r["any_gold"]
     ]
     print(f"   基线 frontier 题数 {len(frontier)}：{frontier}")
     for b in BUDGETS:
-        got = [q for q in frontier if per_budget[b][idx[q]]["any_gold_in_context"]]
+        got = [q for q in frontier if per_budget[b][idx[q]]["any_gold"]]
         print(f"   预算 {b}: 收复 {len(got)}/{len(frontier)}   {got if got else ''}")
 
     print()
@@ -321,7 +325,7 @@ def main(argv: list[str] | None = None) -> int:
     cand_sum = summarize(cand)
     k1 = delta(base, cand, "correct_coverage")
     k2 = delta(base, cand, "covered")
-    frontier_8000 = [q for q in frontier if cand[idx[q]]["any_gold_in_context"]]
+    frontier_8000 = [q for q in frontier if cand[idx[q]]["any_gold"]]
     r2 = cand_sum["abstained"] - base_sum["abstained"]
     print(f"   K1 correct_coverage 净增 {k1['net']:+d}（门槛 ≥ +10）-> {'PASS' if k1['net'] >= 10 else 'FAIL'}")
     print(f"   K2 covered 净增 {k2['net']:+d}（门槛 ≥ +10）-> {'PASS' if k2['net'] >= 10 else 'FAIL'}")
@@ -376,7 +380,7 @@ def main(argv: list[str] | None = None) -> int:
             "R3_cite_bad": summarize(per_budget[BUDGETS[-1]])["cite_bad"],
         },
         "frontier_at_base": frontier,
-        "frontier_recovered": {str(b): [q for q in frontier if per_budget[b][idx[q]]["any_gold_in_context"]] for b in BUDGETS},
+        "frontier_recovered": {str(b): [q for q in frontier if per_budget[b][idx[q]]["any_gold"]] for b in BUDGETS},
         "non_monotonic_watch": {
             q: [{str(b): per_budget[b][idx[q]]} for b in BUDGETS] if q in idx else "absent"
             for q in NON_MONOTONIC_WATCH
