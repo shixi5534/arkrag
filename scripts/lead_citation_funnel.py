@@ -299,7 +299,22 @@ def section_mining_origin(answerable, by_chunk) -> dict:
 
 
 def section_funnel(answerable, by_chunk, triage) -> dict:
-    """四道互斥闸门：成功 / 断言不含 / 块没进上下文 / 块进了没选中。"""
+    """四道互斥闸门：成功 / 断言不含 / 块没进上下文 / 块进了没选中。
+
+    **本节是旧口径，已被 `data/lead_gate_recheck.json` 的六态漏斗取代，勿单独引用。**
+
+    旧口径把「块没进上下文」与「断言在、但被 `_assertion_relevant()` 挡掉」混成
+    两个笼统的桶，其中「闸门3 块在手却没发这条引用 21 题」里 19 道实为闸门1b
+    （断言抽到了、准入判据把它挡在 `unit["assertions"]` 之外，回答层连候选都拿
+    不到）——它们不是「回答层不发引用」，而是准入判据的活。真·闸门3 只有 2 题
+    （`q-dr-000047`、`q-tc-000007`）。
+
+    改这件事需要真跑 `pipeline.ask_once` 才知道每条断言有没有被准入，代价远超
+    本脚本只读 triage 的定位，所以这里**保留原数字仅供对账**，并把更正指向
+    `scripts/lead_gate_recheck.py`（六态：covered / 闸门3 / 闸门2 / 闸门1b /
+    闸门1L / 闸门1，合计恒等于应答题数）。六态在 v1 300 应答题上的实测是
+    `51 / 2 / 122 / 19 / 38 / 68`。
+    """
     st = collections.Counter()
     by_cat = collections.defaultdict(collections.Counter)
     for it in answerable:
@@ -327,6 +342,13 @@ def section_funnel(answerable, by_chunk, triage) -> dict:
             st["闸门3 块在手却没发这条引用"] += 1
             by_cat[cat]["闸门3 块在手却没发这条引用"] += 1
     return {
+        "口径": "旧四闸门（已被取代）",
+        "说明": (
+            "闸门3 21 题里 19 道实为闸门1b（断言抽到了、被 _assertion_relevant() 挡掉），"
+            "真·闸门3 只有 2 题。六态口径见 data/lead_gate_recheck.json："
+            "covered 51 / 闸门3 2 / 闸门2 122 / 闸门1b 19 / 闸门1L 38 / 闸门1 68 = 300。"
+            "本节数字仅供与历史报告对账，不许单独当结论引用。"
+        ),
         "题级": dict(st),
         "按题型": {c: dict(v) for c, v in sorted(by_cat.items())},
     }
