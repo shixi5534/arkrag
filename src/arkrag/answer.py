@@ -41,6 +41,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import time
 
 # 引用校验的最低证据长度。1–2 字的证据在正文里几乎必然重复出现，位置对不上也
@@ -61,6 +62,43 @@ MAX_CLAIMS = 5
 # `_claim_supported_by_line` 的输入、预算与条数上限——那些都读断言 span，不读这里。
 CITATION_WHOLE_LINE = False
 
+# 标题型答案通路开关：False = 不启用（与改动前逐位一致），True = 问句在问「出处标题」
+# 时，用问句里的「」引文定位上下文中的块，直接回答该块的 title。
+#
+# **为什么需要这条通路**：抽取式回答器只会拼「主体 谓词 客体」三元组，而这类问法的
+# 答案是某个 chunk 的 title——title 既不在块正文里，也不在断言里，claim 机制结构上
+# 永远答不出。实测（dev 350 应答题）这类题 76 道，100% 是 single_chunk。
+#
+# **为什么默认关**：这是**新增一种答案形态**，不是改判据。关掉即与改动前逐位一致。
+#
+# 硬约束（改这条通路时不许违反）：
+#   1. 答案文本**只能**取自 `unit["title"]`。question 参数仅用于提取「」引文去
+#      **定位块**，绝不许从中切片/正则出答案字符。
+#   2. 引用 evidence 取「引文所在那一行」，且保证 `text[start:end] == evidence`，
+#      否则 `verify_citations` 会判 `evidence_does_not_match_offsets`。
+#   3. 命中块的 title 不唯一（>1 种）或为空 ⇒ 不触发，落回原路径（不许瞎猜）。
+#   4. 不动 CITATION_WHOLE_LINE、不动 MAX_CLAIMS、不动 min_top_score、不动 retrieve。
+#
+# **记账提醒**：本通路启用后，系统里会同时存在两种引用粒度——标题题走整行（本通路
+# 内建）、其余题走断言 span（`CITATION_WHOLE_LINE` 仍为 False）。这不违反单变量
+# （粒度差异是本通路的实现内含，不是又拧了一个旋钮），但报告里必须把「整行引用条数」
+# 与「断言 span 引用条数」分开计，且下一轮若有人打开 `CITATION_WHOLE_LINE`，那就是
+# 在「已经部分整行」的基础上再打开，届时引用覆盖数不能与本轮直比。
+TITLE_ANSWER_PATH = False
+
+# 触发词与 `answer_form == needs_metadata` 判据完全等价（实测 76/76 全 single_chunk）。
+# 刻意收窄：不加「引文」「原文」等泛词，否则会把 alias 类「「X」的规范名是什么」
+# 一起吃进来（dev 350 里有 158 道含「」引文的非标题题，必须一道都不能触发）。
+TITLE_TRIGGERS = (
+    "请给出该块的标题",
+    "请回答该段的标题",
+    "出自哪个文本块",
+    "来自哪一段剧情",
+)
+
+# 问句里的「」引文（≥4 字，与 MIN_EVIDENCE_CHARS 对齐：更短的行无法作为引用）。
+_QUOTE_RE = re.compile(r"「([^」]{4,})」")
+
 
 def _line_bounds(text: str, start: int, end: int) -> tuple[int, int]:
     """把 `[start, end)` 扩到所在整行（含说话人前缀）。"""
@@ -78,6 +116,74 @@ def _line_bounds(text: str, start: int, end: int) -> tuple[int, int]:
 def _line_of(text: str, start: int, end: int) -> str:
     left, right = _line_bounds(text, start, end)
     return text[left:right]
+
+
+def _title_answer(question: str, units: list[dict]) -> dict | None:
+    """问句在问「出处标题」时，用「」引文定位块，返回该块 title 与引文行引用。
+
+    **答案只能取自 `unit["title"]`**；`question` 在这里只有两个用途：判触发词、
+    取「」引文当**定位键**。函数体内没有任何对 question 的切片/替换/partition。
+
+    返回 `None` 表示不适用（落回原有 claim 通路）——定位失败、title 为空、title
+    不唯一，全部返回 None，**绝不猜一个 title 出来**（`any_predicate` 那条路正是
+    死在「判据不成立时仍然给答案」上）。
+    """
+    q = str(question or "")
+    if not any(trigger in q for trigger in TITLE_TRIGGERS):
+        return None
+    quotes = [m for m in _QUOTE_RE.findall(q) if m.strip()]
+    if not quotes:
+        return None
+
+    located: list[tuple[dict, int, int, str]] = []
+    for unit in units:
+        title = str(unit.get("title") or "").strip()
+        if not title:
+            continue
+        text = str(unit.get("text") or "")
+        if not text:
+            continue
+        for line in text.splitlines():
+            if not line.strip() or len(line) < MIN_EVIDENCE_CHARS:
+                continue
+            if not any(quote in line for quote in quotes):
+                continue
+            start = text.find(line)
+            # 偏移自检：同一行文本可能在块内重复出现，find 取第一个可能定位到别处。
+            if start < 0 or text[start:start + len(line)] != line:
+                continue
+            located.append((unit, start, start + len(line), line))
+            break
+
+    if not located:
+        return None
+
+    titles = {str(unit.get("title") or "").strip() for unit, _, _, _ in located}
+    if len(titles) != 1:
+        return None
+    title = titles.pop()
+
+    # **同一 title 的每一个命中块都要各发一条引用**，不能只取 located[0]。
+    #
+    # 原因（实测）：同一行文本可能在**同 title 的两个块**里逐字节重复。对话体语料里
+    # 「上一块的结尾」与「下一块的开头」常是同一句台词，两块 title 也可能相同。这时
+    # 只发第一条会把引用发到非 gold 块上，required 的 chunk_id 对不上，覆盖率回退
+    # （`q-sc-000064` 就是这么掉的）。每条引用各自满足 `text[start:end] == evidence`，
+    # 所以多发不影响引用定位校验。
+    citations = [
+        {
+            "chunk_id": str(unit.get("chunk_id") or ""),
+            "start": start,
+            "end": end,
+            "evidence": line,
+        }
+        for unit, start, end, line in located
+    ]
+    return {
+        "answer": title,
+        "citations": citations,
+        "n_located": len(located),
+    }
 
 
 def _citation_span(text: str, start: int, end: int, *, whole_line: bool = False):
@@ -311,6 +417,37 @@ class ExtractiveAnswerer:
                 f"{self.min_top_score:.4f})"
             )
             return base
+
+        # ---- 标题型答案通路（新增答案形态，默认关） ----------------------
+        # 放在三道拒答闸之后、claim 机制之前：
+        #   * 合法拒答（问句不可答 / 零上下文 / 检索分不足）不受影响 —— R3' 防的就是这个；
+        #   * 命中时完全绕过 claim 生成、MAX_CLAIMS 截断、逐行支撑判据与接地判据，
+        #     这就是「只改答案形态、不动 claim 选择」的单变量保证。
+        if TITLE_ANSWER_PATH:
+            hit = _title_answer(question, units)
+            if hit is not None:
+                base["answer"] = hit["answer"]
+                base["citations"] = [
+                    {
+                        "claim": f"标题：{hit['answer']}",
+                        "chunk_id": cite["chunk_id"],
+                        "evidence": cite["evidence"],
+                        "start": cite["start"],
+                        "end": cite["end"],
+                        "assertion_id": "",
+                        "predicate_in_line": False,
+                        "granularity": "line",  # 记账用：本通路发的是整行引用
+                    }
+                    for cite in hit["citations"]
+                ]
+                base["confidence"] = round(min(0.95, float(top_score or 0.0)), 4)
+                base["stats"]["title_path"] = {
+                    "applied": True,
+                    "located_units": hit["n_located"],
+                    "title_source": "unit.title",
+                }
+                return base
+            base["stats"]["title_path"] = {"applied": False}
 
         # ---- 收集候选 claim（每条都从断言的证据偏移来） -------------------
         context_names: set[str] = set()
