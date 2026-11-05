@@ -1,0 +1,64 @@
+{
+ "generated_at": "2026-11-05T03:08:26Z",
+ "git_commit": "6eda85b8314cc9b0f9573746990d8e673bc39198",
+ "python": "3.14.3",
+ "os": "Windows-11-10.0.26200-SP0",
+ "command": "py -3 scripts/lead_verify_p3_round1.py",
+ "source": "data/a_p3_line_citation.json",
+ "questions": 380,
+ "coverage": {
+  "base": 63,
+  "cand": 82,
+  "gain": [
+   "q-al-000003",
+   "q-al-000009",
+   "q-al-000012",
+   "q-al-000019",
+   "q-al-000020",
+   "q-al-000033",
+   "q-al-000037",
+   "q-al-000044",
+   "q-al-000046",
+   "q-al-900016",
+   "q-al-900035",
+   "q-al-900036",
+   "q-al-900037",
+   "q-al-900041",
+   "q-cx-000007",
+   "q-na-000001",
+   "q-na-000003",
+   "q-na-000012",
+   "q-sc-900012"
+  ],
+  "lose": [],
+  "selfreported_base": 63,
+  "selfreported_cand": 82,
+  "denominators": {
+   "all_answerable": 350,
+   "span_reachable": 230,
+   "two_gates": 89
+  }
+ },
+ "single_variable": {
+  "answer_same": 380,
+  "answer_changed": []
+ },
+ "citations": {
+  "total_base": 2103,
+  "total_cand": 2103,
+  "bad_base": 0,
+  "bad_cand": 0,
+  "accuracy_base": 1.0,
+  "accuracy_cand": 1.0,
+  "collapsed_questions": 42,
+  "delta_histogram": {
+   "0": 380
+  }
+ },
+ "answer_quality": {
+  "contains_gold_base": 122,
+  "contains_gold_cand": 122,
+  "gain": [],
+  "lose": []
+ }
+}
