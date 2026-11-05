@@ -56,6 +56,11 @@ DEFAULT_MIN_TOP_SCORE = 0.05
 # `warnings`——一条答案堆二十句话，读者无法判断哪句是重点。
 MAX_CLAIMS = 5
 
+# 引用粒度开关：False = 发断言短语本身（现状），True = 发断言所在整行。
+# 只影响 `citations` 里 `evidence/start/end` 三元组，**不影响** claim 的取舍、
+# `_claim_supported_by_line` 的输入、预算与条数上限——那些都读断言 span，不读这里。
+CITATION_WHOLE_LINE = False
+
 
 def _line_bounds(text: str, start: int, end: int) -> tuple[int, int]:
     """把 `[start, end)` 扩到所在整行（含说话人前缀）。"""
@@ -73,6 +78,25 @@ def _line_bounds(text: str, start: int, end: int) -> tuple[int, int]:
 def _line_of(text: str, start: int, end: int) -> str:
     left, right = _line_bounds(text, start, end)
     return text[left:right]
+
+
+def _citation_span(text: str, start: int, end: int, *, whole_line: bool = False):
+    """一条引用要发出的 `(start, end, evidence)` 三元组。
+
+    `verify_citations` 逐条查 `text[start:end] == evidence`，所以这三样必须自洽：
+    换区间就必须同时换 evidence，只改其中一个必然被判 `evidence_does_not_match_offsets`。
+
+    `whole_line=True` 时把区间扩到断言所在**整行**（含说话人前缀），evidence 取该行
+    原文。这样 gold 的 `required_citations.evidence`（常是整句台词）落在这行内时，
+    下游 `req.evidence in cite.evidence` 的单向子串判据就能成立。
+
+    **为什么抽成函数**：让「改引用粒度」成为可 A/B 的单变量——只需替换这一个函数的
+    `whole_line` 取值，claim 选择、`_claim_supported_by_line`、预算、MAX_CLAIMS 全不动。
+    """
+    if whole_line:
+        left, right = _line_bounds(text, start, end)
+        return left, right, text[left:right]
+    return start, end, text[start:end]
 
 
 def _claim_supported_by_line(claim: dict, text: str) -> dict:
@@ -350,6 +374,9 @@ class ExtractiveAnswerer:
                 "evidence": str(span.get("evidence") or ""),
                 "start": int(span.get("start", -1)),
                 "end": int(span.get("end", -1)),
+                # 引用粒度实验要能把区间扩到整行，需要块正文；存在 claim 上一路带下去，
+                # 避免在发引用时反查 chunks。**不参与任何判据**，只是数据的载体。
+                "chunk_text": str(span.get("text") or ""),
                 "subject": str(brief.get("subject") or ""),
                 "predicate": str(brief.get("predicate") or ""),
                 "object": str(brief.get("object") or ""),
@@ -451,6 +478,7 @@ class ExtractiveAnswerer:
                     "evidence": claim["evidence"],
                     "start": claim["start"],
                     "end": claim["end"],
+                    "chunk_text": claim.get("chunk_text") or "",
                     "assertion_id": claim["assertion_id"],
                 }
             )
@@ -481,13 +509,17 @@ class ExtractiveAnswerer:
         citations: list[dict] = []
         for c in accepted:
             claim_text = f"{c['subject']}{c['predicate']}{c['object']}"
+            _ev = _citation_span(
+                c.get("chunk_text") or "", int(c["start"]), int(c["end"]),
+                whole_line=CITATION_WHOLE_LINE,
+            )
             citations.append(
                 {
                     "claim": claim_text,
                     "chunk_id": c["chunk_id"],
-                    "evidence": c["evidence"],
-                    "start": c["start"],
-                    "end": c["end"],
+                    "evidence": _ev[2],
+                    "start": _ev[0],
+                    "end": _ev[1],
                     "assertion_id": c["assertion_id"],
                     "predicate_in_line": c["predicate_in_line"],
                 }
@@ -495,13 +527,17 @@ class ExtractiveAnswerer:
             # 同一事实的其余支撑断言：答案正文只写一次，但每一条引用都留着——
             # 删掉它们等于丢掉「这件事在多个轮次被独立观察到」的证据。
             for extra in c.get("extra_citations") or []:
+                _ex = _citation_span(
+                    extra.get("chunk_text") or "", int(extra["start"]), int(extra["end"]),
+                    whole_line=CITATION_WHOLE_LINE,
+                )
                 citations.append(
                     {
                         "claim": claim_text,
                         "chunk_id": extra["chunk_id"],
-                        "evidence": extra["evidence"],
-                        "start": extra["start"],
-                        "end": extra["end"],
+                        "evidence": _ex[2],
+                        "start": _ex[0],
+                        "end": _ex[1],
                         "assertion_id": extra["assertion_id"],
                         "predicate_in_line": c["predicate_in_line"],
                     }
