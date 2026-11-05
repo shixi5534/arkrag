@@ -744,3 +744,126 @@ class TestSignalDensityBlock:
         row = {"r20": 0.79, "caliber": "gold_only", "context_hits": 162}
         row.update(block)
         assert provenance.verify_metric_row(row)["verdict"] == provenance.PASS
+
+
+class TestCoverageNeedsThreeDenominators:
+    """引用覆盖必须并列三个分母。
+
+    同一个「引用覆盖 0.17」有三种分母，三者答的是不同的问题：
+    `/300` 把三种失败混在一起、`/194` 只算断言层可达、`/72` 只算两闸都过。
+
+    判 unknown 而不是 fail：报告里只有 `coverage: 0.17` 时我们**不知道**作者的
+    分子分母是什么——这是「查不了」，不是「看得出来缺什么」。
+    """
+
+    def test_coverage_without_denominators_is_unknown(self) -> None:
+        row = {"coverage": 0.17}
+        res = provenance.verify_metric_row(row)
+        assert res["verdict"] == provenance.UNKNOWN
+        assert "denominators" in res["missing"]
+        assert "51/300" in res["detail"]
+
+    def test_one_denominator_only_is_unknown_naming_the_missing_ones(self) -> None:
+        row = {"coverage": 0.17, "denominators": {"mixed": 300}}
+        res = provenance.verify_metric_row(row)
+        assert res["verdict"] == provenance.UNKNOWN
+        assert res["missing"] == ["denominators.reachable", "denominators.ungated"]
+
+    def test_three_denominators_pass_and_name_the_target(self) -> None:
+        row = {"coverage": 0.17,
+               "denominators": {"mixed": 300, "reachable": 194, "ungated": 72}}
+        assert provenance.verify_metric_row(row)["verdict"] == provenance.PASS
+        # 整行通过时 detail 只汇总「不通过」的分支，所以要看判据自己的说明。
+        verdict, detail, missing = provenance._judge_coverage_denominators(row)
+        assert verdict == provenance.PASS
+        assert "三个分母齐全" in detail
+        assert provenance.COVERAGE_TARGET in detail
+        assert missing == []
+
+    def test_denominators_not_monotonic_is_fail(self) -> None:
+        """窄分母必须是宽分母题集的子集，题数不可能反而更多。"""
+        row = {"coverage": 0.17,
+               "denominators": {"mixed": 300, "reachable": 400, "ungated": 72}}
+        res = provenance.verify_metric_row(row)
+        assert res["verdict"] == provenance.FAIL
+        assert "单调不增" in res["detail"]
+
+    def test_zero_mixed_denominator_is_fail(self) -> None:
+        row = {"coverage": 0.0, "denominators": {"mixed": 0, "reachable": 0, "ungated": 0}}
+        assert provenance.verify_metric_row(row)["verdict"] == provenance.FAIL
+
+    def test_flat_spelling_is_accepted(self) -> None:
+        """`coverage_denominator` / `coverage_denominators` 两种拼法都认。"""
+        row = {"coverage": 0.17,
+               "coverage_denominator": {"mixed_n": 300, "reachable_n": 194, "ungated_n": 72}}
+        assert provenance.verify_metric_row(row)["verdict"] == provenance.PASS
+
+    def test_a_row_without_coverage_keys_is_not_affected(self) -> None:
+        assert provenance.verify_metric_row({"p95_ms": 12.3})["verdict"] == provenance.PASS
+
+
+class TestShuffleRatioIsAnEliminationCriterion:
+    """净增益 ÷ 变动集合 < 0.1 判洗牌：只能淘汰，不能预测。"""
+
+    def test_ratio_arithmetic(self) -> None:
+        assert provenance.shuffle_ratio(6, 64) == 0.0938
+        assert provenance.shuffle_ratio(0, 10) == 0.0
+        assert provenance.shuffle_ratio(6, 0) is None
+
+    def test_gain_and_changed_without_ratio_is_unknown(self) -> None:
+        res = provenance.verify_metric_row({"net_gain": 6, "top20_changed": 64})
+        assert res["verdict"] == provenance.UNKNOWN
+        assert res["missing"] == ["shuffle_ratio"]
+
+    def test_low_ratio_without_elimination_declaration_is_fail(self) -> None:
+        row = {"net_gain": 6, "top20_changed": 64, "shuffle_ratio": 0.0938}
+        res = provenance.verify_metric_row(row)
+        assert res["verdict"] == provenance.FAIL
+        assert "淘汰" in res["detail"]
+
+    def test_low_ratio_declared_as_elimination_passes(self) -> None:
+        row = {"net_gain": 6, "top20_changed": 64, "shuffle_ratio": 0.0938,
+               "shuffle_usage": provenance.SHUFFLE_USAGE_OK}
+        assert provenance.verify_metric_row(row)["verdict"] == provenance.PASS
+
+    def test_reported_ratio_must_match_the_two_numbers(self) -> None:
+        row = {"net_gain": 6, "top20_changed": 64, "shuffle_ratio": 0.5,
+               "shuffle_usage": provenance.SHUFFLE_USAGE_OK}
+        res = provenance.verify_metric_row(row)
+        assert res["verdict"] == provenance.FAIL
+        assert "0.0938" in res["detail"]
+
+    def test_high_ratio_needs_no_declaration(self) -> None:
+        row = {"net_gain": 20, "top20_changed": 64, "shuffle_ratio": 0.3125}
+        assert provenance.verify_metric_row(row)["verdict"] == provenance.PASS
+
+
+class TestRank5CliffMustBeStated:
+    """报前 5 名内的指标，必须附第 5 名转化率 0.4167。"""
+
+    # 注意：`r5` 同时是 recall 键，所以这些行还必须带 caliber 与下游量，
+    # 否则先红在口径上，断崖这条根本没被执行到。
+    def test_r5_without_rank5_conversion_is_unknown(self) -> None:
+        row = {"r5": 0.79, "caliber": "gold_only", "context_hits": 162}
+        res = provenance.verify_metric_row(row)
+        assert res["verdict"] == provenance.UNKNOWN
+        assert res["missing"] == ["rank5_conversion"]
+        assert "0.4167" in res["detail"]
+
+    def test_r5_with_the_real_conversion_passes(self) -> None:
+        row = {"r5": 0.79, "rank5_conversion": provenance.RANK5_CONVERSION,
+               "caliber": "gold_only", "context_hits": 162}
+        assert provenance.verify_metric_row(row)["verdict"] == provenance.PASS
+
+    def test_a_fabricated_conversion_is_fail(self) -> None:
+        """这个数是实测出来的，不是估计值——写成 1.0 会让断崖消失。"""
+        row = {"r5": 0.79, "rank5_conversion": 1.0,
+               "caliber": "gold_only", "context_hits": 162}
+        res = provenance.verify_metric_row(row)
+        assert res["verdict"] == provenance.FAIL
+        assert "实测" in res["detail"]
+
+    def test_r20_alone_does_not_trigger_the_rank5_gate(self) -> None:
+        """只有 r20 时断崖提示不适用——第 5 名的事只归 r5 那类键管。"""
+        row = {"r20": 0.79, "caliber": "gold_only", "context_hits": 162}
+        assert provenance.verify_metric_row(row)["verdict"] == provenance.PASS

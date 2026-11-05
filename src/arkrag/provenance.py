@@ -176,6 +176,47 @@ CPU_KEYS: tuple[str, ...] = (
     "process_s",
 )
 
+#: 「引用覆盖」类指标：出现这些键时，同一行必须**并列三个分母**。
+#:
+#: 同一个「引用覆盖 0.17」有三种分母，三者答的是不同的问题：
+#:   mixed     /300 —— 全部应答题。把三种互不相干的失败混在一个分母里：
+#:                    断言层没抽到 gold 那句、required 块压根没进上下文、
+#:                    块在手却没发这条引用。它涨落时看不出该修哪一层。
+#:   reachable /194 —— 只算「gold 那句确实被抽成某条断言」的题，即断言层天花板。
+#:   ungated   /72  —— 只算「断言可达 **且** required 块全进了上下文」的题，
+#:                    两道上游闸都过了，只剩「发不发这条引用」。
+#: 只报一个数，读者无法判断这次涨落发生在哪一层——这正是 P3 最需要的信息。
+COVERAGE_KEYS: tuple[str, ...] = (
+    "citation_coverage",
+    "required_citation_coverage",
+    "coverage",
+)
+
+#: 三个分母的名字。顺序有语义：从最宽到最窄，题数必须单调不增
+#: （窄分母的题集是宽分母题集的子集）。写成常量是为了让报告与判据用同一套字。
+COVERAGE_DENOMINATORS: tuple[str, ...] = ("mixed", "reachable", "ungated")
+
+#: P3 盯的那一个。换成 mixed 会让「上游没抽到」和「下游没发引用」两类失败
+#: 在同一个数字里互相掩盖，前者是抽取/挖掘的活，后者才是 P3 的活。
+COVERAGE_TARGET = "ungated"
+
+#: 「真跑净增益」÷「top-K 变动集合大小」= 信号转换率。
+SHUFFLE_GAIN_KEYS: tuple[str, ...] = ("net_gain", "gain")
+SHUFFLE_CHANGED_KEYS: tuple[str, ...] = ("top20_changed", "changed_questions", "changed_set_size")
+
+#: 转换率低于它即判「洗牌」：名次动了，结果没动。
+SHUFFLE_THRESHOLD = 0.1
+
+#: 洗牌唯一允许的用途：**淘汰**这一版，不是**预测**下一版。
+SHUFFLE_USAGE_OK = "elimination_only"
+
+#: 「名次进前 5」类指标出现时，必须附带的第 5 名转化率。
+#: 实测：名次 1–4 转化率 1.0000（181/181），**第 5 名 5/12 = 0.4167**，
+#: 第 6 名 1/18 = 0.0556，第 7–20 名 0/44。断崖在第 4 与第 5 名之间。
+#: 不附这个数，读者会把「R@5 高」读成「进了前 5 就能用」。
+RANK5_KEYS: tuple[str, ...] = ("r5", "recall_at_5", "top5", "top_5")
+RANK5_CONVERSION = 0.4167
+
 _ISO_RE = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$")
 _SHA16_RE = re.compile(r"^[0-9a-f]{16}$")
 _COMMIT_RE = re.compile(r"^[0-9a-f]{7,40}$")
@@ -674,20 +715,191 @@ def _judge_duration(row: dict) -> tuple[str, str, list[str]]:
     return PASS, f"墙钟 {w}s / CPU {c}s", []
 
 
+# ---------------------------------------------------------------- 引用覆盖的三个分母
+
+
+def _coverage_denominators(row: dict) -> dict | None:
+    """从一行里取出三个分母。三种取法都认，取到一种就够：
+
+    * `denominators: {mixed: 300, reachable: 194, ungated: 72}`
+    * `coverage_denominator: {mixed_n: 300, ...}`
+    * 平铺的 `coverage_denominators: {mixed: 300, ...}`
+
+    取不到返回 `None`（调用方据此判 unknown，而不是猜一个分母）。
+    """
+    for key in ("denominators", "coverage_denominators", "coverage_denominator"):
+        block = row.get(key)
+        if isinstance(block, dict):
+            got = {}
+            for name in COVERAGE_DENOMINATORS:
+                value = block.get(name, block.get(f"{name}_n"))
+                if not _blank(value):
+                    got[name] = value
+            if got:
+                return got
+    return None
+
+
+def _judge_coverage_denominators(row: dict) -> tuple[str, str, list[str]]:
+    """「引用覆盖」行必须并列三个分母，并且题数必须单调不增。
+
+    ## 为什么要三个
+
+    同一个「引用覆盖 0.17」有三种分母，三者回答不同的问题：
+    `/300` 混合了三种互不相干的失败、`/194` 只算断言层可达、`/72` 只算两道上游
+    闸都过。只报一个数，读者无法判断这次涨落发生在抽取层、检索层还是回答层——
+    而这正是 P3 唯一需要的信息。
+
+    ## 为什么判 unknown 而不是 fail
+
+    报告里只有 `coverage: 0.17` 一行时，我们**不知道**作者的分子分母是什么，
+    可能他内部算了三个却没写出来，也可能只有一个。这是「查不了」。
+
+    ## 为什么要求单调不增
+
+    窄分母的题集是宽分母题集的子集（`ungated ⊆ reachable ⊆ mixed`），所以题数
+    必须单调不增。反过来说明三个分母不是同一批数据的嵌套口径，而是三份不同的
+    东西——那种情况下三个数并列也仍然没有可比性。
+    """
+    if not _has_any(row, COVERAGE_KEYS):
+        return PASS, "不含引用覆盖键，三分母检查不适用", []
+    denoms = _coverage_denominators(row)
+    if not denoms:
+        return UNKNOWN, (
+            "本行报了引用覆盖，却没有并列三个分母。实测反例：同一个「0.17」可以是 "
+            "51/300（混三种失败）、51/194（断言层可达）、51/72（两闸都过）——"
+            "三者答的是不同的问题，只报一个数就分不清涨落发生在哪一层。"
+            f"请补 denominators 里的 {list(COVERAGE_DENOMINATORS)}"
+        ), ["denominators"]
+    missing = [name for name in COVERAGE_DENOMINATORS if name not in denoms]
+    if missing:
+        return UNKNOWN, (
+            "三个分母只给了 " + str(sorted(denoms)) + "，缺 " + "、".join(missing) +
+            "。三者必须同时出现——少给最窄的那个，报告就会把「上游没抽到」"
+            "当成「P3 没做好」"
+        ), [f"denominators.{name}" for name in missing]
+    try:
+        values = {name: int(denoms[name]) for name in COVERAGE_DENOMINATORS}
+    except (TypeError, ValueError):
+        return FAIL, f"分母不是整数：{denoms!r}", []
+    if values["mixed"] <= 0:
+        return FAIL, f"mixed 分母 {values['mixed']} 不是正数", []
+    if not (values["mixed"] >= values["reachable"] >= values["ungated"] > 0):
+        return FAIL, (
+            f"三个分母不是单调不增：{values}。窄分母的题集必须是宽分母题集的子集"
+            "（ungated ⊆ reachable ⊆ mixed），不满足说明三个数不是同一批数据的"
+            "嵌套口径，并列也没有可比性"
+        ), []
+    return PASS, (f"三个分母齐全 {values}，P3 盯 {COVERAGE_TARGET}"), []
+
+
+# ---------------------------------------------------------------- 洗牌判据
+
+
+def shuffle_ratio(net_gain, changed) -> float | None:
+    """`真跑净增益 / top-K 变动集合大小`。分母为 0 或非数 → `None`。
+
+    这个数回答的是「动了多少名次，换回来多少结果」。它天然是一个**淘汰**判据：
+    低于门槛说明这一版名次变动主要是噪声，不配当下一版的预测依据。
+    """
+    try:
+        g = float(net_gain)
+        c = float(changed)
+    except (TypeError, ValueError):
+        return None
+    if c <= 0:
+        return None
+    return round(g / c, 4)
+
+
+def _judge_shuffle(row: dict) -> tuple[str, str, list[str]]:
+    """同时报了「净增益」与「变动集合大小」的行，必须给转换率并声明用途。"""
+    if not (_has_any(row, SHUFFLE_GAIN_KEYS) and _has_any(row, SHUFFLE_CHANGED_KEYS)):
+        return PASS, "不同时含净增益与变动集合，洗牌判据不适用", []
+    gain = row.get([k for k in SHUFFLE_GAIN_KEYS if not _blank(row.get(k))][0])
+    changed = row.get([k for k in SHUFFLE_CHANGED_KEYS if not _blank(row.get(k))][0])
+    ratio = shuffle_ratio(gain, changed)
+    if ratio is None:
+        return FAIL, f"净增益 {gain!r} / 变动集合 {changed!r} 算不出转换率（变动集合必须 > 0）", []
+    reported = row.get("shuffle_ratio")
+    if _blank(reported):
+        return UNKNOWN, (
+            f"报了净增益 {gain} 与变动集合 {changed}，却没有给转换率。"
+            f"实算转换率 = {ratio}（阈值 {SHUFFLE_THRESHOLD}）："
+            "不写这个数，读者会把「名次动了」读成「效果好了」"
+        ), ["shuffle_ratio"]
+    if abs(float(reported) - ratio) > 1e-4:
+        return FAIL, f"shuffle_ratio={reported} 与 {gain}/{changed}={ratio} 不一致", []
+    usage = str(row.get("shuffle_usage") or "")
+    if ratio < SHUFFLE_THRESHOLD and usage != SHUFFLE_USAGE_OK:
+        return FAIL, (
+            f"转换率 {ratio} 低于 {SHUFFLE_THRESHOLD}，判为洗牌；"
+            f"这一版只能当淘汰用（shuffle_usage={SHUFFLE_USAGE_OK}），"
+            "不能写成「下一版会更好」的依据"
+        ), []
+    if ratio < SHUFFLE_THRESHOLD:
+        return PASS, f"转换率 {ratio} 低于阈值，已声明只作淘汰用", []
+    return PASS, f"转换率 {ratio} 达到阈值", []
+
+
+# ---------------------------------------------------------------- 第 5 名断崖
+
+
+def _judge_rank5(row: dict) -> tuple[str, str, list[str]]:
+    """报「名次进前 5」的行必须附第 5 名转化率。
+
+    实测（dev 350，两份独立逐题产物交叉验证逐位相同）：名次 1–4 的转化率是
+    **1.0000**（181/181），第 5 名 **5/12 = 0.4167**，第 6 名 1/18，第 7–20 名 0/44。
+    断崖落在第 4 与第 5 名之间。所以「R@5 = 0.79」不意味着「进了前 5 就能用」，
+    它里面有一档只有四成能进上下文。
+    """
+    if not _has_any(row, RANK5_KEYS):
+        return PASS, "不含前 5 名指标，断崖提示不适用", []
+    value = row.get("rank5_conversion")
+    if _blank(value):
+        return UNKNOWN, (
+            f"本行报了前 5 名内的指标，却没有附第 5 名转化率（应为 {RANK5_CONVERSION}）。"
+            "实测：名次 1–4 转化率 1.0000，第 5 名只有 5/12=0.4167，断崖在第 4 与"
+            "第 5 名之间。不附这个数，读者会把「进了前 5」读成「能用」"
+        ), ["rank5_conversion"]
+    try:
+        got = float(value)
+    except (TypeError, ValueError):
+        return FAIL, f"rank5_conversion={value!r} 不是数", []
+    if abs(got - RANK5_CONVERSION) > 5e-4:
+        return FAIL, (
+            f"rank5_conversion={got} 与实测 {RANK5_CONVERSION} 不符——"
+            "这个数是实测出来的，不是估计值；改它之前请附新的逐名次实测"
+        ), []
+    return PASS, f"已附第 5 名转化率 {RANK5_CONVERSION}", []
+
+
 def verify_metric_row(row: dict) -> dict:
-    """检查**一行指标**是否合规：口径 + 下游量。
+    """检查**一行指标**是否合规。
 
-    一行里只要出现 recall 类键，就必须：
+    分两层：
 
-    1. 带 `caliber`（缺 → unknown，作废值 → fail）；
-    2. 并列至少一个下游量（缺 → fail）。
+    **A. 与 recall 无关的判据**（出现相应键就查，不看有没有 recall）：
 
-    第 2 条的理由是实测反例：`hop0.5` 配置 R@20 = 0.7379（六配置里第二高），
+    1. 排序加成 → 必须带 `signal_boosted` / `context_units` / `density`；
+    2. 累计耗时 → 必须另有 CPU 时间（墙钟会被机器休眠污染）；
+    3. 引用覆盖 → 必须并列三个分母（`/300` 混合、`/194` 断言层可达、`/72`
+       两闸都过），且题数单调不增；
+    4. 同时有净增益与 top-K 变动集合 → 必须给转换率，低于 0.1 只能声明淘汰用；
+    5. 报前 5 名内的指标 → 必须附第 5 名转化率（实测 0.4167）。
+
+    **B. 与 recall 有关的判据**（`r5`/`r20`/`recall` 等键出现时）：
+
+    6. 带 `caliber`（缺 → unknown，作废值 → fail）；
+    7. 并列至少一个下游量（缺 → fail）。
+
+    第 7 条的理由是实测反例：`hop0.5` 配置 R@20 = 0.7379（六配置里第二高），
     但「真进上下文题数」净增益 0、引用覆盖 51→48。只看 R@20 的报告会建议上这
     个配置。**R@n 单独一行时，它不构成「更好」的证据。**
 
-    第二条判 fail 而不是 unknown：报告里明明能看到这一行、也能看到没有下游量，
-    这是**看得出来的缺口**，不是「查不了」。
+    判 fail 还是 unknown 的分界：报告里明明能看到这一行、也能看到缺什么 ——
+    那是**看得出来的缺口**，判 fail；看不出作者到底算了什么 —— 那是「查不了」，
+    判 unknown。两者都不算通过。
     """
     if not isinstance(row, dict):
         return {"verdict": FAIL, "detail": f"指标行不是 dict（{type(row).__name__}）",
@@ -695,28 +907,25 @@ def verify_metric_row(row: dict) -> dict:
     has_recall = _has_any(row, RECALL_KEYS)
     has_down = _has_any(row, DOWNSTREAM_KEYS)
 
-    # 密度与耗时两条判据**不依赖 recall**：一行可以只报加成、只报耗时。所以它们
-    # 放在 recall 的「不适用就直接放行」分支之前，否则这类行永远不会被检查。
-    density_verdict, density_detail, density_missing = _judge_density(row)
-    duration_verdict, duration_detail, duration_missing = _judge_duration(row)
+    # 这五条判据**都不依赖 recall**：一行可以只报加成、只报覆盖、只报耗时。
+    # 放在 recall 的「不适用就直接放行」分支之前，否则这类行永远不被检查。
+    extras = [
+        _judge_density(row),
+        _judge_duration(row),
+        _judge_coverage_denominators(row),
+        _judge_shuffle(row),
+        _judge_rank5(row),
+    ]
 
     if not has_recall:
-        parts = [
-            (density_verdict, density_detail, density_missing),
-            (duration_verdict, duration_detail, duration_missing),
-        ]
-        verdict = _fold([p[0] for p in parts])
-        details = [p[1] for p in parts if p[0] != PASS]
-        missing = [name for p in parts for name in p[2]]
+        verdict = _fold([p[0] for p in extras])
+        details = [p[1] for p in extras if p[0] != PASS]
+        missing = [name for p in extras for name in p[2]]
         return {"verdict": verdict,
                 "detail": ("；".join(details) if details else "不含 recall 键，不适用口径检查"),
                 "missing": missing, "caliber": row.get("caliber"),
                 "has_recall": False, "has_downstream": has_down}
     caliber_verdict, caliber_detail = judge_caliber(row.get("caliber"))
-    extras = [
-        (density_verdict, density_detail, density_missing),
-        (duration_verdict, duration_detail, duration_missing),
-    ]
     if caliber_verdict != PASS:
         # `missing` 与 `verify()` 同形：判不了的时候必须能反查到缺的是哪一项。
         # P1-c 那次的教训是「缺输入」安静地变成了「无法判定」，两种输出要分得开。

@@ -739,7 +739,41 @@ class TestSuiteSizeIsMonotonic:
     #      `76d66073ff87aab1`）与 `gold-v2.json`（601492 字节 / `069375f8e355e4b9`）
     #      一字节未动。三轮判定下来对 gold 的影响是 **0 题**，这条用例让那个「0」
     #      不是一句声明，而是一个可复算的断言。
-    N = 1743
+    # ------------------------------------------------------------------
+    # N: 1743 -> 1760（2026-11-05，三道新判据）
+    #
+    # 一笔账：`tests/test_provenance.py` 61 -> 78，+17 条，分三个新类：
+    #   TestCoverageNeedsThreeDenominators（7）：引用覆盖行必须并列三个分母
+    #     （/300 混合、/194 断言层可达、/72 两闸都过），且题数单调不增。
+    #     换来的门：把 `denominators` 改成一个数或停掉整条判据 → 5 failed；
+    #     只停单调性 → 1 failed。
+    #   TestShuffleRatioIsAnEliminationCriterion（6）：净增益 ÷ top-K 变动集合
+    #     低于 0.1 判洗牌，且必须声明「只作淘汰用」。
+    #     换来的门：停整条判据 → 3 failed；只停「必须声明淘汰」→ 1 failed。
+    #   TestRank5CliffMustBeStated（4）：报前 5 名内的指标必须附第 5 名转化率
+    #     0.4167（实测 1–4 名 1.0000、第 5 名 5/12、第 6 名 1/18、7–20 名 0/44）。
+    #     换来的门：停整条判据 → 2 failed；只停「编造的转化率判 fail」→ 1 failed。
+    # 该文件**已在** `TEST_FILES` 里，不产生 parametrize 增量。
+    #
+    # 算术：1743 + 17 = 1760，与 `py -3 -m pytest tests --collect-only -q`
+    # 实测 1760 一致。
+    #
+    # 反向实测（命令级，日志 %TEMP%\gate0\logs\reverse_coverage_shuffle_rank5.txt）：
+    #   [0] 基线 78 passed 退出码 0
+    #   [A] 三分母判据恒 PASS → 5 failed 退出码 1；恢复 78 passed 退出码 0
+    #   [B] 单调性检查 `if False` → 1 failed 退出码 1；恢复 0
+    #   [C] 洗牌判据恒 PASS → 3 failed 退出码 1；恢复 0
+    #   [D] 「低转换率必须声明淘汰」`if False` → 1 failed 退出码 1；恢复 0
+    #   [E] 断崖判据恒 PASS → 2 failed 退出码 1；恢复 0
+    #   [F] 编造转化率不判 fail → 1 failed 退出码 1；恢复 0
+    # 六笔都指名道姓核过红的是哪一条，不是「有红花就算数」。
+    #
+    # 踩到的坑（记在这里免得下次重犯）：`r5` 同时是 recall 键，所以只带
+    # `rank5_conversion` 而不带 caliber/下游量的行会**先红在口径上**，断崖这条
+    # 根本没被执行到 —— 三条断崖用例最初就是因此假绿。补上 caliber 与
+    # context_hits 之后才真的测到它。
+    # ------------------------------------------------------------------
+    N = 1760
 
     def test_declared_count_matches_actual(self) -> None:
         """用 pytest 自己数一遍当前收集到的用例数，与本文件登记值比对。"""
