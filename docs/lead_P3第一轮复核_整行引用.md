@@ -140,8 +140,11 @@ A 这轮 19 题增量的题型分布：`alias` 14 / `negative_abstain` 3 / `cros
 
 1. 只测了 v2 dev 350 应答题（A 按纪律没碰验收集 260）。
    **结论不许外推到 new-holdout 160。**
-2. 「答案含 gold 答案」用的是子串匹配，对 `acceptable_answers` 未展开——
-   真实答案正确率应略高于 122，但**base 与 cand 用同一判据，差值 0 仍然成立**。
+2. 「答案含 gold 答案」用的是子串匹配。**已补测**：把 `acceptable_answers` 一并展开
+   （`any(x in answer for x in [gold.answer] + acceptable_answers)`）后，
+   350 应答题上 base 仍是 **122**、cand 仍是 **122**，覆盖变化 19 题里
+   真修 14 / 假修 5 的划分也**逐题相同**。⇒ 展开 acceptable 不改变任何结论，
+   这个限制可以划掉。
 3. 那 5 题「假修」里 3 题是 `negative_abstain`（gold 答案就是「否」）。
    这类的正确答案形态是布尔判断，子串匹配对 2 字答案很敏感，
    应人工复核一遍再写进台账；但即使这 3 题全算对，K2 也只有 +3，仍不改变「答案文本一字未改」这个事实。
