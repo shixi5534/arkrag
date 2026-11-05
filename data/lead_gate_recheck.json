@@ -1,0 +1,619 @@
+{
+ "generated_at": "2026-11-05T02:56:55Z",
+ "git_commit": "78369c09b75cb3974267c3ec4f49c358be201fa4",
+ "python": "3.14.3",
+ "os": "Windows-11-10.0.26200-SP0",
+ "command": "py -3 scripts/lead_gate_recheck.py",
+ "generation": "g-20261103T132152Z-06a741",
+ "answerable": 300,
+ "1_闸门漏斗": {
+  "说明": "六态互斥，合计恒等于应答题数；闸门1L 与闸门1 把「改粒度能救」与「抽取缺口」分开",
+  "各配置": [
+   {
+    "配置": "baseline(cooc0.0)",
+    "covered": 51,
+    "闸门3 块在手没发引用": 2,
+    "闸门2 块没进上下文": 112,
+    "闸门1b 断言在但被相关度过滤": 29,
+    "闸门1L 仅整行可救": 38,
+    "闸门1 抽取缺（行都没被抽）": 68,
+    "合计": 300
+   },
+   {
+    "配置": "cooc0.1",
+    "covered": 55,
+    "闸门3 块在手没发引用": 1,
+    "闸门2 块没进上下文": 109,
+    "闸门1b 断言在但被相关度过滤": 29,
+    "闸门1L 仅整行可救": 38,
+    "闸门1 抽取缺（行都没被抽）": 68,
+    "合计": 300
+   }
+  ],
+  "两档归类不同的题": [
+   {
+    "question_id": "q-dr-000010",
+    "baseline": "闸门2 块没进上下文",
+    "cooc0.1": "covered"
+   },
+   {
+    "question_id": "q-dr-000024",
+    "baseline": "闸门2 块没进上下文",
+    "cooc0.1": "covered"
+   },
+   {
+    "question_id": "q-dr-000038",
+    "baseline": "闸门2 块没进上下文",
+    "cooc0.1": "covered"
+   },
+   {
+    "question_id": "q-dr-000041",
+    "baseline": "闸门2 块没进上下文",
+    "cooc0.1": "covered"
+   },
+   {
+    "question_id": "q-tc-000007",
+    "baseline": "闸门3 块在手没发引用",
+    "cooc0.1": "闸门2 块没进上下文"
+   }
+  ],
+  "covered 增量": 4
+ },
+ "2_闸门1b画像": {
+  "题数": 29,
+  "按题型": {
+   "multihop": 5,
+   "single_chunk": 24
+  },
+  "答案恰等于块 title": 24,
+  "required 被问句原样引用": 24,
+  "问句含「」引文": 29,
+  "强行放行后 claim 层仍立不住": 3,
+  "机制": "`retrieve._assertion_relevant()` 只认「端点落在焦点实体」或「谓词命中关系提示」；这类问句把要引的原句直接放在「」里，里面既不是实体名也不是关系词，于是 gold 那条断言根本不被登记 ⇒ 回答层连候选都拿不到",
+  "逐题": [
+   {
+    "question_id": "q-mh-000010",
+    "category": "multihop",
+    "n_matched_assertions": 1,
+    "answer_equals_chunk_title": false,
+    "required_quoted_in_question": false,
+    "n_quotes_in_question": 2,
+    "claim_layer_can_stand": true
+   },
+   {
+    "question_id": "q-mh-000015",
+    "category": "multihop",
+    "n_matched_assertions": 1,
+    "answer_equals_chunk_title": false,
+    "required_quoted_in_question": false,
+    "n_quotes_in_question": 2,
+    "claim_layer_can_stand": true
+   },
+   {
+    "question_id": "q-mh-000017",
+    "category": "multihop",
+    "n_matched_assertions": 1,
+    "answer_equals_chunk_title": false,
+    "required_quoted_in_question": false,
+    "n_quotes_in_question": 2,
+    "claim_layer_can_stand": true
+   },
+   {
+    "question_id": "q-mh-000021",
+    "category": "multihop",
+    "n_matched_assertions": 1,
+    "answer_equals_chunk_title": false,
+    "required_quoted_in_question": false,
+    "n_quotes_in_question": 2,
+    "claim_layer_can_stand": true
+   },
+   {
+    "question_id": "q-mh-000043",
+    "category": "multihop",
+    "n_matched_assertions": 1,
+    "answer_equals_chunk_title": false,
+    "required_quoted_in_question": false,
+    "n_quotes_in_question": 2,
+    "claim_layer_can_stand": true
+   },
+   {
+    "question_id": "q-sc-000001",
+    "category": "single_chunk",
+    "n_matched_assertions": 1,
+    "answer_equals_chunk_title": true,
+    "required_quoted_in_question": true,
+    "n_quotes_in_question": 1,
+    "claim_layer_can_stand": true
+   },
+   {
+    "question_id": "q-sc-000004",
+    "category": "single_chunk",
+    "n_matched_assertions": 1,
+    "answer_equals_chunk_title": true,
+    "required_quoted_in_question": true,
+    "n_quotes_in_question": 1,
+    "claim_layer_can_stand": false
+   },
+   {
+    "question_id": "q-sc-000010",
+    "category": "single_chunk",
+    "n_matched_assertions": 1,
+    "answer_equals_chunk_title": true,
+    "required_quoted_in_question": true,
+    "n_quotes_in_question": 1,
+    "claim_layer_can_stand": true
+   },
+   {
+    "question_id": "q-sc-000011",
+    "category": "single_chunk",
+    "n_matched_assertions": 1,
+    "answer_equals_chunk_title": true,
+    "required_quoted_in_question": true,
+    "n_quotes_in_question": 1,
+    "claim_layer_can_stand": true
+   },
+   {
+    "question_id": "q-sc-000014",
+    "category": "single_chunk",
+    "n_matched_assertions": 1,
+    "answer_equals_chunk_title": true,
+    "required_quoted_in_question": true,
+    "n_quotes_in_question": 1,
+    "claim_layer_can_stand": true
+   },
+   {
+    "question_id": "q-sc-000017",
+    "category": "single_chunk",
+    "n_matched_assertions": 1,
+    "answer_equals_chunk_title": true,
+    "required_quoted_in_question": true,
+    "n_quotes_in_question": 1,
+    "claim_layer_can_stand": true
+   },
+   {
+    "question_id": "q-sc-000025",
+    "category": "single_chunk",
+    "n_matched_assertions": 1,
+    "answer_equals_chunk_title": true,
+    "required_quoted_in_question": true,
+    "n_quotes_in_question": 1,
+    "claim_layer_can_stand": true
+   },
+   {
+    "question_id": "q-sc-000030",
+    "category": "single_chunk",
+    "n_matched_assertions": 1,
+    "answer_equals_chunk_title": true,
+    "required_quoted_in_question": true,
+    "n_quotes_in_question": 1,
+    "claim_layer_can_stand": false
+   },
+   {
+    "question_id": "q-sc-000031",
+    "category": "single_chunk",
+    "n_matched_assertions": 1,
+    "answer_equals_chunk_title": true,
+    "required_quoted_in_question": true,
+    "n_quotes_in_question": 1,
+    "claim_layer_can_stand": true
+   },
+   {
+    "question_id": "q-sc-000032",
+    "category": "single_chunk",
+    "n_matched_assertions": 1,
+    "answer_equals_chunk_title": true,
+    "required_quoted_in_question": true,
+    "n_quotes_in_question": 1,
+    "claim_layer_can_stand": true
+   },
+   {
+    "question_id": "q-sc-000033",
+    "category": "single_chunk",
+    "n_matched_assertions": 1,
+    "answer_equals_chunk_title": true,
+    "required_quoted_in_question": true,
+    "n_quotes_in_question": 1,
+    "claim_layer_can_stand": true
+   },
+   {
+    "question_id": "q-sc-000034",
+    "category": "single_chunk",
+    "n_matched_assertions": 1,
+    "answer_equals_chunk_title": true,
+    "required_quoted_in_question": true,
+    "n_quotes_in_question": 1,
+    "claim_layer_can_stand": true
+   },
+   {
+    "question_id": "q-sc-000035",
+    "category": "single_chunk",
+    "n_matched_assertions": 1,
+    "answer_equals_chunk_title": true,
+    "required_quoted_in_question": true,
+    "n_quotes_in_question": 1,
+    "claim_layer_can_stand": false
+   },
+   {
+    "question_id": "q-sc-000041",
+    "category": "single_chunk",
+    "n_matched_assertions": 1,
+    "answer_equals_chunk_title": true,
+    "required_quoted_in_question": true,
+    "n_quotes_in_question": 1,
+    "claim_layer_can_stand": true
+   },
+   {
+    "question_id": "q-sc-000044",
+    "category": "single_chunk",
+    "n_matched_assertions": 1,
+    "answer_equals_chunk_title": true,
+    "required_quoted_in_question": true,
+    "n_quotes_in_question": 1,
+    "claim_layer_can_stand": true
+   },
+   {
+    "question_id": "q-sc-000046",
+    "category": "single_chunk",
+    "n_matched_assertions": 1,
+    "answer_equals_chunk_title": true,
+    "required_quoted_in_question": true,
+    "n_quotes_in_question": 1,
+    "claim_layer_can_stand": true
+   },
+   {
+    "question_id": "q-sc-000052",
+    "category": "single_chunk",
+    "n_matched_assertions": 1,
+    "answer_equals_chunk_title": true,
+    "required_quoted_in_question": true,
+    "n_quotes_in_question": 1,
+    "claim_layer_can_stand": true
+   },
+   {
+    "question_id": "q-sc-000054",
+    "category": "single_chunk",
+    "n_matched_assertions": 1,
+    "answer_equals_chunk_title": true,
+    "required_quoted_in_question": true,
+    "n_quotes_in_question": 1,
+    "claim_layer_can_stand": true
+   },
+   {
+    "question_id": "q-sc-000055",
+    "category": "single_chunk",
+    "n_matched_assertions": 1,
+    "answer_equals_chunk_title": true,
+    "required_quoted_in_question": true,
+    "n_quotes_in_question": 1,
+    "claim_layer_can_stand": true
+   },
+   {
+    "question_id": "q-sc-000056",
+    "category": "single_chunk",
+    "n_matched_assertions": 1,
+    "answer_equals_chunk_title": true,
+    "required_quoted_in_question": true,
+    "n_quotes_in_question": 1,
+    "claim_layer_can_stand": true
+   },
+   {
+    "question_id": "q-sc-000057",
+    "category": "single_chunk",
+    "n_matched_assertions": 1,
+    "answer_equals_chunk_title": true,
+    "required_quoted_in_question": true,
+    "n_quotes_in_question": 1,
+    "claim_layer_can_stand": true
+   },
+   {
+    "question_id": "q-sc-000059",
+    "category": "single_chunk",
+    "n_matched_assertions": 1,
+    "answer_equals_chunk_title": true,
+    "required_quoted_in_question": true,
+    "n_quotes_in_question": 1,
+    "claim_layer_can_stand": true
+   },
+   {
+    "question_id": "q-sc-000060",
+    "category": "single_chunk",
+    "n_matched_assertions": 1,
+    "answer_equals_chunk_title": true,
+    "required_quoted_in_question": true,
+    "n_quotes_in_question": 1,
+    "claim_layer_can_stand": true
+   },
+   {
+    "question_id": "q-sc-000061",
+    "category": "single_chunk",
+    "n_matched_assertions": 1,
+    "answer_equals_chunk_title": true,
+    "required_quoted_in_question": true,
+    "n_quotes_in_question": 1,
+    "claim_layer_can_stand": true
+   }
+  ]
+ },
+ "2b_闸门1b兑现": {
+  "题数": 29,
+  "required 块已在上下文": 19,
+  "准入放行后覆盖率会变真": 19,
+  "准入放行后答案文本仍不含 gold 答案": 26,
+  "既会过覆盖率又答不上": 19,
+  "判读": "「覆盖率会变真」与「答案对不对」是两件事：多数题的 gold 答案就是块标题，而抽取式回答器只会输出三元组，于是覆盖率能过、答案仍是错的。这类增益不能算作回答质量提升，只能算口径修正",
+  "逐题": [
+   {
+    "question_id": "q-mh-000010",
+    "category": "multihop",
+    "all_required_blocks_in_context": false,
+    "coverage_would_pass_if_admitted": false,
+    "answer_text_contains_gold_answer": false,
+    "gold_answer": "罗德岛",
+    "answer_text": "甘比诺敌对企鹅物流。拜松隶属企鹅物流。空隶属企鹅物流。空前往贫民窟。"
+   },
+   {
+    "question_id": "q-mh-000015",
+    "category": "multihop",
+    "all_required_blocks_in_context": false,
+    "coverage_would_pass_if_admitted": false,
+    "answer_text_contains_gold_answer": false,
+    "gold_answer": "凯尔希",
+    "answer_text": "特米米交谈嘉维尔。嘉维尔感染矿石病。嘉维尔交谈博士。嘉维尔救助特米米。嘉维尔交谈特米米。"
+   },
+   {
+    "question_id": "q-mh-000017",
+    "category": "multihop",
+    "all_required_blocks_in_context": false,
+    "coverage_would_pass_if_admitted": false,
+    "answer_text_contains_gold_answer": true,
+    "gold_answer": "煌",
+    "answer_text": "熔泉交谈森蚺。森蚺交谈熔泉。煌交谈熔泉。沙蜥帮敌对熔泉。熔泉交谈煌。"
+   },
+   {
+    "question_id": "q-mh-000021",
+    "category": "multihop",
+    "all_required_blocks_in_context": false,
+    "coverage_would_pass_if_admitted": false,
+    "answer_text_contains_gold_answer": true,
+    "gold_answer": "小黑",
+    "answer_text": "小沅交谈六十七。小黑交谈六十七。"
+   },
+   {
+    "question_id": "q-mh-000043",
+    "category": "multihop",
+    "all_required_blocks_in_context": false,
+    "coverage_would_pass_if_admitted": false,
+    "answer_text_contains_gold_answer": true,
+    "gold_answer": "阿米娅",
+    "answer_text": "特蕾西娅使用文明的存续。阿米娅使用文明的存续。凯尔希使用文明的存续。王冠称为文明的存续。"
+   },
+   {
+    "question_id": "q-sc-000001",
+    "category": "single_chunk",
+    "all_required_blocks_in_context": true,
+    "coverage_would_pass_if_admitted": true,
+    "answer_text_contains_gold_answer": false,
+    "gold_answer": "梦醒时分",
+    "answer_text": ""
+   },
+   {
+    "question_id": "q-sc-000004",
+    "category": "single_chunk",
+    "all_required_blocks_in_context": true,
+    "coverage_would_pass_if_admitted": true,
+    "answer_text_contains_gold_answer": false,
+    "gold_answer": "雪里蕻",
+    "answer_text": ""
+   },
+   {
+    "question_id": "q-sc-000010",
+    "category": "single_chunk",
+    "all_required_blocks_in_context": true,
+    "coverage_would_pass_if_admitted": true,
+    "answer_text_contains_gold_answer": false,
+    "gold_answer": "野蛮肇事者",
+    "answer_text": ""
+   },
+   {
+    "question_id": "q-sc-000011",
+    "category": "single_chunk",
+    "all_required_blocks_in_context": true,
+    "coverage_would_pass_if_admitted": true,
+    "answer_text_contains_gold_answer": false,
+    "gold_answer": "白热",
+    "answer_text": "伍德洛位于达维镇。"
+   },
+   {
+    "question_id": "q-sc-000014",
+    "category": "single_chunk",
+    "all_required_blocks_in_context": false,
+    "coverage_would_pass_if_admitted": false,
+    "answer_text_contains_gold_answer": false,
+    "gold_answer": "甲板室",
+    "answer_text": ""
+   },
+   {
+    "question_id": "q-sc-000017",
+    "category": "single_chunk",
+    "all_required_blocks_in_context": true,
+    "coverage_would_pass_if_admitted": true,
+    "answer_text_contains_gold_answer": false,
+    "gold_answer": "干员间切磋指南",
+    "answer_text": ""
+   },
+   {
+    "question_id": "q-sc-000025",
+    "category": "single_chunk",
+    "all_required_blocks_in_context": true,
+    "coverage_would_pass_if_admitted": true,
+    "answer_text_contains_gold_answer": false,
+    "gold_answer": "罗德岛大食堂",
+    "answer_text": "博士隶属罗德岛。沉渊隶属罗德岛。卢西恩隶属罗德岛。泥岩隶属罗德岛。"
+   },
+   {
+    "question_id": "q-sc-000030",
+    "category": "single_chunk",
+    "all_required_blocks_in_context": true,
+    "coverage_would_pass_if_admitted": true,
+    "answer_text_contains_gold_answer": false,
+    "gold_answer": "完整的缺损",
+    "answer_text": "第二集团军交战第四集团军。第四集团军前往泽尔格勒。远北政府赠予第四集团军。第二集团军背叛费奥多尔。第二集团军敌对圣骏堡。"
+   },
+   {
+    "question_id": "q-sc-000031",
+    "category": "single_chunk",
+    "all_required_blocks_in_context": false,
+    "coverage_would_pass_if_admitted": false,
+    "answer_text_contains_gold_answer": false,
+    "gold_answer": "或许有时",
+    "answer_text": ""
+   },
+   {
+    "question_id": "q-sc-000032",
+    "category": "single_chunk",
+    "all_required_blocks_in_context": true,
+    "coverage_would_pass_if_admitted": true,
+    "answer_text_contains_gold_answer": false,
+    "gold_answer": "失乐园",
+    "answer_text": ""
+   },
+   {
+    "question_id": "q-sc-000033",
+    "category": "single_chunk",
+    "all_required_blocks_in_context": true,
+    "coverage_would_pass_if_admitted": true,
+    "answer_text_contains_gold_answer": false,
+    "gold_answer": "向死寻生",
+    "answer_text": "奥伦源自维多利亚。"
+   },
+   {
+    "question_id": "q-sc-000034",
+    "category": "single_chunk",
+    "all_required_blocks_in_context": true,
+    "coverage_would_pass_if_admitted": true,
+    "answer_text_contains_gold_answer": false,
+    "gold_answer": "护身符",
+    "answer_text": "芙蓉交谈医疗部。"
+   },
+   {
+    "question_id": "q-sc-000035",
+    "category": "single_chunk",
+    "all_required_blocks_in_context": true,
+    "coverage_would_pass_if_admitted": true,
+    "answer_text_contains_gold_answer": false,
+    "gold_answer": "一问之答",
+    "answer_text": ""
+   },
+   {
+    "question_id": "q-sc-000041",
+    "category": "single_chunk",
+    "all_required_blocks_in_context": false,
+    "coverage_would_pass_if_admitted": false,
+    "answer_text_contains_gold_answer": false,
+    "gold_answer": "种因",
+    "answer_text": ""
+   },
+   {
+    "question_id": "q-sc-000044",
+    "category": "single_chunk",
+    "all_required_blocks_in_context": true,
+    "coverage_would_pass_if_admitted": true,
+    "answer_text_contains_gold_answer": false,
+    "gold_answer": "不得安宁",
+    "answer_text": ""
+   },
+   {
+    "question_id": "q-sc-000046",
+    "category": "single_chunk",
+    "all_required_blocks_in_context": true,
+    "coverage_would_pass_if_admitted": true,
+    "answer_text_contains_gold_answer": false,
+    "gold_answer": "蒙眬",
+    "answer_text": "凛冬源自乌萨斯。"
+   },
+   {
+    "question_id": "q-sc-000052",
+    "category": "single_chunk",
+    "all_required_blocks_in_context": true,
+    "coverage_would_pass_if_admitted": true,
+    "answer_text_contains_gold_answer": false,
+    "gold_answer": "复航",
+    "answer_text": ""
+   },
+   {
+    "question_id": "q-sc-000054",
+    "category": "single_chunk",
+    "all_required_blocks_in_context": true,
+    "coverage_would_pass_if_admitted": true,
+    "answer_text_contains_gold_answer": false,
+    "gold_answer": "朝圣",
+    "answer_text": ""
+   },
+   {
+    "question_id": "q-sc-000055",
+    "category": "single_chunk",
+    "all_required_blocks_in_context": true,
+    "coverage_would_pass_if_admitted": true,
+    "answer_text_contains_gold_answer": false,
+    "gold_answer": "月蚀",
+    "answer_text": "人格面具冲突怪物。"
+   },
+   {
+    "question_id": "q-sc-000056",
+    "category": "single_chunk",
+    "all_required_blocks_in_context": false,
+    "coverage_would_pass_if_admitted": false,
+    "answer_text_contains_gold_answer": false,
+    "gold_answer": "商业联合",
+    "answer_text": ""
+   },
+   {
+    "question_id": "q-sc-000057",
+    "category": "single_chunk",
+    "all_required_blocks_in_context": false,
+    "coverage_would_pass_if_admitted": false,
+    "answer_text_contains_gold_answer": false,
+    "gold_answer": "捂住耳朵",
+    "answer_text": ""
+   },
+   {
+    "question_id": "q-sc-000059",
+    "category": "single_chunk",
+    "all_required_blocks_in_context": true,
+    "coverage_would_pass_if_admitted": true,
+    "answer_text_contains_gold_answer": false,
+    "gold_answer": "崩落",
+    "answer_text": "耶拉冈德包含银心湖。恩雅交谈耶拉冈德。耶拉冈德交谈恩雅。阿德颂交谈耶拉冈德。耶拉冈德称为巨兽。"
+   },
+   {
+    "question_id": "q-sc-000060",
+    "category": "single_chunk",
+    "all_required_blocks_in_context": true,
+    "coverage_would_pass_if_admitted": true,
+    "answer_text_contains_gold_answer": false,
+    "gold_answer": "凛刃出匣",
+    "answer_text": ""
+   },
+   {
+    "question_id": "q-sc-000061",
+    "category": "single_chunk",
+    "all_required_blocks_in_context": true,
+    "coverage_would_pass_if_admitted": true,
+    "answer_text_contains_gold_answer": false,
+    "gold_answer": "升华之夜",
+    "answer_text": "巫王使用黑焰。"
+   }
+  ]
+ },
+ "3_三集合互斥": {
+  "整行粒度可救(frag, 最坏一条)": 38,
+  "抽取缺口(none, 最坏一条)": 68,
+  "闸门1b(span 可达但被准入判据挡)": 29,
+  "已覆盖": 51,
+  "frag ∩ 闸门1b": 0,
+  "frag ∩ 抽取缺口": 0,
+  "闸门1b ∩ 抽取缺口": 0,
+  "三者合计": 135,
+  "结论": "口径统一到「最坏一条 required」后，frag / 抽取缺口 / 闸门1b 三者互斥：frag 要改引用粒度、抽取缺口要补抽取、闸门1b 要改准入判据。这是三件不同的活，任何把它们合成一个「天花板」的说法都会导致修错地方"
+ }
+}
