@@ -1,0 +1,156 @@
+{
+  "generated_at": "2026-11-05T11:43:10Z",
+  "git_commit": "9d0d7491e219441985166a3b389f1f769c3e61b0",
+  "python": "3.14.3",
+  "os": "Windows-11-10.0.26200-SP0",
+  "command": "py -3 scripts/a_title_path_round.py --stage reverse",
+  "generation": "g-20261103T132152Z-06a741",
+  "gold_set": "data/goldset/gold-v2.json",
+  "split_policy": "pre-split-diagnostic/dev-only",
+  "fake_title": "完全不存在的假标题",
+  "fake_quote": "这段引文在该块里绝对不存在请勿当真",
+  "picks": [
+    "q-sc-000005",
+    "q-sc-000009",
+    "q-sc-000010",
+    "q-sc-000012",
+    "q-sc-000013"
+  ],
+  "r7a": {
+    "n": 5,
+    "pass": 5,
+    "meaning": "换掉问句里的《真标题》后，答案必须仍是块真实 title"
+  },
+  "r7b": {
+    "n": 5,
+    "pass": 5,
+    "meaning": "换掉「」引文后，必须落回原路径（不触发标题通路）且不编答案"
+  },
+  "per_question": [
+    {
+      "question_id": "q-sc-000005",
+      "gold_answer": "最后的怯薛",
+      "question_original": "在剧情《最后的怯薛》的正文里，出现了这样一句话：「玛莉娅，我认识一些优秀的工匠。」。这句话出自哪个文本块？请给出该块的标题。",
+      "r7a": {
+        "constructed": true,
+        "question": "在剧情《完全不存在的假标题》的正文里，出现了这样一句话：「玛莉娅，我认识一些优秀的工匠。」。这句话出自哪个文本块？请给出该块的标题。",
+        "applied": true,
+        "answer": "最后的怯薛",
+        "answer_is_real_title": true,
+        "pass": true
+      },
+      "r7b": {
+        "constructed": true,
+        "question": "在剧情《最后的怯薛》的正文里，出现了这样一句话：「这段引文在该块里绝对不存在请勿当真」。这句话出自哪个文本块？请给出该块的标题。",
+        "applied": false,
+        "answer": "逐魇骑士源自怯薛。",
+        "answer_same_as_path_off": true,
+        "pass": true
+      },
+      "baseline": {
+        "applied": true,
+        "answer": "最后的怯薛"
+      }
+    },
+    {
+      "question_id": "q-sc-000009",
+      "gold_answer": "红日留驻",
+      "question_original": "在剧情《红日留驻》的正文里，出现了这样一句话：「他刚才还给了达雅干木柴」。这句话出自哪个文本块？请给出该块的标题。",
+      "r7a": {
+        "constructed": true,
+        "question": "在剧情《完全不存在的假标题》的正文里，出现了这样一句话：「他刚才还给了达雅干木柴」。这句话出自哪个文本块？请给出该块的标题。",
+        "applied": true,
+        "answer": "红日留驻",
+        "answer_is_real_title": true,
+        "pass": true
+      },
+      "r7b": {
+        "constructed": true,
+        "question": "在剧情《红日留驻》的正文里，出现了这样一句话：「这段引文在该块里绝对不存在请勿当真」。这句话出自哪个文本块？请给出该块的标题。",
+        "applied": false,
+        "answer": "",
+        "answer_same_as_path_off": true,
+        "pass": true
+      },
+      "baseline": {
+        "applied": true,
+        "answer": "红日留驻"
+      }
+    },
+    {
+      "question_id": "q-sc-000010",
+      "gold_answer": "野蛮肇事者",
+      "question_original": "在剧情《野蛮肇事者》的正文里，出现了这样一句话：「我警告过你们不许进入森林。」。这句话出自哪个文本块？请给出该块的标题。",
+      "r7a": {
+        "constructed": true,
+        "question": "在剧情《完全不存在的假标题》的正文里，出现了这样一句话：「我警告过你们不许进入森林。」。这句话出自哪个文本块？请给出该块的标题。",
+        "applied": true,
+        "answer": "野蛮肇事者",
+        "answer_is_real_title": true,
+        "pass": true
+      },
+      "r7b": {
+        "constructed": true,
+        "question": "在剧情《野蛮肇事者》的正文里，出现了这样一句话：「这段引文在该块里绝对不存在请勿当真」。这句话出自哪个文本块？请给出该块的标题。",
+        "applied": false,
+        "answer": "",
+        "answer_same_as_path_off": true,
+        "pass": true
+      },
+      "baseline": {
+        "applied": true,
+        "answer": "野蛮肇事者"
+      }
+    },
+    {
+      "question_id": "q-sc-000012",
+      "gold_answer": "牺牲与代价",
+      "question_original": "在剧情《牺牲与代价》的正文里，出现了这样一句话：「布兰都斯，关于这场手术，你是否还有什么其他的事项需要交代？」。这句话出自哪个文本块？请给出该块的标题。",
+      "r7a": {
+        "constructed": true,
+        "question": "在剧情《完全不存在的假标题》的正文里，出现了这样一句话：「布兰都斯，关于这场手术，你是否还有什么其他的事项需要交代？」。这句话出自哪个文本块？请给出该块的标题。",
+        "applied": true,
+        "answer": "牺牲与代价",
+        "answer_is_real_title": true,
+        "pass": true
+      },
+      "r7b": {
+        "constructed": true,
+        "question": "在剧情《牺牲与代价》的正文里，出现了这样一句话：「这段引文在该块里绝对不存在请勿当真」。这句话出自哪个文本块？请给出该块的标题。",
+        "applied": false,
+        "answer": "",
+        "answer_same_as_path_off": true,
+        "pass": true
+      },
+      "baseline": {
+        "applied": true,
+        "answer": "牺牲与代价"
+      }
+    },
+    {
+      "question_id": "q-sc-000013",
+      "gold_answer": "地堡防线",
+      "question_original": "在剧情《地堡防线》的正文里，出现了这样一句话：「皮加尔：这是我听过的最疯狂的作战计划。」。这句话出自哪个文本块？请给出该块的标题。",
+      "r7a": {
+        "constructed": true,
+        "question": "在剧情《完全不存在的假标题》的正文里，出现了这样一句话：「皮加尔：这是我听过的最疯狂的作战计划。」。这句话出自哪个文本块？请给出该块的标题。",
+        "applied": true,
+        "answer": "地堡防线",
+        "answer_is_real_title": true,
+        "pass": true
+      },
+      "r7b": {
+        "constructed": true,
+        "question": "在剧情《地堡防线》的正文里，出现了这样一句话：「这段引文在该块里绝对不存在请勿当真」。这句话出自哪个文本块？请给出该块的标题。",
+        "applied": false,
+        "answer": "",
+        "answer_same_as_path_off": true,
+        "pass": true
+      },
+      "baseline": {
+        "applied": true,
+        "answer": "地堡防线"
+      }
+    }
+  ]
+}

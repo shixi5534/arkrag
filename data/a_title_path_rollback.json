@@ -1,0 +1,83 @@
+{
+  "generated_at": "2026-11-05T11:45:58Z",
+  "git_commit": "9d0d7491e219441985166a3b389f1f769c3e61b0",
+  "python": "3.14.3",
+  "os": "Windows-11-10.0.26200-SP0",
+  "command": "py -3 scripts/a_title_path_round.py --stage rollback",
+  "observed_fields": [
+    "answer_sha",
+    "abstained",
+    "citations",
+    "citations_line",
+    "citations_span",
+    "covered",
+    "correct_coverage",
+    "unit_sequence",
+    "title_path_applied"
+  ],
+  "runs": [
+    {
+      "mode": "orig",
+      "effective_title_answer_path": false,
+      "digest": "2406ac799d088f462678b6c2f20d124a4246321f4e0afff054bae6d068ae35f2",
+      "n": 380,
+      "aggregate": {
+        "covered": 63,
+        "correct_coverage": 25,
+        "abstained": 35,
+        "citations": 2103
+      },
+      "tag": "orig",
+      "rc": 0,
+      "stdout_tail": "TITLE_ANSWER_PATH=False DIGEST=2406ac799d088f462678b6c2f20d124a4246321f4e0afff054bae6d068ae35f2"
+    },
+    {
+      "mode": "false",
+      "effective_title_answer_path": false,
+      "digest": "2406ac799d088f462678b6c2f20d124a4246321f4e0afff054bae6d068ae35f2",
+      "n": 380,
+      "aggregate": {
+        "covered": 63,
+        "correct_coverage": 25,
+        "abstained": 35,
+        "citations": 2103
+      },
+      "tag": "false0",
+      "rc": 0,
+      "stdout_tail": "TITLE_ANSWER_PATH=False DIGEST=2406ac799d088f462678b6c2f20d124a4246321f4e0afff054bae6d068ae35f2"
+    },
+    {
+      "mode": "true",
+      "effective_title_answer_path": true,
+      "digest": "8841617fedf789beba7e892be097ae986a73852be7beb44baac9625a78718bd5",
+      "n": 380,
+      "aggregate": {
+        "covered": 88,
+        "correct_coverage": 86,
+        "abstained": 22,
+        "citations": 1905
+      },
+      "tag": "true1",
+      "rc": 0,
+      "stdout_tail": "TITLE_ANSWER_PATH=True DIGEST=8841617fedf789beba7e892be097ae986a73852be7beb44baac9625a78718bd5"
+    },
+    {
+      "mode": "true",
+      "effective_title_answer_path": true,
+      "digest": "8841617fedf789beba7e892be097ae986a73852be7beb44baac9625a78718bd5",
+      "n": 380,
+      "aggregate": {
+        "covered": 88,
+        "correct_coverage": 86,
+        "abstained": 22,
+        "citations": 1905
+      },
+      "tag": "true2",
+      "rc": 0,
+      "stdout_tail": "TITLE_ANSWER_PATH=True DIGEST=8841617fedf789beba7e892be097ae986a73852be7beb44baac9625a78718bd5"
+    }
+  ],
+  "orig_equals_false": true,
+  "true_runs_stable": true,
+  "switch_echo_ok": true
+}
