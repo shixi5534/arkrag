@@ -1,0 +1,192 @@
+{
+ "schema": "a-rank-churn-1",
+ "generated_at": "2026-11-05T01:57:34Z",
+ "git_commit": "91161af744d671c2bcc59acddf3c89189508e854",
+ "python": "3.14.3",
+ "os": "Windows-11-10.0.26200-SP0",
+ "command": "py -3 scripts/a_rank_churn.py",
+ "generation": "g-20261103T132152Z-06a741",
+ "gold_set": "data/goldset/gold-v2.json",
+ "probe_json": "data/a_cooc_scope_probe.json",
+ "split_policy": "dev-only-pre-split-diagnostic：仅 dev 调参集 350 道应答题；结论不得外推到 new-holdout 160（一次都未观测）。",
+ "n_questions": 350,
+ "capacity_line": 5,
+ "capacity_const": 5,
+ "caveat": "跨线进/出是「有希望真正进上下文」的上界，不是结果：ask_once 的 expand() 会把图扩展单元也塞进上下文，名次 6–8 的 gold 有时也能进。真进上下文只能由 a_cooc_scope_probe.py 真跑给出。",
+ "rules": {
+  "const0.1": {
+   "top20_changed": 64,
+   "jac_mean": 0.9673,
+   "cross_in": [
+    "q-dr-000010",
+    "q-dr-000038",
+    "q-tc-000018",
+    "q-tc-000023",
+    "q-dr-900003",
+    "q-dr-900020",
+    "q-dr-900036",
+    "q-dr-900043"
+   ],
+   "cross_out": [
+    "q-tc-000007",
+    "q-tc-900021"
+   ],
+   "n_cross_in": 8,
+   "n_cross_out": 2,
+   "real_d_any_gold": 6
+  },
+  "strict0.1": {
+   "top20_changed": 41,
+   "jac_mean": 0.9736,
+   "cross_in": [
+    "q-tc-000018",
+    "q-tc-000023",
+    "q-dr-900003",
+    "q-dr-900036",
+    "q-tc-900003"
+   ],
+   "cross_out": [
+    "q-dr-900032",
+    "q-tc-900019",
+    "q-tc-900029"
+   ],
+   "n_cross_in": 5,
+   "n_cross_out": 3,
+   "real_d_any_gold": 1
+  },
+  "dens_le2": {
+   "top20_changed": 15,
+   "jac_mean": 0.995,
+   "cross_in": [
+    "q-dr-000010",
+    "q-dr-000038",
+    "q-tc-000023",
+    "q-dr-900020",
+    "q-dr-900036",
+    "q-dr-900043"
+   ],
+   "cross_out": [
+    "q-tc-000007",
+    "q-tc-900021"
+   ],
+   "n_cross_in": 6,
+   "n_cross_out": 2,
+   "real_d_any_gold": 5
+  },
+  "dens_le3": {
+   "top20_changed": 26,
+   "jac_mean": 0.9905,
+   "cross_in": [
+    "q-dr-000010",
+    "q-dr-000038",
+    "q-tc-000023",
+    "q-dr-900003",
+    "q-dr-900020",
+    "q-dr-900036",
+    "q-dr-900043"
+   ],
+   "cross_out": [
+    "q-tc-000007",
+    "q-tc-900021"
+   ],
+   "n_cross_in": 7,
+   "n_cross_out": 2,
+   "real_d_any_gold": 6
+  },
+  "dens_le4": {
+   "top20_changed": 36,
+   "jac_mean": 0.9857,
+   "cross_in": [
+    "q-dr-000010",
+    "q-dr-000038",
+    "q-tc-000018",
+    "q-tc-000023",
+    "q-dr-900003",
+    "q-dr-900020",
+    "q-dr-900036",
+    "q-dr-900043"
+   ],
+   "cross_out": [
+    "q-tc-000007",
+    "q-tc-900021"
+   ],
+   "n_cross_in": 8,
+   "n_cross_out": 2,
+   "real_d_any_gold": 6
+  },
+  "topk2": {
+   "top20_changed": 2,
+   "jac_mean": 0.9995,
+   "cross_in": [
+    "q-dr-000010",
+    "q-dr-900036"
+   ],
+   "cross_out": [],
+   "n_cross_in": 2,
+   "n_cross_out": 0,
+   "real_d_any_gold": 1
+  },
+  "topk3": {
+   "top20_changed": 2,
+   "jac_mean": 0.9992,
+   "cross_in": [
+    "q-dr-000010",
+    "q-dr-000038",
+    "q-dr-900020",
+    "q-dr-900036"
+   ],
+   "cross_out": [],
+   "n_cross_in": 4,
+   "n_cross_out": 0,
+   "real_d_any_gold": 2
+  },
+  "inat_t2": {
+   "top20_changed": 46,
+   "jac_mean": 0.9833,
+   "cross_in": [
+    "q-dr-000010",
+    "q-dr-000038",
+    "q-tc-000018",
+    "q-tc-000023",
+    "q-dr-900003",
+    "q-dr-900020",
+    "q-dr-900036",
+    "q-dr-900043"
+   ],
+   "cross_out": [
+    "q-tc-000007",
+    "q-tc-900021"
+   ],
+   "n_cross_in": 8,
+   "n_cross_out": 2,
+   "real_d_any_gold": 6
+  },
+  "oracle_gold": {
+   "top20_changed": 9,
+   "jac_mean": 0.9976,
+   "cross_in": [
+    "q-dr-000001",
+    "q-dr-000003",
+    "q-dr-000010",
+    "q-dr-000038",
+    "q-tc-000017",
+    "q-tc-000018",
+    "q-tc-000023",
+    "q-tc-000026",
+    "q-sc-900004",
+    "q-dr-900003",
+    "q-dr-900020",
+    "q-dr-900024",
+    "q-dr-900035",
+    "q-dr-900036",
+    "q-dr-900043",
+    "q-mh-900010",
+    "q-tc-900003"
+   ],
+   "cross_out": [],
+   "n_cross_in": 17,
+   "n_cross_out": 0,
+   "real_d_any_gold": 18
+  }
+ }
+}
