@@ -1,0 +1,472 @@
+{
+  "schema": "arkrag.p1c-needs-extra-citation/1",
+  "generated_by": "scripts/needs_extra_citation_probe.py",
+  "generation_id": "g-20261103T132152Z-06a741",
+  "top_k": 20,
+  "graph_depth": 1,
+  "chunks_source_api": "pipeline.resolve_chunks(gen, manifest)",
+  "chunks_loaded": 13798,
+  "targets_n": 16,
+  "if_appended_would_cover_n": 3,
+  "both_lines_cited_n": 2,
+  "carrier_cited_but_required_not_n": 8,
+  "required_cited_but_carrier_not_n": 1,
+  "neither_cited_n": 5,
+  "by_split": {
+    "dev": {
+      "n": 13,
+      "required_line_cited": 3,
+      "required_and_carrier": 2,
+      "carrier_cited_only": 5,
+      "required_cited_only": 1,
+      "neither_cited": 5
+    },
+    "holdout": {
+      "n": 3,
+      "required_line_cited": 0,
+      "required_and_carrier": 0,
+      "carrier_cited_only": 3,
+      "required_cited_only": 0,
+      "neither_cited": 0
+    }
+  },
+  "by_group": {
+    "frag": {
+      "n": 6,
+      "required_line_cited": 3,
+      "required_and_carrier": 2,
+      "carrier_cited_only": 1,
+      "required_cited_only": 1,
+      "neither_cited": 2
+    },
+    "none": {
+      "n": 10,
+      "required_line_cited": 0,
+      "required_and_carrier": 0,
+      "carrier_cited_only": 7,
+      "required_cited_only": 0,
+      "neither_cited": 3
+    }
+  },
+  "by_split_and_group": {
+    "dev/frag": {
+      "n": 6,
+      "required_line_cited": 3,
+      "required_and_carrier": 2,
+      "carrier_cited_only": 1,
+      "required_cited_only": 1,
+      "neither_cited": 2
+    },
+    "dev/none": {
+      "n": 7,
+      "required_line_cited": 0,
+      "required_and_carrier": 0,
+      "carrier_cited_only": 4,
+      "required_cited_only": 0,
+      "neither_cited": 3
+    },
+    "holdout/frag": {
+      "n": 0,
+      "required_line_cited": 0,
+      "required_and_carrier": 0,
+      "carrier_cited_only": 0,
+      "required_cited_only": 0,
+      "neither_cited": 0
+    },
+    "holdout/none": {
+      "n": 3,
+      "required_line_cited": 0,
+      "required_and_carrier": 0,
+      "carrier_cited_only": 3,
+      "required_cited_only": 0,
+      "neither_cited": 0
+    }
+  },
+  "detail": [
+    {
+      "question_id": "q-al-000002",
+      "group": "none",
+      "assertions_on_required_line": [],
+      "category": "alias",
+      "split": "dev",
+      "answer": "繁藏",
+      "chunk_id": "obt/memory/story_gyuki_1_1#000",
+      "required_line": "热情的村民：哟，这不是小缠丸嘛！怎么了，这是有空回来看看？",
+      "required_line_cited": false,
+      "carrier_lines": [
+        "缠丸：繁藏阿伯，没时间跟你聊了，我有急事回家去！"
+      ],
+      "carrier_lines_cited": [
+        true
+      ],
+      "any_carrier_cited": true,
+      "emitted_n": 2,
+      "units": 4,
+      "abstained": false
+    },
+    {
+      "question_id": "q-al-000004",
+      "group": "none",
+      "assertions_on_required_line": [],
+      "category": "alias",
+      "split": "dev",
+      "answer": "汤姆",
+      "chunk_id": "activities/act27side/level_act27side_08_end#005",
+      "required_line": "冷饮店店主：......",
+      "required_line_cited": false,
+      "carrier_lines": [
+        "雪雉：汤姆爷爷......"
+      ],
+      "carrier_lines_cited": [
+        true
+      ],
+      "any_carrier_cited": true,
+      "emitted_n": 5,
+      "units": 5,
+      "abstained": false
+    },
+    {
+      "question_id": "q-al-000010",
+      "group": "none",
+      "assertions_on_required_line": [],
+      "category": "alias",
+      "split": "dev",
+      "answer": "佩德罗",
+      "chunk_id": "obt/memory/story_greyy2_1_1#003",
+      "required_line": "办事处干员B：莉塔，还是我来说吧。",
+      "required_line_cited": false,
+      "carrier_lines": [
+        "格雷伊：......谢谢佩德罗叔叔。"
+      ],
+      "carrier_lines_cited": [
+        false
+      ],
+      "any_carrier_cited": false,
+      "emitted_n": 0,
+      "units": 5,
+      "abstained": true
+    },
+    {
+      "question_id": "q-al-000012",
+      "group": "frag",
+      "assertions_on_required_line": [
+        "a-0b5ea42cd1a076b5",
+        "a-4e6e709adf7840ef"
+      ],
+      "category": "alias",
+      "split": "dev",
+      "answer": "断崖",
+      "chunk_id": "activities/act11d0/level_act11d0_04_beg#000",
+      "required_line": "卡达：既然灰喉姐和艾尔斯把我从山上救下来了，我一定会好好帮忙的！",
+      "required_line_cited": true,
+      "carrier_lines": [
+        "灰喉：卡达干员，断崖干员，现在情况有变。"
+      ],
+      "carrier_lines_cited": [
+        false
+      ],
+      "any_carrier_cited": false,
+      "emitted_n": 10,
+      "units": 6,
+      "abstained": false
+    },
+    {
+      "question_id": "q-al-000014",
+      "group": "frag",
+      "assertions_on_required_line": [
+        "a-2ae2d1d5cf8a73de"
+      ],
+      "category": "alias",
+      "split": "dev",
+      "answer": "雅拉",
+      "chunk_id": "activities/act25side/level_act25side_03_end#000",
+      "required_line": "杰克逊：能让曾经红极一时的玛丽安娜·布莱克女士充当导游，是我特里蒙之行的又一大收获。",
+      "required_line_cited": false,
+      "carrier_lines": [
+        "杰克逊：多谢你，雅拉主任。今天太过兴师动众，希望没有给你带来不便。"
+      ],
+      "carrier_lines_cited": [
+        false
+      ],
+      "any_carrier_cited": false,
+      "emitted_n": 6,
+      "units": 5,
+      "abstained": false
+    },
+    {
+      "question_id": "q-al-000018",
+      "group": "none",
+      "assertions_on_required_line": [],
+      "category": "alias",
+      "split": "dev",
+      "answer": "源石",
+      "chunk_id": "activities/act49side/level_act49side_05_beg#000",
+      "required_line": "逾年，真龙以身殉，术乃成。储君涕泣，名之“不反”。",
+      "required_line_cited": false,
+      "carrier_lines": [
+        "真龙：先祖以生命为引，将人殉的代价系于当朝真龙一身。后世真龙以捐躯做交换，便能动用这枚源石的极大威能。"
+      ],
+      "carrier_lines_cited": [
+        true
+      ],
+      "any_carrier_cited": true,
+      "emitted_n": 2,
+      "units": 5,
+      "abstained": false
+    },
+    {
+      "question_id": "q-al-000022",
+      "group": "frag",
+      "assertions_on_required_line": [
+        "a-be89def4f460ea3a"
+      ],
+      "category": "alias",
+      "split": "dev",
+      "answer": "老于",
+      "chunk_id": "obt/memory/story_haak_1_1#000",
+      "required_line": "强壮的男人：你个蠢蛋，我们去医院岂不是自投罗网，那些大夫都精明得很，一看到伤势就知道不对劲了......",
+      "required_line_cited": false,
+      "carrier_lines": [
+        "魁梧的男人：老于，这......这可怎么办？"
+      ],
+      "carrier_lines_cited": [
+        true
+      ],
+      "any_carrier_cited": true,
+      "emitted_n": 4,
+      "units": 5,
+      "abstained": false
+    },
+    {
+      "question_id": "q-al-000023",
+      "group": "none",
+      "assertions_on_required_line": [],
+      "category": "alias",
+      "split": "holdout",
+      "answer": "惟任刑警",
+      "chunk_id": "activities/act44side/level_act44side_01_beg#003",
+      "required_line": "值班警察：惟任先生还没——",
+      "required_line_cited": false,
+      "carrier_lines": [
+        "三船：不如你也来叫一声如何，惟任刑警？"
+      ],
+      "carrier_lines_cited": [
+        true
+      ],
+      "any_carrier_cited": true,
+      "emitted_n": 6,
+      "units": 5,
+      "abstained": false
+    },
+    {
+      "question_id": "q-al-000028",
+      "group": "none",
+      "assertions_on_required_line": [],
+      "category": "alias",
+      "split": "dev",
+      "answer": "吉拉",
+      "chunk_id": "obt/memory/story_shotst_2_1#002",
+      "required_line": "外勤干员A：流星姐，怎么了，是不是做噩梦了？没事的，没事的，我们都在这里。",
+      "required_line_cited": false,
+      "carrier_lines": [
+        "流星：吉拉，你去附近寻找幸存村民，组织他们一起灭火，阿烽，准备好药物，这么大的火情一定有人受伤，快！"
+      ],
+      "carrier_lines_cited": [
+        false
+      ],
+      "any_carrier_cited": false,
+      "emitted_n": 0,
+      "units": 5,
+      "abstained": true
+    },
+    {
+      "question_id": "q-al-000032",
+      "group": "none",
+      "assertions_on_required_line": [],
+      "category": "alias",
+      "split": "holdout",
+      "answer": "昆图斯",
+      "chunk_id": "activities/act17side/level_act17side_10_end#005",
+      "required_line": "盐风主教：......什么？你又想和她交谈？这个杂种能告诉你什么......",
+      "required_line_cited": false,
+      "carrier_lines": [
+        "阿玛雅：你不理解，昆图斯。"
+      ],
+      "carrier_lines_cited": [
+        true
+      ],
+      "any_carrier_cited": true,
+      "emitted_n": 2,
+      "units": 6,
+      "abstained": false
+    },
+    {
+      "question_id": "q-al-000033",
+      "group": "frag",
+      "assertions_on_required_line": [
+        "a-b793b42e5f940196"
+      ],
+      "category": "alias",
+      "split": "dev",
+      "answer": "迪亚兹",
+      "chunk_id": "activities/act32side/level_act32side_06_beg#000",
+      "required_line": "带队的军官：迪亚兹·冈萨雷斯，我记得你，从辛嘉斯的军队退伍后，你来到多索雷斯成为市消防局的一员。",
+      "required_line_cited": true,
+      "carrier_lines": [
+        "迪亚兹：特克诺，你带着社区里的老人和孩子离开这里，去罗德岛的办事处找埃内斯托。"
+      ],
+      "carrier_lines_cited": [
+        true
+      ],
+      "any_carrier_cited": true,
+      "emitted_n": 5,
+      "units": 5,
+      "abstained": false
+    },
+    {
+      "question_id": "q-al-000036",
+      "group": "none",
+      "assertions_on_required_line": [],
+      "category": "alias",
+      "split": "dev",
+      "answer": "阿斯卡纶",
+      "chunk_id": "activities/act33side/level_act33side_07_end#002",
+      "required_line": "沉默的刺客收起了袖刃，缓缓退回阴影中。",
+      "required_line_cited": false,
+      "carrier_lines": [
+        "特蕾西娅：抱歉，我打扰到你休息了吗，阿斯卡纶？"
+      ],
+      "carrier_lines_cited": [
+        true
+      ],
+      "any_carrier_cited": true,
+      "emitted_n": 7,
+      "units": 6,
+      "abstained": false
+    },
+    {
+      "question_id": "q-al-000037",
+      "group": "frag",
+      "assertions_on_required_line": [
+        "a-71736d575120b944"
+      ],
+      "category": "alias",
+      "split": "dev",
+      "answer": "奎萨图什塔",
+      "chunk_id": "obt/main/level_main_14-11_beg#004",
+      "required_line": "闪灵：那个活在传说中的白角魔王，击败无数强敌，在晨昏倒影下建起一座不灭的卡兹戴尔的英雄——早就死了。",
+      "required_line_cited": true,
+      "carrier_lines": [
+        "闪灵：奎萨图什塔，真正的你，早就死了数千年。"
+      ],
+      "carrier_lines_cited": [
+        true
+      ],
+      "any_carrier_cited": true,
+      "emitted_n": 8,
+      "units": 5,
+      "abstained": false
+    },
+    {
+      "question_id": "q-al-000038",
+      "group": "frag",
+      "assertions_on_required_line": [
+        "a-f3f5dfa99267c248"
+      ],
+      "category": "alias",
+      "split": "dev",
+      "answer": "诗怀雅",
+      "chunk_id": "obt/main/level_main_05-02_beg#000",
+      "required_line": "诗怀雅：*龙门粗口*，说过多少次了，我不姓施！听好，我的代号是诗怀雅，或者叫我碧翠克斯·施怀雅警官，懂吗？",
+      "required_line_cited": false,
+      "carrier_lines": [
+        "陈：诗怀雅，你没有这个权力。"
+      ],
+      "carrier_lines_cited": [
+        false
+      ],
+      "any_carrier_cited": false,
+      "emitted_n": 10,
+      "units": 6,
+      "abstained": false
+    },
+    {
+      "question_id": "q-al-000042",
+      "group": "none",
+      "assertions_on_required_line": [],
+      "category": "alias",
+      "split": "holdout",
+      "answer": "制醇厂",
+      "chunk_id": "obt/main/level_main_10-07_end#003",
+      "required_line": "阿米娅：炼糖厂？听起来好耳熟......",
+      "required_line_cited": false,
+      "carrier_lines": [
+        "克洛维希娅：通知费斯特，我们的第一目标是制醇厂。",
+        "克洛维希娅：通知费斯特，我们的第一目标是制醇厂。"
+      ],
+      "carrier_lines_cited": [
+        false,
+        true
+      ],
+      "any_carrier_cited": true,
+      "emitted_n": 1,
+      "units": 6,
+      "abstained": false
+    },
+    {
+      "question_id": "q-al-000045",
+      "group": "none",
+      "assertions_on_required_line": [],
+      "category": "alias",
+      "split": "dev",
+      "answer": "阿尔图罗",
+      "chunk_id": "activities/act16side/level_act16side_st02#004",
+      "required_line": "奥伦：你会有的。因为我恰好在几年前......真的见到过那位比安多恩名气还要大得多的通缉犯，阿尔图罗小姐。",
+      "required_line_cited": false,
+      "carrier_lines": [
+        "奥伦：......费德里科，你和阿尔图罗是什么关系？"
+      ],
+      "carrier_lines_cited": [
+        false
+      ],
+      "any_carrier_cited": false,
+      "emitted_n": 7,
+      "units": 6,
+      "abstained": false
+    }
+  ],
+  "generated_at": "2026-11-05T02:54:16Z",
+  "git_commit": "78369c09b75cb3974267c3ec4f49c358be201fa4",
+  "code_sha256_16": "d5d8984aaba7ec26",
+  "dataset": {
+    "gold_path": "data/goldset/gold-v2.json",
+    "gold_sha16": "069375f8e355e4b9",
+    "split_path": "data/goldset/split-v2.json",
+    "split_sha16": "3d586b36efc7ce85",
+    "gold_total": 640
+  },
+  "inputs": [
+    {
+      "path": "data/goldset/gold-v1.json",
+      "sha16": "76d66073ff87aab1",
+      "bytes": 284356
+    },
+    {
+      "path": "data/goldset/gold-v2.json",
+      "sha16": "069375f8e355e4b9",
+      "bytes": 601492
+    },
+    {
+      "path": "data/a_triage_all320.jsonl",
+      "sha16": "268cfc58715f3817",
+      "bytes": 709326
+    }
+  ],
+  "environment": {
+    "python": "3.14.3",
+    "platform": "win32",
+    "os": "Windows-11-10.0.26200-SP0",
+    "machine": "AMD64",
+    "cpu_count": 20
+  }
+}
