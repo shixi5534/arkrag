@@ -1,0 +1,84 @@
+{
+  "generated_at": "2026-11-05T15:13:51Z",
+  "git_commit": "14399867a290420062d062d60229aaa073e38522",
+  "python": "3.14.3",
+  "os": "Windows-11-10.0.26200-SP0",
+  "command": "py -3 scripts/a_p3_chapter_round.py --stage rollback",
+  "observed_fields": [
+    "covered",
+    "correct_coverage",
+    "answer_hits_gold",
+    "abstained",
+    "citations",
+    "citations_distinct",
+    "cite_bad",
+    "units",
+    "answer_sha",
+    "chapter_path_applied"
+  ],
+  "runs": [
+    {
+      "mode": "orig",
+      "effective_chapter_answer_path": false,
+      "digest": "989c08b00b6a5168b248980b59a92c0fb847994c6aa1dd2125932ea99f1589f2",
+      "n": 380,
+      "aggregate": {
+        "covered": 63,
+        "correct_coverage": 25,
+        "answer_hits_gold": 122,
+        "abstained": 35,
+        "citations": 2103
+      },
+      "tag": "orig",
+      "rc": 0
+    },
+    {
+      "mode": "false",
+      "effective_chapter_answer_path": false,
+      "digest": "989c08b00b6a5168b248980b59a92c0fb847994c6aa1dd2125932ea99f1589f2",
+      "n": 380,
+      "aggregate": {
+        "covered": 63,
+        "correct_coverage": 25,
+        "answer_hits_gold": 122,
+        "abstained": 35,
+        "citations": 2103
+      },
+      "tag": "false0",
+      "rc": 0
+    },
+    {
+      "mode": "true",
+      "effective_chapter_answer_path": true,
+      "digest": "a82ec0d58edf9995756b917abc3a5005c9215d26c87b7ba9118a7551f0cc8cc5",
+      "n": 380,
+      "aggregate": {
+        "covered": 69,
+        "correct_coverage": 31,
+        "answer_hits_gold": 135,
+        "abstained": 29,
+        "citations": 2150
+      },
+      "tag": "true1",
+      "rc": 0
+    },
+    {
+      "mode": "true",
+      "effective_chapter_answer_path": true,
+      "digest": "a82ec0d58edf9995756b917abc3a5005c9215d26c87b7ba9118a7551f0cc8cc5",
+      "n": 380,
+      "aggregate": {
+        "covered": 69,
+        "correct_coverage": 31,
+        "answer_hits_gold": 135,
+        "abstained": 29,
+        "citations": 2150
+      },
+      "tag": "true2",
+      "rc": 0
+    }
+  ],
+  "orig_equals_false": true,
+  "true_runs_stable": true,
+  "switch_echo_ok": true
+}

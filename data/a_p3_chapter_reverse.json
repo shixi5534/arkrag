@@ -1,0 +1,264 @@
+{
+  "generated_at": "2026-11-05T15:08:29Z",
+  "git_commit": "48ded5389ba33b8f805e706c0046aa99f8b55235",
+  "python": "3.14.3",
+  "os": "Windows-11-10.0.26200-SP0",
+  "command": "py -3 scripts/a_p3_chapter_round.py --stage reverse",
+  "generation": "g-20261103T132152Z-06a741",
+  "gold_set": "data/goldset/gold-v2.json",
+  "split_policy": "pre-split-diagnostic/dev-only：dev 结论不外推到 new-holdout 160",
+  "r8b_trigger_purity": {
+    "trigger": "章节代号",
+    "n_with_trigger": 64,
+    "n_non_cross_chunk": 0,
+    "intruders": [],
+    "pass": true
+  },
+  "r8a_swap_entity": {
+    "n": 38,
+    "n_still_applied": 0,
+    "rows": [
+      {
+        "question_id": "q-cx-000001",
+        "mutated_question": "「完全不存在的东西甲乙丙」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+        "chapter_path_applied": false,
+        "answer": ""
+      },
+      {
+        "question_id": "q-cx-000003",
+        "mutated_question": "「完全不存在的东西甲乙丙」在哪些章节的正文里出现过？请列出全部章节代号。",
+        "chapter_path_applied": false,
+        "answer": ""
+      },
+      {
+        "question_id": "q-cx-000004",
+        "mutated_question": "「完全不存在的东西甲乙丙」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+        "chapter_path_applied": false,
+        "answer": ""
+      },
+      {
+        "question_id": "q-cx-000005",
+        "mutated_question": "「完全不存在的东西甲乙丙」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+        "chapter_path_applied": false,
+        "answer": ""
+      },
+      {
+        "question_id": "q-cx-000006",
+        "mutated_question": "「完全不存在的东西甲乙丙」在哪些章节的正文里出现过？请列出全部章节代号。",
+        "chapter_path_applied": false,
+        "answer": ""
+      },
+      {
+        "question_id": "q-cx-000007",
+        "mutated_question": "「完全不存在的东西甲乙丙」在哪些章节的正文里出现过？请列出全部章节代号。",
+        "chapter_path_applied": false,
+        "answer": ""
+      },
+      {
+        "question_id": "q-cx-000008",
+        "mutated_question": "「完全不存在的东西甲乙丙」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+        "chapter_path_applied": false,
+        "answer": ""
+      },
+      {
+        "question_id": "q-cx-000009",
+        "mutated_question": "「完全不存在的东西甲乙丙」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+        "chapter_path_applied": false,
+        "answer": ""
+      },
+      {
+        "question_id": "q-cx-000010",
+        "mutated_question": "「完全不存在的东西甲乙丙」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+        "chapter_path_applied": false,
+        "answer": ""
+      },
+      {
+        "question_id": "q-cx-000011",
+        "mutated_question": "「完全不存在的东西甲乙丙」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+        "chapter_path_applied": false,
+        "answer": ""
+      },
+      {
+        "question_id": "q-cx-000014",
+        "mutated_question": "「完全不存在的东西甲乙丙」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+        "chapter_path_applied": false,
+        "answer": ""
+      },
+      {
+        "question_id": "q-cx-000016",
+        "mutated_question": "「完全不存在的东西甲乙丙」在哪些章节的正文里出现过？请列出全部章节代号。",
+        "chapter_path_applied": false,
+        "answer": ""
+      },
+      {
+        "question_id": "q-cx-000017",
+        "mutated_question": "「完全不存在的东西甲乙丙」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+        "chapter_path_applied": false,
+        "answer": ""
+      },
+      {
+        "question_id": "q-cx-000020",
+        "mutated_question": "「完全不存在的东西甲乙丙」在哪些章节的正文里出现过？请列出全部章节代号。",
+        "chapter_path_applied": false,
+        "answer": ""
+      },
+      {
+        "question_id": "q-cx-000021",
+        "mutated_question": "「完全不存在的东西甲乙丙」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+        "chapter_path_applied": false,
+        "answer": ""
+      },
+      {
+        "question_id": "q-cx-000022",
+        "mutated_question": "「完全不存在的东西甲乙丙」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+        "chapter_path_applied": false,
+        "answer": ""
+      },
+      {
+        "question_id": "q-cx-000024",
+        "mutated_question": "「完全不存在的东西甲乙丙」在哪些章节的正文里出现过？请列出全部章节代号。",
+        "chapter_path_applied": false,
+        "answer": ""
+      },
+      {
+        "question_id": "q-cx-000026",
+        "mutated_question": "「完全不存在的东西甲乙丙」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+        "chapter_path_applied": false,
+        "answer": ""
+      },
+      {
+        "question_id": "q-cx-000027",
+        "mutated_question": "「完全不存在的东西甲乙丙」在哪些章节的正文里出现过？请列出全部章节代号。",
+        "chapter_path_applied": false,
+        "answer": ""
+      },
+      {
+        "question_id": "q-cx-000029",
+        "mutated_question": "「完全不存在的东西甲乙丙」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+        "chapter_path_applied": false,
+        "answer": ""
+      },
+      {
+        "question_id": "q-cx-000030",
+        "mutated_question": "「完全不存在的东西甲乙丙」在哪些章节的正文里出现过？请列出全部章节代号。",
+        "chapter_path_applied": false,
+        "answer": ""
+      },
+      {
+        "question_id": "q-cx-000032",
+        "mutated_question": "「完全不存在的东西甲乙丙」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+        "chapter_path_applied": false,
+        "answer": ""
+      },
+      {
+        "question_id": "q-cx-900002",
+        "mutated_question": "「完全不存在的东西甲乙丙」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+        "chapter_path_applied": false,
+        "answer": ""
+      },
+      {
+        "question_id": "q-cx-900005",
+        "mutated_question": "「完全不存在的东西甲乙丙」在哪些章节的正文里出现过？请列出全部章节代号。",
+        "chapter_path_applied": false,
+        "answer": ""
+      },
+      {
+        "question_id": "q-cx-900008",
+        "mutated_question": "「完全不存在的东西甲乙丙」在哪些章节的正文里出现过？请列出全部章节代号。",
+        "chapter_path_applied": false,
+        "answer": ""
+      },
+      {
+        "question_id": "q-cx-900011",
+        "mutated_question": "「完全不存在的东西甲乙丙」在哪些章节的正文里出现过？请列出全部章节代号。",
+        "chapter_path_applied": false,
+        "answer": ""
+      },
+      {
+        "question_id": "q-cx-900012",
+        "mutated_question": "「完全不存在的东西甲乙丙」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+        "chapter_path_applied": false,
+        "answer": ""
+      },
+      {
+        "question_id": "q-cx-900013",
+        "mutated_question": "「完全不存在的东西甲乙丙」在哪些章节的正文里出现过？请列出全部章节代号。",
+        "chapter_path_applied": false,
+        "answer": ""
+      },
+      {
+        "question_id": "q-cx-900014",
+        "mutated_question": "「完全不存在的东西甲乙丙」在哪些章节的正文里出现过？请列出全部章节代号。",
+        "chapter_path_applied": false,
+        "answer": ""
+      },
+      {
+        "question_id": "q-cx-900016",
+        "mutated_question": "「完全不存在的东西甲乙丙」在哪些章节的正文里出现过？请列出全部章节代号。",
+        "chapter_path_applied": false,
+        "answer": ""
+      },
+      {
+        "question_id": "q-cx-900017",
+        "mutated_question": "「完全不存在的东西甲乙丙」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+        "chapter_path_applied": false,
+        "answer": ""
+      },
+      {
+        "question_id": "q-cx-900018",
+        "mutated_question": "「完全不存在的东西甲乙丙」在哪些章节的正文里出现过？请列出全部章节代号。",
+        "chapter_path_applied": false,
+        "answer": ""
+      },
+      {
+        "question_id": "q-cx-900021",
+        "mutated_question": "「完全不存在的东西甲乙丙」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+        "chapter_path_applied": false,
+        "answer": ""
+      },
+      {
+        "question_id": "q-cx-900022",
+        "mutated_question": "「完全不存在的东西甲乙丙」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+        "chapter_path_applied": false,
+        "answer": ""
+      },
+      {
+        "question_id": "q-cx-900024",
+        "mutated_question": "「完全不存在的东西甲乙丙」在哪些章节的正文里出现过？请列出全部章节代号。",
+        "chapter_path_applied": false,
+        "answer": ""
+      },
+      {
+        "question_id": "q-cx-900026",
+        "mutated_question": "「完全不存在的东西甲乙丙」在哪些章节的正文里出现过？请列出全部章节代号。",
+        "chapter_path_applied": false,
+        "answer": ""
+      },
+      {
+        "question_id": "q-cx-900027",
+        "mutated_question": "「完全不存在的东西甲乙丙」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+        "chapter_path_applied": false,
+        "answer": ""
+      },
+      {
+        "question_id": "q-cx-900030",
+        "mutated_question": "「完全不存在的东西甲乙丙」在哪些章节的正文里出现过？请列出全部章节代号。",
+        "chapter_path_applied": false,
+        "answer": ""
+      }
+    ],
+    "pass": true
+  },
+  "r8c_chapter_source": {
+    "n_bad": 0,
+    "bad": [],
+    "pass": true
+  },
+  "citation_locate": {
+    "n_bad": 0,
+    "bad": [],
+    "pass": true
+  },
+  "all_pass": true,
+  "n_triggered": 38
+}
