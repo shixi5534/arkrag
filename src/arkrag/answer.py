@@ -99,6 +99,101 @@ TITLE_TRIGGERS = (
 # 问句里的「」引文（≥4 字，与 MIN_EVIDENCE_CHARS 对齐：更短的行无法作为引用）。
 _QUOTE_RE = re.compile(r"「([^」]{4,})」")
 
+# ---- 章节包答案通路（`cross_chunk`，默认关） ---------------------------------
+# 信号定义：问句问「出现过哪些章节代号」时，把**上下文单元自带的 `chapter` 字段**
+# 去重排序后用「、」连接作答。
+#
+# 为什么需要它：`cross_chunk` 题的 gold answer 就是一串章节代号，而 claim 通路只会
+# 拼「主体 谓词 客体」三元组，结构上产不出这种形态（P3 第三轮实测 `hits=0`）。
+#
+# 为什么默认关：这是**新增答案形态**，必须单变量验证后才可开；开与关的差别只在本
+# 通路，不触及 claim 生成、`MAX_CLAIMS` 截断、接地判据与引用校验。
+#
+# 三条硬约束（实现时守住，评审时对照）：
+#   1. **章节名只能读 `unit["chapter"]`**，绝不允许截 `chunk_id` 路径第二段——
+#      main 线路径第二段只有 `main`，真实字段值是 `main_ep14`；memory 线同理
+#      （路径 `memory`、字段 `memory_whitw2`）。截路径实测只有 7/38 对，读字段 38/38。
+#   2. **只准用 `context["units"]`**。`answer()` 没有 retriever 句柄，拿不到全图
+#      断言索引；用「实体在正文出现」当判据会多取章节（`q-cx-000001` 「以勒什」
+#      正文出现于 47 块、取到 3 章节含 `act17mini`，gold 只 2）。
+#   3. **必须同时发引用**。答案非空而引用为空会被 `verify_citations` 清空并改判
+#      拒答（`no_valid_citation`）——`q-cx-900024` 就是这么从「该答」变成「拒答」的。
+CHAPTER_ANSWER_PATH = False
+
+# 触发词与 `cross_chunk` 骨架一一对应（实测 38/38 命中、零混入其他类别）。
+CHAPTER_TRIGGERS = ("章节代号",)
+
+
+def _chapter_answer(question: str, units: list[dict],
+                    query_analysis: dict | None = None) -> dict | None:
+    """问句问「出现过哪些章节代号」时，用上下文单元自带的 `chapter` 组合作答。
+
+    判据：某章节进答案，当且仅当该章节下有**至少一个单元正文含问句焦点实体名**
+    （`nh >= 1`）。这是 dev 38 题上实测最好的可解释判据（精确命中 12/38；更严的
+    `nh >= 2` 掉到 2，`na >= 1` 只有 10 且会丢掉 11 个 `na == 0` 的 gold 章节）。
+
+    返回 `None` 表示不适用（落回原有 claim 通路）——不触发、无焦点实体、章节集合
+    为空、或某一章节能组出但一条引用都发不出，全部返回 None，**绝不猜章节**。
+    """
+    q = str(question or "")
+    if not any(trigger in q for trigger in CHAPTER_TRIGGERS):
+        return None
+
+    cands = ((query_analysis or {}).get("entity_candidates") or [])[:2]
+    names = {str(c.get("name") or "").strip() for c in cands}
+    names.discard("")
+    if not names:
+        return None
+
+    # 章节 -> 该章节里命中焦点实体的单元
+    by_chapter: dict[str, list[dict]] = {}
+    for unit in units:
+        chapter = str(unit.get("chapter") or "").strip()
+        if not chapter:
+            continue
+        text = str(unit.get("text") or "")
+        if not text or not any(n in text for n in names):
+            continue
+        by_chapter.setdefault(chapter, []).append(unit)
+
+    if not by_chapter:
+        return None
+
+    chapters = sorted(by_chapter)
+    answer = "、".join(chapters)
+
+    # 每块取第一行含焦点实体且够长的行当引用（同一块只发一条，避免同块多行重复）
+    citations: list[dict] = []
+    for chapter in chapters:
+        for unit in by_chapter[chapter]:
+            text = str(unit.get("text") or "")
+            for line in text.splitlines():
+                if len(line) < MIN_EVIDENCE_CHARS:
+                    continue
+                if not any(n in line for n in names):
+                    continue
+                start = text.find(line)
+                if start < 0 or text[start:start + len(line)] != line:
+                    continue
+                citations.append({
+                    "chunk_id": str(unit.get("chunk_id") or ""),
+                    "evidence": line,
+                    "start": start,
+                    "end": start + len(line),
+                })
+                break
+
+    if not citations:
+        return None
+
+    return {
+        "answer": answer,
+        "chapters": chapters,
+        "citations": citations,
+        "n_chapters": len(chapters),
+        "chapter_source": "unit.chapter",
+    }
+
 
 def _line_bounds(text: str, start: int, end: int) -> tuple[int, int]:
     """把 `[start, end)` 扩到所在整行（含说话人前缀）。"""
@@ -448,6 +543,35 @@ class ExtractiveAnswerer:
                 }
                 return base
             base["stats"]["title_path"] = {"applied": False}
+
+        # ---- 章节包答案通路（新增答案形态，默认关） ------------------------
+        # 同样放在三道拒答闸之后、claim 机制之前，理由与标题通路一致。
+        if CHAPTER_ANSWER_PATH:
+            chapter_hit = _chapter_answer(question, units, qa)
+            if chapter_hit is not None:
+                base["answer"] = chapter_hit["answer"]
+                base["citations"] = [
+                    {
+                        "claim": f"章节：{chapter_hit['answer']}",
+                        "chunk_id": cite["chunk_id"],
+                        "evidence": cite["evidence"],
+                        "start": cite["start"],
+                        "end": cite["end"],
+                        "assertion_id": "",
+                        "predicate_in_line": False,
+                        "granularity": "line",  # 记账用：本通路发的是整行引用
+                    }
+                    for cite in chapter_hit["citations"]
+                ]
+                base["confidence"] = round(min(0.95, float(top_score or 0.0)), 4)
+                base["stats"]["chapter_path"] = {
+                    "applied": True,
+                    "n_chapters": chapter_hit["n_chapters"],
+                    "chapter_source": chapter_hit["chapter_source"],
+                    "citations": len(chapter_hit["citations"]),
+                }
+                return base
+            base["stats"]["chapter_path"] = {"applied": False}
 
         # ---- 收集候选 claim（每条都从断言的证据偏移来） -------------------
         context_names: set[str] = set()
