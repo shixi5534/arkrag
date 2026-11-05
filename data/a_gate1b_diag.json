@@ -1,0 +1,888 @@
+{
+  "generated_at": "2026-11-05T10:35:40Z",
+  "git_commit": "14eea8a06ecfe302dd1d0cd939f263431c1d8c84",
+  "python": "3.14.3",
+  "os": "Windows-11-10.0.26200-SP0",
+  "command": "py -3 scripts/a_gate1b_probe.py --stage diag",
+  "generation": "g-20261103T132152Z-06a741",
+  "gold_set": "data/goldset/gold-v2.json",
+  "split": "dev",
+  "split_policy": "pre-split-diagnostic（只跑 dev 380 里的应答题；验收集 260 未碰；结论不许外推到 new-holdout 160）",
+  "eval_top_k": 20,
+  "eval_graph_depth": 1,
+  "sampled": false,
+  "baseline": {
+    "n": 350,
+    "covered": 63,
+    "correct_coverage": 25,
+    "answer_hits_gold": 122,
+    "abstained": 30,
+    "required_in_context": 147,
+    "citations": 2014,
+    "citation_failed": 0,
+    "locate_pass_rate": 1.0,
+    "answer_len_median": 42
+  },
+  "gate1b_diag": {
+    "n": 25,
+    "by_category": {
+      "single_chunk": 25
+    },
+    "answer_equals_title": 25,
+    "blocked_reason": {
+      "endpoint_not_focus": 25,
+      "predicate_not_hint": 25,
+      "total_blocked": 25
+    },
+    "per_question": [
+      {
+        "question_id": "q-sc-000010",
+        "category": "single_chunk",
+        "question": "在剧情《野蛮肇事者》的正文里，出现了这样一句话：「我警告过你们不许进入森林。」。这句话出自哪个文本块？请给出该块的标题。",
+        "gold_answer": "野蛮肇事者",
+        "required_title": "野蛮肇事者",
+        "answer_equals_title": true,
+        "focus_ids_n": 1,
+        "hint_predicates": [],
+        "n_matched": 1,
+        "n_blocked": 1,
+        "per_req": [
+          {
+            "chunk_id": "activities/act24side/level_act24side_05_beg#002",
+            "evidence": "我警告过你们不许进入森林。",
+            "n_matched": 1,
+            "n_blocked": 1,
+            "blocked_detail": [
+              {
+                "assertion_id": "a-036e3b1ba9d8da99",
+                "predicate": "交谈",
+                "subject": "柏生义冈",
+                "object": "夜刀",
+                "subj_in_focus": false,
+                "obj_in_focus": false,
+                "pred_in_hints": false,
+                "evidence_text": "我警告过你们不许进入森林。"
+              }
+            ]
+          }
+        ],
+        "answer": ""
+      },
+      {
+        "question_id": "q-sc-000017",
+        "category": "single_chunk",
+        "question": "下面这段原文来自哪一段剧情？「喂，我说你，你是看不起老子吗？」请回答该段的标题。",
+        "gold_answer": "干员间切磋指南",
+        "required_title": "干员间切磋指南",
+        "answer_equals_title": true,
+        "focus_ids_n": 0,
+        "hint_predicates": [
+          "源自"
+        ],
+        "n_matched": 1,
+        "n_blocked": 1,
+        "per_req": [
+          {
+            "chunk_id": "obt/memory/story_tiger_1_1#000",
+            "evidence": "喂，我说你，你是看不起老子吗？",
+            "n_matched": 1,
+            "n_blocked": 1,
+            "blocked_detail": [
+              {
+                "assertion_id": "a-98c71ac8bad18bec",
+                "predicate": "交谈",
+                "subject": "因陀罗",
+                "object": "杰克",
+                "subj_in_focus": false,
+                "obj_in_focus": false,
+                "pred_in_hints": false,
+                "evidence_text": "喂，我说你，你是看不起老子吗？"
+              }
+            ]
+          }
+        ],
+        "answer": ""
+      },
+      {
+        "question_id": "q-sc-000030",
+        "category": "single_chunk",
+        "question": "在剧情《完整的缺损》的正文里，出现了这样一句话：「第四集团军仍然与第二集团军相持不下。」。这句话出自哪个文本块？请给出该块的标题。",
+        "gold_answer": "完整的缺损",
+        "required_title": "完整的缺损",
+        "answer_equals_title": true,
+        "focus_ids_n": 2,
+        "hint_predicates": [],
+        "n_matched": 1,
+        "n_blocked": 1,
+        "per_req": [
+          {
+            "chunk_id": "activities/act51side/level_act51side_st02#006",
+            "evidence": "第四集团军仍然与第二集团军相持不下。",
+            "n_matched": 1,
+            "n_blocked": 1,
+            "blocked_detail": [
+              {
+                "assertion_id": "a-ecfbe88a57d44993",
+                "predicate": "交战",
+                "subject": "乌萨斯第四集团军",
+                "object": "乌萨斯第二集团军",
+                "subj_in_focus": false,
+                "obj_in_focus": false,
+                "pred_in_hints": false,
+                "evidence_text": "第四集团军仍然与第二集团军相持不下。"
+              }
+            ]
+          }
+        ],
+        "answer": "第二集团军交战第四集团军。第四集团军冲突第二集团军。利沃诺夫号敌对第四集团军。远北政府赠予第四集团军。第二集团军背叛费奥多尔。"
+      },
+      {
+        "question_id": "q-sc-000032",
+        "category": "single_chunk",
+        "question": "在剧情《失乐园》的正文里，出现了这样一句话：「每个人的性格都不一样，你的想法我也能够理解。」。这句话出自哪个文本块？请给出该块的标题。",
+        "gold_answer": "失乐园",
+        "required_title": "失乐园",
+        "answer_equals_title": true,
+        "focus_ids_n": 0,
+        "hint_predicates": [],
+        "n_matched": 1,
+        "n_blocked": 1,
+        "per_req": [
+          {
+            "chunk_id": "activities/act20side/level_act20side_st02#000",
+            "evidence": "每个人的性格都不一样，你的想法我也能够理解。",
+            "n_matched": 1,
+            "n_blocked": 1,
+            "blocked_detail": [
+              {
+                "assertion_id": "a-aede40c0002b325c",
+                "predicate": "交谈",
+                "subject": "卡奇·叙光",
+                "object": "黛柯绮·银币",
+                "subj_in_focus": false,
+                "obj_in_focus": false,
+                "pred_in_hints": false,
+                "evidence_text": "每个人的性格都不一样，你的想法我也能够理解。"
+              }
+            ]
+          }
+        ],
+        "answer": ""
+      },
+      {
+        "question_id": "q-sc-000033",
+        "category": "single_chunk",
+        "question": "下面这段原文来自哪一段剧情？「让我带你走出来。」请回答该段的标题。",
+        "gold_answer": "向死寻生",
+        "required_title": "向死寻生",
+        "answer_equals_title": true,
+        "focus_ids_n": 0,
+        "hint_predicates": [
+          "源自"
+        ],
+        "n_matched": 1,
+        "n_blocked": 1,
+        "per_req": [
+          {
+            "chunk_id": "obt/memory/story_absin_1_1#007",
+            "evidence": "让我带你走出来。",
+            "n_matched": 1,
+            "n_blocked": 1,
+            "blocked_detail": [
+              {
+                "assertion_id": "a-7cd78d8793ede412",
+                "predicate": "救助",
+                "subject": "苦艾",
+                "object": "早露",
+                "subj_in_focus": false,
+                "obj_in_focus": false,
+                "pred_in_hints": false,
+                "evidence_text": "让我带你走出来。"
+              }
+            ]
+          }
+        ],
+        "answer": "奥伦源自维多利亚。"
+      },
+      {
+        "question_id": "q-sc-000034",
+        "category": "single_chunk",
+        "question": "下面这段原文来自哪一段剧情？「医疗部有规定，不能随意收受患者的礼物。」请回答该段的标题。",
+        "gold_answer": "护身符",
+        "required_title": "护身符",
+        "answer_equals_title": true,
+        "focus_ids_n": 1,
+        "hint_predicates": [
+          "源自"
+        ],
+        "n_matched": 1,
+        "n_blocked": 1,
+        "per_req": [
+          {
+            "chunk_id": "obt/memory/story_myrrh_1_1#007",
+            "evidence": "医疗部有规定，不能随意收受患者的礼物。",
+            "n_matched": 1,
+            "n_blocked": 1,
+            "blocked_detail": [
+              {
+                "assertion_id": "a-bfb682f75f7ba82c",
+                "predicate": "交谈",
+                "subject": "末药",
+                "object": "柳芭",
+                "subj_in_focus": false,
+                "obj_in_focus": false,
+                "pred_in_hints": false,
+                "evidence_text": "医疗部有规定，不能随意收受患者的礼物。"
+              }
+            ]
+          }
+        ],
+        "answer": "芙蓉交谈医疗部。"
+      },
+      {
+        "question_id": "q-sc-000035",
+        "category": "single_chunk",
+        "question": "在剧情《一问之答》的正文里，出现了这样一句话：「岂不是枉费了我一番教诲？」。这句话出自哪个文本块？请给出该块的标题。",
+        "gold_answer": "一问之答",
+        "required_title": "一问之答",
+        "answer_equals_title": true,
+        "focus_ids_n": 0,
+        "hint_predicates": [],
+        "n_matched": 1,
+        "n_blocked": 1,
+        "per_req": [
+          {
+            "chunk_id": "activities/act16d5/level_act16d5_st03#000",
+            "evidence": "岂不是枉费了我一番教诲？",
+            "n_matched": 1,
+            "n_blocked": 1,
+            "blocked_detail": [
+              {
+                "assertion_id": "a-4457be492a9ac24f",
+                "predicate": "指导",
+                "subject": "夕",
+                "object": "黎",
+                "subj_in_focus": false,
+                "obj_in_focus": false,
+                "pred_in_hints": false,
+                "evidence_text": "岂不是枉费了我一番教诲？"
+              }
+            ]
+          }
+        ],
+        "answer": ""
+      },
+      {
+        "question_id": "q-sc-000046",
+        "category": "single_chunk",
+        "question": "下面这段原文来自哪一段剧情？「没有经过特殊训练的人，手握出鞘的兵刃入睡实在太危险了。」请回答该段的标题。",
+        "gold_answer": "蒙眬",
+        "required_title": "蒙眬",
+        "answer_equals_title": true,
+        "focus_ids_n": 1,
+        "hint_predicates": [
+          "源自"
+        ],
+        "n_matched": 1,
+        "n_blocked": 1,
+        "per_req": [
+          {
+            "chunk_id": "obt/memory/story_kroos2_1_1#002",
+            "evidence": "没有经过特殊训练的人，手握出鞘的兵刃入睡实在太危险了。",
+            "n_matched": 1,
+            "n_blocked": 1,
+            "blocked_detail": [
+              {
+                "assertion_id": "a-d7e82100cad5da66",
+                "predicate": "交谈",
+                "subject": "克洛丝",
+                "object": "阿尹",
+                "subj_in_focus": false,
+                "obj_in_focus": false,
+                "pred_in_hints": false,
+                "evidence_text": "没有经过特殊训练的人，手握出鞘的兵刃入睡实在太危险了。"
+              }
+            ]
+          }
+        ],
+        "answer": "凛冬源自乌萨斯。"
+      },
+      {
+        "question_id": "q-sc-000052",
+        "category": "single_chunk",
+        "question": "在剧情《复航》的正文里，出现了这样一句话：「她直接回了359实验基地」。这句话出自哪个文本块？请给出该块的标题。",
+        "gold_answer": "复航",
+        "required_title": "复航",
+        "answer_equals_title": true,
+        "focus_ids_n": 1,
+        "hint_predicates": [],
+        "n_matched": 1,
+        "n_blocked": 1,
+        "per_req": [
+          {
+            "chunk_id": "activities/act47side/level_act47side_st03#005",
+            "evidence": "她直接回了359实验基地",
+            "n_matched": 1,
+            "n_blocked": 1,
+            "blocked_detail": [
+              {
+                "assertion_id": "a-94b0add78f6e8c3d",
+                "predicate": "前往",
+                "subject": "多萝西",
+                "object": "359实验基地",
+                "subj_in_focus": false,
+                "obj_in_focus": false,
+                "pred_in_hints": false,
+                "evidence_text": "她直接回了359实验基地"
+              }
+            ]
+          }
+        ],
+        "answer": ""
+      },
+      {
+        "question_id": "q-sc-000059",
+        "category": "single_chunk",
+        "question": "下面这段原文来自哪一段剧情？「我们做的每一件事，都逃不过耶拉冈德的眼睛。」请回答该段的标题。",
+        "gold_answer": "崩落",
+        "required_title": "崩落",
+        "answer_equals_title": true,
+        "focus_ids_n": 1,
+        "hint_predicates": [
+          "源自"
+        ],
+        "n_matched": 1,
+        "n_blocked": 1,
+        "per_req": [
+          {
+            "chunk_id": "activities/act46side/level_act46side_st01#003",
+            "evidence": "我们做的每一件事，都逃不过耶拉冈德的眼睛。",
+            "n_matched": 1,
+            "n_blocked": 1,
+            "blocked_detail": [
+              {
+                "assertion_id": "a-5518a7fc1c4afd46",
+                "predicate": "交谈",
+                "subject": "恩雅",
+                "object": "阿德颂",
+                "subj_in_focus": false,
+                "obj_in_focus": false,
+                "pred_in_hints": false,
+                "evidence_text": "我们做的每一件事，都逃不过耶拉冈德的眼睛。"
+              }
+            ]
+          }
+        ],
+        "answer": "耶拉冈德包含银心湖。恩雅交谈耶拉冈德。耶拉冈德交谈恩雅。阿德颂交谈耶拉冈德。耶拉冈德称为巨兽。"
+      },
+      {
+        "question_id": "q-sc-000060",
+        "category": "single_chunk",
+        "question": "在剧情《凛刃出匣》的正文里，出现了这样一句话：「那就容我们见证，长老。」。这句话出自哪个文本块？请给出该块的标题。",
+        "gold_answer": "凛刃出匣",
+        "required_title": "凛刃出匣",
+        "answer_equals_title": true,
+        "focus_ids_n": 0,
+        "hint_predicates": [],
+        "n_matched": 1,
+        "n_blocked": 1,
+        "per_req": [
+          {
+            "chunk_id": "activities/act46side/level_act46side_09_beg#005",
+            "evidence": "那就容我们见证，长老。",
+            "n_matched": 1,
+            "n_blocked": 1,
+            "blocked_detail": [
+              {
+                "assertion_id": "a-35cbb443efdff8a9",
+                "predicate": "交谈",
+                "subject": "恩雅",
+                "object": "阿德颂",
+                "subj_in_focus": false,
+                "obj_in_focus": false,
+                "pred_in_hints": false,
+                "evidence_text": "那就容我们见证，长老。"
+              }
+            ]
+          }
+        ],
+        "answer": ""
+      },
+      {
+        "question_id": "q-sc-000061",
+        "category": "single_chunk",
+        "question": "下面这段原文来自哪一段剧情？「在我被送到实验场之前，女皇陛下推翻了巫王。我得救了。」请回答该段的标题。",
+        "gold_answer": "升华之夜",
+        "required_title": "升华之夜",
+        "answer_equals_title": true,
+        "focus_ids_n": 3,
+        "hint_predicates": [
+          "源自",
+          "获救于"
+        ],
+        "n_matched": 1,
+        "n_blocked": 1,
+        "per_req": [
+          {
+            "chunk_id": "activities/act18side/level_act18side_07_end#005",
+            "evidence": "在我被送到实验场之前，女皇陛下推翻了巫王。我得救了。",
+            "n_matched": 1,
+            "n_blocked": 1,
+            "blocked_detail": [
+              {
+                "assertion_id": "a-058cd3d4c1e9c45b",
+                "predicate": "交谈",
+                "subject": "爷爷",
+                "object": "芙蓉",
+                "subj_in_focus": false,
+                "obj_in_focus": false,
+                "pred_in_hints": false,
+                "evidence_text": "在我被送到实验场之前，女皇陛下推翻了巫王。我得救了。"
+              }
+            ]
+          }
+        ],
+        "answer": "巫王使用黑焰。"
+      },
+      {
+        "question_id": "q-sc-900012",
+        "category": "single_chunk",
+        "question": "在剧情《无法再一次踏入的河》的正文里，出现了这样一句话：「如果有一天你和施特罗斯伯伯住的地方」。这句话出自哪个文本块？请给出该块的标题。",
+        "gold_answer": "无法再一次踏入的河",
+        "required_title": "无法再一次踏入的河",
+        "answer_equals_title": true,
+        "focus_ids_n": 1,
+        "hint_predicates": [],
+        "n_matched": 1,
+        "n_blocked": 1,
+        "per_req": [
+          {
+            "chunk_id": "activities/act48side/level_act48side_st03#000",
+            "evidence": "如果有一天你和施特罗斯伯伯住的地方",
+            "n_matched": 1,
+            "n_blocked": 1,
+            "blocked_detail": [
+              {
+                "assertion_id": "a-4c581220891e5277",
+                "predicate": "交谈",
+                "subject": "小里底娅",
+                "object": "小莱娜",
+                "subj_in_focus": false,
+                "obj_in_focus": false,
+                "pred_in_hints": false,
+                "evidence_text": "如果有一天你和施特罗斯伯伯住的地方"
+              }
+            ]
+          }
+        ],
+        "answer": "施特罗斯亲属调香师。施特罗斯交谈调香师。小里底娅亲属施特罗斯。"
+      },
+      {
+        "question_id": "q-sc-900019",
+        "category": "single_chunk",
+        "question": "下面这段原文来自哪一段剧情？「先回营地吧。我已经等不及要喝啤酒了。」请回答该段的标题。",
+        "gold_answer": "在卡兹戴尔",
+        "required_title": "在卡兹戴尔",
+        "answer_equals_title": true,
+        "focus_ids_n": 2,
+        "hint_predicates": [
+          "源自"
+        ],
+        "n_matched": 1,
+        "n_blocked": 1,
+        "per_req": [
+          {
+            "chunk_id": "obt/memory/story_mudrok_1_1#003",
+            "evidence": "先回营地吧。我已经等不及要喝啤酒了。",
+            "n_matched": 1,
+            "n_blocked": 1,
+            "blocked_detail": [
+              {
+                "assertion_id": "a-439949a19af68735",
+                "predicate": "前往",
+                "subject": "泥岩",
+                "object": "卡兹戴尔",
+                "subj_in_focus": false,
+                "obj_in_focus": false,
+                "pred_in_hints": false,
+                "evidence_text": "先回营地吧。我已经等不及要喝啤酒了。"
+              }
+            ]
+          }
+        ],
+        "answer": "丽扎制造啤酒。泥岩持有啤酒。大鲍勃制造啤酒。"
+      },
+      {
+        "question_id": "q-sc-900022",
+        "category": "single_chunk",
+        "question": "在剧情《惊愕》的正文里，出现了这样一句话：「我希望你和白垩立刻在空间上分开，越快越好。」。这句话出自哪个文本块？请给出该块的标题。",
+        "gold_answer": "惊愕",
+        "required_title": "惊愕",
+        "answer_equals_title": true,
+        "focus_ids_n": 1,
+        "hint_predicates": [],
+        "n_matched": 1,
+        "n_blocked": 1,
+        "per_req": [
+          {
+            "chunk_id": "activities/act18side/level_act18side_04_beg#001",
+            "evidence": "我希望你和白垩立刻在空间上分开，越快越好。",
+            "n_matched": 1,
+            "n_blocked": 1,
+            "blocked_detail": [
+              {
+                "assertion_id": "a-6431e6ed4c8787c9",
+                "predicate": "交谈",
+                "subject": "芙蓉",
+                "object": "黑键",
+                "subj_in_focus": false,
+                "obj_in_focus": false,
+                "pred_in_hints": false,
+                "evidence_text": "我希望你和白垩立刻在空间上分开，越快越好。"
+              }
+            ]
+          }
+        ],
+        "answer": "白垩同行黑键。芙蓉交谈白垩。白垩交谈芙蓉。黑键交谈白垩。白垩交谈黑键。"
+      },
+      {
+        "question_id": "q-sc-900028",
+        "category": "single_chunk",
+        "question": "在剧情《无畏·3》的正文里，出现了这样一句话：「处理内部的害虫说到底是我们玻利瓦尔的家务事」。这句话出自哪个文本块？请给出该块的标题。",
+        "gold_answer": "无畏·3",
+        "required_title": "无畏·3",
+        "answer_equals_title": true,
+        "focus_ids_n": 1,
+        "hint_predicates": [],
+        "n_matched": 1,
+        "n_blocked": 1,
+        "per_req": [
+          {
+            "chunk_id": "obt/rogue/rogue_6/monthrecord/month_record_rogue_6_1_3#001",
+            "evidence": "处理内部的害虫说到底是我们玻利瓦尔的家务事",
+            "n_matched": 1,
+            "n_blocked": 1,
+            "blocked_detail": [
+              {
+                "assertion_id": "a-db18fd9ac3d080c9",
+                "predicate": "隶属",
+                "subject": "杜宾",
+                "object": "玻利瓦尔第二独立国",
+                "subj_in_focus": false,
+                "obj_in_focus": false,
+                "pred_in_hints": false,
+                "evidence_text": "处理内部的害虫说到底是我们玻利瓦尔的家务事"
+              }
+            ]
+          }
+        ],
+        "answer": "多索雷斯位于玻利瓦尔。球场属于玻利瓦尔。热狗产自玻利瓦尔。玻利瓦尔隶属莱塔尼亚。"
+      },
+      {
+        "question_id": "q-sc-900029",
+        "category": "single_chunk",
+        "question": "在剧情《烤串与预言》的正文里，出现了这样一句话：「与其在这里漫无目的地寻找齐尔查克，不如就地生火。」。这句话出自哪个文本块？请给出该块的标题。",
+        "gold_answer": "烤串与预言",
+        "required_title": "烤串与预言",
+        "answer_equals_title": true,
+        "focus_ids_n": 1,
+        "hint_predicates": [],
+        "n_matched": 1,
+        "n_blocked": 1,
+        "per_req": [
+          {
+            "chunk_id": "activities/act36side/level_act36side_04_end#002",
+            "evidence": "与其在这里漫无目的地寻找齐尔查克，不如就地生火。",
+            "n_matched": 1,
+            "n_blocked": 1,
+            "blocked_detail": [
+              {
+                "assertion_id": "a-5e70a3348b00e374",
+                "predicate": "交谈",
+                "subject": "森西",
+                "object": "玛露西尔",
+                "subj_in_focus": false,
+                "obj_in_focus": false,
+                "pred_in_hints": false,
+                "evidence_text": "与其在这里漫无目的地寻找齐尔查克，不如就地生火。"
+              }
+            ]
+          }
+        ],
+        "answer": "刻俄柏交谈齐尔查克。齐尔查克交谈艾尔启。艾尔启交谈齐尔查克。齐尔查克交谈莱欧斯。莱欧斯交谈齐尔查克。"
+      },
+      {
+        "question_id": "q-sc-900030",
+        "category": "single_chunk",
+        "question": "在剧情《疑惑之影》的正文里，出现了这样一句话：「这些事都写在你我的合约之中」。这句话出自哪个文本块？请给出该块的标题。",
+        "gold_answer": "疑惑之影",
+        "required_title": "疑惑之影",
+        "answer_equals_title": true,
+        "focus_ids_n": 0,
+        "hint_predicates": [],
+        "n_matched": 1,
+        "n_blocked": 1,
+        "per_req": [
+          {
+            "chunk_id": "activities/act28side/level_act28side_05_beg#000",
+            "evidence": "这些事都写在你我的合约之中",
+            "n_matched": 1,
+            "n_blocked": 1,
+            "blocked_detail": [
+              {
+                "assertion_id": "a-01db0c642d2660b0",
+                "predicate": "交谈",
+                "subject": "克里夫",
+                "object": "银行行长",
+                "subj_in_focus": false,
+                "obj_in_focus": false,
+                "pred_in_hints": false,
+                "evidence_text": "这些事都写在你我的合约之中"
+              }
+            ]
+          }
+        ],
+        "answer": ""
+      },
+      {
+        "question_id": "q-sc-900036",
+        "category": "single_chunk",
+        "question": "在剧情《高空拒阻行动》的正文里，出现了这样一句话：「W小姐，还差一点，这个距离」。这句话出自哪个文本块？请给出该块的标题。",
+        "gold_answer": "高空拒阻行动",
+        "required_title": "高空拒阻行动",
+        "answer_equals_title": true,
+        "focus_ids_n": 1,
+        "hint_predicates": [],
+        "n_matched": 1,
+        "n_blocked": 1,
+        "per_req": [
+          {
+            "chunk_id": "obt/main/level_main_14-12_beg#003",
+            "evidence": "W小姐，还差一点，这个距离",
+            "n_matched": 1,
+            "n_blocked": 1,
+            "blocked_detail": [
+              {
+                "assertion_id": "a-b21d241288f29a7c",
+                "predicate": "交谈",
+                "subject": "阿米娅",
+                "object": "W",
+                "subj_in_focus": false,
+                "obj_in_focus": false,
+                "pred_in_hints": false,
+                "evidence_text": "W小姐，还差一点，这个距离"
+              }
+            ]
+          }
+        ],
+        "answer": ""
+      },
+      {
+        "question_id": "q-sc-900041",
+        "category": "single_chunk",
+        "question": "在剧情《走出那条长长的走廊》的正文里，出现了这样一句话：「给你爸爸妈妈的衣服不是已经做好了吗？这件是什么？」。这句话出自哪个文本块？请给出该块的标题。",
+        "gold_answer": "走出那条长长的走廊",
+        "required_title": "走出那条长长的走廊",
+        "answer_equals_title": true,
+        "focus_ids_n": 2,
+        "hint_predicates": [],
+        "n_matched": 1,
+        "n_blocked": 1,
+        "per_req": [
+          {
+            "chunk_id": "obt/memory/story_bibeak_2_1#005",
+            "evidence": "给你爸爸妈妈的衣服不是已经做好了吗？这件是什么？",
+            "n_matched": 1,
+            "n_blocked": 1,
+            "blocked_detail": [
+              {
+                "assertion_id": "a-d339162e1a08049c",
+                "predicate": "交谈",
+                "subject": "松果",
+                "object": "柏喙",
+                "subj_in_focus": false,
+                "obj_in_focus": false,
+                "pred_in_hints": false,
+                "evidence_text": "给你爸爸妈妈的衣服不是已经做好了吗？这件是什么？"
+              }
+            ]
+          }
+        ],
+        "answer": ""
+      },
+      {
+        "question_id": "q-sc-900043",
+        "category": "single_chunk",
+        "question": "下面这段原文来自哪一段剧情？「大哥哥说话真奇怪，你不会也是病人吧。」请回答该段的标题。",
+        "gold_answer": "漫游症",
+        "required_title": "漫游症",
+        "answer_equals_title": true,
+        "focus_ids_n": 0,
+        "hint_predicates": [
+          "亲属",
+          "源自"
+        ],
+        "n_matched": 1,
+        "n_blocked": 1,
+        "per_req": [
+          {
+            "chunk_id": "activities/act21mini/level_act21mini_st07#000",
+            "evidence": "大哥哥说话真奇怪，你不会也是病人吧。",
+            "n_matched": 1,
+            "n_blocked": 1,
+            "blocked_detail": [
+              {
+                "assertion_id": "a-b98bc7d6198d9ff1",
+                "predicate": "交谈",
+                "subject": "洛伦茨",
+                "object": "佩德洛",
+                "subj_in_focus": false,
+                "obj_in_focus": false,
+                "pred_in_hints": false,
+                "evidence_text": "大哥哥说话真奇怪，你不会也是病人吧。"
+              }
+            ]
+          }
+        ],
+        "answer": ""
+      },
+      {
+        "question_id": "q-sc-900047",
+        "category": "single_chunk",
+        "question": "在剧情《月光沉沦》的正文里，出现了这样一句话：「你们居然真的赢了我。」。这句话出自哪个文本块？请给出该块的标题。",
+        "gold_answer": "月光沉沦",
+        "required_title": "月光沉沦",
+        "answer_equals_title": true,
+        "focus_ids_n": 0,
+        "hint_predicates": [],
+        "n_matched": 1,
+        "n_blocked": 1,
+        "per_req": [
+          {
+            "chunk_id": "activities/act11d0/level_act11d0_08_end#002",
+            "evidence": "你们居然真的赢了我。",
+            "n_matched": 1,
+            "n_blocked": 1,
+            "blocked_detail": [
+              {
+                "assertion_id": "a-e2187572fdfed5ec",
+                "predicate": "交谈",
+                "subject": "泥岩",
+                "object": "灰喉",
+                "subj_in_focus": false,
+                "obj_in_focus": false,
+                "pred_in_hints": false,
+                "evidence_text": "你们居然真的赢了我。"
+              }
+            ]
+          }
+        ],
+        "answer": ""
+      },
+      {
+        "question_id": "q-sc-900048",
+        "category": "single_chunk",
+        "question": "在剧情《禁飞区》的正文里，出现了这样一句话：「俺的眼睛被面罩挡住了，什么都看不见！」。这句话出自哪个文本块？请给出该块的标题。",
+        "gold_answer": "禁飞区",
+        "required_title": "禁飞区",
+        "answer_equals_title": true,
+        "focus_ids_n": 0,
+        "hint_predicates": [],
+        "n_matched": 1,
+        "n_blocked": 1,
+        "per_req": [
+          {
+            "chunk_id": "activities/act24side/level_act24side_06_beg#000",
+            "evidence": "俺的眼睛被面罩挡住了，什么都看不见！",
+            "n_matched": 1,
+            "n_blocked": 1,
+            "blocked_detail": [
+              {
+                "assertion_id": "a-e68e777de3a321c2",
+                "predicate": "交谈",
+                "subject": "黑角",
+                "object": "学者猫",
+                "subj_in_focus": false,
+                "obj_in_focus": false,
+                "pred_in_hints": false,
+                "evidence_text": "俺的眼睛被面罩挡住了，什么都看不见！"
+              }
+            ]
+          }
+        ],
+        "answer": ""
+      },
+      {
+        "question_id": "q-sc-900054",
+        "category": "single_chunk",
+        "question": "在剧情《“堕天”》的正文里，出现了这样一句话：「克里夫先生是一位可靠的领袖」。这句话出自哪个文本块？请给出该块的标题。",
+        "gold_answer": "“堕天”",
+        "required_title": "“堕天”",
+        "answer_equals_title": true,
+        "focus_ids_n": 3,
+        "hint_predicates": [],
+        "n_matched": 1,
+        "n_blocked": 1,
+        "per_req": [
+          {
+            "chunk_id": "activities/act42side/level_act42side_st01#002",
+            "evidence": "克里夫先生是一位可靠的领袖",
+            "n_matched": 1,
+            "n_blocked": 1,
+            "blocked_detail": [
+              {
+                "assertion_id": "a-a74ba1edfe3276a4",
+                "predicate": "交谈",
+                "subject": "蒂拉",
+                "object": "黑钢",
+                "subj_in_focus": false,
+                "obj_in_focus": false,
+                "pred_in_hints": false,
+                "evidence_text": "克里夫先生是一位可靠的领袖"
+              }
+            ]
+          }
+        ],
+        "answer": "克里夫交谈伍德洛。伍德洛交谈克里夫。克里夫保护海伦娜。克里夫位于哥伦比亚。银行行长交谈克里夫。"
+      },
+      {
+        "question_id": "q-sc-900062",
+        "category": "single_chunk",
+        "question": "下面这段原文来自哪一段剧情？「什么？问题真的都解决了？」请回答该段的标题。",
+        "gold_answer": "分身有术",
+        "required_title": "分身有术",
+        "answer_equals_title": true,
+        "focus_ids_n": 0,
+        "hint_predicates": [
+          "源自"
+        ],
+        "n_matched": 1,
+        "n_blocked": 1,
+        "per_req": [
+          {
+            "chunk_id": "obt/memory/story_closur_1_1#007",
+            "evidence": "什么？问题真的都解决了？",
+            "n_matched": 1,
+            "n_blocked": 1,
+            "blocked_detail": [
+              {
+                "assertion_id": "a-139a44f62d4921f5",
+                "predicate": "交谈",
+                "subject": "华法琳",
+                "object": "可露希尔",
+                "subj_in_focus": false,
+                "obj_in_focus": false,
+                "pred_in_hints": false,
+                "evidence_text": "什么？问题真的都解决了？"
+              }
+            ]
+          }
+        ],
+        "answer": ""
+      }
+    ]
+  },
+  "sanity": {
+    "restored_ok": true
+  }
+}
