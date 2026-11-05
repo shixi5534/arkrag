@@ -360,6 +360,97 @@ def section_line_hypothesis(answerable, by_chunk, chunks, triage) -> dict:
     }
 
 
+def section_required_line_split(answerable, by_chunk, chunks) -> dict:
+    """把「对不上的 required」按「required 那一行有没有被抽成断言」拆两群。
+
+    为什么需要这一节
+    ================
+    B 在 P1-c 把 13 条 dev 侧 `needs_extra` 判成「答案在同块另一行，但那一行不含
+    别名，所以不能只改 required 指向」，并据此算出「追加 required 只能救 2 条」。
+    判据没错，但 `needs_extra` 不是一个同质集合：里面混了两种完全不同的东西。
+
+    - **frag**：required 那一行上**有**断言，只是抽取器切的是行内片段。
+      改引用粒度（发整行）就能通，不动 gold 一个字节。
+    - **none**：required 那一行**根本没被抽成任何断言**。这是抽取缺口，
+      改 gold 改不动，改引用粒度也改不动。
+
+    三种修法（改粒度 / 追加 required / 补抽取）能救的题数与代价完全不同，
+    合成一个「2/13」会把最便宜的那条路算没了。
+    """
+    per_cit = collections.Counter()
+    by_cat = collections.defaultdict(collections.Counter)
+    rows = []
+    for it in answerable:
+        states = []
+        for rc in it.get("required_citations") or []:
+            cid, req = rc["chunk_id"], rc["evidence"]
+            text = chunks.get(cid, "")
+            ok = any(req in (rec.get("evidence_text") or "")
+                     for rec in by_chunk.get(cid) or [])
+            line_hit = False
+            if not ok:
+                for rec in by_chunk.get(cid) or []:
+                    s, e = int(rec.get("evidence_start", -1)), int(rec.get("evidence_end", -1))
+                    if s < 0 or e <= s or e > len(text):
+                        continue
+                    a, b = _line_bounds(text, s, e)
+                    if req in text[a:b]:
+                        line_hit = True
+                        break
+            state = "ok" if ok else ("frag" if line_hit else "none")
+            per_cit[state] += 1
+            by_cat[it["category"]][state] += 1
+            states.append({"chunk_id": cid, "state": state})
+        if all(s["state"] == "ok" for s in states):
+            continue
+        rows.append({
+            "question_id": it["question_id"],
+            "category": it["category"],
+            "split": it.get("split", ""),
+            "states": [s["state"] for s in states],
+            "worst": "none" if any(s["state"] == "none" for s in states) else "frag",
+        })
+
+    # 与 B 的 P1-c 判定表交叉：`needs_extra` 那群到底落在哪一侧
+    cross = {}
+    p1c = config.ROOT / "data" / "p1c_leak_audit.json"
+    if p1c.exists():
+        try:
+            doc = json.loads(p1c.read_text(encoding="utf-8"))
+            ac = doc.get("a_class_requirements") or {}
+            mine = {r["question_id"]: r for r in rows}
+            bucket = collections.defaultdict(list)
+            for r in ac.get("rows") or []:
+                qid, verdict, split = r.get("question_id"), r.get("verdict"), r.get("split")
+                if verdict != "needs_extra":
+                    continue
+                side = (mine.get(qid) or {}).get("worst", "not_in_answerable")
+                bucket[side].append({"question_id": qid, "split": split})
+            cross = {
+                "来源": config.rel_to_root(p1c),
+                "needs_extra_按我的两群拆": {k: len(v) for k, v in bucket.items()},
+                "明细": {k: sorted(v, key=lambda x: x["question_id"]) for k, v in bucket.items()},
+                "结论": ("needs_extra 混了两群，不许当成一个集合算行数"
+                         if len([k for k in bucket if k in ("frag", "none")]) == 2
+                         else "只有一群或口径不同，需人工核对"),
+            }
+        except (OSError, ValueError) as exc:
+            cross = {"status": "unreadable", "detail": str(exc)}
+
+    return {
+        "逐条口径": dict(per_cit),
+        "按题型": {k: dict(v) for k, v in sorted(by_cat.items())},
+        "未全达标的题数": len(rows),
+        "按最坏一条分类": dict(collections.Counter(r["worst"] for r in rows)),
+        "与 p1c 判定表交叉": cross,
+        "三种修法各自能救": {
+            "改引用粒度（发整行）": per_cit.get("frag", 0),
+            "补抽取": per_cit.get("none", 0),
+            "改 gold 标注": "见 B 的 P1-c 探针：追加 required 只救 2/13，本脚本不重复测",
+        },
+    }
+
+
 def section_speaker_lines(by_chunk, chunks) -> dict:
     """检验「说话人标签行被抽取器系统性跳过」这个猜想（结论：不成立）。"""
     tag_total = tag_mined = other_total = other_mined = 0
@@ -451,6 +542,7 @@ def main(argv: list[str] | None = None) -> int:
     if triage:
         out["5_四闸门漏斗"] = section_funnel(answerable, by_chunk, triage)
         out["6_整行引用假设"] = section_line_hypothesis(answerable, by_chunk, chunks, triage)
+    out["6b_required行是否被抽成断言"] = section_required_line_split(answerable, by_chunk, chunks)
     if not args.skip_heavy:
         out["7_说话人标签行"] = section_speaker_lines(by_chunk, chunks)
 

@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-11-04T15:33:04Z",
- "git_commit": "a3a93ae41b8f61eef54fcccbe81f0f84e4c29779",
+ "generated_at": "2026-11-05T02:19:45Z",
+ "git_commit": "e1506e1117e053e90e11c1106d67380f9892226e",
  "python": "3.14.3",
  "os": "Windows-11-10.0.26200-SP0",
  "command": "py -3 scripts/lead_citation_funnel.py",
@@ -331,6 +331,134 @@
    "cross_chunk": 6,
    "negative_abstain": 6,
    "adversarial": 6
+  }
+ },
+ "6b_required行是否被抽成断言": {
+  "逐条口径": {
+   "ok": 279,
+   "frag": 64,
+   "none": 85
+  },
+  "按题型": {
+   "adversarial": {
+    "none": 10,
+    "frag": 6
+   },
+   "alias": {
+    "frag": 19,
+    "none": 26,
+    "ok": 3
+   },
+   "cross_chunk": {
+    "none": 43,
+    "frag": 32,
+    "ok": 5
+   },
+   "direct_relation": {
+    "ok": 47,
+    "frag": 1
+   },
+   "multihop": {
+    "ok": 96
+   },
+   "negative_abstain": {
+    "frag": 6,
+    "none": 6
+   },
+   "single_chunk": {
+    "ok": 64
+   },
+   "time_conflict": {
+    "ok": 64
+   }
+  },
+  "未全达标的题数": 106,
+  "按最坏一条分类": {
+   "frag": 38,
+   "none": 68
+  },
+  "与 p1c 判定表交叉": {
+   "来源": "data/p1c_leak_audit.json",
+   "needs_extra_按我的两群拆": {
+    "none": 10,
+    "frag": 6
+   },
+   "明细": {
+    "none": [
+     {
+      "question_id": "q-al-000002",
+      "split": "dev"
+     },
+     {
+      "question_id": "q-al-000004",
+      "split": "dev"
+     },
+     {
+      "question_id": "q-al-000010",
+      "split": "dev"
+     },
+     {
+      "question_id": "q-al-000018",
+      "split": "dev"
+     },
+     {
+      "question_id": "q-al-000023",
+      "split": "holdout"
+     },
+     {
+      "question_id": "q-al-000028",
+      "split": "dev"
+     },
+     {
+      "question_id": "q-al-000032",
+      "split": "holdout"
+     },
+     {
+      "question_id": "q-al-000036",
+      "split": "dev"
+     },
+     {
+      "question_id": "q-al-000042",
+      "split": "holdout"
+     },
+     {
+      "question_id": "q-al-000045",
+      "split": "dev"
+     }
+    ],
+    "frag": [
+     {
+      "question_id": "q-al-000012",
+      "split": "dev"
+     },
+     {
+      "question_id": "q-al-000014",
+      "split": "dev"
+     },
+     {
+      "question_id": "q-al-000022",
+      "split": "dev"
+     },
+     {
+      "question_id": "q-al-000033",
+      "split": "dev"
+     },
+     {
+      "question_id": "q-al-000037",
+      "split": "dev"
+     },
+     {
+      "question_id": "q-al-000038",
+      "split": "dev"
+     }
+    ]
+   },
+   "结论": "needs_extra 混了两群，不许当成一个集合算行数"
+  },
+  "三种修法各自能救": {
+   "改引用粒度（发整行）": 64,
+   "补抽取": 85,
+   "改 gold 标注": "见 B 的 P1-c 探针：追加 required 只救 2/13，本脚本不重复测"
   }
  }
 }
