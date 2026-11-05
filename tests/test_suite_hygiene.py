@@ -847,7 +847,74 @@ class TestSuiteSizeIsMonotonic:
     #   红的正是第一条；`Copy-Item` 还原 → 3 passed 退出码 0，
     #   `git diff --stat` 显示该文件只剩本次 6 插 2 删的改动，实验改动没留下。
     # ------------------------------------------------------------------
-    N = 1796
+    # ------------------------------------------------------------------
+    # N: 1796 -> 1811（2026-11-05，正确覆盖成对 + 回归入口自采 CPU）
+    #
+    # 算术 1796 + 7 + 8 = 1811：
+    #   · `tests/test_provenance.py` 新增 `TestCorrectCoverageMustPairWithCoverage`
+    #     7 条（先前在 Lead 工作区里未提交，本轮一并入库）；
+    #   · `tests/test_regression_entry.py` 新增 8 条 CPU 采集门
+    #     （该文件原有 9 条 → 现 17 条）。
+    #   · 两个文件**都已在** `TEST_FILES` 里（`TEST_FILES` 是
+    #     `sorted(TESTS.glob("test_*.py"))`），所以**四个 parametrize 不变**——
+    #     这一点和过去几次「新文件 +4」的账不同，不能照抄旧算式。
+    # 与 `py -3 -m pytest tests --collect-only -q` 实测 1811 一致。
+    #
+    # 这次换来的门（逐条写明，只报数字不算）：
+    #   · `test_correct_coverage_must_pair_with_coverage`（同类共 7 条）：
+    #     只报「覆盖建立」不报「正确覆盖」时判 incomplete。四个口径的假通过率
+    #     base 60.3% / cand 52.4% 说明前者的分子里六成答案是错的，单看它会把
+    #     「口径修正」读成「质量改进」。
+    #   · `test_os_times_would_have_reported_zero_on_this_platform`：
+    #     钉死 `os.times()` 在这台机器上对子进程恒返回 0。第一版实现就是用它，
+    #     跑出 28.85s 墙钟配 **0.02s CPU**——一个能通过 `_judge_duration()` 的
+    #     假数（0.02 < 28.85 不矛盾），比不采更糟。这条门记录「为什么不能改回去」。
+    #   · `test_child_cpu_seconds_reads_real_cpu_for_a_burning_child`：
+    #     真起一个烧 2 秒 CPU 的子进程，必须读到 > 1.0s，且来源必须是
+    #     `proc_stat`（量到被测进程那档）。改成 `return 0.0, "proc_stat"`
+    #     → 1 failed。
+    #   · `test_cpu_source_is_one_of_three_values`：`cpu_source` 只能取三个值，
+    #     拼错的来源名一律落成 `none`。让未知值原样通过 → 1 failed。
+    #   · `test_unmeasurable_cpu_stays_none_not_zero` / `test_source_and_number_
+    #     must_both_hold` / `test_no_source_means_no_number_either`：来源与数字
+    #     必须同时成立，缺一个就都作废。有来源但填 0 → **2 failed**。
+    #   · `test_missing_cpu_is_unknown_not_pass`：只有墙钟 → `unknown`。
+    #     `duration_verdict` 恒返回 pass → 1 failed。**判据早就在
+    #     `provenance._judge_duration()` 里，但入口没接线**——「没接线的判据
+    #     等于不存在」，整条门不成立，不是「弱了一点」。
+    #   · `test_report_carries_cpu_s_and_seven_provenance_fields`：`--report`
+    #     写出的 JSON 同时带 `cpu_s`、`cpu_source` 与七字段。`"timings": {}`
+    #     → 1 failed。
+    #
+    # 反向实测（命令级，结果落在 `data/_tmp_reverse_cpu_gate.json`；本轮起日志路径
+    # 用 `tempfile.gettempdir()` 解析——PowerShell 里带引号的 `"%TEMP%"` 不展开，
+    # 会在仓库根建一个叫 `%TEMP%` 的字面目录。那次「日志在 %TEMP%」的断言，
+    # 路径字面写对了，指向的地方却不是我以为的那个系统临时目录）：
+    #   [0] 基线 17 passed 退出码 0
+    #   [A] `GetProcessTimes` 分支 `return 0.0, "proc_stat"` → 1 failed 退出码 1
+    #   [B] 有来源但数字丢了时填 0 → 2 failed 退出码 1
+    #   [C] 未知来源名原样通过 → 1 failed 退出码 1
+    #   [D] `"timings": {}` → 1 failed 退出码 1
+    #   [E] `duration_verdict` 恒 pass → 1 failed 退出码 1
+    #   [Z] 恢复后 17 passed 退出码 0；`.gate0bak` 残留 False
+    #
+    # 踩到的坑（当场自查，两次）：
+    #   1. 第一版实现用 `os.times()` 前后求差，跑出「墙钟 28.85s / CPU 0.02s」。
+    #      **我自己在同一个 docstring 里刚写过「只算本进程会得到几乎为 0 的数，
+    #      那比不采更糟」，然后照做了。** 探针实测：`os.times()` 四个字段在
+    #      Windows 上全是 0（含两个名字专为子进程准备的 `children_*`）；
+    #      `GetProcessTimes` 读回 3.0625s，且必须在 `proc.wait()` 之后、句柄
+    #      关闭之前读（运行中恒 0.0）。教训：**「我加了这个字段」不等于
+    #      「这个字段是真的」**——新采的每个量都要先拿一个已知答案的输入试一遍，
+    #      否则它只是把「缺失」换成了「假数」。
+    #   2. B 笔第一次**没变红**：测试喂的是 `cpu_s=None, cpu_source="none"`，
+    #      而那条路径在两个版本里都返回 `None`（`source == "none"` 分支先
+    #      return 了）。「采不到填 0」这个 bug 只在「**有来源、但数字丢了**」
+    #      这条更窄的路径上才显形，而我的用例从没走进那条路径——**用例围着
+    #      函数的常见返回值写、没围着它的状态空间写**。补
+    #      `test_source_and_number_must_both_hold` 后才红。
+    # ------------------------------------------------------------------
+    N = 1811
 
     def test_declared_count_matches_actual(self) -> None:
         """用 pytest 自己数一遍当前收集到的用例数，与本文件登记值比对。"""

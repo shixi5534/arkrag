@@ -793,6 +793,102 @@ def _judge_coverage_denominators(row: dict) -> tuple[str, str, list[str]]:
     return PASS, (f"三个分母齐全 {values}，P3 盯 {COVERAGE_TARGET}"), []
 
 
+# ---------------------------------------------------------------- 正确覆盖必须成对
+
+#: 「正确覆盖」= 覆盖建立 **且** 答案文本含 gold 答案（含 `acceptable_answers` 展开）。
+#: 单看「覆盖建立」必然导致虚假达标：实测 2026-11-05，v1 应答题里覆盖成立 55 题，
+#: 其中 **34 题（61.8%）答案不含 gold**；v2 dev 63 题里 38 题（60.3%）。
+#: A 的 P3 cand（整行引用）82 题里仍有 43 题（52.4%）。
+CORRECT_COVERAGE_KEYS: tuple[str, ...] = (
+    "correct_coverage",
+    "correct_covered",
+    "correct_coverage_n",
+)
+
+#: 「正确覆盖」的分子。与 `COVERAGE_KEYS` 的分子同量纲，才能比较大小。
+_COVERED_N_KEYS: tuple[str, ...] = (
+    "citation_covered_n",
+    "covered_n",
+    "coverage_n",
+)
+
+
+def _first_number(row: dict, keys: tuple[str, ...]) -> float | None:
+    for key in keys:
+        value = row.get(key)
+        if _blank(value):
+            continue
+        try:
+            return float(value)
+        except (TypeError, ValueError):
+            continue
+    return None
+
+
+def _judge_correct_coverage(row: dict) -> tuple[str, str, list[str]]:
+    """引用覆盖行必须**成对**出现「覆盖建立」与「正确覆盖」。
+
+    ## 为什么要这一条
+
+    「覆盖建立」只问「要求的引用发出来了没有」，不问「发出来的引用支持不支持答案」。
+    实测四个口径的假通过率都在五到六成，所以只报覆盖建立会让一份**答案六成是错的**
+    报告显示「覆盖率 0.18 → 0.23，提升 5 个点」。
+
+    这条是 Lead 在复核 P3 第一轮时抓到的：整行引用让覆盖 63 → 82（+19），
+    但答案质量 122 → 122（**零收益**），19 题里 5 题是「引用修好了、答案还是错的」。
+
+    ## 判据
+
+    * 行里既没有覆盖键也没有正确覆盖键 → PASS（不适用）
+    * 有覆盖建立、没有正确覆盖 → **UNKNOWN**（缺的是 `correct_coverage`：
+      「作者可能算了没写」和「根本没算」我们分不出来，这是查不了，不是看得出来）
+    * 有正确覆盖、没有覆盖建立 → **UNKNOWN**（没有分母的分子没法审）
+    * 两者都有：
+        - 正确覆盖 > 覆盖建立 → **FAIL**（子集关系被破坏，两个数不是同一次运行采的）
+        - 否则 PASS，并在 detail 里给出假通过率
+
+    ## 为什么正确覆盖 > 覆盖建立 要判 FAIL 而不是 unknown
+
+    正确覆盖的定义里就含「覆盖建立 ∧ ...」，所以它必然是覆盖建立的子集。
+    一旦大于，说明两次数不是同一口径/同一批题——这是**看得出矛盾**，判 fail。
+    """
+    has_cov = _has_any(row, COVERAGE_KEYS)
+    has_correct = _has_any(row, CORRECT_COVERAGE_KEYS)
+    if not has_cov and not has_correct:
+        return PASS, "不含引用覆盖键，成对检查不适用", []
+    if has_cov and not has_correct:
+        return UNKNOWN, (
+            "本行只报了「覆盖建立」，没有「正确覆盖」。实测反例：整行引用让覆盖 "
+            "63→82（+19 题），但答案质量 122→122（零收益），19 题里 5 题是"
+            "「引用修好了、答案还是错的」（q-cx-000007、q-na-000001、q-na-000003、"
+            "q-na-000012、q-sc-900012）。请补 correct_coverage："
+            "只报覆盖建立视为不完整"
+        ), ["correct_coverage"]
+    if has_correct and not has_cov:
+        return UNKNOWN, (
+            "本行报了「正确覆盖」却没有「覆盖建立」——正确覆盖是它的子集，"
+            "没有母数就无法判断这个分子是不是同一次运行采到的"
+        ), ["coverage"]
+
+    correct = _first_number(row, CORRECT_COVERAGE_KEYS)
+    covered = _first_number(row, _COVERED_N_KEYS)
+    if correct is None or covered is None:
+        # 只给了比率、没给分子：比率本来就 ≤1，无法与母数比大小，只能放过。
+        return PASS, "报了正确覆盖，但只给比率未给分子，子集关系无法核验", []
+    if covered <= 0:
+        return FAIL, f"覆盖建立分子 {covered} 不是正数，假通过率无从计算", []
+    if correct > covered:
+        return FAIL, (
+            f"正确覆盖 {correct} 大于覆盖建立 {covered}——按定义正确覆盖是它的子集，"
+            "出现这种情况说明两个数不是同一次运行采到的（或分母不同源）"
+        ), []
+    false_pass = round(1 - correct / covered, 4)
+    return PASS, (
+        f"覆盖建立 {int(covered)} / 正确覆盖 {int(correct)}，假通过率 {false_pass}. "
+        "注意：假通过率是这一对数的差值，不是可以忽略的噪声"
+    ), []
+
+
 # ---------------------------------------------------------------- 洗牌判据
 
 
@@ -913,6 +1009,7 @@ def verify_metric_row(row: dict) -> dict:
         _judge_density(row),
         _judge_duration(row),
         _judge_coverage_denominators(row),
+        _judge_correct_coverage(row),
         _judge_shuffle(row),
         _judge_rank5(row),
     ]

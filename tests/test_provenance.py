@@ -752,6 +752,11 @@ class TestCoverageNeedsThreeDenominators:
     同一个「引用覆盖 0.17」有三种分母，三者答的是不同的问题：
     `/300` 把三种失败混在一起、`/194` 只算断言层可达、`/72` 只算两闸都过。
 
+    三个分母的题数必须单调不增：`72 <= 194 <= 300`。`/72` 这个数在 2026-11-05
+    被更正过一次——首版按闸门1b 29 算成 `/82`、并据此宣布 `/72` 作废，后来发现
+    闸门判定顺序错了（块不在上下文时准入判据一次都没被调用），闸门1b 实为 19，
+    `/72 = 51 + 2 + 19` 本来就成立。**本文件一律用 `/72`，`/82` 与 `/85` 均已作废。**
+
     判 unknown 而不是 fail：报告里只有 `coverage: 0.17` 时我们**不知道**作者的
     分子分母是什么——这是「查不了」，不是「看得出来缺什么」。
     """
@@ -764,14 +769,16 @@ class TestCoverageNeedsThreeDenominators:
         assert "51/300" in res["detail"]
 
     def test_one_denominator_only_is_unknown_naming_the_missing_ones(self) -> None:
-        row = {"coverage": 0.17, "denominators": {"mixed": 300}}
+        row = {"coverage": 0.17, "denominators": {"mixed": 300},
+               "correct_coverage": 21, "citation_covered_n": 55}
         res = provenance.verify_metric_row(row)
         assert res["verdict"] == provenance.UNKNOWN
         assert res["missing"] == ["denominators.reachable", "denominators.ungated"]
 
     def test_three_denominators_pass_and_name_the_target(self) -> None:
         row = {"coverage": 0.17,
-               "denominators": {"mixed": 300, "reachable": 194, "ungated": 72}}
+               "denominators": {"mixed": 300, "reachable": 194, "ungated": 72},
+               "correct_coverage": 21, "citation_covered_n": 55}
         assert provenance.verify_metric_row(row)["verdict"] == provenance.PASS
         # 整行通过时 detail 只汇总「不通过」的分支，所以要看判据自己的说明。
         verdict, detail, missing = provenance._judge_coverage_denominators(row)
@@ -795,10 +802,66 @@ class TestCoverageNeedsThreeDenominators:
     def test_flat_spelling_is_accepted(self) -> None:
         """`coverage_denominator` / `coverage_denominators` 两种拼法都认。"""
         row = {"coverage": 0.17,
-               "coverage_denominator": {"mixed_n": 300, "reachable_n": 194, "ungated_n": 72}}
+               "coverage_denominator": {"mixed_n": 300, "reachable_n": 194, "ungated_n": 72},
+               "correct_coverage": 21, "citation_covered_n": 55}
         assert provenance.verify_metric_row(row)["verdict"] == provenance.PASS
 
     def test_a_row_without_coverage_keys_is_not_affected(self) -> None:
+        assert provenance.verify_metric_row({"p95_ms": 12.3})["verdict"] == provenance.PASS
+
+
+class TestCorrectCoverageMustPairWithCoverage:
+    """引用覆盖必须成对：「覆盖建立」+「正确覆盖」。
+
+    实测假通过率：v1 61.8%（55 覆盖成立里 34 题答案不含 gold）、v2 dev 60.3%、
+    A 的 P3 base 60.3%、cand 52.4%。只报前者必然虚假达标。
+    """
+
+    def test_coverage_without_correct_coverage_is_unknown(self) -> None:
+        row = {"coverage": 0.17,
+               "denominators": {"mixed": 300, "reachable": 194, "ungated": 72},
+               "citation_covered_n": 55}
+        res = provenance.verify_metric_row(row)
+        assert res["verdict"] == provenance.UNKNOWN
+        assert "correct_coverage" in res["missing"]
+        # detail 必须点出反例，否则读者不知道「为什么不能只报覆盖建立」
+        assert "63" in res["detail"] and "82" in res["detail"]
+
+    def test_correct_coverage_without_coverage_is_unknown(self) -> None:
+        row = {"correct_coverage": 21, "citation_covered_n": 55}
+        res = provenance.verify_metric_row(row)
+        assert res["verdict"] == provenance.UNKNOWN
+        assert "coverage" in res["missing"]
+
+    def test_pair_passes_and_reports_the_false_pass_rate(self) -> None:
+        row = {"coverage": 0.1833,
+               "denominators": {"mixed": 300, "reachable": 194, "ungated": 72},
+               "correct_coverage": 21, "citation_covered_n": 55}
+        verdict, detail, missing = provenance._judge_correct_coverage(row)
+        assert verdict == provenance.PASS
+        assert "55" in detail and "21" in detail
+        assert "0.6182" in detail          # 1 - 21/55
+        assert missing == []
+
+    def test_correct_greater_than_covered_is_fail(self) -> None:
+        """正确覆盖是覆盖建立的子集，多了就说明两个数不同源。"""
+        row = {"coverage": 0.17, "correct_coverage": 90, "citation_covered_n": 55}
+        res = provenance.verify_metric_row(row)
+        assert res["verdict"] == provenance.FAIL
+        assert "子集" in res["detail"]
+
+    def test_zero_covered_numerator_is_fail(self) -> None:
+        row = {"coverage": 0.0, "correct_coverage": 0, "citation_covered_n": 0}
+        assert provenance.verify_metric_row(row)["verdict"] == provenance.FAIL
+
+    def test_ratio_only_cannot_verify_subset_and_passes_quietly(self) -> None:
+        """只给比率不给分子时，子集关系核不了——这是唯一放过的形状。"""
+        row = {"coverage": 0.17, "correct_coverage": 0.0714}
+        verdict, detail, missing = provenance._judge_correct_coverage(row)
+        assert verdict == provenance.PASS
+        assert "未给分子" in detail
+
+    def test_row_without_any_coverage_key_is_not_affected(self) -> None:
         assert provenance.verify_metric_row({"p95_ms": 12.3})["verdict"] == provenance.PASS
 
 
