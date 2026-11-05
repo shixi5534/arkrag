@@ -400,6 +400,94 @@ def section_cooc_multi(base: dict, cand: dict, gold: dict, chunks: dict) -> dict
     }
 
 
+def section_weight_grid(grid_path: Path) -> dict:
+    """八档权重的完整扫描：低权重区是「只动名次不动指标」的死区。"""
+    if not grid_path.exists():
+        return {"status": "missing", "path": config.rel_to_root(grid_path)}
+    g = json.loads(grid_path.read_text(encoding="utf-8"))
+    pq, ws = g["per_question"], g["weights"]
+    tags = ["cooc%g" % w for w in ws]
+    base = {r["question_id"]: r for r in pq[tags[0]]}
+
+    rows = []
+    for w, t in zip(ws, tags):
+        c = {r["question_id"]: r for r in pq[t]}
+        if set(c) != set(base):
+            return {"status": "mismatch", "detail": "题集与基线不一致：%s" % t}
+        row = {"w": w, "any_gold": sum(1 for q in base if c[q]["any_gold"]),
+               "all_gold": sum(1 for q in base if c[q]["all_gold"]),
+               "covered": sum(1 for q in base if c[q]["covered"]),
+               "abstained": sum(1 for q in base if c[q]["abstained"]),
+               "citations": sum(c[q].get("citations", 0) for q in base),
+               "hard_failures": sum(1 for q in base if c[q].get("citation_hard_failures"))}
+        for dim in ("any_gold", "all_gold", "covered"):
+            row["救_" + dim] = sorted(q for q in base if not base[q][dim] and c[q][dim])
+            row["丢_" + dim] = sorted(q for q in base if base[q][dim] and not c[q][dim])
+        # 「只动名次、不动任何指标」的证据：名次变了但三个维度全没变
+        row["名次变动题数"] = sum(
+            1 for q in base if c[q].get("gold_first_rank") != base[q].get("gold_first_rank"))
+        row["答案长度变动题数"] = sum(
+            1 for q in base if c[q].get("answer_len") != base[q].get("answer_len"))
+        row["引用数变动题数"] = sum(
+            1 for q in base if c[q].get("citations") != base[q].get("citations"))
+        row["触发题数"] = sum(1 for q in base if c[q].get("cooc_applied", 0) > 0)
+        rows.append(row)
+
+    # 结构上限：基线未进上下文的题，按 cooc 能不能救分组
+    top = rows[-1]["w"]
+    c_top = {r["question_id"]: r for r in pq["cooc%g" % top]}
+    notin = [q for q in base if not base[q]["any_gold"]]
+    groups = {}
+    for q in notin:
+        r = c_top[q]
+        if len(r.get("cooc_endpoints") or []) < 2:
+            k = "D_只解析出<2个实体"
+        elif r["cooc_boosted"] == 0:
+            k = "C_信号不亮(两端点从未同行)"
+        elif r["cooc_boosted"] / max(1, r["units"]) > 4:
+            k = "B_密度4+"
+        else:
+            k = "A_密度<=3"
+        groups.setdefault(k, []).append(q)
+    ceiling = {}
+    for k in sorted(groups):
+        sel = groups[k]
+        saved = [q for q in sel if c_top[q]["any_gold"]]
+        ceiling[k] = {
+            "n": len(sel),
+            "救回": len(saved),
+            "救回率": round(len(saved) / len(sel), 4),
+            "其中基线名次<=8": sum(
+                1 for q in sel
+                if isinstance(base[q]["gold_first_rank"], int) and base[q]["gold_first_rank"] <= 8),
+        }
+
+    # 名次<=5 但没进上下文：转化率不是 1.0 的实证
+    near = [q for q in c_top if isinstance(c_top[q]["gold_first_rank"], int)
+            and c_top[q]["gold_first_rank"] <= 5]
+    near_miss = [q for q in near if not c_top[q]["any_gold"]]
+
+    return {
+        "status": "ok",
+        "path": config.rel_to_root(grid_path),
+        "档位": ws,
+        "总题数": len(base),
+        "逐档": rows,
+        "结构上限分组": ceiling,
+        "名次<=5": {
+            "题数": len(near),
+            "进上下文": len(near) - len(near_miss),
+            "未进": len(near_miss),
+            "转化率": round((len(near) - len(near_miss)) / len(near), 4) if near else 0,
+            "未进题号": sorted(near_miss),
+        },
+        "结论": (
+            "低权重区（0.002–0.008）改变名次但不改变任何召回指标；"
+            "0.016 档反而丢 any_gold 一题，权重与效果不单调"
+        ),
+    }
+
+
 def section_untriggered(base: dict, cand: dict) -> dict:
     """215 题未触发里，多少是实体解析上限（cooc 结构上不可能）。"""
     notrig = [q for q in base if not cand[q].get("cooc_applied", 0)]
@@ -461,6 +549,7 @@ def main(argv: list[str] | None = None) -> int:
         "3_多块题结构": section_multi(base, cand, gold_v2),
         "4_cooc判据与多块题": section_cooc_multi(base, cand, gold_v2, chunks),
         "5_未触发归因": section_untriggered(base, cand),
+        "6_权重扫描": section_weight_grid(ROOT / "data" / "a_p2_weight_grid.json"),
     }
     result.update(_provenance("py -3 scripts/lead_cooc_boundary.py"))
 
@@ -542,6 +631,30 @@ def main(argv: list[str] | None = None) -> int:
     print("  结构上不可能触发（<2 端点）: %d 题" % s5["结构上不可能触发题数"])
     print("  算出加成但没进前20: %s" % s5["算出加成但没进前20"])
     print("  ⇒ %s" % s5["结论"])
+
+    s6 = result["6_权重扫描"]
+    print()
+    print("=" * 72)
+    print("6 八档权重扫描：低权重区只动名次不动指标")
+    print("=" * 72)
+    if s6.get("status") != "ok":
+        print("  [跳过] %s" % s6)
+    else:
+        print("  %-7s %5s %5s %5s %6s %5s %7s %7s %7s" % (
+            "w", "any", "all", "cov", "cit", "abst", "名次变", "答案变", "引用变"))
+        for r in s6["逐档"]:
+            print("  %-7g %5d %5d %5d %6d %5d %7d %7d %7d" % (
+                r["w"], r["any_gold"], r["all_gold"], r["covered"], r["citations"],
+                r["abstained"], r["名次变动题数"], r["答案长度变动题数"], r["引用数变动题数"]))
+        print("  结构上限（基线未进上下文的 %d 题，按 cooc 能否救分组）:" % (
+            sum(v["n"] for v in s6["结构上限分组"].values()),))
+        for k, v in s6["结构上限分组"].items():
+            print("    %-24s n=%-3d 救回 %-2d (%.1f%%) 其中基线名次<=8 %d 题" % (
+                k, v["n"], v["救回"], 100 * v["救回率"], v["其中基线名次<=8"]))
+        n5 = s6["名次<=5"]
+        print("  名次<=5 的 %d 题：进上下文 %d / 未进 %d（转化率 %.3f）未进题号 %s" % (
+            n5["题数"], n5["进上下文"], n5["未进"], n5["转化率"], n5["未进题号"]))
+        print("  ⇒ %s" % s6["结论"])
 
     print()
     print("溯源：%s | %s | py %s | %s" % (

@@ -1,0 +1,1639 @@
+{
+ "schema": 1,
+ "purpose": "预算容量与上下文填充实测：逐名次转化、frontier 缺口、预算单调性、优先级反转与填充策略",
+ "generated_at": "2026-11-05T02:07:45Z",
+ "git_commit": "91161af744d671c2bcc59acddf3c89189508e854",
+ "python": "3.14.3",
+ "os": "Windows-11-10.0.26200-SP0",
+ "command": "py -3 scripts/lead_budget_and_fill.py",
+ "generation": "g-20261103T132152Z-06a741",
+ "budget": 6000,
+ "dev_n": 350,
+ "1_名次转化": {
+  "available": true,
+  "sources": [
+   "a_p2_round1",
+   "a_p2_weight_grid"
+  ],
+  "cross_check_identical": true,
+  "by_rank": {
+   "1": {
+    "n": 101,
+    "in_context": 101,
+    "rate": 1.0,
+    "cross_check_same": true
+   },
+   "2": {
+    "n": 32,
+    "in_context": 32,
+    "rate": 1.0,
+    "cross_check_same": true
+   },
+   "3": {
+    "n": 26,
+    "in_context": 26,
+    "rate": 1.0,
+    "cross_check_same": true
+   },
+   "4": {
+    "n": 22,
+    "in_context": 22,
+    "rate": 1.0,
+    "cross_check_same": true
+   },
+   "5": {
+    "n": 12,
+    "in_context": 5,
+    "rate": 0.4167,
+    "cross_check_same": true
+   },
+   "6": {
+    "n": 18,
+    "in_context": 1,
+    "rate": 0.0556,
+    "cross_check_same": true
+   },
+   "7": {
+    "n": 8,
+    "in_context": 0,
+    "rate": 0.0,
+    "cross_check_same": true
+   },
+   "8": {
+    "n": 9,
+    "in_context": 0,
+    "rate": 0.0,
+    "cross_check_same": true
+   },
+   "9": {
+    "n": 8,
+    "in_context": 0,
+    "rate": 0.0,
+    "cross_check_same": true
+   },
+   "10": {
+    "n": 3,
+    "in_context": 0,
+    "rate": 0.0,
+    "cross_check_same": true
+   },
+   "11": {
+    "n": 1,
+    "in_context": 0,
+    "rate": 0.0,
+    "cross_check_same": true
+   },
+   "12": {
+    "n": 6,
+    "in_context": 0,
+    "rate": 0.0,
+    "cross_check_same": true
+   },
+   "13": {
+    "n": 3,
+    "in_context": 0,
+    "rate": 0.0,
+    "cross_check_same": true
+   },
+   "14": {
+    "n": 5,
+    "in_context": 0,
+    "rate": 0.0,
+    "cross_check_same": true
+   },
+   "15": {
+    "n": 3,
+    "in_context": 0,
+    "rate": 0.0,
+    "cross_check_same": true
+   },
+   "16": {
+    "n": 4,
+    "in_context": 0,
+    "rate": 0.0,
+    "cross_check_same": true
+   },
+   "17": {
+    "n": 1,
+    "in_context": 0,
+    "rate": 0.0,
+    "cross_check_same": true
+   },
+   "18": {
+    "n": 1,
+    "in_context": 0,
+    "rate": 0.0,
+    "cross_check_same": true
+   },
+   "19": {
+    "n": 5,
+    "in_context": 0,
+    "rate": 0.0,
+    "cross_check_same": true
+   },
+   "20": {
+    "n": 3,
+    "in_context": 0,
+    "rate": 0.0,
+    "cross_check_same": true
+   }
+  },
+  "cumulative": {
+   "1": {
+    "n": 101,
+    "in_context": 101,
+    "rate": 1.0
+   },
+   "2": {
+    "n": 133,
+    "in_context": 133,
+    "rate": 1.0
+   },
+   "3": {
+    "n": 159,
+    "in_context": 159,
+    "rate": 1.0
+   },
+   "4": {
+    "n": 181,
+    "in_context": 181,
+    "rate": 1.0
+   },
+   "5": {
+    "n": 193,
+    "in_context": 186,
+    "rate": 0.9637
+   },
+   "6": {
+    "n": 211,
+    "in_context": 187,
+    "rate": 0.8863
+   },
+   "7": {
+    "n": 219,
+    "in_context": 187,
+    "rate": 0.8539
+   },
+   "8": {
+    "n": 228,
+    "in_context": 187,
+    "rate": 0.8202
+   },
+   "9": {
+    "n": 236,
+    "in_context": 187,
+    "rate": 0.7924
+   },
+   "10": {
+    "n": 239,
+    "in_context": 187,
+    "rate": 0.7824
+   },
+   "11": {
+    "n": 240,
+    "in_context": 187,
+    "rate": 0.7792
+   },
+   "12": {
+    "n": 246,
+    "in_context": 187,
+    "rate": 0.7602
+   },
+   "13": {
+    "n": 249,
+    "in_context": 187,
+    "rate": 0.751
+   },
+   "14": {
+    "n": 254,
+    "in_context": 187,
+    "rate": 0.7362
+   },
+   "15": {
+    "n": 257,
+    "in_context": 187,
+    "rate": 0.7276
+   },
+   "16": {
+    "n": 261,
+    "in_context": 187,
+    "rate": 0.7165
+   },
+   "17": {
+    "n": 262,
+    "in_context": 187,
+    "rate": 0.7137
+   },
+   "18": {
+    "n": 263,
+    "in_context": 187,
+    "rate": 0.711
+   },
+   "19": {
+    "n": 268,
+    "in_context": 187,
+    "rate": 0.6978
+   },
+   "20": {
+    "n": 271,
+    "in_context": 187,
+    "rate": 0.69
+   }
+  },
+  "le5": {
+   "n": 193,
+   "in_context": 186,
+   "rate": 0.9637
+  },
+  "note": "分桶口径（1-3 / 4-5）会把第 5 名的断崖摊平；逐名次才看得见。"
+ },
+ "2_frontier缺口": {
+  "n": 9,
+  "rows": [
+   {
+    "question_id": "q-sc-000036",
+    "category": "single_chunk",
+    "best_rank": 5,
+    "gold_tokens": 1364,
+    "tokens_used": 5931,
+    "units": 5,
+    "leftover": 69,
+    "shortfall": 1295
+   },
+   {
+    "question_id": "q-sc-000045",
+    "category": "single_chunk",
+    "best_rank": 5,
+    "gold_tokens": 1262,
+    "tokens_used": 4986,
+    "units": 4,
+    "leftover": 1014,
+    "shortfall": 248
+   },
+   {
+    "question_id": "q-sc-000057",
+    "category": "single_chunk",
+    "best_rank": 5,
+    "gold_tokens": 1345,
+    "tokens_used": 5332,
+    "units": 4,
+    "leftover": 668,
+    "shortfall": 677
+   },
+   {
+    "question_id": "q-al-000034",
+    "category": "alias",
+    "best_rank": 5,
+    "gold_tokens": 1191,
+    "tokens_used": 5338,
+    "units": 4,
+    "leftover": 662,
+    "shortfall": 529
+   },
+   {
+    "question_id": "q-tc-000018",
+    "category": "time_conflict",
+    "best_rank": 5,
+    "gold_tokens": 1332,
+    "tokens_used": 5276,
+    "units": 4,
+    "leftover": 724,
+    "shortfall": 608
+   },
+   {
+    "question_id": "q-dr-900036",
+    "category": "direct_relation",
+    "best_rank": 5,
+    "gold_tokens": 1240,
+    "tokens_used": 5286,
+    "units": 4,
+    "leftover": 714,
+    "shortfall": 526
+   },
+   {
+    "question_id": "q-dr-900043",
+    "category": "direct_relation",
+    "best_rank": 5,
+    "gold_tokens": 1313,
+    "tokens_used": 5887,
+    "units": 5,
+    "leftover": 113,
+    "shortfall": 1200
+   },
+   {
+    "question_id": "q-mh-900001",
+    "category": "multihop",
+    "best_rank": 5,
+    "gold_tokens": 1249,
+    "tokens_used": 5934,
+    "units": 5,
+    "leftover": 66,
+    "shortfall": 1183
+   },
+   {
+    "question_id": "q-mh-900038",
+    "category": "multihop",
+    "best_rank": 5,
+    "gold_tokens": 1334,
+    "tokens_used": 5155,
+    "units": 4,
+    "leftover": 845,
+    "shortfall": 489
+   }
+  ],
+  "median_shortfall": 608,
+  "max_shortfall": 1295,
+  "note": "缺口 = 已用 + gold 块自身 token - 预算；正数表示差多少才能装进去。缺口远小于块长说明是「差一点点」，接近块长说明前面被更大的块吃掉配额。"
+ },
+ "3_预算曲线": {
+  "grid": {
+   "6000": {
+    "any_gold": 195,
+    "all_gold": 147,
+    "avg_units": 5.014,
+    "avg_used": 5701.5
+   },
+   "6400": {
+    "any_gold": 197,
+    "all_gold": 153,
+    "avg_units": 5.329,
+    "avg_used": 6171.3
+   },
+   "7000": {
+    "any_gold": 202,
+    "all_gold": 158,
+    "avg_units": 5.76,
+    "avg_used": 6747.6
+   },
+   "8000": {
+    "any_gold": 215,
+    "all_gold": 169,
+    "avg_units": 6.574,
+    "avg_used": 7771.8
+   },
+   "10000": {
+    "any_gold": 231,
+    "all_gold": 182,
+    "avg_units": 8.226,
+    "avg_used": 9727.2
+   },
+   "12000": {
+    "any_gold": 239,
+    "all_gold": 189,
+    "avg_units": 9.789,
+    "avg_used": 11742.2
+   }
+  },
+  "adjacent": [
+   {
+    "from": 6000,
+    "to": 6400,
+    "any_gain": 5,
+    "any_lose": 3,
+    "any_net": 2,
+    "any_lose_ids": [
+     "q-al-000022",
+     "q-tc-900021",
+     "q-tc-900022"
+    ],
+    "all_gain": 7,
+    "all_lose": 1,
+    "all_lose_ids": [
+     "q-al-000022"
+    ]
+   },
+   {
+    "from": 6400,
+    "to": 7000,
+    "any_gain": 8,
+    "any_lose": 3,
+    "any_net": 5,
+    "any_lose_ids": [
+     "q-sc-000056",
+     "q-mh-000042",
+     "q-mh-900005"
+    ],
+    "all_gain": 8,
+    "all_lose": 3,
+    "all_lose_ids": [
+     "q-sc-000056",
+     "q-cx-000003",
+     "q-cx-900011"
+    ]
+   },
+   {
+    "from": 7000,
+    "to": 8000,
+    "any_gain": 14,
+    "any_lose": 1,
+    "any_net": 13,
+    "any_lose_ids": [
+     "q-dr-900024"
+    ],
+    "all_gain": 12,
+    "all_lose": 1,
+    "all_lose_ids": [
+     "q-dr-900024"
+    ]
+   },
+   {
+    "from": 8000,
+    "to": 10000,
+    "any_gain": 17,
+    "any_lose": 1,
+    "any_net": 16,
+    "any_lose_ids": [
+     "q-dr-000035"
+    ],
+    "all_gain": 14,
+    "all_lose": 1,
+    "all_lose_ids": [
+     "q-dr-000035"
+    ]
+   },
+   {
+    "from": 10000,
+    "to": 12000,
+    "any_gain": 9,
+    "any_lose": 1,
+    "any_net": 8,
+    "any_lose_ids": [
+     "q-mh-000042"
+    ],
+    "all_gain": 7,
+    "all_lose": 0,
+    "all_lose_ids": []
+   }
+  ],
+  "versus_base": [
+   {
+    "budget": 6400,
+    "any_gain": 5,
+    "any_lose": 3,
+    "any_net": 2,
+    "any_lose_ids": [
+     "q-al-000022",
+     "q-tc-900021",
+     "q-tc-900022"
+    ],
+    "all_gain": 7,
+    "all_lose": 1
+   },
+   {
+    "budget": 7000,
+    "any_gain": 11,
+    "any_lose": 4,
+    "any_net": 7,
+    "any_lose_ids": [
+     "q-al-000022",
+     "q-mh-000042",
+     "q-tc-900021",
+     "q-tc-900022"
+    ],
+    "all_gain": 13,
+    "all_lose": 2
+   },
+   {
+    "budget": 8000,
+    "any_gain": 22,
+    "any_lose": 2,
+    "any_net": 20,
+    "any_lose_ids": [
+     "q-mh-000042",
+     "q-tc-900022"
+    ],
+    "all_gain": 22,
+    "all_lose": 0
+   },
+   {
+    "budget": 10000,
+    "any_gain": 37,
+    "any_lose": 1,
+    "any_net": 36,
+    "any_lose_ids": [
+     "q-tc-900022"
+    ],
+    "all_gain": 35,
+    "all_lose": 0
+   },
+   {
+    "budget": 12000,
+    "any_gain": 46,
+    "any_lose": 2,
+    "any_net": 44,
+    "any_lose_ids": [
+     "q-mh-000042",
+     "q-tc-900022"
+    ],
+    "all_gain": 42,
+    "all_lose": 0
+   }
+  ],
+  "non_monotonic": {
+   "any": [
+    {
+     "question_id": "q-sc-000056",
+     "budget": 7000
+    },
+    {
+     "question_id": "q-al-000022",
+     "budget": 6400
+    },
+    {
+     "question_id": "q-dr-000035",
+     "budget": 10000
+    },
+    {
+     "question_id": "q-mh-000042",
+     "budget": 7000
+    },
+    {
+     "question_id": "q-mh-000042",
+     "budget": 12000
+    },
+    {
+     "question_id": "q-dr-900024",
+     "budget": 8000
+    },
+    {
+     "question_id": "q-mh-900005",
+     "budget": 7000
+    },
+    {
+     "question_id": "q-tc-900021",
+     "budget": 6400
+    },
+    {
+     "question_id": "q-tc-900022",
+     "budget": 6400
+    }
+   ],
+   "all": [
+    {
+     "question_id": "q-sc-000056",
+     "budget": 7000
+    },
+    {
+     "question_id": "q-al-000022",
+     "budget": 6400
+    },
+    {
+     "question_id": "q-dr-000035",
+     "budget": 10000
+    },
+    {
+     "question_id": "q-cx-000003",
+     "budget": 7000
+    },
+    {
+     "question_id": "q-dr-900024",
+     "budget": 8000
+    },
+    {
+     "question_id": "q-cx-900011",
+     "budget": 7000
+    }
+   ]
+  },
+  "note": "keep 集合在更高预算下可能变差（direct 大块进来挤掉 direct 小块），这是贪心首适配 + `continue` 的算法性质；判据只能看 gold 侧救/丢，不能看 keep 集合本身。"
+ },
+ "4_优先级反转与填充": {
+  "inversion_n": 110,
+  "inversion_rate": 0.3143,
+  "inversion_rows": [
+   {
+    "question_id": "q-sc-000005",
+    "category": "single_chunk",
+    "skipped_direct": 15,
+    "kept_graph": 1,
+    "leftover": 119,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-sc-000030",
+    "category": "single_chunk",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 224,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-sc-000037",
+    "category": "single_chunk",
+    "skipped_direct": 16,
+    "kept_graph": 2,
+    "leftover": 15,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-sc-000042",
+    "category": "single_chunk",
+    "skipped_direct": 16,
+    "kept_graph": 2,
+    "leftover": 41,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-sc-000050",
+    "category": "single_chunk",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 114,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-sc-000061",
+    "category": "single_chunk",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 448,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-al-000011",
+    "category": "alias",
+    "skipped_direct": 15,
+    "kept_graph": 1,
+    "leftover": 300,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-al-000012",
+    "category": "alias",
+    "skipped_direct": 15,
+    "kept_graph": 1,
+    "leftover": 121,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-al-000014",
+    "category": "alias",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 534,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-al-000016",
+    "category": "alias",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 223,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-al-000019",
+    "category": "alias",
+    "skipped_direct": 15,
+    "kept_graph": 1,
+    "leftover": 154,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-al-000031",
+    "category": "alias",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 242,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-al-000035",
+    "category": "alias",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 41,
+    "gold_skipped": [
+     "obt/memory/story_mint_1_1#001"
+    ]
+   },
+   {
+    "question_id": "q-al-000036",
+    "category": "alias",
+    "skipped_direct": 15,
+    "kept_graph": 1,
+    "leftover": 248,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-al-000037",
+    "category": "alias",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 154,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-al-000038",
+    "category": "alias",
+    "skipped_direct": 15,
+    "kept_graph": 1,
+    "leftover": 149,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-al-000045",
+    "category": "alias",
+    "skipped_direct": 16,
+    "kept_graph": 2,
+    "leftover": 437,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-al-000047",
+    "category": "alias",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 6,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-dr-000001",
+    "category": "direct_relation",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 243,
+    "gold_skipped": [
+     "obt/main/level_st_17-01#001"
+    ]
+   },
+   {
+    "question_id": "q-dr-000003",
+    "category": "direct_relation",
+    "skipped_direct": 15,
+    "kept_graph": 1,
+    "leftover": 186,
+    "gold_skipped": [
+     "obt/main/level_main_14-03_beg#004"
+    ]
+   },
+   {
+    "question_id": "q-dr-000004",
+    "category": "direct_relation",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 173,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-dr-000011",
+    "category": "direct_relation",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 125,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-dr-000018",
+    "category": "direct_relation",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 551,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-dr-000019",
+    "category": "direct_relation",
+    "skipped_direct": 15,
+    "kept_graph": 1,
+    "leftover": 44,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-dr-000020",
+    "category": "direct_relation",
+    "skipped_direct": 15,
+    "kept_graph": 1,
+    "leftover": 37,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-dr-000025",
+    "category": "direct_relation",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 229,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-dr-000030",
+    "category": "direct_relation",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 150,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-dr-000032",
+    "category": "direct_relation",
+    "skipped_direct": 15,
+    "kept_graph": 1,
+    "leftover": 7,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-dr-000038",
+    "category": "direct_relation",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 397,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-dr-000040",
+    "category": "direct_relation",
+    "skipped_direct": 16,
+    "kept_graph": 2,
+    "leftover": 18,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-dr-000045",
+    "category": "direct_relation",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 52,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-mh-000003",
+    "category": "multihop",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 237,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-mh-000004",
+    "category": "multihop",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 353,
+    "gold_skipped": [
+     "obt/main/level_main_13-07_end#004"
+    ]
+   },
+   {
+    "question_id": "q-mh-000009",
+    "category": "multihop",
+    "skipped_direct": 15,
+    "kept_graph": 1,
+    "leftover": 54,
+    "gold_skipped": [
+     "activities/act11d0/level_act11d0_04_end#000"
+    ]
+   },
+   {
+    "question_id": "q-mh-000012",
+    "category": "multihop",
+    "skipped_direct": 15,
+    "kept_graph": 1,
+    "leftover": 90,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-mh-000020",
+    "category": "multihop",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 49,
+    "gold_skipped": [
+     "obt/main/level_main_16-10_beg#005"
+    ]
+   },
+   {
+    "question_id": "q-mh-000033",
+    "category": "multihop",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 228,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-mh-000034",
+    "category": "multihop",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 21,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-mh-000042",
+    "category": "multihop",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 141,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-mh-000045",
+    "category": "multihop",
+    "skipped_direct": 15,
+    "kept_graph": 1,
+    "leftover": 170,
+    "gold_skipped": [
+     "obt/main/level_main_12-03_end#003"
+    ]
+   },
+   {
+    "question_id": "q-cx-000014",
+    "category": "cross_chunk",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 645,
+    "gold_skipped": [
+     "obt/memory/story_glacus_1_1#000"
+    ]
+   },
+   {
+    "question_id": "q-cx-000020",
+    "category": "cross_chunk",
+    "skipped_direct": 15,
+    "kept_graph": 1,
+    "leftover": 4,
+    "gold_skipped": [
+     "activities/act17side/level_act17side_01_beg#002"
+    ]
+   },
+   {
+    "question_id": "q-tc-000003",
+    "category": "time_conflict",
+    "skipped_direct": 14,
+    "kept_graph": 1,
+    "leftover": 54,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-tc-000004",
+    "category": "time_conflict",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 90,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-tc-000005",
+    "category": "time_conflict",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 451,
+    "gold_skipped": [
+     "obt/memory/story_chyue_1_1#005",
+     "activities/act23side/level_act23side_st03#000"
+    ]
+   },
+   {
+    "question_id": "q-tc-000007",
+    "category": "time_conflict",
+    "skipped_direct": 14,
+    "kept_graph": 2,
+    "leftover": 44,
+    "gold_skipped": [
+     "activities/a001/level_a001_03_beg#001"
+    ]
+   },
+   {
+    "question_id": "q-tc-000008",
+    "category": "time_conflict",
+    "skipped_direct": 15,
+    "kept_graph": 1,
+    "leftover": 69,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-tc-000010",
+    "category": "time_conflict",
+    "skipped_direct": 15,
+    "kept_graph": 1,
+    "leftover": 132,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-tc-000013",
+    "category": "time_conflict",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 522,
+    "gold_skipped": [
+     "activities/act21side/level_act21side_06_beg#000"
+    ]
+   },
+   {
+    "question_id": "q-tc-000017",
+    "category": "time_conflict",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 282,
+    "gold_skipped": [
+     "activities/act21side/level_act21side_st04#002",
+     "activities/act21side/level_act21side_09_end#003"
+    ]
+   },
+   {
+    "question_id": "q-tc-000020",
+    "category": "time_conflict",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 119,
+    "gold_skipped": [
+     "activities/act44side/level_act44side_st02#005"
+    ]
+   },
+   {
+    "question_id": "q-tc-000022",
+    "category": "time_conflict",
+    "skipped_direct": 16,
+    "kept_graph": 2,
+    "leftover": 129,
+    "gold_skipped": [
+     "activities/act9mini/level_act9mini_st01#006"
+    ]
+   },
+   {
+    "question_id": "q-tc-000023",
+    "category": "time_conflict",
+    "skipped_direct": 16,
+    "kept_graph": 2,
+    "leftover": 302,
+    "gold_skipped": [
+     "activities/act25side/level_act25side_07_end#006"
+    ]
+   },
+   {
+    "question_id": "q-tc-000026",
+    "category": "time_conflict",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 254,
+    "gold_skipped": [
+     "obt/main/level_main_17-02_beg#008"
+    ]
+   },
+   {
+    "question_id": "q-tc-000027",
+    "category": "time_conflict",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 40,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-tc-000028",
+    "category": "time_conflict",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 14,
+    "gold_skipped": [
+     "obt/main/level_st_07-03#009"
+    ]
+   },
+   {
+    "question_id": "q-tc-000029",
+    "category": "time_conflict",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 466,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-tc-000030",
+    "category": "time_conflict",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 5,
+    "gold_skipped": [
+     "activities/act48side/level_act48side_06_end#004",
+     "activities/act48side/level_act48side_st01#004"
+    ]
+   },
+   {
+    "question_id": "q-tc-000031",
+    "category": "time_conflict",
+    "skipped_direct": 16,
+    "kept_graph": 2,
+    "leftover": 34,
+    "gold_skipped": [
+     "activities/act14side/level_act14side_03_end#002"
+    ]
+   },
+   {
+    "question_id": "q-na-000001",
+    "category": "negative_abstain",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 158,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-na-000003",
+    "category": "negative_abstain",
+    "skipped_direct": 15,
+    "kept_graph": 1,
+    "leftover": 9,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-na-000004",
+    "category": "negative_abstain",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 252,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-na-000008",
+    "category": "negative_abstain",
+    "skipped_direct": 15,
+    "kept_graph": 1,
+    "leftover": 208,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-na-000012",
+    "category": "negative_abstain",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 263,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-ad-000009",
+    "category": "adversarial",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 87,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-sc-900003",
+    "category": "single_chunk",
+    "skipped_direct": 16,
+    "kept_graph": 3,
+    "leftover": 100,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-sc-900004",
+    "category": "single_chunk",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 54,
+    "gold_skipped": [
+     "activities/act25side/level_act25side_04_end#005"
+    ]
+   },
+   {
+    "question_id": "q-sc-900005",
+    "category": "single_chunk",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 229,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-sc-900015",
+    "category": "single_chunk",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 5,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-sc-900033",
+    "category": "single_chunk",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 271,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-sc-900057",
+    "category": "single_chunk",
+    "skipped_direct": 15,
+    "kept_graph": 1,
+    "leftover": 34,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-al-900008",
+    "category": "alias",
+    "skipped_direct": 15,
+    "kept_graph": 1,
+    "leftover": 240,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-al-900012",
+    "category": "alias",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 58,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-al-900018",
+    "category": "alias",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 235,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-al-900036",
+    "category": "alias",
+    "skipped_direct": 15,
+    "kept_graph": 1,
+    "leftover": 197,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-dr-900001",
+    "category": "direct_relation",
+    "skipped_direct": 16,
+    "kept_graph": 2,
+    "leftover": 93,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-dr-900002",
+    "category": "direct_relation",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 241,
+    "gold_skipped": [
+     "obt/memory/story_slchan_1_1#001"
+    ]
+   },
+   {
+    "question_id": "q-dr-900007",
+    "category": "direct_relation",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 156,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-dr-900010",
+    "category": "direct_relation",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 223,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-dr-900011",
+    "category": "direct_relation",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 130,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-dr-900017",
+    "category": "direct_relation",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 307,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-dr-900020",
+    "category": "direct_relation",
+    "skipped_direct": 15,
+    "kept_graph": 1,
+    "leftover": 59,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-dr-900022",
+    "category": "direct_relation",
+    "skipped_direct": 16,
+    "kept_graph": 2,
+    "leftover": 89,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-dr-900024",
+    "category": "direct_relation",
+    "skipped_direct": 15,
+    "kept_graph": 1,
+    "leftover": 71,
+    "gold_skipped": [
+     "activities/act17side/level_act17side_10_end#003"
+    ]
+   },
+   {
+    "question_id": "q-dr-900027",
+    "category": "direct_relation",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 2,
+    "gold_skipped": [
+     "obt/memory/story_slbell_1_1#000"
+    ]
+   },
+   {
+    "question_id": "q-dr-900029",
+    "category": "direct_relation",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 156,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-dr-900031",
+    "category": "direct_relation",
+    "skipped_direct": 15,
+    "kept_graph": 2,
+    "leftover": 304,
+    "gold_skipped": [
+     "obt/rogue/rogue_4/endbook/endbook_rogue_4_1_2#000"
+    ]
+   },
+   {
+    "question_id": "q-dr-900032",
+    "category": "direct_relation",
+    "skipped_direct": 15,
+    "kept_graph": 1,
+    "leftover": 5,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-dr-900035",
+    "category": "direct_relation",
+    "skipped_direct": 15,
+    "kept_graph": 1,
+    "leftover": 71,
+    "gold_skipped": [
+     "activities/act25side/level_act25side_04_end#009"
+    ]
+   },
+   {
+    "question_id": "q-dr-900041",
+    "category": "direct_relation",
+    "skipped_direct": 15,
+    "kept_graph": 1,
+    "leftover": 19,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-dr-900043",
+    "category": "direct_relation",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 113,
+    "gold_skipped": [
+     "obt/main/level_main_17-13_beg#007"
+    ]
+   },
+   {
+    "question_id": "q-mh-900005",
+    "category": "multihop",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 263,
+    "gold_skipped": [
+     "obt/memory/story_bldsk_2_1#007"
+    ]
+   },
+   {
+    "question_id": "q-mh-900006",
+    "category": "multihop",
+    "skipped_direct": 16,
+    "kept_graph": 3,
+    "leftover": 17,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-mh-900019",
+    "category": "multihop",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 616,
+    "gold_skipped": [
+     "activities/act49side/level_act49side_03_beg#002",
+     "activities/act12side/level_act12side_09_beg#003"
+    ]
+   },
+   {
+    "question_id": "q-mh-900021",
+    "category": "multihop",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 233,
+    "gold_skipped": [
+     "obt/memory/story_gdglow_1_1#002"
+    ]
+   },
+   {
+    "question_id": "q-mh-900026",
+    "category": "multihop",
+    "skipped_direct": 15,
+    "kept_graph": 1,
+    "leftover": 230,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-mh-900033",
+    "category": "multihop",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 153,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-mh-900046",
+    "category": "multihop",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 436,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-tc-900003",
+    "category": "time_conflict",
+    "skipped_direct": 16,
+    "kept_graph": 2,
+    "leftover": 44,
+    "gold_skipped": [
+     "obt/main/level_main_15-08_end#003"
+    ]
+   },
+   {
+    "question_id": "q-tc-900004",
+    "category": "time_conflict",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 122,
+    "gold_skipped": [
+     "activities/act46side/level_act46side_01_end#000",
+     "activities/act14side/level_act14side_06_beg#008"
+    ]
+   },
+   {
+    "question_id": "q-tc-900005",
+    "category": "time_conflict",
+    "skipped_direct": 16,
+    "kept_graph": 2,
+    "leftover": 145,
+    "gold_skipped": [
+     "activities/act52side/level_act52side_05_beg#000"
+    ]
+   },
+   {
+    "question_id": "q-tc-900006",
+    "category": "time_conflict",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 237,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-tc-900011",
+    "category": "time_conflict",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 215,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-tc-900019",
+    "category": "time_conflict",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 223,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-tc-900022",
+    "category": "time_conflict",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 50,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-tc-900030",
+    "category": "time_conflict",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 158,
+    "gold_skipped": [
+     "activities/act21side/level_act21side_09_end#001"
+    ]
+   },
+   {
+    "question_id": "q-tc-900032",
+    "category": "time_conflict",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 314,
+    "gold_skipped": [
+     "activities/act47side/level_act47side_st01#001",
+     "activities/act47side/level_act47side_08_end#001"
+    ]
+   },
+   {
+    "question_id": "q-ad-900003",
+    "category": "adversarial",
+    "skipped_direct": 16,
+    "kept_graph": 1,
+    "leftover": 420,
+    "gold_skipped": []
+   },
+   {
+    "question_id": "q-ad-900010",
+    "category": "adversarial",
+    "skipped_direct": 15,
+    "kept_graph": 1,
+    "leftover": 142,
+    "gold_skipped": [
+     "activities/act27side/level_act27side_02_beg#004"
+    ]
+   },
+   {
+    "question_id": "q-ad-900014",
+    "category": "adversarial",
+    "skipped_direct": 15,
+    "kept_graph": 1,
+    "leftover": 26,
+    "gold_skipped": []
+   }
+  ],
+  "gold_truncated_n": 110,
+  "fill_policies": {
+   "A_现状贪心": {
+    "any_gold": 195,
+    "all_gold": 147,
+    "avg_units": 5.014,
+    "avg_used": 5701.5
+   },
+   "B_严格两段": {
+    "any_gold": 195,
+    "all_gold": 147,
+    "avg_units": 5.014,
+    "avg_used": 5701.5
+   },
+   "C_两段+降级补位": {
+    "any_gold": 195,
+    "all_gold": 147,
+    "avg_units": 5.014,
+    "avg_used": 5701.5
+   }
+  },
+  "A_match_real_mismatch": [],
+  "note": "优先级反转 = 有 direct 单元被截断、却有 graph-only 单元被保留；docstring 写「直接证据优先于图背景」，填充却用 continue。A 档与真实现逐题一致才说明复算可信。"
+ },
+ "5_frontier收复": {
+  "frontier": [
+   "q-sc-000036",
+   "q-sc-000045",
+   "q-sc-000057",
+   "q-al-000034",
+   "q-tc-000018",
+   "q-dr-900036",
+   "q-dr-900043",
+   "q-mh-900001",
+   "q-mh-900038"
+  ],
+  "by_budget": [
+   {
+    "budget": 6000,
+    "recovered": 0,
+    "n": 9
+   },
+   {
+    "budget": 6400,
+    "recovered": 3,
+    "n": 9
+   },
+   {
+    "budget": 7000,
+    "recovered": 9,
+    "n": 9
+   },
+   {
+    "budget": 8000,
+    "recovered": 9,
+    "n": 9
+   },
+   {
+    "budget": 10000,
+    "recovered": 9,
+    "n": 9
+   },
+   {
+    "budget": 12000,
+    "recovered": 9,
+    "n": 9
+   }
+  ],
+  "note": "frontier = 名次 <=5 却因预算没进上下文的题；它们最便宜能救回来。"
+ },
+ "6_限制": [
+  "只对 dev 350 应答题成立，验收集 260 未观测，结论不得外推。",
+  "全部是结构量（gold 块是否进上下文），不是真跑的答案与引用覆盖。",
+  "逐名次转化表依赖 A 的两份逐题产物，本脚本只做复算与交叉验证。",
+  "keep 集合非单调是真实算法性质；但 gold 侧非单调次数很少，不能拿个别题否定整体。"
+ ]
+}
