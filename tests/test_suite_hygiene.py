@@ -773,7 +773,51 @@ class TestSuiteSizeIsMonotonic:
     # 根本没被执行到 —— 三条断崖用例最初就是因此假绿。补上 caliber 与
     # context_hits 之后才真的测到它。
     # ------------------------------------------------------------------
-    N = 1760
+    # ------------------------------------------------------------------
+    # N: 1760 -> 1789（2026-11-05，引用落点观测可复算）
+    #
+    # 两笔账，算术 1760 + 25 + 4 = 1789：
+    #   · 新增 `tests/test_needs_extra_citation.py`，25 条用例；
+    #   · 该文件**不在** `TEST_FILES` 的旧名单里，所以本文件四个 parametrize
+    #     （test_file_has_pytest_visible_tests / test_every_test_function_can_fail
+    #     / test_assertion_helpers_raise / test_no_repo_relative_path_literal）
+    #     各 +1，共 +4。
+    # 与 `py -3 -m pytest tests --collect-only -q` 实测 1789 一致；
+    # 用 `--ignore=tests/test_needs_extra_citation.py` 复跑得 1764 =
+    # 1789 - 25，差的 4 条正是上面那四个 parametrize（glob 仍认这个文件名）。
+    #
+    # 这次换来的门（逐条写明，只报数字不算）：
+    #   · `test_an_assertion_inside_the_line_makes_it_frag` +
+    #     `test_the_boundary_does_not_use_the_verdict`：钉住 frag / none 的
+    #     分界是「required 那一行**有没有被抽成断言**」，不是「答案在不在那一
+    #     行」。若按后者分界，frag 群会恒空——一个恒空的群看起来像结论，实际是
+    #     判据与定义重复。把 `group_of` 开头改成恒返回 none → 2 failed。
+    #   · `test_an_assertion_spanning_past_the_line_does_not_count`：跨出行外的
+    #     断言不算「落在这一行」，否则「这一行被切碎了」的判断会失真。把区间
+    #     判据从「完全落在行内」放宽成「相交即算」→ 1 failed。
+    #   · `test_the_four_cells_sum_to_n` / `test_a_row_cited_on_both_lines_lands_in_the_both_cell`
+    #     / `test_required_line_cited_is_the_union_not_a_cell`：一次回答可能同时
+    #     引用「required 那一行」与「承载答案的另一行」，所以三个格加不出总数。
+    #     漏掉第四格（两行都有）时，三个数相加比总数多，而多出来的恰好是「看
+    #     起来最正常」的那种行。把 `required_and_carrier` 记成 0 → 3 failed。
+    #   · `test_observations_strip_volatile_fields` + `test_check_passes_on_the_committed_file`：
+    #     `--check` 比的是「引用落点变了吗」，不是「文件字节一样吗」。把溯源
+    #     字段算进比较 → 这道命令永远红、那等于没有门。改回 `dict(payload)` → 2 failed。
+    #
+    # 反向实测（命令级，日志 %TEMP%\gate0\logs\reverse_needs_extra_citation2.txt）：
+    #   [0] 基线 25 passed 退出码 0
+    #   [A] `group_of` 恒返回 none → 2 failed 退出码 1；恢复 25 passed 退出码 0
+    #   [B] 断言区间判据放宽成相交即算 → 1 failed 退出码 1；恢复 0
+    #   [C] `required_and_carrier` 记 0 → 3 failed 退出码 1；恢复 0
+    #   [D] `_observations` 返回整个 payload → 2 failed 退出码 1；恢复 0
+    #
+    # 踩到的坑（第一版四笔里两笔「没变红」）：那一版的用例全部读**已写出的
+    # JSON**，改坏脚本实现不会触发重算，用例读到的还是上一轮数据 —— 也就是说
+    # 那两道门在测磁盘状态，不在测实现。修法是把 `group_of` / `tally_rows` 抽成
+    # 模块级纯函数，用例喂合成输入：改坏实现必然红，与磁盘无关。
+    # 这与「注释替真代码把门撑住」是同族：**门必须直接调用被判定的东西。**
+    # ------------------------------------------------------------------
+    N = 1789
 
     def test_declared_count_matches_actual(self) -> None:
         """用 pytest 自己数一遍当前收集到的用例数，与本文件登记值比对。"""
