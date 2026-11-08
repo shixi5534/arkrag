@@ -1,0 +1,997 @@
+{
+ "n": 52,
+ "rows": [
+  {
+   "qid": "q-na-000013",
+   "abstained": false,
+   "names": [
+    "内部铁道"
+   ],
+   "types": [
+    "地点"
+   ],
+   "quoted": [
+    "0374小队",
+    "内部铁道",
+    "婚约"
+   ],
+   "quoted_as_entity": [
+    "内部铁道"
+   ],
+   "answer": "维多利亚使用内部铁道。"
+  },
+  {
+   "qid": "q-na-000014",
+   "abstained": false,
+   "names": [
+    "塔拉"
+   ],
+   "types": [
+    "地点"
+   ],
+   "quoted": [
+    "0374小队",
+    "塔拉",
+    "祖孙"
+   ],
+   "quoted_as_entity": [
+    "塔拉"
+   ],
+   "answer": "苇草研究塔拉。"
+  },
+  {
+   "qid": "q-na-000015",
+   "abstained": false,
+   "names": [
+    "玛格娜"
+   ],
+   "types": [
+    "角色"
+   ],
+   "quoted": [
+    "0374小队",
+    "玛格娜·瑙曼",
+    "债主"
+   ],
+   "quoted_as_entity": [],
+   "answer": "凯勒同行玛格娜·瑙曼。玛格娜·瑙曼研究火山。玛格娜·瑙曼亲属阿黛尔。阿黛尔亲属玛格娜·瑙曼。玛格娜·瑙曼保护凯勒。"
+  },
+  {
+   "qid": "q-na-000016",
+   "abstained": false,
+   "names": [
+    "医疗无人机",
+    "邻居"
+   ],
+   "types": [
+    "物品",
+    "角色"
+   ],
+   "quoted": [
+    "0374小队",
+    "医疗无人机",
+    "邻居"
+   ],
+   "quoted_as_entity": [
+    "医疗无人机",
+    "邻居"
+   ],
+   "answer": "邻居交谈阿根。阿根交谈邻居。"
+  },
+  {
+   "qid": "q-na-000017",
+   "abstained": true,
+   "names": [
+    "学生宿舍"
+   ],
+   "types": [
+    "地点"
+   ],
+   "quoted": [
+    "0374小队",
+    "学生宿舍",
+    "寄养"
+   ],
+   "quoted_as_entity": [
+    "学生宿舍"
+   ],
+   "answer": ""
+  },
+  {
+   "qid": "q-na-000018",
+   "abstained": false,
+   "names": [
+    "小敏"
+   ],
+   "types": [
+    "角色"
+   ],
+   "quoted": [
+    "0374小队",
+    "小敏",
+    "同乡"
+   ],
+   "quoted_as_entity": [
+    "小敏"
+   ],
+   "answer": "夜烟交谈小敏。小敏交谈丹顿兄弟。夜烟赠予小敏。"
+  },
+  {
+   "qid": "q-na-000019",
+   "abstained": false,
+   "names": [
+    "埃琳娜"
+   ],
+   "types": [
+    "角色"
+   ],
+   "quoted": [
+    "0374小队",
+    "埃琳娜",
+    "笔友"
+   ],
+   "quoted_as_entity": [
+    "埃琳娜"
+   ],
+   "answer": "埃琳娜交谈恩雅。埃琳娜交谈斐尔迪南。埃琳娜交谈多萝西。缪尔赛思交谈埃琳娜。诺希斯交谈埃琳娜。"
+  },
+  {
+   "qid": "q-na-000020",
+   "abstained": false,
+   "names": [
+    "信号发射接收一体器"
+   ],
+   "types": [
+    "物品"
+   ],
+   "quoted": [
+    "0374小队",
+    "信号发射接收一体器",
+    "代言"
+   ],
+   "quoted_as_entity": [
+    "信号发射接收一体器"
+   ],
+   "answer": "极境制造信号发射接收一体器。极境持有信号发射接收一体器。"
+  },
+  {
+   "qid": "q-na-000021",
+   "abstained": false,
+   "names": [
+    "年兽"
+   ],
+   "types": [
+    "概念"
+   ],
+   "quoted": [
+    "0374小队",
+    "年兽",
+    "代购"
+   ],
+   "quoted_as_entity": [
+    "年兽"
+   ],
+   "answer": "年兽破坏龙门。"
+  },
+  {
+   "qid": "q-na-000022",
+   "abstained": false,
+   "names": [
+    "巴尼特"
+   ],
+   "types": [
+    "角色"
+   ],
+   "quoted": [
+    "0374小队",
+    "巴尼特",
+    "陪练"
+   ],
+   "quoted_as_entity": [
+    "巴尼特"
+   ],
+   "answer": "巴尼特交谈安洁莉娜。安洁莉娜交谈巴尼特。巴尼特驾驶越野车。巴尼特交谈塔妮。巴尼特位于大涌泉镇。"
+  },
+  {
+   "qid": "q-na-000023",
+   "abstained": false,
+   "names": [
+    "卡登区"
+   ],
+   "types": [
+    "地点"
+   ],
+   "quoted": [
+    "0374小队",
+    "卡登区",
+    "婚约"
+   ],
+   "quoted_as_entity": [
+    "卡登区"
+   ],
+   "answer": "萨卡兹交战卡登区。卡登区位于伦蒂尼姆。"
+  },
+  {
+   "qid": "q-na-000024",
+   "abstained": false,
+   "names": [
+    "犰爪兽"
+   ],
+   "types": [
+    "角色"
+   ],
+   "quoted": [
+    "0374小队",
+    "犰爪兽",
+    "祖孙"
+   ],
+   "quoted_as_entity": [
+    "犰爪兽"
+   ],
+   "answer": "泷居应敌对犰爪兽。犰爪兽导致兽潮。"
+  },
+  {
+   "qid": "q-na-000025",
+   "abstained": true,
+   "names": [
+    "商店"
+   ],
+   "types": [
+    "地点"
+   ],
+   "quoted": [
+    "0374小队",
+    "商店",
+    "债主"
+   ],
+   "quoted_as_entity": [
+    "商店"
+   ],
+   "answer": ""
+  },
+  {
+   "qid": "q-na-000026",
+   "abstained": false,
+   "names": [
+    "邻居",
+    "巨大的终极丑东西"
+   ],
+   "types": [
+    "角色",
+    "物品"
+   ],
+   "quoted": [
+    "0374小队",
+    "巨大的终极丑东西Mk3",
+    "邻居"
+   ],
+   "quoted_as_entity": [
+    "邻居"
+   ],
+   "answer": "邻居交谈阿根。阿根交谈邻居。巨大的终极丑东西Mk3产自七号烈酒派。"
+  },
+  {
+   "qid": "q-na-000027",
+   "abstained": false,
+   "names": [
+    "玉米窝"
+   ],
+   "types": [
+    "地点"
+   ],
+   "quoted": [
+    "0374小队",
+    "玉米窝",
+    "寄养"
+   ],
+   "quoted_as_entity": [
+    "玉米窝"
+   ],
+   "answer": "瑞恩前往玉米窝。"
+  },
+  {
+   "qid": "q-na-000028",
+   "abstained": false,
+   "names": [
+    "保安部"
+   ],
+   "types": [
+    "组织"
+   ],
+   "quoted": [
+    "0374小队",
+    "保安部",
+    "同乡"
+   ],
+   "quoted_as_entity": [
+    "保安部"
+   ],
+   "answer": "暴行隶属保安部。"
+  },
+  {
+   "qid": "q-na-000029",
+   "abstained": false,
+   "names": [
+    "实验室用室温校对系统"
+   ],
+   "types": [
+    "物品"
+   ],
+   "quoted": [
+    "0374小队",
+    "实验室用室温校对系统",
+    "笔友"
+   ],
+   "quoted_as_entity": [
+    "实验室用室温校对系统"
+   ],
+   "answer": "雪雉使用实验室用室温校对系统。雪雉制造实验室用室温校对系统。雪雉交谈实验室用室温校对系统。实验室用室温校对系统交谈雪雉。"
+  },
+  {
+   "qid": "q-na-000030",
+   "abstained": false,
+   "names": [
+    "乌尔比安"
+   ],
+   "types": [
+    "角色"
+   ],
+   "quoted": [
+    "0374小队",
+    "乌尔比安",
+    "代言"
+   ],
+   "quoted_as_entity": [
+    "乌尔比安"
+   ],
+   "answer": "歌蕾蒂娅交谈乌尔比安。布兰都斯交谈乌尔比安。歌蕾蒂娅敌对乌尔比安。乌尔比安敌对海嗣。乌尔比安交谈博士。"
+  },
+  {
+   "qid": "q-na-000031",
+   "abstained": false,
+   "names": [
+    "佐菲娅"
+   ],
+   "types": [
+    "角色"
+   ],
+   "quoted": [
+    "0374小队",
+    "佐菲娅",
+    "代购"
+   ],
+   "quoted_as_entity": [
+    "佐菲娅"
+   ],
+   "answer": "佐菲娅交谈光头马丁。佐菲娅指导玛莉娅。佐菲娅隶属临光家。佐菲娅交谈逐魇骑士。埃尔交谈佐菲娅。"
+  },
+  {
+   "qid": "q-na-000032",
+   "abstained": false,
+   "names": [
+    "独立旅行社"
+   ],
+   "types": [
+    "组织"
+   ],
+   "quoted": [
+    "0374小队",
+    "独立旅行社",
+    "陪练"
+   ],
+   "quoted_as_entity": [
+    "独立旅行社"
+   ],
+   "answer": "费尔南创建独立旅行社。费尔南任职独立旅行社。"
+  },
+  {
+   "qid": "q-na-900001",
+   "abstained": false,
+   "names": [
+    "徽记卡片"
+   ],
+   "types": [
+    "物品"
+   ],
+   "quoted": [
+    "0374小队",
+    "徽记卡片",
+    "笔友"
+   ],
+   "quoted_as_entity": [
+    "徽记卡片"
+   ],
+   "answer": "艾沃娜持有徽记卡片。"
+  },
+  {
+   "qid": "q-na-900002",
+   "abstained": false,
+   "names": [
+    "王者之杖"
+   ],
+   "types": [
+    "组织"
+   ],
+   "quoted": [
+    "0374小队",
+    "王者之杖",
+    "代购"
+   ],
+   "quoted_as_entity": [
+    "王者之杖"
+   ],
+   "answer": "王者之杖交战整合运动。"
+  },
+  {
+   "qid": "q-na-900003",
+   "abstained": false,
+   "names": [
+    "塔吉扬娜"
+   ],
+   "types": [
+    "角色"
+   ],
+   "quoted": [
+    "0374小队",
+    "塔吉扬娜",
+    "债主"
+   ],
+   "quoted_as_entity": [
+    "塔吉扬娜"
+   ],
+   "answer": "塔吉扬娜交谈安东尼奥。早露指挥塔吉扬娜。"
+  },
+  {
+   "qid": "q-na-900004",
+   "abstained": false,
+   "names": [
+    "毕德曼"
+   ],
+   "types": [
+    "角色"
+   ],
+   "quoted": [
+    "0374小队",
+    "毕德曼",
+    "祖孙"
+   ],
+   "quoted_as_entity": [
+    "毕德曼"
+   ],
+   "answer": "塞弗林交谈毕德曼。毕德曼交谈塞弗林。毕德曼隶属危机合约。安托交谈毕德曼。毕德曼救助塞弗林。"
+  },
+  {
+   "qid": "q-na-900005",
+   "abstained": false,
+   "names": [
+    "吠山渡"
+   ],
+   "types": [
+    "地点"
+   ],
+   "quoted": [
+    "0374小队",
+    "吠山渡",
+    "寄养"
+   ],
+   "quoted_as_entity": [
+    "吠山渡"
+   ],
+   "answer": "住持爷爷前往吠山渡。"
+  },
+  {
+   "qid": "q-na-900006",
+   "abstained": false,
+   "names": [
+    "克洛维希娅"
+   ],
+   "types": [
+    "角色"
+   ],
+   "quoted": [
+    "0374小队",
+    "克洛维希娅",
+    "代言"
+   ],
+   "quoted_as_entity": [
+    "克洛维希娅"
+   ],
+   "answer": "克洛维希娅交谈阿米娅。洛洛交谈克洛维希娅。克洛维希娅交谈推进之王。克洛维希娅指挥哈默。克洛维希娅交谈莱托中校。"
+  },
+  {
+   "qid": "q-na-900007",
+   "abstained": false,
+   "names": [
+    "安瓦尔"
+   ],
+   "types": [
+    "角色"
+   ],
+   "quoted": [
+    "0374小队",
+    "安瓦尔",
+    "代言"
+   ],
+   "quoted_as_entity": [
+    "安瓦尔"
+   ],
+   "answer": "安瓦尔感染矿石病。萨尼婶交谈安瓦尔。战车指导安瓦尔。安瓦尔交谈战车。战车治愈安瓦尔。"
+  },
+  {
+   "qid": "q-na-900008",
+   "abstained": false,
+   "names": [
+    "梅兰德儿童权益保障基金会"
+   ],
+   "types": [
+    "组织"
+   ],
+   "quoted": [
+    "0374小队",
+    "梅兰德儿童权益保障基金会",
+    "婚约"
+   ],
+   "quoted_as_entity": [
+    "梅兰德儿童权益保障基金会"
+   ],
+   "answer": "锡人同盟梅兰德儿童权益保障基金会。梅兰德儿童权益保障基金会保护格兰杰的女儿。"
+  },
+  {
+   "qid": "q-na-900009",
+   "abstained": false,
+   "names": [
+    "居民楼"
+   ],
+   "types": [
+    "地点"
+   ],
+   "quoted": [
+    "0374小队",
+    "居民楼",
+    "婚约"
+   ],
+   "quoted_as_entity": [
+    "居民楼"
+   ],
+   "answer": "火灾发生于居民楼。"
+  },
+  {
+   "qid": "q-na-900010",
+   "abstained": false,
+   "names": [
+    "吉安"
+   ],
+   "types": [
+    "角色"
+   ],
+   "quoted": [
+    "0374小队",
+    "吉安",
+    "代购"
+   ],
+   "quoted_as_entity": [
+    "吉安"
+   ],
+   "answer": "伊雷妮救助吉安。山姆救助吉安。伊雷妮交谈吉安。吉安交谈鲁杰罗。"
+  },
+  {
+   "qid": "q-na-900011",
+   "abstained": false,
+   "names": [
+    "桔红酥"
+   ],
+   "types": [
+    "物品"
+   ],
+   "quoted": [
+    "0374小队",
+    "桔红酥",
+    "祖孙"
+   ],
+   "quoted_as_entity": [
+    "桔红酥"
+   ],
+   "answer": "煌持有桔红酥。顾筌持有桔红酥。桔红酥源自百灶。桔红酥产自大炎。"
+  },
+  {
+   "qid": "q-na-900012",
+   "abstained": false,
+   "names": [
+    "泷居应"
+   ],
+   "types": [
+    "角色"
+   ],
+   "quoted": [
+    "0374小队",
+    "泷居应",
+    "祖孙"
+   ],
+   "quoted_as_entity": [
+    "泷居应"
+   ],
+   "answer": "泷居应交谈柏生明。柏生明交谈泷居应。柏生义冈交谈泷居应。泷居应交谈柏生义冈。泷居应使用陷阱。"
+  },
+  {
+   "qid": "q-na-900013",
+   "abstained": true,
+   "names": [
+    "大地巡旅"
+   ],
+   "types": [
+    "物品"
+   ],
+   "quoted": [
+    "0374小队",
+    "《大地巡旅》",
+    "笔友"
+   ],
+   "quoted_as_entity": [],
+   "answer": ""
+  },
+  {
+   "qid": "q-na-900014",
+   "abstained": false,
+   "names": [
+    "斯特凡",
+    "邻居"
+   ],
+   "types": [
+    "角色",
+    "角色"
+   ],
+   "quoted": [
+    "0374小队",
+    "斯特凡",
+    "邻居"
+   ],
+   "quoted_as_entity": [
+    "斯特凡",
+    "邻居"
+   ],
+   "answer": "雷内尔敌对斯特凡。斯特凡亲属雷内尔。邻居交谈阿根。阿根交谈邻居。"
+  },
+  {
+   "qid": "q-na-900015",
+   "abstained": false,
+   "names": [
+    "掌机"
+   ],
+   "types": [
+    "物品"
+   ],
+   "quoted": [
+    "0374小队",
+    "掌机",
+    "陪练"
+   ],
+   "quoted_as_entity": [
+    "掌机"
+   ],
+   "answer": "云母使用掌机。"
+  },
+  {
+   "qid": "q-na-900016",
+   "abstained": false,
+   "names": [
+    "柳芭"
+   ],
+   "types": [
+    "角色"
+   ],
+   "quoted": [
+    "0374小队",
+    "柳芭",
+    "代言"
+   ],
+   "quoted_as_entity": [
+    "柳芭"
+   ],
+   "answer": "末药交谈柳芭。末药赠予柳芭。柳芭受赠于末药。末药治愈柳芭。"
+  },
+  {
+   "qid": "q-na-900017",
+   "abstained": true,
+   "names": [
+    "埃尔"
+   ],
+   "types": [
+    "角色"
+   ],
+   "quoted": [
+    "0374小队",
+    "埃尔",
+    "债主"
+   ],
+   "quoted_as_entity": [
+    "埃尔"
+   ],
+   "answer": ""
+  },
+  {
+   "qid": "q-na-900018",
+   "abstained": false,
+   "names": [
+    "斯塔福德"
+   ],
+   "types": [
+    "角色"
+   ],
+   "quoted": [
+    "0374小队",
+    "斯塔福德",
+    "陪练"
+   ],
+   "quoted_as_entity": [
+    "斯塔福德"
+   ],
+   "answer": "斯塔福德交战卡文迪许。斯塔福德冲突维多利亚。"
+  },
+  {
+   "qid": "q-na-900019",
+   "abstained": false,
+   "names": [
+    "伊格纳西奥"
+   ],
+   "types": [
+    "角色"
+   ],
+   "quoted": [
+    "0374小队",
+    "伊格纳西奥",
+    "寄养"
+   ],
+   "quoted_as_entity": [
+    "伊格纳西奥"
+   ],
+   "answer": "伊格纳西奥交谈瓦列里奥。瓦列里奥交谈伊格纳西奥。"
+  },
+  {
+   "qid": "q-na-900020",
+   "abstained": false,
+   "names": [
+    "坎伯兰"
+   ],
+   "types": [
+    "组织"
+   ],
+   "quoted": [
+    "0374小队",
+    "坎伯兰",
+    "寄养"
+   ],
+   "quoted_as_entity": [
+    "坎伯兰"
+   ],
+   "answer": "蒸汽甲胄属于坎伯兰。坎伯兰效忠维多利亚。阿勒黛隶属坎伯兰。"
+  },
+  {
+   "qid": "q-na-900021",
+   "abstained": false,
+   "names": [
+    "溪流"
+   ],
+   "types": [
+    "地点"
+   ],
+   "quoted": [
+    "0374小队",
+    "溪流",
+    "婚约"
+   ],
+   "quoted_as_entity": [
+    "溪流"
+   ],
+   "answer": "溪流包含木屋。"
+  },
+  {
+   "qid": "q-na-900022",
+   "abstained": false,
+   "names": [
+    "商业联合",
+    "邻居"
+   ],
+   "types": [
+    "组织",
+    "角色"
+   ],
+   "quoted": [
+    "0374小队",
+    "商业联合",
+    "邻居"
+   ],
+   "quoted_as_entity": [
+    "商业联合",
+    "邻居"
+   ],
+   "answer": "邻居交谈阿根。阿根交谈邻居。"
+  },
+  {
+   "qid": "q-na-900023",
+   "abstained": false,
+   "names": [
+    "宗师"
+   ],
+   "types": [
+    "角色"
+   ],
+   "quoted": [
+    "0374小队",
+    "宗师",
+    "代购"
+   ],
+   "quoted_as_entity": [
+    "宗师"
+   ],
+   "answer": "宗师任职玉门军。宗师隶属玉门军。左宣辽交谈宗师。左宣辽师从宗师。"
+  },
+  {
+   "qid": "q-na-900024",
+   "abstained": false,
+   "names": [
+    "工业振兴协会"
+   ],
+   "types": [
+    "组织"
+   ],
+   "quoted": [
+    "0374小队",
+    "工业振兴协会",
+    "债主"
+   ],
+   "quoted_as_entity": [
+    "工业振兴协会"
+   ],
+   "answer": "工业振兴协会隶属议会。工业振兴协会救助马修。凯瑟琳领导工业振兴协会。"
+  },
+  {
+   "qid": "q-na-900025",
+   "abstained": false,
+   "names": [
+    "卢宁伯爵",
+    "邻居"
+   ],
+   "types": [
+    "角色",
+    "角色"
+   ],
+   "quoted": [
+    "0374小队",
+    "卢宁伯爵",
+    "邻居"
+   ],
+   "quoted_as_entity": [
+    "卢宁伯爵",
+    "邻居"
+   ],
+   "answer": "邻居交谈阿根。阿根交谈邻居。"
+  },
+  {
+   "qid": "q-na-900026",
+   "abstained": false,
+   "names": [
+    "档案馆"
+   ],
+   "types": [
+    "地点"
+   ],
+   "quoted": [
+    "0374小队",
+    "档案馆",
+    "代购"
+   ],
+   "quoted_as_entity": [
+    "档案馆"
+   ],
+   "answer": "凯特任职档案馆。"
+  },
+  {
+   "qid": "q-na-900027",
+   "abstained": false,
+   "names": [
+    "清泉之城"
+   ],
+   "types": [
+    "地点"
+   ],
+   "quoted": [
+    "0374小队",
+    "清泉之城",
+    "婚约"
+   ],
+   "quoted_as_entity": [
+    "清泉之城"
+   ],
+   "answer": "祖拜尔破坏清泉之城。"
+  },
+  {
+   "qid": "q-na-900028",
+   "abstained": false,
+   "names": [
+    "弗里斯顿"
+   ],
+   "types": [
+    "角色"
+   ],
+   "quoted": [
+    "0374小队",
+    "弗里斯顿",
+    "笔友"
+   ],
+   "quoted_as_entity": [
+    "弗里斯顿"
+   ],
+   "answer": "弗里斯顿创建石棺。弗里斯顿称为保存者。"
+  },
+  {
+   "qid": "q-na-900029",
+   "abstained": false,
+   "names": [
+    "永吉"
+   ],
+   "types": [
+    "角色"
+   ],
+   "quoted": [
+    "0374小队",
+    "永吉",
+    "债主"
+   ],
+   "quoted_as_entity": [
+    "永吉"
+   ],
+   "answer": "紧张的职员交谈永吉。缠丸亲属永吉。阿清交谈永吉。永吉交谈阿清。缠丸交谈永吉。"
+  },
+  {
+   "qid": "q-na-900030",
+   "abstained": true,
+   "names": [],
+   "types": [],
+   "quoted": [
+    "0374小队",
+    "Castle-3",
+    "同乡"
+   ],
+   "quoted_as_entity": [],
+   "answer": ""
+  },
+  {
+   "qid": "q-na-900031",
+   "abstained": false,
+   "names": [
+    "大典"
+   ],
+   "types": [
+    "事件"
+   ],
+   "quoted": [
+    "0374小队",
+    "大典",
+    "同乡"
+   ],
+   "quoted_as_entity": [
+    "大典"
+   ],
+   "answer": "恩希欧迪斯参与大典。"
+  },
+  {
+   "qid": "q-na-900032",
+   "abstained": true,
+   "names": [
+    "前哨卡"
+   ],
+   "types": [
+    "地点"
+   ],
+   "quoted": [
+    "0374小队",
+    "前哨卡",
+    "婚约"
+   ],
+   "quoted_as_entity": [
+    "前哨卡"
+   ],
+   "answer": ""
+  }
+ ]
+}

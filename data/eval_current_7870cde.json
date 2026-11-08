@@ -1,0 +1,2930 @@
+{
+  "generation_id": "g-20261103T132152Z-06a741",
+  "gold_set": "data\\goldset\\gold-v1.json",
+  "items_total_in_file": 320,
+  "items_evaluated": 320,
+  "metrics": {
+    "recall_at_20": {
+      "value": 0.708889,
+      "n": 300,
+      "skipped": 20
+    },
+    "recall_at_5": {
+      "value": 0.510833,
+      "n": 300,
+      "skipped": 20
+    },
+    "mrr": {
+      "value": 0.438846,
+      "n": 300,
+      "skipped": 20
+    },
+    "citation_location_accuracy": {
+      "value": 1.0,
+      "n": 1651,
+      "ok": 1651,
+      "skipped": 0
+    },
+    "required_citation_coverage": {
+      "value": 0.183333,
+      "n": 300,
+      "covered": 55,
+      "skipped": 20
+    },
+    "abstain_accuracy": {
+      "value": 0.85625,
+      "n": 320,
+      "correct": 274,
+      "skipped": 0
+    },
+    "direction_accuracy": {
+      "value": 0.666667,
+      "n": 96,
+      "correct": 64,
+      "skipped": 224
+    }
+  },
+  "citation_verify_failures": 0,
+  "rows": [
+    {
+      "question_id": "q-sc-000001",
+      "category": "single_chunk",
+      "abstained": true,
+      "should_abstain": false,
+      "citations": 0,
+      "top1": "obt/memory/story_fuze_1_1#007",
+      "answer": ""
+    },
+    {
+      "question_id": "q-sc-000002",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 1,
+      "top1": "activities/act15mini/level_act15mini_st06#000",
+      "answer": "乌萨斯商队使用伏特加。"
+    },
+    {
+      "question_id": "q-sc-000003",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 4,
+      "top1": "activities/act42side/level_act42side_02_beg#002",
+      "answer": "萨卡兹敌对萨科塔。守护铳属于萨科塔。萨卡兹敌对维多利亚。雷吉斯亲属林吉斯。"
+    },
+    {
+      "question_id": "q-sc-000004",
+      "category": "single_chunk",
+      "abstained": true,
+      "should_abstain": false,
+      "citations": 0,
+      "top1": "activities/act40side/level_act40side_04_beg#005",
+      "answer": ""
+    },
+    {
+      "question_id": "q-sc-000005",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 7,
+      "top1": "activities/act13side/level_act13side_08_beg#002",
+      "answer": "佐菲娅亲属玛莉娅。玛嘉烈交谈玛莉娅。玛莉娅亲属玛恩纳。逐魇骑士源自怯薛。逐魇骑士交谈玛莉娅。"
+    },
+    {
+      "question_id": "q-sc-000006",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 9,
+      "top1": "obt/memory/story_beagle_1_1#006",
+      "answer": "芬交谈米格鲁。芙蓉交谈米格鲁。米格鲁交谈格瑞斯。炎熔交谈米格鲁。米格鲁交谈芬。"
+    },
+    {
+      "question_id": "q-sc-000007",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "activities/act13d5/level_act13d5_02_end#003",
+      "answer": "瑟奇亚克交谈查丝汀娜。玛莉娅交谈瑟奇亚克。瑟奇亚克隶属呼啸守卫公司。白金交战瑟奇亚克。瑟奇亚克隶属红松骑士团。"
+    },
+    {
+      "question_id": "q-sc-000008",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 8,
+      "top1": "activities/act13mini/level_act13mini_st02#004",
+      "answer": "可颂交谈空。可颂交谈德克萨斯。空交谈可颂。德克萨斯交谈可颂。可颂同行能天使。"
+    },
+    {
+      "question_id": "q-sc-000009",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "obt/main/level_main_16-18_end#004",
+      "answer": "别乔克交谈达雅。基安赠予达雅。达雅交谈别乔克。别乔克救助达雅。别乔克亲属达雅。"
+    },
+    {
+      "question_id": "q-sc-000010",
+      "category": "single_chunk",
+      "abstained": true,
+      "should_abstain": false,
+      "citations": 0,
+      "top1": "activities/act24side/level_act24side_05_beg#002",
+      "answer": ""
+    },
+    {
+      "question_id": "q-sc-000011",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 1,
+      "top1": "activities/act28side/level_act28side_07_beg#003",
+      "answer": "伍德洛位于达维镇。"
+    },
+    {
+      "question_id": "q-sc-000012",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 7,
+      "top1": "activities/act34side/level_act34side_04_end#000",
+      "answer": "斯卡蒂交谈布兰都斯。幽灵鲨交谈布兰都斯。歌蕾蒂娅交谈布兰都斯。布兰都斯参与评议会。布兰都斯交谈幽灵鲨。"
+    },
+    {
+      "question_id": "q-sc-000013",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "activities/act17d0/level_act17d0_07_beg#002",
+      "answer": "皮加尔交谈战车。德鲁奇交谈皮加尔。皮加尔亲属德鲁奇。巡林者交谈皮加尔。战车交谈皮加尔。"
+    },
+    {
+      "question_id": "q-sc-000014",
+      "category": "single_chunk",
+      "abstained": true,
+      "should_abstain": false,
+      "citations": 0,
+      "top1": "activities/act17side/level_act17side_st10#001",
+      "answer": ""
+    },
+    {
+      "question_id": "q-sc-000015",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "activities/act46side/level_act46side_10_end#009",
+      "answer": "耶拉冈德保护谢拉格。谢拉格敌对维多利亚。恩希欧迪斯保护谢拉格。耶拉冈德包含银心湖。恩雅交谈耶拉冈德。"
+    },
+    {
+      "question_id": "q-sc-000016",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 9,
+      "top1": "obt/main/level_main_07-06_beg#002",
+      "answer": "阿米娅交谈迷迭香。阿米娅指挥迷迭香。洛肯交谈迷迭香。迷迭香交谈洛肯。凯尔希交谈迷迭香。"
+    },
+    {
+      "question_id": "q-sc-000017",
+      "category": "single_chunk",
+      "abstained": true,
+      "should_abstain": false,
+      "citations": 0,
+      "top1": "obt/memory/story_tiger_1_1#000",
+      "answer": ""
+    },
+    {
+      "question_id": "q-sc-000018",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 2,
+      "top1": "obt/memory/story_wanqin_1_1#001",
+      "answer": "禾生前往木屋。锡人源自哥伦比亚。"
+    },
+    {
+      "question_id": "q-sc-000019",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "obt/memory/story_utage_2_1#005",
+      "answer": "鵺切家敌对鵺。宴敌对鵺切家。宴隶属鵺切家。鵺切家位于东国。"
+    },
+    {
+      "question_id": "q-sc-000020",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 2,
+      "top1": "activities/act51side/level_act51side_st01#003",
+      "answer": "萨米敌对乌萨斯。赫拉格隶属乌萨斯。"
+    },
+    {
+      "question_id": "q-sc-000021",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 2,
+      "top1": "activities/act15mini/level_act15mini_st05#010",
+      "answer": "拉瑟驻守北地。埃克提尔尼尔驻守冰原。"
+    },
+    {
+      "question_id": "q-sc-000022",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 2,
+      "top1": "activities/act17side/level_act17side_10_end#007",
+      "answer": "艾丽妮隶属伊比利亚。加西亚效忠伊比利亚。"
+    },
+    {
+      "question_id": "q-sc-000023",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 3,
+      "top1": "obt/main/level_main_14-09_beg#006",
+      "answer": "查尔斯·林奇交战萨卡兹。赦罪师隶属萨卡兹。号角交战萨卡兹。"
+    },
+    {
+      "question_id": "q-sc-000024",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 14,
+      "top1": "activities/a001/level_a001_06_end#000",
+      "answer": "可萝尔交谈格拉尼。格拉尼同行可萝尔。格拉尼保护可萝尔。斯卡蒂敌对可萝尔。格拉尼交谈可萝尔。"
+    },
+    {
+      "question_id": "q-sc-000025",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 4,
+      "top1": "activities/act36side/level_act36side_08_end#003",
+      "answer": "博士隶属罗德岛。沉渊隶属罗德岛。卢西恩隶属罗德岛。泥岩隶属罗德岛。"
+    },
+    {
+      "question_id": "q-sc-000026",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 9,
+      "top1": "activities/act12d0/level_act12d0_08_end#000",
+      "answer": "嘉维尔交谈祖玛玛。祖玛玛交谈嘉维尔。祖玛玛敌对嘉维尔。嘉维尔破坏大丑。嘉维尔任职大酋长。"
+    },
+    {
+      "question_id": "q-sc-000027",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 7,
+      "top1": "activities/act51side/level_act51side_06_end#004",
+      "answer": "凛冬敌对格罗莫夫。格罗莫夫交战尼卡。尼卡敌对格罗莫夫。格罗莫夫使用第三局。十六勇士听命于格罗莫夫。"
+    },
+    {
+      "question_id": "q-sc-000028",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "activities/act3d0/level_act3d0_01_beg#000",
+      "answer": "天火交谈普罗旺斯。天火交谈锡兰。天火研究黑曜石。普罗旺斯交谈天火。普罗旺斯同行天火。"
+    },
+    {
+      "question_id": "q-sc-000029",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 12,
+      "top1": "activities/act15side/level_act15side_st02#000",
+      "answer": "老鲤交谈杜遥夜。老鲤交谈夜半。夜半交谈老鲤。槐琥交谈老鲤。老鲤交谈槐琥。"
+    },
+    {
+      "question_id": "q-sc-000030",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "activities/act51side/level_act51side_st02#006",
+      "answer": "第二集团军交战第四集团军。第四集团军冲突第二集团军。利沃诺夫号敌对第四集团军。远北政府赠予第四集团军。第二集团军背叛费奥多尔。"
+    },
+    {
+      "question_id": "q-sc-000031",
+      "category": "single_chunk",
+      "abstained": true,
+      "should_abstain": false,
+      "citations": 0,
+      "top1": "obt/main/level_main_14-04_beg#003",
+      "answer": ""
+    },
+    {
+      "question_id": "q-sc-000032",
+      "category": "single_chunk",
+      "abstained": true,
+      "should_abstain": false,
+      "citations": 0,
+      "top1": "activities/act20side/level_act20side_st02#000",
+      "answer": ""
+    },
+    {
+      "question_id": "q-sc-000033",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 1,
+      "top1": "obt/memory/story_absin_1_1#007",
+      "answer": "奥伦源自维多利亚。"
+    },
+    {
+      "question_id": "q-sc-000034",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 1,
+      "top1": "obt/memory/story_myrrh_1_1#007",
+      "answer": "芙蓉交谈医疗部。"
+    },
+    {
+      "question_id": "q-sc-000035",
+      "category": "single_chunk",
+      "abstained": true,
+      "should_abstain": false,
+      "citations": 0,
+      "top1": "activities/act16d5/level_act16d5_st03#000",
+      "answer": ""
+    },
+    {
+      "question_id": "q-sc-000036",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 8,
+      "top1": "obt/main/level_main_14-15_beg#005",
+      "answer": "阿米娅交谈死魂灵。阿米娅破坏死魂灵。特蕾西娅救助死魂灵。阿米娅交谈W。阿米娅救助博士。"
+    },
+    {
+      "question_id": "q-sc-000037",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "activities/act34side/level_act34side_05_beg#001",
+      "answer": "海嗣敌对阿戈尔。海嗣交战阿戈尔。幽灵鲨交战海嗣。乌尔比安敌对海嗣。阿维图斯效忠阿戈尔。"
+    },
+    {
+      "question_id": "q-sc-000038",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "obt/rogue/rogue_4/endbook/endbook_rogue_4_4_3#001",
+      "answer": "奎隆使用觉法。班谛达同行奎隆。班谛达交谈奎隆。觉者使用觉法。奎隆同盟班谛达。"
+    },
+    {
+      "question_id": "q-sc-000039",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 7,
+      "top1": "activities/act25side/level_act25side_st03#006",
+      "answer": "塞雷娅任职莱茵生命。塞雷娅交谈缪尔赛思。赫默救助塞雷娅。塞雷娅交谈伊芙利特。赫默交谈塞雷娅。"
+    },
+    {
+      "question_id": "q-sc-000040",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 16,
+      "top1": "activities/act20side/level_act20side_06_end#004",
+      "answer": "森蚺赠予嘉维尔。森蚺交谈嘉维尔。特米米交谈嘉维尔。嘉维尔交谈阿芙朵嘉。阿芙朵嘉交谈嘉维尔。"
+    },
+    {
+      "question_id": "q-sc-000041",
+      "category": "single_chunk",
+      "abstained": true,
+      "should_abstain": false,
+      "citations": 0,
+      "top1": "obt/memory/story_firwhl_1_1#006",
+      "answer": ""
+    },
+    {
+      "question_id": "q-sc-000042",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "activities/act34side/level_act34side_01_end#003",
+      "answer": "巨兽容纳海嗣。海嗣源自巨兽。幽灵鲨交战海嗣。乌尔比安敌对海嗣。海嗣导致航道计划。"
+    },
+    {
+      "question_id": "q-sc-000043",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 8,
+      "top1": "obt/memory/story_lava_2_1#001",
+      "answer": "炎熔隶属罗德岛。炎熔交谈安赛尔。芙蓉交谈炎熔。炎熔交谈芙蓉。灰礼帽指导炎熔。"
+    },
+    {
+      "question_id": "q-sc-000044",
+      "category": "single_chunk",
+      "abstained": true,
+      "should_abstain": false,
+      "citations": 0,
+      "top1": "activities/act12mini/level_act12mini_st04#006",
+      "answer": ""
+    },
+    {
+      "question_id": "q-sc-000045",
+      "category": "single_chunk",
+      "abstained": true,
+      "should_abstain": false,
+      "citations": 0,
+      "top1": "activities/act18side/level_act18side_02_end#001",
+      "answer": ""
+    },
+    {
+      "question_id": "q-sc-000046",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 1,
+      "top1": "obt/memory/story_kroos2_1_1#002",
+      "answer": "凛冬源自乌萨斯。"
+    },
+    {
+      "question_id": "q-sc-000047",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "activities/act25side/level_act25side_05_beg#010",
+      "answer": "小贾斯汀交谈娜斯提。小贾斯汀同行娜斯提。娜斯提同行小贾斯汀。娜斯提交谈小贾斯汀。小贾斯汀前往特里蒙。"
+    },
+    {
+      "question_id": "q-sc-000048",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 3,
+      "top1": "activities/act42side/level_act42side_10_end#009",
+      "answer": "圣徒源自提卡兹。提卡兹前往银色山脉。提卡兹使用驮兽。"
+    },
+    {
+      "question_id": "q-sc-000049",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 1,
+      "top1": "activities/act30side/level_act30side_06_beg#002",
+      "answer": "耶拉冈德像位于银心湖。"
+    },
+    {
+      "question_id": "q-sc-000050",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "activities/act35side/level_act35side_08_beg#004",
+      "answer": "阿娜特交谈缇缇。缇缇指导阿娜特。缇缇前往雅赛努斯。缇缇前往萨尔贡。缇缇前往哥伦比亚。"
+    },
+    {
+      "question_id": "q-sc-000051",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "activities/act25side/level_act25side_st04#006",
+      "answer": "阻隔层容纳泰拉。保存者研究阻隔层。克丽斯腾前往阻隔层。阻隔层称为星荚。克丽斯腾破坏阻隔层。"
+    },
+    {
+      "question_id": "q-sc-000052",
+      "category": "single_chunk",
+      "abstained": true,
+      "should_abstain": false,
+      "citations": 0,
+      "top1": "activities/act47side/level_act47side_st03#005",
+      "answer": ""
+    },
+    {
+      "question_id": "q-sc-000053",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "obt/roguelike/ro4/level_rogue4_entry#000",
+      "answer": "魂灵熔炉位于卡兹戴尔。萨卡兹位于卡兹戴尔。博物馆位于卡兹戴尔。妮芙位于卡兹戴尔。卡兹戴尔包含魂灵熔炉。"
+    },
+    {
+      "question_id": "q-sc-000054",
+      "category": "single_chunk",
+      "abstained": true,
+      "should_abstain": false,
+      "citations": 0,
+      "top1": "activities/act42side/level_act42side_08_beg#006",
+      "answer": ""
+    },
+    {
+      "question_id": "q-sc-000055",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 1,
+      "top1": "activities/act54side/level_act54side_06_end#000",
+      "answer": "人格面具冲突怪物。"
+    },
+    {
+      "question_id": "q-sc-000056",
+      "category": "single_chunk",
+      "abstained": true,
+      "should_abstain": false,
+      "citations": 0,
+      "top1": "obt/memory/story_swire_1_1#006",
+      "answer": ""
+    },
+    {
+      "question_id": "q-sc-000057",
+      "category": "single_chunk",
+      "abstained": true,
+      "should_abstain": false,
+      "citations": 0,
+      "top1": "obt/main/level_main_17-17_beg#005",
+      "answer": ""
+    },
+    {
+      "question_id": "q-sc-000058",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 7,
+      "top1": "activities/act13side/level_act13side_10_beg#001",
+      "answer": "砾保护博士。阿米娅交谈博士。凯尔希同行博士。凯尔希交谈博士。砾交谈博士。"
+    },
+    {
+      "question_id": "q-sc-000059",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 13,
+      "top1": "activities/act46side/level_act46side_10_end#000",
+      "answer": "耶拉冈德包含银心湖。恩雅交谈耶拉冈德。耶拉冈德交谈恩雅。阿德颂交谈耶拉冈德。耶拉冈德称为巨兽。"
+    },
+    {
+      "question_id": "q-sc-000060",
+      "category": "single_chunk",
+      "abstained": true,
+      "should_abstain": false,
+      "citations": 0,
+      "top1": "activities/act46side/level_act46side_09_beg#005",
+      "answer": ""
+    },
+    {
+      "question_id": "q-sc-000061",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 1,
+      "top1": "activities/act18side/level_act18side_07_end#005",
+      "answer": "巫王使用黑焰。"
+    },
+    {
+      "question_id": "q-sc-000062",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 2,
+      "top1": "activities/act34side/level_act34side_08_end#002",
+      "answer": "阿戈尔使用弥利亚留姆。航道计划源自弥利亚留姆。"
+    },
+    {
+      "question_id": "q-sc-000063",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 8,
+      "top1": "obt/main/level_main_16-17_beg#004",
+      "answer": "Mantra交谈别乔克。雷尔金交谈别乔克。别乔克交谈雷尔金。圣愚交谈别乔克。别乔克使用铜钟。"
+    },
+    {
+      "question_id": "q-sc-000064",
+      "category": "single_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 4,
+      "top1": "activities/act51side/level_act51side_01_beg#003",
+      "answer": "安德烈位于切尔诺伯格。巴普洛维奇任职卡托加区。早露亲属安德烈。"
+    },
+    {
+      "question_id": "q-al-000001",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 1,
+      "top1": "activities/act46side/level_act46side_06_end#003",
+      "answer": "仓库属于喀兰贸易。"
+    },
+    {
+      "question_id": "q-al-000002",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 2,
+      "top1": "activities/act12mini/level_act12mini_st01#004",
+      "answer": "罗德岛干员交谈繁藏。缠丸交谈繁藏。"
+    },
+    {
+      "question_id": "q-al-000003",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "activities/act20side/level_act20side_02_end#000",
+      "answer": "卡奇·叙光交谈依娜姆。依娜姆交谈卡奇·叙光。卡奇·叙光交谈特米米。特米米交谈卡奇·叙光。卡奇·叙光交谈斯第奇·画布。"
+    },
+    {
+      "question_id": "q-al-000004",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "activities/act27side/level_act27side_08_end#005",
+      "answer": "哈莉交谈汤姆。埃尼斯交谈汤姆。雪雉交谈汤姆。拜松交谈汤姆。"
+    },
+    {
+      "question_id": "q-al-000005",
+      "category": "alias",
+      "abstained": true,
+      "should_abstain": false,
+      "citations": 0,
+      "top1": "obt/main/level_main_14-11_end#006",
+      "answer": ""
+    },
+    {
+      "question_id": "q-al-000006",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "obt/main/level_main_10-12_beg#005",
+      "answer": "自救军冲突萨卡兹。罗德岛救助自救军。汤米隶属自救军。自救军离开伦蒂尼姆。费斯特隶属自救军。"
+    },
+    {
+      "question_id": "q-al-000007",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 1,
+      "top1": "activities/act14side/level_act14side_05_beg#003",
+      "answer": "蔓珠院位于喀兰峰顶。"
+    },
+    {
+      "question_id": "q-al-000008",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "obt/main/level_main_16-03_beg#000",
+      "answer": "科谢尼娅交谈凯尔希。科谢尼娅任职远北中心矿区研究所。科谢尼娅下属伊利亚。拉古诺夫赠予科谢尼娅。科谢尼娅隶属帝国理工大学。"
+    },
+    {
+      "question_id": "q-al-000009",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "activities/act27side/level_act27side_08_beg#000",
+      "answer": "卡提亚·瑙曼交谈阿黛尔。卡提亚·瑙曼研究源石。卡提亚·瑙曼亲属阿黛尔。阿黛尔亲属卡提亚·瑙曼。卡提亚·瑙曼研究源石技艺。"
+    },
+    {
+      "question_id": "q-al-000010",
+      "category": "alias",
+      "abstained": true,
+      "should_abstain": false,
+      "citations": 0,
+      "top1": "obt/memory/story_susuro_1_1#000",
+      "answer": ""
+    },
+    {
+      "question_id": "q-al-000011",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 7,
+      "top1": "activities/act40side/level_act40side_04_end#002",
+      "answer": "莫不服属于鼎丰楼。莫不服交谈麟青砚。麟青砚交谈莫不服。莫不服交谈煌。莫不服交谈余味居。"
+    },
+    {
+      "question_id": "q-al-000012",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 10,
+      "top1": "obt/memory/story_lionhd_1_1#001",
+      "answer": "灰喉交谈断崖。断崖交谈莱恩哈特。莱恩哈特交谈断崖。断崖保护莱恩哈特。断崖救助卡达。"
+    },
+    {
+      "question_id": "q-al-000013",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 1,
+      "top1": "obt/main/level_main_11-17_end#004",
+      "answer": "蒸汽甲胄属于坎伯兰家族。"
+    },
+    {
+      "question_id": "q-al-000014",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "activities/act43side/level_act43side_05_end#001",
+      "answer": "霍尔海雅冲突布莱克。雅拉交谈赫默。雅拉任职莱茵生命。米兰妮交谈雅拉。雅拉交谈锡人。"
+    },
+    {
+      "question_id": "q-al-000015",
+      "category": "alias",
+      "abstained": true,
+      "should_abstain": false,
+      "citations": 0,
+      "top1": "activities/act53side/level_act53side_07_end#005",
+      "answer": ""
+    },
+    {
+      "question_id": "q-al-000016",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "activities/act29side/level_act29side_04_end#003",
+      "answer": "莱辛隶属路德维格大学。黑键交谈莱辛。莱辛交谈黑键。埃芒加德交谈莱辛。莱辛交谈米夏埃尔。"
+    },
+    {
+      "question_id": "q-al-000017",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 3,
+      "top1": "obt/main/level_st_17-01#009",
+      "answer": "瓦西里交谈赫拉格。维特交谈瓦西里。瓦西里交谈维特。"
+    },
+    {
+      "question_id": "q-al-000018",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 2,
+      "top1": "activities/act49side/level_act49side_05_beg#000",
+      "answer": "源石位于岁陵。真龙使用源石。"
+    },
+    {
+      "question_id": "q-al-000019",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 11,
+      "top1": "activities/act11d0/level_act11d0_st01#003",
+      "answer": "铃兰师从凯尔希。铃兰隶属罗德岛。铃兰交谈亚叶。亚叶交谈铃兰。铃兰交谈安洁莉娜。"
+    },
+    {
+      "question_id": "q-al-000020",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 3,
+      "top1": "obt/memory/story_durin_1_1#002",
+      "answer": "慑砂交谈杜林。杜林交谈慑砂。慑砂指挥杜林。"
+    },
+    {
+      "question_id": "q-al-000021",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 2,
+      "top1": "obt/memory/story_rfalcn_2_1#001",
+      "answer": "维伦冲突塔尔。塔尔交谈普罗旺斯。"
+    },
+    {
+      "question_id": "q-al-000022",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 4,
+      "top1": "obt/memory/story_haak_1_1#005",
+      "answer": "阿振交谈老于。老于交谈阿振。"
+    },
+    {
+      "question_id": "q-al-000023",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "activities/act44side/level_act44side_07_end#003",
+      "answer": "惟任刑警敌对三船。三船交谈惟任刑警。惟任刑警交谈星熊。惟任刑警敌对星熊。星熊交谈惟任刑警。"
+    },
+    {
+      "question_id": "q-al-000024",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 8,
+      "top1": "obt/memory/story_amgoat_1_1#006",
+      "answer": "锡兰亲属赫尔曼。锡兰出生于汐斯塔。阿黛尔交谈锡兰。医疗干员交谈锡兰。锡兰交谈阿黛尔。"
+    },
+    {
+      "question_id": "q-al-000025",
+      "category": "alias",
+      "abstained": true,
+      "should_abstain": false,
+      "citations": 0,
+      "top1": "activities/act41side/level_act41side_05_end#003",
+      "answer": ""
+    },
+    {
+      "question_id": "q-al-000026",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "obt/memory/story_blackd_1_1#001",
+      "answer": "魏斯交谈艾德文。艾德文交谈魏斯。魏斯保护艾德文。"
+    },
+    {
+      "question_id": "q-al-000027",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "obt/main/level_main_17-11_end#007",
+      "answer": "普拉多交谈瓦西里。普拉多交谈阿洛伊泽。阿洛伊泽同行普拉多。普拉多位于卢宁府。阿洛伊泽赠予普拉多。"
+    },
+    {
+      "question_id": "q-al-000028",
+      "category": "alias",
+      "abstained": true,
+      "should_abstain": false,
+      "citations": 0,
+      "top1": "obt/memory/story_shotst_2_1#000",
+      "answer": ""
+    },
+    {
+      "question_id": "q-al-000029",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 2,
+      "top1": "activities/act13d5/level_act13d5_06_end#002",
+      "answer": "白金隶属玫瑰报业。"
+    },
+    {
+      "question_id": "q-al-000030",
+      "category": "alias",
+      "abstained": true,
+      "should_abstain": false,
+      "citations": 0,
+      "top1": "activities/act18mini/level_act18mini_st05#005",
+      "answer": ""
+    },
+    {
+      "question_id": "q-al-000031",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "obt/main/level_main_13-19_end#002",
+      "answer": "萨卡兹位于卡兹戴尔。深池听命于萨卡兹。伦蒂尼姆工人B敌对萨卡兹。萨卡兹冲突伦蒂尼姆。萨卡兹前往卡兹戴尔。"
+    },
+    {
+      "question_id": "q-al-000032",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 2,
+      "top1": "activities/act17side/level_act17side_10_end#005",
+      "answer": "阿玛雅交谈昆图斯。"
+    },
+    {
+      "question_id": "q-al-000033",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "activities/act32side/level_act32side_06_beg#000",
+      "answer": "艾拉交谈迪亚兹。雷内尔敌对迪亚兹。迪亚兹救助特克诺。迪亚兹指挥特克诺。迪亚兹任职市消防局。"
+    },
+    {
+      "question_id": "q-al-000034",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 10,
+      "top1": "activities/act10mini/level_act10mini_st05#012",
+      "answer": "天火交谈昂斯特。昂斯特交谈天火。天火师从昂斯特。"
+    },
+    {
+      "question_id": "q-al-000035",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 9,
+      "top1": "obt/memory/story_skgoat_1_1#005",
+      "answer": "普罗旺斯交谈地灵。地灵隶属罗德岛。阿黛尔交谈地灵。地灵听命于博士。巴赫曼教授指导地灵。"
+    },
+    {
+      "question_id": "q-al-000036",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 7,
+      "top1": "activities/act33side/level_act33side_07_end#002",
+      "answer": "特蕾西娅交谈阿斯卡纶。阿斯卡纶交谈曼弗雷德。阿斯卡纶交谈特蕾西娅。曼弗雷德交谈阿斯卡纶。阿斯卡纶师从特雷西斯。"
+    },
+    {
+      "question_id": "q-al-000037",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 8,
+      "top1": "obt/main/level_main_14-11_beg#004",
+      "answer": "奎萨图什塔领导赦罪师。闪灵交谈奎萨图什塔。闪灵敌对奎萨图什塔。奎萨图什塔创建卡兹戴尔。奎萨图什塔亲属闪灵。"
+    },
+    {
+      "question_id": "q-al-000038",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 10,
+      "top1": "obt/memory/story_swire_1_1#003",
+      "answer": "诗怀雅交谈埃尼斯。魏彦吾交谈诗怀雅。亚当斯·施怀雅亲属诗怀雅。诗怀雅交谈魏彦吾。诗怀雅亲属亚当斯·施怀雅。"
+    },
+    {
+      "question_id": "q-al-000039",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 1,
+      "top1": "obt/memory/story_yu_1_1#004",
+      "answer": "老乞丐交谈余。"
+    },
+    {
+      "question_id": "q-al-000040",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "activities/act26side/level_act26side_04_beg#000",
+      "answer": "奥卢斯前往伊比利亚。奥卢斯交谈斯特凡诺。奥卢斯研究实验。斯卡蒂交谈奥卢斯。歌蕾蒂娅交谈奥卢斯。"
+    },
+    {
+      "question_id": "q-al-000041",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 7,
+      "top1": "activities/act37side/level_act37side_08_end#000",
+      "answer": "查尔斯·林奇隶属蒸汽骑士。维娜交谈查尔斯·林奇。阿勒黛交谈查尔斯·林奇。查尔斯·林奇位于诸王长眠之所。查尔斯·林奇驻守圣王会西部大堂。"
+    },
+    {
+      "question_id": "q-al-000042",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 1,
+      "top1": "obt/main/level_main_10-07_end#003",
+      "answer": "费斯特前往制醇厂。"
+    },
+    {
+      "question_id": "q-al-000043",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 8,
+      "top1": "activities/act44side/level_act44side_07_beg#004",
+      "answer": "森内交谈星熊。星熊位于锻冶町。星熊隶属金石会。星熊交战金石会。星熊属于金石会。"
+    },
+    {
+      "question_id": "q-al-000044",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 1,
+      "top1": "activities/act47side/level_act47side_06_end#002",
+      "answer": "雅拉交谈韦恩。"
+    },
+    {
+      "question_id": "q-al-000045",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 7,
+      "top1": "obt/memory/story_cello_1_1#004",
+      "answer": "阿尔图罗交谈尤利娅。尤利娅交谈阿尔图罗。费德里科亲属阿尔图罗。阿尔图罗前往罗德岛。阿尔图罗交谈伊万杰利斯塔十一世。"
+    },
+    {
+      "question_id": "q-al-000046",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 10,
+      "top1": "activities/act23side/level_act23side_06_end#001",
+      "answer": "林雨霞交谈孟铁衣。孟铁衣交谈林雨霞。林雨霞隶属近卫局。孟铁衣敌对林雨霞。孟铁衣救助林雨霞。"
+    },
+    {
+      "question_id": "q-al-000047",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "activities/act19mini/level_act19mini_st01#003",
+      "answer": "左乐亲属麟青砚。麟青砚交谈胡君。麟青砚前往邙山镇。麟青砚前往天师府。麟青砚交谈易。"
+    },
+    {
+      "question_id": "q-al-000048",
+      "category": "alias",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 1,
+      "top1": "obt/main/level_main_14-04_end#002",
+      "answer": "Logos使用穿刺。"
+    },
+    {
+      "question_id": "q-dr-000001",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 7,
+      "top1": "obt/main/level_main_16-08_end#001",
+      "answer": "凯尔希交谈伊利亚。伊利亚交谈凯尔希。伊利亚师从凯尔希。凯尔希交谈博士。可露希尔交谈凯尔希。"
+    },
+    {
+      "question_id": "q-dr-000002",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 8,
+      "top1": "activities/act23side/level_act23side_st03#005",
+      "answer": "山海众离开玉门。山海众前往玉门。山海众敌对玉门。山海众敌对仇白。荆先生敌对山海众。"
+    },
+    {
+      "question_id": "q-dr-000003",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 7,
+      "top1": "obt/main/level_main_10-09_beg#004",
+      "answer": "费斯特指挥洛洛。费斯特交谈洛洛。洛洛交谈费斯特。费斯特同行洛洛。洛洛隶属自救军。"
+    },
+    {
+      "question_id": "q-dr-000004",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 7,
+      "top1": "activities/act46side/level_act46side_04_beg#001",
+      "answer": "菈塔托丝领导布朗陶家。维多利亚交谈菈塔托丝。菈塔托丝交谈维多利亚。布朗陶敌对佩尔罗契。菈塔托丝亲属休露丝。"
+    },
+    {
+      "question_id": "q-dr-000005",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "activities/act19side/level_act19side_01_beg#002",
+      "answer": "赫默任职罗德岛。赫默隶属罗德岛。赫默隶属莱茵生命。格雷伊任职罗德岛。赫默交谈玛丽。"
+    },
+    {
+      "question_id": "q-dr-000006",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "activities/act34side/level_act34side_st01#006",
+      "answer": "海嗣交谈乌尔比安。乌尔比安交谈海嗣。乌尔比安交谈罗辛南特。乌尔比安位于巢穴。海嗣效忠生代。"
+    },
+    {
+      "question_id": "q-dr-000007",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 8,
+      "top1": "activities/act49side/level_act49side_09_beg#002",
+      "answer": "太尉效忠大炎。太尉任职大炎。真龙交谈太尉。太尉敌对岁兽。太尉指挥玉门。"
+    },
+    {
+      "question_id": "q-dr-000008",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "activities/act17d0/level_act17d0_02_end#003",
+      "answer": "安全屋属于罗德岛。奥克芬隶属罗德岛。罗德岛部署瞭望塔33。巡林者驻守安全屋。芙兰卡隶属罗德岛。"
+    },
+    {
+      "question_id": "q-dr-000009",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 8,
+      "top1": "obt/main/level_main_14-02_end#003",
+      "answer": "号角交谈风笛。风笛交谈号角。风笛下属号角。号角指挥风笛。风笛研究深池。"
+    },
+    {
+      "question_id": "q-dr-000010",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 4,
+      "top1": "activities/act29side/level_act29side_08_beg#005",
+      "answer": "崔林特尔梅位于莱塔尼亚。尤利娅位于莱塔尼亚。帝国音乐学院位于崔林特尔梅。伊维格娜德领导莱塔尼亚。"
+    },
+    {
+      "question_id": "q-dr-000011",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 9,
+      "top1": "activities/act29side/level_act29side_10_end#006",
+      "answer": "埃芒加德交谈莱辛。莱辛交谈埃芒加德。埃芒加德隶属巫妖。米夏埃尔交谈埃芒加德。黑键交谈埃芒加德。"
+    },
+    {
+      "question_id": "q-dr-000012",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 4,
+      "top1": "obt/main/level_main_16-03_beg#009",
+      "answer": "布列斯克位于乌萨斯。乌萨斯持有石棺。"
+    },
+    {
+      "question_id": "q-dr-000013",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 3,
+      "top1": "activities/act17side/level_act17side_st02#005",
+      "answer": "Dan隶属日落即逝。Aya隶属日落即逝。凯尔希同盟日落即逝。"
+    },
+    {
+      "question_id": "q-dr-000014",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 3,
+      "top1": "obt/main/level_main_11-12_beg#000",
+      "answer": "军事委员会位于伦蒂尼姆。特雷西斯前往伦蒂尼姆。号角隶属维多利亚。"
+    },
+    {
+      "question_id": "q-dr-000015",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "activities/act25side/level_act25side_02_end#002",
+      "answer": "赫默研究递质。递质产自359号基地。多萝西研究递质。多萝西使用递质。斐尔迪南使用递质。"
+    },
+    {
+      "question_id": "q-dr-000016",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 2,
+      "top1": "obt/memory/story_morgan_1_1#002",
+      "answer": "萨迪恩区位于伦蒂尼姆。"
+    },
+    {
+      "question_id": "q-dr-000017",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "activities/act49side/level_act49side_06_end#001",
+      "answer": "玉门前往百灶。玉门位于百灶。重岳离开玉门。梁洵任职玉门。梁洵前往百灶。"
+    },
+    {
+      "question_id": "q-dr-000018",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "obt/main/level_main_13-16_end#000",
+      "answer": "莱托中校任职城防军。莱托中校隶属城防军。血魔大君交谈莱托中校。军事委员会敌对城防军。莱托中校赠予前城防军成员。"
+    },
+    {
+      "question_id": "q-dr-000019",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "activities/act4d0/level_act4d0_st02#000",
+      "answer": "整合运动交谈W。整合运动驻守切尔诺伯格。整合运动救助碎骨。W救助整合运动。罗德岛交战整合运动。"
+    },
+    {
+      "question_id": "q-dr-000020",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "activities/act18mini/level_act18mini_st01#002",
+      "answer": "萨卡兹敌对维多利亚。查尔斯·林奇保护维多利亚。查尔斯·林奇交战萨卡兹。萨卡兹敌对自救军。斯塔福德冲突维多利亚。"
+    },
+    {
+      "question_id": "q-dr-000021",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 7,
+      "top1": "activities/act13side/level_act13side_03_beg#003",
+      "answer": "马克维茨任职商业联合会。马克维茨隶属商业联合会。马克维茨交谈博士。白金交谈马克维茨。马克维茨交谈白金。"
+    },
+    {
+      "question_id": "q-dr-000022",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 9,
+      "top1": "obt/main/level_main_01-01_beg#000",
+      "answer": "杜宾交谈临光。阿米娅交谈临光。临光敌对整合运动。杜宾指挥阿米娅。临光交战塔露拉。"
+    },
+    {
+      "question_id": "q-dr-000023",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 9,
+      "top1": "activities/act42side/level_act42side_10_beg#006",
+      "answer": "普瑞赛斯制造源石。普瑞赛斯交谈博士。普瑞赛斯使用PCS。凯尔希背叛普瑞赛斯。Mon3tr交战普瑞赛斯。"
+    },
+    {
+      "question_id": "q-dr-000024",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "activities/act18d0/level_act18d0_07_beg#004",
+      "answer": "萨卡兹位于卡兹戴尔。萨卡兹源自卡兹戴尔。特蕾西娅领导卡兹戴尔。泥岩前往卡兹戴尔。号角敌对萨卡兹。"
+    },
+    {
+      "question_id": "q-dr-000025",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 4,
+      "top1": "obt/main/level_main_tr28_end#006",
+      "answer": "罗德岛驻圣骏堡办事处位于乌萨斯。乌萨斯研究石棺。罗德岛位于乌萨斯。夜刀研究源石。"
+    },
+    {
+      "question_id": "q-dr-000026",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 8,
+      "top1": "obt/main/level_main_05-09_beg#000",
+      "answer": "近卫局敌对整合运动。近卫局交战整合运动。近卫局交战兵俑。陈指挥近卫局。整合运动交战切尔诺伯格。"
+    },
+    {
+      "question_id": "q-dr-000027",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 3,
+      "top1": "activities/act42side/level_act42side_02_beg#001",
+      "answer": "制铳圣堂位于米迦莱昂区。梵里妮前往制铳圣堂。"
+    },
+    {
+      "question_id": "q-dr-000028",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 12,
+      "top1": "obt/main/level_main_15-15_beg#002",
+      "answer": "普瑞赛斯创建凯尔希。普瑞赛斯交谈凯尔希。凯尔希交谈普瑞赛斯。凯尔希背叛普瑞赛斯。凯尔希敌对普瑞赛斯。"
+    },
+    {
+      "question_id": "q-dr-000029",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "activities/act50side/level_act50side_03_beg#006",
+      "answer": "异变发生于雪山。异兽导致异变。熔火蜗破坏雪山。熔火蜗位于雪山。"
+    },
+    {
+      "question_id": "q-dr-000030",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "obt/main/level_main_10-01_end#001",
+      "answer": "伦蒂尼姆位于泰拉。城防军驻守伦蒂尼姆。萨卡兹冲突伦蒂尼姆。海布里区位于伦蒂尼姆。伦蒂尼姆位于维多利亚。"
+    },
+    {
+      "question_id": "q-dr-000031",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "activities/act10mini/level_act10mini_st03#008",
+      "answer": "天火使用源石技艺。天火属于蒙贝兰家。桑葚交谈天火。薄绿交谈天火。天火交谈薄绿。"
+    },
+    {
+      "question_id": "q-dr-000032",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 8,
+      "top1": "obt/main/level_st_13-02#005",
+      "answer": "闪灵师从赦罪师。闪灵敌对赦罪师。闪灵交谈夜莺。夜莺交谈闪灵。赦罪师指挥萨卢斯。"
+    },
+    {
+      "question_id": "q-dr-000033",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 9,
+      "top1": "obt/main/level_main_13-02_beg#008",
+      "answer": "血魔大君领导鲜血王庭。阿米娅交战血魔大君。厄尔苏拉交谈血魔大君。温德米尔公爵交谈血魔大君。Logos交谈血魔大君。"
+    },
+    {
+      "question_id": "q-dr-000034",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 8,
+      "top1": "obt/main/level_st_17-02#000",
+      "answer": "凯尔希交谈阿米娅。可露希尔交谈凯尔希。凯尔希交谈Raidian。凯尔希交谈Mon3tr。普瑞赛斯交谈凯尔希。"
+    },
+    {
+      "question_id": "q-dr-000035",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 7,
+      "top1": "activities/act25side/level_act25side_st02#009",
+      "answer": "迷迭香前往特里蒙。迷迭香交谈洛肯。缪尔赛思交谈迷迭香。洛肯交谈迷迭香。迷迭香交谈煌。"
+    },
+    {
+      "question_id": "q-dr-000036",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "obt/main/level_main_16-01_beg#007",
+      "answer": "中心矿区位于乌萨斯。布列斯克位于乌萨斯。远北中心矿区研究所位于中心矿区。"
+    },
+    {
+      "question_id": "q-dr-000037",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "activities/act15side/level_act15side_04_end#005",
+      "answer": "左乐隶属司岁台。左乐任职司岁台。司岁台隶属大炎。克洛丝交谈左乐。左乐交谈克洛丝。"
+    },
+    {
+      "question_id": "q-dr-000038",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "activities/act38side/level_act38side_st04#002",
+      "answer": "拉普兰德隶属萨卢佐家族。拉普兰德离开萨卢佐家族。拉普兰德交谈德克萨斯。阿尔贝托交谈拉普兰德。德米特里交谈拉普兰德。"
+    },
+    {
+      "question_id": "q-dr-000039",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "obt/main/level_main_07-01_end#002",
+      "answer": "整合运动冲突切尔诺伯格。整合运动驻守切尔诺伯格。整合运动交战切尔诺伯格。近卫局交战整合运动。切尔诺伯格位于乌萨斯。"
+    },
+    {
+      "question_id": "q-dr-000040",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "obt/main/level_st_13-03#008",
+      "answer": "塔露拉领导整合运动。九交谈塔露拉。罗德岛敌对塔露拉。塔露拉离开维多利亚。爱布拉娜交谈塔露拉。"
+    },
+    {
+      "question_id": "q-dr-000041",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 9,
+      "top1": "obt/main/level_main_07-01_end#002",
+      "answer": "天灾破坏切尔诺伯格。切尔诺伯格位于乌萨斯。贝加尔敌对切尔诺伯格。鲍里斯领导切尔诺伯格。切尔诺伯格隶属乌萨斯帝国。"
+    },
+    {
+      "question_id": "q-dr-000042",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 3,
+      "top1": "activities/act45side/level_act45side_02_end#001",
+      "answer": "甘比诺敌对企鹅物流。拜松隶属企鹅物流。空隶属企鹅物流。"
+    },
+    {
+      "question_id": "q-dr-000043",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 3,
+      "top1": "obt/rogue/rogue_3/endbook/endbook_rogue_3_4_2#000",
+      "answer": "巨构位于冰原。寒檀驻守冰原。缪尔赛思前往巨构。"
+    },
+    {
+      "question_id": "q-dr-000044",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "activities/act49side/level_act49side_08_end#004",
+      "answer": "司岁台持有书刀。书刀位于天镜阁。陈持有书刀。太尉使用书刀。颉持有书刀。"
+    },
+    {
+      "question_id": "q-dr-000045",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "obt/main/level_st_13-03#008",
+      "answer": "塔露拉隶属整合运动。塔露拉领导整合运动。塔露拉离开维多利亚。深池敌对整合运动。爱布拉娜交谈塔露拉。"
+    },
+    {
+      "question_id": "q-dr-000046",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 7,
+      "top1": "activities/act33side/level_act33side_06_end#002",
+      "answer": "博士交谈阿米娅。博士同行阿米娅。阿米娅交谈博士。凯尔希交谈博士。博士感染矿石病。"
+    },
+    {
+      "question_id": "q-dr-000047",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 7,
+      "top1": "activities/act33side/level_act33side_st03#000",
+      "answer": "可露希尔交谈博士。凯尔希交谈博士。Ace交谈博士。Scout交谈博士。博士交谈凯尔希。"
+    },
+    {
+      "question_id": "q-dr-000048",
+      "category": "direct_relation",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "activities/act29side/level_act29side_04_end#006",
+      "answer": "叙拉古背叛莱塔尼亚。金律乐章源自莱塔尼亚。莱塔尼亚敌对葆拉。特尔尼城位于莱塔尼亚。新沃尔西尼位于叙拉古。"
+    },
+    {
+      "question_id": "q-mh-000001",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "obt/main/level_main_12-18_end#001",
+      "answer": "变形者集群交谈戈尔丁。变形者集群交谈凯尔希。阿米娅交谈变形者集群。阿斯卡纶交谈变形者集群。Logos交谈变形者集群。"
+    },
+    {
+      "question_id": "q-mh-000002",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 13,
+      "top1": "activities/act54side/level_act54side_05_beg#003",
+      "answer": "岳羽由加莉交谈山岸风花。结城理交谈岳羽由加莉。岳羽由加莉交谈埃癸斯。埃癸斯交谈岳羽由加莉。山岸风花交谈岳羽由加莉。"
+    },
+    {
+      "question_id": "q-mh-000003",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "activities/act38side/level_act38side_01_beg#004",
+      "answer": "凯尔希交谈博士。可露希尔交谈凯尔希。安东尼奥交谈卡尔。甘比诺听命于安东尼奥。安东尼奥位于新沃尔西尼。"
+    },
+    {
+      "question_id": "q-mh-000004",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "obt/main/level_main_14-04_end#001",
+      "answer": "厄尔苏拉隶属疤痕商场。厄尔苏拉敌对伊内丝。厄尔苏拉效忠军事委员会。厄尔苏拉交谈血魔大君。厄尔苏拉交谈曼弗雷德。"
+    },
+    {
+      "question_id": "q-mh-000005",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 7,
+      "top1": "obt/memory/story_frostl_1_1#008",
+      "answer": "霜叶交谈杰西卡。杰西卡交谈霜叶。霜叶交谈凯尔希。阿米娅交谈霜叶。霜叶隶属罗德岛。"
+    },
+    {
+      "question_id": "q-mh-000006",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 8,
+      "top1": "activities/act7d5/level_act7d5_st05#007",
+      "answer": "月见夜交谈梓兰。月见夜保护泡普卡。月见夜冲突雷之主。月见夜感染矿石病。斑点交谈月见夜。"
+    },
+    {
+      "question_id": "q-mh-000007",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "obt/memory/story_excu_2_1#002",
+      "answer": "费德里科交谈马切洛。费德里科亲属马切洛。马切洛亲属阿尔图罗。阿尔图罗交谈律法。律法指导萨科塔。"
+    },
+    {
+      "question_id": "q-mh-000008",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "activities/act11d0/level_act11d0_sub-1-1_end#002",
+      "answer": "塞弗林驻守沃伦姆德。沃伦姆德包含十二音街道。安托救助沃伦姆德。沃伦姆德包含冬灵。罗德岛保护沃伦姆德。"
+    },
+    {
+      "question_id": "q-mh-000009",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "obt/main/level_main_17-01_beg#000",
+      "answer": "监正会敌对商业联合会。商业联合会敌对监正会。铃兰隶属罗德岛。铃兰交谈亚叶。亚叶交谈铃兰。"
+    },
+    {
+      "question_id": "q-mh-000010",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 4,
+      "top1": "activities/act45side/level_act45side_02_end#001",
+      "answer": "甘比诺敌对企鹅物流。拜松隶属企鹅物流。空隶属企鹅物流。空前往贫民窟。"
+    },
+    {
+      "question_id": "q-mh-000011",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 7,
+      "top1": "obt/memory/story_frostl_1_1#000",
+      "answer": "霜叶交谈杰西卡。杰西卡交谈霜叶。霜叶隶属罗德岛。霜叶交谈凯尔希。阿米娅交谈霜叶。"
+    },
+    {
+      "question_id": "q-mh-000012",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 9,
+      "top1": "obt/memory/story_crosly_1_1#004",
+      "answer": "柳德米拉前往乌萨斯。柳德米拉交谈雷德。柳德米拉隶属整合运动。柳德米拉持有石棺。柳德米拉听命于塔露拉。"
+    },
+    {
+      "question_id": "q-mh-000013",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "activities/act42side/level_act42side_st04#006",
+      "answer": "希尔达救助阿纳托利。希尔达交谈阿纳托利。阿纳托利交谈希尔达。希尔达交谈屈光者。屈光者交谈希尔达。"
+    },
+    {
+      "question_id": "q-mh-000014",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "activities/act36side/level_act36side_08_end#002",
+      "answer": "莱欧斯交谈墨魉。莱欧斯交谈黎。莱欧斯研究墨魉。阿米娅交谈莱欧斯。莱欧斯研究黎博利。"
+    },
+    {
+      "question_id": "q-mh-000015",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 15,
+      "top1": "activities/act12d0/level_act12d0_st01#002",
+      "answer": "特米米交谈嘉维尔。嘉维尔感染矿石病。嘉维尔交谈博士。嘉维尔救助特米米。嘉维尔交谈特米米。"
+    },
+    {
+      "question_id": "q-mh-000016",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "activities/act40side/level_act40side_09_beg#002",
+      "answer": "太傅交谈重岳。太傅交谈年。梁洵交谈太傅。太傅交谈梁洵。重岳交谈太傅。"
+    },
+    {
+      "question_id": "q-mh-000017",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 13,
+      "top1": "obt/memory/story_toddi_1_1#000",
+      "answer": "熔泉交谈森蚺。森蚺交谈熔泉。煌交谈熔泉。沙蜥帮敌对熔泉。熔泉交谈煌。"
+    },
+    {
+      "question_id": "q-mh-000018",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 11,
+      "top1": "activities/act54side/level_act54side_07_beg#003",
+      "answer": "岳羽由加莉交谈博士。岳羽由加莉交谈裘里奥。岳羽由加莉交谈山岸风花。结城理交谈岳羽由加莉。岳羽由加莉交谈埃癸斯。"
+    },
+    {
+      "question_id": "q-mh-000019",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 8,
+      "top1": "activities/act21side/level_act21side_10_end#007",
+      "answer": "莱昂图索交谈西西里夫人。西西里夫人交谈莱昂图索。阿格尼尔交谈西西里夫人。西西里夫人交谈阿格尼尔。西西里夫人交谈德克萨斯。"
+    },
+    {
+      "question_id": "q-mh-000020",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 7,
+      "top1": "obt/main/level_main_16-03_beg#008",
+      "answer": "雷尔金同行别乔克。别乔克师从雷尔金。尼克托交谈雷尔金。雷尔金交谈尼克托。别乔克交谈雷尔金。"
+    },
+    {
+      "question_id": "q-mh-000021",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 4,
+      "top1": "activities/act13mini/level_act13mini_st05#001",
+      "answer": "小沅交谈六十七。小黑交谈六十七。"
+    },
+    {
+      "question_id": "q-mh-000022",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "obt/main/level_st_11-02#006",
+      "answer": "阿斯卡纶交战曼弗雷德。阿米娅同行阿斯卡纶。阿斯卡纶效忠特蕾西娅。阿斯卡纶隶属罗德岛。阿斯卡纶交谈莱托中校。"
+    },
+    {
+      "question_id": "q-mh-000023",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 7,
+      "top1": "obt/main/level_main_13-18_end#000",
+      "answer": "血魔大君交谈特雷西斯。特雷西斯领导萨卡兹。特雷西斯指挥血魔大君。赦罪师效忠特雷西斯。特雷西斯交谈赦罪师。"
+    },
+    {
+      "question_id": "q-mh-000024",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 7,
+      "top1": "activities/act32side/level_act32side_st03#001",
+      "answer": "布克隶属坎黛拉。布克交谈埃内斯托。布克听命于坎黛拉。坎黛拉位于多索雷斯。克里斯达尔艺术馆位于多索雷斯。"
+    },
+    {
+      "question_id": "q-mh-000025",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 8,
+      "top1": "activities/act48side/level_act48side_st02#001",
+      "answer": "卡珊卓拉交谈里底娅。缇缇交谈卡珊卓拉。赫卡德墨交谈卡珊卓拉。米奥交谈缇缇。卡珊卓拉隶属恩底弥翁神殿。"
+    },
+    {
+      "question_id": "q-mh-000026",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "activities/act31side/level_act31side_02_beg#001",
+      "answer": "禾生交谈左乐。神农创建二十四节气。神农离开大荒城。禾生师从黍。神农位于大荒城。"
+    },
+    {
+      "question_id": "q-mh-000027",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 7,
+      "top1": "activities/act11mini/level_act11mini_st06#008",
+      "answer": "杰斯顿交谈安东尼。杰斯顿隶属沙滩伞公司。杰斯顿交谈狱警A。狱警A指挥杰斯顿。杰斯顿交谈罗宾。"
+    },
+    {
+      "question_id": "q-mh-000028",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "obt/rogue/rogue_4/endbook/endbook_rogue_4_1_3#002",
+      "answer": "老科利持有金券。老科利冲突小默。小默冲突老科利。老科利交谈锡人。大拉里冲突老科利。"
+    },
+    {
+      "question_id": "q-mh-000029",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "activities/act15side/level_act15side_06_beg#003",
+      "answer": "左乐交谈尚冢。左乐隶属司岁台。暴行前往雷姆必拓。胡萝卜罐头产自雷姆必拓。暴行离开雷姆必拓。"
+    },
+    {
+      "question_id": "q-mh-000030",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "activities/act17mini/level_act17mini_st06#003",
+      "answer": "赫德雷交谈埃芒加德。华法琳交谈红豆。泥岩交谈红豆。埃芒加德交谈珀耳。卡莱莎交谈埃芒加德。"
+    },
+    {
+      "question_id": "q-mh-000031",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "obt/main/level_st_10-01#002",
+      "answer": "血魔大君交谈特雷西斯。特蕾西娅交谈特雷西斯。特雷西斯指挥赦罪师。特雷西斯领导萨卡兹。特雷西斯指挥血魔大君。"
+    },
+    {
+      "question_id": "q-mh-000032",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "activities/act38side/level_act38side_st03#006",
+      "answer": "鼠王敌对甘比诺。甘比诺隶属威尼斯家族。甘比诺听命于拉普兰德。拉普兰德参与狂欢节。拉普兰德同行甘比诺。"
+    },
+    {
+      "question_id": "q-mh-000033",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 7,
+      "top1": "activities/act38side/level_act38side_05_beg#002",
+      "answer": "索默尔交谈柳德米拉。柳德米拉交谈红。雷德交谈柳德米拉。柳德米拉位于叙拉古。柳德米拉交谈伊雷妮。"
+    },
+    {
+      "question_id": "q-mh-000034",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 8,
+      "top1": "obt/memory/story_phenxi_2_1#005",
+      "answer": "菲亚梅塔交谈薇尔丽芙。安多恩交谈薇尔丽芙。薇尔丽芙交谈安多恩。薇尔丽芙交谈菲亚梅塔。薇尔丽芙敌对安多恩。"
+    },
+    {
+      "question_id": "q-mh-000035",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 2,
+      "top1": "activities/act15side/level_act15side_06_beg#002",
+      "answer": "太傅交谈老船夫。老船夫位于尚蜀。"
+    },
+    {
+      "question_id": "q-mh-000036",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 12,
+      "top1": "obt/memory/story_estell_1_1#006",
+      "answer": "特米米交谈艾丝黛尔。灰掌交谈艾丝黛尔。艾丝黛尔交谈特米米。艾丝黛尔交谈克莱赫尔爵士。特米米同行艾丝黛尔。"
+    },
+    {
+      "question_id": "q-mh-000037",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "activities/act18d0/level_act18d0_02_beg#006",
+      "answer": "莉莉娅敌对万尼亚大公。莉莉娅交谈凯尔希。莉莉娅亲属阿斯特罗夫。莉莉娅敌对谢尔盖。鲍里斯侯爵位于切尔诺伯格。"
+    },
+    {
+      "question_id": "q-mh-000038",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "activities/act11d0/level_act11d0_01_end#002",
+      "answer": "安托救助沃伦姆德。沃伦姆德包含冬灵。塞弗林驻守沃伦姆德。沃伦姆德包含十二音街道。罗德岛保护沃伦姆德。"
+    },
+    {
+      "question_id": "q-mh-000039",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 7,
+      "top1": "activities/act49side/level_act49side_03_end#000",
+      "answer": "莫佚隶属山海众。莫佚交谈左乐。左乐交谈莫佚。老天师交谈莫佚。山海众敌对槐琥。"
+    },
+    {
+      "question_id": "q-mh-000040",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "obt/main/level_main_12-18_end#001",
+      "answer": "变形者集群交谈戈尔丁。变形者集群交谈凯尔希。阿米娅交谈变形者集群。阿斯卡纶交谈变形者集群。Logos交谈变形者集群。"
+    },
+    {
+      "question_id": "q-mh-000041",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 3,
+      "top1": "obt/memory/story_mlyss_1_1#000",
+      "answer": "生态园包含极地区。鞘叶榉位于生态园。"
+    },
+    {
+      "question_id": "q-mh-000042",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 7,
+      "top1": "activities/act33side/level_act33side_01_end#007",
+      "answer": "凯尔希交谈特蕾西娅。特蕾西娅交谈凯尔希。巴别塔同盟萨尔贡。特蕾西娅冲突罗德岛。特蕾西娅领导萨卡兹。"
+    },
+    {
+      "question_id": "q-mh-000043",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "activities/act34side/level_act34side_07_end#010",
+      "answer": "特蕾西娅使用文明的存续。阿米娅使用文明的存续。凯尔希使用文明的存续。王冠称为文明的存续。"
+    },
+    {
+      "question_id": "q-mh-000044",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 8,
+      "top1": "activities/act40side/level_act40side_04_end#002",
+      "answer": "莫不服属于鼎丰楼。莫不服前往百灶。莫不服交谈麟青砚。麟青砚交谈莫不服。莫不服交谈老姜。"
+    },
+    {
+      "question_id": "q-mh-000045",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "activities/act30side/level_act30side_05_end#000",
+      "answer": "烈夏交谈灰礼帽。烈夏救助灰礼帽。灰礼帽交谈烈夏。灰礼帽同行烈夏。烈夏敌对灰礼帽。"
+    },
+    {
+      "question_id": "q-mh-000046",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 12,
+      "top1": "activities/act21mini/level_act21mini_st07#005",
+      "answer": "米格鲁交谈佩德洛。佩德洛交谈米格鲁。米格鲁交谈洛伦茨。洛伦茨交谈米格鲁。米格鲁前往特科马。"
+    },
+    {
+      "question_id": "q-mh-000047",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 4,
+      "top1": "activities/act34side/level_act34side_07_beg#004",
+      "answer": "信标塔位于弥利亚留姆。乌尔比安驻守信标塔。海嗣位于信标塔。海嗣前往伊比利亚。"
+    },
+    {
+      "question_id": "q-mh-000048",
+      "category": "multihop",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 9,
+      "top1": "activities/act26side/level_act26side_02_beg#005",
+      "answer": "斯普莉雅交谈菲亚梅塔。菲亚梅塔交谈帕蒂亚。帕蒂亚交谈菲亚梅塔。蕾缪安交谈斯普莉雅。斯普莉雅交谈蕾缪安。"
+    },
+    {
+      "question_id": "q-cx-000001",
+      "category": "cross_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "obt/main/level_main_14-18_end#000",
+      "answer": "以勒什制造熔炉。以勒什前往卡兹戴尔。以勒什交谈死魂灵。特蕾西娅交谈以勒什。以勒什称为王冠。"
+    },
+    {
+      "question_id": "q-cx-000002",
+      "category": "cross_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 8,
+      "top1": "activities/act21side/level_act21side_st01#001",
+      "answer": "扎罗交谈德克萨斯。扎罗属于狼之主。德克萨斯交谈扎罗。扎罗交谈大帝。大帝交谈扎罗。"
+    },
+    {
+      "question_id": "q-cx-000003",
+      "category": "cross_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 7,
+      "top1": "obt/main/level_st_17-02#009",
+      "answer": "米拉娜交谈亚娜。图林交谈米拉娜。米拉娜交谈塔露拉。塔露拉同行米拉娜。米拉娜师从图林。"
+    },
+    {
+      "question_id": "q-cx-000004",
+      "category": "cross_chunk",
+      "abstained": true,
+      "should_abstain": false,
+      "citations": 0,
+      "top1": "activities/act34side/level_act34side_08_beg#011",
+      "answer": ""
+    },
+    {
+      "question_id": "q-cx-000005",
+      "category": "cross_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 3,
+      "top1": "obt/main/level_main_14-03_beg#001",
+      "answer": "风暴突击队隶属维多利亚议会。高多汀公爵隶属维多利亚议会。维多利亚议会包含温德米尔领。"
+    },
+    {
+      "question_id": "q-cx-000006",
+      "category": "cross_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 1,
+      "top1": "activities/act17d0/level_act17d0_07_beg#002",
+      "answer": "战车使用源石引擎。"
+    },
+    {
+      "question_id": "q-cx-000007",
+      "category": "cross_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 4,
+      "top1": "obt/memory/story_weedy_1_1#001",
+      "answer": "温蒂使用蓄水炮。温蒂制造蓄水炮。温蒂持有蓄水炮。"
+    },
+    {
+      "question_id": "q-cx-000008",
+      "category": "cross_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 7,
+      "top1": "obt/roguelike/ro6/level_rogue6_ending_4#001",
+      "answer": "卡萨斯持有石板。卡萨斯属于黎博利。卡萨斯研究日照族。卡萨斯前往黑流树海。卡萨斯前往哥伦比亚。"
+    },
+    {
+      "question_id": "q-cx-000009",
+      "category": "cross_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 1,
+      "top1": "activities/act40side/level_act40side_09_end#009",
+      "answer": "望前往古寺。"
+    },
+    {
+      "question_id": "q-cx-000010",
+      "category": "cross_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 4,
+      "top1": "obt/main/level_main_16-11_end#002",
+      "answer": "整合运动位于乌卡边境。雷尔金驻守乌卡边境。雷尔金前往乌卡边境。"
+    },
+    {
+      "question_id": "q-cx-000011",
+      "category": "cross_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 1,
+      "top1": "activities/act3d0/level_act3d0_st01#003",
+      "answer": "天火前往汐斯塔火山。"
+    },
+    {
+      "question_id": "q-cx-000012",
+      "category": "cross_chunk",
+      "abstained": true,
+      "should_abstain": false,
+      "citations": 0,
+      "top1": "obt/memory/story_pudd_1_1#006",
+      "answer": ""
+    },
+    {
+      "question_id": "q-cx-000013",
+      "category": "cross_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 2,
+      "top1": "obt/main/level_st_14-03#003",
+      "answer": "威灵顿位于加斯特里尔。威灵顿公爵驾驶加斯特里尔。"
+    },
+    {
+      "question_id": "q-cx-000014",
+      "category": "cross_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 8,
+      "top1": "activities/act7mini/level_act7mini_st04#001",
+      "answer": "蓝毒交谈格劳克斯。格劳克斯交谈蓝毒。格劳克斯持有外骨骼。格劳克斯交谈戈登。戈登交谈格劳克斯。"
+    },
+    {
+      "question_id": "q-cx-000015",
+      "category": "cross_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 2,
+      "top1": "activities/act29side/level_act29side_03_end#000",
+      "answer": "彼得前往维多利亚。彼得参与移动城市。"
+    },
+    {
+      "question_id": "q-cx-000016",
+      "category": "cross_chunk",
+      "abstained": true,
+      "should_abstain": false,
+      "citations": 0,
+      "top1": "activities/act28side/level_act28side_01_end#003",
+      "answer": ""
+    },
+    {
+      "question_id": "q-cx-000017",
+      "category": "cross_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 2,
+      "top1": "obt/memory/story_mitm_1_1#001",
+      "answer": "赫德雷创建识字班。赫德雷领导识字班。"
+    },
+    {
+      "question_id": "q-cx-000018",
+      "category": "cross_chunk",
+      "abstained": true,
+      "should_abstain": false,
+      "citations": 0,
+      "top1": "obt/main/level_main_17-17_end#010",
+      "answer": ""
+    },
+    {
+      "question_id": "q-cx-000019",
+      "category": "cross_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 1,
+      "top1": "obt/main/level_main_09-10_beg#000",
+      "answer": "奥利弗指挥弗雷德。"
+    },
+    {
+      "question_id": "q-cx-000020",
+      "category": "cross_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 3,
+      "top1": "activities/act17side/level_act17side_03_end#002",
+      "answer": "达里奥敌对恐鱼。Mon3tr交战恐鱼。斯卡蒂交战恐鱼。"
+    },
+    {
+      "question_id": "q-cx-000021",
+      "category": "cross_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "obt/memory/story_saga_1_1#000",
+      "answer": "嵯峨位于大炎。菲林少女交谈嵯峨。嵯峨位于百灶。嵯峨交谈菲林少女。嵯峨隶属东国。"
+    },
+    {
+      "question_id": "q-cx-000022",
+      "category": "cross_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 3,
+      "top1": "obt/memory/story_jaksel_1_1#008",
+      "answer": "杰克隶属罗德岛。杰克感染矿石病。杰克任职哥伦比亚。"
+    },
+    {
+      "question_id": "q-cx-000023",
+      "category": "cross_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "obt/main/level_main_10-13_beg#002",
+      "answer": "海蒂指挥白轮。达格达指挥白轮。可露希尔交谈白轮。可露希尔指挥白轮。海蒂交谈白轮。"
+    },
+    {
+      "question_id": "q-cx-000024",
+      "category": "cross_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "activities/act42side/level_act42side_02_beg#004",
+      "answer": "帕特里奇昂交谈潘格尼尼。潘格尼尼制造守护铳。阿摩斯交谈潘格尼尼。潘格尼尼任职铳械工坊。能天使交谈潘格尼尼。"
+    },
+    {
+      "question_id": "q-cx-000025",
+      "category": "cross_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 1,
+      "top1": "obt/memory/story_rfalcn_1_1#004",
+      "answer": "麦哲伦前往集市。"
+    },
+    {
+      "question_id": "q-cx-000026",
+      "category": "cross_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "activities/act43side/level_act43side_st03#002",
+      "answer": "蒂比同行马修。雅拉交谈蒂比。米兰妮交谈蒂比。蒂比交谈米兰妮。蒂比参与《坏小子》。"
+    },
+    {
+      "question_id": "q-cx-000027",
+      "category": "cross_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 1,
+      "top1": "activities/act28side/level_act28side_st01#004",
+      "answer": "动力炉位于达维镇。"
+    },
+    {
+      "question_id": "q-cx-000028",
+      "category": "cross_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 3,
+      "top1": "obt/memory/story_pinecn_1_1#004",
+      "answer": "酸糖持有滑板。酸糖使用滑板。"
+    },
+    {
+      "question_id": "q-cx-000029",
+      "category": "cross_chunk",
+      "abstained": true,
+      "should_abstain": false,
+      "citations": 0,
+      "top1": "activities/act38side/level_act38side_07_end#000",
+      "answer": ""
+    },
+    {
+      "question_id": "q-cx-000030",
+      "category": "cross_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 3,
+      "top1": "activities/act29side/level_act29side_09_end#005",
+      "answer": "混沌位于荒域。赫尔昏佐伦位于荒域。巫妖研究荒域。"
+    },
+    {
+      "question_id": "q-cx-000031",
+      "category": "cross_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 7,
+      "top1": "activities/act14side/level_act14side_07_end#003",
+      "answer": "切斯特隶属喀兰贸易。切斯特亲属奥拉维尔。切斯特交谈恩希亚。切斯特交谈极光。瓦莱丝敌对切斯特。"
+    },
+    {
+      "question_id": "q-cx-000032",
+      "category": "cross_chunk",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 1,
+      "top1": "obt/memory/story_jnight_1_1#000",
+      "answer": "柳德米拉破坏轮胎。"
+    },
+    {
+      "question_id": "q-tc-000001",
+      "category": "time_conflict",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "activities/act21side/level_act21side_09_beg#002",
+      "answer": "萨卢佐家族敌对贝洛内家族。贝洛内家族位于叙拉古。萨卢佐家族敌对罗塞蒂家族。丹布朗隶属萨卢佐家族。丹布朗听命于萨卢佐家族。"
+    },
+    {
+      "question_id": "q-tc-000002",
+      "category": "time_conflict",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "activities/act34side/level_act34side_st01#001",
+      "answer": "歌蕾蒂娅交谈凯尔希。歌蕾蒂娅指挥幽灵鲨。斯卡蒂隶属深海猎人。斯卡蒂交谈歌蕾蒂娅。幽灵鲨交谈歌蕾蒂娅。"
+    },
+    {
+      "question_id": "q-tc-000003",
+      "category": "time_conflict",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 7,
+      "top1": "activities/act3d0/level_act3d0_st04#000",
+      "answer": "赫尔曼交谈克洛宁。克洛宁交谈赫尔曼。克洛宁师从赫尔曼。克洛宁背叛赫尔曼。克洛宁隶属赫尔曼。"
+    },
+    {
+      "question_id": "q-tc-000004",
+      "category": "time_conflict",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "activities/act21side/level_act21side_st04#003",
+      "answer": "莱昂图索交谈德克萨斯。贝纳尔多领导贝洛内家族。拉维妮娅交谈莱昂图索。莱昂图索交谈埃里奥。贝洛内家族交战罗塞蒂家族。"
+    },
+    {
+      "question_id": "q-tc-000005",
+      "category": "time_conflict",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 8,
+      "top1": "activities/act23side/level_act23side_06_end#000",
+      "answer": "重岳驻守玉门。玉门前往百灶。太傅交谈重岳。重岳交谈太傅。重岳隶属大炎。"
+    },
+    {
+      "question_id": "q-tc-000006",
+      "category": "time_conflict",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "obt/memory/story_savage_2_2#005",
+      "answer": "暴行离开雷姆必拓。暴行前往雷姆必拓。罗德岛医疗干员交谈暴行。暴行隶属雷姆必拓矿业公司。暴行隶属罗德岛。"
+    },
+    {
+      "question_id": "q-tc-000007",
+      "category": "time_conflict",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 10,
+      "top1": "activities/a001/level_a001_06_beg#001",
+      "answer": "斯卡蒂交谈格拉尼。格拉尼交谈斯卡蒂。斯卡蒂敌对格拉尼。格拉尼敌对斯卡蒂。格拉尼交战斯卡蒂。"
+    },
+    {
+      "question_id": "q-tc-000008",
+      "category": "time_conflict",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 10,
+      "top1": "activities/act33side/level_act33side_10_end#005",
+      "answer": "特雷西斯交谈特蕾西娅。特蕾西娅交谈特雷西斯。特雷西斯赠予特蕾西娅。王冠属于特蕾西娅。变形者集群交谈特蕾西娅。"
+    },
+    {
+      "question_id": "q-tc-000009",
+      "category": "time_conflict",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "activities/act46side/level_act46side_04_beg#002",
+      "answer": "菈塔托丝同盟维多利亚。菈塔托丝交谈维多利亚。维多利亚交谈菈塔托丝。菈塔托丝敌对阿克托斯。维多利亚同盟布朗陶。"
+    },
+    {
+      "question_id": "q-tc-000010",
+      "category": "time_conflict",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 8,
+      "top1": "activities/act33side/level_act33side_03_end#005",
+      "answer": "特蕾西娅交谈特雷西斯。特雷西斯交谈特蕾西娅。特蕾西娅敌对特雷西斯。特雷西斯交谈阿斯卡纶。特雷西斯持有石刃。"
+    },
+    {
+      "question_id": "q-tc-000011",
+      "category": "time_conflict",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 8,
+      "top1": "activities/act19side/level_act19side_05_beg#000",
+      "answer": "塞雷娅交谈缪尔赛思。塞雷娅救助缪尔赛思。缪尔赛思同行塞雷娅。缪尔赛思交谈塞雷娅。塞雷娅保护缪尔赛思。"
+    },
+    {
+      "question_id": "q-tc-000012",
+      "category": "time_conflict",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "activities/act45side/level_act45side_08_beg#004",
+      "answer": "弗朗西斯敌对八幡海铃。弗朗西斯交谈八幡海铃。弗朗西斯属于八幡海铃。弗朗西斯救助八幡海铃。弗朗西斯赠予八幡海铃。"
+    },
+    {
+      "question_id": "q-tc-000013",
+      "category": "time_conflict",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 8,
+      "top1": "activities/act21side/level_act21side_09_end#008",
+      "answer": "贝纳尔多师从扎罗。扎罗交谈贝纳尔多。扎罗敌对贝纳尔多。贝纳尔多背叛扎罗。扎罗指导贝纳尔多。"
+    },
+    {
+      "question_id": "q-tc-000014",
+      "category": "time_conflict",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 9,
+      "top1": "activities/act33side/level_act33side_02_end#005",
+      "answer": "特雷西斯指挥特蕾西娅。特蕾西娅交谈特雷西斯。特雷西斯交谈特蕾西娅。特蕾西娅敌对特雷西斯。特雷西斯交谈阿斯卡纶。"
+    },
+    {
+      "question_id": "q-tc-000015",
+      "category": "time_conflict",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "obt/memory/story_bubble_1_1#007",
+      "answer": "刻俄柏交谈泡泡。泡泡交谈刻俄柏。泡泡同盟刻俄柏。泡普卡交谈泡泡。泡泡隶属塞拉托部族。"
+    },
+    {
+      "question_id": "q-tc-000016",
+      "category": "time_conflict",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 7,
+      "top1": "obt/main/level_main_07-16_beg#003",
+      "answer": "爱国者效忠整合运动。爱国者隶属整合运动。阿米娅交谈爱国者。整合运动敌对乌萨斯。整合运动破坏切尔诺伯格。"
+    },
+    {
+      "question_id": "q-tc-000017",
+      "category": "time_conflict",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 8,
+      "top1": "activities/act21side/level_act21side_10_end#007",
+      "answer": "西西里夫人交谈莱昂图索。莱昂图索交谈西西里夫人。西西里夫人交谈德克萨斯。拉维妮娅交谈西西里夫人。西西里夫人创建灰厅。"
+    },
+    {
+      "question_id": "q-tc-000018",
+      "category": "time_conflict",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 8,
+      "top1": "activities/act38side/level_act38side_st02#004",
+      "answer": "英格丽敌对安东尼奥。英格丽交谈安东尼奥。安东尼奥交谈英格丽。英格丽救助安东尼奥。老威尼斯交谈英格丽。"
+    },
+    {
+      "question_id": "q-tc-000019",
+      "category": "time_conflict",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 10,
+      "top1": "obt/main/level_main_08-13_end#005",
+      "answer": "塔露拉交谈霜星。霜星赠予塔露拉。塔露拉指挥霜星。塔露拉交谈爱国者。爱国者交谈塔露拉。"
+    },
+    {
+      "question_id": "q-tc-000020",
+      "category": "time_conflict",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "activities/act44side/level_act44side_01_end#002",
+      "answer": "铁斋交谈三船。三船交谈铁斋。三船听命于铁斋。三船师从铁斋。三船效忠铁斋。"
+    },
+    {
+      "question_id": "q-tc-000021",
+      "category": "time_conflict",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 12,
+      "top1": "activities/act21side/level_act21side_02_end#001",
+      "answer": "德米特里效忠莱昂图索。德米特里交谈莱昂图索。莱昂图索指挥德米特里。德米特里同盟莱昂图索。莱昂图索交谈德米特里。"
+    },
+    {
+      "question_id": "q-tc-000022",
+      "category": "time_conflict",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "obt/main/level_main_17-01_beg#000",
+      "answer": "监正会敌对商业联合会。商业联合会敌对监正会。监正会同盟商业联合会。索娜敌对商业联合会。商业联合会创建零号地块。"
+    },
+    {
+      "question_id": "q-tc-000023",
+      "category": "time_conflict",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 7,
+      "top1": "activities/act25side/level_act25side_07_end#007",
+      "answer": "霍尔海雅交谈凯尔希。凯尔希交谈霍尔海雅。凯尔希同盟霍尔海雅。凯尔希交谈博士。可露希尔交谈凯尔希。"
+    },
+    {
+      "question_id": "q-tc-000024",
+      "category": "time_conflict",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "obt/main/level_main_14-08_beg#004",
+      "answer": "Logos背叛巴别塔。Logos隶属巴别塔。巴别塔成员隶属巴别塔。巴别塔位于卡兹戴尔。（注：以上关系存在互斥记录，见 warnings，不作单一结论。）"
+    },
+    {
+      "question_id": "q-tc-000025",
+      "category": "time_conflict",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "obt/main/level_main_11-12_end#003",
+      "answer": "阿斯兰同盟德拉克。钥匙属于阿斯兰。钥匙属于德拉克。塔露拉敌对爱布拉娜。爱布拉娜敌对塔露拉。"
+    },
+    {
+      "question_id": "q-tc-000026",
+      "category": "time_conflict",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "obt/main/level_main_07-03_beg#005",
+      "answer": "罗德岛前往切尔诺伯格。阿米娅领导罗德岛。爱国者离开乌萨斯。落日峡谷位于乌萨斯。乌萨斯敌对萨米。"
+    },
+    {
+      "question_id": "q-tc-000027",
+      "category": "time_conflict",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "obt/main/level_main_13-13_end#006",
+      "answer": "阿米娅交谈赫德雷。推进之王交谈赫德雷。明椒交谈赫德雷。赫德雷同盟罗德岛。赫德雷听命于特雷西斯。"
+    },
+    {
+      "question_id": "q-tc-000028",
+      "category": "time_conflict",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "obt/main/level_main_15-05_end#000",
+      "answer": "凯尔希交谈博士。可露希尔交谈凯尔希。阿米娅交谈凯尔希。凯尔希交谈阿米娅。凯尔希指挥Raidian。"
+    },
+    {
+      "question_id": "q-tc-000029",
+      "category": "time_conflict",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "activities/act14side/level_act14side_08_beg#001",
+      "answer": "休露丝背叛布朗陶家。休露丝隶属布朗陶家。休露丝亲属尤卡坦。休露丝救助尤卡坦。休露丝隶属布朗陶。（注：以上关系存在互斥记录，见 warnings，不作单一结论。）"
+    },
+    {
+      "question_id": "q-tc-000030",
+      "category": "time_conflict",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 3,
+      "top1": "activities/act48side/level_act48side_08_end#000",
+      "answer": "玛夏耶尔隶属萨尔贡。萨尔贡持有克瑞斯拉的竖琴。"
+    },
+    {
+      "question_id": "q-tc-000031",
+      "category": "time_conflict",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "activities/act46side/level_act46side_05_end#005",
+      "answer": "菈塔托丝同盟喀兰贸易。菈塔托丝敌对喀兰贸易。菈塔托丝领导布朗陶家。菈塔托丝交谈恩希欧迪斯。菈塔托丝交谈莫希。"
+    },
+    {
+      "question_id": "q-tc-000032",
+      "category": "time_conflict",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 9,
+      "top1": "obt/main/level_main_07-01_end#000",
+      "answer": "凯尔希交谈魏彦吾。魏彦吾交谈凯尔希。魏彦吾领导龙门。魏彦吾指挥陈。阿米娅交谈魏彦吾。"
+    },
+    {
+      "question_id": "q-na-000001",
+      "category": "negative_abstain",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 8,
+      "top1": "activities/act18mini/level_act18mini_st04#009",
+      "answer": "隐德来希隶属玫瑰河畔。隐德来希破坏血魔大君。凯尔希交谈隐德来希。隐德来希交谈凯尔希。隐德来希赠予弥尔顿。"
+    },
+    {
+      "question_id": "q-na-000002",
+      "category": "negative_abstain",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "activities/act19side/level_act19side_06_end#004",
+      "answer": "埃琳娜交谈斐尔迪南。斐尔迪南交谈莱茵防卫科。斐尔迪南指挥莱茵防卫科。斐尔迪南指挥埃琳娜。莱茵防卫科听命于斐尔迪南。"
+    },
+    {
+      "question_id": "q-na-000003",
+      "category": "negative_abstain",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 8,
+      "top1": "activities/act20side/level_act20side_02_end#002",
+      "answer": "阿芙朵嘉交谈嘉维尔。阿芙朵嘉交谈极境。阿芙朵嘉交谈卡奇·叙光。阿芙朵嘉隶属际崖城。嘉维尔交谈阿芙朵嘉。"
+    },
+    {
+      "question_id": "q-na-000004",
+      "category": "negative_abstain",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 19,
+      "top1": "activities/act24side/level_act24side_09_end#004",
+      "answer": "源石感染火龙。夜刀交谈学者猫。学者猫交谈黑角。学者猫指挥工匠猫。学者猫交谈夜刀。"
+    },
+    {
+      "question_id": "q-na-000005",
+      "category": "negative_abstain",
+      "abstained": true,
+      "should_abstain": false,
+      "citations": 0,
+      "top1": "activities/act29side/level_act29side_04_beg#000",
+      "answer": ""
+    },
+    {
+      "question_id": "q-na-000006",
+      "category": "negative_abstain",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 1,
+      "top1": "activities/act29side/level_act29side_st01#000",
+      "answer": "薇薇安娜离开卡西米尔。"
+    },
+    {
+      "question_id": "q-na-000007",
+      "category": "negative_abstain",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 9,
+      "top1": "activities/act33side/level_act33side_01_end#001",
+      "answer": "菈玛莲交谈特蕾西娅。菈玛莲隶属女妖王庭。菈玛莲领导女妖王庭。菈玛莲亲属哀珐尼尔。菈玛莲交谈特雷西斯。"
+    },
+    {
+      "question_id": "q-na-000008",
+      "category": "negative_abstain",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "obt/main/level_main_06-06_beg#003",
+      "answer": "霜星位于龙门。霜星交谈罗德岛。浮士德指挥梅菲斯特。梅菲斯特交谈浮士德。霜星同盟整合运动。"
+    },
+    {
+      "question_id": "q-na-000009",
+      "category": "negative_abstain",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "obt/main/level_main_08-14_end#003",
+      "answer": "谢尔盖师从凯尔希。凯尔希任职鲍里斯集团。凯尔希交谈阿米娅。凯尔希研究源石。凯尔希前往哥伦比亚。"
+    },
+    {
+      "question_id": "q-na-000010",
+      "category": "negative_abstain",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "obt/main/level_main_08-14_end#003",
+      "answer": "谢尔盖师从凯尔希。凯尔希任职鲍里斯集团。凯尔希交谈阿米娅。凯尔希研究源石。凯尔希前往哥伦比亚。"
+    },
+    {
+      "question_id": "q-na-000011",
+      "category": "negative_abstain",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "obt/main/level_main_08-14_end#003",
+      "answer": "谢尔盖师从凯尔希。凯尔希任职鲍里斯集团。凯尔希交谈阿米娅。凯尔希研究源石。凯尔希前往哥伦比亚。"
+    },
+    {
+      "question_id": "q-na-000012",
+      "category": "negative_abstain",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 12,
+      "top1": "obt/memory/story_wyvern_1_1#004",
+      "answer": "香草研究源石虫。香草研究矿石病。香草交谈查德。源石虫使用啤酒花。查德交谈香草。"
+    },
+    {
+      "question_id": "q-na-000013",
+      "category": "negative_abstain",
+      "abstained": false,
+      "should_abstain": true,
+      "citations": 1,
+      "top1": "activities/act46side/level_act46side_06_end#005",
+      "answer": "维多利亚使用内部铁道。"
+    },
+    {
+      "question_id": "q-na-000014",
+      "category": "negative_abstain",
+      "abstained": true,
+      "should_abstain": true,
+      "citations": 0,
+      "top1": "obt/main/level_main_09-04_beg#003",
+      "answer": ""
+    },
+    {
+      "question_id": "q-na-000015",
+      "category": "negative_abstain",
+      "abstained": false,
+      "should_abstain": true,
+      "citations": 4,
+      "top1": "activities/act27side/level_act27side_st01#007",
+      "answer": "凯勒同行玛格娜·瑙曼。玛格娜·瑙曼研究火山。玛格娜·瑙曼亲属阿黛尔。玛格娜·瑙曼研究天灾。"
+    },
+    {
+      "question_id": "q-na-000016",
+      "category": "negative_abstain",
+      "abstained": false,
+      "should_abstain": true,
+      "citations": 2,
+      "top1": "activities/act19side/level_act19side_02_beg#000",
+      "answer": "邻居交谈阿根。阿根交谈邻居。"
+    },
+    {
+      "question_id": "q-na-000017",
+      "category": "negative_abstain",
+      "abstained": true,
+      "should_abstain": true,
+      "citations": 0,
+      "top1": "activities/act54side/level_act54side_01_beg#003",
+      "answer": ""
+    },
+    {
+      "question_id": "q-na-000018",
+      "category": "negative_abstain",
+      "abstained": false,
+      "should_abstain": true,
+      "citations": 7,
+      "top1": "activities/act10mini/level_act10mini_st02#000",
+      "answer": "夜烟交谈小敏。小敏交谈丹顿兄弟。夜烟赠予小敏。"
+    },
+    {
+      "question_id": "q-na-000019",
+      "category": "negative_abstain",
+      "abstained": false,
+      "should_abstain": true,
+      "citations": 6,
+      "top1": "activities/act46side/level_act46side_01_end#003",
+      "answer": "缪尔赛思交谈埃琳娜。多萝西交谈埃琳娜。诺希斯交谈埃琳娜。白面鸮交谈埃琳娜。埃琳娜交谈白面鸮。"
+    },
+    {
+      "question_id": "q-na-000020",
+      "category": "negative_abstain",
+      "abstained": false,
+      "should_abstain": true,
+      "citations": 2,
+      "top1": "obt/memory/story_elysm_1_1#002",
+      "answer": "极境制造信号发射接收一体器。极境持有信号发射接收一体器。"
+    },
+    {
+      "question_id": "q-na-000021",
+      "category": "negative_abstain",
+      "abstained": false,
+      "should_abstain": true,
+      "citations": 1,
+      "top1": "activities/act6d5/level_act6d5_st01#002",
+      "answer": "年兽破坏龙门。"
+    },
+    {
+      "question_id": "q-na-000022",
+      "category": "negative_abstain",
+      "abstained": false,
+      "should_abstain": true,
+      "citations": 7,
+      "top1": "activities/act53side/level_act53side_st01#002",
+      "answer": "巴尼特交谈安洁莉娜。安洁莉娜交谈巴尼特。巴尼特驾驶越野车。巴尼特交谈塔妮。"
+    },
+    {
+      "question_id": "q-na-000023",
+      "category": "negative_abstain",
+      "abstained": false,
+      "should_abstain": true,
+      "citations": 4,
+      "top1": "obt/main/level_main_12-02_beg#002",
+      "answer": "萨卡兹交战卡登区。卡登区位于伦蒂尼姆。"
+    },
+    {
+      "question_id": "q-na-000024",
+      "category": "negative_abstain",
+      "abstained": false,
+      "should_abstain": true,
+      "citations": 2,
+      "top1": "activities/act24side/level_act24side_07_end#000",
+      "answer": "泷居应敌对犰爪兽。犰爪兽导致兽潮。"
+    },
+    {
+      "question_id": "q-na-000025",
+      "category": "negative_abstain",
+      "abstained": true,
+      "should_abstain": true,
+      "citations": 0,
+      "top1": "obt/memory/story_elysm_1_1#002",
+      "answer": ""
+    },
+    {
+      "question_id": "q-na-000026",
+      "category": "negative_abstain",
+      "abstained": false,
+      "should_abstain": true,
+      "citations": 1,
+      "top1": "obt/memory/story_gvial2_1_1#008",
+      "answer": "巨大的终极丑东西Mk3产自七号烈酒派。"
+    },
+    {
+      "question_id": "q-na-000027",
+      "category": "negative_abstain",
+      "abstained": false,
+      "should_abstain": true,
+      "citations": 1,
+      "top1": "activities/act36side/level_act36side_07_beg#001",
+      "answer": "瑞恩前往玉米窝。"
+    },
+    {
+      "question_id": "q-na-000028",
+      "category": "negative_abstain",
+      "abstained": false,
+      "should_abstain": true,
+      "citations": 1,
+      "top1": "obt/memory/story_savage_1_1#000",
+      "answer": "暴行隶属保安部。"
+    },
+    {
+      "question_id": "q-na-000029",
+      "category": "negative_abstain",
+      "abstained": false,
+      "should_abstain": true,
+      "citations": 4,
+      "top1": "activities/act6d5/level_act6d5_st01#008",
+      "answer": "雪雉使用实验室用室温校对系统。雪雉制造实验室用室温校对系统。雪雉交谈实验室用室温校对系统。实验室用室温校对系统交谈雪雉。"
+    },
+    {
+      "question_id": "q-na-000030",
+      "category": "negative_abstain",
+      "abstained": false,
+      "should_abstain": true,
+      "citations": 5,
+      "top1": "activities/act34side/level_act34side_05_end#003",
+      "answer": "歌蕾蒂娅交谈乌尔比安。乌尔比安交谈博士。乌尔比安前往信标发射井。乌尔比安破坏航道计划。海嗣交谈乌尔比安。"
+    },
+    {
+      "question_id": "q-na-000031",
+      "category": "negative_abstain",
+      "abstained": false,
+      "should_abstain": true,
+      "citations": 16,
+      "top1": "activities/act13d5/level_act13d5_01_beg#003",
+      "answer": "佐菲娅指导玛莉娅。佐菲娅隶属临光家。玛莉娅交谈佐菲娅。佐菲娅交谈玛莉娅。光头马丁交谈佐菲娅。"
+    },
+    {
+      "question_id": "q-na-000032",
+      "category": "negative_abstain",
+      "abstained": false,
+      "should_abstain": true,
+      "citations": 2,
+      "top1": "activities/act47side/level_act47side_05_end#000",
+      "answer": "费尔南创建独立旅行社。费尔南任职独立旅行社。"
+    },
+    {
+      "question_id": "q-ad-000001",
+      "category": "adversarial",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 2,
+      "top1": "activities/act10mini/level_act10mini_st01#001",
+      "answer": "卡拉顿城镇议会雇用苦根。罗德岛同盟卡拉顿城镇议会。"
+    },
+    {
+      "question_id": "q-ad-000002",
+      "category": "adversarial",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 6,
+      "top1": "activities/act10d5/level_act10d5_st07#002",
+      "answer": "罗莲娜隶属整合运动。整合运动驻守切尔诺伯格。爱国者隶属整合运动。梅菲斯特隶属整合运动。赫德雷冲突整合运动。"
+    },
+    {
+      "question_id": "q-ad-000003",
+      "category": "adversarial",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 3,
+      "top1": "obt/main/level_main_15-01_end#002",
+      "answer": "曼弗雷德持有提卡兹之根。提卡兹持有光环。阿斯卡纶使用提卡兹之根。"
+    },
+    {
+      "question_id": "q-ad-000004",
+      "category": "adversarial",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "activities/act47side/level_act47side_02_beg#003",
+      "answer": "高登指挥太空鳞兽零五四。太空鳞兽零五四交谈雅斯彭。太空鳞兽冲突古斯塔夫。高登使用太空鳞兽。高登制造太空鳞兽。"
+    },
+    {
+      "question_id": "q-ad-000005",
+      "category": "adversarial",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 2,
+      "top1": "obt/rogue/rogue_6/monthrecord/month_record_rogue_6_1_3#000",
+      "answer": "杜宾隶属玻利瓦尔第二独立国。"
+    },
+    {
+      "question_id": "q-ad-000006",
+      "category": "adversarial",
+      "abstained": true,
+      "should_abstain": false,
+      "citations": 0,
+      "top1": "activities/act18side/level_act18side_st01#002",
+      "answer": ""
+    },
+    {
+      "question_id": "q-ad-000007",
+      "category": "adversarial",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 7,
+      "top1": "activities/act46side/level_act46side_01_end#000",
+      "answer": "莱茵生命研究星荚。赫默隶属莱茵生命。埃琳娜隶属莱茵生命。莱茵生命同盟喀兰贸易。莱茵生命观测站位于谢拉格。"
+    },
+    {
+      "question_id": "q-ad-000008",
+      "category": "adversarial",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 2,
+      "top1": "activities/act10mini/level_act10mini_st01#003",
+      "answer": "苏茜前往卡拉顿。"
+    },
+    {
+      "question_id": "q-ad-000009",
+      "category": "adversarial",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "activities/act38side/level_act38side_st01#000",
+      "answer": "诺埃米隶属新沃尔西尼警察局。卡彭位于新沃尔西尼。新沃尔西尼港位于新沃尔西尼。新沃尔西尼使用哥伦比亚。新沃尔西尼参与狂欢节。"
+    },
+    {
+      "question_id": "q-ad-000010",
+      "category": "adversarial",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 5,
+      "top1": "obt/main/level_st_17-01#005",
+      "answer": "雅科夫·彼得洛夫参与第四集团军军队哗变事件。第二集团军交战第四集团军。远北政府赠予第四集团军。安德里安领导第四集团军。第四集团军听命于帝国议会。"
+    },
+    {
+      "question_id": "q-ad-000011",
+      "category": "adversarial",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 17,
+      "top1": "activities/act28side/level_act28side_07_end#005",
+      "answer": "银行行长交谈克里夫。克里夫交谈银行行长。银行位于达维镇。"
+    },
+    {
+      "question_id": "q-ad-000012",
+      "category": "adversarial",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 16,
+      "top1": "activities/act17side/level_act17side_st07#002",
+      "answer": "船长阿方索交谈斯卡蒂。船长阿方索持有愚人号。船长阿方索交谈艾丽妮。船长阿方索交谈幽灵鲨。艾丽妮交谈船长阿方索。"
+    },
+    {
+      "question_id": "q-ad-000013",
+      "category": "adversarial",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 3,
+      "top1": "activities/act23side/level_act23side_07_beg#002",
+      "answer": "杜遥夜隶属行裕物流。铸剑坊敌对行裕物流。"
+    },
+    {
+      "question_id": "q-ad-000014",
+      "category": "adversarial",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 3,
+      "top1": "obt/main/level_st_17-02#005",
+      "answer": "别乔克前往圣骏堡。阿洛伊泽前往圣骏堡。维特前往圣骏堡。"
+    },
+    {
+      "question_id": "q-ad-000015",
+      "category": "adversarial",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 3,
+      "top1": "activities/act19side/level_act19side_st02#005",
+      "answer": "哥伦比亚交谈恩希欧迪斯。哥伦比亚保护莱茵生命。霍尔海雅任职哥伦比亚占星研究协会。"
+    },
+    {
+      "question_id": "q-ad-000016",
+      "category": "adversarial",
+      "abstained": false,
+      "should_abstain": false,
+      "citations": 1,
+      "top1": "activities/act42side/level_act42side_04_end#000",
+      "answer": "圣堂巡卫交战费德里科。"
+    }
+  ]
+}

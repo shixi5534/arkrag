@@ -1,0 +1,62 @@
+{
+ "dev@6000": {
+  "n": 38,
+  "eq_current": 12,
+  "eq_fix": 15,
+  "eq_ceil": 37,
+  "extra_a": 17,
+  "miss_a": 35,
+  "extra_b": 0,
+  "miss_b": 35
+ },
+ "dev@12000": {
+  "n": 38,
+  "eq_current": 11,
+  "eq_fix": 22,
+  "eq_ceil": 37,
+  "extra_a": 46,
+  "miss_a": 23,
+  "extra_b": 0,
+  "miss_b": 23
+ },
+ "dev@40000": {
+  "n": 38,
+  "eq_current": 14,
+  "eq_fix": 32,
+  "eq_ceil": 37,
+  "extra_a": 69,
+  "miss_a": 8,
+  "extra_b": 1,
+  "miss_b": 8
+ },
+ "holdout@6000": {
+  "n": 26,
+  "eq_current": 7,
+  "eq_fix": 9,
+  "eq_ceil": 25,
+  "extra_a": 18,
+  "miss_a": 24,
+  "extra_b": 0,
+  "miss_b": 24
+ },
+ "holdout@12000": {
+  "n": 26,
+  "eq_current": 6,
+  "eq_fix": 14,
+  "eq_ceil": 25,
+  "extra_a": 37,
+  "miss_a": 16,
+  "extra_b": 0,
+  "miss_b": 16
+ },
+ "holdout@40000": {
+  "n": 26,
+  "eq_current": 10,
+  "eq_fix": 23,
+  "eq_ceil": 25,
+  "extra_a": 66,
+  "miss_a": 3,
+  "extra_b": 0,
+  "miss_b": 3
+ }
+}

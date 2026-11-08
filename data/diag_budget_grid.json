@@ -1,0 +1,180 @@
+{
+ "b6000_direct_c5": {
+  "correct": 196,
+  "exact": 73,
+  "p95_ms": 0.5,
+  "units_mean": 5.01,
+  "n": 350
+ },
+ "b6000_direct_c12": {
+  "correct": 211,
+  "exact": 73,
+  "p95_ms": 0.5,
+  "units_mean": 5.01,
+  "n": 350
+ },
+ "b6000_assert1_c5": {
+  "correct": 189,
+  "exact": 65,
+  "p95_ms": 0.5,
+  "units_mean": 5.02,
+  "n": 350
+ },
+ "b6000_assert1_c12": {
+  "correct": 207,
+  "exact": 65,
+  "p95_ms": 0.5,
+  "units_mean": 5.02,
+  "n": 350
+ },
+ "b6000_direct_assert_c5": {
+  "correct": 188,
+  "exact": 65,
+  "p95_ms": 0.4,
+  "units_mean": 5.02,
+  "n": 350
+ },
+ "b6000_direct_assert_c12": {
+  "correct": 206,
+  "exact": 65,
+  "p95_ms": 0.5,
+  "units_mean": 5.02,
+  "n": 350
+ },
+ "b9000_direct_c5": {
+  "correct": 208,
+  "exact": 77,
+  "p95_ms": 0.6,
+  "units_mean": 7.42,
+  "n": 350
+ },
+ "b9000_direct_c12": {
+  "correct": 223,
+  "exact": 77,
+  "p95_ms": 0.6,
+  "units_mean": 7.42,
+  "n": 350
+ },
+ "b9000_assert1_c5": {
+  "correct": 208,
+  "exact": 71,
+  "p95_ms": 0.6,
+  "units_mean": 7.41,
+  "n": 350
+ },
+ "b9000_assert1_c12": {
+  "correct": 226,
+  "exact": 71,
+  "p95_ms": 0.6,
+  "units_mean": 7.41,
+  "n": 350
+ },
+ "b9000_direct_assert_c5": {
+  "correct": 207,
+  "exact": 73,
+  "p95_ms": 0.5,
+  "units_mean": 7.41,
+  "n": 350
+ },
+ "b9000_direct_assert_c12": {
+  "correct": 225,
+  "exact": 73,
+  "p95_ms": 0.6,
+  "units_mean": 7.41,
+  "n": 350
+ },
+ "b12000_direct_c5": {
+  "correct": 215,
+  "exact": 80,
+  "p95_ms": 0.7,
+  "units_mean": 9.79,
+  "n": 350
+ },
+ "b12000_direct_c12": {
+  "correct": 234,
+  "exact": 80,
+  "p95_ms": 0.7,
+  "units_mean": 9.79,
+  "n": 350
+ },
+ "b12000_assert1_c5": {
+  "correct": 215,
+  "exact": 75,
+  "p95_ms": 0.7,
+  "units_mean": 9.79,
+  "n": 350
+ },
+ "b12000_assert1_c12": {
+  "correct": 231,
+  "exact": 75,
+  "p95_ms": 0.8,
+  "units_mean": 9.79,
+  "n": 350
+ },
+ "b12000_direct_assert_c5": {
+  "correct": 217,
+  "exact": 79,
+  "p95_ms": 0.7,
+  "units_mean": 9.79,
+  "n": 350
+ },
+ "b12000_direct_assert_c12": {
+  "correct": 233,
+  "exact": 79,
+  "p95_ms": 0.8,
+  "units_mean": 9.79,
+  "n": 350
+ },
+ "b18000_direct_c5": {
+  "correct": 218,
+  "exact": 80,
+  "p95_ms": 1.0,
+  "units_mean": 14.61,
+  "n": 350
+ },
+ "b18000_direct_c12": {
+  "correct": 237,
+  "exact": 80,
+  "p95_ms": 1.1,
+  "units_mean": 14.61,
+  "n": 350
+ },
+ "b18000_assert1_c5": {
+  "correct": 213,
+  "exact": 75,
+  "p95_ms": 1.0,
+  "units_mean": 14.65,
+  "n": 350
+ },
+ "b18000_assert1_c12": {
+  "correct": 234,
+  "exact": 75,
+  "p95_ms": 1.0,
+  "units_mean": 14.65,
+  "n": 350
+ },
+ "b18000_direct_assert_c5": {
+  "correct": 216,
+  "exact": 78,
+  "p95_ms": 1.0,
+  "units_mean": 14.62,
+  "n": 350
+ },
+ "b18000_direct_assert_c12": {
+  "correct": 235,
+  "exact": 78,
+  "p95_ms": 1.0,
+  "units_mean": 14.62,
+  "n": 350
+ },
+ "ref@6000": {
+  "correct": 196,
+  "exact": 73,
+  "n": 350
+ },
+ "ref@40000": {
+  "correct": 228,
+  "exact": 83,
+  "n": 350
+ }
+}

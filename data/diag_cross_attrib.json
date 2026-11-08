@@ -1,0 +1,3495 @@
+{
+ "modes": [
+  "A",
+  "B",
+  "C",
+  "D"
+ ],
+ "splits": {
+  "dev": {
+   "n": 38,
+   "pass": {
+    "A": 19,
+    "B": 13,
+    "C": 13,
+    "D": 19
+   },
+   "extra_chapters": {
+    "A": 34,
+    "B": 0,
+    "C": 0,
+    "D": 34
+   },
+   "per": [
+    {
+     "qid": "q-cx-000001",
+     "gold": [
+      "act33side",
+      "main_ep14"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act17mini",
+        "act33side",
+        "main_ep14"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      },
+      "B": {
+       "chapters": [
+        "act33side",
+        "main_ep14"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "C": {
+       "chapters": [
+        "act33side",
+        "main_ep14"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "D": {
+       "chapters": [
+        "act17mini",
+        "act33side",
+        "main_ep14"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-000003",
+     "gold": [
+      "main_ep16",
+      "main_st17"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "main_ep16",
+        "main_st17"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "B": {
+       "chapters": [
+        "main_ep16",
+        "main_st17"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "C": {
+       "chapters": [
+        "main_ep16",
+        "main_st17"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "D": {
+       "chapters": [
+        "main_ep16",
+        "main_st17"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-000004",
+     "gold": [
+      "act17side",
+      "memory_deepcl",
+      "rogue_rogue_6"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act17side",
+        "act34side",
+        "act39side",
+        "rogue_rogue_2",
+        "rogue_rogue_5"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "B": {
+       "chapters": [],
+       "pass": false,
+       "reason": "empty"
+      },
+      "C": {
+       "chapters": [],
+       "pass": false,
+       "reason": "empty"
+      },
+      "D": {
+       "chapters": [
+        "act17side",
+        "act34side",
+        "act39side",
+        "rogue_rogue_2",
+        "rogue_rogue_5"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-000005",
+     "gold": [
+      "main_ep14",
+      "main_st11"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "main_ep14",
+        "main_st11"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "B": {
+       "chapters": [
+        "main_ep14"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "main_ep14"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "main_ep14",
+        "main_st11"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-000006",
+     "gold": [
+      "act17d0",
+      "act24side"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act13d5",
+        "act17d0",
+        "act19side",
+        "act24side",
+        "act38side",
+        "act47side",
+        "act6d5",
+        "main_ep16"
+       ],
+       "pass": false,
+       "reason": "extra_chapters_outnumber_gold"
+      },
+      "B": {
+       "chapters": [
+        "act17d0"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "act17d0"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act13d5",
+        "act17d0",
+        "act19side",
+        "act24side",
+        "act38side",
+        "act47side",
+        "act6d5",
+        "main_ep16"
+       ],
+       "pass": false,
+       "reason": "extra_chapters_outnumber_gold"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-000007",
+     "gold": [
+      "memory_huang",
+      "memory_weedy"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "memory_huang",
+        "memory_weedy"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "B": {
+       "chapters": [
+        "memory_huang",
+        "memory_weedy"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "C": {
+       "chapters": [
+        "memory_huang",
+        "memory_weedy"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "D": {
+       "chapters": [
+        "memory_huang",
+        "memory_weedy"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-000008",
+     "gold": [
+      "rogue_rogue_6",
+      "roguelike_level_rogue6_ending_4"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "rogue_rogue_6",
+        "roguelike_level_rogue6_ending_4"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "B": {
+       "chapters": [
+        "rogue_rogue_6",
+        "roguelike_level_rogue6_ending_4"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "C": {
+       "chapters": [
+        "rogue_rogue_6",
+        "roguelike_level_rogue6_ending_4"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "D": {
+       "chapters": [
+        "rogue_rogue_6",
+        "roguelike_level_rogue6_ending_4"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-000009",
+     "gold": [
+      "act40side",
+      "act49side"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act40side",
+        "act49side",
+        "rogue_rogue_5"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      },
+      "B": {
+       "chapters": [
+        "act40side",
+        "act49side"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "C": {
+       "chapters": [
+        "act40side",
+        "act49side"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "D": {
+       "chapters": [
+        "act40side",
+        "act49side",
+        "rogue_rogue_5"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-000010",
+     "gold": [
+      "main_ep16",
+      "main_spst16"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "main_ep16",
+        "main_st17"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "B": {
+       "chapters": [
+        "main_ep16"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "main_ep16"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "main_ep16",
+        "main_st17"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-000011",
+     "gold": [
+      "act27side",
+      "act3d0",
+      "memory_bryota",
+      "memory_buildr"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act27side",
+        "act3d0",
+        "memory_buildr"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "B": {
+       "chapters": [
+        "act27side",
+        "act3d0"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "act27side",
+        "act3d0"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act27side",
+        "act3d0",
+        "memory_buildr"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-000014",
+     "gold": [
+      "act7mini",
+      "memory_bluep",
+      "memory_glacus",
+      "memory_indigo"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act7mini",
+        "memory_bluep",
+        "memory_glacus"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "B": {
+       "chapters": [
+        "act7mini",
+        "memory_bluep",
+        "memory_glacus"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "act7mini",
+        "memory_bluep",
+        "memory_glacus"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act7mini",
+        "memory_bluep",
+        "memory_glacus"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-000016",
+     "gold": [
+      "act28side",
+      "memory_tinman"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act28side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "B": {
+       "chapters": [
+        "act28side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "act28side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act28side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-000017",
+     "gold": [
+      "memory_mitm",
+      "memory_nymph"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "main_ep13",
+        "memory_mitm",
+        "memory_nymph"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      },
+      "B": {
+       "chapters": [
+        "memory_mitm",
+        "memory_nymph"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "C": {
+       "chapters": [
+        "memory_mitm",
+        "memory_nymph"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "D": {
+       "chapters": [
+        "main_ep13",
+        "memory_mitm",
+        "memory_nymph"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-000020",
+     "gold": [
+      "act17side",
+      "act18d3",
+      "rogue_rogue_2"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act17side",
+        "act18d3",
+        "act52side",
+        "rogue_rogue_2"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      },
+      "B": {
+       "chapters": [
+        "act17side",
+        "act18d3"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "act17side",
+        "act18d3"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act17side",
+        "act18d3",
+        "act52side",
+        "rogue_rogue_2"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-000021",
+     "gold": [
+      "act14mini",
+      "act16d5",
+      "memory_saga"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act14mini",
+        "act16d5",
+        "memory_saga"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "B": {
+       "chapters": [
+        "act14mini",
+        "act16d5",
+        "memory_saga"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "C": {
+       "chapters": [
+        "act14mini",
+        "act16d5",
+        "memory_saga"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "D": {
+       "chapters": [
+        "act14mini",
+        "act16d5",
+        "memory_saga"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-000022",
+     "gold": [
+      "memory_dagda",
+      "memory_jaksel",
+      "memory_tiger"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "memory_jaksel",
+        "memory_tiger"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "B": {
+       "chapters": [
+        "memory_jaksel",
+        "memory_tiger"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "memory_jaksel",
+        "memory_tiger"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "memory_jaksel",
+        "memory_tiger"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-000024",
+     "gold": [
+      "act42side",
+      "memory_graceb"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act42side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "B": {
+       "chapters": [
+        "act42side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "act42side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act42side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-000026",
+     "gold": [
+      "act43side",
+      "memory_tippi"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act43side",
+        "memory_tippi"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "B": {
+       "chapters": [
+        "act43side",
+        "memory_tippi"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "C": {
+       "chapters": [
+        "act43side",
+        "memory_tippi"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "D": {
+       "chapters": [
+        "act43side",
+        "memory_tippi"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-000027",
+     "gold": [
+      "act11d0",
+      "act28side"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act11d0",
+        "act16mini",
+        "act28side",
+        "rogue_rogue_4"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      },
+      "B": {
+       "chapters": [
+        "act11d0",
+        "act28side"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "C": {
+       "chapters": [
+        "act11d0",
+        "act28side"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "D": {
+       "chapters": [
+        "act11d0",
+        "act16mini",
+        "act28side",
+        "rogue_rogue_4"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-000029",
+     "gold": [
+      "act22side",
+      "memory_confes",
+      "rogue_rogue_4"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act21mini",
+        "act21side",
+        "act38side",
+        "memory_haak"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "B": {
+       "chapters": [],
+       "pass": false,
+       "reason": "empty"
+      },
+      "C": {
+       "chapters": [],
+       "pass": false,
+       "reason": "empty"
+      },
+      "D": {
+       "chapters": [
+        "act21mini",
+        "act21side",
+        "act38side",
+        "memory_haak"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-000030",
+     "gold": [
+      "act29side",
+      "act42side"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act29side",
+        "act42side"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "B": {
+       "chapters": [
+        "act29side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "act29side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act29side",
+        "act42side"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-000032",
+     "gold": [
+      "act38side",
+      "main_ep14"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act12side",
+        "act32side",
+        "act38side",
+        "act45side",
+        "memory_coldst",
+        "memory_jnight",
+        "memory_wscoot"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "B": {
+       "chapters": [
+        "act38side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "act38side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act12side",
+        "act32side",
+        "act38side",
+        "act45side",
+        "memory_coldst",
+        "memory_jnight",
+        "memory_wscoot"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900002",
+     "gold": [
+      "act18d3",
+      "act36side",
+      "act52side"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act18d3"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "B": {
+       "chapters": [
+        "act18d3"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "act18d3"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act18d3"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900005",
+     "gold": [
+      "act21side",
+      "act38side",
+      "memory_demetr",
+      "memory_vigil"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act21side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "B": {
+       "chapters": [
+        "act21side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "act21side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act21side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900008",
+     "gold": [
+      "memory_bstalk",
+      "memory_flower"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act13mini",
+        "act31side",
+        "memory_bstalk",
+        "memory_ctable",
+        "memory_flower"
+       ],
+       "pass": false,
+       "reason": "extra_chapters_outnumber_gold"
+      },
+      "B": {
+       "chapters": [
+        "memory_bstalk",
+        "memory_flower"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "C": {
+       "chapters": [
+        "memory_bstalk",
+        "memory_flower"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "D": {
+       "chapters": [
+        "act13mini",
+        "act31side",
+        "memory_bstalk",
+        "memory_ctable",
+        "memory_flower"
+       ],
+       "pass": false,
+       "reason": "extra_chapters_outnumber_gold"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900011",
+     "gold": [
+      "act51side",
+      "memory_headb2"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act51side",
+        "memory_headb2"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "B": {
+       "chapters": [
+        "act51side",
+        "memory_headb2"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "C": {
+       "chapters": [
+        "act51side",
+        "memory_headb2"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "D": {
+       "chapters": [
+        "act51side",
+        "memory_headb2"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900012",
+     "gold": [
+      "act26side",
+      "memory_spuria"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act26side",
+        "memory_spuria"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "B": {
+       "chapters": [
+        "act26side",
+        "memory_spuria"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "C": {
+       "chapters": [
+        "act26side",
+        "memory_spuria"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "D": {
+       "chapters": [
+        "act26side",
+        "memory_spuria"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900013",
+     "gold": [
+      "act34side",
+      "act52side",
+      "main_ep15"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act34side",
+        "act52side",
+        "main_ep15"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "B": {
+       "chapters": [
+        "act34side",
+        "main_ep15"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "act34side",
+        "main_ep15"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act34side",
+        "act52side",
+        "main_ep15"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900014",
+     "gold": [
+      "act14side",
+      "act30side",
+      "memory_blackd"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act14side",
+        "act30side",
+        "memory_blackd"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "B": {
+       "chapters": [
+        "act14side",
+        "memory_blackd"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "act14side",
+        "memory_blackd"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act14side",
+        "act30side",
+        "memory_blackd"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900016",
+     "gold": [
+      "act15side",
+      "act31side",
+      "act40side",
+      "act49side"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act31side",
+        "act40side",
+        "act49side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "B": {
+       "chapters": [
+        "act31side",
+        "act40side",
+        "act49side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "act31side",
+        "act40side",
+        "act49side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act31side",
+        "act40side",
+        "act49side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900017",
+     "gold": [
+      "main_ep12",
+      "main_st12",
+      "memory_morgan"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act37side",
+        "main_ep12",
+        "main_st12",
+        "memory_morgan"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      },
+      "B": {
+       "chapters": [
+        "main_ep12",
+        "main_st12"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "main_ep12",
+        "main_st12"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act37side",
+        "main_ep12",
+        "main_st12",
+        "memory_morgan"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900018",
+     "gold": [
+      "act22side",
+      "act41side"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act22side",
+        "act41side",
+        "main_ep09",
+        "main_ep10"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      },
+      "B": {
+       "chapters": [
+        "act22side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "act22side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act22side",
+        "act41side",
+        "main_ep09",
+        "main_ep10"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900021",
+     "gold": [
+      "act7d5",
+      "memory_blitz",
+      "memory_melan"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act7d5",
+        "memory_blitz",
+        "memory_durnar",
+        "memory_melan"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      },
+      "B": {
+       "chapters": [
+        "act7d5",
+        "memory_blitz",
+        "memory_melan"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "C": {
+       "chapters": [
+        "act7d5",
+        "memory_blitz",
+        "memory_melan"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "D": {
+       "chapters": [
+        "act7d5",
+        "memory_blitz",
+        "memory_durnar",
+        "memory_melan"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900022",
+     "gold": [
+      "main_ep11",
+      "main_ep14"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act29side",
+        "act47side",
+        "main_ep13",
+        "main_ep14"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "B": {
+       "chapters": [
+        "main_ep14"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "main_ep14"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act29side",
+        "act47side",
+        "main_ep13",
+        "main_ep14"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900024",
+     "gold": [
+      "main_ep11",
+      "main_ep12"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act42side",
+        "memory_phenxi"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "B": {
+       "chapters": [],
+       "pass": false,
+       "reason": "empty"
+      },
+      "C": {
+       "chapters": [],
+       "pass": false,
+       "reason": "empty"
+      },
+      "D": {
+       "chapters": [
+        "act42side",
+        "memory_phenxi"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900026",
+     "gold": [
+      "act29side",
+      "act41side",
+      "memory_lessng"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act41side",
+        "memory_beewax",
+        "memory_lessng"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "B": {
+       "chapters": [
+        "memory_lessng"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "memory_lessng"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act41side",
+        "memory_beewax",
+        "memory_lessng"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900027",
+     "gold": [
+      "act15d0",
+      "main_ep13",
+      "main_ep14",
+      "memory_plosis"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act15d0",
+        "main_ep13",
+        "main_ep14",
+        "main_st12",
+        "rogue_rogue_4"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "B": {
+       "chapters": [
+        "act15d0",
+        "main_ep13"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "act15d0",
+        "main_ep13"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act15d0",
+        "main_ep13",
+        "main_ep14",
+        "main_st12",
+        "rogue_rogue_4"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900030",
+     "gold": [
+      "memory_sqrrel",
+      "rogue_rogue_5"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act16d5",
+        "act23side",
+        "act49side",
+        "memory_nothin",
+        "memory_sqrrel",
+        "rogue_rogue_5"
+       ],
+       "pass": false,
+       "reason": "extra_chapters_outnumber_gold"
+      },
+      "B": {
+       "chapters": [],
+       "pass": false,
+       "reason": "empty"
+      },
+      "C": {
+       "chapters": [],
+       "pass": false,
+       "reason": "empty"
+      },
+      "D": {
+       "chapters": [
+        "act16d5",
+        "act23side",
+        "act49side",
+        "memory_nothin",
+        "memory_sqrrel",
+        "rogue_rogue_5"
+       ],
+       "pass": false,
+       "reason": "extra_chapters_outnumber_gold"
+      }
+     }
+    }
+   ]
+  },
+  "holdout": {
+   "n": 26,
+   "pass": {
+    "A": 13,
+    "B": 6,
+    "C": 6,
+    "D": 13
+   },
+   "extra_chapters": {
+    "A": 30,
+    "B": 0,
+    "C": 0,
+    "D": 30
+   },
+   "per": [
+    {
+     "qid": "q-cx-000002",
+     "gold": [
+      "act21side",
+      "act38side",
+      "memory_whitw2"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act21side",
+        "act38side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "B": {
+       "chapters": [
+        "act21side",
+        "act38side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "act21side",
+        "act38side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act21side",
+        "act38side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-000012",
+     "gold": [
+      "act13mini",
+      "memory_pudd"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act53side",
+        "memory_beagle",
+        "memory_greyy2",
+        "memory_pudd",
+        "memory_serum"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "B": {
+       "chapters": [],
+       "pass": false,
+       "reason": "empty"
+      },
+      "C": {
+       "chapters": [],
+       "pass": false,
+       "reason": "empty"
+      },
+      "D": {
+       "chapters": [
+        "act53side",
+        "memory_beagle",
+        "memory_greyy2",
+        "memory_pudd",
+        "memory_serum"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-000013",
+     "gold": [
+      "act18mini",
+      "act41side",
+      "main_ep14",
+      "main_st14"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act37side",
+        "main_ep14",
+        "main_st14"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "B": {
+       "chapters": [
+        "main_ep14"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "main_ep14"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act37side",
+        "main_ep14",
+        "main_st14"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-000015",
+     "gold": [
+      "act29side",
+      "main_st17",
+      "memory_pinecn",
+      "memory_turdus"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act10d5",
+        "act29side",
+        "act51side",
+        "main_ep17",
+        "main_st17",
+        "memory_pinecn",
+        "memory_turdus"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      },
+      "B": {
+       "chapters": [
+        "act29side",
+        "main_st17",
+        "memory_pinecn"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "act29side",
+        "main_st17",
+        "memory_pinecn"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act10d5",
+        "act29side",
+        "act51side",
+        "main_ep17",
+        "main_st17",
+        "memory_pinecn",
+        "memory_turdus"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-000018",
+     "gold": [
+      "main_ep17",
+      "main_st17"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "main_ep17",
+        "main_st17"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "B": {
+       "chapters": [],
+       "pass": false,
+       "reason": "empty"
+      },
+      "C": {
+       "chapters": [],
+       "pass": false,
+       "reason": "empty"
+      },
+      "D": {
+       "chapters": [
+        "main_ep17",
+        "main_st17"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-000019",
+     "gold": [
+      "main_ep09",
+      "memory_peper"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "main_ep09",
+        "main_ep10",
+        "main_ep13",
+        "main_st14"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "B": {
+       "chapters": [
+        "main_ep09"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "main_ep09"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "main_ep09",
+        "main_ep10",
+        "main_ep13",
+        "main_st14"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-000023",
+     "gold": [
+      "main_ep10",
+      "main_ep14"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "main_ep10",
+        "main_ep14"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "B": {
+       "chapters": [
+        "main_ep10",
+        "main_ep14"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "C": {
+       "chapters": [
+        "main_ep10",
+        "main_ep14"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "D": {
+       "chapters": [
+        "main_ep10",
+        "main_ep14"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-000025",
+     "gold": [
+      "act12d0",
+      "act15mini"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act15d5",
+        "act15mini",
+        "act18d0",
+        "act19mini",
+        "act23side",
+        "act27side",
+        "memory_rfalcn"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "B": {
+       "chapters": [
+        "act15mini"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "act15mini"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act15d5",
+        "act15mini",
+        "act18d0",
+        "act19mini",
+        "act23side",
+        "act27side",
+        "memory_rfalcn"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-000028",
+     "gold": [
+      "memory_acdrop",
+      "memory_medic2",
+      "memory_pinecn"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "memory_acdrop",
+        "memory_jnight",
+        "memory_medic2",
+        "memory_pinecn"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      },
+      "B": {
+       "chapters": [
+        "memory_acdrop",
+        "memory_medic2",
+        "memory_pinecn"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "C": {
+       "chapters": [
+        "memory_acdrop",
+        "memory_medic2",
+        "memory_pinecn"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "D": {
+       "chapters": [
+        "memory_acdrop",
+        "memory_jnight",
+        "memory_medic2",
+        "memory_pinecn"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-000031",
+     "gold": [
+      "act14side",
+      "act30side",
+      "act46side"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act14side",
+        "act30side",
+        "act46side"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "B": {
+       "chapters": [
+        "act14side",
+        "act30side",
+        "act46side"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "C": {
+       "chapters": [
+        "act14side",
+        "act30side",
+        "act46side"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "D": {
+       "chapters": [
+        "act14side",
+        "act30side",
+        "act46side"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900001",
+     "gold": [
+      "act17side",
+      "act34side",
+      "rogue_rogue_2"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act17side",
+        "act34side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "B": {
+       "chapters": [
+        "act17side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "act17side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act17side",
+        "act34side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900003",
+     "gold": [
+      "act42side",
+      "main_ep13",
+      "main_ep14"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act42side",
+        "main_ep13",
+        "main_ep14",
+        "rogue_rogue_4"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      },
+      "B": {
+       "chapters": [
+        "act42side",
+        "main_ep14"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "act42side",
+        "main_ep14"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act42side",
+        "main_ep13",
+        "main_ep14",
+        "rogue_rogue_4"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900004",
+     "gold": [
+      "act31side",
+      "act49side",
+      "rogue_rogue_5"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act49side",
+        "rogue_rogue_5"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "B": {
+       "chapters": [],
+       "pass": false,
+       "reason": "empty"
+      },
+      "C": {
+       "chapters": [],
+       "pass": false,
+       "reason": "empty"
+      },
+      "D": {
+       "chapters": [
+        "act49side",
+        "rogue_rogue_5"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900006",
+     "gold": [
+      "act49side",
+      "act6d5"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act16d5",
+        "act49side",
+        "act6d5"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      },
+      "B": {
+       "chapters": [
+        "act49side",
+        "act6d5"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "C": {
+       "chapters": [
+        "act49side",
+        "act6d5"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "D": {
+       "chapters": [
+        "act16d5",
+        "act49side",
+        "act6d5"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900007",
+     "gold": [
+      "act10mini",
+      "memory_bpipe"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act22side",
+        "act46side",
+        "main_ep09",
+        "main_ep13"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "B": {
+       "chapters": [],
+       "pass": false,
+       "reason": "empty"
+      },
+      "C": {
+       "chapters": [],
+       "pass": false,
+       "reason": "empty"
+      },
+      "D": {
+       "chapters": [
+        "act22side",
+        "act46side",
+        "main_ep09",
+        "main_ep13"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900009",
+     "gold": [
+      "act32side",
+      "memory_ela"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act32side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "B": {
+       "chapters": [
+        "act32side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "act32side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act32side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900010",
+     "gold": [
+      "act19mini",
+      "act49side"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act19mini",
+        "act49side",
+        "rogue_rogue_5"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      },
+      "B": {
+       "chapters": [
+        "act19mini"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "act19mini"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act19mini",
+        "act49side",
+        "rogue_rogue_5"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900015",
+     "gold": [
+      "act51side",
+      "main_st16"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act51side",
+        "main_st16"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "B": {
+       "chapters": [
+        "act51side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "act51side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act51side",
+        "main_st16"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900019",
+     "gold": [
+      "act18mini",
+      "main_ep13",
+      "main_st13",
+      "memory_nowell"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act18mini",
+        "main_ep13",
+        "main_st13",
+        "memory_nowell"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "B": {
+       "chapters": [
+        "act18mini",
+        "main_ep13",
+        "main_st13",
+        "memory_nowell"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "C": {
+       "chapters": [
+        "act18mini",
+        "main_ep13",
+        "main_st13",
+        "memory_nowell"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "D": {
+       "chapters": [
+        "act18mini",
+        "main_ep13",
+        "main_st13",
+        "memory_nowell"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900020",
+     "gold": [
+      "act51side",
+      "main_ep17",
+      "main_st17",
+      "memory_tanya"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "main_ep17",
+        "main_st17"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "B": {
+       "chapters": [
+        "main_ep17",
+        "main_st17"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "main_ep17",
+        "main_st17"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "main_ep17",
+        "main_st17"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900023",
+     "gold": [
+      "act27side",
+      "memory_otter",
+      "rogue_rogue_4"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act27side",
+        "main_ep09",
+        "main_ep17",
+        "main_st14",
+        "memory_aurora",
+        "memory_hibisc",
+        "memory_otter",
+        "memory_tanya"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "B": {
+       "chapters": [
+        "act27side",
+        "memory_otter"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "act27side",
+        "memory_otter"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act27side",
+        "main_ep09",
+        "main_ep17",
+        "main_st14",
+        "memory_aurora",
+        "memory_hibisc",
+        "memory_otter",
+        "memory_tanya"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900025",
+     "gold": [
+      "act18mini",
+      "act47side"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act18mini",
+        "act47side",
+        "act48side"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      },
+      "B": {
+       "chapters": [
+        "act47side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "act47side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act18mini",
+        "act47side",
+        "act48side"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900028",
+     "gold": [
+      "act17d0",
+      "act32side",
+      "memory_fuze"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act17d0",
+        "act32side",
+        "memory_fuze",
+        "memory_iana"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      },
+      "B": {
+       "chapters": [
+        "act17d0",
+        "act32side",
+        "memory_fuze"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "C": {
+       "chapters": [
+        "act17d0",
+        "act32side",
+        "memory_fuze"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "D": {
+       "chapters": [
+        "act17d0",
+        "act32side",
+        "memory_fuze",
+        "memory_iana"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900029",
+     "gold": [
+      "main_ep10",
+      "main_ep12",
+      "main_ep14"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "main_ep10"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "B": {
+       "chapters": [
+        "main_ep10"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "main_ep10"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "main_ep10"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900031",
+     "gold": [
+      "memory_mudrok",
+      "memory_wyvern"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act11d0",
+        "act12mini",
+        "act36side",
+        "memory_firwhl",
+        "memory_mudrok",
+        "memory_wyvern"
+       ],
+       "pass": false,
+       "reason": "extra_chapters_outnumber_gold"
+      },
+      "B": {
+       "chapters": [
+        "memory_wyvern"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "memory_wyvern"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act11d0",
+        "act12mini",
+        "act36side",
+        "memory_firwhl",
+        "memory_mudrok",
+        "memory_wyvern"
+       ],
+       "pass": false,
+       "reason": "extra_chapters_outnumber_gold"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900032",
+     "gold": [
+      "act34side",
+      "act52side"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act34side",
+        "act52side"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "B": {
+       "chapters": [
+        "act34side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "act34side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act34side",
+        "act52side"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      }
+     }
+    }
+   ]
+  },
+  "clean": {
+   "n": 16,
+   "pass": {
+    "A": 8,
+    "B": 3,
+    "C": 3,
+    "D": 8
+   },
+   "extra_chapters": {
+    "A": 16,
+    "B": 0,
+    "C": 0,
+    "D": 16
+   },
+   "per": [
+    {
+     "qid": "q-cx-900001",
+     "gold": [
+      "act17side",
+      "act34side",
+      "rogue_rogue_2"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act17side",
+        "act34side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "B": {
+       "chapters": [
+        "act17side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "act17side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act17side",
+        "act34side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900003",
+     "gold": [
+      "act42side",
+      "main_ep13",
+      "main_ep14"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act42side",
+        "main_ep13",
+        "main_ep14",
+        "rogue_rogue_4"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      },
+      "B": {
+       "chapters": [
+        "act42side",
+        "main_ep14"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "act42side",
+        "main_ep14"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act42side",
+        "main_ep13",
+        "main_ep14",
+        "rogue_rogue_4"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900004",
+     "gold": [
+      "act31side",
+      "act49side",
+      "rogue_rogue_5"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act49side",
+        "rogue_rogue_5"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "B": {
+       "chapters": [],
+       "pass": false,
+       "reason": "empty"
+      },
+      "C": {
+       "chapters": [],
+       "pass": false,
+       "reason": "empty"
+      },
+      "D": {
+       "chapters": [
+        "act49side",
+        "rogue_rogue_5"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900006",
+     "gold": [
+      "act49side",
+      "act6d5"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act16d5",
+        "act49side",
+        "act6d5"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      },
+      "B": {
+       "chapters": [
+        "act49side",
+        "act6d5"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "C": {
+       "chapters": [
+        "act49side",
+        "act6d5"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "D": {
+       "chapters": [
+        "act16d5",
+        "act49side",
+        "act6d5"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900007",
+     "gold": [
+      "act10mini",
+      "memory_bpipe"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act22side",
+        "act46side",
+        "main_ep09",
+        "main_ep13"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "B": {
+       "chapters": [],
+       "pass": false,
+       "reason": "empty"
+      },
+      "C": {
+       "chapters": [],
+       "pass": false,
+       "reason": "empty"
+      },
+      "D": {
+       "chapters": [
+        "act22side",
+        "act46side",
+        "main_ep09",
+        "main_ep13"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900009",
+     "gold": [
+      "act32side",
+      "memory_ela"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act32side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "B": {
+       "chapters": [
+        "act32side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "act32side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act32side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900010",
+     "gold": [
+      "act19mini",
+      "act49side"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act19mini",
+        "act49side",
+        "rogue_rogue_5"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      },
+      "B": {
+       "chapters": [
+        "act19mini"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "act19mini"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act19mini",
+        "act49side",
+        "rogue_rogue_5"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900015",
+     "gold": [
+      "act51side",
+      "main_st16"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act51side",
+        "main_st16"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "B": {
+       "chapters": [
+        "act51side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "act51side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act51side",
+        "main_st16"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900019",
+     "gold": [
+      "act18mini",
+      "main_ep13",
+      "main_st13",
+      "memory_nowell"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act18mini",
+        "main_ep13",
+        "main_st13",
+        "memory_nowell"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "B": {
+       "chapters": [
+        "act18mini",
+        "main_ep13",
+        "main_st13",
+        "memory_nowell"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "C": {
+       "chapters": [
+        "act18mini",
+        "main_ep13",
+        "main_st13",
+        "memory_nowell"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "D": {
+       "chapters": [
+        "act18mini",
+        "main_ep13",
+        "main_st13",
+        "memory_nowell"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900020",
+     "gold": [
+      "act51side",
+      "main_ep17",
+      "main_st17",
+      "memory_tanya"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "main_ep17",
+        "main_st17"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "B": {
+       "chapters": [
+        "main_ep17",
+        "main_st17"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "main_ep17",
+        "main_st17"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "main_ep17",
+        "main_st17"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900023",
+     "gold": [
+      "act27side",
+      "memory_otter",
+      "rogue_rogue_4"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act27side",
+        "main_ep09",
+        "main_ep17",
+        "main_st14",
+        "memory_aurora",
+        "memory_hibisc",
+        "memory_otter",
+        "memory_tanya"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "B": {
+       "chapters": [
+        "act27side",
+        "memory_otter"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "act27side",
+        "memory_otter"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act27side",
+        "main_ep09",
+        "main_ep17",
+        "main_st14",
+        "memory_aurora",
+        "memory_hibisc",
+        "memory_otter",
+        "memory_tanya"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900025",
+     "gold": [
+      "act18mini",
+      "act47side"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act18mini",
+        "act47side",
+        "act48side"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      },
+      "B": {
+       "chapters": [
+        "act47side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "act47side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act18mini",
+        "act47side",
+        "act48side"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900028",
+     "gold": [
+      "act17d0",
+      "act32side",
+      "memory_fuze"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act17d0",
+        "act32side",
+        "memory_fuze",
+        "memory_iana"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      },
+      "B": {
+       "chapters": [
+        "act17d0",
+        "act32side",
+        "memory_fuze"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "C": {
+       "chapters": [
+        "act17d0",
+        "act32side",
+        "memory_fuze"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "D": {
+       "chapters": [
+        "act17d0",
+        "act32side",
+        "memory_fuze",
+        "memory_iana"
+       ],
+       "pass": true,
+       "reason": "extra_chapters_all_real_and_bounded"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900029",
+     "gold": [
+      "main_ep10",
+      "main_ep12",
+      "main_ep14"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "main_ep10"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "B": {
+       "chapters": [
+        "main_ep10"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "main_ep10"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "main_ep10"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900031",
+     "gold": [
+      "memory_mudrok",
+      "memory_wyvern"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act11d0",
+        "act12mini",
+        "act36side",
+        "memory_firwhl",
+        "memory_mudrok",
+        "memory_wyvern"
+       ],
+       "pass": false,
+       "reason": "extra_chapters_outnumber_gold"
+      },
+      "B": {
+       "chapters": [
+        "memory_wyvern"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "memory_wyvern"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act11d0",
+        "act12mini",
+        "act36side",
+        "memory_firwhl",
+        "memory_mudrok",
+        "memory_wyvern"
+       ],
+       "pass": false,
+       "reason": "extra_chapters_outnumber_gold"
+      }
+     }
+    },
+    {
+     "qid": "q-cx-900032",
+     "gold": [
+      "act34side",
+      "act52side"
+     ],
+     "arms": {
+      "A": {
+       "chapters": [
+        "act34side",
+        "act52side"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      },
+      "B": {
+       "chapters": [
+        "act34side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "C": {
+       "chapters": [
+        "act34side"
+       ],
+       "pass": false,
+       "reason": "chapter_set_missing"
+      },
+      "D": {
+       "chapters": [
+        "act34side",
+        "act52side"
+       ],
+       "pass": true,
+       "reason": "chapter_set_equal"
+      }
+     }
+    }
+   ]
+  }
+ }
+}

@@ -32,10 +32,10 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
 from arkrag import (  # noqa: E402
-    config,
     embedding,
     fusion,
     index as index_mod,
+    pipeline,
     query as query_mod,
     release,
     retrieve,
@@ -97,7 +97,10 @@ def main(argv: list[str] | None = None) -> int:
     print(f"题 {len(questions)}  channel_k={args.channel_k}")
 
     gen = release.Generation(args.generation)
-    chunks = {str(r["chunk_id"]): r for r in read_jsonl(config.chunks_path()) if r.get("chunk_id")}
+    # 同上：分通道诊断必须用这一代自己的块正文，否则 vector 单路的命中率
+    # 会被「空串向量」污染，而污染方向恰好是「向量通道看起来更差」。
+    chunks_path = pipeline.resolve_chunks(gen, gen.load())
+    chunks = {str(r["chunk_id"]): r for r in read_jsonl(chunks_path) if r.get("chunk_id")}
     index, index_meta = index_mod.load_index(gen.index_path)
     digest = (index_meta or {}).get("index_content_digest") or ""
     graph = json.loads(gen.graph_path.read_text(encoding="utf-8"))

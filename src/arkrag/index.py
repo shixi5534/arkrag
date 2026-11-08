@@ -24,6 +24,7 @@ import time
 from collections import Counter, defaultdict
 from functools import lru_cache
 from pathlib import Path
+from typing import Iterable
 
 from . import atomic, config, fingerprint, legacy
 
@@ -571,7 +572,7 @@ def build_alias_index(entities: list[dict]) -> dict[str, str]:
     return out
 
 
-def name_terms_from_graph(graph: dict) -> set[str]:
+def name_terms_from_graph(graph: dict, *, extra: Iterable[str] | None = None) -> set[str]:
     """从图里取「可以被整词检索的名字」：实体名 + 权威别名。
 
     **只用 `aliases`，不碰 `pending_aliases` / `rejected_aliases`。** 待审别名
@@ -581,6 +582,12 @@ def name_terms_from_graph(graph: dict) -> set[str]:
 
     返回的是**候选词表**，不是"每个块都要注入的词"。`tokenize` 只把文本里确实
     出现的名字整词入索引，所以 8 千个名字不会让每个块都背上全部词。
+
+    `extra` 是**外挂术语库**（`arkrag.glossary`）补进来的规范名，例如
+    `逻各斯 -> Logos`：图里这个角色只有拉丁名，语料里也只写拉丁名，用户用中文问
+    「逻各斯是谁」时整条实体通道打不中——中文形态必须进整词表才能被切出来。
+    这里只做合并，不判断该不该补；判断在 `glossary.resolve` 里（含类型守卫）。
+    传进来的仍只是候选词，`tokenize` 照旧只注入文本里真实出现的。
     """
     terms: set[str] = set()
     for ent in graph.get("entities") or []:
@@ -593,6 +600,11 @@ def name_terms_from_graph(graph: dict) -> set[str]:
             # 单字别名不进整词表：单字已经在单字 token 里了，再整词加一遍是重复计数
             if len(text) >= 2:
                 terms.add(text)
+    for item in extra or ():
+        text = str(item or "").strip()
+        # 单字同样排除：理由与上面单字别名一致
+        if len(text) >= 2:
+            terms.add(text)
     return terms
 
 
@@ -604,15 +616,24 @@ def build(
     graph_artifact_id: str = "",
     tokenizer_version: str = TOKENIZER_VERSION,
     use_name_terms: bool = True,
+    extra_name_terms: Iterable[str] | None = None,
+    extra_name_terms_digest: str = "",
 ) -> tuple[LexicalIndex, dict]:
     """建词法索引。
 
     `tokenizer_version` 默认用当前版本；显式传 `"t1"` 可以重建历史语义的索引
     （用于对照旧世代的检索行为）。`use_name_terms` 关掉时退化成纯单字+双字切分，
     便于量化"整词名"这一项单独带来多少收益（计划 I2 要求收益可分离测量）。
+
+    `extra_name_terms` 是外挂术语库补的规范名（见 `name_terms_from_graph` 的
+    `extra` 参数）。`extra_name_terms_digest` 必须由调用方给出**该术语文件的内容
+    摘要**：索引产物的 `name_terms` 里混了外部词，只记 "启用了" 无法回答
+    "这份倒排是对着哪一版术语表建的"。
     """
     index = LexicalIndex(tokenizer_version=tokenizer_version)
-    name_terms = name_terms_from_graph(graph) if use_name_terms else None
+    name_terms = (
+        name_terms_from_graph(graph, extra=extra_name_terms) if use_name_terms else None
+    )
     index.set_name_terms(name_terms)
     # 表只转一次再逐块传下去。每块都传原始 set 的话，`_as_table` 会为 13,781 个块
     # 各复制一遍 8,177 个名字，实测 11.3 秒——纯粹是重复劳动。
@@ -641,6 +662,10 @@ def build(
         "index_build_fp": index_build_fingerprint(tokenizer=index.tokenizer_version),
         "tokenizer_version": index.tokenizer_version,
         "name_terms_enabled": bool(name_terms),
+        "name_terms_count": len(name_terms or ()),
+        # 外挂术语库：计数 + 内容摘要。空串表"没接"，不是"接了空表"。
+        "name_terms_extra_count": len(list(extra_name_terms or ())),
+        "name_terms_extra_digest": extra_name_terms_digest,
         "index_fields": list(INDEX_FIELDS),
         "index_content_digest": content_digest(index),
         "probe_digest": probe_digest(index),

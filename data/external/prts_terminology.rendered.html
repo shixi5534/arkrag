@@ -1,0 +1,5043 @@
+<div class="mw-content-ltr mw-parser-output" lang="zh-Hans-CN" dir="ltr"><style data-mw-deduplicate="TemplateStyles:r433460">body:not(.skin-arknights) .mw-parser-output .prts-cbox2-host{max-width:825px}.mw-parser-output .ak-cbox.prts-cbox2--custom{border-color:transparent}.mw-parser-output .ak-cbox.rerun-reference-box{background:linear-gradient(90deg,#defcff,#e2dbff)}.mw-parser-output .ak-cbox.rerun-reference-box>.ak-cbox__icon{background:#7051db;color:#fff}html.skin-theme-clientpref-night body .mw-parser-output .ak-cbox.rerun-reference-box{background:linear-gradient(90deg,#1f3b46,#332f56)}html.skin-theme-clientpref-night body .mw-parser-output .ak-cbox.rerun-reference-box>.ak-cbox__icon{background:#4b3c93;color:#f8f9fa}html.skin-theme-clientpref-night body .mw-parser-output .rerun-reference-warning{background:#6b1f1f!important;color:#fff2f2!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.12)}html.skin-theme-clientpref-night body .mw-parser-output .ak-cbox--danger:not([data-theme]) [style*="color:red"],html.skin-theme-clientpref-night body .mw-parser-output .ak-cbox--danger:not([data-theme]) [style*="color: red"],html.skin-theme-clientpref-night body .mw-parser-output .ak-cbox--danger:not([data-theme]) [style*="color:#ff0000"],html.skin-theme-clientpref-night body .mw-parser-output .ak-cbox--danger:not([data-theme]) [style*="color: #ff0000"]{color:#ff9d9d!important}html.skin-theme-clientpref-night body .mw-parser-output .prts-cbox2:not([data-theme]) [style*="color:#9b2c3b"],html.skin-theme-clientpref-night body .mw-parser-output .prts-cbox2:not([data-theme]) [style*="color: #9b2c3b"]{color:#ffb3bd!important}html.skin-theme-clientpref-night body .mw-parser-output .prts-cbox2:not([data-theme]) [style*="color:#47060f"],html.skin-theme-clientpref-night body .mw-parser-output .prts-cbox2:not([data-theme]) [style*="color: #47060f"]{color:#ffd6dc!important}@media(prefers-color-scheme:dark){html.skin-theme-clientpref-os body .mw-parser-output .ak-cbox.rerun-reference-box{background:linear-gradient(90deg,#1f3b46,#332f56)}html.skin-theme-clientpref-os body .mw-parser-output .ak-cbox.rerun-reference-box>.ak-cbox__icon{background:#4b3c93;color:#f8f9fa}html.skin-theme-clientpref-os body .mw-parser-output .rerun-reference-warning{background:#6b1f1f!important;color:#fff2f2!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.12)}html.skin-theme-clientpref-os body .mw-parser-output .ak-cbox--danger:not([data-theme]) [style*="color:red"],html.skin-theme-clientpref-os body .mw-parser-output .ak-cbox--danger:not([data-theme]) [style*="color: red"],html.skin-theme-clientpref-os body .mw-parser-output .ak-cbox--danger:not([data-theme]) [style*="color:#ff0000"],html.skin-theme-clientpref-os body .mw-parser-output .ak-cbox--danger:not([data-theme]) [style*="color: #ff0000"]{color:#ff9d9d!important}html.skin-theme-clientpref-os body .mw-parser-output .prts-cbox2:not([data-theme]) [style*="color:#9b2c3b"],html.skin-theme-clientpref-os body .mw-parser-output .prts-cbox2:not([data-theme]) [style*="color: #9b2c3b"]{color:#ffb3bd!important}html.skin-theme-clientpref-os body .mw-parser-output .prts-cbox2:not([data-theme]) [style*="color:#47060f"],html.skin-theme-clientpref-os body .mw-parser-output .prts-cbox2:not([data-theme]) [style*="color: #47060f"]{color:#ffd6dc!important}}</style><p><style>
+.client-js body:not(.skin-arknights) .ak-host:not(.ak-scope){visibility:hidden;animation:ak-host-reveal 0s 3s forwards}
+@keyframes ak-host-reveal{to{visibility:visible}}
+</style><script>
+(function () {
+  if (document.body.classList.contains('skin-arknights')) { return; }
+  var root = document.documentElement, ready = false;
+  if (!/(^|\s)skin-theme-clientpref-/.test(root.className)) { root.setAttribute('data-theme', 'light'); }
+  /* 页签 / 可折叠面板 / 对话框：同皮肤 skins.arknights.scripts/interactive.js 的那几条，其他皮肤不加载它 */
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    if (!(t instanceof Element)) { return; }
+    var tab = t.closest('.ak-tabs[data-tabs] .ak-tab');
+    if (tab) {
+      e.preventDefault();
+      var tabs = tab.closest('.ak-tabs');
+      tabs.querySelectorAll('.ak-tab').forEach(function (x) { x.classList.toggle('is-active', x === tab); x.setAttribute('aria-selected', x === tab ? 'true' : 'false'); });
+      document.querySelectorAll('.ak-tabpanel[data-tabs="' + tabs.getAttribute('data-tabs') + '"]').forEach(function (p) { p.hidden = p.getAttribute('data-tab') !== tab.getAttribute('data-tab'); });
+      return;
+    }
+    var head = t.closest('.ak-panel--collapsible > .ak-panel__head');
+    if (head && !head.closest('[data-no-toggle]')) { head.parentElement.classList.toggle('is-collapsed'); return; }
+    var opener = t.closest('[data-dialog-open]');
+    if (opener) {
+      var d = document.querySelector(opener.getAttribute('data-dialog-open'));
+      if (d && typeof d.showModal === 'function') {
+        /* 样式加载完以后才建的对话框错过了下面那次加类，不补会一直被上面的 visibility: hidden 藏着 */
+        if (ready && d.classList.contains('ak-host')) { d.classList.add('ak-scope'); }
+        d.showModal();
+      }
+    }
+    var closer = t.closest('[data-dialog-close]');
+    if (closer) { var c = closer.closest('dialog'); if (c) { c.close(); } }
+  });
+  /* RLQ 的数组形式：mediawiki.base 就绪后 using 这些模块再回调（函数形式那时还没有 mw.loader.using） */
+  (window.RLQ = window.RLQ || []).push([['skins.arknights.components', 'skins.arknights.fonts'], function () {
+    $(function () { ready = true; $('.ak-host').addClass('ak-scope'); });
+  }]);
+})();
+</script></p><div class="ak-host prts-cbox2-host"><div class="ak-cbox prts-cbox2" role="note"><span class="ak-cbox&#95;&#95;icon"><i class="fa-satellite fas" style="font-size:20px;height:20px;color:;line-height:1;"></i></span><div class="ak-cbox&#95;&#95;body">本条目为泰拉大典计划附属条目，适用相关<a href="/w/%E6%B3%B0%E6%8B%89%E5%A4%A7%E5%85%B8:%E7%BC%96%E8%BE%91%E6%8C%87%E5%8D%97" title="泰拉大典:编辑指南">编辑规范</a>。</div></div></div>
+<link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r433460" /><p class="mw-empty-elt"></p><div class="ak-host prts-cbox2-host"><div class="ak-cbox prts-cbox2" role="note"><span class="ak-cbox&#95;&#95;icon"><i class="fa-code-branch fas" style="font-size:20px;height:20px;color:;line-height:1;"></i></span><div class="ak-cbox&#95;&#95;body"><div class="ak-cbox&#95;&#95;title">本条目需要随游戏客户端更新长期维护。</div>本条目的最后更新时，参考的游戏客户端（简体中文）版本号为<b><a href="/w/%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%89%88%E6%9C%AC/2.7.91" title="客户端版本/2.7.91">2.7.91</a></b>。<br />本条目同时参考的 Yostar 外服客户端版本号为<b>31.5.80</b>（EN/JP/KR）。</div></div></div>
+<p>本条目记载了由鹰角网络在游戏内外写明的涉及《明日方舟》世界观的各种词语在中文及外文中的写法，同时提供部分来自海外发行商Yostar的翻译文本以供参考。
+</p><p>语源为日语，或出现于语音文本中的词语，注明相应的日文文本；尚无鹰角版本外文文本的词语，注明相应的悠星版本。
+</p><p>内容为“-”表示不存在对应内容或无需记载，内容为空白表示该词语在对应语种文本中尚未出现或该部分内容的编辑尚未完成。
+</p>
+<div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="zh-Hans-CN" dir="ltr"><h2 id="mw-toc-heading">目录</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#基础设定"><span class="tocnumber">1</span> <span class="toctext">基础设定</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#地名"><span class="tocnumber">2</span> <span class="toctext">地名</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#组织"><span class="tocnumber">3</span> <span class="toctext">组织</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="#种族"><span class="tocnumber">4</span> <span class="toctext">种族</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="#角色"><span class="tocnumber">5</span> <span class="toctext">角色</span></a>
+<ul>
+<li class="toclevel-2 tocsection-6"><a href="#干员代号"><span class="tocnumber">5.1</span> <span class="toctext">干员代号</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="#其他角色"><span class="tocnumber">5.2</span> <span class="toctext">其他角色</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-8"><a href="#杂项"><span class="tocnumber">6</span> <span class="toctext">杂项</span></a></li>
+<li class="toclevel-1 tocsection-9"><a href="#注释与链接"><span class="tocnumber">7</span> <span class="toctext">注释与链接</span></a></li>
+</ul>
+</div>
+
+<div class="mw-heading mw-heading2"><h2 id="基础设定"><span id=".E5.9F.BA.E7.A1.80.E8.AE.BE.E5.AE.9A"></span>基础设定</h2><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/index.php?title=%E6%B3%B0%E6%8B%89%E8%AF%8D%E5%BA%93&amp;action=edit&amp;section=1" title="编辑章节：基础设定"><span>编辑</span></a><span class="mw-editsection-bracket">]</span></span></div>
+<p>关于这片大地。
+</p>
+<table class="wikitable" style="width:min(800px, 100%); display:table; text-align:center; white-space:normal;">
+<tbody><tr>
+<th colspan="3">鹰角文本
+</th>
+<th colspan="2">悠星文本
+</th></tr>
+<tr>
+<th scope="col">中文
+</th>
+<th scope="col">英文
+</th>
+<th scope="col">其他
+</th>
+<th scope="col">日文
+</th>
+<th scope="col">英文
+</th></tr>
+<tr>
+<td>源石</td>
+<td>Originiums</td>
+<td>-</td>
+<td><ruby><rb>源石</rb><rp>（</rp><rt style="font-size:0.75em">オリジニウム</rt><rp>）</rp></ruby></td>
+<td>-
+</td></tr>
+<tr>
+<td>源石技艺</td>
+<td>Originium Arts</td>
+<td>-</td>
+<td>アーツ</td>
+<td>-
+</td></tr>
+<tr>
+<td>感染者</td>
+<td>Infected</td>
+<td>-</td>
+<td>感染者</td>
+<td>-
+</td></tr>
+<tr>
+<td>矿石病</td>
+<td>Oripathy</td>
+<td>-</td>
+<td><ruby><rb>鉱石病</rb><rp>（</rp><rt style="font-size:0.75em">オリパシー</rt><rp>）</rp></ruby></td>
+<td>-
+</td></tr>
+<tr>
+<td>移动城市</td>
+<td>Nomadic City</td>
+<td>-</td>
+<td>移動都市</td>
+<td>-
+</td></tr></tbody></table>
+<div class="mw-heading mw-heading2"><h2 id="地名"><span id=".E5.9C.B0.E5.90.8D"></span>地名</h2><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/index.php?title=%E6%B3%B0%E6%8B%89%E8%AF%8D%E5%BA%93&amp;action=edit&amp;section=2" title="编辑章节：地名"><span>编辑</span></a><span class="mw-editsection-bracket">]</span></span></div>
+<p>大地上的地名。
+</p>
+<div class="ak-table-scroll">
+<table class="wikitable" style="width:min(800px, 100%); display:table; text-align:center; white-space:normal;">
+<tbody><tr>
+<th colspan="3">鹰角文本
+</th>
+<th colspan="2">悠星文本
+</th></tr>
+<tr>
+<th scope="col">中文
+</th>
+<th scope="col">英文
+</th>
+<th scope="col">其他
+</th>
+<th scope="col">日文
+</th>
+<th scope="col">英文
+</th></tr>
+<tr>
+<td>泰拉</td>
+<td>Terra</td>
+<td>-</td>
+<td>テラ</td>
+<td>-
+</td></tr>
+<tr>
+<td>炎</td>
+<td>Yan</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>百灶</td>
+<td>Baizao</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>龙门</td>
+<td>Lungmen</td>
+<td>-</td>
+<td>龍門</td>
+<td>-
+</td></tr>
+<tr>
+<td>尚蜀</td>
+<td>Shangshu</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>玉门</td>
+<td>Yumen</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>哥伦比亚</td>
+<td>Columbia</td>
+<td>-</td>
+<td>クルビア</td>
+<td>-
+</td></tr>
+<tr>
+<td>麦克斯哥伦比亚特区</td>
+<td>Max, District of Columbia</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>提卡伦多</td>
+<td>Tkaronto</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>特里蒙</td>
+<td>Trimounts</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>达维镇</td>
+<td>Davistown</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>东</td>
+<td>Higashi</td>
+<td>-</td>
+<td>極東</td>
+<td>-
+</td></tr>
+<tr>
+<td>锁川</td>
+<td>Kusarikawa</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>御机</td>
+<td>Mitsukue</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>卡西米尔</td>
+<td>Kazimierz</td>
+<td>-</td>
+<td>カジミエーシュ</td>
+<td>-
+</td></tr>
+<tr>
+<td>卡瓦莱利亚基</td>
+<td>Kawalerielki</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>谢拉格</td>
+<td>Kjerag</td>
+<td>-</td>
+<td>イェラグ</td>
+<td>-
+</td></tr>
+<tr>
+<td>拉特兰</td>
+<td>Laterano</td>
+<td>-</td>
+<td>ラテラーノ</td>
+<td>-
+</td></tr>
+<tr>
+<td>莱塔尼亚</td>
+<td>Leithanien</td>
+<td>-</td>
+<td>リターニア</td>
+<td>-
+</td></tr>
+<tr>
+<td>沃伦姆德</td>
+<td>Wolumonde</td>
+<td>-</td>
+<td>ウォルモンド</td>
+<td>-
+</td></tr>
+<tr>
+<td>维谢海姆</td>
+<td>Vyseheim</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>崔林特尔梅</td>
+<td>Zwillingstürme</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>雷姆必拓</td>
+<td>Rim Billiton</td>
+<td>-</td>
+<td>レム・ビリトン</td>
+<td>-
+</td></tr>
+<tr>
+<td>终极大铁屯</td>
+<td>Ultramassive</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>萨米</td>
+<td>Sami</td>
+<td>-</td>
+<td>サーミ</td>
+<td>-
+</td></tr>
+<tr>
+<td>米诺斯</td>
+<td>Minos</td>
+<td>-</td>
+<td>ミノス</td>
+<td>-
+</td></tr>
+<tr>
+<td>雅赛努斯</td>
+<td>Athenus</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>科林尼亚</td>
+<td></td>
+<td>-</td>
+<td>コリニア</td>
+<td>-
+</td></tr>
+<tr>
+<td>荷谟伊</td>
+<td>Hymnoi</td>
+<td>-</td>
+<td>ヒュムノイ</td>
+<td>-
+</td></tr>
+<tr>
+<td>玻利瓦尔</td>
+<td>Bolívar</td>
+<td>-</td>
+<td>ボリバル</td>
+<td>-
+</td></tr>
+<tr>
+<td>大辛德拉卡托</td>
+<td>Gran Sinderacato</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>拉乌尼达</td>
+<td>La Unidad</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>多索雷斯/双日城</td>
+<td>Dossoles</td>
+<td>-</td>
+<td>ドッソレス</td>
+<td>-
+</td></tr>
+<tr>
+<td>萨尔贡</td>
+<td>Sargon</td>
+<td>-</td>
+<td>サルゴン</td>
+<td>-
+</td></tr>
+<tr>
+<td>沙尔-阿加德</td>
+<td>Shar-Agade</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>瓦伊凡</td>
+<td>Vyvern</td>
+<td>-</td>
+<td>ワイバーン</td>
+<td>-
+</td></tr>
+<tr>
+<td>长泉镇</td>
+<td>Long Spring</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>阿卡胡拉</td>
+<td>Acahualla</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>叙拉古</td>
+<td>Siracusa</td>
+<td>-</td>
+<td>シラクーザ</td>
+<td>-
+</td></tr>
+<tr>
+<td>蒙特卢佩</td>
+<td>Montelupe</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>沃尔西尼</td>
+<td>Volsinii</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>乌萨斯帝国/乌萨斯</td>
+<td>Ursus</td>
+<td>Урсус Империя</td>
+<td>ウルサス</td>
+<td>-
+</td></tr>
+<tr>
+<td>圣骏堡</td>
+<td>Deity Grypherburg</td>
+<td>Святой Грифенбург</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>切尔诺伯格</td>
+<td>Chernobog</td>
+<td>Чернобог</td>
+<td>チェルノボーグ</td>
+<td>-
+</td></tr>
+<tr>
+<td>维多利亚帝国/维多利亚</td>
+<td>Victoria Empire/Victoria</td>
+<td>-</td>
+<td>ヴィクトリア</td>
+<td>-
+</td></tr>
+<tr>
+<td>塔拉</td>
+<td>Tara</td>
+<td>-</td>
+<td>ターラー</td>
+<td>Tara
+</td></tr>
+<tr>
+<td>伦蒂尼姆</td>
+<td>Londinium</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>多伦郡</td>
+<td>Toron County</td>
+<td>-</td>
+<td>ドルン</td>
+<td>-
+</td></tr>
+<tr>
+<td>小丘郡</td>
+<td>County Hillock</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>卡拉顿</td>
+<td>Caladon</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>克莱布拉松</td>
+<td>Celaiblason</td>
+<td>-</td>
+<td>-</td>
+<td>Calais-Blason
+</td></tr>
+<tr>
+<td>汐斯塔</td>
+<td>Siesta</td>
+<td>-</td>
+<td>シエスタ</td>
+<td>-
+</td></tr>
+<tr>
+<td>卡兹戴尔</td>
+<td>Kazdel</td>
+<td>-</td>
+<td>カズデル</td>
+<td>-
+</td></tr>
+<tr>
+<td>伊比利亚王国/伊比利亚</td>
+<td>Iberia</td>
+<td>Reino de Iberia</td>
+<td>イベリア</td>
+<td>-
+</td></tr>
+<tr>
+<td>雷亚-伊比利亚</td>
+<td>Real-Iberia</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>佩尔多尼</td>
+<td>Perdoni</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>格兰法洛</td>
+<td>Gran Faro</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>阿戈尔</td>
+<td>Ægir</td>
+<td>-</td>
+<td>エーギル</td>
+<td>-
+</td></tr>
+<tr>
+<td>杜林</td>
+<td>Durin</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>际崖城</td>
+<td>Zeruertza</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>阿加门</td>
+<td>Agamem</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>高卢</td>
+<td>Gaul</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>林贡斯</td>
+<td>Lingones</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>骏鹰王国</td>
+<td>Hippogryphic Kingdom</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>焚风热土</td>
+<td>Foehn Hotlands</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>因非冰原</td>
+<td>Infy Icefield</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>科罗萨主矿脉</td>
+<td>Kolossal Prime Vain</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>璟屿主矿脉</td>
+<td>Jingyu Prime Vain</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>塔尔干主矿脉</td>
+<td>Targanglis Prime Vain</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr></tbody></table>
+</div>
+<div class="mw-heading mw-heading2"><h2 id="组织"><span id=".E7.BB.84.E7.BB.87"></span>组织</h2><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/index.php?title=%E6%B3%B0%E6%8B%89%E8%AF%8D%E5%BA%93&amp;action=edit&amp;section=3" title="编辑章节：组织"><span>编辑</span></a><span class="mw-editsection-bracket">]</span></span></div>
+<p>大地上的组织。
+</p>
+<div class="ak-table-scroll">
+<table class="wikitable" style="width:min(800px, 100%); display:table; text-align:center; white-space:normal;">
+<tbody><tr>
+<th colspan="3">鹰角文本
+</th>
+<th colspan="2">悠星文本
+</th></tr>
+<tr>
+<th scope="col">中文
+</th>
+<th scope="col">英文
+</th>
+<th scope="col">其他
+</th>
+<th scope="col">日文
+</th>
+<th scope="col">英文
+</th></tr>
+<tr>
+<td>罗德岛/罗德岛制药公司</td>
+<td>Rhodes Island/Rhodes Island Pharmaceutical Inc.</td>
+<td>-</td>
+<td>ロドス</td>
+<td>-
+</td></tr>
+<tr>
+<td>罗德岛-精英干员</td>
+<td>Rhodes-Elite Op</td>
+<td>-</td>
+<td>エリートオペレーター</td>
+<td>Rhodes Island-Elite Operator
+</td></tr>
+<tr>
+<td>行动组A4</td>
+<td>Op Team A4/<br />Operations Detachment Alpha 4</td>
+<td>-</td>
+<td>行動隊A4</td>
+<td>Op Team A4
+</td></tr>
+<tr>
+<td>行动预备组A1</td>
+<td>Re-Op Team A1/<br />Operations Preparation Detachment Alpha 1</td>
+<td>-</td>
+<td>行動予備隊A1</td>
+<td>Reserve Op Team A1
+</td></tr>
+<tr>
+<td>行动预备组A4</td>
+<td>Re-Op Team A4/<br />Operations Preparation Detachment Alpha 4</td>
+<td>-</td>
+<td>行動予備隊A4</td>
+<td>Reserve Op Team A4
+</td></tr>
+<tr>
+<td>行动预备组A6</td>
+<td>Re-Op Team A6/<br />Operations Preparation Detachment Alpha 6</td>
+<td>-</td>
+<td>行動予備隊A6</td>
+<td>Reserve Op Team A6
+</td></tr>
+<tr>
+<td>S.W.E.E.P</td>
+<td>S.W.E.E.P</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>巴别塔</td>
+<td>Babel</td>
+<td>-</td>
+<td>バベル</td>
+<td>Babel
+</td></tr>
+<tr>
+<td>深海猎人</td>
+<td>Abyssal Hunters</td>
+<td>-</td>
+<td>アビサルハンター</td>
+<td>Abyssal Hunters
+</td></tr>
+<tr>
+<td>黑钢国际</td>
+<td>BSW/Blacksteel Worldwide</td>
+<td>-</td>
+<td>BSW</td>
+<td>Blacksteel Worldwide
+</td></tr>
+<tr>
+<td>格拉斯哥帮</td>
+<td>Glasgow</td>
+<td>-</td>
+<td>グラスゴー</td>
+<td>Glasgow
+</td></tr>
+<tr>
+<td>喀兰贸易</td>
+<td>Karlan Trade</td>
+<td>-</td>
+<td>カランド貿易</td>
+<td>Karlan Trade CO., LTD
+</td></tr>
+<tr>
+<td>龙门近卫局</td>
+<td>L.G.D./Lungmen Guard Department</td>
+<td>-</td>
+<td>龍門近衛局</td>
+<td>Lungmen Guard Department
+</td></tr>
+<tr>
+<td>企鹅物流</td>
+<td>Penguin Logistics</td>
+<td>-</td>
+<td>ペンギン急便</td>
+<td>Penguin Logistics
+</td></tr>
+<tr>
+<td>莱茵生命</td>
+<td>Rhine Lab LLC.</td>
+<td>-</td>
+<td>ライン生命</td>
+<td>Rhine Lab
+</td></tr>
+<tr>
+<td>岁</td>
+<td>Sui</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>贾维团伙</td>
+<td>Chiave Gang</td>
+<td>-</td>
+<td>キアーベ一味</td>
+<td>Chiave Gang
+</td></tr>
+<tr>
+<td>使徒</td>
+<td>Followers</td>
+<td>-</td>
+<td>使徒</td>
+<td>Followers
+</td></tr>
+<tr>
+<td>赦罪师</td>
+<td></td>
+<td>-</td>
+<td>聴罪師</td>
+<td>-
+</td></tr>
+<tr>
+<td>鲤氏侦探事务所</td>
+<td>Lee's Detective Agency</td>
+<td>-</td>
+<td>リー探偵事務所</td>
+<td>Lee's Detective Agency
+</td></tr>
+<tr>
+<td>彩虹小队</td>
+<td>Team Rainbow</td>
+<td>-</td>
+<td>レインボー小隊</td>
+<td>Team Rainbow
+</td></tr>
+<tr>
+<td>乌萨斯学生自治团</td>
+<td>U.S.S.G/Ursus Student Self-Government Group</td>
+<td>Урсуский Ученический Союз Самоуправления</td>
+<td>ウルサス学生自治団</td>
+<td>Ursus Student Self-Governing Group
+</td></tr>
+<tr>
+<td>阿撒兹勒</td>
+<td></td>
+<td>-</td>
+<td>アザゼル</td>
+<td>-
+</td></tr>
+<tr>
+<td>卡西米尔无胄盟</td>
+<td>Armorless Union</td>
+<td>-</td>
+<td>カジミエーシュ無冑盟</td>
+<td>Kazimierz Scionless Alliance
+</td></tr>
+<tr>
+<td>卡西米尔商业联合会</td>
+<td>Kazimierz General Chamber of Commerce</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>卡西米尔监正会</td>
+<td>Adeptus Sprawiedliwi Kazimierz</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>卡兹戴尔军事委员会</td>
+<td>Military Commission of Kazdel</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>整合运动</td>
+<td>Reunion</td>
+<td>-</td>
+<td>レユニオン</td>
+<td>-
+</td></tr>
+<tr>
+<td>深池</td>
+<td>Dublinn</td>
+<td>-</td>
+<td>ダブリン</td>
+<td>Dublinn
+</td></tr>
+<tr>
+<td>伦蒂尼姆市民自救军</td>
+<td>Eartha</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>雷神工业</td>
+<td>Raythean</td>
+<td>-</td>
+<td>レイジアン工業</td>
+<td>-
+</td></tr>
+<tr>
+<td>瓦伊凡联盟</td>
+<td>Vyvern</td>
+<td>-</td>
+<td>ワイバーン アライアンス</td>
+<td>-
+</td></tr>
+<tr>
+<td>诺斯伍德大骑士团</td>
+<td>Northwood Knightorder</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>呼啸骑士团</td>
+<td>Road Knightclub</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>沸血骑士团</td>
+<td>Bloodboil</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>雪踵骑士团</td>
+<td>Snowyheel</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>红松骑士团</td>
+<td>Pinus Sylvestris</td>
+<td>-</td>
+<td>レッドパイン騎士団</td>
+<td>Pinus Sylvestris
+</td></tr>
+<tr>
+<td>拉特兰中庭公证所</td>
+<td>Laterano Notarial Hall</td>
+<td>S.N.C.L./Secretaria Notariorum Curise Laterani</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>梅兰德基金会</td>
+<td>Maylander Foundation</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>沙滩伞公司</td>
+<td>Beachbrella</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>约翰老妈</td>
+<td>Mama John's</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>辛嘉斯王朝/玻利瓦尔王国</td>
+<td>Singas Dynasty</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>玻利瓦尔联合政府/玻利瓦尔独立国</td>
+<td>Coalition Government</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>真正玻利瓦尔人解放运动</td>
+<td>True Bolívarians</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>塔山生物科技</td>
+<td>Tower Mountains</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>沃尔沃特科钦斯基</td>
+<td>VolvortKochinski</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>锈锤</td>
+<td>Rusthammer</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>太阳谷机械工业</td>
+<td>Sunvalley Industries</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr></tbody></table>
+</div>
+<div class="mw-heading mw-heading2"><h2 id="种族"><span id=".E7.A7.8D.E6.97.8F"></span>种族</h2><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/index.php?title=%E6%B3%B0%E6%8B%89%E8%AF%8D%E5%BA%93&amp;action=edit&amp;section=4" title="编辑章节：种族"><span>编辑</span></a><span class="mw-editsection-bracket">]</span></span></div>
+<p>大地上的种族。
+</p>
+<table class="wikitable" style="width:min(800px, 100%); display:table; text-align:center; white-space:normal;">
+<tbody><tr>
+<th colspan="3">鹰角文本
+</th>
+<th colspan="2">悠星文本
+</th></tr>
+<tr>
+<th scope="col">中文
+</th>
+<th scope="col">英文
+</th>
+<th scope="col">其他
+</th>
+<th scope="col">日文
+</th>
+<th scope="col">英文
+</th></tr>
+<tr>
+<td>龙</td>
+<td>Lung</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>黎博利</td>
+<td>Liberi</td>
+<td>-</td>
+<td>リーベリ</td>
+<td>-
+</td></tr>
+<tr>
+<td>鲁珀</td>
+<td>Lupo</td>
+<td>-</td>
+<td>ループス</td>
+<td>-
+</td></tr>
+<tr>
+<td>鬼</td>
+<td></td>
+<td></td>
+<td>鬼</td>
+<td>Oni
+</td></tr>
+<tr>
+<td>阿达克利斯</td>
+<td>Archosauria</td>
+<td>-</td>
+<td>アダクリス</td>
+<td>-
+</td></tr>
+<tr>
+<td>阿纳缇</td>
+<td>Anaty</td>
+<td>-</td>
+<td>アナティ</td>
+<td>-
+</td></tr>
+<tr>
+<td>萨科塔</td>
+<td>Sankta</td>
+<td>-</td>
+<td>サンクタ</td>
+<td>-
+</td></tr>
+<tr>
+<td>萨弗拉</td>
+<td>Savra</td>
+<td>-</td>
+<td>サヴラ</td>
+<td>-
+</td></tr>
+<tr>
+<td>萨卡兹</td>
+<td>Sarkaz</td>
+<td>-</td>
+<td>サルカズ</td>
+<td>-
+</td></tr>
+<tr>
+<td>血魔</td>
+<td></td>
+<td></td>
+<td>ブラッドブルード</td>
+<td>Vampire
+</td></tr>
+<tr>
+<td>温迪戈</td>
+<td></td>
+<td></td>
+<td>ウェンディゴ</td>
+<td>Wendigo
+</td></tr>
+<tr>
+<td>菲林</td>
+<td>Feline</td>
+<td>-</td>
+<td>フェリーン</td>
+<td>-
+</td></tr>
+<tr>
+<td>瓦伊凡</td>
+<td>Vouivre</td>
+<td>-</td>
+<td>ヴイーヴル</td>
+<td>-
+</td></tr>
+<tr>
+<td>德拉克</td>
+<td>Draco</td>
+<td>-</td>
+<td>ドラコ</td>
+<td>-
+</td></tr>
+<tr>
+<td>瑞柏巴</td>
+<td>Reproba</td>
+<td>-</td>
+<td>レプロバ</td>
+<td>Rebbah
+</td></tr>
+<tr>
+<td>沃尔珀</td>
+<td>Vulpo</td>
+<td>-</td>
+<td>ヴァルポ</td>
+<td>-
+</td></tr>
+<tr>
+<td>杜林</td>
+<td>Durin</td>
+<td>-</td>
+<td>ドゥリン</td>
+<td>-
+</td></tr>
+<tr>
+<td>札拉克</td>
+<td>Zalak</td>
+<td>-</td>
+<td>ザラック</td>
+<td>-
+</td></tr>
+<tr>
+<td>曼提柯</td>
+<td>Manticore</td>
+<td>-</td>
+<td>マンティコア</td>
+<td>-
+</td></tr>
+<tr>
+<td>库兰塔</td>
+<td>Kuranta</td>
+<td>-</td>
+<td>クランタ</td>
+<td>-
+</td></tr>
+<tr>
+<td>安努拉</td>
+<td>Anura</td>
+<td>-</td>
+<td>アヌーラ</td>
+<td>-
+</td></tr>
+<tr>
+<td>埃拉菲亚</td>
+<td>Elafia</td>
+<td>-</td>
+<td>エラフィア</td>
+<td>-
+</td></tr>
+<tr>
+<td>卡特斯</td>
+<td>Cautus</td>
+<td>-</td>
+<td>コータス</td>
+<td>-
+</td></tr>
+<tr>
+<td>卡普里尼</td>
+<td>Caprinae</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>匹特拉姆</td>
+<td>Petram</td>
+<td>-</td>
+<td>ペートラム</td>
+<td>-
+</td></tr>
+<tr>
+<td>依特拉</td>
+<td>Itra</td>
+<td>-</td>
+<td>イトラ</td>
+<td>-
+</td></tr>
+<tr>
+<td>佩洛</td>
+<td>Perro</td>
+<td>-</td>
+<td>ペッロー</td>
+<td>-
+</td></tr>
+<tr>
+<td>丰蹄</td>
+<td>Forte</td>
+<td>-</td>
+<td>フォルテ</td>
+<td>-
+</td></tr>
+<tr>
+<td>乌萨斯</td>
+<td>Ursus</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>奇美拉</td>
+<td></td>
+<td></td>
+<td>キメラ</td>
+<td>Chimera
+</td></tr>
+<tr>
+<td>阿斯兰</td>
+<td>Aslan</td>
+<td>-</td>
+<td>アスラン</td>
+<td>-
+</td></tr>
+<tr>
+<td>麒麟</td>
+<td>Kylin</td>
+<td>-</td>
+<td>麒麟</td>
+<td>-
+</td></tr>
+<tr>
+<td>阿戈尔</td>
+<td>Ægir</td>
+<td>-</td>
+<td>エーギル</td>
+<td>-
+</td></tr>
+<tr>
+<td>皮洛萨</td>
+<td>Pilosa</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>斐迪亚</td>
+<td>Phidia</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr>
+<tr>
+<td>塞拉托</td>
+<td>Cerato</td>
+<td>-</td>
+<td>-</td>
+<td>-
+</td></tr></tbody></table>
+<div class="mw-heading mw-heading2"><h2 id="角色"><span id=".E8.A7.92.E8.89.B2"></span>角色</h2><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/index.php?title=%E6%B3%B0%E6%8B%89%E8%AF%8D%E5%BA%93&amp;action=edit&amp;section=5" title="编辑章节：角色"><span>编辑</span></a><span class="mw-editsection-bracket">]</span></span></div>
+<link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r433460" /><p class="mw-empty-elt"></p><div class="ak-host prts-cbox2-host"><div class="ak-cbox prts-cbox2 ak-cbox--tip" role="note"><span class="ak-cbox&#95;&#95;icon"><span class="mdi mdi-arrow-top-right" style="font-size:20px;color:;line-height:1;"></span></span><div class="ak-cbox&#95;&#95;body">如需了解<b>游戏内使用代号角色的真实姓名</b>，您也可以查阅<a href="/w/%E8%A7%92%E8%89%B2%E7%9C%9F%E5%90%8D" title="角色真名">角色真名</a>页面。</div></div></div>
+<div class="mw-heading mw-heading3"><h3 id="干员代号"><span id=".E5.B9.B2.E5.91.98.E4.BB.A3.E5.8F.B7"></span>干员代号</h3><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/index.php?title=%E6%B3%B0%E6%8B%89%E8%AF%8D%E5%BA%93&amp;action=edit&amp;section=6" title="编辑章节：干员代号"><span>编辑</span></a><span class="mw-editsection-bracket">]</span></span></div>
+<p>罗德岛干员的代号。
+</p>
+<div class="ak-table-scroll">
+<table class="wikitable mw-collapsible mw-collapsed" style="width:min(800px, 100%); display:table; text-align:center; white-space:normal;">
+<tbody><tr>
+<th colspan="3">鹰角文本
+</th>
+<th colspan="2">悠星文本
+</th></tr>
+<tr>
+<th scope="col">中文
+</th>
+<th scope="col">英文
+</th>
+<th scope="col">其他
+</th>
+<th scope="col">日文
+</th>
+<th scope="col">英文
+</th></tr>
+
+
+<tr>
+<td><a href="/w/%E5%A4%9C%E5%88%80" title="夜刀">夜刀</a></td>
+<td>Yato</td>
+<td></td>
+<td>ヤトウ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%BB%91%E8%A7%92" title="黑角">黑角</a></td>
+<td>Noir Corne</td>
+<td></td>
+<td>ノイルホーン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%B7%A1%E6%9E%97%E8%80%85" title="巡林者">巡林者</a></td>
+<td>Rangers</td>
+<td></td>
+<td>レンジャー</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%9D%9C%E6%9E%97" title="杜林">杜林</a></td>
+<td>Durin</td>
+<td></td>
+<td>ドゥリン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/12F" title="12F">12F</a></td>
+<td>12F</td>
+<td></td>
+<td>12F</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%8A%AC" title="芬">芬</a></td>
+<td>Fang</td>
+<td></td>
+<td>フェン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%A6%99%E8%8D%89" title="香草">香草</a></td>
+<td>Vanilla</td>
+<td></td>
+<td>バニラ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%BF%8E%E7%BE%BD" title="翎羽">翎羽</a></td>
+<td>Plume</td>
+<td></td>
+<td>プリュム</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%8E%AB%E5%85%B0%E8%8E%8E" title="玫兰莎">玫兰莎</a></td>
+<td>Melantha</td>
+<td></td>
+<td>メランサ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%8D%A1%E7%BC%87" title="卡缇">卡缇</a></td>
+<td>Cardigan</td>
+<td></td>
+<td>カーディ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%B1%B3%E6%A0%BC%E9%B2%81" title="米格鲁">米格鲁</a></td>
+<td>Beagle</td>
+<td></td>
+<td>ビーグル</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%85%8B%E6%B4%9B%E4%B8%9D" title="克洛丝">克洛丝</a></td>
+<td>Kroos</td>
+<td></td>
+<td>クルース</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%AE%89%E5%BE%B7%E5%88%87%E5%B0%94" title="安德切尔">安德切尔</a></td>
+<td>Adnachiel</td>
+<td></td>
+<td>アドナキエル</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%82%8E%E7%86%94" title="炎熔">炎熔</a></td>
+<td>Lava</td>
+<td></td>
+<td>ラヴァ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%8A%99%E8%93%89" title="芙蓉">芙蓉</a></td>
+<td>Hibiscus</td>
+<td></td>
+<td>ハイビスカス</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%AE%89%E8%B5%9B%E5%B0%94" title="安赛尔">安赛尔</a></td>
+<td>Ansel</td>
+<td></td>
+<td>アンセル</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%8F%B2%E9%83%BD%E5%8D%8E%E5%BE%B7" title="史都华德">史都华德</a></td>
+<td>Steward</td>
+<td></td>
+<td>スチュワード</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%A2%93%E5%85%B0" title="梓兰">梓兰</a></td>
+<td>Orchid</td>
+<td></td>
+<td>オーキッド</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%A4%9C%E7%83%9F" title="夜烟">夜烟</a></td>
+<td>Haze</td>
+<td></td>
+<td>ヘイズ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%BF%9C%E5%B1%B1" title="远山">远山</a></td>
+<td>Gitano</td>
+<td></td>
+<td>ギターノ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%9D%B0%E8%A5%BF%E5%8D%A1" title="杰西卡">杰西卡</a></td>
+<td>Jessica</td>
+<td></td>
+<td>ジェシカ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%B5%81%E6%98%9F" title="流星">流星</a></td>
+<td>Meteor</td>
+<td></td>
+<td>メテオ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%99%BD%E9%9B%AA" title="白雪">白雪</a></td>
+<td>ShiraYuki</td>
+<td></td>
+<td>シラユキ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%AE%AF%E4%BD%BF" title="讯使">讯使</a></td>
+<td>Courier</td>
+<td></td>
+<td>クーリエ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%B8%85%E9%81%93%E5%A4%AB" title="清道夫">清道夫</a></td>
+<td>Scavenger</td>
+<td></td>
+<td>スカベンジャー</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%BA%A2%E8%B1%86" title="红豆">红豆</a></td>
+<td>Vigna</td>
+<td></td>
+<td>ヴィグナ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%9D%9C%E5%AE%BE" title="杜宾">杜宾</a></td>
+<td>Dobermann</td>
+<td></td>
+<td>ドーベルマン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%BC%A0%E4%B8%B8" title="缠丸">缠丸</a></td>
+<td>Matoimaru</td>
+<td></td>
+<td>マトイマル</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%9C%9C%E5%8F%B6" title="霜叶">霜叶</a></td>
+<td>Frostleaf</td>
+<td></td>
+<td>フロストリーフ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%89%BE%E4%B8%9D%E9%BB%9B%E5%B0%94" title="艾丝黛尔">艾丝黛尔</a></td>
+<td>Estelle</td>
+<td></td>
+<td>エステル</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%85%95%E6%96%AF" title="慕斯">慕斯</a></td>
+<td>Mousse</td>
+<td></td>
+<td>ムース</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%A0%BE" title="砾">砾</a></td>
+<td>Gravel</td>
+<td></td>
+<td>グラベル</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%9A%97%E7%B4%A2" title="暗索">暗索</a></td>
+<td>Rope</td>
+<td></td>
+<td>ロープ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%9C%AB%E8%8D%AF" title="末药">末药</a></td>
+<td>Myrrh</td>
+<td></td>
+<td>ミルラ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%98%89%E7%BB%B4%E5%B0%94" title="嘉维尔">嘉维尔</a></td>
+<td>Gavial</td>
+<td></td>
+<td>ガヴィル</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%B0%83%E9%A6%99%E5%B8%88" title="调香师">调香师</a></td>
+<td>Perfumer</td>
+<td></td>
+<td>パフューマー</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%A7%92%E5%B3%B0" title="角峰">角峰</a></td>
+<td>Matterhorn</td>
+<td></td>
+<td>マッターホルン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%9B%87%E5%B1%A0%E7%AE%B1" title="蛇屠箱">蛇屠箱</a></td>
+<td>Cuora</td>
+<td></td>
+<td>クオーラ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%8F%A4%E7%B1%B3" title="古米">古米</a></td>
+<td>Гум</td>
+<td></td>
+<td>グム</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%B7%B1%E6%B5%B7%E8%89%B2" title="深海色">深海色</a></td>
+<td>Deepcolor</td>
+<td></td>
+<td>ディピカ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%9C%B0%E7%81%B5" title="地灵">地灵</a></td>
+<td>Earthspirit</td>
+<td></td>
+<td>アーススピリット</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%98%BF%E6%B6%88" title="阿消">阿消</a></td>
+<td>Shaw</td>
+<td></td>
+<td>ショウ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%99%BD%E9%9D%A2%E9%B8%AE" title="白面鸮">白面鸮</a></td>
+<td>Ptilopsis</td>
+<td></td>
+<td>フィリオプシス</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%87%9B%E5%86%AC" title="凛冬">凛冬</a></td>
+<td>Зима</td>
+<td></td>
+<td>ズィマー</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%BE%B7%E5%85%8B%E8%90%A8%E6%96%AF" title="德克萨斯">德克萨斯</a></td>
+<td>Texas</td>
+<td></td>
+<td>テキサス</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%8A%99%E5%85%B0%E5%8D%A1" title="芙兰卡">芙兰卡</a></td>
+<td>Franka</td>
+<td></td>
+<td>フランカ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%9B%A0%E9%99%80%E7%BD%97" title="因陀罗">因陀罗</a></td>
+<td>Indra</td>
+<td></td>
+<td>インドラ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%8B%89%E6%99%AE%E5%85%B0%E5%BE%B7" title="拉普兰德">拉普兰德</a></td>
+<td>Lappland</td>
+<td></td>
+<td>ラップランド</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%B9%BD%E7%81%B5%E9%B2%A8" title="幽灵鲨">幽灵鲨</a></td>
+<td>Specter</td>
+<td></td>
+<td>スペクター</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%93%9D%E6%AF%92" title="蓝毒">蓝毒</a></td>
+<td>Blue Poison</td>
+<td></td>
+<td>アズリウス</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%99%BD%E9%87%91" title="白金">白金</a></td>
+<td>Platinum</td>
+<td></td>
+<td>プラチナ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%99%A8%E6%98%9F" title="陨星">陨星</a></td>
+<td>Meteorite</td>
+<td></td>
+<td>メテオリーテ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%98%BF%E7%B1%B3%E5%A8%85" title="阿米娅">阿米娅</a></td>
+<td>Amiya</td>
+<td></td>
+<td>アーミヤ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%A4%A9%E7%81%AB" title="天火">天火</a></td>
+<td>Skyfire</td>
+<td></td>
+<td>スカイフレア</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%A2%85%E5%B0%94" title="梅尔">梅尔</a></td>
+<td>Mayer</td>
+<td></td>
+<td>メイヤー</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%B5%AB%E9%BB%98" title="赫默">赫默</a></td>
+<td>Silence</td>
+<td></td>
+<td>サイレンス</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%8D%8E%E6%B3%95%E7%90%B3" title="华法琳">华法琳</a></td>
+<td>Warfarin</td>
+<td></td>
+<td>ワルファリン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E4%B8%B4%E5%85%89" title="临光">临光</a></td>
+<td>Nearl</td>
+<td></td>
+<td>ニアール</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%BA%A2" title="红">红</a></td>
+<td>Projekt Red</td>
+<td></td>
+<td>レッド</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%9B%B7%E8%9B%87" title="雷蛇">雷蛇</a></td>
+<td>Liskarm</td>
+<td></td>
+<td>リスカム</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%8F%AF%E9%A2%82" title="可颂">可颂</a></td>
+<td>Croissant</td>
+<td></td>
+<td>クロワッサン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%81%AB%E7%A5%9E" title="火神">火神</a></td>
+<td>Vulcan</td>
+<td></td>
+<td>ヴァルカン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%99%AE%E7%BD%97%E6%97%BA%E6%96%AF" title="普罗旺斯">普罗旺斯</a></td>
+<td>Provence</td>
+<td></td>
+<td>プロヴァンス</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%AE%88%E6%9E%97%E4%BA%BA" title="守林人">守林人</a></td>
+<td>Firewatch</td>
+<td></td>
+<td>ファイヤーウォッチ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%B4%96%E5%BF%83" title="崖心">崖心</a></td>
+<td>Cliffheart</td>
+<td></td>
+<td>クリフハート</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%88%9D%E9%9B%AA" title="初雪">初雪</a></td>
+<td>Pramanix</td>
+<td></td>
+<td>プラマニクス</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%9C%9F%E7%90%86" title="真理">真理</a></td>
+<td>Истина</td>
+<td></td>
+<td>イースチナ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%A9%BA" title="空">空</a></td>
+<td>Sora</td>
+<td></td>
+<td>ソラ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%8B%AE%E8%9D%8E" title="狮蝎">狮蝎</a></td>
+<td>Manticore</td>
+<td></td>
+<td>マンティコア</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%A3%9F%E9%93%81%E5%85%BD" title="食铁兽">食铁兽</a></td>
+<td>FEater</td>
+<td></td>
+<td>エフイーター</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%83%BD%E5%A4%A9%E4%BD%BF" title="能天使">能天使</a></td>
+<td>Exusiai</td>
+<td></td>
+<td>エクシア</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%8E%A8%E8%BF%9B%E4%B9%8B%E7%8E%8B" title="推进之王">推进之王</a></td>
+<td>Siege</td>
+<td></td>
+<td>シージ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E4%BC%8A%E8%8A%99%E5%88%A9%E7%89%B9" title="伊芙利特">伊芙利特</a></td>
+<td>Ifrit</td>
+<td></td>
+<td>イフリータ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%89%BE%E9%9B%85%E6%B3%95%E6%8B%89" title="艾雅法拉">艾雅法拉</a></td>
+<td>Eyjafjalla</td>
+<td></td>
+<td>エイヤフィヤトラ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%AE%89%E6%B4%81%E8%8E%89%E5%A8%9C" title="安洁莉娜">安洁莉娜</a></td>
+<td>Angelina</td>
+<td></td>
+<td>アンジェリーナ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%97%AA%E7%81%B5" title="闪灵">闪灵</a></td>
+<td>Shining</td>
+<td></td>
+<td>シャイニング</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%A4%9C%E8%8E%BA" title="夜莺">夜莺</a></td>
+<td>Nightingale</td>
+<td></td>
+<td>ナイチンゲール</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%98%9F%E7%86%8A" title="星熊">星熊</a></td>
+<td>Hoshiguma</td>
+<td></td>
+<td>ホシグマ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%A1%9E%E9%9B%B7%E5%A8%85" title="塞雷娅">塞雷娅</a></td>
+<td>Saria</td>
+<td></td>
+<td>サリア</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%93%B6%E7%81%B0" title="银灰">银灰</a></td>
+<td>SilverAsh</td>
+<td></td>
+<td>シルバーアッシュ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%9A%B4%E8%A1%8C" title="暴行">暴行</a></td>
+<td>Savage</td>
+<td></td>
+<td>サベージ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%A9%BA%E7%88%86" title="空爆">空爆</a></td>
+<td>Catapult</td>
+<td></td>
+<td>カタパルト</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%9C%88%E8%A7%81%E5%A4%9C" title="月见夜">月见夜</a></td>
+<td>Midnight</td>
+<td></td>
+<td>ミッドナイト</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%8C%8E%E8%9C%82" title="猎蜂">猎蜂</a></td>
+<td>Beehunter</td>
+<td></td>
+<td>ビーハンター</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%A4%9C%E9%AD%94" title="夜魔">夜魔</a></td>
+<td>Nightmare</td>
+<td></td>
+<td>ナイトメア</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%A0%BC%E6%8B%89%E5%B0%BC" title="格拉尼">格拉尼</a></td>
+<td>Grani</td>
+<td></td>
+<td>グラニ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%96%AF%E5%8D%A1%E8%92%82" title="斯卡蒂">斯卡蒂</a></td>
+<td>Skadi</td>
+<td></td>
+<td>スカジ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%B3%A1%E6%99%AE%E5%8D%A1" title="泡普卡">泡普卡</a></td>
+<td>Popukar</td>
+<td></td>
+<td>ポプカル</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%96%91%E7%82%B9" title="斑点">斑点</a></td>
+<td>Spot</td>
+<td></td>
+<td>スポット</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%A0%BC%E9%9B%B7%E4%BC%8A" title="格雷伊">格雷伊</a></td>
+<td>Greyy</td>
+<td></td>
+<td>グレイ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%AF%97%E6%80%80%E9%9B%85" title="诗怀雅">诗怀雅</a></td>
+<td>Swire</td>
+<td></td>
+<td>スワイヤー</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%99%88" title="陈">陈</a></td>
+<td>Ch'en</td>
+<td></td>
+<td>チェン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%8B%8F%E8%8B%8F%E6%B4%9B" title="苏苏洛">苏苏洛</a></td>
+<td>Sussurro</td>
+<td></td>
+<td>ススーロ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%94%A1%E5%85%B0" title="锡兰">锡兰</a></td>
+<td>Ceylon</td>
+<td></td>
+<td>セイロン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%A0%BC%E5%8A%B3%E5%85%8B%E6%96%AF" title="格劳克斯">格劳克斯</a></td>
+<td>Glaucus</td>
+<td></td>
+<td>グラウコス</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%BB%91" title="黑">黑</a></td>
+<td>Schwarz</td>
+<td></td>
+<td>シュヴァルツ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%A1%83%E9%87%91%E5%A8%98" title="桃金娘">桃金娘</a></td>
+<td>Myrtle</td>
+<td></td>
+<td>テンニンカ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%98%9F%E6%9E%81" title="星极">星极</a></td>
+<td>Astesia</td>
+<td></td>
+<td>アステシア</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%B5%AB%E6%8B%89%E6%A0%BC" title="赫拉格">赫拉格</a></td>
+<td>Hellagur</td>
+<td></td>
+<td>ヘラグ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%9D%9A%E9%9B%B7" title="坚雷">坚雷</a></td>
+<td>Dur-nar</td>
+<td></td>
+<td>ジュナー</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%BA%A2%E4%BA%91" title="红云">红云</a></td>
+<td>Vermeil</td>
+<td></td>
+<td>ヴァーミル</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%82%8E%E5%AE%A2" title="炎客">炎客</a></td>
+<td>Flamebringer</td>
+<td></td>
+<td>エンカク</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%80%81%E8%91%AC%E4%BA%BA" title="送葬人">送葬人</a></td>
+<td>Executor</td>
+<td></td>
+<td>イグゼキュター</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%BA%A6%E5%93%B2%E4%BC%A6" title="麦哲伦">麦哲伦</a></td>
+<td>Magallan</td>
+<td></td>
+<td>マゼラン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E4%BC%8A%E6%A1%91" title="伊桑">伊桑</a></td>
+<td>Ethan</td>
+<td></td>
+<td>イーサン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%BE%AE%E9%A3%8E" title="微风">微风</a></td>
+<td>Breeze</td>
+<td></td>
+<td>ブリーズ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%A2%85" title="梅">梅</a></td>
+<td>May</td>
+<td></td>
+<td>メイ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%8B%9C%E6%9D%BE" title="拜松">拜松</a></td>
+<td>Bison</td>
+<td></td>
+<td>バイソン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%A7%90%E7%90%A5" title="槐琥">槐琥</a></td>
+<td>Waai Fu</td>
+<td></td>
+<td>ワイフー</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%8E%AB%E6%96%AF%E6%8F%90%E9%A9%AC" title="莫斯提马">莫斯提马</a></td>
+<td>Mostima</td>
+<td></td>
+<td>モスティマ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%8B%87%E8%8D%89" title="苇草">苇草</a></td>
+<td>Reed</td>
+<td></td>
+<td>リード</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%B8%83%E6%B4%9B%E5%8D%A1" title="布洛卡">布洛卡</a></td>
+<td>Broca</td>
+<td></td>
+<td>ブローカ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%AE%89%E6%AF%94%E5%B0%94" title="安比尔">安比尔</a></td>
+<td>Ambriel</td>
+<td></td>
+<td>アンブリエル</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%81%B0%E5%96%89" title="灰喉">灰喉</a></td>
+<td>GreyThroat</td>
+<td></td>
+<td>グレースロート</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%85%8C" title="煌">煌</a></td>
+<td>Blaze</td>
+<td></td>
+<td>ブレイズ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%9B%AA%E9%9B%89" title="雪雉">雪雉</a></td>
+<td>Snowsant</td>
+<td></td>
+<td>スノーズント</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%90%BD" title="吽">吽</a></td>
+<td>Hung</td>
+<td></td>
+<td>ウン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%98%BF" title="阿">阿</a></td>
+<td>Aak</td>
+<td></td>
+<td>ア</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%B9%B4" title="年">年</a></td>
+<td>Nian</td>
+<td></td>
+<td>ニェン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%83%8A%E8%9B%B0" title="惊蛰">惊蛰</a></td>
+<td>Leizi</td>
+<td></td>
+<td>レイズ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%88%BB%E4%BF%84%E6%9F%8F" title="刻俄柏">刻俄柏</a></td>
+<td>Ceobe</td>
+<td></td>
+<td>ケオベ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%B8%85%E6%B5%81" title="清流">清流</a></td>
+<td>Purestream</td>
+<td></td>
+<td>セイリュウ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%AE%B4" title="宴">宴</a></td>
+<td>Utage</td>
+<td></td>
+<td>ウタゲ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%9F%8F%E5%96%99" title="柏喙">柏喙</a></td>
+<td>Bibeak</td>
+<td></td>
+<td>バイビーク</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%85%91%E7%A0%82" title="慑砂">慑砂</a></td>
+<td>Sesa</td>
+<td></td>
+<td>シェーシャ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%A3%8E%E7%AC%9B" title="风笛">风笛</a></td>
+<td>Bagpipe</td>
+<td></td>
+<td>バグパイプ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%96%AD%E7%BD%AA%E8%80%85" title="断罪者">断罪者</a></td>
+<td>Conviction</td>
+<td></td>
+<td>コンビクション</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%88%BB%E5%88%80" title="刻刀">刻刀</a></td>
+<td>Cutter</td>
+<td></td>
+<td>カッター</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%93%B8%E9%93%81" title="铸铁">铸铁</a></td>
+<td>Sideroca</td>
+<td></td>
+<td>シデロカ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%B7%AB%E6%81%8B" title="巫恋">巫恋</a></td>
+<td>Shamare</td>
+<td></td>
+<td>シャマレ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%82%80%E5%BD%B1" title="傀影">傀影</a></td>
+<td>Phantom</td>
+<td></td>
+<td>ファントム</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%9E%81%E5%A2%83" title="极境">极境</a></td>
+<td>Elysium</td>
+<td></td>
+<td>エリジウム</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%B8%A9%E8%92%82" title="温蒂">温蒂</a></td>
+<td>Weedy</td>
+<td></td>
+<td>ウィーディ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/W" title="W">W</a></td>
+<td>W</td>
+<td></td>
+<td>W</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%9F%B3%E6%A3%89" title="石棉">石棉</a></td>
+<td>Asbestos</td>
+<td></td>
+<td>アスベストス</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%9C%88%E7%A6%BE" title="月禾">月禾</a></td>
+<td>Tsukinogi</td>
+<td></td>
+<td>ツキノギ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%B3%A2%E7%99%BB%E5%8F%AF" title="波登可">波登可</a></td>
+<td>Podenco</td>
+<td></td>
+<td>ポデンコ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%8B%A6%E8%89%BE" title="苦艾">苦艾</a></td>
+<td>Absinthe</td>
+<td></td>
+<td>アブサント</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%8E%B1%E6%81%A9%E5%93%88%E7%89%B9" title="莱恩哈特">莱恩哈特</a></td>
+<td>Leonhardt</td>
+<td></td>
+<td>レオンハルト</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%97%A9%E9%9C%B2" title="早露">早露</a></td>
+<td>Роса</td>
+<td></td>
+<td>ロサ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%8D%A1%E8%BE%BE" title="卡达">卡达</a></td>
+<td>Click</td>
+<td></td>
+<td>カシャ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E4%BA%9A%E5%8F%B6" title="亚叶">亚叶</a></td>
+<td>Folinic</td>
+<td></td>
+<td>フォリニック</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%96%AD%E5%B4%96" title="断崖">断崖</a></td>
+<td>Ayerscarpe</td>
+<td></td>
+<td>エアースカーペ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%93%83%E5%85%B0" title="铃兰">铃兰</a></td>
+<td>Suzuran</td>
+<td></td>
+<td>スズラン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%A8%80%E9%9F%B3" title="稀音">稀音</a></td>
+<td>Scene</td>
+<td></td>
+<td>シーン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%9C%9C%E8%9C%A1" title="蜜蜡">蜜蜡</a></td>
+<td>Beeswax</td>
+<td></td>
+<td>ビーズワクス</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%B4%BE%E7%BB%B4" title="贾维">贾维</a></td>
+<td>Chiave</td>
+<td></td>
+<td>キアーベ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%AD%91" title="孑">孑</a></td>
+<td>Jaye</td>
+<td></td>
+<td>ジェイ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%AE%89%E5%93%B2%E6%8B%89" title="安哲拉">安哲拉</a></td>
+<td>Andreana</td>
+<td></td>
+<td>アンドレアナ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%A3%98%E5%88%BA" title="棘刺">棘刺</a></td>
+<td>Thorns</td>
+<td></td>
+<td>ソーンズ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%85%B8%E7%B3%96" title="酸糖">酸糖</a></td>
+<td>Aciddrop</td>
+<td></td>
+<td>アシッドドロップ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%89%B9%E7%B1%B3%E7%B1%B3" title="特米米">特米米</a></td>
+<td>Tomimi</td>
+<td></td>
+<td>トミミ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%87%A7%E7%9F%B3" title="燧石">燧石</a></td>
+<td>Flint</td>
+<td></td>
+<td>フリント</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%A3%AE%E8%9A%BA" title="森蚺">森蚺</a></td>
+<td>Eunectes</td>
+<td></td>
+<td>ユーネクテス</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%8A%B3%E6%B1%80" title="芳汀">芳汀</a></td>
+<td>Arene</td>
+<td></td>
+<td>アレーン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%96%84%E7%BB%BF" title="薄绿">薄绿</a></td>
+<td>Mint</td>
+<td></td>
+<td>ミント</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%9B%9B%E6%9C%88" title="四月">四月</a></td>
+<td>April</td>
+<td></td>
+<td>エイプリル</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%8F%B2%E5%B0%94%E7%89%B9%E5%B0%94" title="史尔特尔">史尔特尔</a></td>
+<td>Surtr</td>
+<td></td>
+<td>スルト</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%B3%A1%E6%B3%A1" title="泡泡">泡泡</a></td>
+<td>Bubble</td>
+<td></td>
+<td>バブル</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%9E%AD%E5%88%83" title="鞭刃">鞭刃</a></td>
+<td>Whislash</td>
+<td></td>
+<td>ウィスラッシュ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%A5%A5%E6%96%AF%E5%A1%94" title="奥斯塔">奥斯塔</a></td>
+<td>Aosta</td>
+<td></td>
+<td>アオスタ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%91%95%E5%85%89" title="瑕光">瑕光</a></td>
+<td>Blemishine</td>
+<td></td>
+<td>ブレミシャイン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%9D%B0%E5%85%8B" title="杰克">杰克</a></td>
+<td>Jackie</td>
+<td></td>
+<td>ジャッキー</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%B5%AE%E9%9B%A8" title="絮雨">絮雨</a></td>
+<td>Whisperain</td>
+<td></td>
+<td>ウィスパーレイン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%B3%A5%E5%B2%A9" title="泥岩">泥岩</a></td>
+<td>Mudrock</td>
+<td></td>
+<td>マドロック</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%BF%B7%E8%BF%AD%E9%A6%99" title="迷迭香">迷迭香</a></td>
+<td>Rosmontis</td>
+<td></td>
+<td>ロスモンティス</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%9D%BE%E6%9E%9C" title="松果">松果</a></td>
+<td>Pinecone</td>
+<td></td>
+<td>パインコーン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%BD%97%E5%AE%BE" title="罗宾">罗宾</a></td>
+<td>Robin</td>
+<td></td>
+<td>ロビン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%8D%A1%E5%A4%AB%E5%8D%A1" title="卡夫卡">卡夫卡</a></td>
+<td>Kafka</td>
+<td></td>
+<td>カフカ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%B1%B1" title="山">山</a></td>
+<td>Mountain</td>
+<td></td>
+<td>マウンテン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%B1%86%E8%8B%97" title="豆苗">豆苗</a></td>
+<td>Beanstalk</td>
+<td></td>
+<td>ビーンストーク</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%88%B1%E4%B8%BD%E4%B8%9D" title="爱丽丝">爱丽丝</a></td>
+<td>Iris</td>
+<td></td>
+<td>アイリス</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%A9%BA%E5%BC%A6" title="空弦">空弦</a></td>
+<td>Archetto</td>
+<td></td>
+<td>アルケット</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%9B%BE%E8%80%B6" title="图耶">图耶</a></td>
+<td>Tuye</td>
+<td></td>
+<td>トゥイエ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%82%8E%E7%8B%B1%E7%82%8E%E7%86%94" title="炎狱炎熔">炎狱炎熔</a></td>
+<td>Lava the Purgatory</td>
+<td></td>
+<td>炎獄ラヴァ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E4%B9%8C%E6%9C%89" title="乌有">乌有</a></td>
+<td>Mr.Nothing</td>
+<td></td>
+<td>ウユウ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%B5%AF%E5%B3%A8" title="嵯峨">嵯峨</a></td>
+<td>Saga</td>
+<td></td>
+<td>サガ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%A4%95" title="夕">夕</a></td>
+<td>Dusk</td>
+<td></td>
+<td>シー</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%88%98%E8%BD%A6" title="战车">战车</a></td>
+<td>Tachanka</td>
+<td></td>
+<td>Tachanka</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%97%AA%E5%87%BB" title="闪击">闪击</a></td>
+<td>Blitz</td>
+<td></td>
+<td>Blitz</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%9C%9C%E5%8D%8E" title="霜华">霜华</a></td>
+<td>Frost</td>
+<td></td>
+<td>Frost</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%81%B0%E7%83%AC" title="灰烬">灰烬</a></td>
+<td>Ash</td>
+<td></td>
+<td>Ash</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%9A%B4%E9%9B%A8" title="暴雨">暴雨</a></td>
+<td>Heavyrain</td>
+<td></td>
+<td>ヘビーレイン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%86%94%E6%B3%89" title="熔泉">熔泉</a></td>
+<td>Toddifons</td>
+<td></td>
+<td>トギフォンス</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%BC%82%E5%AE%A2" title="异客">异客</a></td>
+<td>Passenger</td>
+<td></td>
+<td>パッセンジャー</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%B5%A4%E5%86%AC" title="赤冬">赤冬</a></td>
+<td>Akafuyu</td>
+<td></td>
+<td>アカフユ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%AD%8C%E8%95%BE%E8%92%82%E5%A8%85" title="歌蕾蒂娅">歌蕾蒂娅</a></td>
+<td>Gladiia</td>
+<td></td>
+<td>グレイディーア</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%87%AF%E5%B0%94%E5%B8%8C" title="凯尔希">凯尔希</a></td>
+<td>Kal'tsit</td>
+<td></td>
+<td>ケルシー</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%B5%8A%E5%BF%83%E6%96%AF%E5%8D%A1%E8%92%82" title="浊心斯卡蒂">浊心斯卡蒂</a></td>
+<td>Skadi the Corrupting Heart</td>
+<td></td>
+<td>濁心スカジ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%B7%B1%E9%9D%9B" title="深靛">深靛</a></td>
+<td>Indigo</td>
+<td></td>
+<td>インディゴ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%B4%9D%E5%A8%9C" title="贝娜">贝娜</a></td>
+<td>Bena</td>
+<td></td>
+<td>ベナ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%BB%AE%E8%89%AF" title="绮良">绮良</a></td>
+<td>Kirara</td>
+<td></td>
+<td>キララ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%8D%A1%E6%B6%85%E5%88%A9%E5%AE%89" title="卡涅利安">卡涅利安</a></td>
+<td>Carnelian</td>
+<td></td>
+<td>カーネリアン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%B8%95%E6%8B%89%E6%96%AF" title="帕拉斯">帕拉斯</a></td>
+<td>Pallas</td>
+<td></td>
+<td>パラス</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%BE%99%E8%88%8C%E5%85%B0" title="龙舌兰">龙舌兰</a></td>
+<td>Tequila</td>
+<td></td>
+<td>テキーラ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%BE%BD%E6%AF%9B%E7%AC%94" title="羽毛笔">羽毛笔</a></td>
+<td>La Pluma</td>
+<td></td>
+<td>ラ・プルマ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%B0%B4%E6%9C%88" title="水月">水月</a></td>
+<td>Mizuki</td>
+<td></td>
+<td>ミヅキ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%81%87%E6%97%A5%E5%A8%81%E9%BE%99%E9%99%88" title="假日威龙陈">假日威龙陈</a></td>
+<td>Ch'en the Holungday</td>
+<td></td>
+<td>遊龍チェン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%BD%97%E6%AF%94%E8%8F%88%E5%A1%94" title="罗比菈塔">罗比菈塔</a></td>
+<td>Roberta</td>
+<td></td>
+<td>ロベルタ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%A1%91%E8%91%9A" title="桑葚">桑葚</a></td>
+<td>Mulberry</td>
+<td></td>
+<td>マルベリー</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%90%B4%E6%9F%B3" title="琴柳">琴柳</a></td>
+<td>Saileach</td>
+<td></td>
+<td>サイラッハ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%81%B0%E6%AF%AB" title="灰毫">灰毫</a></td>
+<td>Ashlock</td>
+<td></td>
+<td>アッシュロック</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%BF%9C%E7%89%99" title="远牙">远牙</a></td>
+<td>Fartooth</td>
+<td></td>
+<td>ファートゥース</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%B8%83%E4%B8%81" title="布丁">布丁</a></td>
+<td>Pudding</td>
+<td></td>
+<td>プリン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%9C%9C%E8%8E%93" title="蜜莓">蜜莓</a></td>
+<td>Honeyberry</td>
+<td></td>
+<td>ハニーベリー</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%87%8E%E9%AC%83" title="野鬃">野鬃</a></td>
+<td>Wild Mane</td>
+<td></td>
+<td>ワイルドメイン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%9A%80%E6%B8%85" title="蚀清">蚀清</a></td>
+<td>Corroserum</td>
+<td></td>
+<td>コロセラム</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%84%B0%E5%B0%BE" title="焰尾">焰尾</a></td>
+<td>Flametail</td>
+<td></td>
+<td>フレイムテイル</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%80%80%E9%AA%91%E5%A3%AB%E4%B8%B4%E5%85%89" title="耀骑士临光">耀骑士临光</a></td>
+<td>Nearl the Radiant Knight</td>
+<td></td>
+<td>耀騎士ニアール</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%80%B6%E6%8B%89" title="耶拉">耶拉</a></td>
+<td>Kjera</td>
+<td></td>
+<td>イェラ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%9E%81%E5%85%89" title="极光">极光</a></td>
+<td>Aurora</td>
+<td></td>
+<td>オーロラ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%81%B5%E7%9F%A5" title="灵知">灵知</a></td>
+<td>Gnosis</td>
+<td></td>
+<td>ノーシス</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%9A%AE%E8%90%BD" title="暮落">暮落</a></td>
+<td>Shalem</td>
+<td></td>
+<td>シャレム</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E4%B9%9D%E8%89%B2%E9%B9%BF" title="九色鹿">九色鹿</a></td>
+<td>Nine-Colored Deer</td>
+<td></td>
+<td>九色鹿</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%AF%92%E8%8A%92%E5%85%8B%E6%B4%9B%E4%B8%9D" title="寒芒克洛丝">寒芒克洛丝</a></td>
+<td>Kroos the Keen Glint</td>
+<td></td>
+<td>寒芒クルース</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%A4%9C%E5%8D%8A" title="夜半">夜半</a></td>
+<td>Blacknight</td>
+<td></td>
+<td>ブラックナイト</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%80%81%E9%B2%A4" title="老鲤">老鲤</a></td>
+<td>Lee</td>
+<td></td>
+<td>リー</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E4%BB%A4" title="令">令</a></td>
+<td>Ling</td>
+<td></td>
+<td>リィン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%A4%8F%E6%A0%8E" title="夏栎">夏栎</a></td>
+<td>Quercus</td>
+<td></td>
+<td>クエルクス</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%BE%84%E9%97%AA" title="澄闪">澄闪</a></td>
+<td>Goldenglow</td>
+<td></td>
+<td>ゴールデングロー</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%A7%81%E8%A1%8C%E8%80%85" title="见行者">见行者</a></td>
+<td>Enforcer</td>
+<td></td>
+<td>エンフォーサー</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%A3%8E%E4%B8%B8" title="风丸">风丸</a></td>
+<td>Kazemaru</td>
+<td></td>
+<td>カゼマル</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%8F%B2%E4%BA%9A%E6%A2%85%E5%A1%94" title="菲亚梅塔">菲亚梅塔</a></td>
+<td>Fiammetta</td>
+<td></td>
+<td>フィアメッタ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%A4%90%E6%9E%9C" title="褐果">褐果</a></td>
+<td>Chestnut</td>
+<td></td>
+<td>チェストナット</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%B5%B7%E8%92%82" title="海蒂">海蒂</a></td>
+<td>Heidi</td>
+<td></td>
+<td>ハイディ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%B4%9B%E6%B4%9B" title="洛洛">洛洛</a></td>
+<td>Rockrock</td>
+<td></td>
+<td>ロックロック</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%8F%B7%E8%A7%92" title="号角">号角</a></td>
+<td>Horn</td>
+<td></td>
+<td>ホルン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%8E%A0%E9%A3%8E" title="掠风">掠风</a></td>
+<td>Windflit</td>
+<td></td>
+<td>ウインドフリット</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%B5%81%E6%98%8E" title="流明">流明</a></td>
+<td>Lumen</td>
+<td></td>
+<td>ルーメン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%89%BE%E4%B8%BD%E5%A6%AE" title="艾丽妮">艾丽妮</a></td>
+<td>Irene</td>
+<td></td>
+<td>アイリーニ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%BD%92%E6%BA%9F%E5%B9%BD%E7%81%B5%E9%B2%A8" title="归溟幽灵鲨">归溟幽灵鲨</a></td>
+<td>Specter the Unchained</td>
+<td></td>
+<td>帰溟スペクター</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%9F%83%E6%8B%89%E6%89%98" title="埃拉托">埃拉托</a></td>
+<td>Erato</td>
+<td></td>
+<td>エラト</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%BD%A6%E5%B0%94%E5%B0%BC" title="车尔尼">车尔尼</a></td>
+<td>Czerny</td>
+<td></td>
+<td>ツェルニー</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%BF%AF%E5%B0%98%E8%8A%99%E8%93%89" title="濯尘芙蓉">濯尘芙蓉</a></td>
+<td>Hibiscus the Purifier</td>
+<td></td>
+<td>濯塵ハイビスカス</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%BB%91%E9%94%AE" title="黑键">黑键</a></td>
+<td>Ebenholz</td>
+<td></td>
+<td>エーベンホルツ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%98%9F%E6%BA%90" title="星源">星源</a></td>
+<td>Astgenne</td>
+<td></td>
+<td>アステジーニ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%89%BF%E6%9B%A6%E6%A0%BC%E9%9B%B7%E4%BC%8A" title="承曦格雷伊">承曦格雷伊</a></td>
+<td>Greyy the Lightningbearer</td>
+<td></td>
+<td>承曦グレイ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%A4%9A%E8%90%9D%E8%A5%BF" title="多萝西">多萝西</a></td>
+<td>Dorothy</td>
+<td></td>
+<td>ドロシー</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%87%B3%E7%AE%80" title="至简">至简</a></td>
+<td>Minimalist</td>
+<td></td>
+<td>ミニマリスト</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%99%93%E6%AD%8C" title="晓歌">晓歌</a></td>
+<td>Cantabile</td>
+<td></td>
+<td>カンタービレ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%B8%BF%E9%9B%AA" title="鸿雪">鸿雪</a></td>
+<td>Позёмка</td>
+<td></td>
+<td>パゼオンカ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%99%BE%E7%82%BC%E5%98%89%E7%BB%B4%E5%B0%94" title="百炼嘉维尔">百炼嘉维尔</a></td>
+<td>Gavial the Invincible</td>
+<td></td>
+<td>百錬ガヴィル</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E4%BD%86%E4%B9%A6" title="但书">但书</a></td>
+<td>Proviso</td>
+<td></td>
+<td>プロヴァイゾ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%8E%9B%E6%81%A9%E7%BA%B3" title="玛恩纳">玛恩纳</a></td>
+<td>Młynar</td>
+<td></td>
+<td>ムリナール</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%BD%97%E5%B0%8F%E9%BB%91" title="罗小黑">罗小黑</a></td>
+<td>Luo Xiaohei</td>
+<td></td>
+<td>羅小黒</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%B5%B7%E6%B2%AB" title="海沫">海沫</a></td>
+<td>Highmore</td>
+<td></td>
+<td>ハイモア</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%93%85%E8%B8%9D" title="铅踝">铅踝</a></td>
+<td>Totter</td>
+<td></td>
+<td>トター</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%BE%BE%E6%A0%BC%E8%BE%BE" title="达格达">达格达</a></td>
+<td>Dagda</td>
+<td></td>
+<td>ダグザ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%98%8E%E6%A4%92" title="明椒">明椒</a></td>
+<td>Paprika</td>
+<td></td>
+<td>パプリカ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%99%BD%E9%93%81" title="白铁">白铁</a></td>
+<td>Stainless</td>
+<td></td>
+<td>ステインレス</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%9F%B3%E8%8B%B1" title="石英">石英</a></td>
+<td>Quartz</td>
+<td></td>
+<td>クォーツ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%9B%AA%E7%BB%92" title="雪绒">雪绒</a></td>
+<td>Qanipalaat</td>
+<td></td>
+<td>カニパラート</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%AD%90%E6%9C%88" title="子月">子月</a></td>
+<td>Lunacub</td>
+<td></td>
+<td>ルナカブ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E4%BC%BA%E5%A4%9C" title="伺夜">伺夜</a></td>
+<td>Vigil</td>
+<td></td>
+<td>ヴィジェル</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%96%A5%E7%BD%AA" title="斥罪">斥罪</a></td>
+<td>Penance</td>
+<td></td>
+<td>ペナンス</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%BC%84%E9%BB%98%E5%BE%B7%E5%85%8B%E8%90%A8%E6%96%AF" title="缄默德克萨斯">缄默德克萨斯</a></td>
+<td>Texas the Omertosa</td>
+<td></td>
+<td>血掟テキサス</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%B0%9C%E5%9B%BE" title="谜图">谜图</a></td>
+<td>Puzzle</td>
+<td></td>
+<td>パズル</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%92%8C%E5%BC%A6" title="和弦">和弦</a></td>
+<td>Harmonie</td>
+<td></td>
+<td>ハーモニー</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%84%B0%E5%BD%B1%E8%8B%87%E8%8D%89" title="焰影苇草">焰影苇草</a></td>
+<td>Reed The Flame Shadow</td>
+<td></td>
+<td>焔影リード</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%88%AA%E4%BA%91" title="截云">截云</a></td>
+<td>Jieyun</td>
+<td></td>
+<td>ジエユン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%81%AB%E5%93%A8" title="火哨">火哨</a></td>
+<td>Firewhistle</td>
+<td></td>
+<td>ファイヤーホイッスル</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%9E%97" title="林">林</a></td>
+<td>Lin</td>
+<td></td>
+<td>リン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%87%8D%E5%B2%B3" title="重岳">重岳</a></td>
+<td>Chongyue</td>
+<td></td>
+<td>チョンユエ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%93%8E%E9%93%83" title="铎铃">铎铃</a></td>
+<td>Wind Chimes</td>
+<td></td>
+<td>ウィンドチャイム</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E4%BB%87%E7%99%BD" title="仇白">仇白</a></td>
+<td>Qiubai</td>
+<td></td>
+<td>チューバイ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%81%AB%E9%BE%99S%E9%BB%91%E8%A7%92" title="火龙S黑角">火龙S黑角</a></td>
+<td>Rathalos S Noir Corne</td>
+<td></td>
+<td>レウスSノイルホーン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%BA%92%E9%BA%9FR%E5%A4%9C%E5%88%80" title="麒麟R夜刀">麒麟R夜刀</a></td>
+<td>Kirin R Yato</td>
+<td></td>
+<td>キリンRヤトウ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E4%BC%91%E8%B0%9F%E6%96%AF" title="休谟斯">休谟斯</a></td>
+<td>Humus</td>
+<td></td>
+<td>ヒューマス</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%91%A9%E6%A0%B9" title="摩根">摩根</a></td>
+<td>Morgan</td>
+<td></td>
+<td>モーガン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%B4%8B%E7%81%B0" title="洋灰">洋灰</a></td>
+<td>Cement</td>
+<td></td>
+<td>セメント</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E4%BC%8A%E5%86%85%E4%B8%9D" title="伊内丝">伊内丝</a></td>
+<td>Ines</td>
+<td></td>
+<td>イネス</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%8E%AB%E6%8B%89" title="玫拉">玫拉</a></td>
+<td>Melanite</td>
+<td></td>
+<td>メラナイト</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%B7%AC%E7%BE%BD%E8%B5%AB%E9%BB%98" title="淬羽赫默">淬羽赫默</a></td>
+<td>Silence the Paradigmatic</td>
+<td></td>
+<td>淬羽サイレンス</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%9C%8D%E5%B0%94%E6%B5%B7%E9%9B%85" title="霍尔海雅">霍尔海雅</a></td>
+<td>Ho'olheyak</td>
+<td></td>
+<td>ホルハイヤ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%BC%AA%E5%B0%94%E8%B5%9B%E6%80%9D" title="缪尔赛思">缪尔赛思</a></td>
+<td>Muelsyse</td>
+<td></td>
+<td>ミュルジス</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%9A%90%E7%8E%B0" title="隐现">隐现</a></td>
+<td>Insider</td>
+<td></td>
+<td>インサイダー</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%A9%BA%E6%9E%84" title="空构">空构</a></td>
+<td>Spuria</td>
+<td></td>
+<td>スプリア</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%9C%A3%E7%BA%A6%E9%80%81%E8%91%AC%E4%BA%BA" title="圣约送葬人">圣约送葬人</a></td>
+<td>Executor the Ex Foedere</td>
+<td></td>
+<td>聖約イグゼキュター</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%AF%92%E6%AA%80" title="寒檀">寒檀</a></td>
+<td>Santalla</td>
+<td></td>
+<td>サンタラ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%8F%90%E4%B8%B0" title="提丰">提丰</a></td>
+<td>Typhon</td>
+<td></td>
+<td>ティフォン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%87%9B%E8%A7%86" title="凛视">凛视</a></td>
+<td>Valarqvin</td>
+<td></td>
+<td>ヴァラルクビン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%8B%8D%E8%8B%94" title="苍苔">苍苔</a></td>
+<td>Bryophyta</td>
+<td></td>
+<td>ブライオファイタ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%9D%92%E6%9E%B3" title="青枳">青枳</a></td>
+<td>Poncirus</td>
+<td></td>
+<td>ポンシラス</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%90%B3%E7%90%85%E8%AF%97%E6%80%80%E9%9B%85" title="琳琅诗怀雅">琳琅诗怀雅</a></td>
+<td>Swire the Elegant Wit</td>
+<td></td>
+<td>琳琅スワイヤー</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%BA%AF%E7%83%AC%E8%89%BE%E9%9B%85%E6%B3%95%E6%8B%89" title="纯烬艾雅法拉">纯烬艾雅法拉</a></td>
+<td>Eyjafjalla the Hvít Aska</td>
+<td></td>
+<td>純燼エイヤフィヤトラ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%86%B0%E9%85%BF" title="冰酿">冰酿</a></td>
+<td>Coldshot</td>
+<td></td>
+<td>コールドショット</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%9D%8F%E4%BB%81" title="杏仁">杏仁</a></td>
+<td>Almond</td>
+<td></td>
+<td>アーモンド</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%B6%A4%E7%81%AB%E6%9D%B0%E8%A5%BF%E5%8D%A1" title="涤火杰西卡">涤火杰西卡</a></td>
+<td>Jessica the Liberated</td>
+<td></td>
+<td>滌火ジェシカ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%BB%B4%E8%8D%BB" title="维荻">维荻</a></td>
+<td>Verdant</td>
+<td></td>
+<td>ヴァーダント</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%88%B4%E8%8F%B2%E6%81%A9" title="戴菲恩">戴菲恩</a></td>
+<td>Delphine</td>
+<td></td>
+<td>デルフィーン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%88%BA%E7%8E%AB" title="刺玫">刺玫</a></td>
+<td>Vendela</td>
+<td></td>
+<td>ヴァンデラ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%B5%AB%E5%BE%B7%E9%9B%B7" title="赫德雷">赫德雷</a></td>
+<td>Hoederer</td>
+<td></td>
+<td>ヘドリー</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%B7%83%E8%B7%83" title="跃跃">跃跃</a></td>
+<td>Caper</td>
+<td></td>
+<td>ケイパー</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%8A%98%E5%85%89" title="折光">折光</a></td>
+<td>Diamante</td>
+<td></td>
+<td>ディアマンテ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%B7%B1%E5%BE%8B" title="深律">深律</a></td>
+<td>Bassline</td>
+<td></td>
+<td>ベースライン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%AD%A2%E9%A2%82" title="止颂">止颂</a></td>
+<td>Lessing</td>
+<td></td>
+<td>レッシング</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%96%87%E8%96%87%E5%AE%89%E5%A8%9C" title="薇薇安娜">薇薇安娜</a></td>
+<td>Viviana</td>
+<td></td>
+<td>ヴィヴィアナ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%A1%91%E5%BF%83" title="塑心">塑心</a></td>
+<td>Virtuosa</td>
+<td></td>
+<td>ヴィルトゥオーサ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%93%88%E6%B4%9B%E5%BE%B7" title="哈洛德">哈洛德</a></td>
+<td>Harold</td>
+<td></td>
+<td>ハロルド</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%83%88%E5%A4%8F" title="烈夏">烈夏</a></td>
+<td>Лето</td>
+<td></td>
+<td>リェータ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%94%8F" title="锏">锏</a></td>
+<td>Degenbrecher</td>
+<td></td>
+<td>デーゲンブレヒャー</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%B8%A9%E7%B1%B3" title="温米">温米</a></td>
+<td>Warmy</td>
+<td></td>
+<td>ウォーミー</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%8E%B1%E4%BC%8A" title="莱伊">莱伊</a></td>
+<td>Ray</td>
+<td></td>
+<td>レイ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E4%B8%87%E9%A1%B7" title="万顷">万顷</a></td>
+<td>Wanqing</td>
+<td></td>
+<td>ワンチィン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%B0%8F%E6%BB%A1" title="小满">小满</a></td>
+<td>Grain Buds</td>
+<td></td>
+<td>グレインバッズ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%B7%A6%E4%B9%90" title="左乐">左乐</a></td>
+<td>Zuo Le</td>
+<td></td>
+<td>ズオ・ラウ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%BB%8D" title="黍">黍</a></td>
+<td>Shu</td>
+<td></td>
+<td>シュウ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%BA%A2%E9%9A%BC" title="红隼">红隼</a></td>
+<td>Kestrel</td>
+<td></td>
+<td>ケストレル</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%AF%BC%E7%81%AB%E7%B4%A2" title="导火索">导火索</a></td>
+<td>Fuze</td>
+<td></td>
+<td>Fuze</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%8F%8C%E6%9C%88" title="双月">双月</a></td>
+<td>Iana</td>
+<td></td>
+<td>Iana</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%8C%BB%E7%94%9F" title="医生">医生</a></td>
+<td>Doc</td>
+<td></td>
+<td>Doc</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%89%BE%E6%8B%89" title="艾拉">艾拉</a></td>
+<td>Ela</td>
+<td></td>
+<td>Ela</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%9C%B2%E6%89%98" title="露托">露托</a></td>
+<td>Lutonada</td>
+<td></td>
+<td>ルトナダ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%A5%A5%E8%BE%BE" title="奥达">奥达</a></td>
+<td>Odda</td>
+<td></td>
+<td>オッダ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%98%BF%E7%BD%97%E7%8E%9B" title="阿罗玛">阿罗玛</a></td>
+<td>Aroma</td>
+<td></td>
+<td>アロマ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%98%BF%E6%96%AF%E5%8D%A1%E7%BA%B6" title="阿斯卡纶">阿斯卡纶</a></td>
+<td>Ascalon</td>
+<td></td>
+<td>アスカロン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%8E%86%E9%98%B5%E9%94%90%E6%9E%AA%E8%8A%AC" title="历阵锐枪芬">历阵锐枪芬</a></td>
+<td>Fang the Fire-sharpened</td>
+<td></td>
+<td>歴陣鋭槍フェン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%AD%94%E7%8E%8B" title="魔王">魔王</a></td>
+<td>Civilight Eterna</td>
+<td></td>
+<td>シヴィライト・エテルナ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%80%BB%E5%90%84%E6%96%AF" title="逻各斯">逻各斯</a></td>
+<td>Logos</td>
+<td></td>
+<td>ロゴス</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%BB%B4%E4%BB%80%E6%88%B4%E5%B0%94" title="维什戴尔">维什戴尔</a></td>
+<td>Wiš'adel</td>
+<td></td>
+<td>ウィシャデル</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%98%BF%E7%B1%B3%E5%A8%85(%E5%8C%BB%E7%96%97)" title="阿米娅(医疗)">阿米娅(医疗)</a></td>
+<td>Amiya</td>
+<td></td>
+<td></td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%B7%B1%E5%B7%A1" title="深巡">深巡</a></td>
+<td>Underflow</td>
+<td></td>
+<td>アンダーフロー</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%B5%B7%E9%9C%93" title="海霓">海霓</a></td>
+<td>Lucilla</td>
+<td></td>
+<td>ルシーラ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E4%B9%8C%E5%B0%94%E6%AF%94%E5%AE%89" title="乌尔比安">乌尔比安</a></td>
+<td>Ulpianus</td>
+<td></td>
+<td>ウルピアヌス</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%B8%A1%E6%A1%A5" title="渡桥">渡桥</a></td>
+<td>Mitm</td>
+<td></td>
+<td>ミトム</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%A6%AE%E8%8A%99" title="妮芙">妮芙</a></td>
+<td>Nymph</td>
+<td></td>
+<td>ニンフ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%94%A1%E4%BA%BA" title="锡人">锡人</a></td>
+<td>Tin Man</td>
+<td></td>
+<td>ブリキ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%8E%8E%E8%8D%89" title="莎草">莎草</a></td>
+<td>Papyrus</td>
+<td></td>
+<td>パピルス</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%A1%A1%E6%B2%99" title="衡沙">衡沙</a></td>
+<td>Sand Reckoner</td>
+<td></td>
+<td>サンドレコナー</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%A8%9C%E4%BB%81%E5%9B%BE%E4%BA%9A" title="娜仁图亚">娜仁图亚</a></td>
+<td>Narantuya</td>
+<td></td>
+<td>ナラントゥヤ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E4%BD%A9%E4%BD%A9" title="佩佩">佩佩</a></td>
+<td>Pepe</td>
+<td></td>
+<td>ペペ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%A3%AE%E8%A5%BF" title="森西">森西</a></td>
+<td>Senshi</td>
+<td></td>
+<td>センシ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%BD%90%E5%B0%94%E6%9F%A5%E5%85%8B" title="齐尔查克">齐尔查克</a></td>
+<td>Chilchuck</td>
+<td></td>
+<td>チルチャック</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%8E%B1%E6%AC%A7%E6%96%AF" title="莱欧斯">莱欧斯</a></td>
+<td>Laios</td>
+<td></td>
+<td>ライオス</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%8E%9B%E9%9C%B2%E8%A5%BF%E5%B0%94" title="玛露西尔">玛露西尔</a></td>
+<td>Marcille</td>
+<td></td>
+<td>マルシル</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%87%AF%E7%91%9F%E7%90%B3" title="凯瑟琳">凯瑟琳</a></td>
+<td>Catherine</td>
+<td></td>
+<td>キャサリン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%B3%A2%E5%8D%9C" title="波卜">波卜</a></td>
+<td>Bobbing</td>
+<td></td>
+<td>ボビング</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%BB%B4%E5%A8%9C%C2%B7%E7%BB%B4%E5%A4%9A%E5%88%A9%E4%BA%9A" title="维娜·维多利亚">维娜·维多利亚</a></td>
+<td>Vina Victoria</td>
+<td></td>
+<td>ヴィーナ・ヴィクトリア</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E4%BA%91%E8%BF%B9" title="云迹">云迹</a></td>
+<td>Contrail</td>
+<td></td>
+<td>コントレイル</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%8F%B2%E8%8E%B1" title="菲莱">菲莱</a></td>
+<td>Philae</td>
+<td></td>
+<td>フィラエ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%A3%81%E5%BA%A6" title="裁度">裁度</a></td>
+<td>Figurino</td>
+<td></td>
+<td>フィグリーノ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%BC%91%E5%90%9B%E8%80%85" title="弑君者">弑君者</a></td>
+<td>Crownslayer</td>
+<td></td>
+<td>クラウンスレイヤー</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%BF%8D%E5%86%AC" title="忍冬">忍冬</a></td>
+<td>Vulpisfoglia</td>
+<td></td>
+<td>ウルピスフォリア</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%8D%92%E8%8A%9C%E6%8B%89%E6%99%AE%E5%85%B0%E5%BE%B7" title="荒芜拉普兰德">荒芜拉普兰德</a></td>
+<td>Lappland the Decadenza</td>
+<td></td>
+<td>荒蕪ラップランド</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%91%B0%E7%9B%90" title="瑰盐">瑰盐</a></td>
+<td>Rose Salt</td>
+<td></td>
+<td>ローズソルト</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%89%B9%E5%85%8B%E8%AF%BA" title="特克诺">特克诺</a></td>
+<td>Tecno</td>
+<td></td>
+<td>テクノ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%BC%95%E6%98%9F%E6%A3%98%E5%88%BA" title="引星棘刺">引星棘刺</a></td>
+<td>Thorns the Lodestar</td>
+<td></td>
+<td>引星ソーンズ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%A1%8C%E7%AE%B8" title="行箸">行箸</a></td>
+<td>Xingzhu</td>
+<td></td>
+<td>シィンズゥ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%AF%BB%E6%BE%9C" title="寻澜">寻澜</a></td>
+<td>Surfer</td>
+<td></td>
+<td>サーファー</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%83%9B%E7%85%8C" title="烛煌">烛煌</a></td>
+<td>Blaze the Igniting Spark</td>
+<td></td>
+<td>熾炎ブレイズ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E4%BD%99" title="余">余</a></td>
+<td>Yu</td>
+<td></td>
+<td>ユー</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%AF%BA%E5%A8%81%E5%B0%94" title="诺威尔">诺威尔</a></td>
+<td>Nowell</td>
+<td></td>
+<td>ノウエル</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%9A%90%E5%BE%B7%E6%9D%A5%E5%B8%8C" title="隐德来希">隐德来希</a></td>
+<td>Entelechia</td>
+<td></td>
+<td>エンテレケイア</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%B0%B4%E7%81%AF%E5%BF%83" title="水灯心">水灯心</a></td>
+<td>Brigid</td>
+<td></td>
+<td>ブリギッド</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%92%BC%E9%93%85" title="钼铅">钼铅</a></td>
+<td>Wulfenite</td>
+<td></td>
+<td>ウルフェナイト</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%AD%BB%E8%8A%92" title="死芒">死芒</a></td>
+<td>Necrass</td>
+<td></td>
+<td>ネクラス</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%AA%8B%E9%A3%8E" title="骋风">骋风</a></td>
+<td>Windscoot</td>
+<td></td>
+<td>ウィンドスクート</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%98%BF%E5%85%B0%E5%A8%9C" title="阿兰娜">阿兰娜</a></td>
+<td>Alanna</td>
+<td></td>
+<td>アランナ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/Mon3tr" title="Mon3tr">Mon3tr</a></td>
+<td>Mon3tr</td>
+<td></td>
+<td>Mon3tr</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%81%86%E9%9F%B3" title="聆音">聆音</a></td>
+<td>Gracebearer</td>
+<td></td>
+<td>グレースベアラー</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E4%BF%A1%E4%BB%B0%E6%90%85%E6%8B%8C%E6%9C%BA" title="信仰搅拌机">信仰搅拌机</a></td>
+<td>Sankta Miksaparato</td>
+<td></td>
+<td>サンクタ・ミキサー</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%95%BE%E7%BC%AA%E5%AE%89" title="蕾缪安">蕾缪安</a></td>
+<td>Lemuen</td>
+<td></td>
+<td>レミュアン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%96%B0%E7%BA%A6%E8%83%BD%E5%A4%A9%E4%BD%BF" title="新约能天使">新约能天使</a></td>
+<td>Exusiai the New Covenant</td>
+<td></td>
+<td>新約エクシア</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/Miss.Christine" title="Miss.Christine">Miss.Christine</a></td>
+<td>Miss.Christine</td>
+<td></td>
+<td>ミス・クリスティーン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%92%82%E6%AF%94" title="蒂比">蒂比</a></td>
+<td>Tippi</td>
+<td></td>
+<td>ティッピ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%85%92%E7%A5%9E" title="酒神">酒神</a></td>
+<td>Tragodia</td>
+<td></td>
+<td>トラゴーディア</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%BD%95%E6%AD%A6%E5%AE%98" title="录武官">录武官</a></td>
+<td>Record Keeper</td>
+<td></td>
+<td>レコードキーパー</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%8F%B8%E9%9C%86%E6%83%8A%E8%9B%B0" title="司霆惊蛰">司霆惊蛰</a></td>
+<td>Leizi the Thunderbringer</td>
+<td></td>
+<td>司霆レイズ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%94%B5%E5%BC%A7" title="电弧">电弧</a></td>
+<td>Raidian</td>
+<td></td>
+<td>レイディアン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%9D%BE%E6%A1%90" title="松桐">松桐</a></td>
+<td>Matsukiri</td>
+<td></td>
+<td>マツキリ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%90%89%E6%98%9F" title="吉星">吉星</a></td>
+<td>Kichisei</td>
+<td></td>
+<td>キチセイ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%81%A5" title="遥">遥</a></td>
+<td>Haruka</td>
+<td></td>
+<td>ハルカ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%96%A9%E4%B8%9A%E6%98%9F%E7%86%8A" title="斩业星熊">斩业星熊</a></td>
+<td>Hoshiguma the Breacher</td>
+<td></td>
+<td>斬業ホシグマ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%A5%90%E5%A4%A9%E5%AF%BA%E8%8B%A5%E9%BA%A6" title="祐天寺若麦">祐天寺若麦</a></td>
+<td>Yūtenji Nyamu</td>
+<td></td>
+<td>祐天寺にゃむ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%85%AB%E5%B9%A1%E6%B5%B7%E9%93%83" title="八幡海铃">八幡海铃</a></td>
+<td>Yahata Umiri</td>
+<td></td>
+<td>八幡海鈴</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%8B%A5%E5%8F%B6%E7%9D%A6" title="若叶睦">若叶睦</a></td>
+<td>Wakaba Mutsumi</td>
+<td></td>
+<td>若葉睦</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E4%B8%89%E8%A7%92%E5%88%9D%E5%8D%8E" title="三角初华">三角初华</a></td>
+<td>Misumi Uika</td>
+<td></td>
+<td>三角初華</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E4%B8%B0%E5%B7%9D%E7%A5%A5%E5%AD%90" title="丰川祥子">丰川祥子</a></td>
+<td>Togawa Sakiko</td>
+<td></td>
+<td>豊川祥子</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%86%AC%E6%97%B6" title="冬时">冬时</a></td>
+<td>Снегyрочка</td>
+<td></td>
+<td>スネグーラチカ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%8A%98%E6%A1%A0" title="折桠">折桠</a></td>
+<td>Веточки</td>
+<td></td>
+<td>ヴェトチキ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%9C%9F%E8%A8%80" title="真言">真言</a></td>
+<td>Mantra</td>
+<td></td>
+<td>マントラ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%8D%8F%E5%BE%8B" title="协律">协律</a></td>
+<td>Akkord</td>
+<td></td>
+<td>アコルト</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%93%88%E8%92%82%E5%A8%85" title="哈蒂娅">哈蒂娅</a></td>
+<td>Hadiya</td>
+<td></td>
+<td>ハディヤ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%9B%AA%E7%8C%8E" title="雪猎">雪猎</a></td>
+<td>Snow Hunter</td>
+<td></td>
+<td>スノーハンター</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%BA%AF%E5%85%89%E6%98%9F%E6%BA%90" title="溯光星源">溯光星源</a></td>
+<td>Astgenne the Lightchaser</td>
+<td></td>
+<td>溯光アステジーニ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%9C%A3%E8%81%86%E5%88%9D%E9%9B%AA" title="圣聆初雪">圣聆初雪</a></td>
+<td>Pramanix the Prerita</td>
+<td></td>
+<td>聖聆プラマニクス</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%87%9B%E5%BE%A1%E9%93%B6%E7%81%B0" title="凛御银灰">凛御银灰</a></td>
+<td>SilverAsh the Reignfrost</td>
+<td></td>
+<td>凛御シルバーアッシュ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%A4%A9%E7%A9%BA%E7%9B%92" title="天空盒">天空盒</a></td>
+<td>Skybox</td>
+<td></td>
+<td>スカイボックス</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%93%8D%E7%9F%B3" title="响石">响石</a></td>
+<td>Cairn</td>
+<td></td>
+<td>ケルン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%A8%9C%E6%96%AF%E6%8F%90" title="娜斯提">娜斯提</a></td>
+<td>Nasti</td>
+<td></td>
+<td>ナスティ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%91%86%E6%B8%A1%E4%BA%BA" title="摆渡人">摆渡人</a></td>
+<td>Varkáris</td>
+<td></td>
+<td>ヴァルカリス</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%92%B7%E8%8B%B1%E8%B0%83%E9%A6%99%E5%B8%88" title="撷英调香师">撷英调香师</a></td>
+<td>Perfumer the Distilled</td>
+<td></td>
+<td>萃香パフューマー</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%BC%87%E7%BC%87" title="缇缇">缇缇</a></td>
+<td>Titi</td>
+<td></td>
+<td>ティティ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%9F%A9" title="矩">矩</a></td>
+<td>Ju</td>
+<td></td>
+<td>ジュー</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%A3%8E%E7%B5%AE" title="风絮">风絮</a></td>
+<td>Taraxacum</td>
+<td></td>
+<td>タラクサカム</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%B5%A4%E5%88%83%E6%98%8E%E9%9C%84%E9%99%88" title="赤刃明霄陈">赤刃明霄陈</a></td>
+<td>Ch'en the Dawnstreak</td>
+<td></td>
+<td>赤刃明霄チェン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%9C%9B" title="望">望</a></td>
+<td>Wang</td>
+<td></td>
+<td>ウァン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%A4%8D%E5%A5%8F" title="复奏">复奏</a></td>
+<td>Ripresa</td>
+<td></td>
+<td>リプレーザ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%B4%9D%E6%B4%9B%E5%86%85" title="贝洛内">贝洛内</a></td>
+<td>Bellone</td>
+<td></td>
+<td>ベッローネ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E4%BC%AF%E5%A1%94%E5%B0%BC" title="伯塔尼">伯塔尼</a></td>
+<td>Ботани</td>
+<td></td>
+<td>ボタニ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E4%B9%8C%E5%95%BE" title="乌啾">乌啾</a></td>
+<td>Укусик</td>
+<td></td>
+<td>ウクシク</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%80%92%E6%BD%AE%E5%87%9B%E5%86%AC" title="怒潮凛冬">怒潮凛冬</a></td>
+<td>Zima the Raging Tide</td>
+<td></td>
+<td>怒潮ズィマー</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%A3%82%E5%93%8D" title="裂响">裂响</a></td>
+<td>Crackborne</td>
+<td></td>
+<td>クラックボーン</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%BB%B4%E4%BC%8A" title="维伊">维伊</a></td>
+<td>Вий</td>
+<td></td>
+<td>ヴィイ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%8F%AF%E9%9C%B2%E5%B8%8C%E5%B0%94" title="可露希尔">可露希尔</a></td>
+<td>Closure</td>
+<td></td>
+<td>クロージャ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%87%AF%E5%B0%94%E5%B8%8C%C2%B7%E6%80%9D%E8%A1%A1%E6%89%98" title="凯尔希·思衡托">凯尔希·思衡托</a></td>
+<td>Kal'tsit·Esperanta</td>
+<td></td>
+<td>ケルシー・エスペランタ</td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%9B%B7%E7%8B%BC%E9%BE%99S%E7%A9%BA%E7%88%86" title="雷狼龙S空爆">雷狼龙S空爆</a></td>
+<td>Zinogre S Catapult</td>
+<td></td>
+<td></td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%84%B0%E7%8B%90%E9%BE%99%E6%A2%93%E5%85%B0" title="焰狐龙梓兰">焰狐龙梓兰</a></td>
+<td>Violet Mizutsune Orchid</td>
+<td></td>
+<td></td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E4%BD%A9%E5%BE%B7%E6%B4%9B" title="佩德洛">佩德洛</a></td>
+<td>Pedro</td>
+<td></td>
+<td></td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%B0%AC%E5%9B%A0" title="谬因">谬因</a></td>
+<td>Aphrissa</td>
+<td></td>
+<td></td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%9C%BA%E6%A2%B0%E5%B8%88" title="机械师">机械师</a></td>
+<td>Mechanist</td>
+<td></td>
+<td></td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%97%B6%E9%9A%99" title="时隙">时隙</a></td>
+<td>Timeslot</td>
+<td></td>
+<td></td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%98%89%E8%BE%9B%E5%A1%94" title="嘉辛塔">嘉辛塔</a></td>
+<td>Jacinta</td>
+<td></td>
+<td></td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%8F%8A%E6%AF%94" title="珊比">珊比</a></td>
+<td>Thumpy</td>
+<td></td>
+<td></td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E4%BA%88%E6%84%BF%E5%AE%89%E6%B4%81%E8%8E%89%E5%A8%9C" title="予愿安洁莉娜">予愿安洁莉娜</a></td>
+<td>Angelina the Mellow Wish</td>
+<td></td>
+<td></td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%B2%B3%E7%BE%BD%E7%94%B1%E5%8A%A0%E8%8E%89" title="岳羽由加莉">岳羽由加莉</a></td>
+<td>Yukari Takeba</td>
+<td></td>
+<td></td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%9F%83%E7%99%B8%E6%96%AF" title="埃癸斯">埃癸斯</a></td>
+<td>Aegis</td>
+<td></td>
+<td></td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E7%BB%93%E5%9F%8E%E7%90%86" title="结城理">结城理</a></td>
+<td>Makoto Yuki</td>
+<td></td>
+<td></td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E6%97%85%E9%AA%A8" title="旅骨">旅骨</a></td>
+<td>Homebound</td>
+<td></td>
+<td></td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%BE%B7%C2%B7%E6%89%98%E8%8E%B1%E5%A4%9A" title="德·托莱多">德·托莱多</a></td>
+<td>de Toledo</td>
+<td></td>
+<td></td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%85%8B%E8%8E%B1%E9%97%A8%E8%8E%8E" title="克莱门莎">克莱门莎</a></td>
+<td>Clementia</td>
+<td></td>
+<td></td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E8%A1%8C%E9%93%83" title="行铃">行铃</a></td>
+<td>Herdbells</td>
+<td></td>
+<td></td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E9%95%9C%E5%8C%A0" title="镜匠">镜匠</a></td>
+<td>Caleido</td>
+<td></td>
+<td></td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%A5%A5%E5%B0%94%E4%BD%B3" title="奥尔佳">奥尔佳</a></td>
+<td>Ольга</td>
+<td></td>
+<td></td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%9B%BD%E5%BA%A6" title="国度">国度</a></td>
+<td>Территория</td>
+<td></td>
+<td></td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%86%BB%E6%B2%B3" title="冻河">冻河</a></td>
+<td>Тоска</td>
+<td></td>
+<td></td>
+<td>
+</td></tr>
+<tr>
+<td><a href="/w/%E5%A1%94%E9%9C%B2%E6%8B%89" title="塔露拉">塔露拉</a></td>
+<td>Talulah</td>
+<td></td>
+<td></td>
+<td>
+</td></tr></tbody></table>
+</div>
+<div class="mw-heading mw-heading3"><h3 id="其他角色"><span id=".E5.85.B6.E4.BB.96.E8.A7.92.E8.89.B2"></span>其他角色</h3><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/index.php?title=%E6%B3%B0%E6%8B%89%E8%AF%8D%E5%BA%93&amp;action=edit&amp;section=7" title="编辑章节：其他角色"><span>编辑</span></a><span class="mw-editsection-bracket">]</span></span></div>
+<link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r433460" /><p class="mw-empty-elt"></p><div class="ak-host prts-cbox2-host"><div class="ak-cbox prts-cbox2 ak-cbox--warning" role="note"><span class="ak-cbox&#95;&#95;icon"><span class="mdi mdi-lead-pencil" style="font-size:20px;color:;line-height:1;"></span></span><div class="ak-cbox&#95;&#95;body"><div class="ak-cbox&#95;&#95;title">这个页面或章节尚在编辑中。</div>请注意，部分内容可能尚未完成或存在错误。您也可以编辑页面帮助我们完善内容。</div></div></div>
+<p>出现在剧情和档案中的人名，按照出场地点或所属组织简单分类
+</p><p><b>罗德岛</b>
+</p>
+<table class="wikitable mw-collapsible mw-collapsed" style="display:table; white-space:normal; width:min(800px, 100%); text-align:center;">
+<tbody><tr>
+<th scope="col">中文
+</th>
+<th scope="col">日文
+</th>
+<th scope="col">英文
+</th></tr>
+<tr>
+<td>博士</td>
+<td>ドクター</td>
+<td>Doctor/Dr.
+</td></tr>
+<tr>
+<td>可露希尔</td>
+<td>クロージャ</td>
+<td>Closure
+</td></tr>
+<tr>
+<td>PRTS<br />原生罗德岛终端服务</td>
+<td>-</td>
+<td>PRTS/P.R.T.S/<br />Primitive Rhodes Island Terminal Service
+</td></tr>
+<tr>
+<td>Ace<br />王牌</td>
+<td>-</td>
+<td>Ace
+</td></tr>
+<tr>
+<td>Scout<br />斥候</td>
+<td>-</td>
+<td>Scout
+</td></tr>
+<tr>
+<td>西蒙娜</td>
+<td>シモーネ</td>
+<td>Simone
+</td></tr>
+<tr>
+<td>Sharp<br />锋刃</td>
+<td>シャープ</td>
+<td>Sharp
+</td></tr>
+<tr>
+<td>Stormeye<br />风暴眼</td>
+<td>ストームアイ</td>
+<td>Stormeye
+</td></tr>
+<tr>
+<td>Pith<br />术髓</td>
+<td>ピス</td>
+<td>Pith
+</td></tr>
+<tr>
+<td>Touch<br />触痕</td>
+<td>タッチ</td>
+<td>Touch
+</td></tr>
+<tr>
+<td>郁金香</td>
+<td>チューリップ</td>
+<td>Tulip
+</td></tr></tbody></table>
+<p><b>整合运动</b>
+</p>
+<table class="wikitable mw-collapsible mw-collapsed" style="display:table; white-space:normal; width:min(800px, 100%); text-align:center;">
+<tbody><tr>
+<th scope="col">中文
+</th>
+<th scope="col">日文
+</th>
+<th scope="col">英文
+</th></tr>
+<tr>
+<td>塔露拉</td>
+<td>タルラ</td>
+<td>Talulah
+</td></tr>
+<tr>
+<td>弑君者</td>
+<td>クラウンスレイヤー</td>
+<td>Crownslayer
+</td></tr>
+<tr>
+<td>浮士德</td>
+<td>ファウスト</td>
+<td>Faust
+</td></tr>
+<tr>
+<td>梅菲斯特</td>
+<td>メフィスト</td>
+<td>Mephisto
+</td></tr>
+<tr>
+<td>霜星</td>
+<td>フロストノヴァ</td>
+<td>Frostnova
+</td></tr>
+<tr>
+<td>爱国者</td>
+<td>パトリオット</td>
+<td>Patriot
+</td></tr>
+<tr>
+<td>碎骨</td>
+<td>スカルシュレッダー</td>
+<td>Skullshatterer
+</td></tr></tbody></table>
+<p><b>巴别塔</b>
+</p>
+<table class="wikitable mw-collapsible mw-collapsed" style="display:table; white-space:normal; width:min(800px, 100%); text-align:center;">
+<tbody><tr>
+<th scope="col">中文
+</th>
+<th scope="col">日文
+</th>
+<th scope="col">英文
+</th></tr>
+<tr>
+<td>特蕾西娅</td>
+<td>テレジア</td>
+<td>Theresia
+</td></tr></tbody></table>
+<p><b>莱茵生命</b>
+</p>
+<table class="wikitable mw-collapsible mw-collapsed" style="display:table; white-space:normal; width:min(800px, 100%); text-align:center;">
+<tbody><tr>
+<th scope="col">中文
+</th>
+<th scope="col">日文
+</th>
+<th scope="col">英文
+</th></tr>
+<tr>
+<td>阿伦茨·帕尔维斯</td>
+<td>-</td>
+<td>Ahrens Parvis
+</td></tr>
+<tr>
+<td>斐尔迪南·克鲁尼</td>
+<td>-</td>
+<td>Ferdinand Clooney
+</td></tr>
+<tr>
+<td>克丽斯腾·莱特</td>
+<td>-</td>
+<td>Kristen Wright
+</td></tr>
+<tr>
+<td>小贾斯汀·菲茨罗伊</td>
+<td>-</td>
+<td>Justin Fitzroy Jr.
+</td></tr>
+<tr>
+<td>娜斯提·鲁诺瑞伊</td>
+<td>-</td>
+<td>Nasti Lunorey
+</td></tr>
+<tr>
+<td>雅拉·B·威尔森</td>
+<td>-</td>
+<td>Jara B. Wilson
+</td></tr>
+<tr>
+<td>安德涅特·马里亚姆</td>
+<td>-</td>
+<td>Andenate Maryam
+</td></tr></tbody></table>
+<p><b>黑钢国际</b>
+</p>
+<table class="wikitable mw-collapsible mw-collapsed" style="display:table; white-space:normal; width:min(800px, 100%); text-align:center;">
+<tbody><tr>
+<th scope="col">中文
+</th>
+<th scope="col">日文
+</th>
+<th scope="col">英文
+</th></tr>
+<tr>
+<td>珍妮特·朗费罗</td>
+<td>-</td>
+<td>Janet Longfellow
+</td></tr></tbody></table>
+<p><b>汐斯塔</b>
+</p>
+<table class="wikitable mw-collapsible mw-collapsed" style="display:table; white-space:normal; width:min(800px, 100%); text-align:center;">
+<tbody><tr>
+<th scope="col">中文
+</th>
+<th scope="col">日文
+</th>
+<th scope="col">英文
+</th></tr>
+<tr>
+<td>克洛宁</td>
+<td>クローニン</td>
+<td>Cronin
+</td></tr>
+<tr>
+<td>赫尔曼·道尔科斯</td>
+<td>ヘルマン</td>
+<td>Herman Dolcos
+</td></tr>
+<tr>
+<td>芭芭拉·道尔科斯</td>
+<td></td>
+<td>
+</td></tr>
+<tr>
+<td>恶魔破坏龙</td>
+<td>デストラクティブ・ドラゴン・デーモン（悪魔破壊竜）</td>
+<td>Destructive Dragon Demon/<b>D.D.D.</b>
+</td></tr>
+<tr>
+<td>Alty</td>
+<td>-</td>
+<td>Alty
+</td></tr></tbody></table>
+<p><b>龙门</b>
+</p>
+<table class="wikitable mw-collapsible mw-collapsed" style="display:table; white-space:normal; width:min(800px, 100%); text-align:center;">
+<tbody><tr>
+<th scope="col">中文
+</th>
+<th scope="col">日文
+</th>
+<th scope="col">英文
+</th></tr>
+<tr>
+<td>魏彦吾</td>
+<td>ウェイ</td>
+<td>Wei Yenwu
+</td></tr>
+<tr>
+<td>文月</td>
+<td>フミヅキ</td>
+<td>Fumizuki
+</td></tr>
+<tr>
+<td>米莎</td>
+<td>ミーシャ</td>
+<td>Misha
+</td></tr>
+<tr>
+<td>阿发</td>
+<td>ファー</td>
+<td>Ah Faat
+</td></tr>
+<tr>
+<td>卡彭</td>
+<td>カポネ</td>
+<td>Capone
+</td></tr>
+<tr>
+<td>甘比诺</td>
+<td>ガンビーノ</td>
+<td>Gambino
+</td></tr>
+<tr>
+<td>董阿伯</td>
+<td>董のおじさん</td>
+<td>Uncle Tung
+</td></tr>
+<tr>
+<td>伊斯</td>
+<td>イース</td>
+<td>Yith
+</td></tr>
+<tr>
+<td>鼠王</td>
+<td>鼠王</td>
+<td>Rat King
+</td></tr>
+<tr>
+<td>欧厄尔·彼得斯</td>
+<td>オエル・ピーターズ</td>
+<td>Eurill Pides
+</td></tr>
+<tr>
+<td>大帝</td>
+<td>エンペラー</td>
+<td>Emperor
+</td></tr></tbody></table>
+<p><b>卡西米尔</b>
+</p>
+<table class="wikitable mw-collapsible mw-collapsed" style="display:table; white-space:normal; width:min(800px, 100%); text-align:center;">
+<tbody><tr>
+<th scope="col">中文
+</th>
+<th scope="col">日文
+</th>
+<th scope="col">英文
+</th></tr>
+<tr>
+<td>可萝尔</td>
+<td>キャロル</td>
+<td>Carol
+</td></tr>
+<tr>
+<td>黑骑士</td>
+<td>-</td>
+<td>Black Knight
+</td></tr>
+<tr>
+<td>凋零骑士</td>
+<td>-</td>
+<td>Desecrated Knight
+</td></tr>
+<tr>
+<td>腐败骑士</td>
+<td>-</td>
+<td>Defiled Knight
+</td></tr>
+<tr>
+<td>血骑士</td>
+<td>-</td>
+<td>Blood Knight
+</td></tr>
+<tr>
+<td>瑟奇亚克</td>
+<td>-</td>
+<td>Szewczyk
+</td></tr>
+<tr>
+<td>托兰</td>
+<td>-</td>
+<td>Toland
+</td></tr>
+<tr>
+<td>切斯柏</td>
+<td>-</td>
+<td>Czcibor
+</td></tr></tbody></table>
+<p><b>叙拉古</b>
+</p>
+<table class="wikitable mw-collapsible mw-collapsed" style="display:table; white-space:normal; width:min(800px, 100%); text-align:center;">
+<tbody><tr>
+<th scope="col">中文
+</th>
+<th scope="col">日文
+</th>
+<th scope="col">英文
+</th></tr>
+<tr>
+<td>迪伦马特</td>
+<td>デュレンマット</td>
+<td>Dürrenmatt
+</td></tr>
+<tr>
+<td>阿格尼尔</td>
+<td>-</td>
+<td>Agenir
+</td></tr>
+<tr>
+<td>乔万娜·罗塞蒂</td>
+<td>-</td>
+<td>Giovanna Rossati
+</td></tr>
+<tr>
+<td>德米特里·切塔尔多</td>
+<td>-</td>
+<td>Demetri Certaldo
+</td></tr>
+<tr>
+<td>丹布朗·莱奥帕尔迪</td>
+<td>-</td>
+<td>Danbrown Leopardi
+</td></tr>
+<tr>
+<td>文</td>
+<td>-</td>
+<td>Ben
+</td></tr></tbody></table>
+<p><b>维多利亚</b>
+</p>
+<table class="wikitable mw-collapsible mw-collapsed" style="display:table; white-space:normal; width:min(800px, 100%); text-align:center;">
+<tbody><tr>
+<th scope="col">中文
+</th>
+<th scope="col">日文
+</th>
+<th scope="col">英文
+</th></tr>
+<tr>
+<td>蔓德拉</td>
+<td>-</td>
+<td>Mandragora
+</td></tr>
+<tr>
+<td>莉薇娅·吉尔达斯</td>
+<td>-</td>
+<td>Livia Gildas
+</td></tr>
+<tr>
+<td>理查·西摩</td>
+<td>-</td>
+<td>Richard Seymour
+</td></tr>
+<tr>
+<td>露西娅·斯卡曼德罗斯</td>
+<td>-</td>
+<td>Lucia Skamandros
+</td></tr>
+<tr>
+<td>雷顿·孟塔古</td>
+<td>-</td>
+<td>Rayton Montague
+</td></tr>
+<tr>
+<td>杰弗里·梅斯</td>
+<td>-</td>
+<td>Jeffrey Metz
+</td></tr>
+<tr>
+<td>温德米尔公爵</td>
+<td>-</td>
+<td>Duke of Windermere
+</td></tr>
+<tr>
+<td>威灵顿公爵</td>
+<td>-</td>
+<td>Duke of Wellington
+</td></tr>
+<tr>
+<td>弗雷德里克三世</td>
+<td>-</td>
+<td>Frederick Ⅲ
+</td></tr></tbody></table>
+<p><b>哥伦比亚</b>
+</p>
+<table class="wikitable mw-collapsible mw-collapsed" style="display:table; white-space:normal; width:min(800px, 100%); text-align:center;">
+<tbody><tr>
+<th scope="col">中文
+</th>
+<th scope="col">日文
+</th>
+<th scope="col">英文
+</th></tr>
+<tr>
+<td>杰斯顿</td>
+<td>-</td>
+<td>Jesselton Miller
+</td></tr>
+<tr>
+<td>马克·麦克斯</td>
+<td>-</td>
+<td>Mk-MAX
+</td></tr></tbody></table>
+<p><b>高卢</b>
+</p>
+<table class="wikitable mw-collapsible mw-collapsed" style="display:table; white-space:normal; width:min(800px, 100%); text-align:center;">
+<tbody><tr>
+<th scope="col">中文
+</th>
+<th scope="col">日文
+</th>
+<th scope="col">英文
+</th></tr>
+<tr>
+<td>科西嘉一世</td>
+<td>-</td>
+<td>Corsica Ⅰ
+</td></tr>
+<tr>
+<td>德·黎博利</td>
+<td>-</td>
+<td>Emmanuel de Liberi
+</td></tr></tbody></table>
+<p><b>卡兹戴尔</b>
+</p>
+<table class="wikitable mw-collapsible mw-collapsed" style="display:table; white-space:normal; width:min(800px, 100%); text-align:center;">
+<tbody><tr>
+<th scope="col">中文
+</th>
+<th scope="col">日文
+</th>
+<th scope="col">英文
+</th></tr>
+<tr>
+<td>特雷西斯</td>
+<td>-</td>
+<td>Theresis
+</td></tr>
+<tr>
+<td>曼弗雷德</td>
+<td>-</td>
+<td>Manfred
+</td></tr></tbody></table>
+<p><b>拉特兰</b>
+</p>
+<table class="wikitable mw-collapsible mw-collapsed" style="display:table; white-space:normal; width:min(800px, 100%); text-align:center;">
+<tbody><tr>
+<th scope="col">中文
+</th>
+<th scope="col">日文
+</th>
+<th scope="col">英文
+</th></tr>
+<tr>
+<td>塞茜莉亚</td>
+<td>-</td>
+<td>Cecilia
+</td></tr>
+<tr>
+<td>安多恩</td>
+<td>-</td>
+<td>Androne
+</td></tr>
+<tr>
+<td>蕾缪安</td>
+<td>-</td>
+<td>Lemuen
+</td></tr>
+<tr>
+<td>克莱芒·杜波瓦</td>
+<td>-</td>
+<td>Clément Dubois
+</td></tr>
+<tr>
+<td>斯特凡诺·托雷格罗萨</td>
+<td>-</td>
+<td>Stefano Torregrossa
+</td></tr>
+<tr>
+<td>伊万杰利斯塔十一世</td>
+<td>-</td>
+<td>Yvangelista PP.Ⅺ
+</td></tr></tbody></table>
+<p><b>玻利瓦尔</b>
+</p>
+<table class="wikitable mw-collapsible mw-collapsed" style="display:table; white-space:normal; width:min(800px, 100%); text-align:center;">
+<tbody><tr>
+<th scope="col">中文
+</th>
+<th scope="col">日文
+</th>
+<th scope="col">英文
+</th></tr>
+<tr>
+<td>坎黛拉</td>
+<td>-</td>
+<td>Candela
+</td></tr>
+<tr>
+<td>潘乔</td>
+<td>-</td>
+<td>Pancho
+</td></tr></tbody></table>
+<p><b>莱塔尼亚</b>
+</p>
+<table class="wikitable mw-collapsible mw-collapsed" style="display:table; white-space:normal; width:min(800px, 100%); text-align:center;">
+<tbody><tr>
+<th scope="col">中文
+</th>
+<th scope="col">日文
+</th>
+<th scope="col">英文
+</th></tr>
+<tr>
+<td>赫尔昏佐伦/巫王</td>
+<td>-</td>
+<td>Herkunftshorn
+</td></tr>
+<tr>
+<td>利奥波德大公</td>
+<td>-</td>
+<td>Erzherzog von Leopold
+</td></tr>
+<tr>
+<td>塞弗林·霍索恩</td>
+<td>-</td>
+<td>Severin Hawthorn
+</td></tr>
+<tr>
+<td>塔佳娜</td>
+<td>-</td>
+<td>Tatjana
+</td></tr>
+<tr>
+<td>托尔瓦尔德·霍索恩</td>
+<td>-</td>
+<td>Thorwald Hawthorn
+</td></tr>
+<tr>
+<td>毕德曼</td>
+<td>-</td>
+<td>Biederman
+</td></tr>
+<tr>
+<td>埃克哈德</td>
+<td>-</td>
+<td>Eckehard
+</td></tr>
+<tr>
+<td>凯文</td>
+<td>-</td>
+<td>Kevin
+</td></tr></tbody></table>
+<div class="mw-heading mw-heading2"><h2 id="杂项"><span id=".E6.9D.82.E9.A1.B9"></span>杂项</h2><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/index.php?title=%E6%B3%B0%E6%8B%89%E8%AF%8D%E5%BA%93&amp;action=edit&amp;section=8" title="编辑章节：杂项"><span>编辑</span></a><span class="mw-editsection-bracket">]</span></span></div>
+<p>各种不能归于以上分类的词语。
+</p>
+<table class="wikitable" style="width:min(800px, 100%); display:table; text-align:center; white-space:normal;">
+<tbody><tr>
+<th scope="col">中文
+</th>
+<th scope="col">日文
+</th>
+<th scope="col">英文
+</th>
+<th scope="col">备注
+</th></tr>
+<tr>
+<td>明日方舟</td>
+<td>アークナイツ</td>
+<td>Arknights</td>
+<td>-
+</td></tr>
+<tr>
+<td>法杖</td>
+<td>アーツロッド/アーツユニット</td>
+<td>wand/Arts staff/staff</td>
+<td>-
+</td></tr>
+<tr>
+<td>咪波</td>
+<td>ミーボ</td>
+<td>Meeboo</td>
+<td>梅尔制造的线控机械装置。
+</td></tr>
+<tr>
+<td>西绪福斯</td>
+<td>シーシュポス</td>
+<td>Sisyphus</td>
+<td>莱茵生命出品的机械装置。
+</td></tr>
+<tr>
+<td>柯克西卡</td>
+<td>ココシュカ</td>
+<td>Kirkika</td>
+<td>莱茵生命出品的机械装置。
+</td></tr>
+<tr>
+<td>罗德岛基建</td>
+<td>-</td>
+<td>R.I.I.C/<br />Rhodes Island Infrastructure Complex</td>
+<td>-
+</td></tr>
+<tr>
+<td>驮兽</td>
+<td>-</td>
+<td>Burdenbeast</td>
+<td>-
+</td></tr>
+<tr>
+<td>瘤兽</td>
+<td>-</td>
+<td>Cystybeast</td>
+<td>-
+</td></tr>
+<tr>
+<td>沙地兽</td>
+<td>-</td>
+<td>Sandbeast</td>
+<td>-
+</td></tr>
+<tr>
+<td>裂兽</td>
+<td>-</td>
+<td>Manglerbeast</td>
+<td>-
+</td></tr>
+<tr>
+<td>钳兽</td>
+<td>-</td>
+<td>Gloompincer</td>
+<td>-
+</td></tr>
+<tr>
+<td>云兽</td>
+<td>-</td>
+<td>Cloudbeast</td>
+<td>-
+</td></tr>
+<tr>
+<td>循兽</td>
+<td>-</td>
+<td>Beckbeast</td>
+<td>-
+</td></tr>
+<tr>
+<td>鼷兽</td>
+<td>-</td>
+<td>Musbeast</td>
+<td>-
+</td></tr>
+<tr>
+<td>海嗣/恐鱼</td>
+<td>-</td>
+<td>Sea Terror/Seaborn</td>
+<td>-
+</td></tr>
+<tr>
+<td>四国战争</td>
+<td>-</td>
+<td>War of the Four Nations</td>
+<td>-
+</td></tr>
+<tr>
+<td>大叛乱</td>
+<td>-</td>
+<td>The Great Rebellion</td>
+<td>-
+</td></tr></tbody></table>
+<div class="mw-heading mw-heading2"><h2 id="注释与链接"><span id=".E6.B3.A8.E9.87.8A.E4.B8.8E.E9.93.BE.E6.8E.A5"></span>注释与链接</h2><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/index.php?title=%E6%B3%B0%E6%8B%89%E8%AF%8D%E5%BA%93&amp;action=edit&amp;section=9" title="编辑章节：注释与链接"><span>编辑</span></a><span class="mw-editsection-bracket">]</span></span></div>
+<div class="nomobile">
+<style data-mw-deduplicate="TemplateStyles:r431860">.mw-parser-output .navbox{width:100%;margin:auto;clear:both;text-align:center;padding:1px}.mw-parser-output .navbox-inner,.mw-parser-output .navbox-subgroup{width:100%}.mw-parser-output .navbox th,.mw-parser-output .navbox-title,.mw-parser-output .navbox-abovebelow{text-align:center;padding:1px 1em}.mw-parser-output th.navbox-group{white-space:nowrap;text-align:right;padding:1px 1em}.mw-parser-output .navbox-list{border-color:transparent}.mw-parser-output table.navbox+table.navbox{margin-top:-1px}.mw-parser-output ol+table.navbox,.mw-parser-output ul+table.navbox{margin-top:0.5em}.mw-parser-output .navbox .hlist td dl,.mw-parser-output .navbox .hlist td ol,.mw-parser-output .navbox .hlist td ul,.mw-parser-output .navbox td.hlist dl,.mw-parser-output .navbox td.hlist ol,.mw-parser-output .navbox td.hlist ul{padding:0.125em 0}.mw-parser-output .navbox .hlist dd,.mw-parser-output .navbox .hlist dt,.mw-parser-output .navbox .hlist li{white-space:nowrap}.mw-parser-output .navbox .hlist dd dl,.mw-parser-output .navbox .hlist dt dl,.mw-parser-output .navbox .hlist li ol,.mw-parser-output .navbox .hlist li ul{white-space:normal}.mw-parser-output .navbar{display:inline;font-weight:normal}.mw-parser-output .navbar ul{display:inline;white-space:nowrap}.mw-parser-output .navbar li{word-spacing:-0.125em}.mw-parser-output .navbar.mini li abbr[title]{font-variant:small-caps;border-bottom:none;text-decoration:none;cursor:inherit}.mw-parser-output .navbox .navbar{display:block}.mw-parser-output .navbox-title .navbar{float:left;text-align:left;margin-right:0.5em;width:8em}.mw-parser-output .collapseButton{float:right;font-weight:normal;margin-left:0.5em;text-align:right;width:auto}.mw-parser-output .navbox .collapseButton{width:8em}@media(max-width:1119px){.mw-parser-output .navbox .hlist li{display:inline-block;white-space:normal}.mw-parser-output .navbox .hlist li a,.mw-parser-output .navbox .hlist li .selflink{white-space:normal}.mw-parser-output .navbox .hlist li:not(:last-child)::after{white-space:pre}}@media(max-width:639px){.mw-parser-output th.navbox-group,.mw-parser-output th.navbox-group a{white-space:normal;word-break:keep-all}.mw-parser-output th.navbox-group{padding-left:0.5em;padding-right:0.5em}}.mw-parser-output .navbox{border:1px solid #a2a9b1;background:#fdfdfd}.mw-parser-output .navbox-subgroup{background:#fdfdfd}.mw-parser-output .navbox th,.mw-parser-output .navbox-title{background:#4487df}.mw-parser-output .navbox-title{border-left:0;color:#fff}.mw-parser-output .navbox-title a,.mw-parser-output .navbox-title a:visited,.mw-parser-output .navbox-title div{color:#fff}.mw-parser-output .navbox-abovebelow,.mw-parser-output th.navbox-group,.mw-parser-output .navbox-subgroup .navbox-title{background:#85c1f7}.mw-parser-output .navbox-subgroup .navbox-group,.mw-parser-output .navbox-subgroup .navbox-abovebelow{background:#ebf7fe}.mw-parser-output .navbox-even{background:#f7f7f7}.mw-parser-output .navbox-odd{background:transparent}.mw-parser-output .navbox-group a,.mw-parser-output .navbox-group a:visited,.mw-parser-output .navbox-abovebelow a,.mw-parser-output .navbox-abovebelow a:visited{color:inherit}html.skin-theme-clientpref-night body .mw-parser-output .navbox{border-color:#454b50;background:#1a1b1c}html.skin-theme-clientpref-night body .mw-parser-output .navbox-subgroup{background:#1a1b1c}html.skin-theme-clientpref-night body .mw-parser-output .navbox th,html.skin-theme-clientpref-night body .mw-parser-output .navbox-title{background:#20579d}html.skin-theme-clientpref-night body .mw-parser-output .navbox-abovebelow,html.skin-theme-clientpref-night body .mw-parser-output th.navbox-group,html.skin-theme-clientpref-night body .mw-parser-output .navbox-subgroup .navbox-title{background:#14466d}html.skin-theme-clientpref-night body .mw-parser-output .navbox-subgroup .navbox-group,html.skin-theme-clientpref-night body .mw-parser-output .navbox-subgroup .navbox-abovebelow{background:#1f272b}html.skin-theme-clientpref-night body .mw-parser-output .navbox-even{background:#232425}html.skin-theme-clientpref-night body .mw-parser-output .navbox [style*="var(--lightblue)"],html.skin-theme-clientpref-night body .mw-parser-output .navbox [style*="#ebf7fe"],html.skin-theme-clientpref-night body .mw-parser-output .navbox [style*="#EBF7FE"]{background:#1f272b!important}html.skin-theme-clientpref-night body .mw-parser-output .navbox [style*="#def"],html.skin-theme-clientpref-night body .mw-parser-output .navbox [style*="#DEF"],html.skin-theme-clientpref-night body .mw-parser-output .navbox [style*="#ddeeff"],html.skin-theme-clientpref-night body .mw-parser-output .navbox [style*="#DDEEFF"]{background:#222d38!important}html.skin-theme-clientpref-night body .mw-parser-output .navbox [style*="background-color:#fdfdfd"],html.skin-theme-clientpref-night body .mw-parser-output .navbox [style*="background-color:#FDFDFD"],html.skin-theme-clientpref-night body .mw-parser-output .navbox [style*="background:#fdfdfd"],html.skin-theme-clientpref-night body .mw-parser-output .navbox [style*="background:#FDFDFD"]{background:#1a1b1c!important}html.skin-theme-clientpref-night body .mw-parser-output .navbox [style*="2px solid #fdfdfd"]{border-left-color:transparent!important}html.skin-theme-clientpref-night body .mw-parser-output .navbox [style*="#fdd"],html.skin-theme-clientpref-night body .mw-parser-output .navbox [style*="#FDD"],html.skin-theme-clientpref-night body .mw-parser-output .navbox [style*="#ffdddd"],html.skin-theme-clientpref-night body .mw-parser-output .navbox [style*="#FFDDDD"]{background:#3d2828!important}html.skin-theme-clientpref-night body .mw-parser-output .navbox [style*="#fee"],html.skin-theme-clientpref-night body .mw-parser-output .navbox [style*="#FEE"],html.skin-theme-clientpref-night body .mw-parser-output .navbox [style*="#ffeeee"],html.skin-theme-clientpref-night body .mw-parser-output .navbox [style*="#FFEEEE"]{background:#2f2424!important}html.skin-theme-clientpref-night body .mw-parser-output .navbox span[style*="color:#000"],html.skin-theme-clientpref-night body .mw-parser-output .navbox span[style*="color: #000"],html.skin-theme-clientpref-night body .mw-parser-output .navbox span[style*="color:black"],html.skin-theme-clientpref-night body .mw-parser-output .navbox span[style*="color: black"],html.skin-theme-clientpref-night body .mw-parser-output .navbox span[style*="color:#202122"],html.skin-theme-clientpref-night body .mw-parser-output .navbox span[style*="color: #202122"]{color:inherit!important}@media(prefers-color-scheme:dark){html.skin-theme-clientpref-os body .mw-parser-output .navbox{border-color:#454b50;background:#1a1b1c}html.skin-theme-clientpref-os body .mw-parser-output .navbox-subgroup{background:#1a1b1c}html.skin-theme-clientpref-os body .mw-parser-output .navbox th,html.skin-theme-clientpref-os body .mw-parser-output .navbox-title{background:#20579d}html.skin-theme-clientpref-os body .mw-parser-output .navbox-abovebelow,html.skin-theme-clientpref-os body .mw-parser-output th.navbox-group,html.skin-theme-clientpref-os body .mw-parser-output .navbox-subgroup .navbox-title{background:#14466d}html.skin-theme-clientpref-os body .mw-parser-output .navbox-subgroup .navbox-group,html.skin-theme-clientpref-os body .mw-parser-output .navbox-subgroup .navbox-abovebelow{background:#1f272b}html.skin-theme-clientpref-os body .mw-parser-output .navbox-even{background:#232425}html.skin-theme-clientpref-os body .mw-parser-output .navbox [style*="var(--lightblue)"],html.skin-theme-clientpref-os body .mw-parser-output .navbox [style*="#ebf7fe"],html.skin-theme-clientpref-os body .mw-parser-output .navbox [style*="#EBF7FE"]{background:#1f272b!important}html.skin-theme-clientpref-os body .mw-parser-output .navbox [style*="#def"],html.skin-theme-clientpref-os body .mw-parser-output .navbox [style*="#DEF"],html.skin-theme-clientpref-os body .mw-parser-output .navbox [style*="#ddeeff"],html.skin-theme-clientpref-os body .mw-parser-output .navbox [style*="#DDEEFF"]{background:#222d38!important}html.skin-theme-clientpref-os body .mw-parser-output .navbox [style*="background-color:#fdfdfd"],html.skin-theme-clientpref-os body .mw-parser-output .navbox [style*="background-color:#FDFDFD"],html.skin-theme-clientpref-os body .mw-parser-output .navbox [style*="background:#fdfdfd"],html.skin-theme-clientpref-os body .mw-parser-output .navbox [style*="background:#FDFDFD"]{background:#1a1b1c!important}html.skin-theme-clientpref-os body .mw-parser-output .navbox [style*="2px solid #fdfdfd"]{border-left-color:transparent!important}html.skin-theme-clientpref-os body .mw-parser-output .navbox [style*="#fdd"],html.skin-theme-clientpref-os body .mw-parser-output .navbox [style*="#FDD"],html.skin-theme-clientpref-os body .mw-parser-output .navbox [style*="#ffdddd"],html.skin-theme-clientpref-os body .mw-parser-output .navbox [style*="#FFDDDD"]{background:#3d2828!important}html.skin-theme-clientpref-os body .mw-parser-output .navbox [style*="#fee"],html.skin-theme-clientpref-os body .mw-parser-output .navbox [style*="#FEE"],html.skin-theme-clientpref-os body .mw-parser-output .navbox [style*="#ffeeee"],html.skin-theme-clientpref-os body .mw-parser-output .navbox [style*="#FFEEEE"]{background:#2f2424!important}html.skin-theme-clientpref-os body .mw-parser-output .navbox span[style*="color:#000"],html.skin-theme-clientpref-os body .mw-parser-output .navbox span[style*="color: #000"],html.skin-theme-clientpref-os body .mw-parser-output .navbox span[style*="color:black"],html.skin-theme-clientpref-os body .mw-parser-output .navbox span[style*="color: black"],html.skin-theme-clientpref-os body .mw-parser-output .navbox span[style*="color:#202122"],html.skin-theme-clientpref-os body .mw-parser-output .navbox span[style*="color: #202122"]{color:inherit!important}}</style><table cellspacing="0" class="navbox" style="border-spacing:0"><tbody><tr><td style="padding:2px"><table cellspacing="0" class="nowraplinks collapsible autocollapse navbox-inner" style="border-spacing:0;background:transparent;color:inherit"><tbody><tr><th scope="col" class="navbox-title" colspan="2"><div style="font-size:150%"><a href="/w/%E6%B3%B0%E6%8B%89%E5%A4%A7%E5%85%B8:Index" title="泰拉大典:Index">泰拉大典</a></div></th></tr><tr style="height:2px"><td colspan="3"></td></tr><tr><th scope="row" class="navbox-group">目录</th><td class="navbox-list navbox-odd hlist" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px"><div style="padding:0em 0.25em"><a href="/w/%E6%B3%B0%E6%8B%89%E5%A4%A7%E5%85%B8:%E8%A7%92%E8%89%B2/%E5%85%B6%E4%BB%96" title="泰拉大典:角色/其他">泰拉人名录</a>&#160;&#8226;&#160;<a href="/w/%E6%B3%B0%E6%8B%89%E5%A4%A7%E5%85%B8:%E5%9C%B0%E7%90%86/%E5%85%B6%E4%BB%96" title="泰拉大典:地理/其他">泰拉地理指南</a>&#160;&#8226;&#160;<a href="/w/%E6%B3%B0%E6%8B%89%E5%A4%A7%E5%85%B8:%E7%BB%84%E7%BB%87/%E5%85%B6%E4%BB%96" title="泰拉大典:组织/其他">泰拉机构名册</a>&#160;&#8226;&#160;<a href="/w/%E6%B3%B0%E6%8B%89%E5%A4%A7%E5%85%B8:%E7%94%9F%E7%89%A9" title="泰拉大典:生物">泰拉生态调查报告</a>&#160;&#8226;&#160;<a href="/w/%E6%B3%B0%E6%8B%89%E5%A4%A7%E5%85%B8:%E9%81%93%E5%85%B7" title="泰拉大典:道具">泰拉商品目录</a>&#160;&#8226;&#160;<a href="/w/%E6%B3%B0%E6%8B%89%E5%A4%A7%E5%85%B8:%E5%AE%B6%E5%85%B7" title="泰拉大典:家具">泰拉家居手册</a>&#160;&#8226;&#160;<a href="/w/%E6%B3%B0%E6%8B%89%E5%A4%A7%E5%85%B8:%E5%85%B3%E5%8D%A1" title="泰拉大典:关卡">罗德岛作战汇报</a>&#160;&#8226;&#160;<a href="/w/%E6%B3%B0%E6%8B%89%E5%A4%A7%E5%85%B8:%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2" title="泰拉大典:用户界面">罗德岛设计研究</a>&#160;&#8226;&#160;<a href="/w/%E6%B3%B0%E6%8B%89%E5%A4%A7%E5%85%B8:%E5%89%A7%E6%83%85" title="泰拉大典:剧情">罗德岛情报分析</a>&#160;&#8226;&#160;<a href="/w/%E6%B3%B0%E6%8B%89%E5%A4%A7%E5%85%B8:%E6%88%90%E5%B0%B1" title="泰拉大典:成就">罗德岛荣誉记录</a>&#160;&#8226;&#160;<a href="/w/%E6%B3%B0%E6%8B%89%E5%A4%A7%E5%85%B8:%E9%9B%86%E6%88%90%E6%88%98%E7%95%A5" title="泰拉大典:集成战略">泰拉收藏品鉴赏</a>&#160;&#8226;&#160;<a href="/w/%E6%B3%B0%E6%8B%89%E5%A4%A7%E5%85%B8:%E7%99%BE%E7%A7%91" title="泰拉大典:百科">泰拉百科事典</a></div></td></tr><tr style="height:2px"><td colspan="3"></td></tr><tr><th scope="row" class="navbox-group">附表</th><td class="navbox-list navbox-even hlist" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px"><div style="padding:0em 0.25em"><a href="/w/%E6%B3%B0%E6%8B%89%E5%A4%A7%E5%85%B8:%E8%A7%92%E8%89%B2" title="泰拉大典:角色">角色一览</a>&#160;&#8226;&#160;<a href="/w/%E6%B3%B0%E6%8B%89%E5%A4%A7%E5%85%B8:%E5%9C%B0%E7%90%86" title="泰拉大典:地理">地理一览</a>&#160;&#8226;&#160;<a href="/w/%E6%B3%B0%E6%8B%89%E5%A4%A7%E5%85%B8:%E7%BB%84%E7%BB%87" title="泰拉大典:组织">组织一览</a>&#160;&#8226;&#160;<a href="/w/%E6%B3%B0%E6%8B%89%E5%B9%B4%E8%A1%A8" title="泰拉年表">泰拉年表</a>&#160;&#8226;&#160;<a class="mw-selflink selflink">泰拉词库</a></div></td></tr><tr style="height:2px"><td colspan="3"></td></tr><tr><th scope="row" class="navbox-group">编辑指引</th><td class="navbox-list navbox-odd hlist" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px"><div style="padding:0em 0.25em"><a href="/w/%E6%B3%B0%E6%8B%89%E5%A4%A7%E5%85%B8:%E7%BC%96%E8%BE%91%E6%8C%87%E5%8D%97" title="泰拉大典:编辑指南">编辑指南</a>&#160;&#8226;&#160;<a href="/w/%E6%B3%B0%E6%8B%89%E5%A4%A7%E5%85%B8:%E6%9D%A1%E7%9B%AE%E6%A0%BC%E5%BC%8F" title="泰拉大典:条目格式">条目格式</a>&#160;&#8226;&#160;<a href="/w/%E6%B3%B0%E6%8B%89%E5%A4%A7%E5%85%B8%E8%AE%A8%E8%AE%BA:%E5%8F%8D%E9%A6%88%E4%B8%8E%E5%BB%BA%E8%AE%AE" title="泰拉大典讨论:反馈与建议">反馈与建议</a></div></td></tr></tbody></table></td></tr></tbody></table><script>RLQ.push(()=>{mw.loader.load('ext.gadget.collapsibleTables')})</script>
+
+</div><div class="nodesktop">
+<table class="wikitable nodesktop mw-collapsible mw-collapsed" style="max-width:100%; min-width:100%; white-space: normal;">
+
+<tbody><tr>
+<th colspan="2" style="background: var(--darkblue); color: white; width:100vw;"><a href="/w/%E6%B3%B0%E6%8B%89%E5%A4%A7%E5%85%B8:Index" title="泰拉大典:Index"><span style="color:white;">泰拉大典</span></a>
+</th></tr>
+<tr>
+<td style="min-width: 80px; background: var(--blue); text-align:right; font-weight:bold;">目录
+</td>
+<td><a href="/w/%E6%B3%B0%E6%8B%89%E5%A4%A7%E5%85%B8:%E8%A7%92%E8%89%B2/%E5%85%B6%E4%BB%96" title="泰拉大典:角色/其他">泰拉人名录</a>&#160;&#8226;&#160;<a href="/w/%E6%B3%B0%E6%8B%89%E5%A4%A7%E5%85%B8:%E5%9C%B0%E7%90%86/%E5%85%B6%E4%BB%96" title="泰拉大典:地理/其他">泰拉地理指南</a>&#160;&#8226;&#160;<a href="/w/%E6%B3%B0%E6%8B%89%E5%A4%A7%E5%85%B8:%E7%BB%84%E7%BB%87/%E5%85%B6%E4%BB%96" title="泰拉大典:组织/其他">泰拉机构名册</a>&#160;&#8226;&#160;<a href="/w/%E6%B3%B0%E6%8B%89%E5%A4%A7%E5%85%B8:%E7%94%9F%E7%89%A9" title="泰拉大典:生物">泰拉生态调查报告</a>&#160;&#8226;&#160;<a href="/w/%E6%B3%B0%E6%8B%89%E5%A4%A7%E5%85%B8:%E9%81%93%E5%85%B7" title="泰拉大典:道具">泰拉商品目录</a>&#160;&#8226;&#160;<a href="/w/%E6%B3%B0%E6%8B%89%E5%A4%A7%E5%85%B8:%E5%AE%B6%E5%85%B7" title="泰拉大典:家具">泰拉家居手册</a>&#160;&#8226;&#160;<a href="/w/%E6%B3%B0%E6%8B%89%E5%A4%A7%E5%85%B8:%E5%85%B3%E5%8D%A1" title="泰拉大典:关卡">罗德岛作战汇报</a>&#160;&#8226;&#160;<a href="/w/%E6%B3%B0%E6%8B%89%E5%A4%A7%E5%85%B8:%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2" title="泰拉大典:用户界面">罗德岛设计研究</a>&#160;&#8226;&#160;<a href="/w/%E6%B3%B0%E6%8B%89%E5%A4%A7%E5%85%B8:%E5%89%A7%E6%83%85" title="泰拉大典:剧情">罗德岛情报分析</a>&#160;&#8226;&#160;<a href="/w/%E6%B3%B0%E6%8B%89%E5%A4%A7%E5%85%B8:%E6%88%90%E5%B0%B1" title="泰拉大典:成就">罗德岛荣誉记录</a>&#160;&#8226;&#160;<a href="/w/%E6%B3%B0%E6%8B%89%E5%A4%A7%E5%85%B8:%E9%9B%86%E6%88%90%E6%88%98%E7%95%A5" title="泰拉大典:集成战略">泰拉收藏品鉴赏</a>&#160;&#8226;&#160;<a href="/w/%E6%B3%B0%E6%8B%89%E5%A4%A7%E5%85%B8:%E7%99%BE%E7%A7%91" title="泰拉大典:百科">泰拉百科事典</a>
+</td></tr>
+<tr>
+<td style="min-width: 80px; background: var(--blue); text-align:right; font-weight:bold;">附表
+</td>
+<td><a href="/w/%E6%B3%B0%E6%8B%89%E5%A4%A7%E5%85%B8:%E8%A7%92%E8%89%B2" title="泰拉大典:角色">角色一览</a>&#160;&#8226;&#160;<a href="/w/%E6%B3%B0%E6%8B%89%E5%A4%A7%E5%85%B8:%E5%9C%B0%E7%90%86" title="泰拉大典:地理">地理一览</a>&#160;&#8226;&#160;<a href="/w/%E6%B3%B0%E6%8B%89%E5%A4%A7%E5%85%B8:%E7%BB%84%E7%BB%87" title="泰拉大典:组织">组织一览</a>&#160;&#8226;&#160;<a href="/w/%E6%B3%B0%E6%8B%89%E5%B9%B4%E8%A1%A8" title="泰拉年表">泰拉年表</a>&#160;&#8226;&#160;<a class="mw-selflink selflink">泰拉词库</a>
+</td></tr></tbody></table>
+</div>
+<!-- 
+NewPP limit report
+Cached time: 20261105184143
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+[SMW] In‐text annotation parser time: 0.001 seconds
+CPU time usage: 0.802 seconds
+Real time usage: 1.002 seconds
+Preprocessor visited node count: 13460/1000000
+Post‐expand include size: 71727/4194304 bytes
+Template argument size: 21158/4194304 bytes
+Highest expansion depth: 12/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 23109/5000000 bytes
+ExtLoops count: 0/800
+Lua time usage: 0.184/7.000 seconds
+Lua memory usage: 682961/52428800 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%  770.219      1 -total
+ 27.56%  212.284    427 模板:泰拉词库/干员代号
+ 21.10%  162.487      1 模板:分析与考据导航
+ 20.67%  159.235      1 模板:Navbox
+ 16.20%  124.790      4 模板:Cbox2
+ 15.98%  123.080      4 模板:Cbox2/core
+  6.95%   53.566      1 模板:参考客户端版本
+  0.86%    6.587      1 模板:参阅
+  0.85%    6.543      1 模板:编辑中
+  0.28%    2.123      2 模板:Ruby
+-->
+
+<!-- Saved in parser cache with key ak-ak:pcache:idhash:12132-0!canonical and timestamp 20261105184143 and revision id 447389. Rendering was triggered because: page-view
+ -->
+</div>

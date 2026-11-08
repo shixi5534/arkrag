@@ -1,0 +1,36 @@
+{
+ "arms": {
+  "continue@6000": {
+   "pass": 175,
+   "scorable": 286,
+   "mean_units": 5.01
+  },
+  "continue@12000": {
+   "pass": 198,
+   "scorable": 285,
+   "mean_units": 9.79
+  },
+  "continue@24000": {
+   "pass": 202,
+   "scorable": 285,
+   "mean_units": 19.42
+  },
+  "break@6000": {
+   "pass": 172,
+   "scorable": 287,
+   "mean_units": 4.28
+  },
+  "break@12000": {
+   "pass": 193,
+   "scorable": 285,
+   "mean_units": 9.22
+  },
+  "break@24000": {
+   "pass": 201,
+   "scorable": 285,
+   "mean_units": 18.86
+  }
+ },
+ "monotonic_violations_continue": 193,
+ "monotonic_violations_break": 0
+}

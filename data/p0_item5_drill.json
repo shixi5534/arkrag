@@ -1,0 +1,403 @@
+{
+  "generated_at": "2026-11-05T15:48:20Z",
+  "generation_id": "g-20261103T132152Z-06a741",
+  "git_commit": "2a5e4f0603a96c6ee0e5d66025d8d263a5f73e44",
+  "code_sha256_16": "d4c5a036f51410f8",
+  "dataset": {
+    "gold_path": "data/goldset/gold-v2.json",
+    "gold_sha16": "069375f8e355e4b9",
+    "split_path": "data/goldset/split-v2.json",
+    "split_sha16": "3d586b36efc7ce85",
+    "gold_total": 640
+  },
+  "inputs": [
+    {
+      "path": "data/k2_hard_gates.json",
+      "sha16": "42b86ff54aa5494a",
+      "bytes": 3984
+    },
+    {
+      "path": "data/k2_perf.json",
+      "sha16": "bbe37013aa052e16",
+      "bytes": 36685
+    },
+    {
+      "path": "data/k2_gray.json",
+      "sha16": "1394ce31a5bcd32f",
+      "bytes": 115772
+    },
+    {
+      "path": "data/k3_threshold_gate.json",
+      "sha16": "a8421670426d9b66",
+      "bytes": 8906
+    },
+    {
+      "path": "data/k4_drill.json",
+      "sha16": "720556d4038ab222",
+      "bytes": 9519
+    }
+  ],
+  "environment": {
+    "python": "3.14.3",
+    "platform": "win32",
+    "os": "Windows-11-10.0.26200-SP0",
+    "machine": "AMD64",
+    "cpu_count": 20
+  },
+  "schema": "ark-p0-item5-drill-1",
+  "tool": "scripts/p0_item5_drill.py",
+  "candidate": "g-20261103T132152Z-06a741",
+  "rollback_target": "g-20261030T154606Z-55dfd7",
+  "archive_target": "g-20261031T035231Z-4eafae",
+  "sandbox": "临时目录（每轮新建、跑完删除；报告里不写机台路径）",
+  "stages": {
+    "approval": {
+      "all_passed": true,
+      "checks": 6,
+      "failed": 0,
+      "undetermined": 1
+    },
+    "publish_rollback": {
+      "published_keys": [
+        "gate_report_hash",
+        "generation_id",
+        "graph_artifact_id",
+        "index_artifact_id",
+        "previous_generation",
+        "published_at",
+        "source_fingerprint",
+        "status"
+      ],
+      "rollback_keys": [
+        "gate_report_hash",
+        "generation_id",
+        "graph_artifact_id",
+        "index_artifact_id",
+        "previous_generation",
+        "published_at",
+        "rolled_back",
+        "source_fingerprint",
+        "status"
+      ]
+    },
+    "half_a_real_dry_run": {
+      "attempts": [
+        {
+          "gid": "g-20261030T154606Z-55dfd7",
+          "refused": true,
+          "reason": "g-20261030T154606Z-55dfd7 不满足归档条件（2 项），拒绝归档",
+          "detail": "目标是当前线上世代（current.json 指向 g-20261030T154606Z-55dfd7）：线上版本不得归档，先发布下一代再考虑 | 观察期未满：线上世代 g-20261030T154606Z-55dfd7 仅运行 6.00 天，未达观察期 7 天（还差 1.00 天），旧版不得归档"
+        },
+        {
+          "gid": "g-20261031T035231Z-4eafae",
+          "refused": true,
+          "reason": "g-20261031T035231Z-4eafae 不满足归档条件（1 项），拒绝归档",
+          "detail": "观察期未满：线上世代 g-20261030T154606Z-55dfd7 仅运行 6.00 天，未达观察期 7 天（还差 1.00 天），旧版不得归档"
+        }
+      ],
+      "drift": {
+        "E:\\图rag\\data\\releases": {
+          "missing": [],
+          "extra": [],
+          "changed": [],
+          "n_files": 4,
+          "identical": true
+        },
+        "E:\\图rag\\data\\arkrag\\generations": {
+          "missing": [],
+          "extra": [],
+          "changed": [],
+          "n_files": 75,
+          "identical": true
+        }
+      },
+      "n_files": 79
+    },
+    "half_b_real_delete": {
+      "file_count": 4,
+      "total_bytes": 253991034,
+      "removed": [
+        "graph/adjacency.json",
+        "graph/assertions.jsonl",
+        "graph/graph.json",
+        "index/lexical.json"
+      ],
+      "restored_verify_problems": [],
+      "source_files_before": 7,
+      "cli": {
+        "cmd": "C:\\Users\\Lenovo\\AppData\\Local\\Programs\\Python\\Python314\\python.exe E:\\图rag\\scripts\\release_cli.py current",
+        "exit_code": 0,
+        "stdout_head": [
+          "当前世代 g-20261103T132152Z-06a741",
+          "  status=PUBLISHED",
+          "  published_at=2026-10-06T15:46:53Z",
+          "  previous_generation=",
+          "",
+          "自检 PASS：Manifest 与产物一致，图与索引绑同一份图"
+        ],
+        "chars": 143
+      }
+    }
+  },
+  "checks": [
+    {
+      "id": "approval.all_passed",
+      "ok": true,
+      "detail": "清单 6 条判据、failed 0 条、undetermined 1 条",
+      "data": {
+        "failed": [],
+        "undetermined": [
+          "报告不早于候选建成"
+        ]
+      }
+    },
+    {
+      "id": "approval.undetermined_are_named",
+      "ok": true,
+      "detail": "1 条无法判定的判据都带 detail，不会被静默当成通过",
+      "data": {
+        "names": [
+          "报告不早于候选建成"
+        ]
+      }
+    },
+    {
+      "id": "publish.pointer_points_at_candidate",
+      "ok": true,
+      "detail": "指针 g-20261103T132152Z-06a741，候选状态 PUBLISHED，previous=g-20261030T154606Z-55dfd7",
+      "data": {}
+    },
+    {
+      "id": "publish.previous_is_rollback_target",
+      "ok": true,
+      "detail": "previous_generation='g-20261030T154606Z-55dfd7'",
+      "data": {}
+    },
+    {
+      "id": "publish.pointer_has_no_path_key",
+      "ok": true,
+      "detail": "指针里不许存会过期的绝对机台路径",
+      "data": {
+        "keys": [
+          "gate_report_hash",
+          "generation_id",
+          "graph_artifact_id",
+          "index_artifact_id",
+          "previous_generation",
+          "published_at",
+          "source_fingerprint",
+          "status"
+        ]
+      }
+    },
+    {
+      "id": "rollback.pointer_shape",
+      "ok": true,
+      "detail": "generation_id=g-20261030T154606Z-55dfd7 rolled_back=True",
+      "data": {}
+    },
+    {
+      "id": "rollback.manifests_untouched",
+      "ok": true,
+      "detail": "3 份 Manifest 的 (st_mtime_ns, st_size) 前后一致",
+      "data": {
+        "changed": []
+      }
+    },
+    {
+      "id": "rollback.key_set_matches_publish",
+      "ok": true,
+      "detail": "回滚指针 = 发布指针 + rolled_back，多一个少一个都说明两边会漂移",
+      "data": {
+        "publish": [
+          "gate_report_hash",
+          "generation_id",
+          "graph_artifact_id",
+          "index_artifact_id",
+          "previous_generation",
+          "published_at",
+          "source_fingerprint",
+          "status"
+        ],
+        "rollback": [
+          "gate_report_hash",
+          "generation_id",
+          "graph_artifact_id",
+          "index_artifact_id",
+          "previous_generation",
+          "published_at",
+          "rolled_back",
+          "source_fingerprint",
+          "status"
+        ]
+      }
+    },
+    {
+      "id": "rollback.reversible",
+      "ok": true,
+      "detail": "再切回后指针 g-20261103T132152Z-06a741",
+      "data": {}
+    },
+    {
+      "id": "rollback.real_pointer_untouched",
+      "ok": true,
+      "detail": "真实 current.json 全程一字节未变（沙箱隔离生效）",
+      "data": {
+        "real_bytes": 488
+      }
+    },
+    {
+      "id": "half_a.real_trees_byte_identical",
+      "ok": true,
+      "detail": "两棵真实目录树 79 个文件逐位相同（跑前跑后递归 SHA-256 相等）",
+      "data": {
+        "E:\\图rag\\data\\releases": {
+          "missing": [],
+          "extra": [],
+          "changed": [],
+          "n_files": 4,
+          "identical": true
+        },
+        "E:\\图rag\\data\\arkrag\\generations": {
+          "missing": [],
+          "extra": [],
+          "changed": [],
+          "n_files": 75,
+          "identical": true
+        }
+      }
+    },
+    {
+      "id": "half_a.online_observation_incomplete_so_refused",
+      "ok": true,
+      "detail": "线上观察期 5.9982 天 < 7 天，两次真实 dry_run 均以观察期为由被拒",
+      "data": {
+        "observation": {
+          "generation_id": "g-20261030T154606Z-55dfd7",
+          "published_at": "2026-10-30T15:49:29Z",
+          "days_elapsed": 5.9982,
+          "required_days": 7,
+          "complete": false
+        },
+        "attempts": [
+          {
+            "gid": "g-20261030T154606Z-55dfd7",
+            "refused": true,
+            "reason": "g-20261030T154606Z-55dfd7 不满足归档条件（2 项），拒绝归档",
+            "detail": "目标是当前线上世代（current.json 指向 g-20261030T154606Z-55dfd7）：线上版本不得归档，先发布下一代再考虑 | 观察期未满：线上世代 g-20261030T154606Z-55dfd7 仅运行 6.00 天，未达观察期 7 天（还差 1.00 天），旧版不得归档"
+          },
+          {
+            "gid": "g-20261031T035231Z-4eafae",
+            "refused": true,
+            "reason": "g-20261031T035231Z-4eafae 不满足归档条件（1 项），拒绝归档",
+            "detail": "观察期未满：线上世代 g-20261030T154606Z-55dfd7 仅运行 6.00 天，未达观察期 7 天（还差 1.00 天），旧版不得归档"
+          }
+        ]
+      }
+    },
+    {
+      "id": "half_b.observation_complete_in_sandbox",
+      "ok": true,
+      "detail": "沙箱指针 30.0 天 / 需 7 天",
+      "data": {}
+    },
+    {
+      "id": "half_b.copy_digests_match",
+      "ok": true,
+      "detail": "4 个文件逐个 SHA-256 与源一致（合计 253991034 B）",
+      "data": {
+        "files": [
+          {
+            "path": "graph/adjacency.json",
+            "bytes": 26406697,
+            "sha256": "af9f12f196b77881",
+            "match": true
+          },
+          {
+            "path": "graph/assertions.jsonl",
+            "bytes": 68738043,
+            "sha256": "3377508b519924db",
+            "match": true
+          },
+          {
+            "path": "graph/graph.json",
+            "bytes": 31601396,
+            "sha256": "de87191d668e6b53",
+            "match": true
+          },
+          {
+            "path": "index/lexical.json",
+            "bytes": 127244898,
+            "sha256": "772973e3648494d2",
+            "match": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "half_b.source_keeps_only_non_artifacts",
+      "ok": true,
+      "detail": "删源后源目录剩 ['manifest.json', 'reports/gates.json', 'reports/gates.json.lock']（gates.json.lock 是 0 字节写盘锁，非产物）",
+      "data": {
+        "removed": [
+          "graph/adjacency.json",
+          "graph/assertions.jsonl",
+          "graph/graph.json",
+          "index/lexical.json"
+        ],
+        "lock_bytes": 0
+      }
+    },
+    {
+      "id": "half_b.heavy_files_gone_from_source",
+      "ok": true,
+      "detail": "图 / 索引 / 块正文已从源目录移走（`_heavy_artifacts()` 为空）",
+      "data": {}
+    },
+    {
+      "id": "half_b.archive_manifest_complete",
+      "ok": true,
+      "detail": "archive-manifest.json 记了 4 个文件 / 253991034 B，与返回的清单逐项一致",
+      "data": {}
+    },
+    {
+      "id": "half_b.restored_copy_verifies",
+      "ok": true,
+      "detail": "归档副本还原后 verify_generation() 返回 0 项不符",
+      "data": {
+        "restored_files": 8,
+        "archived_files": 5
+      }
+    },
+    {
+      "id": "half_b.serving_generation_still_current",
+      "ok": true,
+      "detail": "归档旧世代后 `release_cli current` 退出码 0，自检 PASS",
+      "data": {
+        "cmd": "C:\\Users\\Lenovo\\AppData\\Local\\Programs\\Python\\Python314\\python.exe E:\\图rag\\scripts\\release_cli.py current",
+        "exit_code": 0,
+        "stdout_head": [
+          "当前世代 g-20261103T132152Z-06a741",
+          "  status=PUBLISHED",
+          "  published_at=2026-10-06T15:46:53Z",
+          "  previous_generation=",
+          "",
+          "自检 PASS：Manifest 与产物一致，图与索引绑同一份图"
+        ],
+        "chars": 143
+      }
+    }
+  ],
+  "real_archive_exercised": false,
+  "real_archive_note": "真实归档路径本轮未走通，原因是观察期 5.9992 天 < 7 天，不是实现问题。本报告里的归档结论全部来自隔离副本上的同一份真实字节。",
+  "online_observation": {
+    "generation_id": "g-20261030T154606Z-55dfd7",
+    "published_at": "2026-10-30T15:49:29Z",
+    "days_elapsed": 5.9992,
+    "required_days": 7,
+    "complete": false,
+    "reason": "线上世代 g-20261030T154606Z-55dfd7 仅运行 6.00 天，未达观察期 7 天（还差 1.00 天），旧版不得归档"
+  },
+  "all_passed": true,
+  "wall_seconds": 198.84
+}

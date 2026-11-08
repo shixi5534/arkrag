@@ -50,6 +50,7 @@ from arkrag import (  # noqa: E402
     embedding,
     fusion,
     index as index_mod,
+    pipeline as pipeline_mod,
     query as query_mod,
     release,
     retrieve,
@@ -180,9 +181,13 @@ def main(argv: list[str] | None = None) -> int:
     print(f"世代 {gid}")
 
     gen = release.Generation(gid)
-    from arkrag import config
 
-    chunks_path = config.chunks_path()
+    # 块正文必须由这一代自己的 Manifest 证明，不许读全局 `config.chunks_path()`：
+    # 全局文件是 L1 的最新产物，和 `--generation` 指的那一代可能差出十几块
+    # （实测 06a741 自带 13,798 块 vs 全局 13,786 块，世代有而全局无 17 块）。
+    # 那 17 块取不到正文时向量通道会把它们当空串编码，融合指标被静默拉低，
+    # 报告上却只是「某个模式差一点」——这正是不能留口子的形态。
+    chunks_path = pipeline_mod.resolve_chunks(gen, gen.load())
     chunks = {str(r["chunk_id"]): r for r in read_jsonl(chunks_path) if r.get("chunk_id")}
     index, index_meta = index_mod.load_index(gen.index_path)
     content_digest = (index_meta or {}).get("index_content_digest") or ""

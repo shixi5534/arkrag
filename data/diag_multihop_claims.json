@@ -1,0 +1,4308 @@
+{
+ "generation_id": "g-20261103T132152Z-06a741",
+ "arms": [
+  8,
+  12,
+  20,
+  40,
+  999
+ ],
+ "splits": {
+  "dev": {
+   "n": 57,
+   "agg": {
+    "8": {
+     "pass": 8,
+     "both": 8,
+     "mean_chars": 70.4
+    },
+    "12": {
+     "pass": 9,
+     "both": 9,
+     "mean_chars": 99.7
+    },
+    "20": {
+     "pass": 12,
+     "both": 12,
+     "mean_chars": 135.3
+    },
+    "40": {
+     "pass": 12,
+     "both": 12,
+     "mean_chars": 141.2
+    },
+    "999": {
+     "pass": 12,
+     "both": 12,
+     "mean_chars": 141.2
+    }
+   },
+   "rows": [
+    {
+     "question_id": "q-mh-000001",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 91
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 139
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 222
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 222
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 222
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000003",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 83
+      },
+      "12": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 127
+      },
+      "20": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 223
+      },
+      "40": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 234
+      },
+      "999": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 234
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000004",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 86
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 128
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 197
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 197
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 197
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000005",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 63
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 90
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 98
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 98
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 98
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000006",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 68
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 102
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 156
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 156
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 156
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000008",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 87
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 127
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 127
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 127
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 127
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000009",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 70
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 102
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 102
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 102
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 102
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000010",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 73
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 73
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 73
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 73
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 73
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000012",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 80
+      },
+      "12": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 119
+      },
+      "20": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 204
+      },
+      "40": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 246
+      },
+      "999": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 246
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000013",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 76
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 85
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 85
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 85
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 85
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000014",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 70
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 109
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 170
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 170
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 170
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000015",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 67
+      },
+      "12": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 104
+      },
+      "20": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 184
+      },
+      "40": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 211
+      },
+      "999": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 211
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000016",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 56
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 85
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 122
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 122
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 122
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000017",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 56
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 88
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 111
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 111
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 111
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000018",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 88
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 109
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 109
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 109
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 109
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000020",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 81
+      },
+      "12": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 128
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 205
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 216
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 216
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000021",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 32
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 32
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 32
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 32
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 32
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000024",
+     "per": {
+      "8": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 82
+      },
+      "12": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 104
+      },
+      "20": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 104
+      },
+      "40": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 104
+      },
+      "999": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 104
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000025",
+     "per": {
+      "8": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 76
+      },
+      "12": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 120
+      },
+      "20": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 161
+      },
+      "40": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 161
+      },
+      "999": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 161
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000026",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 61
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 84
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 84
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 84
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 84
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000029",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 77
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 77
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 77
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 77
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 77
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000033",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 79
+      },
+      "12": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 119
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 201
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 241
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 241
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000034",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 84
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 124
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 203
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 203
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 203
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000035",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 68
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 68
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 68
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 68
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 68
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000036",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 81
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 120
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 199
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 238
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 238
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000037",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 79
+      },
+      "12": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 116
+      },
+      "20": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 175
+      },
+      "40": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 175
+      },
+      "999": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 175
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000038",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 76
+      },
+      "12": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 117
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 197
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 197
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 197
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000041",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 28
+      },
+      "12": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 28
+      },
+      "20": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 28
+      },
+      "40": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 28
+      },
+      "999": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 28
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000042",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 79
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 123
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 210
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 259
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 259
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000043",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 67
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 67
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 67
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 67
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 67
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000044",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 67
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 100
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 115
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 115
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 115
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000045",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 69
+      },
+      "12": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 107
+      },
+      "20": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 180
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 253
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 253
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000047",
+     "per": {
+      "8": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 81
+      },
+      "12": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 121
+      },
+      "20": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 121
+      },
+      "40": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 121
+      },
+      "999": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 121
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900001",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 69
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 106
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 135
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 135
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 135
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900005",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 71
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 106
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 144
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 144
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 144
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900006",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 72
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 111
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 138
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 138
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 138
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900008",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 72
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 102
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 124
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 124
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 124
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900009",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 67
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 101
+      },
+      "20": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 158
+      },
+      "40": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 158
+      },
+      "999": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 158
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900010",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 83
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 128
+      },
+      "20": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 210
+      },
+      "40": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 210
+      },
+      "999": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 210
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900013",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 61
+      },
+      "12": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 89
+      },
+      "20": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 151
+      },
+      "40": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 159
+      },
+      "999": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 159
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900014",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 76
+      },
+      "12": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 113
+      },
+      "20": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 171
+      },
+      "40": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 171
+      },
+      "999": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 171
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900018",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 67
+      },
+      "12": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 97
+      },
+      "20": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 152
+      },
+      "40": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 152
+      },
+      "999": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 152
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900019",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 63
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 97
+      },
+      "20": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 118
+      },
+      "40": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 118
+      },
+      "999": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 118
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900021",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 59
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 91
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 155
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 193
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 193
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900022",
+     "per": {
+      "8": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 79
+      },
+      "12": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 116
+      },
+      "20": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 160
+      },
+      "40": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 160
+      },
+      "999": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 160
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900026",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 87
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 122
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 122
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 122
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 122
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900031",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 81
+      },
+      "12": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 124
+      },
+      "20": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 146
+      },
+      "40": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 146
+      },
+      "999": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 146
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900033",
+     "per": {
+      "8": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 58
+      },
+      "12": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 87
+      },
+      "20": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 87
+      },
+      "40": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 87
+      },
+      "999": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 87
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900034",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 69
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 85
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 85
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 85
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 85
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900037",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 68
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 102
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 158
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 158
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 158
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900038",
+     "per": {
+      "8": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 74
+      },
+      "12": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 74
+      },
+      "20": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 74
+      },
+      "40": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 74
+      },
+      "999": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 74
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900039",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 36
+      },
+      "12": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 36
+      },
+      "20": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 36
+      },
+      "40": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 36
+      },
+      "999": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 36
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900042",
+     "per": {
+      "8": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 73
+      },
+      "12": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 98
+      },
+      "20": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 98
+      },
+      "40": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 98
+      },
+      "999": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 98
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900043",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 73
+      },
+      "12": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 109
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 146
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 146
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 146
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900045",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 84
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 120
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 152
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 152
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 152
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900046",
+     "per": {
+      "8": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 68
+      },
+      "12": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 102
+      },
+      "20": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 156
+      },
+      "40": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 156
+      },
+      "999": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 156
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900047",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 24
+      },
+      "12": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 24
+      },
+      "20": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 24
+      },
+      "40": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 24
+      },
+      "999": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 24
+      }
+     }
+    }
+   ]
+  },
+  "holdout": {
+   "n": 39,
+   "agg": {
+    "8": {
+     "pass": 7,
+     "both": 7,
+     "mean_chars": 72.4
+    },
+    "12": {
+     "pass": 7,
+     "both": 7,
+     "mean_chars": 104.7
+    },
+    "20": {
+     "pass": 9,
+     "both": 9,
+     "mean_chars": 150.0
+    },
+    "40": {
+     "pass": 9,
+     "both": 9,
+     "mean_chars": 162.5
+    },
+    "999": {
+     "pass": 9,
+     "both": 9,
+     "mean_chars": 162.5
+    }
+   },
+   "rows": [
+    {
+     "question_id": "q-mh-000002",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 90
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 109
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 109
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 109
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 109
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000007",
+     "per": {
+      "8": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 87
+      },
+      "12": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 87
+      },
+      "20": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 87
+      },
+      "40": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 87
+      },
+      "999": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 87
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000011",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 63
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 90
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 90
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 90
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 90
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000019",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 91
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 135
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 221
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 230
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 230
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000022",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 86
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 128
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 213
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 257
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 257
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000023",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 83
+      },
+      "12": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 127
+      },
+      "20": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 215
+      },
+      "40": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 294
+      },
+      "999": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 294
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000027",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 72
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 107
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 178
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 178
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 178
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000028",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 65
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 97
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 145
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 145
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 145
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000030",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 73
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 113
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 171
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 171
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 171
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000031",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 83
+      },
+      "12": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 125
+      },
+      "20": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 216
+      },
+      "40": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 236
+      },
+      "999": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 236
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000032",
+     "per": {
+      "8": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 76
+      },
+      "12": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 111
+      },
+      "20": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 183
+      },
+      "40": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 203
+      },
+      "999": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 203
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000039",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 62
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 93
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 152
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 175
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 175
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000040",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 91
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 139
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 222
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 222
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 222
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000046",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 69
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 106
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 141
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 141
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 141
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-000048",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 82
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 122
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 203
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 203
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 203
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900002",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 71
+      },
+      "12": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 109
+      },
+      "20": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 191
+      },
+      "40": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 200
+      },
+      "999": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 200
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900003",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 61
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 91
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 152
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 213
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 213
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900004",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 75
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 110
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 145
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 145
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 145
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900007",
+     "per": {
+      "8": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 62
+      },
+      "12": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 91
+      },
+      "20": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 91
+      },
+      "40": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 91
+      },
+      "999": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 91
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900011",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 61
+      },
+      "12": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 96
+      },
+      "20": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 167
+      },
+      "40": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 242
+      },
+      "999": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 242
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900012",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 70
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 101
+      },
+      "20": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 118
+      },
+      "40": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 118
+      },
+      "999": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 118
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900015",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 35
+      },
+      "12": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 35
+      },
+      "20": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 35
+      },
+      "40": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 35
+      },
+      "999": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 35
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900016",
+     "per": {
+      "8": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 69
+      },
+      "12": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 102
+      },
+      "20": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 175
+      },
+      "40": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 175
+      },
+      "999": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 175
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900017",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 67
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 74
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 74
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 74
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 74
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900020",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 85
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 127
+      },
+      "20": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 209
+      },
+      "40": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 331
+      },
+      "999": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 331
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900023",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 37
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 37
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 37
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 37
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 37
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900024",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 67
+      },
+      "12": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 108
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 159
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 159
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 159
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900025",
+     "per": {
+      "8": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 68
+      },
+      "12": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 100
+      },
+      "20": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 132
+      },
+      "40": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 132
+      },
+      "999": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 132
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900027",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 69
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 103
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 103
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 103
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 103
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900028",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 98
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 152
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 217
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 217
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 217
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900029",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 63
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 97
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 121
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 121
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 121
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900030",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 91
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 143
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 211
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 211
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 211
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900032",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 93
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 135
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 206
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 206
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 206
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900035",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 21
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 21
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 21
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 21
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 21
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900036",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 83
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 129
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 149
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 149
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 149
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900040",
+     "per": {
+      "8": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 69
+      },
+      "12": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 85
+      },
+      "20": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 85
+      },
+      "40": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 85
+      },
+      "999": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 85
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900041",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 72
+      },
+      "12": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 106
+      },
+      "20": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 172
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 198
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 198
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900044",
+     "per": {
+      "8": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 90
+      },
+      "12": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 134
+      },
+      "20": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 201
+      },
+      "40": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 201
+      },
+      "999": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 201
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900048",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 74
+      },
+      "12": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 109
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 133
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 133
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 133
+      }
+     }
+    }
+   ]
+  },
+  "clean": {
+   "n": 24,
+   "agg": {
+    "8": {
+     "pass": 5,
+     "both": 5,
+     "mean_chars": 68.8
+    },
+    "12": {
+     "pass": 5,
+     "both": 5,
+     "mean_chars": 99.8
+    },
+    "20": {
+     "pass": 7,
+     "both": 7,
+     "mean_chars": 137.7
+    },
+    "40": {
+     "pass": 7,
+     "both": 7,
+     "mean_chars": 149.9
+    },
+    "999": {
+     "pass": 7,
+     "both": 7,
+     "mean_chars": 149.9
+    }
+   },
+   "rows": [
+    {
+     "question_id": "q-mh-900002",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 71
+      },
+      "12": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 109
+      },
+      "20": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 191
+      },
+      "40": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 200
+      },
+      "999": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 200
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900003",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 61
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 91
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 152
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 213
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 213
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900004",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 75
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 110
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 145
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 145
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 145
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900007",
+     "per": {
+      "8": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 62
+      },
+      "12": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 91
+      },
+      "20": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 91
+      },
+      "40": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 91
+      },
+      "999": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 91
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900011",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 61
+      },
+      "12": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 96
+      },
+      "20": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 167
+      },
+      "40": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 242
+      },
+      "999": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 242
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900012",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 70
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 101
+      },
+      "20": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 118
+      },
+      "40": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 118
+      },
+      "999": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 118
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900015",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 35
+      },
+      "12": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 35
+      },
+      "20": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 35
+      },
+      "40": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 35
+      },
+      "999": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 35
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900016",
+     "per": {
+      "8": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 69
+      },
+      "12": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 102
+      },
+      "20": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 175
+      },
+      "40": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 175
+      },
+      "999": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 175
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900017",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 67
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 74
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 74
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 74
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 74
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900020",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 85
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 127
+      },
+      "20": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 209
+      },
+      "40": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 331
+      },
+      "999": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 331
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900023",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 37
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 37
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 37
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 37
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 37
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900024",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 67
+      },
+      "12": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 108
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 159
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 159
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 159
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900025",
+     "per": {
+      "8": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 68
+      },
+      "12": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 100
+      },
+      "20": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 132
+      },
+      "40": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 132
+      },
+      "999": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 132
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900027",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 69
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 103
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 103
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 103
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 103
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900028",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 98
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 152
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 217
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 217
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 217
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900029",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 63
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 97
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 121
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 121
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 121
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900030",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 91
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 143
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 211
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 211
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 211
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900032",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 93
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 135
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 206
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 206
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 206
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900035",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 21
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 21
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 21
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 21
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 21
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900036",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 83
+      },
+      "12": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 129
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 149
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 149
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 149
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900040",
+     "per": {
+      "8": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 69
+      },
+      "12": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 85
+      },
+      "20": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 85
+      },
+      "40": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 85
+      },
+      "999": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 85
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900041",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 72
+      },
+      "12": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 106
+      },
+      "20": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 172
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 198
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 198
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900044",
+     "per": {
+      "8": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 90
+      },
+      "12": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 134
+      },
+      "20": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 201
+      },
+      "40": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 201
+      },
+      "999": {
+       "pass": true,
+       "reason": "gold_linked_to_every_anchor",
+       "both_in_sentences": true,
+       "n_chars": 201
+      }
+     }
+    },
+    {
+     "question_id": "q-mh-900048",
+     "per": {
+      "8": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 74
+      },
+      "12": {
+       "pass": false,
+       "reason": "no_claim_links_gold_to_any_anchor",
+       "both_in_sentences": false,
+       "n_chars": 109
+      },
+      "20": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 133
+      },
+      "40": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 133
+      },
+      "999": {
+       "pass": false,
+       "reason": "gold_not_linked_to_every_anchor",
+       "both_in_sentences": false,
+       "n_chars": 133
+      }
+     }
+    }
+   ]
+  }
+ }
+}

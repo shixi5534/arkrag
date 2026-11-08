@@ -1,0 +1,26 @@
+{
+ "c12_12000": {
+  "n_q": 64,
+  "extra_total": 83,
+  "extra_real_by_text": 83,
+  "extra_fake_by_text": 0,
+  "miss_total": 39,
+  "miss_real_by_text": 39,
+  "pass_set_equal": 17,
+  "pass_gold_subset_answer_subset_T": 36,
+  "pass_answer_equals_T": 22,
+  "fake_cases": []
+ },
+ "c12_40000": {
+  "n_q": 64,
+  "extra_total": 135,
+  "extra_real_by_text": 135,
+  "extra_fake_by_text": 0,
+  "miss_total": 11,
+  "miss_real_by_text": 11,
+  "pass_set_equal": 24,
+  "pass_gold_subset_answer_subset_T": 56,
+  "pass_answer_equals_T": 39,
+  "fake_cases": []
+ }
+}

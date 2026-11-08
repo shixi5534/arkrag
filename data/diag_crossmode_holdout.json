@@ -1,0 +1,5243 @@
+{
+ "split": "holdout",
+ "n": 238,
+ "n_scorable": 195,
+ "rows": [
+  {
+   "qid": "q-sc-000001",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-000002",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-000003",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": false,
+     "eq": false
+    }
+   }
+  },
+  {
+   "qid": "q-sc-000004",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-000006",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-000008",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-000011",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-000014",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-000019",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-000025",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-000040",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-000041",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": false,
+     "eq": false
+    }
+   }
+  },
+  {
+   "qid": "q-sc-000043",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-000044",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-000051",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-000053",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-000054",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-000055",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-000058",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-000063",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-al-000001",
+   "cat": "alias",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-al-000005",
+   "cat": "alias",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-al-000015",
+   "cat": "alias",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": false,
+     "eq": false
+    }
+   }
+  },
+  {
+   "qid": "q-al-000017",
+   "cat": "alias",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-al-000021",
+   "cat": "alias",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-al-000023",
+   "cat": "alias",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-al-000026",
+   "cat": "alias",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-al-000027",
+   "cat": "alias",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-al-000029",
+   "cat": "alias",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-al-000030",
+   "cat": "alias",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-al-000032",
+   "cat": "alias",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-al-000039",
+   "cat": "alias",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-al-000041",
+   "cat": "alias",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-al-000042",
+   "cat": "alias",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-al-000043",
+   "cat": "alias",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-dr-000002",
+   "cat": "direct_relation",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-dr-000005",
+   "cat": "direct_relation",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-dr-000008",
+   "cat": "direct_relation",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-dr-000009",
+   "cat": "direct_relation",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-dr-000014",
+   "cat": "direct_relation",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": false,
+     "eq": false
+    }
+   }
+  },
+  {
+   "qid": "q-dr-000017",
+   "cat": "direct_relation",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-dr-000023",
+   "cat": "direct_relation",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-dr-000024",
+   "cat": "direct_relation",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-dr-000026",
+   "cat": "direct_relation",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-dr-000036",
+   "cat": "direct_relation",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-dr-000039",
+   "cat": "direct_relation",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-dr-000041",
+   "cat": "direct_relation",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-dr-000043",
+   "cat": "direct_relation",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-dr-000046",
+   "cat": "direct_relation",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-dr-000048",
+   "cat": "direct_relation",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-mh-000002",
+   "cat": "multihop",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-mh-000007",
+   "cat": "multihop",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-mh-000011",
+   "cat": "multihop",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-mh-000019",
+   "cat": "multihop",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-mh-000022",
+   "cat": "multihop",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-mh-000023",
+   "cat": "multihop",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": false,
+     "eq": false
+    }
+   }
+  },
+  {
+   "qid": "q-mh-000027",
+   "cat": "multihop",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-mh-000028",
+   "cat": "multihop",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-mh-000030",
+   "cat": "multihop",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": false,
+     "eq": false
+    }
+   }
+  },
+  {
+   "qid": "q-mh-000031",
+   "cat": "multihop",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-mh-000032",
+   "cat": "multihop",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-mh-000039",
+   "cat": "multihop",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-mh-000040",
+   "cat": "multihop",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": false,
+     "eq": false
+    }
+   }
+  },
+  {
+   "qid": "q-mh-000046",
+   "cat": "multihop",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-mh-000048",
+   "cat": "multihop",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-cx-000002",
+   "cat": "cross_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-cx-000012",
+   "cat": "cross_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": false
+    }
+   }
+  },
+  {
+   "qid": "q-cx-000013",
+   "cat": "cross_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": false,
+     "eq": false
+    }
+   }
+  },
+  {
+   "qid": "q-cx-000015",
+   "cat": "cross_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": false
+    }
+   }
+  },
+  {
+   "qid": "q-cx-000018",
+   "cat": "cross_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-cx-000019",
+   "cat": "cross_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": false,
+     "eq": false
+    }
+   }
+  },
+  {
+   "qid": "q-cx-000023",
+   "cat": "cross_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-cx-000025",
+   "cat": "cross_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": false
+    }
+   }
+  },
+  {
+   "qid": "q-cx-000028",
+   "cat": "cross_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": false
+    }
+   }
+  },
+  {
+   "qid": "q-cx-000031",
+   "cat": "cross_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-tc-000001",
+   "cat": "time_conflict",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-tc-000002",
+   "cat": "time_conflict",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-tc-000009",
+   "cat": "time_conflict",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-tc-000011",
+   "cat": "time_conflict",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-tc-000012",
+   "cat": "time_conflict",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-tc-000014",
+   "cat": "time_conflict",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-tc-000015",
+   "cat": "time_conflict",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-tc-000016",
+   "cat": "time_conflict",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-tc-000021",
+   "cat": "time_conflict",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-tc-000032",
+   "cat": "time_conflict",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-na-000002",
+   "cat": "negative_abstain",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-na-000005",
+   "cat": "negative_abstain",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-na-000006",
+   "cat": "negative_abstain",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-na-000010",
+   "cat": "negative_abstain",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-ad-000002",
+   "cat": "adversarial",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-ad-000003",
+   "cat": "adversarial",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-ad-000006",
+   "cat": "adversarial",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-ad-000008",
+   "cat": "adversarial",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-ad-000016",
+   "cat": "adversarial",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-sc-900001",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-900006",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-900007",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-900008",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-900009",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-900010",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-900014",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-900016",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": false,
+     "eq": false
+    }
+   }
+  },
+  {
+   "qid": "q-sc-900018",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-900024",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-900026",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-900027",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-900032",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-900035",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": false,
+     "eq": false
+    }
+   }
+  },
+  {
+   "qid": "q-sc-900038",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-900039",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-900040",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-900044",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-900045",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-900046",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": false,
+     "eq": false
+    }
+   }
+  },
+  {
+   "qid": "q-sc-900049",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-900050",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-900051",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-900052",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-900053",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-900055",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-900056",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-900058",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-900059",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-900060",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-900061",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-sc-900064",
+   "cat": "single_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": false,
+     "eq": false
+    }
+   }
+  },
+  {
+   "qid": "q-al-900002",
+   "cat": "alias",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-al-900003",
+   "cat": "alias",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-al-900004",
+   "cat": "alias",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-al-900007",
+   "cat": "alias",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-al-900014",
+   "cat": "alias",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": false,
+     "eq": false
+    }
+   }
+  },
+  {
+   "qid": "q-al-900017",
+   "cat": "alias",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-al-900020",
+   "cat": "alias",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-al-900021",
+   "cat": "alias",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-al-900023",
+   "cat": "alias",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-al-900025",
+   "cat": "alias",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-al-900026",
+   "cat": "alias",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-al-900027",
+   "cat": "alias",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-al-900028",
+   "cat": "alias",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-al-900029",
+   "cat": "alias",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-al-900030",
+   "cat": "alias",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-al-900031",
+   "cat": "alias",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-al-900032",
+   "cat": "alias",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-al-900034",
+   "cat": "alias",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-al-900038",
+   "cat": "alias",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-al-900040",
+   "cat": "alias",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-al-900042",
+   "cat": "alias",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-al-900043",
+   "cat": "alias",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-al-900046",
+   "cat": "alias",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-al-900048",
+   "cat": "alias",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-dr-900004",
+   "cat": "direct_relation",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-dr-900005",
+   "cat": "direct_relation",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-dr-900008",
+   "cat": "direct_relation",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-dr-900009",
+   "cat": "direct_relation",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-dr-900012",
+   "cat": "direct_relation",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-dr-900013",
+   "cat": "direct_relation",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-dr-900014",
+   "cat": "direct_relation",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-dr-900016",
+   "cat": "direct_relation",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-dr-900018",
+   "cat": "direct_relation",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-dr-900019",
+   "cat": "direct_relation",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-dr-900021",
+   "cat": "direct_relation",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-dr-900025",
+   "cat": "direct_relation",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-dr-900026",
+   "cat": "direct_relation",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": false,
+     "eq": false
+    }
+   }
+  },
+  {
+   "qid": "q-dr-900028",
+   "cat": "direct_relation",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-dr-900030",
+   "cat": "direct_relation",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-dr-900033",
+   "cat": "direct_relation",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-dr-900034",
+   "cat": "direct_relation",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-dr-900037",
+   "cat": "direct_relation",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-dr-900039",
+   "cat": "direct_relation",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-dr-900040",
+   "cat": "direct_relation",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-dr-900044",
+   "cat": "direct_relation",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-dr-900045",
+   "cat": "direct_relation",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-dr-900047",
+   "cat": "direct_relation",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-dr-900048",
+   "cat": "direct_relation",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-mh-900002",
+   "cat": "multihop",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-mh-900003",
+   "cat": "multihop",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-mh-900004",
+   "cat": "multihop",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-mh-900007",
+   "cat": "multihop",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-mh-900011",
+   "cat": "multihop",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": false,
+     "eq": false
+    }
+   }
+  },
+  {
+   "qid": "q-mh-900012",
+   "cat": "multihop",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-mh-900015",
+   "cat": "multihop",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": false,
+     "eq": false
+    }
+   }
+  },
+  {
+   "qid": "q-mh-900016",
+   "cat": "multihop",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-mh-900017",
+   "cat": "multihop",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-mh-900020",
+   "cat": "multihop",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-mh-900023",
+   "cat": "multihop",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-mh-900024",
+   "cat": "multihop",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": false,
+     "eq": false
+    }
+   }
+  },
+  {
+   "qid": "q-mh-900025",
+   "cat": "multihop",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-mh-900027",
+   "cat": "multihop",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-mh-900028",
+   "cat": "multihop",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": false,
+     "eq": false
+    }
+   }
+  },
+  {
+   "qid": "q-mh-900029",
+   "cat": "multihop",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-mh-900030",
+   "cat": "multihop",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-mh-900032",
+   "cat": "multihop",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-mh-900035",
+   "cat": "multihop",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-mh-900036",
+   "cat": "multihop",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-mh-900040",
+   "cat": "multihop",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-mh-900041",
+   "cat": "multihop",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": false,
+     "eq": false
+    }
+   }
+  },
+  {
+   "qid": "q-mh-900044",
+   "cat": "multihop",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-mh-900048",
+   "cat": "multihop",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-cx-900001",
+   "cat": "cross_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": false
+    }
+   }
+  },
+  {
+   "qid": "q-cx-900003",
+   "cat": "cross_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": false
+    }
+   }
+  },
+  {
+   "qid": "q-cx-900004",
+   "cat": "cross_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": false
+    }
+   }
+  },
+  {
+   "qid": "q-cx-900006",
+   "cat": "cross_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": false
+    }
+   }
+  },
+  {
+   "qid": "q-cx-900007",
+   "cat": "cross_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": false
+    }
+   }
+  },
+  {
+   "qid": "q-cx-900009",
+   "cat": "cross_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-cx-900010",
+   "cat": "cross_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": false
+    }
+   }
+  },
+  {
+   "qid": "q-cx-900015",
+   "cat": "cross_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-cx-900019",
+   "cat": "cross_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-cx-900020",
+   "cat": "cross_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-cx-900023",
+   "cat": "cross_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": false,
+     "eq": false
+    }
+   }
+  },
+  {
+   "qid": "q-cx-900025",
+   "cat": "cross_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": false
+    }
+   }
+  },
+  {
+   "qid": "q-cx-900028",
+   "cat": "cross_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": false
+    }
+   }
+  },
+  {
+   "qid": "q-cx-900029",
+   "cat": "cross_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_6000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_12000": {
+     "sup": false,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-cx-900031",
+   "cat": "cross_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": false
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": false
+    }
+   }
+  },
+  {
+   "qid": "q-cx-900032",
+   "cat": "cross_chunk",
+   "per": {
+    "c5_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_6000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_12000": {
+     "sup": true,
+     "eq": true
+    },
+    "c12_40000": {
+     "sup": true,
+     "eq": true
+    }
+   }
+  },
+  {
+   "qid": "q-tc-900002",
+   "cat": "time_conflict",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-tc-900007",
+   "cat": "time_conflict",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-tc-900008",
+   "cat": "time_conflict",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-tc-900009",
+   "cat": "time_conflict",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-tc-900010",
+   "cat": "time_conflict",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-tc-900013",
+   "cat": "time_conflict",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-tc-900014",
+   "cat": "time_conflict",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-tc-900015",
+   "cat": "time_conflict",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-tc-900017",
+   "cat": "time_conflict",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-tc-900018",
+   "cat": "time_conflict",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-tc-900020",
+   "cat": "time_conflict",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-tc-900025",
+   "cat": "time_conflict",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-tc-900026",
+   "cat": "time_conflict",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-tc-900027",
+   "cat": "time_conflict",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-tc-900028",
+   "cat": "time_conflict",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-tc-900031",
+   "cat": "time_conflict",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-ad-900001",
+   "cat": "adversarial",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-ad-900002",
+   "cat": "adversarial",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-ad-900004",
+   "cat": "adversarial",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-ad-900006",
+   "cat": "adversarial",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-ad-900009",
+   "cat": "adversarial",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-ad-900012",
+   "cat": "adversarial",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-ad-900015",
+   "cat": "adversarial",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  },
+  {
+   "qid": "q-ad-900016",
+   "cat": "adversarial",
+   "per": {
+    "c5_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_6000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_12000": {
+     "sup": null,
+     "eq": null
+    },
+    "c12_40000": {
+     "sup": null,
+     "eq": null
+    }
+   }
+  }
+ ]
+}

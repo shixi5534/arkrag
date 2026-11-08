@@ -1,0 +1,56 @@
+{
+ "n": 350,
+ "ladder": {
+  "5": {
+   "hit": 196,
+   "exact": 73,
+   "chars_mean": 32.29,
+   "claims_mean": 0.97
+  },
+  "8": {
+   "hit": 207,
+   "exact": 73,
+   "chars_mean": 45.37,
+   "claims_mean": 0.97
+  },
+  "12": {
+   "hit": 211,
+   "exact": 73,
+   "chars_mean": 55.83,
+   "claims_mean": 0.97
+  },
+  "20": {
+   "hit": 211,
+   "exact": 73,
+   "chars_mean": 60.93,
+   "claims_mean": 0.97
+  },
+  "50": {
+   "hit": 211,
+   "exact": 73,
+   "chars_mean": 61.04,
+   "claims_mean": 0.97
+  }
+ },
+ "random_control": {
+  "hits": 87,
+  "trials": 1693
+ },
+ "gains_c12": [
+  "q-dr-000004",
+  "q-mh-000033",
+  "q-mh-000034",
+  "q-mh-000036",
+  "q-mh-000042",
+  "q-mh-000044",
+  "q-dr-900006",
+  "q-dr-900010",
+  "q-dr-900036",
+  "q-mh-900005",
+  "q-mh-900009",
+  "q-mh-900019",
+  "q-mh-900021",
+  "q-mh-900043",
+  "q-mh-900045"
+ ]
+}

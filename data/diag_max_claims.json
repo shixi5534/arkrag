@@ -1,0 +1,34 @@
+{
+ "n": 350,
+ "c5": {
+  "correct": 196,
+  "seg_mean": 0.0,
+  "alen_mean": 32.29,
+  "cite_rejected_questions": 0
+ },
+ "c12": {
+  "correct": 211,
+  "seg_mean": 0.0,
+  "alen_mean": 55.83,
+  "cite_rejected_questions": 0
+ },
+ "gain": [
+  "q-dr-000004",
+  "q-mh-000033",
+  "q-mh-000034",
+  "q-mh-000036",
+  "q-mh-000042",
+  "q-mh-000044",
+  "q-dr-900006",
+  "q-dr-900010",
+  "q-dr-900036",
+  "q-mh-900005",
+  "q-mh-900009",
+  "q-mh-900019",
+  "q-mh-900021",
+  "q-mh-900043",
+  "q-mh-900045"
+ ],
+ "loss": [],
+ "gain_gold_not_first": 0
+}

@@ -131,15 +131,10 @@ CHUNKS_SOURCE_DEBT: dict[tuple[str, str], str] = {
     ("scripts/build_goldset.py", "_load_sources"): (
         "按世代挖 gold，但块正文读全局——这正是 v1 里 `required` 与断言层不同源的来源之一。"
     ),
-    ("scripts/build_vectors.py", "generation_chunks"): (
-        "按世代建向量，块正文来源须与该代一致，否则向量与块对不上。"
-    ),
     ("scripts/check_significance.py", "main"): "显著性检验，按世代评测；块源须与世代同源。",
     ("scripts/check_speaker_significance.py", "main"): "说话人显著性检验，同上。",
-    ("scripts/diagnose_channels.py", "main"): "通道诊断，按世代算指标。",
     ("scripts/diagnose_ranking.py", "main"): "排序诊断，按世代算指标。",
     ("scripts/diagnose_speaker_clamp.py", "main"): "说话人夹紧诊断，按世代算指标。",
-    ("scripts/eval_fusion.py", "main"): "融合评测，按世代算 R@n——块源错了指标就错。",
     ("scripts/make_split.py", "mine_new_batch"): (
         "P1-a 新增批挖矿。实测：换成 `resolve_chunks()` 会换掉 84 道题"
         "（差异来自集合/顺序而非文本），故须单独一笔改并重出 gold-v2。"

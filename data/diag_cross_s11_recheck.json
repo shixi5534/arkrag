@@ -1,0 +1,1335 @@
+{
+ "stats": {
+  "c12_12000": {
+   "extra_total": 83,
+   "real_by_06a741": 0,
+   "real_by_global": 0
+  },
+  "c12_40000": {
+   "extra_total": 135,
+   "real_by_06a741": 0,
+   "real_by_global": 0
+  }
+ },
+ "detail": [
+  {
+   "arm": "c12_12000",
+   "qid": "q-cx-000001",
+   "name": "以勒什",
+   "gold": [
+    "act33side",
+    "main_ep14"
+   ],
+   "extra": [
+    "act17mini"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_12000",
+   "qid": "q-cx-000004",
+   "name": "海洋",
+   "gold": [
+    "act17side",
+    "memory_deepcl",
+    "rogue_rogue_6"
+   ],
+   "extra": [
+    "act34side",
+    "act39side",
+    "rogue_rogue_2",
+    "rogue_rogue_5"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": null,
+   "entity_in_06a741": true,
+   "entity_in_global": false
+  },
+  {
+   "arm": "c12_12000",
+   "qid": "q-cx-000006",
+   "name": "源石引擎",
+   "gold": [
+    "act17d0",
+    "act24side"
+   ],
+   "extra": [
+    "act13d5",
+    "act19side",
+    "act38side",
+    "act47side",
+    "act6d5",
+    "main_ep16"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_12000",
+   "qid": "q-cx-000009",
+   "name": "古寺",
+   "gold": [
+    "act40side",
+    "act49side"
+   ],
+   "extra": [
+    "rogue_rogue_5"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_12000",
+   "qid": "q-cx-000010",
+   "name": "乌卡边境",
+   "gold": [
+    "main_ep16",
+    "main_spst16"
+   ],
+   "extra": [
+    "main_st17"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_12000",
+   "qid": "q-cx-000012",
+   "name": "工程部干员",
+   "gold": [
+    "act13mini",
+    "memory_pudd"
+   ],
+   "extra": [
+    "act53side",
+    "memory_beagle",
+    "memory_greyy2",
+    "memory_serum"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_12000",
+   "qid": "q-cx-000013",
+   "name": "加斯特里尔",
+   "gold": [
+    "act18mini",
+    "act41side",
+    "main_ep14",
+    "main_st14"
+   ],
+   "extra": [
+    "act37side"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": null,
+   "entity_in_06a741": true,
+   "entity_in_global": false
+  },
+  {
+   "arm": "c12_12000",
+   "qid": "q-cx-000015",
+   "name": "彼得",
+   "gold": [
+    "act29side",
+    "main_st17",
+    "memory_pinecn",
+    "memory_turdus"
+   ],
+   "extra": [
+    "act10d5",
+    "act51side",
+    "main_ep17"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_12000",
+   "qid": "q-cx-000017",
+   "name": "识字班",
+   "gold": [
+    "memory_mitm",
+    "memory_nymph"
+   ],
+   "extra": [
+    "main_ep13"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_12000",
+   "qid": "q-cx-000019",
+   "name": "弗雷德",
+   "gold": [
+    "main_ep09",
+    "memory_peper"
+   ],
+   "extra": [
+    "main_ep10",
+    "main_ep13",
+    "main_st14"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_12000",
+   "qid": "q-cx-000020",
+   "name": "恐鱼",
+   "gold": [
+    "act17side",
+    "act18d3",
+    "rogue_rogue_2"
+   ],
+   "extra": [
+    "act52side"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": null,
+   "entity_in_06a741": true,
+   "entity_in_global": false
+  },
+  {
+   "arm": "c12_12000",
+   "qid": "q-cx-000025",
+   "name": "集市",
+   "gold": [
+    "act12d0",
+    "act15mini"
+   ],
+   "extra": [
+    "act15d5",
+    "act18d0",
+    "act19mini",
+    "act23side",
+    "act27side",
+    "memory_rfalcn"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_12000",
+   "qid": "q-cx-000027",
+   "name": "动力炉",
+   "gold": [
+    "act11d0",
+    "act28side"
+   ],
+   "extra": [
+    "act16mini",
+    "rogue_rogue_4"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_12000",
+   "qid": "q-cx-000028",
+   "name": "滑板",
+   "gold": [
+    "memory_acdrop",
+    "memory_medic2",
+    "memory_pinecn"
+   ],
+   "extra": [
+    "memory_jnight"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_12000",
+   "qid": "q-cx-000029",
+   "name": "收音机",
+   "gold": [
+    "act22side",
+    "memory_confes",
+    "rogue_rogue_4"
+   ],
+   "extra": [
+    "act21mini",
+    "act21side",
+    "act38side",
+    "memory_haak"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_12000",
+   "qid": "q-cx-000032",
+   "name": "轮胎",
+   "gold": [
+    "act38side",
+    "main_ep14"
+   ],
+   "extra": [
+    "act12side",
+    "act32side",
+    "act45side",
+    "memory_coldst",
+    "memory_jnight",
+    "memory_wscoot"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_12000",
+   "qid": "q-cx-900003",
+   "name": "远逐者",
+   "gold": [
+    "act42side",
+    "main_ep13",
+    "main_ep14"
+   ],
+   "extra": [
+    "rogue_rogue_4"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_12000",
+   "qid": "q-cx-900006",
+   "name": "玄极巨兵",
+   "gold": [
+    "act49side",
+    "act6d5"
+   ],
+   "extra": [
+    "act16d5"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_12000",
+   "qid": "q-cx-900007",
+   "name": "维多利亚军队",
+   "gold": [
+    "act10mini",
+    "memory_bpipe"
+   ],
+   "extra": [
+    "act22side",
+    "act46side",
+    "main_ep09",
+    "main_ep13"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_12000",
+   "qid": "q-cx-900008",
+   "name": "豆豆",
+   "gold": [
+    "memory_bstalk",
+    "memory_flower"
+   ],
+   "extra": [
+    "act13mini",
+    "act31side",
+    "memory_ctable"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_12000",
+   "qid": "q-cx-900010",
+   "name": "邙山",
+   "gold": [
+    "act19mini",
+    "act49side"
+   ],
+   "extra": [
+    "rogue_rogue_5"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_12000",
+   "qid": "q-cx-900017",
+   "name": "日落街酒店",
+   "gold": [
+    "main_ep12",
+    "main_st12",
+    "memory_morgan"
+   ],
+   "extra": [
+    "act37side"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_12000",
+   "qid": "q-cx-900018",
+   "name": "雄辩家",
+   "gold": [
+    "act22side",
+    "act41side"
+   ],
+   "extra": [
+    "main_ep09",
+    "main_ep10"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_12000",
+   "qid": "q-cx-900021",
+   "name": "法伦",
+   "gold": [
+    "act7d5",
+    "memory_blitz",
+    "memory_melan"
+   ],
+   "extra": [
+    "memory_durnar"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_12000",
+   "qid": "q-cx-900022",
+   "name": "巫术",
+   "gold": [
+    "main_ep11",
+    "main_ep14"
+   ],
+   "extra": [
+    "act29side",
+    "act47side",
+    "main_ep13"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_12000",
+   "qid": "q-cx-900023",
+   "name": "防护服",
+   "gold": [
+    "act27side",
+    "memory_otter",
+    "rogue_rogue_4"
+   ],
+   "extra": [
+    "main_ep09",
+    "main_ep17",
+    "main_st14",
+    "memory_aurora",
+    "memory_hibisc",
+    "memory_tanya"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_12000",
+   "qid": "q-cx-900024",
+   "name": "帕特",
+   "gold": [
+    "main_ep11",
+    "main_ep12"
+   ],
+   "extra": [
+    "act42side",
+    "memory_phenxi"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_12000",
+   "qid": "q-cx-900025",
+   "name": "麦克斯特区",
+   "gold": [
+    "act18mini",
+    "act47side"
+   ],
+   "extra": [
+    "act48side"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_12000",
+   "qid": "q-cx-900026",
+   "name": "蒂姆",
+   "gold": [
+    "act29side",
+    "act41side",
+    "memory_lessng"
+   ],
+   "extra": [
+    "memory_beewax"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_12000",
+   "qid": "q-cx-900027",
+   "name": "炎魔",
+   "gold": [
+    "act15d0",
+    "main_ep13",
+    "main_ep14",
+    "memory_plosis"
+   ],
+   "extra": [
+    "main_st12",
+    "rogue_rogue_4"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_12000",
+   "qid": "q-cx-900028",
+   "name": "磁山二号",
+   "gold": [
+    "act17d0",
+    "act32side",
+    "memory_fuze"
+   ],
+   "extra": [
+    "memory_iana"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_12000",
+   "qid": "q-cx-900030",
+   "name": "勾吴",
+   "gold": [
+    "memory_sqrrel",
+    "rogue_rogue_5"
+   ],
+   "extra": [
+    "act16d5",
+    "act23side",
+    "act49side",
+    "memory_nothin"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_12000",
+   "qid": "q-cx-900031",
+   "name": "啤酒花",
+   "gold": [
+    "memory_mudrok",
+    "memory_wyvern"
+   ],
+   "extra": [
+    "act11d0",
+    "act12mini",
+    "act36side",
+    "memory_firwhl"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_40000",
+   "qid": "q-cx-000001",
+   "name": "以勒什",
+   "gold": [
+    "act33side",
+    "main_ep14"
+   ],
+   "extra": [
+    "act17mini"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_40000",
+   "qid": "q-cx-000004",
+   "name": "海洋",
+   "gold": [
+    "act17side",
+    "memory_deepcl",
+    "rogue_rogue_6"
+   ],
+   "extra": [
+    "act34side",
+    "act39side",
+    "rogue_rogue_2",
+    "rogue_rogue_5",
+    "roguelike_level_rogue2_ending_3"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": null,
+   "entity_in_06a741": true,
+   "entity_in_global": false
+  },
+  {
+   "arm": "c12_40000",
+   "qid": "q-cx-000006",
+   "name": "源石引擎",
+   "gold": [
+    "act17d0",
+    "act24side"
+   ],
+   "extra": [
+    "act13d5",
+    "act19side",
+    "act38side",
+    "act47side",
+    "act6d5",
+    "main_ep16",
+    "memory_shotst"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_40000",
+   "qid": "q-cx-000009",
+   "name": "古寺",
+   "gold": [
+    "act40side",
+    "act49side"
+   ],
+   "extra": [
+    "act31side",
+    "rogue_rogue_5"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_40000",
+   "qid": "q-cx-000010",
+   "name": "乌卡边境",
+   "gold": [
+    "main_ep16",
+    "main_spst16"
+   ],
+   "extra": [
+    "main_st17"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_40000",
+   "qid": "q-cx-000012",
+   "name": "工程部干员",
+   "gold": [
+    "act13mini",
+    "memory_pudd"
+   ],
+   "extra": [
+    "act38side",
+    "act53side",
+    "main_ep15",
+    "memory_beagle",
+    "memory_greyy2",
+    "memory_hpsts",
+    "memory_pinecn",
+    "memory_serum"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_40000",
+   "qid": "q-cx-000013",
+   "name": "加斯特里尔",
+   "gold": [
+    "act18mini",
+    "act41side",
+    "main_ep14",
+    "main_st14"
+   ],
+   "extra": [
+    "act22side",
+    "act37side"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": null,
+   "entity_in_06a741": true,
+   "entity_in_global": false
+  },
+  {
+   "arm": "c12_40000",
+   "qid": "q-cx-000015",
+   "name": "彼得",
+   "gold": [
+    "act29side",
+    "main_st17",
+    "memory_pinecn",
+    "memory_turdus"
+   ],
+   "extra": [
+    "act10d5",
+    "act38side",
+    "act51side",
+    "main_ep17",
+    "memory_absin",
+    "memory_headb2"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_40000",
+   "qid": "q-cx-000016",
+   "name": "银行",
+   "gold": [
+    "act28side",
+    "memory_tinman"
+   ],
+   "extra": [
+    "memory_almond"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_40000",
+   "qid": "q-cx-000017",
+   "name": "识字班",
+   "gold": [
+    "memory_mitm",
+    "memory_nymph"
+   ],
+   "extra": [
+    "main_ep13"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_40000",
+   "qid": "q-cx-000019",
+   "name": "弗雷德",
+   "gold": [
+    "main_ep09",
+    "memory_peper"
+   ],
+   "extra": [
+    "act33side",
+    "main_ep10",
+    "main_ep12",
+    "main_ep13",
+    "main_ep14",
+    "main_st14"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_40000",
+   "qid": "q-cx-000020",
+   "name": "恐鱼",
+   "gold": [
+    "act17side",
+    "act18d3",
+    "rogue_rogue_2"
+   ],
+   "extra": [
+    "act52side"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": null,
+   "entity_in_06a741": true,
+   "entity_in_global": false
+  },
+  {
+   "arm": "c12_40000",
+   "qid": "q-cx-000022",
+   "name": "杰克",
+   "gold": [
+    "memory_dagda",
+    "memory_jaksel",
+    "memory_tiger"
+   ],
+   "extra": [
+    "act25side",
+    "act47side"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_40000",
+   "qid": "q-cx-000025",
+   "name": "集市",
+   "gold": [
+    "act12d0",
+    "act15mini"
+   ],
+   "extra": [
+    "act15d5",
+    "act16d5",
+    "act17mini",
+    "act18d0",
+    "act19mini",
+    "act23side",
+    "act27side",
+    "act47side",
+    "memory_confes",
+    "memory_rfalcn",
+    "rogue_rogue_5"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_40000",
+   "qid": "q-cx-000027",
+   "name": "动力炉",
+   "gold": [
+    "act11d0",
+    "act28side"
+   ],
+   "extra": [
+    "act13side",
+    "act16mini",
+    "rogue_rogue_4"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_40000",
+   "qid": "q-cx-000028",
+   "name": "滑板",
+   "gold": [
+    "memory_acdrop",
+    "memory_medic2",
+    "memory_pinecn"
+   ],
+   "extra": [
+    "act27side",
+    "memory_fang",
+    "memory_jnight",
+    "rogue_rogue_6"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_40000",
+   "qid": "q-cx-000029",
+   "name": "收音机",
+   "gold": [
+    "act22side",
+    "memory_confes",
+    "rogue_rogue_4"
+   ],
+   "extra": [
+    "act21mini",
+    "act21side",
+    "act38side",
+    "main_ep17",
+    "memory_haak",
+    "rogue_rogue_3"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_40000",
+   "qid": "q-cx-000032",
+   "name": "轮胎",
+   "gold": [
+    "act38side",
+    "main_ep14"
+   ],
+   "extra": [
+    "act12side",
+    "act32side",
+    "act45side",
+    "act47side",
+    "act53side",
+    "memory_coldst",
+    "memory_jnight",
+    "memory_wscoot"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_40000",
+   "qid": "q-cx-900001",
+   "name": "溟痕",
+   "gold": [
+    "act17side",
+    "act34side",
+    "rogue_rogue_2"
+   ],
+   "extra": [
+    "act52side"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_40000",
+   "qid": "q-cx-900003",
+   "name": "远逐者",
+   "gold": [
+    "act42side",
+    "main_ep13",
+    "main_ep14"
+   ],
+   "extra": [
+    "rogue_rogue_4"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_40000",
+   "qid": "q-cx-900004",
+   "name": "秉烛人",
+   "gold": [
+    "act31side",
+    "act49side",
+    "rogue_rogue_5"
+   ],
+   "extra": [
+    "act15side",
+    "roguelike_level_rogue5_ending_1"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_40000",
+   "qid": "q-cx-900006",
+   "name": "玄极巨兵",
+   "gold": [
+    "act49side",
+    "act6d5"
+   ],
+   "extra": [
+    "act16d5"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_40000",
+   "qid": "q-cx-900007",
+   "name": "维多利亚军队",
+   "gold": [
+    "act10mini",
+    "memory_bpipe"
+   ],
+   "extra": [
+    "act22side",
+    "act30side",
+    "act46side",
+    "main_ep09",
+    "main_ep13",
+    "main_ep14"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_40000",
+   "qid": "q-cx-900008",
+   "name": "豆豆",
+   "gold": [
+    "memory_bstalk",
+    "memory_flower"
+   ],
+   "extra": [
+    "act13mini",
+    "act31side",
+    "memory_cammou",
+    "memory_ctable"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_40000",
+   "qid": "q-cx-900010",
+   "name": "邙山",
+   "gold": [
+    "act19mini",
+    "act49side"
+   ],
+   "extra": [
+    "rogue_rogue_5"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_40000",
+   "qid": "q-cx-900013",
+   "name": "技术院",
+   "gold": [
+    "act34side",
+    "act52side",
+    "main_ep15"
+   ],
+   "extra": [
+    "memory_haini",
+    "rogue_rogue_2"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_40000",
+   "qid": "q-cx-900017",
+   "name": "日落街酒店",
+   "gold": [
+    "main_ep12",
+    "main_st12",
+    "memory_morgan"
+   ],
+   "extra": [
+    "act37side"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_40000",
+   "qid": "q-cx-900018",
+   "name": "雄辩家",
+   "gold": [
+    "act22side",
+    "act41side"
+   ],
+   "extra": [
+    "main_ep09",
+    "main_ep10",
+    "main_st09"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_40000",
+   "qid": "q-cx-900021",
+   "name": "法伦",
+   "gold": [
+    "act7d5",
+    "memory_blitz",
+    "memory_melan"
+   ],
+   "extra": [
+    "memory_durnar"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_40000",
+   "qid": "q-cx-900022",
+   "name": "巫术",
+   "gold": [
+    "main_ep11",
+    "main_ep14"
+   ],
+   "extra": [
+    "act13side",
+    "act17mini",
+    "act29side",
+    "act37side",
+    "act47side",
+    "main_ep07",
+    "main_ep13",
+    "memory_lava2"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_40000",
+   "qid": "q-cx-900023",
+   "name": "防护服",
+   "gold": [
+    "act27side",
+    "memory_otter",
+    "rogue_rogue_4"
+   ],
+   "extra": [
+    "act10d5",
+    "act8mini",
+    "main_ep09",
+    "main_ep17",
+    "main_st14",
+    "memory_ansel",
+    "memory_aurora",
+    "memory_hibisc",
+    "memory_popka",
+    "memory_savage",
+    "memory_tanya"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_40000",
+   "qid": "q-cx-900024",
+   "name": "帕特",
+   "gold": [
+    "main_ep11",
+    "main_ep12"
+   ],
+   "extra": [
+    "act42side",
+    "memory_phenxi"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_40000",
+   "qid": "q-cx-900025",
+   "name": "麦克斯特区",
+   "gold": [
+    "act18mini",
+    "act47side"
+   ],
+   "extra": [
+    "act48side"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_40000",
+   "qid": "q-cx-900026",
+   "name": "蒂姆",
+   "gold": [
+    "act29side",
+    "act41side",
+    "memory_lessng"
+   ],
+   "extra": [
+    "memory_beewax"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_40000",
+   "qid": "q-cx-900027",
+   "name": "炎魔",
+   "gold": [
+    "act15d0",
+    "main_ep13",
+    "main_ep14",
+    "memory_plosis"
+   ],
+   "extra": [
+    "act19side",
+    "act25side",
+    "main_st12",
+    "rogue_rogue_4"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_40000",
+   "qid": "q-cx-900028",
+   "name": "磁山二号",
+   "gold": [
+    "act17d0",
+    "act32side",
+    "memory_fuze"
+   ],
+   "extra": [
+    "memory_iana"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_40000",
+   "qid": "q-cx-900030",
+   "name": "勾吴",
+   "gold": [
+    "memory_sqrrel",
+    "rogue_rogue_5"
+   ],
+   "extra": [
+    "act15side",
+    "act16d5",
+    "act23side",
+    "act49side",
+    "memory_nothin"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  },
+  {
+   "arm": "c12_40000",
+   "qid": "q-cx-900031",
+   "name": "啤酒花",
+   "gold": [
+    "memory_mudrok",
+    "memory_wyvern"
+   ],
+   "extra": [
+    "act11d0",
+    "act12mini",
+    "act36side",
+    "memory_firwhl"
+   ],
+   "real_by_06a741": [],
+   "real_by_global": [],
+   "entity_in_06a741": true,
+   "entity_in_global": true
+  }
+ ]
+}

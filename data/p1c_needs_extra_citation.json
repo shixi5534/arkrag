@@ -7,19 +7,19 @@
   "chunks_source_api": "pipeline.resolve_chunks(gen, manifest)",
   "chunks_loaded": 13798,
   "targets_n": 16,
-  "if_appended_would_cover_n": 3,
-  "both_lines_cited_n": 2,
+  "if_appended_would_cover_n": 4,
+  "both_lines_cited_n": 3,
   "carrier_cited_but_required_not_n": 8,
   "required_cited_but_carrier_not_n": 1,
-  "neither_cited_n": 5,
+  "neither_cited_n": 4,
   "by_split": {
     "dev": {
       "n": 13,
-      "required_line_cited": 3,
-      "required_and_carrier": 2,
+      "required_line_cited": 4,
+      "required_and_carrier": 3,
       "carrier_cited_only": 5,
       "required_cited_only": 1,
-      "neither_cited": 5
+      "neither_cited": 4
     },
     "holdout": {
       "n": 3,
@@ -33,11 +33,11 @@
   "by_group": {
     "frag": {
       "n": 6,
-      "required_line_cited": 3,
-      "required_and_carrier": 2,
+      "required_line_cited": 4,
+      "required_and_carrier": 3,
       "carrier_cited_only": 1,
       "required_cited_only": 1,
-      "neither_cited": 2
+      "neither_cited": 1
     },
     "none": {
       "n": 10,
@@ -51,11 +51,11 @@
   "by_split_and_group": {
     "dev/frag": {
       "n": 6,
-      "required_line_cited": 3,
-      "required_and_carrier": 2,
+      "required_line_cited": 4,
+      "required_and_carrier": 3,
       "carrier_cited_only": 1,
       "required_cited_only": 1,
-      "neither_cited": 2
+      "neither_cited": 1
     },
     "dev/none": {
       "n": 7,
@@ -101,7 +101,7 @@
       ],
       "any_carrier_cited": true,
       "emitted_n": 2,
-      "units": 4,
+      "units": 9,
       "abstained": false
     },
     {
@@ -121,8 +121,8 @@
         true
       ],
       "any_carrier_cited": true,
-      "emitted_n": 5,
-      "units": 5,
+      "emitted_n": 6,
+      "units": 10,
       "abstained": false
     },
     {
@@ -143,7 +143,7 @@
       ],
       "any_carrier_cited": false,
       "emitted_n": 0,
-      "units": 5,
+      "units": 9,
       "abstained": true
     },
     {
@@ -166,8 +166,8 @@
         false
       ],
       "any_carrier_cited": false,
-      "emitted_n": 10,
-      "units": 6,
+      "emitted_n": 14,
+      "units": 10,
       "abstained": false
     },
     {
@@ -189,8 +189,8 @@
         false
       ],
       "any_carrier_cited": false,
-      "emitted_n": 6,
-      "units": 5,
+      "emitted_n": 10,
+      "units": 10,
       "abstained": false
     },
     {
@@ -211,7 +211,7 @@
       ],
       "any_carrier_cited": true,
       "emitted_n": 2,
-      "units": 5,
+      "units": 10,
       "abstained": false
     },
     {
@@ -233,8 +233,8 @@
         true
       ],
       "any_carrier_cited": true,
-      "emitted_n": 4,
-      "units": 5,
+      "emitted_n": 5,
+      "units": 10,
       "abstained": false
     },
     {
@@ -254,8 +254,8 @@
         true
       ],
       "any_carrier_cited": true,
-      "emitted_n": 6,
-      "units": 5,
+      "emitted_n": 13,
+      "units": 9,
       "abstained": false
     },
     {
@@ -275,9 +275,9 @@
         false
       ],
       "any_carrier_cited": false,
-      "emitted_n": 0,
-      "units": 5,
-      "abstained": true
+      "emitted_n": 6,
+      "units": 10,
+      "abstained": false
     },
     {
       "question_id": "q-al-000032",
@@ -297,7 +297,7 @@
       ],
       "any_carrier_cited": true,
       "emitted_n": 2,
-      "units": 6,
+      "units": 12,
       "abstained": false
     },
     {
@@ -319,8 +319,8 @@
         true
       ],
       "any_carrier_cited": true,
-      "emitted_n": 5,
-      "units": 5,
+      "emitted_n": 16,
+      "units": 10,
       "abstained": false
     },
     {
@@ -340,8 +340,8 @@
         true
       ],
       "any_carrier_cited": true,
-      "emitted_n": 7,
-      "units": 6,
+      "emitted_n": 13,
+      "units": 10,
       "abstained": false
     },
     {
@@ -363,8 +363,8 @@
         true
       ],
       "any_carrier_cited": true,
-      "emitted_n": 8,
-      "units": 5,
+      "emitted_n": 10,
+      "units": 9,
       "abstained": false
     },
     {
@@ -378,16 +378,16 @@
       "answer": "诗怀雅",
       "chunk_id": "obt/main/level_main_05-02_beg#000",
       "required_line": "诗怀雅：*龙门粗口*，说过多少次了，我不姓施！听好，我的代号是诗怀雅，或者叫我碧翠克斯·施怀雅警官，懂吗？",
-      "required_line_cited": false,
+      "required_line_cited": true,
       "carrier_lines": [
         "陈：诗怀雅，你没有这个权力。"
       ],
       "carrier_lines_cited": [
-        false
+        true
       ],
-      "any_carrier_cited": false,
-      "emitted_n": 10,
-      "units": 6,
+      "any_carrier_cited": true,
+      "emitted_n": 13,
+      "units": 10,
       "abstained": false
     },
     {
@@ -410,7 +410,7 @@
       ],
       "any_carrier_cited": true,
       "emitted_n": 1,
-      "units": 6,
+      "units": 11,
       "abstained": false
     },
     {
@@ -430,14 +430,14 @@
         false
       ],
       "any_carrier_cited": false,
-      "emitted_n": 7,
-      "units": 6,
+      "emitted_n": 16,
+      "units": 11,
       "abstained": false
     }
   ],
-  "generated_at": "2026-11-05T02:54:16Z",
-  "git_commit": "78369c09b75cb3974267c3ec4f49c358be201fa4",
-  "code_sha256_16": "d5d8984aaba7ec26",
+  "generated_at": "2026-11-07T05:18:49Z",
+  "git_commit": "53a528ab3aa054c7a8bb6360809b3e25f61182e2",
+  "code_sha256_16": "8c2f434d11665bed",
   "dataset": {
     "gold_path": "data/goldset/gold-v2.json",
     "gold_sha16": "069375f8e355e4b9",

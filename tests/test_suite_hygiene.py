@@ -114,7 +114,7 @@ class TestAssertionsActuallyRaise:
         raising = {
             name
             for name, seg in bodies.items()
-            if "raise " in seg or "assert " in seg
+            if "raise " in seg or "assert " in seg or "pytest.raises(" in seg
         }
         changed = True
         while changed:
@@ -135,7 +135,18 @@ class TestAssertionsActuallyRaise:
         offenders: list[str] = []
         for fn in _functions(tree, "test_"):
             seg = ast.get_source_segment(src, fn) or ""
-            if "assert " in seg or "raise " in seg:
+            # 认三种「真会变红」的构造，不止 assert/raise 两个字面量：
+            #   · `with pytest.raises(E): f()`：f() 不抛时 pytest 自己 FAIL；
+            #   · `pytest.fail(...)`：直接红。
+            # 原先只认 assert/raise，于是把
+            # `tests/test_p0_item5_drill.py::test_reassemble_needs_the_kept_files`
+            # 判成「恒为 PASS」——实测是假阳性（去掉保留清单校验后它立刻变红）。
+            if (
+                "assert " in seg
+                or "raise " in seg
+                or "pytest.raises(" in seg
+                or "pytest.fail(" in seg
+            ):
                 continue
             if any(f"{name}(" in seg for name in helpers):
                 continue
@@ -914,7 +925,167 @@ class TestSuiteSizeIsMonotonic:
     #      函数的常见返回值写、没围着它的状态空间写**。补
     #      `test_source_and_number_must_both_hold` 后才红。
     # ------------------------------------------------------------------
-    N = 1811
+    # 1811 -> 1830（+19）：`tests/test_p0_item5_drill.py` 此前是未跟踪残留、
+    # 从未登记；它自带 15 个用例，进入 `TEST_FILES` 后又让本文件三个按
+    # `TEST_FILES` 参数化的门各多一项。登记值以实测为准：
+    #   `--collect-only`             1830 tests collected
+    #   `--collect-only --ignore=…`  1815 tests collected
+    # 两数相减 = 15，正好是该文件自己的用例数。
+    # 这次上调不是为了让门变绿：换来的门是 P0 第 5 项那组归档/还原/回滚的
+    # 隔离副本演练（15 条），其中最要紧的一条
+    # `test_reassemble_needs_the_kept_files` 盯的是「归档可逆」——
+    # 少了保留清单，还原出来就是一包没有身份的字节。
+    # 1830 -> 1855（+25）：新增 `tests/test_answer_paths.py`，给两条此前**零测试覆盖**
+    # 的答案通路（`TITLE_ANSWER_PATH` / `CHAPTER_ANSWER_PATH`）上门。这两个开关各影响
+    # 52 / 32 道题，却在 2026-11-05 被写进台账说「已入库」后一直保持 `False`，一次都
+    # 没在生产里跑过——本项目把这种形态记作「**没接线的判据等于不存在**」。
+    # 登记值以实测为准：
+    #   `--collect-only`                     1855 tests collected
+    #   `--collect-only --ignore=…answer_paths`  1834 tests collected
+    # 两数相减 = 21，正好是该文件自己的用例数；剩下的 +4 是本文件里四个按
+    # `TEST_FILES` 参数化的门各多一项（新文件一进目录就自动被扫到，与 `--ignore`
+    # 无关，所以这个 4 不是"多收的"，是「多一个被测文件」的必然结果）。
+    # 这次上调换来的门：`TestSwitchesAreWired` 两条把开关钉死（改回 `False` 立刻红，
+    # 反向实测 17 failed / 21 passed）+ `TestTitleAnswerPath` 9 条 + `TestChapterAnswerPath`
+    # 8 条 + `TestPathsDoNotShadowEachOther` 2 条，钉的是「答案只能取自 unit.title /
+    # unit.chapter」「引用 `text[start:end] == evidence` 且过 `verify_citations`」
+    # 「判据不成立返回 None 落回原路径（不许猜）」。
+    # 1855 -> 1880（+25）：新增 `tests/test_vector_union.py`，给「向量通道怎么接」上门。
+    # 用户硬约束是「无论如何向量通道都必须存在」，但**怎么接**已被 300 题实测逼到
+    # 唯一可行解：所有融合式接法（minmax 加权 / RRF k=1,2 / DBSF / DBSF 尾部补位 /
+    # 头部锁定+向量重排余下）全部让 R@20 或 MRR 变差，只有「触发时追加到尾部」
+    # 能保证 base 已命中的题名次不变（追加块名次必然 >= 21）。
+    # 登记值以实测为准：
+    #   `--collect-only`                         1880 tests collected
+    #   `--collect-only --ignore=…vector_union`  1859 tests collected
+    # 两数相减 = 21，正是该文件自己的用例数；剩下 +4 是本文件四个按 `TEST_FILES`
+    # 参数化的门各多一项（新文件一进目录就被 glob 扫到，与 `--ignore` 无关）。
+    # 这次上调换来的门：`TestTriggerSignal` 5 条钉触发判据（含「第 20 名分为 0
+    # ⇒ ratio=inf ⇒ 不触发」「前 20 名同分 ⇒ 触发」两个反直觉边界）；
+    # `TestTriggeredTailUnion` 10 条钉「不触发时一个字节都不许变且绝不调
+    # embed_query」「只追加不重排」「追加块 score 必须是 0.0」「sources 的键必须
+    # 是 channel 而非 source（写错会在 build_context 的 direct() 上 KeyError）」
+    # 「EmbeddingError 必须向上抛不许吞成没有向量」；`TestPipelineWiring` 4 条钉
+    # 「build_pipeline 默认 vector_union=None（40 多个历史脚本的读数不许被静默
+    # 改掉）」「ask_once 把 union 放在 search 之后、expand 之前，使补进来的块
+    # 进入图扩展种子」。
+    # 1880 -> 1896（+16）：新增 `tests/test_context_budget.py`，把「上下文预算
+    # 6000 改成 12000」这件事从一次性实测变成门。这次改动的依据是两套题：
+    # dev 可判 285 题 191/285 (67.02%) -> 225/285 (78.95%)；holdout 可判 195 题
+    # 137/195 (70.26%) -> 149/195 (76.41%)（holdout 里 94 题与 gold-v1 重复，
+    # clean holdout 只有 144 题、可判 120 题：87/120 (72.50%) -> 97/120 (80.83%)）。
+    # 不改 `MAX_CLAIMS`：5 -> 12 是 dev +12 而 holdout 只有 +3，判为过拟合。
+    # 登记值以实测为准：
+    #   `--collect-only`                              1896 tests collected
+    #   `--collect-only --ignore=…test_context_budget.py`  1884 tests collected
+    # 两数相减 = 12，正是该文件自己的用例数（11 条断言 + 1 条 `xfail(strict=True)`
+    # 的已知缺陷记录）；剩下 +4 是本文件四个按 `TEST_FILES` 参数化的门各多一项。
+    # 1880 + 12 + 4 = 1896。
+    # 这次上调换来的门：`TestDefaultValueIsPinned` 2 条钉「默认值就是 12000」
+    # （改回 6000 立刻红，失败文案直接打印上面那三组实测数字）+「默认值不得小于
+    # 历史口径」；`TestDefaultTakesEffectInBuildContext` 4 条钉「默认值真的作用到
+    # build_context（24 块 600 字语料上默认装 11 块、显式 6000 装 5 块）」
+    # 「`Retriever.budget` 是 `--token-budget` 的入口」「截断必须记账」；
+    # `TestKnownDefect` 1 条 `xfail(strict=True)` 钉住预算非单调这个既知缺陷
+    # （`build_context` 超预算时是 `continue` 不是 `break`，真语料 237 题里 4 题
+    # 出现「加大预算反而丢金块」；修好时 XPASS 变红，逼人更新记录）；
+    # `TestServerDoesNotCopyTheNumber` 2 条钉「服务端默认值派生自
+    # `retrieve.DEFAULT_BUDGET`」并把「手抄第二个数字」做成静态门——这是本项目
+    # 记录在案的「同一判定写两处」事故形态；`TestCliCanReproduceTheOldCaliber`
+    # 3 条钉「`scripts/ask.py --token-budget` 存在、默认值派生、`evaluate()` 也收到」
+    # （40 多个历史脚本吃默认值，台账里 6000 档读数只有 `--token-budget 6000` 能复现）。
+    # 1896 -> 1939 -> 1943（+43，其中 +4 来自判据改严后补的用例）：
+    # 新增 `tests/test_judge.py`，把「答对」这件事从各脚本各写一份变成唯一实现
+    # `src/arkrag/judge.py`。这一刀不是为了加功能，是因为本轮评测里同一个"答对"
+    # 被三种口径各算过一遍、结论方向不同：
+    #   1. 「答案里出现 gold 串」——`MAX_CLAIMS` 5 -> 12 让 dev 从 196 涨到 211
+    #      (+15)，但换成严判据后只 +0.70pt（p=0.1290，不显著）；多出来的是
+    #      "多堆几条断言撞上高频专名"（`隶属` 出现在 102/350 题答案里）。
+    #   2. `cross_chunk` 用「答案章节 ⊇ gold」——12000 档比 6000 档高 7 题，
+    #      看起来预算有用；但那是"多列章节"堆出来的。实测把语料里全部 494 章
+    #      都列出来在超集判据下 38/38 全过，只列 gold 任一章则 subset 38/38 全过
+    #      —— 两端退化解都能拿满分，说明单边判据根本不能当判据。
+    #   3. 问句自带答案——`single_chunk` 76 题里 46 题的 gold 就写在题干书名号里，
+    #      零检索抄标题就能过 46/76（这是"零检索地板"，任何检索侧增益先减掉它）。
+    # 判据最终定稿（复议后）：
+    #   cross_chunk = gold ⊆ 答案 AND（额外章节逐个查语料正文必须真的提到该实体）
+    #                 AND 额外章节数 ≤ gold 章节数
+    #     - 只要求集合相等会惩罚正确答案：图登记不全，实测 44/64 题 gold 系统性
+    #       漏掉真实提及章节（共 317 章），预算越大错杀越多（12000 档 18 题、
+    #       40000 档 28 题）。
+    #     - 只要求「超集 + 额外真实」会被普通名词打满：`海洋` 题 gold 3 章而正文
+    #       47 章真提及（比值 14.7），`集市` 2→27、`巫术` 15.0、`银行` 11.0。
+    #       所以第三条规模上限是必须的，不是保险。
+    #     - `chapter_texts` 不传时显式降级成集合相等并写明 `extra_chapters_unverified`，
+    #       不许在没查正文时假装做过真实性校验。
+    #   multihop = gold 必须与**每一个**问句锚点各自共现（可分散在不同断言里），
+    #     且 gold 本身不是锚点。旧判据只要"gold + ≥1 锚点"，实测 c12_12000 通过的
+    #     73 题里 57 题只命中 1 个锚点、没有一题体现"经中间实体连接两端"。
+    # 登记值以实测为准：
+    #   `--collect-only`                          1943 tests collected
+    #   `--collect-only --ignore=…test_judge.py`  1900 tests collected
+    # 两数相减 = 43，正是该文件自己的用例数；剩下 +4 是本文件四个按 `TEST_FILES`
+    # 参数化的门各多一项。1896 + 43 + 4 = 1943。
+    # 这次上调换来的门（每条 `test_*_rejects_*` 都对应一次真跑里判错过的案例）：
+    # `TestEmptyAndStructural` 5 条钉「空答案 = False（拒答不算答对，哪怕 gold 也空）」
+    # 「结构类返回 None 而不是 0 分（必须剔分母，不许当 0 或当 1）」「可判类与结构类
+    # 不重叠且并集等于八类全集」「未知类不崩」；`TestSubstringCategories` 8 条钉
+    # single_chunk / alias 的子串口径与 `no_gold`；
+    # `TestCrossChunkNeedsBoundedRealExtras` 11 条是这次的核心：
+    #   `test_accepts_bounded_real_extra_chapters` 钉住"图漏登记时不该判错"
+    #     （gold 少 `main_ep16` 但该章正文真的提到实体，额外 1 ≤ gold 2 → 判对）；
+    #   `test_rejects_extra_chapter_it_never_mentions` 钉住"编的章节要拒"；
+    #   `test_rejects_real_extras_that_outnumber_gold` 单独钉住规模上限——
+    #     额外两章都真实提及、只靠"真实"判据挡不住，只能靠上限拒；
+    #   `test_rejects_listing_every_chapter` 钉住退化解（全列 494 章）；
+    #   `test_without_chapter_texts_it_degrades_to_set_equality` 钉住不许假装校验过；
+    #   `test_space_separated_chapters_are_split` 钉住 gold 里那个空格分隔符
+    #     （`act33side main_ep14`，第一版漏了 `\s` 导致 38 题全假失败）。
+    # `TestDirectRelationNeedsAllAnchorsInOneClaim` 4 条钉「必须是同一条断言同时
+    # 含全部锚点 + gold」，反例就是 `q-dr-900010`（问「红」与「罗德岛」，
+    # 答案里「温蒂隶属罗德岛」被旧判据判过）。
+    # `TestMultihopNeedsGoldLinkedToEveryAnchor` 4 条钉「gold 与每个锚点各自共现」，
+    # 反例是 `q-mh-000001`（锚点 [云兽, 变形者集群]，答案里 `云兽` 一个字没有）。
+    # `TestCitationsSupport` 6 条是另一件事（引用偏移逐字对上、列出 N 章就要有 N 条
+    # 引用），不并入答对判据，否则分不清"答错了"和"引用写错了"。
+    # 反向实测（`tmp_mutate_judge.py` 实跑 10 条突变，**10/10 命中**，基线 rc=0、还原后 rc=0）：
+    #   去掉「额外必须真实提及」      => test_rejects_extra_chapter_it_never_mentions 红
+    #   去掉「额外数 ≤ gold 数」      => test_rejects_real_extras_that_outnumber_gold 红
+    #   回到严格集合相等              => test_accepts_bounded_real_extra_chapters 红
+    #   direct_relation `all` -> `any` => test_rejects_claim_about_a_different_subject 红
+    #   multihop 放宽成任一锚点        => test_rejects_gold_linked_to_only_one_anchor 红
+    #   删掉 `if gold in anc`         => test_rejects_gold_that_is_an_anchor 红
+    #   章节分隔符去掉空白字符类        => test_space_separated_chapters_are_split 红
+    #   结构类 `None` -> `False`       => test_structural_categories_return_none 红
+    #   空答案 `False` -> `True`       => test_abstain_never_counts_as_correct 红
+    #   没传正文时假装校验过            => test_without_chapter_texts_it_degrades_to_set_equality 红
+    # （第一次跑时「去掉额外数上限」那一格漏网，原因是原用例
+    #  `test_rejects_listing_every_chapter` 的额外章节里有一章本来就没提到实体，
+    #  被"额外必须真实"这条先挡下了 —— 于是补出 `test_rejects_real_extras_that_outnumber_gold`。
+    #  这一格就是"一条判据同时被另一个条件遮住"的活标本。）
+    #
+    # 1943 -> 1957（+14）：`tests/test_max_claims.py` 新增 10 条 + 本文件四个按
+    # `TEST_FILES` 参数化的门各多一项（+4）。实测 `--collect-only` = 1957、
+    # `--collect-only --ignore=tests/test_max_claims.py` = 1947，相减 10 对得上。
+    # 换来什么门：把 `MAX_CLAIMS` 这个**影响 43% 可判题**（dev 285 里 116 题要 >5 条
+    # 断言）的参数钉死，且钉了「构造器默认值必须跟着模块常量走」——`TITLE_ANSWER_PATH`
+    # 那种「常量改了但实例还用旧值」的没接线事故在这里也拦得住。
+    # 另三条是源码注释体检：实测读数（191/198/200、128/132）、拒答伤害、
+    # 回滚方法必须留在 `answer.py` 里，删了就没法判断这个数还能不能动。
+    # 1957 -> 2017（+60）：新增 `tests/test_bridge.py`（30 条）与
+    # `tests/test_quote_locate.py`（22 条），两个文件进入 `TEST_FILES` 后让四个
+    # parametrize（本文件各门按 `TEST_FILES` 参数化）各多两项，再 +8。
+    # 1957 + 30 + 22 + 8 = 2017，与 `--collect-only` 实测一致。
+    # 换来什么门：把两条**把 dev 可判正确率从 69.47% 抬到 80.35%** 的通路钉死——
+    # `quote_locate`（题干引文→逐字定位→命中块 title，门控 single_chunk 128/128、
+    # 改一个字即 0 命中）与 `bridge`（一跳公共邻居唯一才答、句源必须是真实断言、
+    # 候选只许来自本次 ctx、引用偏移逐字可校验）。这两条都是被对抗审查逐轮拷问
+    # 才活下来的，删掉任一约束都会让它退回"注水"形态，所以每条否决读数
+    # （41.7%、候选内随机 21 > 排序 top1 19、marginal 差 0 题、改字 0/76、
+    # 98.7/98.1/96.9% 唯一率、p50=16）都写进了对应源码注释并有机检断言。
+    # 突变验证：`tmp_mutate_gates.py` 实跑 13 组突变，**13/13 按预期命中**
+    # （其中 1 组是双突变——`s == o` 与 `- set(anc)` 互为备份，单条改都不红）。
+    N = 2017
 
     def test_declared_count_matches_actual(self) -> None:
         """用 pytest 自己数一遍当前收集到的用例数，与本文件登记值比对。"""

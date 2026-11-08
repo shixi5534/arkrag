@@ -1,0 +1,12 @@
+{
+ "n": 64,
+ "answers": [
+  "时序演进"
+ ],
+ "template_hardcode_pass": 23,
+ "answer_in_question_pass": 0,
+ "judge_returns": {
+  "pass": null,
+  "reason": "structural:not_supported"
+ }
+}

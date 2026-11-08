@@ -1,0 +1,2050 @@
+{
+ "buckets": {
+  "T==gold": [
+   "q-cx-000002",
+   "q-cx-000003",
+   "q-cx-000005",
+   "q-cx-000007",
+   "q-cx-000008",
+   "q-cx-000014",
+   "q-cx-000018",
+   "q-cx-000021",
+   "q-cx-000023",
+   "q-cx-000024",
+   "q-cx-000030",
+   "q-cx-900002",
+   "q-cx-900011",
+   "q-cx-900014",
+   "q-cx-900015",
+   "q-cx-900016",
+   "q-cx-900019",
+   "q-cx-900020",
+   "q-cx-900029",
+   "q-cx-900032"
+  ],
+  "1<|T|<=2|gold|": [
+   "q-cx-000001",
+   "q-cx-000009",
+   "q-cx-000010",
+   "q-cx-000011",
+   "q-cx-000013",
+   "q-cx-000017",
+   "q-cx-000026",
+   "q-cx-000031",
+   "q-cx-900001",
+   "q-cx-900003",
+   "q-cx-900005",
+   "q-cx-900006",
+   "q-cx-900009",
+   "q-cx-900010",
+   "q-cx-900012",
+   "q-cx-900013",
+   "q-cx-900017",
+   "q-cx-900021",
+   "q-cx-900025",
+   "q-cx-900026",
+   "q-cx-900027",
+   "q-cx-900028"
+  ],
+  "2<|T|<=4|gold|": [
+   "q-cx-000015",
+   "q-cx-000020",
+   "q-cx-000027",
+   "q-cx-000028",
+   "q-cx-900004",
+   "q-cx-900008",
+   "q-cx-900018",
+   "q-cx-900030",
+   "q-cx-900031"
+  ],
+  "4<|T|<=10|gold|": [
+   "q-cx-000006",
+   "q-cx-000012",
+   "q-cx-000019",
+   "q-cx-000022",
+   "q-cx-000029",
+   "q-cx-000032",
+   "q-cx-900007",
+   "q-cx-900023",
+   "q-cx-900024"
+  ],
+  "|T|>10|gold|": [
+   "q-cx-000004",
+   "q-cx-000016",
+   "q-cx-000025",
+   "q-cx-900022"
+  ]
+ },
+ "rows": [
+  {
+   "qid": "q-cx-000001",
+   "name": "以勒什",
+   "split": "dev",
+   "gold": [
+    "act33side",
+    "main_ep14"
+   ],
+   "T_text": [
+    "act17mini",
+    "act33side",
+    "main_ep14"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "act17mini"
+   ],
+   "only_G": [],
+   "n_gold": 2,
+   "n_T": 3
+  },
+  {
+   "qid": "q-cx-000002",
+   "name": "扎罗",
+   "split": "holdout",
+   "gold": [
+    "act21side",
+    "act38side",
+    "memory_whitw2"
+   ],
+   "T_text": [
+    "act21side",
+    "act38side",
+    "memory_whitw2"
+   ],
+   "eq": true,
+   "T_superset": false,
+   "only_T": [],
+   "only_G": [],
+   "n_gold": 3,
+   "n_T": 3
+  },
+  {
+   "qid": "q-cx-000003",
+   "name": "米拉娜",
+   "split": "dev",
+   "gold": [
+    "main_ep16",
+    "main_st17"
+   ],
+   "T_text": [
+    "main_ep16",
+    "main_st17"
+   ],
+   "eq": true,
+   "T_superset": false,
+   "only_T": [],
+   "only_G": [],
+   "n_gold": 2,
+   "n_T": 2
+  },
+  {
+   "qid": "q-cx-000004",
+   "name": "海洋",
+   "split": "dev",
+   "gold": [
+    "act17side",
+    "memory_deepcl",
+    "rogue_rogue_6"
+   ],
+   "T_text": [
+    "act11d7",
+    "act12d0",
+    "act12side",
+    "act16side",
+    "act17side",
+    "act18d3",
+    "act18mini",
+    "act25side",
+    "act26side",
+    "act27side",
+    "act29side",
+    "act33side",
+    "act34side",
+    "act39side",
+    "act3d0",
+    "act42side",
+    "act43side",
+    "act47side",
+    "act52side",
+    "act7mini",
+    "main_ep08",
+    "main_ep12",
+    "main_ep13",
+    "main_ep14",
+    "main_ep15",
+    "main_ep17",
+    "main_spst14",
+    "main_st14",
+    "main_st15",
+    "memory_deepcl",
+    "memory_ghost",
+    "memory_ghost2",
+    "memory_glady",
+    "memory_haini",
+    "memory_mlyss",
+    "memory_thorns",
+    "memory_utage",
+    "memory_weedy",
+    "memory_wintim",
+    "rogue_rogue_2",
+    "rogue_rogue_4",
+    "rogue_rogue_5",
+    "rogue_rogue_6",
+    "roguelike_level_rogue2_ending_1",
+    "roguelike_level_rogue2_ending_2",
+    "roguelike_level_rogue2_ending_3",
+    "roguelike_level_rogue2_ending_4"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "act11d7",
+    "act12d0",
+    "act12side",
+    "act16side",
+    "act18d3",
+    "act18mini",
+    "act25side",
+    "act26side",
+    "act27side",
+    "act29side",
+    "act33side",
+    "act34side",
+    "act39side",
+    "act3d0",
+    "act42side",
+    "act43side",
+    "act47side",
+    "act52side",
+    "act7mini",
+    "main_ep08",
+    "main_ep12",
+    "main_ep13",
+    "main_ep14",
+    "main_ep15",
+    "main_ep17",
+    "main_spst14",
+    "main_st14",
+    "main_st15",
+    "memory_ghost",
+    "memory_ghost2",
+    "memory_glady",
+    "memory_haini",
+    "memory_mlyss",
+    "memory_thorns",
+    "memory_utage",
+    "memory_weedy",
+    "memory_wintim",
+    "rogue_rogue_2",
+    "rogue_rogue_4",
+    "rogue_rogue_5",
+    "roguelike_level_rogue2_ending_1",
+    "roguelike_level_rogue2_ending_2",
+    "roguelike_level_rogue2_ending_3",
+    "roguelike_level_rogue2_ending_4"
+   ],
+   "only_G": [],
+   "n_gold": 3,
+   "n_T": 47
+  },
+  {
+   "qid": "q-cx-000005",
+   "name": "维多利亚议会",
+   "split": "dev",
+   "gold": [
+    "main_ep14",
+    "main_st11"
+   ],
+   "T_text": [
+    "main_ep14",
+    "main_st11"
+   ],
+   "eq": true,
+   "T_superset": false,
+   "only_T": [],
+   "only_G": [],
+   "n_gold": 2,
+   "n_T": 2
+  },
+  {
+   "qid": "q-cx-000006",
+   "name": "源石引擎",
+   "split": "dev",
+   "gold": [
+    "act17d0",
+    "act24side"
+   ],
+   "T_text": [
+    "act13d5",
+    "act17d0",
+    "act19side",
+    "act24side",
+    "act38side",
+    "act47side",
+    "act6d5",
+    "main_ep16",
+    "memory_shotst"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "act13d5",
+    "act19side",
+    "act38side",
+    "act47side",
+    "act6d5",
+    "main_ep16",
+    "memory_shotst"
+   ],
+   "only_G": [],
+   "n_gold": 2,
+   "n_T": 9
+  },
+  {
+   "qid": "q-cx-000007",
+   "name": "蓄水炮",
+   "split": "dev",
+   "gold": [
+    "memory_huang",
+    "memory_weedy"
+   ],
+   "T_text": [
+    "memory_huang",
+    "memory_weedy"
+   ],
+   "eq": true,
+   "T_superset": false,
+   "only_T": [],
+   "only_G": [],
+   "n_gold": 2,
+   "n_T": 2
+  },
+  {
+   "qid": "q-cx-000008",
+   "name": "卡萨斯",
+   "split": "dev",
+   "gold": [
+    "rogue_rogue_6",
+    "roguelike_level_rogue6_ending_4"
+   ],
+   "T_text": [
+    "rogue_rogue_6",
+    "roguelike_level_rogue6_ending_4"
+   ],
+   "eq": true,
+   "T_superset": false,
+   "only_T": [],
+   "only_G": [],
+   "n_gold": 2,
+   "n_T": 2
+  },
+  {
+   "qid": "q-cx-000009",
+   "name": "古寺",
+   "split": "dev",
+   "gold": [
+    "act40side",
+    "act49side"
+   ],
+   "T_text": [
+    "act31side",
+    "act40side",
+    "act49side",
+    "rogue_rogue_5"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "act31side",
+    "rogue_rogue_5"
+   ],
+   "only_G": [],
+   "n_gold": 2,
+   "n_T": 4
+  },
+  {
+   "qid": "q-cx-000010",
+   "name": "乌卡边境",
+   "split": "dev",
+   "gold": [
+    "main_ep16",
+    "main_spst16"
+   ],
+   "T_text": [
+    "main_ep16",
+    "main_spst16",
+    "main_st17"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "main_st17"
+   ],
+   "only_G": [],
+   "n_gold": 2,
+   "n_T": 3
+  },
+  {
+   "qid": "q-cx-000011",
+   "name": "汐斯塔火山",
+   "split": "dev",
+   "gold": [
+    "act27side",
+    "act3d0",
+    "memory_bryota",
+    "memory_buildr"
+   ],
+   "T_text": [
+    "act27side",
+    "act35side",
+    "act3d0",
+    "memory_bryota",
+    "memory_buildr"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "act35side"
+   ],
+   "only_G": [],
+   "n_gold": 4,
+   "n_T": 5
+  },
+  {
+   "qid": "q-cx-000012",
+   "name": "工程部干员",
+   "split": "holdout",
+   "gold": [
+    "act13mini",
+    "memory_pudd"
+   ],
+   "T_text": [
+    "act13mini",
+    "act38side",
+    "act39side",
+    "act53side",
+    "main_ep15",
+    "memory_beagle",
+    "memory_finlpp",
+    "memory_greyy2",
+    "memory_hpsts",
+    "memory_pinecn",
+    "memory_pudd",
+    "memory_serum"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "act38side",
+    "act39side",
+    "act53side",
+    "main_ep15",
+    "memory_beagle",
+    "memory_finlpp",
+    "memory_greyy2",
+    "memory_hpsts",
+    "memory_pinecn",
+    "memory_serum"
+   ],
+   "only_G": [],
+   "n_gold": 2,
+   "n_T": 12
+  },
+  {
+   "qid": "q-cx-000013",
+   "name": "加斯特里尔",
+   "split": "holdout",
+   "gold": [
+    "act18mini",
+    "act41side",
+    "main_ep14",
+    "main_st14"
+   ],
+   "T_text": [
+    "act18mini",
+    "act22side",
+    "act37side",
+    "act41side",
+    "main_ep14",
+    "main_st14"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "act22side",
+    "act37side"
+   ],
+   "only_G": [],
+   "n_gold": 4,
+   "n_T": 6
+  },
+  {
+   "qid": "q-cx-000014",
+   "name": "格劳克斯",
+   "split": "dev",
+   "gold": [
+    "act7mini",
+    "memory_bluep",
+    "memory_glacus",
+    "memory_indigo"
+   ],
+   "T_text": [
+    "act7mini",
+    "memory_bluep",
+    "memory_glacus",
+    "memory_indigo"
+   ],
+   "eq": true,
+   "T_superset": false,
+   "only_T": [],
+   "only_G": [],
+   "n_gold": 4,
+   "n_T": 4
+  },
+  {
+   "qid": "q-cx-000015",
+   "name": "彼得",
+   "split": "holdout",
+   "gold": [
+    "act29side",
+    "main_st17",
+    "memory_pinecn",
+    "memory_turdus"
+   ],
+   "T_text": [
+    "act10d5",
+    "act29side",
+    "act38side",
+    "act51side",
+    "main_ep17",
+    "main_st16",
+    "main_st17",
+    "memory_absin",
+    "memory_breeze",
+    "memory_glassb",
+    "memory_headb2",
+    "memory_headbr",
+    "memory_pinecn",
+    "memory_poca",
+    "memory_turdus",
+    "rogue_month_chat_rogue_1_6"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "act10d5",
+    "act38side",
+    "act51side",
+    "main_ep17",
+    "main_st16",
+    "memory_absin",
+    "memory_breeze",
+    "memory_glassb",
+    "memory_headb2",
+    "memory_headbr",
+    "memory_poca",
+    "rogue_month_chat_rogue_1_6"
+   ],
+   "only_G": [],
+   "n_gold": 4,
+   "n_T": 16
+  },
+  {
+   "qid": "q-cx-000016",
+   "name": "银行",
+   "split": "dev",
+   "gold": [
+    "act28side",
+    "memory_tinman"
+   ],
+   "T_text": [
+    "act11d0",
+    "act11mini",
+    "act13side",
+    "act16d5",
+    "act22side",
+    "act25side",
+    "act28side",
+    "act38side",
+    "act47side",
+    "act9mini",
+    "main_ep07",
+    "main_ep10",
+    "main_ep11",
+    "main_st09",
+    "memory_alanna",
+    "memory_almond",
+    "memory_ashlok",
+    "memory_bena",
+    "memory_bison",
+    "memory_bryota",
+    "memory_frncat",
+    "memory_sophia",
+    "memory_tinman",
+    "rogue_rogue_6"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "act11d0",
+    "act11mini",
+    "act13side",
+    "act16d5",
+    "act22side",
+    "act25side",
+    "act38side",
+    "act47side",
+    "act9mini",
+    "main_ep07",
+    "main_ep10",
+    "main_ep11",
+    "main_st09",
+    "memory_alanna",
+    "memory_almond",
+    "memory_ashlok",
+    "memory_bena",
+    "memory_bison",
+    "memory_bryota",
+    "memory_frncat",
+    "memory_sophia",
+    "rogue_rogue_6"
+   ],
+   "only_G": [],
+   "n_gold": 2,
+   "n_T": 24
+  },
+  {
+   "qid": "q-cx-000017",
+   "name": "识字班",
+   "split": "dev",
+   "gold": [
+    "memory_mitm",
+    "memory_nymph"
+   ],
+   "T_text": [
+    "main_ep13",
+    "memory_mitm",
+    "memory_nymph"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "main_ep13"
+   ],
+   "only_G": [],
+   "n_gold": 2,
+   "n_T": 3
+  },
+  {
+   "qid": "q-cx-000018",
+   "name": "维伊",
+   "split": "holdout",
+   "gold": [
+    "main_ep17",
+    "main_st17"
+   ],
+   "T_text": [
+    "main_ep17",
+    "main_st17"
+   ],
+   "eq": true,
+   "T_superset": false,
+   "only_T": [],
+   "only_G": [],
+   "n_gold": 2,
+   "n_T": 2
+  },
+  {
+   "qid": "q-cx-000019",
+   "name": "弗雷德",
+   "split": "holdout",
+   "gold": [
+    "main_ep09",
+    "memory_peper"
+   ],
+   "T_text": [
+    "act17mini",
+    "act18mini",
+    "act33side",
+    "act37side",
+    "main_ep09",
+    "main_ep10",
+    "main_ep11",
+    "main_ep12",
+    "main_ep13",
+    "main_ep14",
+    "main_ep15",
+    "main_st09",
+    "main_st10",
+    "main_st11",
+    "main_st12",
+    "main_st13",
+    "main_st14",
+    "memory_peper"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "act17mini",
+    "act18mini",
+    "act33side",
+    "act37side",
+    "main_ep10",
+    "main_ep11",
+    "main_ep12",
+    "main_ep13",
+    "main_ep14",
+    "main_ep15",
+    "main_st09",
+    "main_st10",
+    "main_st11",
+    "main_st12",
+    "main_st13",
+    "main_st14"
+   ],
+   "only_G": [],
+   "n_gold": 2,
+   "n_T": 18
+  },
+  {
+   "qid": "q-cx-000020",
+   "name": "恐鱼",
+   "split": "dev",
+   "gold": [
+    "act17side",
+    "act18d3",
+    "rogue_rogue_2"
+   ],
+   "T_text": [
+    "act17side",
+    "act18d3",
+    "act25side",
+    "act34side",
+    "act52side",
+    "memory_ghost2",
+    "memory_glady",
+    "memory_mizuki",
+    "rogue_rogue_2",
+    "roguelike_level_rogue2_ending_1",
+    "roguelike_level_rogue2_ending_3"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "act25side",
+    "act34side",
+    "act52side",
+    "memory_ghost2",
+    "memory_glady",
+    "memory_mizuki",
+    "roguelike_level_rogue2_ending_1",
+    "roguelike_level_rogue2_ending_3"
+   ],
+   "only_G": [],
+   "n_gold": 3,
+   "n_T": 11
+  },
+  {
+   "qid": "q-cx-000021",
+   "name": "嵯峨",
+   "split": "dev",
+   "gold": [
+    "act14mini",
+    "act16d5",
+    "memory_saga"
+   ],
+   "T_text": [
+    "act14mini",
+    "act16d5",
+    "memory_saga"
+   ],
+   "eq": true,
+   "T_superset": false,
+   "only_T": [],
+   "only_G": [],
+   "n_gold": 3,
+   "n_T": 3
+  },
+  {
+   "qid": "q-cx-000022",
+   "name": "杰克",
+   "split": "dev",
+   "gold": [
+    "memory_dagda",
+    "memory_jaksel",
+    "memory_tiger"
+   ],
+   "T_text": [
+    "act13side",
+    "act25side",
+    "act27side",
+    "act30side",
+    "act37side",
+    "act42side",
+    "act43side",
+    "act46side",
+    "act47side",
+    "main_ep11",
+    "memory_dagda",
+    "memory_harold",
+    "memory_heidi",
+    "memory_jaksel",
+    "memory_tiger",
+    "rogue_rogue_6"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "act13side",
+    "act25side",
+    "act27side",
+    "act30side",
+    "act37side",
+    "act42side",
+    "act43side",
+    "act46side",
+    "act47side",
+    "main_ep11",
+    "memory_harold",
+    "memory_heidi",
+    "rogue_rogue_6"
+   ],
+   "only_G": [],
+   "n_gold": 3,
+   "n_T": 16
+  },
+  {
+   "qid": "q-cx-000023",
+   "name": "白轮",
+   "split": "holdout",
+   "gold": [
+    "main_ep10",
+    "main_ep14"
+   ],
+   "T_text": [
+    "main_ep10",
+    "main_ep14"
+   ],
+   "eq": true,
+   "T_superset": false,
+   "only_T": [],
+   "only_G": [],
+   "n_gold": 2,
+   "n_T": 2
+  },
+  {
+   "qid": "q-cx-000024",
+   "name": "潘格尼尼",
+   "split": "dev",
+   "gold": [
+    "act42side",
+    "memory_graceb"
+   ],
+   "T_text": [
+    "act42side",
+    "memory_graceb"
+   ],
+   "eq": true,
+   "T_superset": false,
+   "only_T": [],
+   "only_G": [],
+   "n_gold": 2,
+   "n_T": 2
+  },
+  {
+   "qid": "q-cx-000025",
+   "name": "集市",
+   "split": "holdout",
+   "gold": [
+    "act12d0",
+    "act15mini"
+   ],
+   "T_text": [
+    "act12d0",
+    "act13d0",
+    "act14side",
+    "act15d5",
+    "act15mini",
+    "act16d5",
+    "act17mini",
+    "act18d0",
+    "act19mini",
+    "act22side",
+    "act23side",
+    "act27side",
+    "act31side",
+    "act33side",
+    "act35side",
+    "act42side",
+    "act47side",
+    "act54side",
+    "act7d5",
+    "memory_alanna",
+    "memory_asbest",
+    "memory_confes",
+    "memory_jesca2",
+    "memory_rfalcn",
+    "memory_vrdant",
+    "memory_yak",
+    "rogue_rogue_5"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "act13d0",
+    "act14side",
+    "act15d5",
+    "act16d5",
+    "act17mini",
+    "act18d0",
+    "act19mini",
+    "act22side",
+    "act23side",
+    "act27side",
+    "act31side",
+    "act33side",
+    "act35side",
+    "act42side",
+    "act47side",
+    "act54side",
+    "act7d5",
+    "memory_alanna",
+    "memory_asbest",
+    "memory_confes",
+    "memory_jesca2",
+    "memory_rfalcn",
+    "memory_vrdant",
+    "memory_yak",
+    "rogue_rogue_5"
+   ],
+   "only_G": [],
+   "n_gold": 2,
+   "n_T": 27
+  },
+  {
+   "qid": "q-cx-000026",
+   "name": "蒂比",
+   "split": "dev",
+   "gold": [
+    "act43side",
+    "memory_tippi"
+   ],
+   "T_text": [
+    "act34side",
+    "act43side",
+    "memory_tippi"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "act34side"
+   ],
+   "only_G": [],
+   "n_gold": 2,
+   "n_T": 3
+  },
+  {
+   "qid": "q-cx-000027",
+   "name": "动力炉",
+   "split": "dev",
+   "gold": [
+    "act11d0",
+    "act28side"
+   ],
+   "T_text": [
+    "act11d0",
+    "act13side",
+    "act16mini",
+    "act28side",
+    "rogue_rogue_4"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "act13side",
+    "act16mini",
+    "rogue_rogue_4"
+   ],
+   "only_G": [],
+   "n_gold": 2,
+   "n_T": 5
+  },
+  {
+   "qid": "q-cx-000028",
+   "name": "滑板",
+   "split": "holdout",
+   "gold": [
+    "memory_acdrop",
+    "memory_medic2",
+    "memory_pinecn"
+   ],
+   "T_text": [
+    "act27side",
+    "memory_acdrop",
+    "memory_fang",
+    "memory_jnight",
+    "memory_medic2",
+    "memory_pinecn",
+    "rogue_rogue_6"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "act27side",
+    "memory_fang",
+    "memory_jnight",
+    "rogue_rogue_6"
+   ],
+   "only_G": [],
+   "n_gold": 3,
+   "n_T": 7
+  },
+  {
+   "qid": "q-cx-000029",
+   "name": "收音机",
+   "split": "dev",
+   "gold": [
+    "act22side",
+    "memory_confes",
+    "rogue_rogue_4"
+   ],
+   "T_text": [
+    "act13d5",
+    "act15d5",
+    "act16mini",
+    "act21mini",
+    "act21side",
+    "act22side",
+    "act25side",
+    "act37side",
+    "act38side",
+    "act46side",
+    "act47side",
+    "act8mini",
+    "main_ep17",
+    "main_st12",
+    "memory_ashlok",
+    "memory_confes",
+    "memory_haak",
+    "rogue_rogue_3",
+    "rogue_rogue_4"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "act13d5",
+    "act15d5",
+    "act16mini",
+    "act21mini",
+    "act21side",
+    "act25side",
+    "act37side",
+    "act38side",
+    "act46side",
+    "act47side",
+    "act8mini",
+    "main_ep17",
+    "main_st12",
+    "memory_ashlok",
+    "memory_haak",
+    "rogue_rogue_3"
+   ],
+   "only_G": [],
+   "n_gold": 3,
+   "n_T": 19
+  },
+  {
+   "qid": "q-cx-000030",
+   "name": "荒域",
+   "split": "dev",
+   "gold": [
+    "act29side",
+    "act42side"
+   ],
+   "T_text": [
+    "act29side",
+    "act42side"
+   ],
+   "eq": true,
+   "T_superset": false,
+   "only_T": [],
+   "only_G": [],
+   "n_gold": 2,
+   "n_T": 2
+  },
+  {
+   "qid": "q-cx-000031",
+   "name": "切斯特",
+   "split": "holdout",
+   "gold": [
+    "act14side",
+    "act30side",
+    "act46side"
+   ],
+   "T_text": [
+    "act14side",
+    "act30side",
+    "act37side",
+    "act46side",
+    "memory_blackd"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "act37side",
+    "memory_blackd"
+   ],
+   "only_G": [],
+   "n_gold": 3,
+   "n_T": 5
+  },
+  {
+   "qid": "q-cx-000032",
+   "name": "轮胎",
+   "split": "dev",
+   "gold": [
+    "act38side",
+    "main_ep14"
+   ],
+   "T_text": [
+    "act12side",
+    "act28side",
+    "act31side",
+    "act32side",
+    "act38side",
+    "act45side",
+    "act47side",
+    "act53side",
+    "main_ep13",
+    "main_ep14",
+    "memory_astesi",
+    "memory_ayer",
+    "memory_coldst",
+    "memory_hadiya",
+    "memory_jnight",
+    "memory_puzzle",
+    "memory_wscoot"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "act12side",
+    "act28side",
+    "act31side",
+    "act32side",
+    "act45side",
+    "act47side",
+    "act53side",
+    "main_ep13",
+    "memory_astesi",
+    "memory_ayer",
+    "memory_coldst",
+    "memory_hadiya",
+    "memory_jnight",
+    "memory_puzzle",
+    "memory_wscoot"
+   ],
+   "only_G": [],
+   "n_gold": 2,
+   "n_T": 17
+  },
+  {
+   "qid": "q-cx-900001",
+   "name": "溟痕",
+   "split": "holdout",
+   "gold": [
+    "act17side",
+    "act34side",
+    "rogue_rogue_2"
+   ],
+   "T_text": [
+    "act17side",
+    "act34side",
+    "act52side",
+    "rogue_rogue_2"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "act52side"
+   ],
+   "only_G": [],
+   "n_gold": 3,
+   "n_T": 4
+  },
+  {
+   "qid": "q-cx-900002",
+   "name": "安妮塔",
+   "split": "dev",
+   "gold": [
+    "act18d3",
+    "act36side",
+    "act52side"
+   ],
+   "T_text": [
+    "act18d3",
+    "act36side",
+    "act52side"
+   ],
+   "eq": true,
+   "T_superset": false,
+   "only_T": [],
+   "only_G": [],
+   "n_gold": 3,
+   "n_T": 3
+  },
+  {
+   "qid": "q-cx-900003",
+   "name": "远逐者",
+   "split": "holdout",
+   "gold": [
+    "act42side",
+    "main_ep13",
+    "main_ep14"
+   ],
+   "T_text": [
+    "act42side",
+    "main_ep13",
+    "main_ep14",
+    "rogue_rogue_4"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "rogue_rogue_4"
+   ],
+   "only_G": [],
+   "n_gold": 3,
+   "n_T": 4
+  },
+  {
+   "qid": "q-cx-900004",
+   "name": "秉烛人",
+   "split": "holdout",
+   "gold": [
+    "act31side",
+    "act49side",
+    "rogue_rogue_5"
+   ],
+   "T_text": [
+    "act15side",
+    "act19mini",
+    "act23side",
+    "act31side",
+    "act40side",
+    "act49side",
+    "memory_wang",
+    "rogue_rogue_5",
+    "roguelike_level_rogue5_ending_1",
+    "roguelike_level_rogue5_ending_4",
+    "roguelike_level_rogue5_ending_5",
+    "roguelike_level_rogue5_entry"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "act15side",
+    "act19mini",
+    "act23side",
+    "act40side",
+    "memory_wang",
+    "roguelike_level_rogue5_ending_1",
+    "roguelike_level_rogue5_ending_4",
+    "roguelike_level_rogue5_ending_5",
+    "roguelike_level_rogue5_entry"
+   ],
+   "only_G": [],
+   "n_gold": 3,
+   "n_T": 12
+  },
+  {
+   "qid": "q-cx-900005",
+   "name": "贝纳尔多",
+   "split": "dev",
+   "gold": [
+    "act21side",
+    "act38side",
+    "memory_demetr",
+    "memory_vigil"
+   ],
+   "T_text": [
+    "act21side",
+    "act38side",
+    "memory_demetr",
+    "memory_judge",
+    "memory_vigil"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "memory_judge"
+   ],
+   "only_G": [],
+   "n_gold": 4,
+   "n_T": 5
+  },
+  {
+   "qid": "q-cx-900006",
+   "name": "玄极巨兵",
+   "split": "holdout",
+   "gold": [
+    "act49side",
+    "act6d5"
+   ],
+   "T_text": [
+    "act16d5",
+    "act49side",
+    "act6d5"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "act16d5"
+   ],
+   "only_G": [],
+   "n_gold": 2,
+   "n_T": 3
+  },
+  {
+   "qid": "q-cx-900007",
+   "name": "维多利亚军队",
+   "split": "holdout",
+   "gold": [
+    "act10mini",
+    "memory_bpipe"
+   ],
+   "T_text": [
+    "act10mini",
+    "act22side",
+    "act30side",
+    "act46side",
+    "main_ep09",
+    "main_ep11",
+    "main_ep13",
+    "main_ep14",
+    "main_st10",
+    "memory_bpipe",
+    "memory_snhunt"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "act22side",
+    "act30side",
+    "act46side",
+    "main_ep09",
+    "main_ep11",
+    "main_ep13",
+    "main_ep14",
+    "main_st10",
+    "memory_snhunt"
+   ],
+   "only_G": [],
+   "n_gold": 2,
+   "n_T": 11
+  },
+  {
+   "qid": "q-cx-900008",
+   "name": "豆豆",
+   "split": "dev",
+   "gold": [
+    "memory_bstalk",
+    "memory_flower"
+   ],
+   "T_text": [
+    "act13mini",
+    "act31side",
+    "memory_bstalk",
+    "memory_cammou",
+    "memory_ctable",
+    "memory_flower"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "act13mini",
+    "act31side",
+    "memory_cammou",
+    "memory_ctable"
+   ],
+   "only_G": [],
+   "n_gold": 2,
+   "n_T": 6
+  },
+  {
+   "qid": "q-cx-900009",
+   "name": "米沃什",
+   "split": "holdout",
+   "gold": [
+    "act32side",
+    "memory_ela"
+   ],
+   "T_text": [
+    "act21mini",
+    "act32side",
+    "memory_ela"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "act21mini"
+   ],
+   "only_G": [],
+   "n_gold": 2,
+   "n_T": 3
+  },
+  {
+   "qid": "q-cx-900010",
+   "name": "邙山",
+   "split": "holdout",
+   "gold": [
+    "act19mini",
+    "act49side"
+   ],
+   "T_text": [
+    "act19mini",
+    "act49side",
+    "rogue_rogue_5"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "rogue_rogue_5"
+   ],
+   "only_G": [],
+   "n_gold": 2,
+   "n_T": 3
+  },
+  {
+   "qid": "q-cx-900011",
+   "name": "学生联合大会",
+   "split": "dev",
+   "gold": [
+    "act51side",
+    "memory_headb2"
+   ],
+   "T_text": [
+    "act51side",
+    "memory_headb2"
+   ],
+   "eq": true,
+   "T_superset": false,
+   "only_T": [],
+   "only_G": [],
+   "n_gold": 2,
+   "n_T": 2
+  },
+  {
+   "qid": "q-cx-900012",
+   "name": "斯普莉雅",
+   "split": "dev",
+   "gold": [
+    "act26side",
+    "memory_spuria"
+   ],
+   "T_text": [
+    "act26side",
+    "act42side",
+    "memory_spuria"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "act42side"
+   ],
+   "only_G": [],
+   "n_gold": 2,
+   "n_T": 3
+  },
+  {
+   "qid": "q-cx-900013",
+   "name": "技术院",
+   "split": "dev",
+   "gold": [
+    "act34side",
+    "act52side",
+    "main_ep15"
+   ],
+   "T_text": [
+    "act34side",
+    "act52side",
+    "main_ep15",
+    "memory_haini",
+    "rogue_rogue_2"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "memory_haini",
+    "rogue_rogue_2"
+   ],
+   "only_G": [],
+   "n_gold": 3,
+   "n_T": 5
+  },
+  {
+   "qid": "q-cx-900014",
+   "name": "图里卡姆",
+   "split": "dev",
+   "gold": [
+    "act14side",
+    "act30side",
+    "memory_blackd"
+   ],
+   "T_text": [
+    "act14side",
+    "act30side",
+    "memory_blackd"
+   ],
+   "eq": true,
+   "T_superset": false,
+   "only_T": [],
+   "only_G": [],
+   "n_gold": 3,
+   "n_T": 3
+  },
+  {
+   "qid": "q-cx-900015",
+   "name": "彼得拉设夫斯基小组",
+   "split": "holdout",
+   "gold": [
+    "act51side",
+    "main_st16"
+   ],
+   "T_text": [
+    "act51side",
+    "main_st16"
+   ],
+   "eq": true,
+   "T_superset": false,
+   "only_T": [],
+   "only_G": [],
+   "n_gold": 2,
+   "n_T": 2
+  },
+  {
+   "qid": "q-cx-900016",
+   "name": "宁辞秋",
+   "split": "dev",
+   "gold": [
+    "act15side",
+    "act31side",
+    "act40side",
+    "act49side"
+   ],
+   "T_text": [
+    "act15side",
+    "act31side",
+    "act40side",
+    "act49side"
+   ],
+   "eq": true,
+   "T_superset": false,
+   "only_T": [],
+   "only_G": [],
+   "n_gold": 4,
+   "n_T": 4
+  },
+  {
+   "qid": "q-cx-900017",
+   "name": "日落街酒店",
+   "split": "dev",
+   "gold": [
+    "main_ep12",
+    "main_st12",
+    "memory_morgan"
+   ],
+   "T_text": [
+    "act37side",
+    "main_ep12",
+    "main_st12",
+    "memory_morgan"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "act37side"
+   ],
+   "only_G": [],
+   "n_gold": 3,
+   "n_T": 4
+  },
+  {
+   "qid": "q-cx-900018",
+   "name": "雄辩家",
+   "split": "dev",
+   "gold": [
+    "act22side",
+    "act41side"
+   ],
+   "T_text": [
+    "act22side",
+    "act41side",
+    "main_ep09",
+    "main_ep10",
+    "main_st09"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "main_ep09",
+    "main_ep10",
+    "main_st09"
+   ],
+   "only_G": [],
+   "n_gold": 2,
+   "n_T": 5
+  },
+  {
+   "qid": "q-cx-900019",
+   "name": "诺威尔",
+   "split": "holdout",
+   "gold": [
+    "act18mini",
+    "main_ep13",
+    "main_st13",
+    "memory_nowell"
+   ],
+   "T_text": [
+    "act18mini",
+    "main_ep13",
+    "main_st13",
+    "memory_nowell"
+   ],
+   "eq": true,
+   "T_superset": false,
+   "only_T": [],
+   "only_G": [],
+   "n_gold": 4,
+   "n_T": 4
+  },
+  {
+   "qid": "q-cx-900020",
+   "name": "图林",
+   "split": "holdout",
+   "gold": [
+    "act51side",
+    "main_ep17",
+    "main_st17",
+    "memory_tanya"
+   ],
+   "T_text": [
+    "act51side",
+    "main_ep17",
+    "main_st17",
+    "memory_tanya"
+   ],
+   "eq": true,
+   "T_superset": false,
+   "only_T": [],
+   "only_G": [],
+   "n_gold": 4,
+   "n_T": 4
+  },
+  {
+   "qid": "q-cx-900021",
+   "name": "法伦",
+   "split": "dev",
+   "gold": [
+    "act7d5",
+    "memory_blitz",
+    "memory_melan"
+   ],
+   "T_text": [
+    "act7d5",
+    "memory_blitz",
+    "memory_durnar",
+    "memory_melan"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "memory_durnar"
+   ],
+   "only_G": [],
+   "n_gold": 3,
+   "n_T": 4
+  },
+  {
+   "qid": "q-cx-900022",
+   "name": "巫术",
+   "split": "dev",
+   "gold": [
+    "main_ep11",
+    "main_ep14"
+   ],
+   "T_text": [
+    "act11d0",
+    "act13d0",
+    "act13side",
+    "act15mini",
+    "act17mini",
+    "act18d0",
+    "act18mini",
+    "act22side",
+    "act25side",
+    "act29side",
+    "act32side",
+    "act33side",
+    "act35side",
+    "act37side",
+    "act47side",
+    "act7mini",
+    "main_ep07",
+    "main_ep08",
+    "main_ep10",
+    "main_ep11",
+    "main_ep12",
+    "main_ep13",
+    "main_ep14",
+    "main_ep15",
+    "main_st10",
+    "main_st12",
+    "main_st13",
+    "main_st14",
+    "memory_closur",
+    "memory_lava2",
+    "rogue_rogue_4",
+    "rogue_rogue_6"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "act11d0",
+    "act13d0",
+    "act13side",
+    "act15mini",
+    "act17mini",
+    "act18d0",
+    "act18mini",
+    "act22side",
+    "act25side",
+    "act29side",
+    "act32side",
+    "act33side",
+    "act35side",
+    "act37side",
+    "act47side",
+    "act7mini",
+    "main_ep07",
+    "main_ep08",
+    "main_ep10",
+    "main_ep12",
+    "main_ep13",
+    "main_ep15",
+    "main_st10",
+    "main_st12",
+    "main_st13",
+    "main_st14",
+    "memory_closur",
+    "memory_lava2",
+    "rogue_rogue_4",
+    "rogue_rogue_6"
+   ],
+   "only_G": [],
+   "n_gold": 2,
+   "n_T": 32
+  },
+  {
+   "qid": "q-cx-900023",
+   "name": "防护服",
+   "split": "holdout",
+   "gold": [
+    "act27side",
+    "memory_otter",
+    "rogue_rogue_4"
+   ],
+   "T_text": [
+    "act10d5",
+    "act15mini",
+    "act27side",
+    "act46side",
+    "act8mini",
+    "main_ep09",
+    "main_ep17",
+    "main_st14",
+    "memory_ansel",
+    "memory_aurora",
+    "memory_hibisc",
+    "memory_mberry",
+    "memory_otter",
+    "memory_popka",
+    "memory_savage",
+    "memory_tanya",
+    "memory_zumama",
+    "rogue_rogue_4"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "act10d5",
+    "act15mini",
+    "act46side",
+    "act8mini",
+    "main_ep09",
+    "main_ep17",
+    "main_st14",
+    "memory_ansel",
+    "memory_aurora",
+    "memory_hibisc",
+    "memory_mberry",
+    "memory_popka",
+    "memory_savage",
+    "memory_tanya",
+    "memory_zumama"
+   ],
+   "only_G": [],
+   "n_gold": 3,
+   "n_T": 18
+  },
+  {
+   "qid": "q-cx-900024",
+   "name": "帕特",
+   "split": "dev",
+   "gold": [
+    "main_ep11",
+    "main_ep12"
+   ],
+   "T_text": [
+    "act15mini",
+    "act37side",
+    "act42side",
+    "act47side",
+    "act54side",
+    "main_ep11",
+    "main_ep12",
+    "main_ep14",
+    "memory_graceb",
+    "memory_phenxi",
+    "memory_sntlla",
+    "memory_vendla",
+    "rogue_rogue_3"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "act15mini",
+    "act37side",
+    "act42side",
+    "act47side",
+    "act54side",
+    "main_ep14",
+    "memory_graceb",
+    "memory_phenxi",
+    "memory_sntlla",
+    "memory_vendla",
+    "rogue_rogue_3"
+   ],
+   "only_G": [],
+   "n_gold": 2,
+   "n_T": 13
+  },
+  {
+   "qid": "q-cx-900025",
+   "name": "麦克斯特区",
+   "split": "holdout",
+   "gold": [
+    "act18mini",
+    "act47side"
+   ],
+   "T_text": [
+    "act18mini",
+    "act47side",
+    "act48side"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "act48side"
+   ],
+   "only_G": [],
+   "n_gold": 2,
+   "n_T": 3
+  },
+  {
+   "qid": "q-cx-900026",
+   "name": "蒂姆",
+   "split": "dev",
+   "gold": [
+    "act29side",
+    "act41side",
+    "memory_lessng"
+   ],
+   "T_text": [
+    "act29side",
+    "act41side",
+    "memory_beewax",
+    "memory_lessng"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "memory_beewax"
+   ],
+   "only_G": [],
+   "n_gold": 3,
+   "n_T": 4
+  },
+  {
+   "qid": "q-cx-900027",
+   "name": "炎魔",
+   "split": "dev",
+   "gold": [
+    "act15d0",
+    "main_ep13",
+    "main_ep14",
+    "memory_plosis"
+   ],
+   "T_text": [
+    "act15d0",
+    "act19side",
+    "act25side",
+    "main_ep13",
+    "main_ep14",
+    "main_st12",
+    "memory_plosis",
+    "rogue_rogue_4"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "act19side",
+    "act25side",
+    "main_st12",
+    "rogue_rogue_4"
+   ],
+   "only_G": [],
+   "n_gold": 4,
+   "n_T": 8
+  },
+  {
+   "qid": "q-cx-900028",
+   "name": "磁山二号",
+   "split": "holdout",
+   "gold": [
+    "act17d0",
+    "act32side",
+    "memory_fuze"
+   ],
+   "T_text": [
+    "act17d0",
+    "act32side",
+    "memory_fuze",
+    "memory_iana"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "memory_iana"
+   ],
+   "only_G": [],
+   "n_gold": 3,
+   "n_T": 4
+  },
+  {
+   "qid": "q-cx-900029",
+   "name": "罗本",
+   "split": "holdout",
+   "gold": [
+    "main_ep10",
+    "main_ep12",
+    "main_ep14"
+   ],
+   "T_text": [
+    "main_ep10",
+    "main_ep12",
+    "main_ep14"
+   ],
+   "eq": true,
+   "T_superset": false,
+   "only_T": [],
+   "only_G": [],
+   "n_gold": 3,
+   "n_T": 3
+  },
+  {
+   "qid": "q-cx-900030",
+   "name": "勾吴",
+   "split": "dev",
+   "gold": [
+    "memory_sqrrel",
+    "rogue_rogue_5"
+   ],
+   "T_text": [
+    "act15side",
+    "act16d5",
+    "act23side",
+    "act49side",
+    "memory_nothin",
+    "memory_sqrrel",
+    "memory_xingzh",
+    "rogue_rogue_5"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "act15side",
+    "act16d5",
+    "act23side",
+    "act49side",
+    "memory_nothin",
+    "memory_xingzh"
+   ],
+   "only_G": [],
+   "n_gold": 2,
+   "n_T": 8
+  },
+  {
+   "qid": "q-cx-900031",
+   "name": "啤酒花",
+   "split": "holdout",
+   "gold": [
+    "memory_mudrok",
+    "memory_wyvern"
+   ],
+   "T_text": [
+    "a001",
+    "act11d0",
+    "act12mini",
+    "act13d0",
+    "act36side",
+    "memory_firwhl",
+    "memory_mudrok",
+    "memory_wyvern"
+   ],
+   "eq": false,
+   "T_superset": true,
+   "only_T": [
+    "a001",
+    "act11d0",
+    "act12mini",
+    "act13d0",
+    "act36side",
+    "memory_firwhl"
+   ],
+   "only_G": [],
+   "n_gold": 2,
+   "n_T": 8
+  },
+  {
+   "qid": "q-cx-900032",
+   "name": "信标发射井",
+   "split": "holdout",
+   "gold": [
+    "act34side",
+    "act52side"
+   ],
+   "T_text": [
+    "act34side",
+    "act52side"
+   ],
+   "eq": true,
+   "T_superset": false,
+   "only_T": [],
+   "only_G": [],
+   "n_gold": 2,
+   "n_T": 2
+  }
+ ]
+}

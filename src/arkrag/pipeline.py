@@ -25,9 +25,11 @@ import time
 from pathlib import Path
 
 from . import answer as answer_mod
+from . import bridge
 from . import config
 from . import index as index_mod
 from . import query as query_mod
+from . import quote_locate
 from . import release
 from . import retrieve as retrieve_mod
 from . import vocab
@@ -163,7 +165,19 @@ def load_generation(generation_id: str) -> dict:
 
 
 # ---------------------------------------------------------------- 管线
-def build_pipeline(loaded: dict, *, top_k: int, graph_depth: int) -> dict:
+def build_pipeline(loaded: dict, *, top_k: int, graph_depth: int,
+                   vector_union=None) -> dict:
+    """装配一条问答链。`vector_union` 为 `None` 时**与改造前完全等价**。
+
+    向量通道为什么是可选注入而不是默认开：它需要向量产物 + embedding backend
+    两件外部物，缺任何一件都必须显式报错（`EmbeddingError` / 缺产物），不能
+    降级成"没有向量也照跑"——那会让"带向量的评测"和"不带向量的评测"长得
+    一样，而本项目已因"判据没接线等于不存在"栽过两次。
+
+    默认 `None` 还有第二层理由：`scripts/` 下 40 多个历史脚本都在调
+    `build_pipeline(loaded, top_k=…, graph_depth=…)`，给它们默认接上向量会
+    静默改变它们的历史读数，那些台账里的对比就全部失去可比性。
+    """
     retriever = retrieve_mod.Retriever(
         loaded["index"],
         loaded["graph"],
@@ -174,16 +188,84 @@ def build_pipeline(loaded: dict, *, top_k: int, graph_depth: int) -> dict:
     )
     answerer = answer_mod.ExtractiveAnswerer()
     return {"retriever": retriever, "answerer": answerer, "top_k": top_k,
-            "graph_depth": graph_depth}
+            "graph_depth": graph_depth, "vector_union": vector_union}
+
+# ---------------------------------------------------------------- 生产档
+#: 生产检索档：**唯一**一份定义。服务端 `/query`、`scripts/ask.py`、评测脚本都从
+#: 这里取，不各自手抄一套数——本项目已有"同一判定写两处、取最松的那份生效"的三次
+#: 同型事故。
+#:
+#: 为什么是这四个键、这几个数（全部有实测依据，见 `docs/升级台账.md` 本轮章节）：
+#:
+#: * `quote_locate` —— 题干引文逐字定位。门控在 `quote_locate.is_title_question`，
+#:   640 题里只命中 single_chunk 128 道，零误伤；dev 该类 69/76 → 76/76。
+#: * `bridge` + `graph_reserve_tokens` —— 多跳桥接实体。**两者必须同时开**：
+#:   只开 bridge 时两条路径断言根本进不了上下文（40 个直接单元就吃掉 42k–52k
+#:   token，图单元排在尾部被预算整批截掉，实测只有 3/62 能落地），dev multihop
+#:   8→11；加上预留额度后才 8→27。这两个数不是互相可拆借的两笔收益。
+#: * `bridge_search_top_k=40` —— 只对桥接题抬候选数。全局抬到 40 会让
+#:   single_chunk 掉 1 题（逐字定位命中的块被挤到后面），只对桥接题抬则三份都涨。
+#: * `max_context_tokens=24000` —— 12000 档装不下"40 个直接单元 + 预留 12000"，
+#:   实测 12000 档最高只到 75.44%（dev），只有 24000 档能到 80%。
+#:   代价：上下文单位 9.8 → 19.5、token 11.7k → 23.7k，延迟几乎不变
+#:   （P50 73 → 81 ms、P95 132 → 137 ms）。
+PROD_PROFILE: dict = {
+    "max_context_tokens": 24000,
+    "options": {
+        "quote_locate": True,
+        "bridge": True,
+        "bridge_search_top_k": 40,
+        "graph_reserve_tokens": 12000,
+    },
+}
 
 
-def ask_once(pipeline: dict, question: str, *, timings: dict | None = None) -> dict:
+def prod_options() -> dict:
+    """生产档的 `ask_once` 开关副本（调用方改副本不会污染 `PROD_PROFILE`）。"""
+    return dict(PROD_PROFILE["options"])
+
+
+def apply_prod_profile(pipeline: dict) -> dict:
+    """把生产档落到一条链上，返回该传给 `ask_once` 的 `options`。
+
+    为什么要一个函数而不是让调用方自己拼：服务端、CLI、评测脚本三处都要"用生产
+    档"，各写一遍就是三份判定。这里也顺手把预算写进 `Retriever.budget`——那是
+    `build_context` 唯一生效的入口（`tests/test_context_budget.py` 钉着这条）。
+
+    **不改 `DEFAULT_BUDGET`**：那是个默认值，改它会让 `scripts/` 下 40 多个历史
+    脚本的读数一起变，台账里的对比全部失去可比性。这里只改实例属性。
+    """
+    pipeline["retriever"].budget["max_context_tokens"] = int(
+        PROD_PROFILE["max_context_tokens"])
+    return prod_options()
+
+
+def ask_once(pipeline: dict, question: str, *, timings: dict | None = None,
+             options: dict | None = None) -> dict:
     """一问一答的完整链路。返回答案 + 每一层的中间量（供排查与评测）。
 
     `timings` 传入一个 dict 时，逐阶段毫秒数写进它（H1 性能基线要用）。
     默认 `None` → 不测时间，返回结构与原来完全一致：**计时是可选旁路，
     不是返回值的一部分**，否则每个读 `result["search"]` 的调用方都得改。
+
+    ## `options`（默认 `None` = 与改造前逐位等价）
+
+    | 键 | 默认 | 作用 |
+    |---|---|---|
+    | `quote_locate` | False | 题干引文逐字定位，命中块前置进 hits（`quote_locate.locate`） |
+    | `bridge` | False | 多跳桥接实体通路，唯一候选才答（`bridge.find_bridge` + `merge`） |
+    | `graph_reserve_tokens` | 0 | 传给 `build_context` 的图证据预留额度 |
+    | `bridge_search_top_k` | 0 | 桥接题单独使用的候选数（0 = 用 `pipeline["top_k"]`） |
+    | `search_top_k` | `pipeline["top_k"]` | 覆盖本次检索的候选数 |
+
+    三个开关全部默认关，且**每一条都只改检索/装配，不改判据**；关掉时返回的
+    `search.hits` / `context.stats` 与改造前逐位相同，历史台账读数不受影响。
+
+    `graph_reserve_tokens` 与 `bridge` 都只在桥接题上生效：预留额度对全题生效是
+    负收益（dev 213→209），只有在这类题上才是正收益——这不是调出来的阈值，而是
+    "这类题需要两条图上的边、而 40 个直接单元已经吃满预算"的机制结果。
     """
+    opts = dict(options or {})
     retriever = pipeline["retriever"]
     entities = pipeline.get("entities") or retriever.graph.get("entities") or []
     _t0 = time.perf_counter()
@@ -215,9 +297,52 @@ def ask_once(pipeline: dict, question: str, *, timings: dict | None = None) -> d
             ),
         }
 
-    found = retriever.search(qa, top_k=pipeline["top_k"])
+    # 候选数：桥接题单独用 `bridge_search_top_k`，其余题照 `pipeline["top_k"]`。
+    # 只在桥接题上抬高是实测结果——全局抬到 40 会让 single_chunk 掉 1 题
+    # （逐字定位命中的块被挤到后面），而桥接题确实需要更宽的一跳邻域才有候选。
+    top_k = int(opts.get("search_top_k") or 0)
+    if not top_k:
+        top_k = pipeline["top_k"]
+        wide = int(opts.get("bridge_search_top_k") or 0)
+        if wide and opts.get("bridge") and bridge.is_bridge_question(question):
+            top_k = wide
+    found = retriever.search(qa, top_k=top_k)
     if timings is not None:
         timings["search_ms"] = (time.perf_counter() - _t0) * 1000.0 - timings["query_ms"]
+    # ---- 引文逐字定位（可选，默认关） ---------------------------------
+    # 命中块**前置插入**而不是新增一路通道：它只提供"块 id"，分数与来源照正常命中
+    # 的样子写，所以 `build_context` 不用知道这条前置存在。分数取
+    # `max(现有 hits 分)+1.0`，保证它排在第一位——这不是排序技巧，是"逐字命中"
+    # 本就比 BM25 更强的语义，把两者混进同一个尺度反而会让它被压下去。
+    quote_hits = {}
+    if opts.get("quote_locate"):
+        loc = quote_locate.locate(question, retriever.chunks)
+        if loc["chunk_ids"]:
+            top = max((float(h.get("score") or 0.0) for h in found["hits"]), default=0.0)
+            front = [
+                {"chunk_id": cid, "score": top + 1.0, "cooc_boost": 0.0,
+                 "sources": [{"channel": retrieve_mod.SOURCE_BM25, "score": 1.0}]}
+                for cid in loc["chunk_ids"]
+            ]
+            seen = {h["chunk_id"] for h in found["hits"]}
+            found["hits"] = [h for h in front if h["chunk_id"] not in seen] + list(found["hits"])
+            quote_hits = {"probe": loc["probe"], "chunk_ids": list(loc["chunk_ids"])}
+    _tvu = time.perf_counter()
+    union = pipeline.get("vector_union")
+    if union is not None:
+        # 向量通道只在触发时**追加到尾部**，不改 base 的名次（见
+        # `vector_union` 模块头：任何全局融合都被 300 题实测否证）。
+        # 放在 search 之后、expand 之前：expand 的 seed_chunk_ids 必须包含
+        # 向量补进来的块，否则"补进来的块"进不了图扩展，白补。
+        aug = union.augment(found["hits"], question)
+        found["hits"] = aug["hits"]
+        found["stats"]["vector_union"] = {
+            "used": aug["used"], "reason": aug["reason"],
+            "ratio": aug["ratio"], "cut": aug["cut"],
+            "vec_hits": aug["vec_hits"], "added": len(aug["added"]),
+        }
+    if timings is not None:
+        timings["vector_union_ms"] = (time.perf_counter() - _tvu) * 1000.0
     _t1 = time.perf_counter()
     seed_ids = [c["entity_id"] for c in qa.get("entity_candidates") or []]
     expanded = retriever.expand(
@@ -231,7 +356,25 @@ def ask_once(pipeline: dict, question: str, *, timings: dict | None = None) -> d
         timings["expand_nodes"] = int(expanded["stats"].get("nodes_visited") or 0)
         timings["expand_edges"] = int(expanded["stats"].get("expansions") or 0)
     _t2 = time.perf_counter()
-    context = retriever.build_context(found["hits"], expanded["expansions"], query_analysis=qa)
+    # **预留额度只在桥接题上生效**：全题生效实测是负收益（dev 213→209），因为
+    # 非桥接题里图单元本来就只是背景，把它们优先装进来会挤掉真正的直接证据。
+    # 这不是调出来的阈值——桥接题需要两条图上的边，而 40 个直接单元已经吃满预算，
+    # 其余题没有这个结构性需求。
+    reserve = int(opts.get("graph_reserve_tokens") or 0)
+    if reserve and not bridge.is_bridge_question(question):
+        reserve = 0
+    # 只在真的要用到预留额度时才传这个形参：默认路径（`reserve == 0`）与改造前
+    # 逐位相同，连调用形状都一样——这样任何既有 `build_context` 替身（测试桩、
+    # 旧版实现）都不会因为多一个关键字参数而 TypeError。
+    if reserve:
+        context = retriever.build_context(
+            found["hits"], expanded["expansions"], query_analysis=qa,
+            graph_reserve_tokens=reserve,
+        )
+    else:
+        context = retriever.build_context(
+            found["hits"], expanded["expansions"], query_analysis=qa,
+        )
     if timings is not None:
         timings["context_ms"] = (time.perf_counter() - _t2) * 1000.0
     _t3 = time.perf_counter()
@@ -243,12 +386,34 @@ def ask_once(pipeline: dict, question: str, *, timings: dict | None = None) -> d
         query_analysis=qa,
         retrieval_stats=found["stats"],
     )
+    # ---- 多跳桥接（可选，默认关） -------------------------------------
+    # 放在答案器**之后**：它不替换原答案，只是把两条真实断言句前置，让
+    # "gold 与每个锚点各有一句共现"这个判据有机会成立。原答案一句不删（除句数封顶）。
+    bridge_info = {}
+    if opts.get("bridge"):
+        # 候选断言取"上下文块的**全量**断言"，不只用 `unit["assertions"]`：
+        # 后者被 `build_context` 按焦点实体谓词过滤，`X—A`/`X—B` 那条边的另一端
+        # 不是焦点实体，会被过滤掉，实测少捞 6 题（dev multihop 20 → 26）。
+        # 两种来源都只覆盖本次上下文里的块，接地口径不变。
+        br = bridge.find_bridge(
+            question,
+            context.get("units") or [],
+            chunk_assertions=retriever.assertions_by_chunk.get,
+            display=retriever.display_name,
+        )
+        bridge_info = {"status": br["status"], "x": br["x"]}
+        if br["status"] == "ok":
+            ans = bridge.merge(ans, br)
     if timings is not None:
         timings["answer_ms"] = (time.perf_counter() - _t3) * 1000.0
         timings["total_ms"] = (time.perf_counter() - _t0) * 1000.0
         timings["context_tokens"] = int(context["stats"].get("tokens_used") or 0)
         timings["context_units"] = int(context["stats"].get("units") or 0)
         timings["candidates"] = int(found["stats"].get("candidates") or 0)
+        if opts.get("quote_locate"):
+            timings["quote_locate_hits"] = len(quote_hits.get("chunk_ids") or ())
+        if opts.get("bridge"):
+            timings["bridge_status"] = bridge_info.get("status") or ""
     return {
         "query_analysis": qa,
         "search": found,

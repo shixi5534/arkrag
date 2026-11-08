@@ -1,0 +1,3423 @@
+{
+ "dev@6000": {
+  "n": 38,
+  "eq": 15,
+  "all_citable": 38,
+  "pass_full": 15,
+  "rows": [
+   {
+    "qid": "q-cx-000001",
+    "want": [
+     "act33side",
+     "main_ep14"
+    ],
+    "chosen": [
+     "act33side",
+     "main_ep14"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000003",
+    "want": [
+     "main_ep16",
+     "main_st17"
+    ],
+    "chosen": [
+     "main_st17"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "main_ep16"
+    ]
+   },
+   {
+    "qid": "q-cx-000004",
+    "want": [
+     "act17side",
+     "memory_deepcl",
+     "rogue_rogue_6"
+    ],
+    "chosen": [
+     "act17side"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "memory_deepcl",
+     "rogue_rogue_6"
+    ]
+   },
+   {
+    "qid": "q-cx-000005",
+    "want": [
+     "main_ep14",
+     "main_st11"
+    ],
+    "chosen": [
+     "main_ep14",
+     "main_st11"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000006",
+    "want": [
+     "act17d0",
+     "act24side"
+    ],
+    "chosen": [
+     "act17d0",
+     "act24side"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000007",
+    "want": [
+     "memory_huang",
+     "memory_weedy"
+    ],
+    "chosen": [
+     "memory_huang",
+     "memory_weedy"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000008",
+    "want": [
+     "rogue_rogue_6",
+     "roguelike_level_rogue6_ending_4"
+    ],
+    "chosen": [
+     "rogue_rogue_6",
+     "roguelike_level_rogue6_ending_4"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000009",
+    "want": [
+     "act40side",
+     "act49side"
+    ],
+    "chosen": [
+     "act40side",
+     "act49side"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000010",
+    "want": [
+     "main_ep16",
+     "main_spst16"
+    ],
+    "chosen": [
+     "main_ep16"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "main_spst16"
+    ]
+   },
+   {
+    "qid": "q-cx-000011",
+    "want": [
+     "act27side",
+     "act3d0",
+     "memory_bryota",
+     "memory_buildr"
+    ],
+    "chosen": [
+     "act27side",
+     "act3d0"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "memory_bryota",
+     "memory_buildr"
+    ]
+   },
+   {
+    "qid": "q-cx-000014",
+    "want": [
+     "act7mini",
+     "memory_bluep",
+     "memory_glacus",
+     "memory_indigo"
+    ],
+    "chosen": [
+     "act7mini",
+     "memory_bluep",
+     "memory_glacus"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "memory_indigo"
+    ]
+   },
+   {
+    "qid": "q-cx-000016",
+    "want": [
+     "act28side",
+     "memory_tinman"
+    ],
+    "chosen": [
+     "act28side"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "memory_tinman"
+    ]
+   },
+   {
+    "qid": "q-cx-000017",
+    "want": [
+     "memory_mitm",
+     "memory_nymph"
+    ],
+    "chosen": [
+     "memory_mitm",
+     "memory_nymph"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000020",
+    "want": [
+     "act17side",
+     "act18d3",
+     "rogue_rogue_2"
+    ],
+    "chosen": [
+     "act17side",
+     "act18d3"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "rogue_rogue_2"
+    ]
+   },
+   {
+    "qid": "q-cx-000021",
+    "want": [
+     "act14mini",
+     "act16d5",
+     "memory_saga"
+    ],
+    "chosen": [
+     "act14mini",
+     "act16d5",
+     "memory_saga"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000022",
+    "want": [
+     "memory_dagda",
+     "memory_jaksel",
+     "memory_tiger"
+    ],
+    "chosen": [
+     "memory_jaksel"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "memory_dagda",
+     "memory_tiger"
+    ]
+   },
+   {
+    "qid": "q-cx-000024",
+    "want": [
+     "act42side",
+     "memory_graceb"
+    ],
+    "chosen": [
+     "act42side"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "memory_graceb"
+    ]
+   },
+   {
+    "qid": "q-cx-000026",
+    "want": [
+     "act43side",
+     "memory_tippi"
+    ],
+    "chosen": [
+     "act43side",
+     "memory_tippi"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000027",
+    "want": [
+     "act11d0",
+     "act28side"
+    ],
+    "chosen": [
+     "act11d0",
+     "act28side"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000029",
+    "want": [
+     "act22side",
+     "memory_confes",
+     "rogue_rogue_4"
+    ],
+    "chosen": [],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "act22side",
+     "memory_confes",
+     "rogue_rogue_4"
+    ]
+   },
+   {
+    "qid": "q-cx-000030",
+    "want": [
+     "act29side",
+     "act42side"
+    ],
+    "chosen": [
+     "act29side",
+     "act42side"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000032",
+    "want": [
+     "act38side",
+     "main_ep14"
+    ],
+    "chosen": [
+     "act38side"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "main_ep14"
+    ]
+   },
+   {
+    "qid": "q-cx-900002",
+    "want": [
+     "act18d3",
+     "act36side",
+     "act52side"
+    ],
+    "chosen": [
+     "act18d3"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "act36side",
+     "act52side"
+    ]
+   },
+   {
+    "qid": "q-cx-900005",
+    "want": [
+     "act21side",
+     "act38side",
+     "memory_demetr",
+     "memory_vigil"
+    ],
+    "chosen": [
+     "act21side"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "act38side",
+     "memory_demetr",
+     "memory_vigil"
+    ]
+   },
+   {
+    "qid": "q-cx-900008",
+    "want": [
+     "memory_bstalk",
+     "memory_flower"
+    ],
+    "chosen": [
+     "memory_bstalk",
+     "memory_flower"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900011",
+    "want": [
+     "act51side",
+     "memory_headb2"
+    ],
+    "chosen": [
+     "act51side",
+     "memory_headb2"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900012",
+    "want": [
+     "act26side",
+     "memory_spuria"
+    ],
+    "chosen": [
+     "act26side",
+     "memory_spuria"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900013",
+    "want": [
+     "act34side",
+     "act52side",
+     "main_ep15"
+    ],
+    "chosen": [
+     "act34side",
+     "main_ep15"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "act52side"
+    ]
+   },
+   {
+    "qid": "q-cx-900014",
+    "want": [
+     "act14side",
+     "act30side",
+     "memory_blackd"
+    ],
+    "chosen": [
+     "act14side"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "act30side",
+     "memory_blackd"
+    ]
+   },
+   {
+    "qid": "q-cx-900016",
+    "want": [
+     "act15side",
+     "act31side",
+     "act40side",
+     "act49side"
+    ],
+    "chosen": [
+     "act31side",
+     "act40side",
+     "act49side"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "act15side"
+    ]
+   },
+   {
+    "qid": "q-cx-900017",
+    "want": [
+     "main_ep12",
+     "main_st12",
+     "memory_morgan"
+    ],
+    "chosen": [
+     "main_ep12",
+     "memory_morgan"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "main_st12"
+    ]
+   },
+   {
+    "qid": "q-cx-900018",
+    "want": [
+     "act22side",
+     "act41side"
+    ],
+    "chosen": [
+     "act41side"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "act22side"
+    ]
+   },
+   {
+    "qid": "q-cx-900021",
+    "want": [
+     "act7d5",
+     "memory_blitz",
+     "memory_melan"
+    ],
+    "chosen": [
+     "act7d5",
+     "memory_blitz",
+     "memory_melan"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900022",
+    "want": [
+     "main_ep11",
+     "main_ep14"
+    ],
+    "chosen": [
+     "main_ep14"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "main_ep11"
+    ]
+   },
+   {
+    "qid": "q-cx-900024",
+    "want": [
+     "main_ep11",
+     "main_ep12"
+    ],
+    "chosen": [],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "main_ep11",
+     "main_ep12"
+    ]
+   },
+   {
+    "qid": "q-cx-900026",
+    "want": [
+     "act29side",
+     "act41side",
+     "memory_lessng"
+    ],
+    "chosen": [
+     "memory_lessng"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "act29side",
+     "act41side"
+    ]
+   },
+   {
+    "qid": "q-cx-900027",
+    "want": [
+     "act15d0",
+     "main_ep13",
+     "main_ep14",
+     "memory_plosis"
+    ],
+    "chosen": [
+     "act15d0",
+     "main_ep13"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "main_ep14",
+     "memory_plosis"
+    ]
+   },
+   {
+    "qid": "q-cx-900030",
+    "want": [
+     "memory_sqrrel",
+     "rogue_rogue_5"
+    ],
+    "chosen": [
+     "memory_sqrrel"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "rogue_rogue_5"
+    ]
+   }
+  ]
+ },
+ "dev@12000": {
+  "n": 38,
+  "eq": 22,
+  "all_citable": 38,
+  "pass_full": 22,
+  "rows": [
+   {
+    "qid": "q-cx-000001",
+    "want": [
+     "act33side",
+     "main_ep14"
+    ],
+    "chosen": [
+     "act33side",
+     "main_ep14"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000003",
+    "want": [
+     "main_ep16",
+     "main_st17"
+    ],
+    "chosen": [
+     "main_ep16",
+     "main_st17"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000004",
+    "want": [
+     "act17side",
+     "memory_deepcl",
+     "rogue_rogue_6"
+    ],
+    "chosen": [
+     "act17side"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "memory_deepcl",
+     "rogue_rogue_6"
+    ]
+   },
+   {
+    "qid": "q-cx-000005",
+    "want": [
+     "main_ep14",
+     "main_st11"
+    ],
+    "chosen": [
+     "main_ep14",
+     "main_st11"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000006",
+    "want": [
+     "act17d0",
+     "act24side"
+    ],
+    "chosen": [
+     "act17d0",
+     "act24side"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000007",
+    "want": [
+     "memory_huang",
+     "memory_weedy"
+    ],
+    "chosen": [
+     "memory_huang",
+     "memory_weedy"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000008",
+    "want": [
+     "rogue_rogue_6",
+     "roguelike_level_rogue6_ending_4"
+    ],
+    "chosen": [
+     "rogue_rogue_6",
+     "roguelike_level_rogue6_ending_4"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000009",
+    "want": [
+     "act40side",
+     "act49side"
+    ],
+    "chosen": [
+     "act40side",
+     "act49side"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000010",
+    "want": [
+     "main_ep16",
+     "main_spst16"
+    ],
+    "chosen": [
+     "main_ep16"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "main_spst16"
+    ]
+   },
+   {
+    "qid": "q-cx-000011",
+    "want": [
+     "act27side",
+     "act3d0",
+     "memory_bryota",
+     "memory_buildr"
+    ],
+    "chosen": [
+     "act27side",
+     "act3d0",
+     "memory_buildr"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "memory_bryota"
+    ]
+   },
+   {
+    "qid": "q-cx-000014",
+    "want": [
+     "act7mini",
+     "memory_bluep",
+     "memory_glacus",
+     "memory_indigo"
+    ],
+    "chosen": [
+     "act7mini",
+     "memory_bluep",
+     "memory_glacus"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "memory_indigo"
+    ]
+   },
+   {
+    "qid": "q-cx-000016",
+    "want": [
+     "act28side",
+     "memory_tinman"
+    ],
+    "chosen": [
+     "act28side"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "memory_tinman"
+    ]
+   },
+   {
+    "qid": "q-cx-000017",
+    "want": [
+     "memory_mitm",
+     "memory_nymph"
+    ],
+    "chosen": [
+     "memory_mitm",
+     "memory_nymph"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000020",
+    "want": [
+     "act17side",
+     "act18d3",
+     "rogue_rogue_2"
+    ],
+    "chosen": [
+     "act17side",
+     "act18d3",
+     "rogue_rogue_2"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000021",
+    "want": [
+     "act14mini",
+     "act16d5",
+     "memory_saga"
+    ],
+    "chosen": [
+     "act14mini",
+     "act16d5",
+     "memory_saga"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000022",
+    "want": [
+     "memory_dagda",
+     "memory_jaksel",
+     "memory_tiger"
+    ],
+    "chosen": [
+     "memory_jaksel",
+     "memory_tiger"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "memory_dagda"
+    ]
+   },
+   {
+    "qid": "q-cx-000024",
+    "want": [
+     "act42side",
+     "memory_graceb"
+    ],
+    "chosen": [
+     "act42side"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "memory_graceb"
+    ]
+   },
+   {
+    "qid": "q-cx-000026",
+    "want": [
+     "act43side",
+     "memory_tippi"
+    ],
+    "chosen": [
+     "act43side",
+     "memory_tippi"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000027",
+    "want": [
+     "act11d0",
+     "act28side"
+    ],
+    "chosen": [
+     "act11d0",
+     "act28side"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000029",
+    "want": [
+     "act22side",
+     "memory_confes",
+     "rogue_rogue_4"
+    ],
+    "chosen": [],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "act22side",
+     "memory_confes",
+     "rogue_rogue_4"
+    ]
+   },
+   {
+    "qid": "q-cx-000030",
+    "want": [
+     "act29side",
+     "act42side"
+    ],
+    "chosen": [
+     "act29side",
+     "act42side"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000032",
+    "want": [
+     "act38side",
+     "main_ep14"
+    ],
+    "chosen": [
+     "act38side"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "main_ep14"
+    ]
+   },
+   {
+    "qid": "q-cx-900002",
+    "want": [
+     "act18d3",
+     "act36side",
+     "act52side"
+    ],
+    "chosen": [
+     "act18d3"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "act36side",
+     "act52side"
+    ]
+   },
+   {
+    "qid": "q-cx-900005",
+    "want": [
+     "act21side",
+     "act38side",
+     "memory_demetr",
+     "memory_vigil"
+    ],
+    "chosen": [
+     "act21side"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "act38side",
+     "memory_demetr",
+     "memory_vigil"
+    ]
+   },
+   {
+    "qid": "q-cx-900008",
+    "want": [
+     "memory_bstalk",
+     "memory_flower"
+    ],
+    "chosen": [
+     "memory_bstalk",
+     "memory_flower"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900011",
+    "want": [
+     "act51side",
+     "memory_headb2"
+    ],
+    "chosen": [
+     "act51side",
+     "memory_headb2"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900012",
+    "want": [
+     "act26side",
+     "memory_spuria"
+    ],
+    "chosen": [
+     "act26side",
+     "memory_spuria"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900013",
+    "want": [
+     "act34side",
+     "act52side",
+     "main_ep15"
+    ],
+    "chosen": [
+     "act34side",
+     "act52side",
+     "main_ep15"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900014",
+    "want": [
+     "act14side",
+     "act30side",
+     "memory_blackd"
+    ],
+    "chosen": [
+     "act14side",
+     "act30side",
+     "memory_blackd"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900016",
+    "want": [
+     "act15side",
+     "act31side",
+     "act40side",
+     "act49side"
+    ],
+    "chosen": [
+     "act31side",
+     "act40side",
+     "act49side"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "act15side"
+    ]
+   },
+   {
+    "qid": "q-cx-900017",
+    "want": [
+     "main_ep12",
+     "main_st12",
+     "memory_morgan"
+    ],
+    "chosen": [
+     "main_ep12",
+     "main_st12",
+     "memory_morgan"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900018",
+    "want": [
+     "act22side",
+     "act41side"
+    ],
+    "chosen": [
+     "act22side",
+     "act41side"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900021",
+    "want": [
+     "act7d5",
+     "memory_blitz",
+     "memory_melan"
+    ],
+    "chosen": [
+     "act7d5",
+     "memory_blitz",
+     "memory_melan"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900022",
+    "want": [
+     "main_ep11",
+     "main_ep14"
+    ],
+    "chosen": [
+     "main_ep14"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "main_ep11"
+    ]
+   },
+   {
+    "qid": "q-cx-900024",
+    "want": [
+     "main_ep11",
+     "main_ep12"
+    ],
+    "chosen": [],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "main_ep11",
+     "main_ep12"
+    ]
+   },
+   {
+    "qid": "q-cx-900026",
+    "want": [
+     "act29side",
+     "act41side",
+     "memory_lessng"
+    ],
+    "chosen": [
+     "act41side",
+     "memory_lessng"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "act29side"
+    ]
+   },
+   {
+    "qid": "q-cx-900027",
+    "want": [
+     "act15d0",
+     "main_ep13",
+     "main_ep14",
+     "memory_plosis"
+    ],
+    "chosen": [
+     "act15d0",
+     "main_ep13",
+     "main_ep14"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "memory_plosis"
+    ]
+   },
+   {
+    "qid": "q-cx-900030",
+    "want": [
+     "memory_sqrrel",
+     "rogue_rogue_5"
+    ],
+    "chosen": [
+     "memory_sqrrel",
+     "rogue_rogue_5"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   }
+  ]
+ },
+ "dev@40000": {
+  "n": 38,
+  "eq": 32,
+  "all_citable": 37,
+  "pass_full": 32,
+  "rows": [
+   {
+    "qid": "q-cx-000001",
+    "want": [
+     "act33side",
+     "main_ep14"
+    ],
+    "chosen": [
+     "act33side",
+     "main_ep14"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000003",
+    "want": [
+     "main_ep16",
+     "main_st17"
+    ],
+    "chosen": [
+     "main_ep16",
+     "main_st17"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000004",
+    "want": [
+     "act17side",
+     "memory_deepcl",
+     "rogue_rogue_6"
+    ],
+    "chosen": [
+     "act17side",
+     "memory_deepcl"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "rogue_rogue_6"
+    ]
+   },
+   {
+    "qid": "q-cx-000005",
+    "want": [
+     "main_ep14",
+     "main_st11"
+    ],
+    "chosen": [
+     "main_ep14",
+     "main_st11"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000006",
+    "want": [
+     "act17d0",
+     "act24side"
+    ],
+    "chosen": [
+     "act17d0",
+     "act24side"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000007",
+    "want": [
+     "memory_huang",
+     "memory_weedy"
+    ],
+    "chosen": [
+     "memory_huang",
+     "memory_weedy"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000008",
+    "want": [
+     "rogue_rogue_6",
+     "roguelike_level_rogue6_ending_4"
+    ],
+    "chosen": [
+     "rogue_rogue_6",
+     "roguelike_level_rogue6_ending_4"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000009",
+    "want": [
+     "act40side",
+     "act49side"
+    ],
+    "chosen": [
+     "act40side",
+     "act49side"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000010",
+    "want": [
+     "main_ep16",
+     "main_spst16"
+    ],
+    "chosen": [
+     "main_ep16",
+     "main_spst16"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000011",
+    "want": [
+     "act27side",
+     "act3d0",
+     "memory_bryota",
+     "memory_buildr"
+    ],
+    "chosen": [
+     "act27side",
+     "act3d0",
+     "memory_bryota",
+     "memory_buildr"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000014",
+    "want": [
+     "act7mini",
+     "memory_bluep",
+     "memory_glacus",
+     "memory_indigo"
+    ],
+    "chosen": [
+     "act7mini",
+     "memory_bluep",
+     "memory_glacus",
+     "memory_indigo"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000016",
+    "want": [
+     "act28side",
+     "memory_tinman"
+    ],
+    "chosen": [
+     "act28side"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "memory_tinman"
+    ]
+   },
+   {
+    "qid": "q-cx-000017",
+    "want": [
+     "memory_mitm",
+     "memory_nymph"
+    ],
+    "chosen": [
+     "memory_mitm",
+     "memory_nymph"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000020",
+    "want": [
+     "act17side",
+     "act18d3",
+     "rogue_rogue_2"
+    ],
+    "chosen": [
+     "act17side",
+     "act18d3",
+     "rogue_rogue_2"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000021",
+    "want": [
+     "act14mini",
+     "act16d5",
+     "memory_saga"
+    ],
+    "chosen": [
+     "act14mini",
+     "act16d5",
+     "memory_saga"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000022",
+    "want": [
+     "memory_dagda",
+     "memory_jaksel",
+     "memory_tiger"
+    ],
+    "chosen": [
+     "memory_dagda",
+     "memory_jaksel",
+     "memory_tiger"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000024",
+    "want": [
+     "act42side",
+     "memory_graceb"
+    ],
+    "chosen": [
+     "act42side",
+     "memory_graceb"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000026",
+    "want": [
+     "act43side",
+     "memory_tippi"
+    ],
+    "chosen": [
+     "act43side",
+     "memory_tippi"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000027",
+    "want": [
+     "act11d0",
+     "act28side"
+    ],
+    "chosen": [
+     "act11d0",
+     "act28side"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000029",
+    "want": [
+     "act22side",
+     "memory_confes",
+     "rogue_rogue_4"
+    ],
+    "chosen": [
+     "act22side",
+     "rogue_rogue_4"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "memory_confes"
+    ]
+   },
+   {
+    "qid": "q-cx-000030",
+    "want": [
+     "act29side",
+     "act42side"
+    ],
+    "chosen": [
+     "act29side",
+     "act42side"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000032",
+    "want": [
+     "act38side",
+     "main_ep14"
+    ],
+    "chosen": [
+     "act38side",
+     "main_ep14"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900002",
+    "want": [
+     "act18d3",
+     "act36side",
+     "act52side"
+    ],
+    "chosen": [
+     "act18d3"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "act36side",
+     "act52side"
+    ]
+   },
+   {
+    "qid": "q-cx-900005",
+    "want": [
+     "act21side",
+     "act38side",
+     "memory_demetr",
+     "memory_vigil"
+    ],
+    "chosen": [
+     "act21side"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "act38side",
+     "memory_demetr",
+     "memory_vigil"
+    ]
+   },
+   {
+    "qid": "q-cx-900008",
+    "want": [
+     "memory_bstalk",
+     "memory_flower"
+    ],
+    "chosen": [
+     "memory_bstalk",
+     "memory_flower"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900011",
+    "want": [
+     "act51side",
+     "memory_headb2"
+    ],
+    "chosen": [
+     "act51side",
+     "memory_headb2"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900012",
+    "want": [
+     "act26side",
+     "memory_spuria"
+    ],
+    "chosen": [
+     "act26side",
+     "memory_spuria"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900013",
+    "want": [
+     "act34side",
+     "act52side",
+     "main_ep15"
+    ],
+    "chosen": [
+     "act34side",
+     "act52side",
+     "main_ep15"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900014",
+    "want": [
+     "act14side",
+     "act30side",
+     "memory_blackd"
+    ],
+    "chosen": [
+     "act14side",
+     "act30side",
+     "memory_blackd"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900016",
+    "want": [
+     "act15side",
+     "act31side",
+     "act40side",
+     "act49side"
+    ],
+    "chosen": [
+     "act11mini",
+     "act15side",
+     "act31side",
+     "act40side",
+     "act49side"
+    ],
+    "eq": false,
+    "all_citable": false,
+    "pass_full": false,
+    "missing_cite": [
+     "act11mini"
+    ],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900017",
+    "want": [
+     "main_ep12",
+     "main_st12",
+     "memory_morgan"
+    ],
+    "chosen": [
+     "main_ep12",
+     "main_st12",
+     "memory_morgan"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900018",
+    "want": [
+     "act22side",
+     "act41side"
+    ],
+    "chosen": [
+     "act22side",
+     "act41side"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900021",
+    "want": [
+     "act7d5",
+     "memory_blitz",
+     "memory_melan"
+    ],
+    "chosen": [
+     "act7d5",
+     "memory_blitz",
+     "memory_melan"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900022",
+    "want": [
+     "main_ep11",
+     "main_ep14"
+    ],
+    "chosen": [
+     "main_ep11",
+     "main_ep14"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900024",
+    "want": [
+     "main_ep11",
+     "main_ep12"
+    ],
+    "chosen": [
+     "main_ep11",
+     "main_ep12"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900026",
+    "want": [
+     "act29side",
+     "act41side",
+     "memory_lessng"
+    ],
+    "chosen": [
+     "act29side",
+     "act41side",
+     "memory_lessng"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900027",
+    "want": [
+     "act15d0",
+     "main_ep13",
+     "main_ep14",
+     "memory_plosis"
+    ],
+    "chosen": [
+     "act15d0",
+     "main_ep13",
+     "main_ep14",
+     "memory_plosis"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900030",
+    "want": [
+     "memory_sqrrel",
+     "rogue_rogue_5"
+    ],
+    "chosen": [
+     "memory_sqrrel",
+     "rogue_rogue_5"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   }
+  ]
+ },
+ "holdout@6000": {
+  "n": 26,
+  "eq": 9,
+  "all_citable": 26,
+  "pass_full": 9,
+  "rows": [
+   {
+    "qid": "q-cx-000002",
+    "want": [
+     "act21side",
+     "act38side",
+     "memory_whitw2"
+    ],
+    "chosen": [
+     "act21side",
+     "act38side"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "memory_whitw2"
+    ]
+   },
+   {
+    "qid": "q-cx-000012",
+    "want": [
+     "act13mini",
+     "memory_pudd"
+    ],
+    "chosen": [
+     "memory_pudd"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "act13mini"
+    ]
+   },
+   {
+    "qid": "q-cx-000013",
+    "want": [
+     "act18mini",
+     "act41side",
+     "main_ep14",
+     "main_st14"
+    ],
+    "chosen": [
+     "main_ep14",
+     "main_st14"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "act18mini",
+     "act41side"
+    ]
+   },
+   {
+    "qid": "q-cx-000015",
+    "want": [
+     "act29side",
+     "main_st17",
+     "memory_pinecn",
+     "memory_turdus"
+    ],
+    "chosen": [
+     "act29side",
+     "memory_pinecn"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "main_st17",
+     "memory_turdus"
+    ]
+   },
+   {
+    "qid": "q-cx-000018",
+    "want": [
+     "main_ep17",
+     "main_st17"
+    ],
+    "chosen": [
+     "main_ep17"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "main_st17"
+    ]
+   },
+   {
+    "qid": "q-cx-000019",
+    "want": [
+     "main_ep09",
+     "memory_peper"
+    ],
+    "chosen": [
+     "main_ep09"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "memory_peper"
+    ]
+   },
+   {
+    "qid": "q-cx-000023",
+    "want": [
+     "main_ep10",
+     "main_ep14"
+    ],
+    "chosen": [
+     "main_ep10",
+     "main_ep14"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000025",
+    "want": [
+     "act12d0",
+     "act15mini"
+    ],
+    "chosen": [
+     "act15mini"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "act12d0"
+    ]
+   },
+   {
+    "qid": "q-cx-000028",
+    "want": [
+     "memory_acdrop",
+     "memory_medic2",
+     "memory_pinecn"
+    ],
+    "chosen": [
+     "memory_acdrop",
+     "memory_medic2",
+     "memory_pinecn"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000031",
+    "want": [
+     "act14side",
+     "act30side",
+     "act46side"
+    ],
+    "chosen": [
+     "act14side",
+     "act46side"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "act30side"
+    ]
+   },
+   {
+    "qid": "q-cx-900001",
+    "want": [
+     "act17side",
+     "act34side",
+     "rogue_rogue_2"
+    ],
+    "chosen": [
+     "act17side",
+     "rogue_rogue_2"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "act34side"
+    ]
+   },
+   {
+    "qid": "q-cx-900003",
+    "want": [
+     "act42side",
+     "main_ep13",
+     "main_ep14"
+    ],
+    "chosen": [
+     "act42side",
+     "main_ep13",
+     "main_ep14"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900004",
+    "want": [
+     "act31side",
+     "act49side",
+     "rogue_rogue_5"
+    ],
+    "chosen": [
+     "act49side"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "act31side",
+     "rogue_rogue_5"
+    ]
+   },
+   {
+    "qid": "q-cx-900006",
+    "want": [
+     "act49side",
+     "act6d5"
+    ],
+    "chosen": [
+     "act49side"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "act6d5"
+    ]
+   },
+   {
+    "qid": "q-cx-900007",
+    "want": [
+     "act10mini",
+     "memory_bpipe"
+    ],
+    "chosen": [],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "act10mini",
+     "memory_bpipe"
+    ]
+   },
+   {
+    "qid": "q-cx-900009",
+    "want": [
+     "act32side",
+     "memory_ela"
+    ],
+    "chosen": [
+     "act32side"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "memory_ela"
+    ]
+   },
+   {
+    "qid": "q-cx-900010",
+    "want": [
+     "act19mini",
+     "act49side"
+    ],
+    "chosen": [
+     "act19mini",
+     "act49side"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900015",
+    "want": [
+     "act51side",
+     "main_st16"
+    ],
+    "chosen": [
+     "act51side",
+     "main_st16"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900019",
+    "want": [
+     "act18mini",
+     "main_ep13",
+     "main_st13",
+     "memory_nowell"
+    ],
+    "chosen": [
+     "main_ep13",
+     "main_st13",
+     "memory_nowell"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "act18mini"
+    ]
+   },
+   {
+    "qid": "q-cx-900020",
+    "want": [
+     "act51side",
+     "main_ep17",
+     "main_st17",
+     "memory_tanya"
+    ],
+    "chosen": [
+     "main_ep17",
+     "main_st17"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "act51side",
+     "memory_tanya"
+    ]
+   },
+   {
+    "qid": "q-cx-900023",
+    "want": [
+     "act27side",
+     "memory_otter",
+     "rogue_rogue_4"
+    ],
+    "chosen": [
+     "act27side"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "memory_otter",
+     "rogue_rogue_4"
+    ]
+   },
+   {
+    "qid": "q-cx-900025",
+    "want": [
+     "act18mini",
+     "act47side"
+    ],
+    "chosen": [
+     "act18mini",
+     "act47side"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900028",
+    "want": [
+     "act17d0",
+     "act32side",
+     "memory_fuze"
+    ],
+    "chosen": [
+     "act17d0",
+     "act32side",
+     "memory_fuze"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900029",
+    "want": [
+     "main_ep10",
+     "main_ep12",
+     "main_ep14"
+    ],
+    "chosen": [
+     "main_ep10"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "main_ep12",
+     "main_ep14"
+    ]
+   },
+   {
+    "qid": "q-cx-900031",
+    "want": [
+     "memory_mudrok",
+     "memory_wyvern"
+    ],
+    "chosen": [
+     "memory_mudrok",
+     "memory_wyvern"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900032",
+    "want": [
+     "act34side",
+     "act52side"
+    ],
+    "chosen": [
+     "act34side",
+     "act52side"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   }
+  ]
+ },
+ "holdout@12000": {
+  "n": 26,
+  "eq": 14,
+  "all_citable": 26,
+  "pass_full": 14,
+  "rows": [
+   {
+    "qid": "q-cx-000002",
+    "want": [
+     "act21side",
+     "act38side",
+     "memory_whitw2"
+    ],
+    "chosen": [
+     "act21side",
+     "act38side"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "memory_whitw2"
+    ]
+   },
+   {
+    "qid": "q-cx-000012",
+    "want": [
+     "act13mini",
+     "memory_pudd"
+    ],
+    "chosen": [
+     "memory_pudd"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "act13mini"
+    ]
+   },
+   {
+    "qid": "q-cx-000013",
+    "want": [
+     "act18mini",
+     "act41side",
+     "main_ep14",
+     "main_st14"
+    ],
+    "chosen": [
+     "main_ep14",
+     "main_st14"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "act18mini",
+     "act41side"
+    ]
+   },
+   {
+    "qid": "q-cx-000015",
+    "want": [
+     "act29side",
+     "main_st17",
+     "memory_pinecn",
+     "memory_turdus"
+    ],
+    "chosen": [
+     "act29side",
+     "main_st17",
+     "memory_pinecn",
+     "memory_turdus"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000018",
+    "want": [
+     "main_ep17",
+     "main_st17"
+    ],
+    "chosen": [
+     "main_ep17",
+     "main_st17"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000019",
+    "want": [
+     "main_ep09",
+     "memory_peper"
+    ],
+    "chosen": [
+     "main_ep09"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "memory_peper"
+    ]
+   },
+   {
+    "qid": "q-cx-000023",
+    "want": [
+     "main_ep10",
+     "main_ep14"
+    ],
+    "chosen": [
+     "main_ep10",
+     "main_ep14"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000025",
+    "want": [
+     "act12d0",
+     "act15mini"
+    ],
+    "chosen": [
+     "act15mini"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "act12d0"
+    ]
+   },
+   {
+    "qid": "q-cx-000028",
+    "want": [
+     "memory_acdrop",
+     "memory_medic2",
+     "memory_pinecn"
+    ],
+    "chosen": [
+     "memory_acdrop",
+     "memory_medic2",
+     "memory_pinecn"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000031",
+    "want": [
+     "act14side",
+     "act30side",
+     "act46side"
+    ],
+    "chosen": [
+     "act14side",
+     "act30side",
+     "act46side"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900001",
+    "want": [
+     "act17side",
+     "act34side",
+     "rogue_rogue_2"
+    ],
+    "chosen": [
+     "act17side",
+     "act34side"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "rogue_rogue_2"
+    ]
+   },
+   {
+    "qid": "q-cx-900003",
+    "want": [
+     "act42side",
+     "main_ep13",
+     "main_ep14"
+    ],
+    "chosen": [
+     "act42side",
+     "main_ep13",
+     "main_ep14"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900004",
+    "want": [
+     "act31side",
+     "act49side",
+     "rogue_rogue_5"
+    ],
+    "chosen": [
+     "act49side",
+     "rogue_rogue_5"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "act31side"
+    ]
+   },
+   {
+    "qid": "q-cx-900006",
+    "want": [
+     "act49side",
+     "act6d5"
+    ],
+    "chosen": [
+     "act49side",
+     "act6d5"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900007",
+    "want": [
+     "act10mini",
+     "memory_bpipe"
+    ],
+    "chosen": [],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "act10mini",
+     "memory_bpipe"
+    ]
+   },
+   {
+    "qid": "q-cx-900009",
+    "want": [
+     "act32side",
+     "memory_ela"
+    ],
+    "chosen": [
+     "act32side"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "memory_ela"
+    ]
+   },
+   {
+    "qid": "q-cx-900010",
+    "want": [
+     "act19mini",
+     "act49side"
+    ],
+    "chosen": [
+     "act19mini",
+     "act49side"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900015",
+    "want": [
+     "act51side",
+     "main_st16"
+    ],
+    "chosen": [
+     "act51side",
+     "main_st16"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900019",
+    "want": [
+     "act18mini",
+     "main_ep13",
+     "main_st13",
+     "memory_nowell"
+    ],
+    "chosen": [
+     "act18mini",
+     "main_ep13",
+     "main_st13",
+     "memory_nowell"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900020",
+    "want": [
+     "act51side",
+     "main_ep17",
+     "main_st17",
+     "memory_tanya"
+    ],
+    "chosen": [
+     "main_ep17",
+     "main_st17"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "act51side",
+     "memory_tanya"
+    ]
+   },
+   {
+    "qid": "q-cx-900023",
+    "want": [
+     "act27side",
+     "memory_otter",
+     "rogue_rogue_4"
+    ],
+    "chosen": [
+     "act27side",
+     "memory_otter"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "rogue_rogue_4"
+    ]
+   },
+   {
+    "qid": "q-cx-900025",
+    "want": [
+     "act18mini",
+     "act47side"
+    ],
+    "chosen": [
+     "act18mini",
+     "act47side"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900028",
+    "want": [
+     "act17d0",
+     "act32side",
+     "memory_fuze"
+    ],
+    "chosen": [
+     "act17d0",
+     "act32side",
+     "memory_fuze"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900029",
+    "want": [
+     "main_ep10",
+     "main_ep12",
+     "main_ep14"
+    ],
+    "chosen": [
+     "main_ep10"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "main_ep12",
+     "main_ep14"
+    ]
+   },
+   {
+    "qid": "q-cx-900031",
+    "want": [
+     "memory_mudrok",
+     "memory_wyvern"
+    ],
+    "chosen": [
+     "memory_mudrok",
+     "memory_wyvern"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900032",
+    "want": [
+     "act34side",
+     "act52side"
+    ],
+    "chosen": [
+     "act34side",
+     "act52side"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   }
+  ]
+ },
+ "holdout@40000": {
+  "n": 26,
+  "eq": 23,
+  "all_citable": 26,
+  "pass_full": 23,
+  "rows": [
+   {
+    "qid": "q-cx-000002",
+    "want": [
+     "act21side",
+     "act38side",
+     "memory_whitw2"
+    ],
+    "chosen": [
+     "act21side",
+     "act38side",
+     "memory_whitw2"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000012",
+    "want": [
+     "act13mini",
+     "memory_pudd"
+    ],
+    "chosen": [
+     "act13mini",
+     "memory_pudd"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000013",
+    "want": [
+     "act18mini",
+     "act41side",
+     "main_ep14",
+     "main_st14"
+    ],
+    "chosen": [
+     "act18mini",
+     "main_ep14",
+     "main_st14"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "act41side"
+    ]
+   },
+   {
+    "qid": "q-cx-000015",
+    "want": [
+     "act29side",
+     "main_st17",
+     "memory_pinecn",
+     "memory_turdus"
+    ],
+    "chosen": [
+     "act29side",
+     "main_st17",
+     "memory_pinecn",
+     "memory_turdus"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000018",
+    "want": [
+     "main_ep17",
+     "main_st17"
+    ],
+    "chosen": [
+     "main_ep17",
+     "main_st17"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000019",
+    "want": [
+     "main_ep09",
+     "memory_peper"
+    ],
+    "chosen": [
+     "main_ep09"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "memory_peper"
+    ]
+   },
+   {
+    "qid": "q-cx-000023",
+    "want": [
+     "main_ep10",
+     "main_ep14"
+    ],
+    "chosen": [
+     "main_ep10",
+     "main_ep14"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000025",
+    "want": [
+     "act12d0",
+     "act15mini"
+    ],
+    "chosen": [
+     "act12d0",
+     "act15mini"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000028",
+    "want": [
+     "memory_acdrop",
+     "memory_medic2",
+     "memory_pinecn"
+    ],
+    "chosen": [
+     "memory_acdrop",
+     "memory_medic2",
+     "memory_pinecn"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-000031",
+    "want": [
+     "act14side",
+     "act30side",
+     "act46side"
+    ],
+    "chosen": [
+     "act14side",
+     "act30side",
+     "act46side"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900001",
+    "want": [
+     "act17side",
+     "act34side",
+     "rogue_rogue_2"
+    ],
+    "chosen": [
+     "act17side",
+     "act34side",
+     "rogue_rogue_2"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900003",
+    "want": [
+     "act42side",
+     "main_ep13",
+     "main_ep14"
+    ],
+    "chosen": [
+     "act42side",
+     "main_ep13",
+     "main_ep14"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900004",
+    "want": [
+     "act31side",
+     "act49side",
+     "rogue_rogue_5"
+    ],
+    "chosen": [
+     "act31side",
+     "act49side",
+     "rogue_rogue_5"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900006",
+    "want": [
+     "act49side",
+     "act6d5"
+    ],
+    "chosen": [
+     "act49side",
+     "act6d5"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900007",
+    "want": [
+     "act10mini",
+     "memory_bpipe"
+    ],
+    "chosen": [
+     "act10mini",
+     "memory_bpipe"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900009",
+    "want": [
+     "act32side",
+     "memory_ela"
+    ],
+    "chosen": [
+     "act32side",
+     "memory_ela"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900010",
+    "want": [
+     "act19mini",
+     "act49side"
+    ],
+    "chosen": [
+     "act19mini",
+     "act49side"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900015",
+    "want": [
+     "act51side",
+     "main_st16"
+    ],
+    "chosen": [
+     "act51side",
+     "main_st16"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900019",
+    "want": [
+     "act18mini",
+     "main_ep13",
+     "main_st13",
+     "memory_nowell"
+    ],
+    "chosen": [
+     "act18mini",
+     "main_ep13",
+     "main_st13",
+     "memory_nowell"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900020",
+    "want": [
+     "act51side",
+     "main_ep17",
+     "main_st17",
+     "memory_tanya"
+    ],
+    "chosen": [
+     "act51side",
+     "main_ep17",
+     "main_st17",
+     "memory_tanya"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900023",
+    "want": [
+     "act27side",
+     "memory_otter",
+     "rogue_rogue_4"
+    ],
+    "chosen": [
+     "act27side",
+     "memory_otter"
+    ],
+    "eq": false,
+    "all_citable": true,
+    "pass_full": false,
+    "missing_cite": [],
+    "not_in_ctx": [
+     "rogue_rogue_4"
+    ]
+   },
+   {
+    "qid": "q-cx-900025",
+    "want": [
+     "act18mini",
+     "act47side"
+    ],
+    "chosen": [
+     "act18mini",
+     "act47side"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900028",
+    "want": [
+     "act17d0",
+     "act32side",
+     "memory_fuze"
+    ],
+    "chosen": [
+     "act17d0",
+     "act32side",
+     "memory_fuze"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900029",
+    "want": [
+     "main_ep10",
+     "main_ep12",
+     "main_ep14"
+    ],
+    "chosen": [
+     "main_ep10",
+     "main_ep12",
+     "main_ep14"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900031",
+    "want": [
+     "memory_mudrok",
+     "memory_wyvern"
+    ],
+    "chosen": [
+     "memory_mudrok",
+     "memory_wyvern"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   },
+   {
+    "qid": "q-cx-900032",
+    "want": [
+     "act34side",
+     "act52side"
+    ],
+    "chosen": [
+     "act34side",
+     "act52side"
+    ],
+    "eq": true,
+    "all_citable": true,
+    "pass_full": true,
+    "missing_cite": [],
+    "not_in_ctx": []
+   }
+  ]
+ }
+}

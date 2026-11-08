@@ -76,3 +76,24 @@ _*.log
 # 同目录下的小体积扫描结果（sweep_*.json / eval_fusion_*.json / rerank_blind.json）
 # 是结论的证据，应当入库。
 data/rerank_features.json
+
+# ---- 一次性诊断脚本与中间量（2026-11-08 纳管）--------------------------------
+# 背景：仓库根目录累积了 620 个 `tmp_*`（七轮对抗审查 + 一轮全链路诊断的脚本、
+# 落盘、日志，合计 11.7 MB），`data/_tmp_*` 80 个中间量，`scripts/tmp_*` 14 个探针。
+# 这些文件被 docs 引用（根目录脚本 98 处、data/_tmp_ 33 处），但按本项目既有纪律
+# 「临时，不入库」（docs/a_P3_第三轮_方案.md、docs/诊断-知识交接-20261108.md §1.3
+# 均如此声明）——需要复算时按 docs 里给的命令重跑即可，不必靠仓库快照。
+#
+# 刻意不写 `tmp_*` 这种无斜杠模式：那会连 `data/tmp_*`、`docs/tmp_*` 一起吞掉，
+# 而 `docs/_tmp_budget_wire_report.md` 是 `tests/test_context_budget.py` 直接引用的
+# 证据文档，必须入库（下划线开头，不受下面三条影响）。
+/tmp_*
+/data/_tmp_*
+/scripts/tmp_*
+
+# 366 MB 的 onnxruntime 第三方解包目录（`scripts/probe_rerank_opt.py` 与 GPU 基准用），
+# 纯上游二进制，绝不入库。
+/data/_tmp_ortgpu/
+
+# 一次性的表格打印小抄（读 `data/_tmp_rerank_opt.json`，该文件本身已在上面被忽略）。
+/_tab.py

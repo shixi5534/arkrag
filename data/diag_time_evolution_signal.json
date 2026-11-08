@@ -1,0 +1,947 @@
+{
+ "generation": "g-20261103T132152Z-06a741",
+ "splits": {
+  "dev": {
+   "single_chunk": {
+    "n": 76,
+    "answered": 75,
+    "signal": 0
+   },
+   "alias": {
+    "n": 57,
+    "answered": 54,
+    "signal": 0
+   },
+   "direct_relation": {
+    "n": 57,
+    "answered": 57,
+    "signal": 3
+   },
+   "multihop": {
+    "n": 57,
+    "answered": 57,
+    "signal": 0
+   },
+   "cross_chunk": {
+    "n": 38,
+    "answered": 38,
+    "signal": 0
+   },
+   "time_conflict": {
+    "n": 38,
+    "answered": 38,
+    "signal": 18
+   },
+   "negative_abstain": {
+    "n": 8,
+    "answered": 8,
+    "signal": 0
+   },
+   "adversarial": {
+    "n": 19,
+    "answered": 19,
+    "signal": 0
+   }
+  },
+  "holdout": {
+   "single_chunk": {
+    "n": 52,
+    "answered": 49,
+    "signal": 0
+   },
+   "alias": {
+    "n": 39,
+    "answered": 35,
+    "signal": 0
+   },
+   "direct_relation": {
+    "n": 39,
+    "answered": 39,
+    "signal": 0
+   },
+   "multihop": {
+    "n": 39,
+    "answered": 39,
+    "signal": 0
+   },
+   "cross_chunk": {
+    "n": 26,
+    "answered": 26,
+    "signal": 0
+   },
+   "time_conflict": {
+    "n": 26,
+    "answered": 26,
+    "signal": 11
+   },
+   "negative_abstain": {
+    "n": 4,
+    "answered": 4,
+    "signal": 0
+   },
+   "adversarial": {
+    "n": 13,
+    "answered": 12,
+    "signal": 0
+   }
+  },
+  "clean": {
+   "single_chunk": {
+    "n": 32,
+    "answered": 30,
+    "signal": 0
+   },
+   "alias": {
+    "n": 24,
+    "answered": 23,
+    "signal": 0
+   },
+   "direct_relation": {
+    "n": 24,
+    "answered": 24,
+    "signal": 0
+   },
+   "multihop": {
+    "n": 24,
+    "answered": 24,
+    "signal": 0
+   },
+   "cross_chunk": {
+    "n": 16,
+    "answered": 16,
+    "signal": 0
+   },
+   "time_conflict": {
+    "n": 16,
+    "answered": 16,
+    "signal": 8
+   },
+   "adversarial": {
+    "n": 8,
+    "answered": 8,
+    "signal": 0
+   }
+  }
+ },
+ "detail": {
+  "dev": [
+   {
+    "qid": "q-tc-000003",
+    "hits": [
+     {
+      "pair": [
+       "克洛宁",
+       "赫尔曼"
+      ],
+      "predicates": [
+       "背叛",
+       "隶属"
+      ],
+      "docs": [
+       "activities/act3d0/level_act3d0_st04",
+       "activities/act3d0/level_act3d0_07_end"
+      ]
+     }
+    ]
+   },
+   {
+    "qid": "q-tc-000005",
+    "hits": [
+     {
+      "pair": [
+       "玉门",
+       "重岳"
+      ],
+      "predicates": [
+       "驻守",
+       "离开"
+      ],
+      "docs": [
+       "obt/memory/story_chyue_1_1",
+       "activities/act49side/level_act49side_06_end"
+      ]
+     },
+     {
+      "pair": [
+       "玉门",
+       "重岳"
+      ],
+      "predicates": [
+       "驻守",
+       "离开"
+      ],
+      "docs": [
+       "activities/act23side/level_act23side_06_end",
+       "activities/act49side/level_act49side_06_end"
+      ]
+     }
+    ]
+   },
+   {
+    "qid": "q-tc-000006",
+    "hits": [
+     {
+      "pair": [
+       "暴行",
+       "雷姆必拓"
+      ],
+      "predicates": [
+       "离开",
+       "驻守"
+      ],
+      "docs": [
+       "obt/memory/story_savage_2_2",
+       "obt/memory/story_savage_1_1"
+      ]
+     }
+    ]
+   },
+   {
+    "qid": "q-tc-000007",
+    "hits": [
+     {
+      "pair": [
+       "斯卡蒂",
+       "格拉尼"
+      ],
+      "predicates": [
+       "交战",
+       "保护"
+      ],
+      "docs": [
+       "activities/a001/level_a001_06_beg",
+       "activities/a001/level_a001_03_beg"
+      ]
+     }
+    ]
+   },
+   {
+    "qid": "q-tc-000013",
+    "hits": [
+     {
+      "pair": [
+       "扎罗",
+       "贝纳尔多"
+      ],
+      "predicates": [
+       "背叛",
+       "效忠"
+      ],
+      "docs": [
+       "activities/act21side/level_act21side_09_end",
+       "activities/act21side/level_act21side_06_beg"
+      ]
+     },
+     {
+      "pair": [
+       "扎罗",
+       "贝纳尔多"
+      ],
+      "predicates": [
+       "背叛",
+       "效忠"
+      ],
+      "docs": [
+       "activities/act21side/level_act21side_10_end",
+       "activities/act21side/level_act21side_06_beg"
+      ]
+     }
+    ]
+   },
+   {
+    "qid": "q-tc-000018",
+    "hits": [
+     {
+      "pair": [
+       "安东尼奥",
+       "英格丽"
+      ],
+      "predicates": [
+       "保护",
+       "交战"
+      ],
+      "docs": [
+       "activities/act38side/level_act38side_04_beg",
+       "activities/act38side/level_act38side_10_beg"
+      ]
+     }
+    ]
+   },
+   {
+    "qid": "q-tc-000022",
+    "hits": [
+     {
+      "pair": [
+       "商业联合会",
+       "监正会"
+      ],
+      "predicates": [
+       "敌对",
+       "同盟"
+      ],
+      "docs": [
+       "obt/main/level_main_17-01_beg",
+       "activities/act13side/level_act13side_03_beg"
+      ]
+     },
+     {
+      "pair": [
+       "商业联合会",
+       "监正会"
+      ],
+      "predicates": [
+       "同盟",
+       "敌对"
+      ],
+      "docs": [
+       "activities/act13side/level_act13side_03_beg",
+       "activities/act13side/level_act13side_10_end"
+      ]
+     }
+    ]
+   },
+   {
+    "qid": "q-tc-000023",
+    "hits": [
+     {
+      "pair": [
+       "凯尔希",
+       "霍尔海雅"
+      ],
+      "predicates": [
+       "同盟",
+       "敌对"
+      ],
+      "docs": [
+       "activities/act25side/level_act25side_st03",
+       "activities/act25side/level_act25side_07_end"
+      ]
+     },
+     {
+      "pair": [
+       "凯尔希",
+       "霍尔海雅"
+      ],
+      "predicates": [
+       "同盟",
+       "敌对"
+      ],
+      "docs": [
+       "activities/act25side/level_act25side_st03",
+       "activities/act25side/level_act25side_07_end"
+      ]
+     }
+    ]
+   },
+   {
+    "qid": "q-tc-000024",
+    "hits": [
+     {
+      "pair": [
+       "Logos",
+       "巴别塔"
+      ],
+      "predicates": [
+       "背叛",
+       "隶属"
+      ],
+      "docs": [
+       "obt/main/level_main_14-08_beg",
+       "obt/main/level_main_14-07_end"
+      ]
+     }
+    ]
+   },
+   {
+    "qid": "q-tc-000025",
+    "hits": [
+     {
+      "pair": [
+       "德拉克",
+       "阿斯兰"
+      ],
+      "predicates": [
+       "同盟",
+       "敌对"
+      ],
+      "docs": [
+       "obt/main/level_main_11-12_end",
+       "activities/act46side/level_act46side_06_beg"
+      ]
+     }
+    ]
+   },
+   {
+    "qid": "q-tc-000031",
+    "hits": [
+     {
+      "pair": [
+       "喀兰贸易",
+       "菈塔托丝"
+      ],
+      "predicates": [
+       "同盟",
+       "敌对"
+      ],
+      "docs": [
+       "activities/act46side/level_act46side_05_end",
+       "activities/act14side/level_act14side_06_end"
+      ]
+     },
+     {
+      "pair": [
+       "喀兰贸易",
+       "菈塔托丝"
+      ],
+      "predicates": [
+       "同盟",
+       "敌对"
+      ],
+      "docs": [
+       "activities/act46side/level_act46side_05_end",
+       "activities/act14side/level_act14side_03_end"
+      ]
+     }
+    ]
+   },
+   {
+    "qid": "q-tc-900005",
+    "hits": [
+     {
+      "pair": [
+       "互助会",
+       "纳乔"
+      ],
+      "predicates": [
+       "背叛",
+       "隶属"
+      ],
+      "docs": [
+       "activities/act52side/level_act52side_05_end",
+       "activities/act52side/level_act52side_05_beg"
+      ]
+     }
+    ]
+   }
+  ],
+  "holdout": [
+   {
+    "qid": "q-tc-000001",
+    "hits": [
+     {
+      "pair": [
+       "萨卢佐家族",
+       "贝洛内家族"
+      ],
+      "predicates": [
+       "敌对",
+       "同盟"
+      ],
+      "docs": [
+       "activities/act21side/level_act21side_09_beg",
+       "activities/act21side/level_act21side_09_end"
+      ]
+     }
+    ]
+   },
+   {
+    "qid": "q-tc-000009",
+    "hits": [
+     {
+      "pair": [
+       "维多利亚",
+       "菈塔托丝"
+      ],
+      "predicates": [
+       "同盟",
+       "敌对"
+      ],
+      "docs": [
+       "activities/act46side/level_act46side_04_beg",
+       "activities/act46side/level_act46side_08_beg"
+      ]
+     }
+    ]
+   },
+   {
+    "qid": "q-tc-000012",
+    "hits": [
+     {
+      "pair": [
+       "八幡海铃",
+       "弗朗西斯"
+      ],
+      "predicates": [
+       "敌对",
+       "同盟"
+      ],
+      "docs": [
+       "activities/act45side/level_act45side_03_beg",
+       "activities/act45side/level_act45side_08_beg"
+      ]
+     },
+     {
+      "pair": [
+       "八幡海铃",
+       "弗朗西斯"
+      ],
+      "predicates": [
+       "敌对",
+       "同盟"
+      ],
+      "docs": [
+       "activities/act45side/level_act45side_03_beg",
+       "activities/act45side/level_act45side_08_beg"
+      ]
+     }
+    ]
+   },
+   {
+    "qid": "q-tc-900002",
+    "hits": [
+     {
+      "pair": [
+       "深池",
+       "萨卡兹"
+      ],
+      "predicates": [
+       "敌对",
+       "同盟"
+      ],
+      "docs": [
+       "obt/main/level_main_10-02_end",
+       "obt/main/level_main_10-01_end"
+      ]
+     },
+     {
+      "pair": [
+       "深池",
+       "萨卡兹"
+      ],
+      "predicates": [
+       "同盟",
+       "敌对"
+      ],
+      "docs": [
+       "obt/main/level_main_10-01_end",
+       "obt/main/level_main_10-02_end"
+      ]
+     }
+    ]
+   },
+   {
+    "qid": "q-tc-900007",
+    "hits": [
+     {
+      "pair": [
+       "瓦拉赫",
+       "贝洛内家族"
+      ],
+      "predicates": [
+       "敌对",
+       "同盟"
+      ],
+      "docs": [
+       "activities/act21side/level_act21side_09_end",
+       "activities/act21side/level_act21side_08_beg"
+      ]
+     }
+    ]
+   },
+   {
+    "qid": "q-tc-900008",
+    "hits": [
+     {
+      "pair": [
+       "乔万娜",
+       "德克萨斯"
+      ],
+      "predicates": [
+       "同盟",
+       "敌对"
+      ],
+      "docs": [
+       "activities/act21side/level_act21side_07_beg",
+       "activities/act21side/level_act21side_06_end"
+      ]
+     }
+    ]
+   },
+   {
+    "qid": "q-tc-900010",
+    "hits": [
+     {
+      "pair": [
+       "塞雷娅",
+       "斐尔迪南"
+      ],
+      "predicates": [
+       "同盟",
+       "敌对"
+      ],
+      "docs": [
+       "activities/act25side/level_act25side_07_end",
+       "activities/act25side/level_act25side_04_end"
+      ]
+     },
+     {
+      "pair": [
+       "塞雷娅",
+       "斐尔迪南"
+      ],
+      "predicates": [
+       "同盟",
+       "敌对"
+      ],
+      "docs": [
+       "activities/act25side/level_act25side_07_end",
+       "activities/act19side/level_act19side_06_beg"
+      ]
+     }
+    ]
+   },
+   {
+    "qid": "q-tc-900014",
+    "hits": [
+     {
+      "pair": [
+       "孟铁衣",
+       "山海众"
+      ],
+      "predicates": [
+       "敌对",
+       "同盟"
+      ],
+      "docs": [
+       "activities/act23side/level_act23side_06_end",
+       "activities/act23side/level_act23side_07_beg"
+      ]
+     },
+     {
+      "pair": [
+       "孟铁衣",
+       "山海众"
+      ],
+      "predicates": [
+       "敌对",
+       "同盟"
+      ],
+      "docs": [
+       "activities/act23side/level_act23side_06_end",
+       "activities/act23side/level_act23side_st02"
+      ]
+     }
+    ]
+   },
+   {
+    "qid": "q-tc-900020",
+    "hits": [
+     {
+      "pair": [
+       "军事委员会",
+       "巴别塔"
+      ],
+      "predicates": [
+       "敌对",
+       "同盟"
+      ],
+      "docs": [
+       "activities/act33side/level_act33side_05_end",
+       "activities/act18mini/level_act18mini_st06"
+      ]
+     },
+     {
+      "pair": [
+       "军事委员会",
+       "巴别塔"
+      ],
+      "predicates": [
+       "敌对",
+       "同盟"
+      ],
+      "docs": [
+       "activities/act33side/level_act33side_07_beg",
+       "activities/act18mini/level_act18mini_st06"
+      ]
+     }
+    ]
+   },
+   {
+    "qid": "q-tc-900026",
+    "hits": [
+     {
+      "pair": [
+       "维多利亚",
+       "蒸汽骑士"
+      ],
+      "predicates": [
+       "背叛",
+       "效忠"
+      ],
+      "docs": [
+       "obt/main/level_main_11-17_beg",
+       "obt/main/level_main_11-17_end"
+      ]
+     },
+     {
+      "pair": [
+       "维多利亚",
+       "蒸汽骑士"
+      ],
+      "predicates": [
+       "隶属",
+       "背叛"
+      ],
+      "docs": [
+       "obt/main/level_main_11-17_beg",
+       "obt/main/level_main_11-14_end"
+      ]
+     }
+    ]
+   },
+   {
+    "qid": "q-tc-900027",
+    "hits": [
+     {
+      "pair": [
+       "安多恩",
+       "寻路者"
+      ],
+      "predicates": [
+       "隶属",
+       "背叛"
+      ],
+      "docs": [
+       "activities/act16side/level_act16side_05_beg",
+       "activities/act42side/level_act42side_10_beg"
+      ]
+     }
+    ]
+   }
+  ],
+  "clean": [
+   {
+    "qid": "q-tc-900002",
+    "hits": [
+     {
+      "pair": [
+       "深池",
+       "萨卡兹"
+      ],
+      "predicates": [
+       "敌对",
+       "同盟"
+      ],
+      "docs": [
+       "obt/main/level_main_10-02_end",
+       "obt/main/level_main_10-01_end"
+      ]
+     },
+     {
+      "pair": [
+       "深池",
+       "萨卡兹"
+      ],
+      "predicates": [
+       "同盟",
+       "敌对"
+      ],
+      "docs": [
+       "obt/main/level_main_10-01_end",
+       "obt/main/level_main_10-02_end"
+      ]
+     }
+    ]
+   },
+   {
+    "qid": "q-tc-900007",
+    "hits": [
+     {
+      "pair": [
+       "瓦拉赫",
+       "贝洛内家族"
+      ],
+      "predicates": [
+       "敌对",
+       "同盟"
+      ],
+      "docs": [
+       "activities/act21side/level_act21side_09_end",
+       "activities/act21side/level_act21side_08_beg"
+      ]
+     }
+    ]
+   },
+   {
+    "qid": "q-tc-900008",
+    "hits": [
+     {
+      "pair": [
+       "乔万娜",
+       "德克萨斯"
+      ],
+      "predicates": [
+       "同盟",
+       "敌对"
+      ],
+      "docs": [
+       "activities/act21side/level_act21side_07_beg",
+       "activities/act21side/level_act21side_06_end"
+      ]
+     }
+    ]
+   },
+   {
+    "qid": "q-tc-900010",
+    "hits": [
+     {
+      "pair": [
+       "塞雷娅",
+       "斐尔迪南"
+      ],
+      "predicates": [
+       "同盟",
+       "敌对"
+      ],
+      "docs": [
+       "activities/act25side/level_act25side_07_end",
+       "activities/act25side/level_act25side_04_end"
+      ]
+     },
+     {
+      "pair": [
+       "塞雷娅",
+       "斐尔迪南"
+      ],
+      "predicates": [
+       "同盟",
+       "敌对"
+      ],
+      "docs": [
+       "activities/act25side/level_act25side_07_end",
+       "activities/act19side/level_act19side_06_beg"
+      ]
+     }
+    ]
+   },
+   {
+    "qid": "q-tc-900014",
+    "hits": [
+     {
+      "pair": [
+       "孟铁衣",
+       "山海众"
+      ],
+      "predicates": [
+       "敌对",
+       "同盟"
+      ],
+      "docs": [
+       "activities/act23side/level_act23side_06_end",
+       "activities/act23side/level_act23side_07_beg"
+      ]
+     },
+     {
+      "pair": [
+       "孟铁衣",
+       "山海众"
+      ],
+      "predicates": [
+       "敌对",
+       "同盟"
+      ],
+      "docs": [
+       "activities/act23side/level_act23side_06_end",
+       "activities/act23side/level_act23side_st02"
+      ]
+     }
+    ]
+   },
+   {
+    "qid": "q-tc-900020",
+    "hits": [
+     {
+      "pair": [
+       "军事委员会",
+       "巴别塔"
+      ],
+      "predicates": [
+       "敌对",
+       "同盟"
+      ],
+      "docs": [
+       "activities/act33side/level_act33side_05_end",
+       "activities/act18mini/level_act18mini_st06"
+      ]
+     },
+     {
+      "pair": [
+       "军事委员会",
+       "巴别塔"
+      ],
+      "predicates": [
+       "敌对",
+       "同盟"
+      ],
+      "docs": [
+       "activities/act33side/level_act33side_07_beg",
+       "activities/act18mini/level_act18mini_st06"
+      ]
+     }
+    ]
+   },
+   {
+    "qid": "q-tc-900026",
+    "hits": [
+     {
+      "pair": [
+       "维多利亚",
+       "蒸汽骑士"
+      ],
+      "predicates": [
+       "背叛",
+       "效忠"
+      ],
+      "docs": [
+       "obt/main/level_main_11-17_beg",
+       "obt/main/level_main_11-17_end"
+      ]
+     },
+     {
+      "pair": [
+       "维多利亚",
+       "蒸汽骑士"
+      ],
+      "predicates": [
+       "隶属",
+       "背叛"
+      ],
+      "docs": [
+       "obt/main/level_main_11-17_beg",
+       "obt/main/level_main_11-14_end"
+      ]
+     }
+    ]
+   },
+   {
+    "qid": "q-tc-900027",
+    "hits": [
+     {
+      "pair": [
+       "安多恩",
+       "寻路者"
+      ],
+      "predicates": [
+       "隶属",
+       "背叛"
+      ],
+      "docs": [
+       "activities/act16side/level_act16side_05_beg",
+       "activities/act42side/level_act42side_10_beg"
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

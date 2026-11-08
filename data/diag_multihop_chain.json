@@ -1,0 +1,4124 @@
+{
+ "generation_id": "g-20261103T132152Z-06a741",
+ "splits": {
+  "dev": {
+   "agg": {
+    "n": 57,
+    "A_gold_known_name": 57,
+    "B_gold_in_hits": 55,
+    "C_gold_in_context": 53,
+    "D_gold_in_claim": 48,
+    "E_all_anchors_known": 57,
+    "F_gold_edge_to_anchor": 48
+   },
+   "rows": [
+    {
+     "question_id": "q-mh-000001",
+     "question": "已知「云兽」通过唯一一个中间实体与「变形者集群」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "阿米娅"
+     ],
+     "gold_in_graph": [
+      "阿米娅"
+     ],
+     "anchors": [
+      "云兽",
+      "变形者集群"
+     ],
+     "anchors_in_graph": [
+      "云兽",
+      "变形者集群"
+     ],
+     "gold_chunk_ids": [
+      "obt/main/level_main_12-18_beg#005",
+      "obt/memory/story_cetsyr_1_1#002"
+     ],
+     "n_hits": 20,
+     "n_units": 11,
+     "n_claims": 22,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "变形者集群交谈戈尔丁。变形者集群交谈凯尔希。阿米娅交谈变形者集群。戈尔丁交谈变形者集群。爱布拉娜交谈变形者集群。阿斯卡纶交谈变形者集群。Logos交谈变形者集群。变形者集群交谈博士。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000003",
+     "question": "从「凯尔希」出发，经过一个中间实体可以到达「安东尼奥」。这个中间实体叫什么？",
+     "gold": [
+      "华法琳"
+     ],
+     "gold_in_graph": [
+      "华法琳"
+     ],
+     "anchors": [
+      "凯尔希",
+      "安东尼奥"
+     ],
+     "anchors_in_graph": [
+      "凯尔希",
+      "安东尼奥"
+     ],
+     "gold_chunk_ids": [
+      "obt/main/level_main_07-05_end#003",
+      "obt/memory/story_bldsk_1_1#003"
+     ],
+     "n_hits": 20,
+     "n_units": 9,
+     "n_claims": 32,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": false,
+     "C_gold_in_context": false,
+     "D_gold_in_claim": false,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": false,
+     "judge": null,
+     "answer": "安东尼奥交谈老威尼斯。安东尼奥交谈卡尔。安东尼奥亲属贝拉。英格丽交战安东尼奥。甘比诺听命于安东尼奥。安东尼奥位于新沃尔西尼。安东尼奥指挥甘比诺。老威尼斯交谈安东尼奥。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000004",
+     "question": "从「厄尔苏拉」出发，经过一个中间实体可以到达「切尔诺伯格」。这个中间实体叫什么？",
+     "gold": [
+      "伊内丝"
+     ],
+     "gold_in_graph": [
+      "伊内丝"
+     ],
+     "anchors": [
+      "厄尔苏拉",
+      "切尔诺伯格"
+     ],
+     "anchors_in_graph": [
+      "厄尔苏拉",
+      "切尔诺伯格"
+     ],
+     "gold_chunk_ids": [
+      "activities/act9d0/level_act9d0_05_beg#000",
+      "obt/main/level_main_13-07_end#004"
+     ],
+     "n_hits": 20,
+     "n_units": 9,
+     "n_claims": 31,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "厄尔苏拉隶属疤痕商场。厄尔苏拉敌对伊内丝。厄尔苏拉效忠军事委员会。厄尔苏拉交谈血魔大君。厄尔苏拉交谈曼弗雷德。厄尔苏拉驾驶生命脊椎。伊内丝救助厄尔苏拉。厄尔苏拉交谈赫德雷。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000005",
+     "question": "从「霜叶」出发，经过一个中间实体可以到达「乔迪」。这个中间实体叫什么？",
+     "gold": [
+      "凯尔希"
+     ],
+     "gold_in_graph": [
+      "凯尔希"
+     ],
+     "anchors": [
+      "霜叶",
+      "乔迪"
+     ],
+     "anchors_in_graph": [
+      "霜叶",
+      "乔迪"
+     ],
+     "gold_chunk_ids": [
+      "activities/act17side/level_act17side_10_end#001",
+      "obt/main/level_main_04-02_beg#000"
+     ],
+     "n_hits": 20,
+     "n_units": 12,
+     "n_claims": 23,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "霜叶交谈杰西卡。杰西卡交谈霜叶。霜叶交谈凯尔希。阿米娅交谈霜叶。霜叶隶属罗德岛。克洛丝交谈霜叶。调香师交谈霜叶。陨星交谈霜叶。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000006",
+     "question": "从「月见夜」出发，经过一个中间实体可以到达「龙门」。这个中间实体叫什么？",
+     "gold": [
+      "罗德岛"
+     ],
+     "gold_in_graph": [
+      "罗德岛"
+     ],
+     "anchors": [
+      "月见夜",
+      "龙门"
+     ],
+     "anchors_in_graph": [
+      "月见夜",
+      "龙门"
+     ],
+     "gold_chunk_ids": [
+      "obt/main/level_main_04-07_end#000",
+      "obt/memory/story_midn_1_1#005"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 34,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "月见夜交谈梓兰。月见夜保护泡普卡。武士交谈月见夜。月见夜冲突雷之主。月见夜感染矿石病。斑点交谈月见夜。泡普卡交谈月见夜。梓兰交谈月见夜。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000008",
+     "question": "从「夏栎」出发，经过一个中间实体可以到达「沃伦姆德」。这个中间实体叫什么？",
+     "gold": [
+      "罗德岛"
+     ],
+     "gold_in_graph": [
+      "罗德岛"
+     ],
+     "anchors": [
+      "夏栎",
+      "沃伦姆德"
+     ],
+     "anchors_in_graph": [
+      "夏栎",
+      "沃伦姆德"
+     ],
+     "gold_chunk_ids": [
+      "activities/act11d0/level_act11d0_02_end#000",
+      "obt/memory/story_quercu_1_1#009"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 15,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "沃伦姆德包含十二音街道。塞弗林驻守沃伦姆德。安托救助沃伦姆德。沃伦姆德包含冬灵。沃伦姆德位于莱塔尼亚。塔佳娜隶属沃伦姆德。议事厅位于沃伦姆德。L-44“留声机”属于沃伦姆德。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000009",
+     "question": "已知「铃兰」通过唯一一个中间实体与「监正会」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "罗德岛"
+     ],
+     "gold_in_graph": [
+      "罗德岛"
+     ],
+     "anchors": [
+      "铃兰",
+      "监正会"
+     ],
+     "anchors_in_graph": [
+      "铃兰",
+      "监正会"
+     ],
+     "gold_chunk_ids": [
+      "activities/act11d0/level_act11d0_04_end#000",
+      "activities/act13side/level_act13side_10_end#014"
+     ],
+     "n_hits": 20,
+     "n_units": 11,
+     "n_claims": 20,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "监正会敌对商业联合会。商业联合会敌对监正会。铃兰隶属罗德岛。铃兰交谈亚叶。亚叶交谈铃兰。铃兰师从凯尔希。德米安任职监正会。铃兰交谈安洁莉娜。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000010",
+     "question": "从「Scout」出发，经过一个中间实体可以到达「企鹅物流」。这个中间实体叫什么？",
+     "gold": [
+      "罗德岛"
+     ],
+     "gold_in_graph": [
+      "罗德岛"
+     ],
+     "anchors": [
+      "Scout",
+      "企鹅物流"
+     ],
+     "anchors_in_graph": [
+      "Scout",
+      "企鹅物流"
+     ],
+     "gold_chunk_ids": [
+      "activities/act4d0/level_act4d0_st01#008",
+      "obt/main/level_main_02-04_beg#000"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 13,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "卡彭敌对企鹅物流。甘比诺敌对企鹅物流。拜松隶属企鹅物流。空隶属企鹅物流。能天使隶属企鹅物流。罗德岛同盟企鹅物流。能天使任职企鹅物流。空前往贫民窟。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000012",
+     "question": "从「柳德米拉」出发，经过一个中间实体可以到达「妮芙」。这个中间实体叫什么？",
+     "gold": [
+      "阿米娅"
+     ],
+     "gold_in_graph": [
+      "阿米娅"
+     ],
+     "anchors": [
+      "柳德米拉",
+      "妮芙"
+     ],
+     "anchors_in_graph": [
+      "柳德米拉",
+      "妮芙"
+     ],
+     "gold_chunk_ids": [
+      "obt/memory/story_crosly_1_1#000",
+      "obt/rogue/rogue_4/monthrecord/month_record_rogue_4_8_1#000"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 49,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": false,
+     "C_gold_in_context": false,
+     "D_gold_in_claim": false,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": false,
+     "judge": null,
+     "answer": "伊雷妮交谈柳德米拉。雷德交谈柳德米拉。柳德米拉前往乌萨斯。柳德米拉交谈雷德。柳德米拉隶属整合运动。柳德米拉持有石棺。柳德米拉听命于塔露拉。柳德米拉听命于伊雷妮。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000013",
+     "question": "已知「希尔达」通过唯一一个中间实体与「蜜莓」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "罗德岛"
+     ],
+     "gold_in_graph": [
+      "罗德岛"
+     ],
+     "anchors": [
+      "希尔达",
+      "蜜莓"
+     ],
+     "anchors_in_graph": [
+      "希尔达",
+      "蜜莓"
+     ],
+     "gold_chunk_ids": [
+      "obt/main/level_main_15-11_beg#004",
+      "obt/memory/story_glider_1_1#007"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 15,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "希尔达救助阿纳托利。希尔达交谈阿纳托利。阿纳托利交谈希尔达。希尔达交谈屈光者。扎亚交谈希尔达。希尔达使用源石晶簇。普瑞赛斯交谈希尔达。巴尔斯交谈希尔达。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000014",
+     "question": "从「莱欧斯」出发，经过一个中间实体可以到达「赤霄」。这个中间实体叫什么？",
+     "gold": [
+      "阿米娅"
+     ],
+     "gold_in_graph": [
+      "阿米娅"
+     ],
+     "anchors": [
+      "莱欧斯",
+      "赤霄"
+     ],
+     "anchors_in_graph": [
+      "莱欧斯",
+      "赤霄"
+     ],
+     "gold_chunk_ids": [
+      "activities/act36side/level_act36side_08_beg#003",
+      "obt/main/level_main_08-16_end#006"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 95,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "莱欧斯交谈墨魉。莱欧斯交谈黎。莱欧斯研究墨魉。阿米娅交谈莱欧斯。莱欧斯研究黎博利。莱欧斯交谈阿米娅。齐尔查克交谈莱欧斯。莱欧斯交谈玛露西尔。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000015",
+     "question": "已知「嘉维尔」通过唯一一个中间实体与「W」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "凯尔希"
+     ],
+     "gold_in_graph": [
+      "凯尔希"
+     ],
+     "anchors": [
+      "嘉维尔",
+      "W"
+     ],
+     "anchors_in_graph": [
+      "嘉维尔",
+      "W"
+     ],
+     "gold_chunk_ids": [
+      "activities/act12d0/level_act12d0_09_end#004",
+      "obt/main/level_main_14-01_end#001"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 44,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": false,
+     "D_gold_in_claim": false,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": false,
+     "judge": null,
+     "answer": "特米米交谈嘉维尔。嘉维尔感染矿石病。嘉维尔交谈博士。嘉维尔救助特米米。嘉维尔交谈特米米。嘉维尔交谈煌。嘉维尔交谈燧石。森蚺交谈嘉维尔。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000016",
+     "question": "已知「慎楼」通过唯一一个中间实体与「太傅」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "梁洵"
+     ],
+     "gold_in_graph": [
+      "梁洵"
+     ],
+     "anchors": [
+      "慎楼",
+      "太傅"
+     ],
+     "anchors_in_graph": [
+      "慎楼",
+      "太傅"
+     ],
+     "gold_chunk_ids": [
+      "activities/act15side/level_act15side_07_beg#003",
+      "activities/act40side/level_act40side_09_beg#003"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 26,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "太合交谈慎楼。太傅交谈重岳。太傅交谈年。梁洵交谈太傅。太傅交谈梁洵。重岳交谈太傅。重岳指导太傅。太傅交谈魏彦吾。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000017",
+     "question": "已知「熔泉」通过唯一一个中间实体与「Friston-3」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "煌"
+     ],
+     "gold_in_graph": [
+      "煌"
+     ],
+     "anchors": [
+      "熔泉",
+      "Friston-3"
+     ],
+     "anchors_in_graph": [
+      "熔泉",
+      "Friston-3"
+     ],
+     "gold_chunk_ids": [
+      "obt/main/level_main_15-13_beg#000",
+      "obt/memory/story_toddi_1_1#001"
+     ],
+     "n_hits": 20,
+     "n_units": 9,
+     "n_claims": 28,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "熔泉交谈森蚺。森蚺交谈熔泉。煌交谈熔泉。沙蜥帮敌对熔泉。熔泉交谈煌。老乔交谈熔泉。熔泉交谈老乔。熔泉交谈嘉维尔。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000018",
+     "question": "从「岳羽由加莉」出发，经过一个中间实体可以到达「思绪」。这个中间实体叫什么？",
+     "gold": [
+      "阿米娅"
+     ],
+     "gold_in_graph": [
+      "阿米娅"
+     ],
+     "anchors": [
+      "岳羽由加莉",
+      "思绪"
+     ],
+     "anchors_in_graph": [
+      "岳羽由加莉",
+      "思绪"
+     ],
+     "gold_chunk_ids": [
+      "activities/act54side/level_act54side_st02#004",
+      "obt/rogue/rogue_4/monthrecord/month_record_rogue_4_4_2#000"
+     ],
+     "n_hits": 20,
+     "n_units": 9,
+     "n_claims": 22,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "埃癸斯交谈岳羽由加莉。天田乾交谈岳羽由加莉。岳羽由加莉交谈阿米娅。岳羽由加莉交谈博士。岳羽由加莉交谈裘里奥。岳羽由加莉交谈山岸风花。结城理交谈岳羽由加莉。岳羽由加莉交谈埃癸斯。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000020",
+     "question": "从「雷尔金」出发，经过一个中间实体可以到达「高卢」。这个中间实体叫什么？",
+     "gold": [
+      "乌萨斯"
+     ],
+     "gold_in_graph": [
+      "乌萨斯"
+     ],
+     "anchors": [
+      "雷尔金",
+      "高卢"
+     ],
+     "anchors_in_graph": [
+      "雷尔金",
+      "高卢"
+     ],
+     "gold_chunk_ids": [
+      "activities/act33side/level_act33side_01_end#004",
+      "obt/main/level_main_16-10_beg#005"
+     ],
+     "n_hits": 20,
+     "n_units": 9,
+     "n_claims": 30,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "雷尔金交谈Raidian。Raidian交谈雷尔金。雷尔金同行别乔克。雷尔金位于中心矿区。别乔克师从雷尔金。尼克托交谈雷尔金。雷尔金交谈尼克托。别乔克交谈雷尔金。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000021",
+     "question": "已知「吽」通过唯一一个中间实体与「六十七」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "小黑"
+     ],
+     "gold_in_graph": [
+      "小黑"
+     ],
+     "anchors": [
+      "吽",
+      "六十七"
+     ],
+     "anchors_in_graph": [
+      "吽",
+      "六十七"
+     ],
+     "gold_chunk_ids": [
+      "activities/act13mini/level_act13mini_st01#000",
+      "activities/act13mini/level_act13mini_st02#003"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 8,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "小黑交谈六十七。小沅交谈六十七。小沅持有六十七。小黑救助六十七。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000024",
+     "question": "已知「布克」通过唯一一个中间实体与「多索雷斯」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "坎黛拉"
+     ],
+     "gold_in_graph": [
+      "坎黛拉"
+     ],
+     "anchors": [
+      "布克",
+      "多索雷斯"
+     ],
+     "anchors_in_graph": [
+      "布克",
+      "多索雷斯"
+     ],
+     "gold_chunk_ids": [
+      "activities/act12side/level_act12side_st03#001",
+      "obt/memory/story_takila_1_1#005"
+     ],
+     "n_hits": 20,
+     "n_units": 9,
+     "n_claims": 12,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "布克隶属坎黛拉。布克交谈埃内斯托。布克听命于坎黛拉。坎黛拉位于多索雷斯。克里斯达尔艺术馆位于多索雷斯。坎黛拉离开多索雷斯。坎黛拉任职多索雷斯。拉菲艾拉位于多索雷斯。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000025",
+     "question": "已知「卡珊卓拉」通过唯一一个中间实体与「米奥」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "缇缇"
+     ],
+     "gold_in_graph": [
+      "缇缇"
+     ],
+     "anchors": [
+      "卡珊卓拉",
+      "米奥"
+     ],
+     "anchors_in_graph": [
+      "卡珊卓拉",
+      "米奥"
+     ],
+     "gold_chunk_ids": [
+      "activities/act48side/level_act48side_06_beg#000",
+      "activities/act48side/level_act48side_st02#000"
+     ],
+     "n_hits": 20,
+     "n_units": 9,
+     "n_claims": 25,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "赞索斯交谈卡珊卓拉。卡珊卓拉交谈里底娅。缇缇交谈卡珊卓拉。赫卡德墨交谈卡珊卓拉。米奥交谈缇缇。卡珊卓拉隶属恩底弥翁神殿。卡珊卓拉交谈缇缇。缇缇交谈米奥。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000026",
+     "question": "从「禾生」出发，经过一个中间实体可以到达「神农」。这个中间实体叫什么？",
+     "gold": [
+      "黍"
+     ],
+     "gold_in_graph": [
+      "黍"
+     ],
+     "anchors": [
+      "禾生",
+      "神农"
+     ],
+     "anchors_in_graph": [
+      "禾生",
+      "神农"
+     ],
+     "gold_chunk_ids": [
+      "activities/act31side/level_act31side_01_end#004",
+      "activities/act31side/level_act31side_08_beg#002"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 20,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "老乡长交谈禾生。禾生交谈左乐。神农创建二十四节气。神农离开大荒城。禾生师从黍。神农位于大荒城。禾生交谈小满。小满交谈禾生。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000029",
+     "question": "已知「左乐」通过唯一一个中间实体与「雷姆必拓」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "克洛丝"
+     ],
+     "gold_in_graph": [
+      "克洛丝"
+     ],
+     "anchors": [
+      "左乐",
+      "雷姆必拓"
+     ],
+     "anchors_in_graph": [
+      "左乐",
+      "雷姆必拓"
+     ],
+     "gold_chunk_ids": [
+      "activities/act15side/level_act15side_04_end#005",
+      "activities/act15side/level_act15side_06_beg#001"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 9,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "左乐交谈尚冢。左乐隶属司岁台。暴行前往雷姆必拓。胡萝卜罐头产自雷姆必拓。暴行离开雷姆必拓。尤立卡自治州位于雷姆必拓。零号公路位于雷姆必拓。克洛丝交谈左乐。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000033",
+     "question": "已知「柳德米拉」通过唯一一个中间实体与「德拉克」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "塔露拉"
+     ],
+     "gold_in_graph": [
+      "塔露拉"
+     ],
+     "anchors": [
+      "柳德米拉",
+      "德拉克"
+     ],
+     "anchors_in_graph": [
+      "柳德米拉",
+      "德拉克"
+     ],
+     "gold_chunk_ids": [
+      "obt/main/level_main_08-01_beg#002",
+      "obt/memory/story_crosly_1_1#004"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 43,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "柳德米拉交谈伊雷妮。索默尔交谈柳德米拉。柳德米拉交谈索默尔。柳德米拉交谈红。雷德交谈柳德米拉。柳德米拉位于新沃尔西尼。柳德米拉位于叙拉古。柳德米拉持有乌萨斯。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000034",
+     "question": "从「薇尔丽芙」出发，经过一个中间实体可以到达「龙门」。这个中间实体叫什么？",
+     "gold": [
+      "莫斯提马"
+     ],
+     "gold_in_graph": [
+      "莫斯提马"
+     ],
+     "anchors": [
+      "薇尔丽芙",
+      "龙门"
+     ],
+     "anchors_in_graph": [
+      "薇尔丽芙",
+      "龙门"
+     ],
+     "gold_chunk_ids": [
+      "activities/act16side/level_act16side_02_beg#005",
+      "obt/memory/story_mostma_2_1#006"
+     ],
+     "n_hits": 20,
+     "n_units": 9,
+     "n_claims": 24,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "帕特里奇昂交谈薇尔丽芙。崖心交谈薇尔丽芙。菲亚梅塔交谈薇尔丽芙。薇尔丽芙交谈安多恩。安多恩交谈薇尔丽芙。薇尔丽芙交谈菲亚梅塔。薇尔丽芙敌对安多恩。薇尔丽芙指挥费德里科。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000035",
+     "question": "已知「老船夫」通过唯一一个中间实体与「林雨霞」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "老鲤"
+     ],
+     "gold_in_graph": [
+      "老鲤"
+     ],
+     "anchors": [
+      "老船夫",
+      "林雨霞"
+     ],
+     "anchors_in_graph": [
+      "老船夫",
+      "林雨霞"
+     ],
+     "gold_chunk_ids": [
+      "activities/act15side/level_act15side_01_end#002",
+      "activities/act23side/level_act23side_04_end#001"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 8,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "老船夫交谈老鲤。老鲤交谈老船夫。太傅交谈老船夫。老船夫位于尚蜀。孟铁衣交谈林雨霞。林雨霞隶属近卫局。林雨霞交谈孟铁衣。孟铁衣敌对林雨霞。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000036",
+     "question": "从「艾丝黛尔」出发，经过一个中间实体可以到达「龙门贫民区」。这个中间实体叫什么？",
+     "gold": [
+      "罗德岛"
+     ],
+     "gold_in_graph": [
+      "罗德岛"
+     ],
+     "anchors": [
+      "艾丝黛尔",
+      "龙门贫民区"
+     ],
+     "anchors_in_graph": [
+      "艾丝黛尔",
+      "龙门贫民区"
+     ],
+     "gold_chunk_ids": [
+      "obt/main/level_main_02-04_beg#000",
+      "obt/memory/story_estell_1_1#001"
+     ],
+     "n_hits": 20,
+     "n_units": 11,
+     "n_claims": 41,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "特米米交谈艾丝黛尔。艾丝黛尔交谈特米米。艾丝黛尔隶属罗德岛。灰掌交谈艾丝黛尔。艾丝黛尔保护特米米。艾丝黛尔同行微风。艾丝黛尔交谈克莱赫尔爵士。特米米同行艾丝黛尔。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000037",
+     "question": "从「莉莉娅」出发，经过一个中间实体可以到达「切尔诺伯格」。这个中间实体叫什么？",
+     "gold": [
+      "凯尔希"
+     ],
+     "gold_in_graph": [
+      "凯尔希"
+     ],
+     "anchors": [
+      "莉莉娅",
+      "切尔诺伯格"
+     ],
+     "anchors_in_graph": [
+      "莉莉娅",
+      "切尔诺伯格"
+     ],
+     "gold_chunk_ids": [
+      "activities/act18d0/level_act18d0_02_beg#003",
+      "obt/main/level_main_08-14_end#000"
+     ],
+     "n_hits": 20,
+     "n_units": 12,
+     "n_claims": 30,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "莉莉娅交谈凯尔希。莉莉娅敌对万尼亚大公。莉莉娅亲属阿斯特罗夫。莉莉娅敌对谢尔盖。鲍里斯侯爵位于切尔诺伯格。凯尔希交谈莉莉娅。莉莉娅亲属路易莎。莉莉娅前往萨米。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000038",
+     "question": "从「格拉尼」出发，经过一个中间实体可以到达「沃伦姆德」。这个中间实体叫什么？",
+     "gold": [
+      "罗德岛"
+     ],
+     "gold_in_graph": [
+      "罗德岛"
+     ],
+     "anchors": [
+      "格拉尼",
+      "沃伦姆德"
+     ],
+     "anchors_in_graph": [
+      "格拉尼",
+      "沃伦姆德"
+     ],
+     "gold_chunk_ids": [
+      "activities/a001/level_a001_03_end#000",
+      "activities/act11d0/level_act11d0_02_end#000"
+     ],
+     "n_hits": 20,
+     "n_units": 11,
+     "n_claims": 24,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "格拉尼保护可萝尔。格拉尼交谈苏茜。格拉尼隶属卡拉顿警备队。苏茜交谈格拉尼。沃伦姆德包含十二音街道。格拉尼同行可萝尔。安托救助沃伦姆德。沃伦姆德包含冬灵。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000041",
+     "question": "已知「生态园」通过唯一一个中间实体与「生态科」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "缪尔赛思"
+     ],
+     "gold_in_graph": [
+      "缪尔赛思"
+     ],
+     "anchors": [
+      "生态园",
+      "生态科"
+     ],
+     "anchors_in_graph": [
+      "生态园",
+      "生态科"
+     ],
+     "gold_chunk_ids": [
+      "activities/act47side/level_act47side_st02#005",
+      "obt/memory/story_kafka_1_1#005"
+     ],
+     "n_hits": 20,
+     "n_units": 9,
+     "n_claims": 4,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": false,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": false,
+     "judge": null,
+     "answer": "生态园包含极地区。鞘叶榉位于生态园。克丽斯腾创建生态园。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000042",
+     "question": "已知「特蕾西娅」通过唯一一个中间实体与「萨尔贡」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "博士"
+     ],
+     "gold_in_graph": [
+      "博士"
+     ],
+     "anchors": [
+      "特蕾西娅",
+      "萨尔贡"
+     ],
+     "anchors_in_graph": [
+      "特蕾西娅",
+      "萨尔贡"
+     ],
+     "gold_chunk_ids": [
+      "activities/act25side/level_act25side_09_end#009",
+      "obt/memory/story_fmout_1_1#000"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 34,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "凯尔希交谈特蕾西娅。特蕾西娅交谈凯尔希。巴别塔同盟萨尔贡。特蕾西娅冲突罗德岛。特蕾西娅领导萨卡兹。特蕾西娅交谈阿米娅。特蕾西娅任职巴别塔。特蕾西娅救助萨卡兹。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000043",
+     "question": "已知「Guard」通过唯一一个中间实体与「文明的存续」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "阿米娅"
+     ],
+     "gold_in_graph": [
+      "阿米娅"
+     ],
+     "anchors": [
+      "Guard",
+      "文明的存续"
+     ],
+     "anchors_in_graph": [
+      "Guard",
+      "文明的存续"
+     ],
+     "gold_chunk_ids": [
+      "obt/main/level_main_07-07_end#001",
+      "obt/main/level_main_tr28_end#002"
+     ],
+     "n_hits": 20,
+     "n_units": 11,
+     "n_claims": 7,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "特蕾西娅使用文明的存续。阿米娅使用文明的存续。凯尔希使用文明的存续。王冠称为文明的存续。特蕾西娅持有文明的存续。阿米娅称为文明的存续。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000044",
+     "question": "从「莫不服」出发，经过一个中间实体可以到达「温蒂」。这个中间实体叫什么？",
+     "gold": [
+      "煌"
+     ],
+     "gold_in_graph": [
+      "煌"
+     ],
+     "anchors": [
+      "莫不服",
+      "温蒂"
+     ],
+     "anchors_in_graph": [
+      "莫不服",
+      "温蒂"
+     ],
+     "gold_chunk_ids": [
+      "activities/act40side/level_act40side_07_beg#003",
+      "obt/memory/story_huang_1_1#003"
+     ],
+     "n_hits": 20,
+     "n_units": 11,
+     "n_claims": 29,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "莫不服交谈老姜。莫不服属于鼎丰楼。莫不服前往百灶。莫不服交谈麟青砚。麟青砚交谈莫不服。老姜交谈莫不服。莫不服交谈煌。莫不服交谈余味居。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000045",
+     "question": "从「莱伊」出发，经过一个中间实体可以到达「灰礼帽」。这个中间实体叫什么？",
+     "gold": [
+      "阿米娅"
+     ],
+     "gold_in_graph": [
+      "阿米娅"
+     ],
+     "anchors": [
+      "莱伊",
+      "灰礼帽"
+     ],
+     "anchors_in_graph": [
+      "莱伊",
+      "灰礼帽"
+     ],
+     "gold_chunk_ids": [
+      "activities/act16mini/level_act16mini_st06#005",
+      "obt/main/level_main_12-03_end#003"
+     ],
+     "n_hits": 20,
+     "n_units": 11,
+     "n_claims": 38,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "烈夏交谈灰礼帽。灰礼帽隶属开斯特公爵。烈夏救助灰礼帽。灰礼帽交谈烈夏。灰礼帽同行烈夏。烈夏敌对灰礼帽。灰礼帽交谈锏。灰礼帽研究耶拉冈德像。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000047",
+     "question": "从「弥利亚留姆」出发，经过一个中间实体可以到达「信标塔」。这个中间实体叫什么？",
+     "gold": [
+      "海嗣"
+     ],
+     "gold_in_graph": [
+      "海嗣"
+     ],
+     "anchors": [
+      "弥利亚留姆",
+      "信标塔"
+     ],
+     "anchors_in_graph": [
+      "弥利亚留姆",
+      "信标塔"
+     ],
+     "gold_chunk_ids": [
+      "activities/act34side/level_act34side_04_beg#003",
+      "activities/act34side/level_act34side_07_end#011"
+     ],
+     "n_hits": 20,
+     "n_units": 9,
+     "n_claims": 13,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "信标塔位于弥利亚留姆。乌尔比安驻守信标塔。海嗣位于信标塔。克莱门莎指挥弥利亚留姆。布雷奥甘参与信标塔。布雷奥甘前往弥利亚留姆。乔迪位于信标塔。海嗣前往弥利亚留姆。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900001",
+     "question": "已知「九」通过唯一一个中间实体与「坎黛拉」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "陈"
+     ],
+     "gold_in_graph": [
+      "陈"
+     ],
+     "anchors": [
+      "九",
+      "坎黛拉"
+     ],
+     "anchors_in_graph": [
+      "九",
+      "坎黛拉"
+     ],
+     "gold_chunk_ids": [
+      "activities/act12side/level_act12side_st01#004",
+      "obt/main/level_st_14-03#011"
+     ],
+     "n_hits": 20,
+     "n_units": 9,
+     "n_claims": 24,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "坎黛拉交谈林雨霞。坎黛拉交谈星熊。潘乔交谈坎黛拉。坎黛拉交谈潘乔。坎黛拉交谈陈。林雨霞交谈坎黛拉。坎黛拉交谈拉菲艾拉。埃内斯托交谈坎黛拉。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900005",
+     "question": "从「华法琳」出发，经过一个中间实体可以到达「黑冠」。这个中间实体叫什么？",
+     "gold": [
+      "阿米娅"
+     ],
+     "gold_in_graph": [
+      "阿米娅"
+     ],
+     "anchors": [
+      "华法琳",
+      "黑冠"
+     ],
+     "anchors_in_graph": [
+      "华法琳",
+      "黑冠"
+     ],
+     "gold_chunk_ids": [
+      "obt/memory/story_bldsk_2_1#007",
+      "obt/rogue/rogue_4/endbook/endbook_rogue_4_4_4#001"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 26,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "华法琳研究矿石病。华法琳指导嘉维尔。华法琳使用安慰剂。华法琳持有糖果。华法琳交谈嘉维尔。嘉维尔交谈华法琳。华法琳隶属罗德岛。阿米娅交谈华法琳。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900006",
+     "question": "从「杜宾」出发，经过一个中间实体可以到达「佐菲娅」。这个中间实体叫什么？",
+     "gold": [
+      "光头马丁"
+     ],
+     "gold_in_graph": [
+      "光头马丁"
+     ],
+     "anchors": [
+      "杜宾",
+      "佐菲娅"
+     ],
+     "anchors_in_graph": [
+      "杜宾",
+      "佐菲娅"
+     ],
+     "gold_chunk_ids": [
+      "activities/act13d5/level_act13d5_08_beg#006",
+      "obt/rogue/rogue_6/monthrecord/month_record_rogue_6_2_1#001"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 32,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "玛莉娅交谈佐菲娅。佐菲娅交谈光头马丁。佐菲娅指导玛莉娅。佐菲娅隶属临光家。埃尔交谈佐菲娅。佐菲娅参与特锦赛。佐菲娅亲属玛莉娅。佐菲娅交谈玛莉娅。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900008",
+     "question": "从「陈昭芊」出发，经过一个中间实体可以到达「诗怀雅」。这个中间实体叫什么？",
+     "gold": [
+      "陈"
+     ],
+     "gold_in_graph": [
+      "陈"
+     ],
+     "anchors": [
+      "陈昭芊",
+      "诗怀雅"
+     ],
+     "anchors_in_graph": [
+      "陈昭芊",
+      "诗怀雅"
+     ],
+     "gold_chunk_ids": [
+      "activities/act12side/level_act12side_st04#001",
+      "activities/act49side/level_act49side_st02#000"
+     ],
+     "n_hits": 20,
+     "n_units": 11,
+     "n_claims": 24,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "诗怀雅交谈埃尼斯。陈昭芊交谈陈。陈昭芊任职天镜阁。陈昭芊研究家史。陈昭芊离开百灶。陈昭芊隶属陈家。陈昭芊持有《百灶岁阳杂俎》。陈昭芊任职太史阁。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900009",
+     "question": "从「鲁斯」出发，经过一个中间实体可以到达「塞斯克」。这个中间实体叫什么？",
+     "gold": [
+      "伊西多"
+     ],
+     "gold_in_graph": [
+      "伊西多"
+     ],
+     "anchors": [
+      "鲁斯",
+      "塞斯克"
+     ],
+     "anchors_in_graph": [
+      "鲁斯",
+      "塞斯克"
+     ],
+     "gold_chunk_ids": [
+      "activities/act39side/level_act39side_02_end#000",
+      "activities/act39side/level_act39side_02_end#002"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 40,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "鲁斯交谈塞斯克。塞斯克交谈鲁斯。鲁斯指挥塞斯克。塞斯克听命于鲁斯。塞斯克交谈伊西多。伊西多交谈塞斯克。鲁斯交谈胡安娜。胡安娜交谈鲁斯。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900010",
+     "question": "已知「福尔图娜」通过唯一一个中间实体与「斯特凡诺」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "里凯莱"
+     ],
+     "gold_in_graph": [
+      "里凯莱"
+     ],
+     "anchors": [
+      "福尔图娜",
+      "斯特凡诺"
+     ],
+     "anchors_in_graph": [
+      "福尔图娜",
+      "斯特凡诺"
+     ],
+     "gold_chunk_ids": [
+      "activities/act26side/level_act26side_03_beg#002",
+      "activities/act26side/level_act26side_06_beg#005"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 38,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "福尔图娜交谈斯特凡诺。斯特凡诺交谈福尔图娜。福尔图娜交谈德尔菲娜。克莱芒交谈福尔图娜。福尔图娜前往拉特兰。福尔图娜交谈里凯莱。福尔图娜属于萨科塔。里凯莱交谈福尔图娜。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900013",
+     "question": "从「雷蛇」出发，经过一个中间实体可以到达「早露」。这个中间实体叫什么？",
+     "gold": [
+      "阿米娅"
+     ],
+     "gold_in_graph": [
+      "阿米娅"
+     ],
+     "anchors": [
+      "雷蛇",
+      "早露"
+     ],
+     "anchors_in_graph": [
+      "雷蛇",
+      "早露"
+     ],
+     "gold_chunk_ids": [
+      "obt/main/level_main_04-01_end#001",
+      "obt/main/level_main_15-02_beg#004"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 31,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": false,
+     "D_gold_in_claim": false,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": false,
+     "judge": null,
+     "answer": "芙兰卡交谈雷蛇。雷蛇交谈芙兰卡。早露交谈古米。雷蛇指挥芙兰卡。雷蛇离开黑钢。古米交谈早露。雷蛇指挥罗拉。西尔维娅交谈雷蛇。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900014",
+     "question": "从「阿玛丽」出发，经过一个中间实体可以到达「里凯莱」。这个中间实体叫什么？",
+     "gold": [
+      "斯普莉雅"
+     ],
+     "gold_in_graph": [
+      "斯普莉雅"
+     ],
+     "anchors": [
+      "阿玛丽",
+      "里凯莱"
+     ],
+     "anchors_in_graph": [
+      "阿玛丽",
+      "里凯莱"
+     ],
+     "gold_chunk_ids": [
+      "activities/act26side/level_act26side_03_end#003",
+      "obt/memory/story_spuria_1_1#001"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 27,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": false,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": false,
+     "judge": null,
+     "answer": "里凯莱交谈费德里科。费德里科交谈里凯莱。里凯莱持有机密文件。奥伦交谈里凯莱。里凯莱属于执行者。里凯莱研究斯特凡诺。里凯莱交谈菲亚梅塔。里凯莱隶属公证所。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900018",
+     "question": "从「哈莉」出发，经过一个中间实体可以到达「汐斯塔火山」。这个中间实体叫什么？",
+     "gold": [
+      "阿黛尔"
+     ],
+     "gold_in_graph": [
+      "阿黛尔"
+     ],
+     "anchors": [
+      "哈莉",
+      "汐斯塔火山"
+     ],
+     "anchors_in_graph": [
+      "哈莉",
+      "汐斯塔火山"
+     ],
+     "gold_chunk_ids": [
+      "activities/act27side/level_act27side_05_end#000",
+      "activities/act27side/level_act27side_st03#005"
+     ],
+     "n_hits": 20,
+     "n_units": 9,
+     "n_claims": 21,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": false,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": false,
+     "judge": null,
+     "answer": "伯德交谈哈莉。哈莉敌对赫尔曼。哈莉交谈科斯达。科斯达交谈哈莉。哈莉持有纯白火山。天火前往汐斯塔火山。哈莉位于汐斯塔。哈莉创建纯白火山。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900019",
+     "question": "从「潘乔」出发，经过一个中间实体可以到达「天镜阁」。这个中间实体叫什么？",
+     "gold": [
+      "陈"
+     ],
+     "gold_in_graph": [
+      "陈"
+     ],
+     "anchors": [
+      "潘乔",
+      "天镜阁"
+     ],
+     "anchors_in_graph": [
+      "潘乔",
+      "天镜阁"
+     ],
+     "gold_chunk_ids": [
+      "activities/act12side/level_act12side_09_beg#003",
+      "activities/act49side/level_act49side_03_beg#002"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 21,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "潘乔亲属埃内斯托。潘乔交谈陈。潘乔交谈埃内斯托。均位于天镜阁。重岳位于天镜阁。望位于天镜阁。潘乔敌对坎黛拉。司岁台使用天镜阁。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900021",
+     "question": "已知「苏茜」通过唯一一个中间实体与「特里蒙」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "罗德岛"
+     ],
+     "gold_in_graph": [
+      "罗德岛"
+     ],
+     "anchors": [
+      "苏茜",
+      "特里蒙"
+     ],
+     "anchors_in_graph": [
+      "苏茜",
+      "特里蒙"
+     ],
+     "gold_chunk_ids": [
+      "activities/act25side/level_act25side_01_beg#000",
+      "obt/memory/story_gdglow_1_1#002"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 51,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "夏栎交谈苏茜。苏茜交谈夏栎。苏茜前往卡拉顿。苏茜交谈天火。夏栎赠予苏茜。苏茜持有兑奖券。苏茜隶属罗德岛。毕恩交谈苏茜。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900022",
+     "question": "从「萨尔瓦多」出发，经过一个中间实体可以到达「瓦列里奥」。这个中间实体叫什么？",
+     "gold": [
+      "特菲"
+     ],
+     "gold_in_graph": [
+      "特菲"
+     ],
+     "anchors": [
+      "萨尔瓦多",
+      "瓦列里奥"
+     ],
+     "anchors_in_graph": [
+      "萨尔瓦多",
+      "瓦列里奥"
+     ],
+     "gold_chunk_ids": [
+      "activities/act52side/level_act52side_06_beg#002",
+      "activities/act52side/level_act52side_08_end#005"
+     ],
+     "n_hits": 20,
+     "n_units": 9,
+     "n_claims": 19,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "特菲交谈萨尔瓦多。奥卢斯交谈瓦列里奥。瓦列里奥敌对圣徒卡门。萨尔瓦多效忠圣徒卡门。特菲保护萨尔瓦多。特菲交谈瓦列里奥。萨尔瓦多效忠伊比利亚。萨尔瓦多交谈特菲。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900026",
+     "question": "已知「预言家」通过唯一一个中间实体与「文森特伯爵」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "凯尔希"
+     ],
+     "gold_in_graph": [
+      "凯尔希"
+     ],
+     "anchors": [
+      "预言家",
+      "文森特伯爵"
+     ],
+     "anchors_in_graph": [
+      "预言家",
+      "文森特伯爵"
+     ],
+     "gold_chunk_ids": [
+      "activities/act18d0/level_act18d0_08_end#008",
+      "obt/main/level_main_15-12_end#000"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 16,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "凯尔希交谈文森特伯爵。海蒂交谈文森特伯爵。文森特伯爵前往伦蒂尼姆。文森特伯爵交谈海蒂。文森特伯爵交谈凯尔希。文森特伯爵保护汤姆森。海蒂亲属文森特伯爵。文森特伯爵交谈麦田男爵。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900031",
+     "question": "从「维多利亚」出发，经过一个中间实体可以到达「海嗣」。这个中间实体叫什么？",
+     "gold": [
+      "泰拉"
+     ],
+     "gold_in_graph": [
+      "泰拉"
+     ],
+     "anchors": [
+      "维多利亚",
+      "海嗣"
+     ],
+     "anchors_in_graph": [
+      "维多利亚",
+      "海嗣"
+     ],
+     "gold_chunk_ids": [
+      "activities/act34side/level_act34side_08_beg#007",
+      "obt/main/level_main_11-02_end#001"
+     ],
+     "n_hits": 20,
+     "n_units": 11,
+     "n_claims": 15,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": false,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": false,
+     "judge": null,
+     "answer": "幽灵鲨交战海嗣。维多利亚救助谢拉格。维多利亚赠予谢拉格。维多利亚同盟喀兰贸易。维多利亚同盟谢拉格。维多利亚交谈哥伦比亚。开斯特家族位于维多利亚。海蒂保护维多利亚。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900033",
+     "question": "已知「铁斋」通过唯一一个中间实体与「神社」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "星熊"
+     ],
+     "gold_in_graph": [
+      "星熊"
+     ],
+     "anchors": [
+      "铁斋",
+      "神社"
+     ],
+     "anchors_in_graph": [
+      "铁斋",
+      "神社"
+     ],
+     "gold_chunk_ids": [
+      "activities/act44side/level_act44side_03_beg#003",
+      "activities/act44side/level_act44side_06_beg#005"
+     ],
+     "n_hits": 20,
+     "n_units": 9,
+     "n_claims": 16,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "铁斋持有锻冶町。哲也交谈铁斋。星熊亲属铁斋。星熊前往神社。哲也亲属铁斋。铁斋领导金石会。三船破坏神社。三船敌对铁斋。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900034",
+     "question": "从「暴行」出发，经过一个中间实体可以到达「石棺」。这个中间实体叫什么？",
+     "gold": [
+      "凯尔希"
+     ],
+     "gold_in_graph": [
+      "凯尔希"
+     ],
+     "anchors": [
+      "暴行",
+      "石棺"
+     ],
+     "anchors_in_graph": [
+      "暴行",
+      "石棺"
+     ],
+     "gold_chunk_ids": [
+      "activities/act16mini/level_act16mini_st04#011",
+      "obt/main/level_main_15-14_end#002"
+     ],
+     "n_hits": 20,
+     "n_units": 9,
+     "n_claims": 15,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "暴行前往雷姆必拓。暴行交谈博士。博士交谈暴行。暴行交谈阿米娅。吉姆赠予暴行。暴行同行小锅盖。暴行赠予阿米娅。石棺位于泽尔格勒保密区研究所。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900037",
+     "question": "从「温蒂」出发，经过一个中间实体可以到达「近卫局」。这个中间实体叫什么？",
+     "gold": [
+      "罗德岛"
+     ],
+     "gold_in_graph": [
+      "罗德岛"
+     ],
+     "anchors": [
+      "温蒂",
+      "近卫局"
+     ],
+     "anchors_in_graph": [
+      "温蒂",
+      "近卫局"
+     ],
+     "gold_chunk_ids": [
+      "activities/act39side/level_act39side_02_beg#004",
+      "obt/main/level_main_06-01_end#002"
+     ],
+     "n_hits": 20,
+     "n_units": 12,
+     "n_claims": 28,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "近卫局敌对整合运动。近卫局位于龙门。近卫局指挥罗德岛。近卫局交战兵俑。陈隶属近卫局。近卫局交战整合运动。近卫局敌对兵俑。兵俑前往近卫局。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900038",
+     "question": "已知「守院人」通过唯一一个中间实体与「玻利瓦尔」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "杜宾"
+     ],
+     "gold_in_graph": [
+      "杜宾"
+     ],
+     "anchors": [
+      "守院人",
+      "玻利瓦尔"
+     ],
+     "anchors_in_graph": [
+      "守院人",
+      "玻利瓦尔"
+     ],
+     "gold_chunk_ids": [
+      "activities/act7d5/level_act7d5_st06#007",
+      "obt/memory/story_doberm_1_1#005"
+     ],
+     "n_hits": 20,
+     "n_units": 9,
+     "n_claims": 19,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "守院人位于玻利瓦尔。守院人交谈杜宾。杜宾交谈守院人。守院人制造石雕。杜宾离开玻利瓦尔。玻利瓦尔隶属莱塔尼亚。多索雷斯位于玻利瓦尔。热狗产自玻利瓦尔。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900039",
+     "question": "已知「飞空艇的“幽灵”」通过唯一一个中间实体与「Logos」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "阿米娅"
+     ],
+     "gold_in_graph": [
+      "阿米娅"
+     ],
+     "anchors": [
+      "飞空艇的“幽灵”",
+      "Logos"
+     ],
+     "anchors_in_graph": [
+      "飞空艇的“幽灵”",
+      "Logos"
+     ],
+     "gold_chunk_ids": [
+      "obt/main/level_main_14-02_beg#005",
+      "obt/main/level_main_14-15_beg#001"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 8,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": false,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": false,
+     "judge": null,
+     "answer": "死魂灵位于飞空艇。W敌对飞空艇。Logos前往飞空艇。凯尔希前往飞空艇。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900042",
+     "question": "已知「洛肯」通过唯一一个中间实体与「镇痛剂」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "罗德岛"
+     ],
+     "gold_in_graph": [
+      "罗德岛"
+     ],
+     "anchors": [
+      "洛肯",
+      "镇痛剂"
+     ],
+     "anchors_in_graph": [
+      "洛肯",
+      "镇痛剂"
+     ],
+     "gold_chunk_ids": [
+      "activities/act25side/level_act25side_04_beg#001",
+      "obt/memory/story_svrash_1_1#000"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 17,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "洛肯交谈迷迭香。缪尔赛思交谈洛肯。梅兰德基金会敌对洛肯。洛肯敌对梅兰德基金会。洛肯研究迷迭香。洛肯敌对罗德岛。罗德岛制造镇痛剂。洛肯听命于国防部。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900043",
+     "question": "已知「贝尔德」通过唯一一个中间实体与「帕特尔」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "戴菲恩"
+     ],
+     "gold_in_graph": [
+      "戴菲恩"
+     ],
+     "anchors": [
+      "贝尔德",
+      "帕特尔"
+     ],
+     "anchors_in_graph": [
+      "贝尔德",
+      "帕特尔"
+     ],
+     "gold_chunk_ids": [
+      "obt/main/level_main_12-05_end#003",
+      "obt/main/level_main_14-09_beg#003"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 21,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "贝尔德交谈麦克拉伦。贝琳亲属帕特尔。帕特尔交谈贝琳。帕特尔赠予贝琳。贝尔德救助麦克拉伦。贝尔德使用蝴蝶刀。老哈利敌对帕特尔。贝尔德隶属格拉斯哥帮。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900045",
+     "question": "从「香草」出发，经过一个中间实体可以到达「伦蒂尼姆」。这个中间实体叫什么？",
+     "gold": [
+      "罗德岛"
+     ],
+     "gold_in_graph": [
+      "罗德岛"
+     ],
+     "anchors": [
+      "香草",
+      "伦蒂尼姆"
+     ],
+     "anchors_in_graph": [
+      "香草",
+      "伦蒂尼姆"
+     ],
+     "gold_chunk_ids": [
+      "activities/act7d5/level_act7d5_st01#003",
+      "obt/memory/story_heidi_1_1#005"
+     ],
+     "n_hits": 20,
+     "n_units": 9,
+     "n_claims": 17,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "因陀罗出生于伦蒂尼姆。城防军驻守伦蒂尼姆。萨卡兹冲突伦蒂尼姆。海布里区位于伦蒂尼姆。伦蒂尼姆位于维多利亚。碎片大厦位于伦蒂尼姆。罗德岛前往伦蒂尼姆。萨卡兹持有伦蒂尼姆。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900046",
+     "question": "已知「行板」通过唯一一个中间实体与「车尔尼」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "芙蓉"
+     ],
+     "gold_in_graph": [
+      "芙蓉"
+     ],
+     "anchors": [
+      "行板",
+      "车尔尼"
+     ],
+     "anchors_in_graph": [
+      "行板",
+      "车尔尼"
+     ],
+     "gold_chunk_ids": [
+      "activities/act18side/level_act18side_st01#006",
+      "obt/memory/story_pianst_1_1#001"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 32,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "车尔尼交谈芙蓉。行板交谈芙蓉。乌尔苏拉交谈车尔尼。车尔尼交谈乌尔苏拉。行板隶属罗德岛。车尔尼位于夕照厅。车尔尼前往高庭区。芙蓉交谈行板。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900047",
+     "question": "从「均」出发，经过一个中间实体可以到达「监察司」。这个中间实体叫什么？",
+     "gold": [
+      "陈"
+     ],
+     "gold_in_graph": [
+      "陈"
+     ],
+     "anchors": [
+      "均",
+      "监察司"
+     ],
+     "anchors_in_graph": [
+      "均",
+      "监察司"
+     ],
+     "gold_chunk_ids": [
+      "activities/act49side/level_act49side_08_end#004",
+      "obt/main/level_main_06-12_end#001"
+     ],
+     "n_hits": 20,
+     "n_units": 11,
+     "n_claims": 6,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "太合交谈监察司。煌交谈监察司。魏彦吾敌对监察司。",
+     "abstained": false
+    }
+   ]
+  },
+  "holdout": {
+   "agg": {
+    "n": 39,
+    "A_gold_known_name": 39,
+    "B_gold_in_hits": 37,
+    "C_gold_in_context": 34,
+    "D_gold_in_claim": 34,
+    "E_all_anchors_known": 39,
+    "F_gold_edge_to_anchor": 34
+   },
+   "rows": [
+    {
+     "question_id": "q-mh-000002",
+     "question": "已知「岳羽由加莉」通过唯一一个中间实体与「整合运动」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "阿米娅"
+     ],
+     "gold_in_graph": [
+      "阿米娅"
+     ],
+     "anchors": [
+      "岳羽由加莉",
+      "整合运动"
+     ],
+     "anchors_in_graph": [
+      "岳羽由加莉",
+      "整合运动"
+     ],
+     "gold_chunk_ids": [
+      "activities/act54side/level_act54side_st02#004",
+      "obt/main/level_main_00-10_beg#000"
+     ],
+     "n_hits": 20,
+     "n_units": 11,
+     "n_claims": 25,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "岳羽由加莉交谈埃癸斯。天田乾交谈岳羽由加莉。岳羽由加莉交谈阿米娅。岳羽由加莉交谈山岸风花。结城理交谈岳羽由加莉。埃癸斯交谈岳羽由加莉。山岸风花交谈岳羽由加莉。岳羽由加莉交谈结城理。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000007",
+     "question": "从「律法」出发，经过一个中间实体可以到达「马切洛」。这个中间实体叫什么？",
+     "gold": [
+      "费德里科"
+     ],
+     "gold_in_graph": [
+      "费德里科"
+     ],
+     "anchors": [
+      "律法",
+      "马切洛"
+     ],
+     "anchors_in_graph": [
+      "律法",
+      "马切洛"
+     ],
+     "gold_chunk_ids": [
+      "activities/act42side/level_act42side_10_end#011",
+      "obt/memory/story_excu_2_1#008"
+     ],
+     "n_hits": 20,
+     "n_units": 9,
+     "n_claims": 14,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "费德里科交谈律法。费德里科交谈马切洛。律法属于PCS。费德里科亲属马切洛。马切洛亲属阿尔图罗。律法听命于第一适居环带自律技术产物运作公约。费德里科隶属律法。律法交谈费德里科。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000011",
+     "question": "从「文月」出发，经过一个中间实体可以到达「霜叶」。这个中间实体叫什么？",
+     "gold": [
+      "阿米娅"
+     ],
+     "gold_in_graph": [
+      "阿米娅"
+     ],
+     "anchors": [
+      "文月",
+      "霜叶"
+     ],
+     "anchors_in_graph": [
+      "文月",
+      "霜叶"
+     ],
+     "gold_chunk_ids": [
+      "activities/act6d5/level_act6d5_st02#000",
+      "obt/main/level_main_04-08_beg#000"
+     ],
+     "n_hits": 20,
+     "n_units": 11,
+     "n_claims": 21,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "霜叶交谈杰西卡。杰西卡交谈霜叶。霜叶隶属罗德岛。霜叶交谈凯尔希。阿米娅交谈霜叶。克洛丝交谈霜叶。调香师交谈霜叶。陨星交谈霜叶。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000019",
+     "question": "从「西西里夫人」出发，经过一个中间实体可以到达「市政厅」。这个中间实体叫什么？",
+     "gold": [
+      "莱昂图索"
+     ],
+     "gold_in_graph": [
+      "莱昂图索"
+     ],
+     "anchors": [
+      "西西里夫人",
+      "市政厅"
+     ],
+     "anchors_in_graph": [
+      "西西里夫人",
+      "市政厅"
+     ],
+     "gold_chunk_ids": [
+      "activities/act21side/level_act21side_10_end#007",
+      "activities/act38side/level_act38side_10_end#008"
+     ],
+     "n_hits": 20,
+     "n_units": 9,
+     "n_claims": 33,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "莱昂图索交谈西西里夫人。西西里夫人交谈莱昂图索。阿格尼尔交谈西西里夫人。西西里夫人交谈阿格尼尔。西西里夫人交谈德克萨斯。西西里夫人交谈文。拉维妮娅交谈西西里夫人。西西里夫人创建灰厅。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000022",
+     "question": "已知「阿斯卡纶」通过唯一一个中间实体与「城防炮」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "曼弗雷德"
+     ],
+     "gold_in_graph": [
+      "曼弗雷德"
+     ],
+     "anchors": [
+      "阿斯卡纶",
+      "城防炮"
+     ],
+     "anchors_in_graph": [
+      "阿斯卡纶",
+      "城防炮"
+     ],
+     "gold_chunk_ids": [
+      "obt/main/level_main_10-13_beg#000",
+      "obt/main/level_st_14-02#008"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 30,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "阿斯卡纶交战曼弗雷德。阿米娅同行阿斯卡纶。阿斯卡纶效忠特蕾西娅。阿斯卡纶隶属罗德岛。阿斯卡纶交谈莱托中校。阿斯卡纶背叛卡兹戴尔。莱托中校交战阿斯卡纶。曼弗雷德交谈阿斯卡纶。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000023",
+     "question": "从「苦艾」出发，经过一个中间实体可以到达「特雷西斯」。这个中间实体叫什么？",
+     "gold": [
+      "罗德岛"
+     ],
+     "gold_in_graph": [
+      "罗德岛"
+     ],
+     "anchors": [
+      "苦艾",
+      "特雷西斯"
+     ],
+     "anchors_in_graph": [
+      "苦艾",
+      "特雷西斯"
+     ],
+     "gold_chunk_ids": [
+      "obt/main/level_st_11-03#003",
+      "obt/memory/story_absin_1_1#000"
+     ],
+     "n_hits": 20,
+     "n_units": 9,
+     "n_claims": 36,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": false,
+     "D_gold_in_claim": false,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": false,
+     "judge": null,
+     "answer": "血魔大君交谈特雷西斯。特雷西斯领导萨卡兹。特雷西斯指挥血魔大君。赦罪师效忠特雷西斯。特雷西斯交谈赦罪师。特雷西斯位于源石。特雷西斯敌对普瑞赛斯。普瑞赛斯交谈特雷西斯。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000027",
+     "question": "从「梓兰」出发，经过一个中间实体可以到达「杰斯顿」。这个中间实体叫什么？",
+     "gold": [
+      "安东尼"
+     ],
+     "gold_in_graph": [
+      "安东尼"
+     ],
+     "anchors": [
+      "梓兰",
+      "杰斯顿"
+     ],
+     "anchors_in_graph": [
+      "梓兰",
+      "杰斯顿"
+     ],
+     "gold_chunk_ids": [
+      "activities/act15d0/level_act15d0_08_end#001",
+      "obt/memory/story_f12yin_1_1#002"
+     ],
+     "n_hits": 20,
+     "n_units": 9,
+     "n_claims": 28,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "杰斯顿交谈瑞克。杰斯顿交谈安东尼。卡夫卡交谈杰斯顿。杰斯顿交谈卡夫卡。杰斯顿隶属沙滩伞公司。杰斯顿交谈狱警A。狱警A指挥杰斯顿。杰斯顿交谈罗宾。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000028",
+     "question": "已知「老科利」通过唯一一个中间实体与「珀耳」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "锡人"
+     ],
+     "gold_in_graph": [
+      "锡人"
+     ],
+     "anchors": [
+      "老科利",
+      "珀耳"
+     ],
+     "anchors_in_graph": [
+      "老科利",
+      "珀耳"
+     ],
+     "gold_chunk_ids": [
+      "activities/act17mini/level_act17mini_st06#008",
+      "obt/rogue/rogue_4/endbook/endbook_rogue_4_1_3#001"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 27,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "老科利交谈锡人。老科利持有金券。老科利冲突小默。小默冲突老科利。大拉里冲突老科利。大拉里交谈老科利。老科利使用拐杖。妮芙交谈珀耳。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000030",
+     "question": "已知「红豆」通过唯一一个中间实体与「埃芒加德」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "泥岩"
+     ],
+     "gold_in_graph": [
+      "泥岩"
+     ],
+     "anchors": [
+      "红豆",
+      "埃芒加德"
+     ],
+     "anchors_in_graph": [
+      "红豆",
+      "埃芒加德"
+     ],
+     "gold_chunk_ids": [
+      "activities/act17mini/level_act17mini_st06#002",
+      "obt/rogue/month_chat_rogue_1_1/month_chat_rogue_1_1_3#000"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 25,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "埃芒加德交谈莱辛。赫德雷交谈埃芒加德。埃芒加德交谈赫德雷。华法琳交谈红豆。泥岩交谈红豆。埃芒加德交谈珀耳。伊内丝交谈埃芒加德。卡莱莎交谈埃芒加德。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000031",
+     "question": "已知「迪伦」通过唯一一个中间实体与「特雷西斯」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "罗德岛"
+     ],
+     "gold_in_graph": [
+      "罗德岛"
+     ],
+     "anchors": [
+      "迪伦",
+      "特雷西斯"
+     ],
+     "anchors_in_graph": [
+      "迪伦",
+      "特雷西斯"
+     ],
+     "gold_chunk_ids": [
+      "activities/act8mini/level_act8mini_st01#000",
+      "obt/main/level_st_11-03#003"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 31,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": false,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": false,
+     "judge": null,
+     "answer": "血魔大君交谈特雷西斯。特蕾西娅交谈特雷西斯。特雷西斯指挥赦罪师。特雷西斯领导萨卡兹。特雷西斯指挥血魔大君。赦罪师效忠特雷西斯。卡文迪许同盟特雷西斯。莱托同盟特雷西斯。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000032",
+     "question": "从「甘比诺」出发，经过一个中间实体可以到达「狂欢节」。这个中间实体叫什么？",
+     "gold": [
+      "拉普兰德"
+     ],
+     "gold_in_graph": [
+      "拉普兰德"
+     ],
+     "anchors": [
+      "甘比诺",
+      "狂欢节"
+     ],
+     "anchors_in_graph": [
+      "甘比诺",
+      "狂欢节"
+     ],
+     "gold_chunk_ids": [
+      "activities/act38side/level_act38side_st01#009",
+      "activities/act5d0/level_act5d0_ex02_end#001"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 30,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "甘比诺隶属威尼斯家族。鼠王交谈甘比诺。甘比诺敌对卡彭。甘比诺听命于拉普兰德。拉普兰德参与狂欢节。拉普兰德同行甘比诺。拉普兰德交谈甘比诺。甘比诺同行卡尔。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000039",
+     "question": "从「山海众」出发，经过一个中间实体可以到达「莫佚」。这个中间实体叫什么？",
+     "gold": [
+      "左乐"
+     ],
+     "gold_in_graph": [
+      "左乐"
+     ],
+     "anchors": [
+      "山海众",
+      "莫佚"
+     ],
+     "anchors_in_graph": [
+      "山海众",
+      "莫佚"
+     ],
+     "gold_chunk_ids": [
+      "activities/act23side/level_act23side_02_end#000",
+      "activities/act49side/level_act49side_01_end#005"
+     ],
+     "n_hits": 20,
+     "n_units": 12,
+     "n_claims": 35,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "莫佚隶属山海众。莫佚交谈左乐。左乐交谈莫佚。老天师交谈莫佚。太合敌对山海众。山海众使用谛兽。山海众敌对槐琥。莫佚交谈老天师。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000040",
+     "question": "已知「杰西卡」通过唯一一个中间实体与「变形者集群」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "阿米娅"
+     ],
+     "gold_in_graph": [
+      "阿米娅"
+     ],
+     "anchors": [
+      "杰西卡",
+      "变形者集群"
+     ],
+     "anchors_in_graph": [
+      "杰西卡",
+      "变形者集群"
+     ],
+     "gold_chunk_ids": [
+      "obt/main/level_main_10-01_end#005",
+      "obt/main/level_main_12-18_beg#005"
+     ],
+     "n_hits": 20,
+     "n_units": 11,
+     "n_claims": 22,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "变形者集群交谈戈尔丁。变形者集群交谈凯尔希。阿米娅交谈变形者集群。戈尔丁交谈变形者集群。爱布拉娜交谈变形者集群。阿斯卡纶交谈变形者集群。Logos交谈变形者集群。变形者集群交谈博士。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000046",
+     "question": "已知「米格鲁」通过唯一一个中间实体与「格雷伊」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "博士"
+     ],
+     "gold_in_graph": [
+      "博士"
+     ],
+     "anchors": [
+      "米格鲁",
+      "格雷伊"
+     ],
+     "anchors_in_graph": [
+      "米格鲁",
+      "格雷伊"
+     ],
+     "gold_chunk_ids": [
+      "activities/act8mini/level_act8mini_st03#002",
+      "obt/memory/story_greyy2_1_1#001"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 25,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "米格鲁交谈佩德洛。佩德洛交谈米格鲁。米格鲁交谈洛伦茨。玛丽交谈格雷伊。洛伦茨交谈米格鲁。米格鲁前往特科马。兽主容纳米格鲁。米格鲁交谈杜宾。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-000048",
+     "question": "从「菲亚梅塔」出发，经过一个中间实体可以到达「斯普莉雅」。这个中间实体叫什么？",
+     "gold": [
+      "蕾缪安"
+     ],
+     "gold_in_graph": [
+      "蕾缪安"
+     ],
+     "anchors": [
+      "菲亚梅塔",
+      "斯普莉雅"
+     ],
+     "anchors_in_graph": [
+      "菲亚梅塔",
+      "斯普莉雅"
+     ],
+     "gold_chunk_ids": [
+      "activities/act16side/level_act16side_04_end#002",
+      "activities/act26side/level_act26side_02_beg#005"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 34,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "斯普莉雅交谈菲亚梅塔。菲亚梅塔交谈帕蒂亚。帕蒂亚交谈菲亚梅塔。蕾缪安交谈斯普莉雅。斯普莉雅交谈蕾缪安。斯普莉雅交谈费德里科。里凯莱交谈斯普莉雅。斯普莉雅任职教皇厅。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900002",
+     "question": "从「凯尔希」出发，经过一个中间实体可以到达「蜜蜡」。这个中间实体叫什么？",
+     "gold": [
+      "伊芙利特"
+     ],
+     "gold_in_graph": [
+      "伊芙利特"
+     ],
+     "anchors": [
+      "凯尔希",
+      "蜜蜡"
+     ],
+     "anchors_in_graph": [
+      "凯尔希",
+      "蜜蜡"
+     ],
+     "gold_chunk_ids": [
+      "activities/act11d7/level_act11d7_st01#006",
+      "activities/act25side/level_act25side_02_beg#004"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 30,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": false,
+     "C_gold_in_context": false,
+     "D_gold_in_claim": false,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": false,
+     "judge": null,
+     "answer": "凯尔希交谈博士。可露希尔交谈凯尔希。卡涅利安交谈凯尔希。蜜蜡交谈卡涅利安。博士指导蜜蜡。蜜蜡隶属罗德岛。卡涅利安保护蜜蜡。凯尔希交谈玻利瓦尔。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900003",
+     "question": "从「左乐」出发，经过一个中间实体可以到达「大荒城」。这个中间实体叫什么？",
+     "gold": [
+      "禾生"
+     ],
+     "gold_in_graph": [
+      "禾生"
+     ],
+     "anchors": [
+      "左乐",
+      "大荒城"
+     ],
+     "anchors_in_graph": [
+      "左乐",
+      "大荒城"
+     ],
+     "gold_chunk_ids": [
+      "activities/act31side/level_act31side_08_end#002",
+      "activities/act31side/level_act31side_st02#000"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 37,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "左乐前往大荒城。左乐交谈禾生。大荒城属于炎国。绩前往大荒城。绩离开大荒城。宁辞秋交谈左乐。左乐交谈宁辞秋。左乐任职秉烛人。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900004",
+     "question": "已知「达里奥」通过唯一一个中间实体与「德鲁莎」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "艾丽妮"
+     ],
+     "gold_in_graph": [
+      "艾丽妮"
+     ],
+     "anchors": [
+      "达里奥",
+      "德鲁莎"
+     ],
+     "anchors_in_graph": [
+      "达里奥",
+      "德鲁莎"
+     ],
+     "gold_chunk_ids": [
+      "activities/act17side/level_act17side_05_end#003",
+      "activities/act52side/level_act52side_st02#006"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 25,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "德鲁莎交谈南多。德鲁莎交谈斐戴拉。斐戴拉交谈德鲁莎。艾丽妮交谈德鲁莎。达里奥听命于圣徒卡门。德鲁莎任职审判庭。克莱门莎交谈德鲁莎。克莱门莎雇用德鲁莎。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900007",
+     "question": "从「地下怪医」出发，经过一个中间实体可以到达「老鲤」。这个中间实体叫什么？",
+     "gold": [
+      "槐琥"
+     ],
+     "gold_in_graph": [
+      "槐琥"
+     ],
+     "anchors": [
+      "地下怪医",
+      "老鲤"
+     ],
+     "anchors_in_graph": [
+      "地下怪医",
+      "老鲤"
+     ],
+     "gold_chunk_ids": [
+      "activities/act13mini/level_act13mini_st01#001",
+      "activities/act6d5/level_act6d5_st02#008"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 39,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "老鲤交谈槐琥。槐琥交谈老鲤。乌有交谈老鲤。地下怪医交谈槐琥。吽听命于老鲤。地下怪医交谈吽。地下怪医交谈近卫局。老鲤保护槐琥。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900011",
+     "question": "从「星熊」出发，经过一个中间实体可以到达「坚雷」。这个中间实体叫什么？",
+     "gold": [
+      "铸铁"
+     ],
+     "gold_in_graph": [
+      "铸铁"
+     ],
+     "anchors": [
+      "星熊",
+      "坚雷"
+     ],
+     "anchors_in_graph": [
+      "星熊",
+      "坚雷"
+     ],
+     "gold_chunk_ids": [
+      "activities/act12side/level_act12side_04_end#002",
+      "obt/memory/story_sidero_1_1#000"
+     ],
+     "n_hits": 20,
+     "n_units": 11,
+     "n_claims": 36,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": false,
+     "D_gold_in_claim": false,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": false,
+     "judge": null,
+     "answer": "凛冬交谈坚雷。汉克交谈坚雷。星熊属于金石会。星熊交谈Missy。铁斋交谈星熊。星熊位于锻冶町。星熊交谈铁斋。汉克师从坚雷。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900012",
+     "question": "从「猎蜂」出发，经过一个中间实体可以到达「自治团」。这个中间实体叫什么？",
+     "gold": [
+      "烈夏"
+     ],
+     "gold_in_graph": [
+      "烈夏"
+     ],
+     "anchors": [
+      "猎蜂",
+      "自治团"
+     ],
+     "anchors_in_graph": [
+      "猎蜂",
+      "自治团"
+     ],
+     "gold_chunk_ids": [
+      "activities/act10d5/level_act10d5_st05#004",
+      "activities/act51side/level_act51side_st01#013"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 20,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "烈夏交谈猎蜂。自治团隶属学生联合大会。猎蜂交谈烈夏。自治团源自切尔诺伯格。猎蜂交谈安东尼。猎蜂保护烈夏。早露隶属自治团。列昂尼德敌对自治团。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900015",
+     "question": "从「Medic」出发，经过一个中间实体可以到达「芬」。这个中间实体叫什么？",
+     "gold": [
+      "可露希尔"
+     ],
+     "gold_in_graph": [
+      "可露希尔"
+     ],
+     "anchors": [
+      "Medic",
+      "芬"
+     ],
+     "anchors_in_graph": [
+      "Medic",
+      "芬"
+     ],
+     "gold_chunk_ids": [
+      "obt/main/level_main_14-03_end#006",
+      "obt/memory/story_closur_1_1#003"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 4,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": false,
+     "D_gold_in_claim": false,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": false,
+     "judge": null,
+     "answer": "安洁莉娜前往洋蓟村。安洁莉娜前往南境。崖心前往罗德岛。谬因前往罗德岛。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900016",
+     "question": "已知「尤卡坦」通过唯一一个中间实体与「莫希」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "休露丝"
+     ],
+     "gold_in_graph": [
+      "休露丝"
+     ],
+     "anchors": [
+      "尤卡坦",
+      "莫希"
+     ],
+     "anchors_in_graph": [
+      "尤卡坦",
+      "莫希"
+     ],
+     "gold_chunk_ids": [
+      "activities/act14side/level_act14side_st03#009",
+      "activities/act30side/level_act30side_08_beg#007"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 25,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "莫希保护尤卡坦。尤卡坦交谈菈塔托丝。尤卡坦保护休露丝。休露丝亲属尤卡坦。魏斯敌对尤卡坦。休露丝保护莫希。莫希隶属休露丝。尤卡坦亲属休露丝。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900017",
+     "question": "从「董阿伯」出发，经过一个中间实体可以到达「孑」。这个中间实体叫什么？",
+     "gold": [
+      "星熊"
+     ],
+     "gold_in_graph": [
+      "星熊"
+     ],
+     "anchors": [
+      "董阿伯",
+      "孑"
+     ],
+     "anchors_in_graph": [
+      "董阿伯",
+      "孑"
+     ],
+     "gold_chunk_ids": [
+      "obt/memory/story_hsguma_1_1#000",
+      "obt/memory/story_strong_1_1#008"
+     ],
+     "n_hits": 20,
+     "n_units": 11,
+     "n_claims": 16,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "鼠王交谈董阿伯。孑交谈董阿伯。星熊交谈董阿伯。董阿伯交谈星熊。董阿伯前往哥伦比亚。鼠王领导董阿伯。董阿伯保护魏彦吾。董阿伯同盟林先生。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900020",
+     "question": "从「开斯特公爵」出发，经过一个中间实体可以到达「阿德颂」。这个中间实体叫什么？",
+     "gold": [
+      "恩希欧迪斯"
+     ],
+     "gold_in_graph": [
+      "恩希欧迪斯"
+     ],
+     "anchors": [
+      "开斯特公爵",
+      "阿德颂"
+     ],
+     "anchors_in_graph": [
+      "开斯特公爵",
+      "阿德颂"
+     ],
+     "gold_chunk_ids": [
+      "activities/act46side/level_act46side_06_beg#002",
+      "activities/act46side/level_act46side_07_beg#007"
+     ],
+     "n_hits": 20,
+     "n_units": 11,
+     "n_claims": 45,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "阿德颂敌对开斯特公爵。开斯特公爵隶属维多利亚。开斯特公爵交谈高多汀公爵。阿德颂领导蔓珠院。茱安娜交谈阿德颂。开斯特公爵敌对谢拉格。阿德颂前往圣山。开斯特公爵领导维多利亚。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900023",
+     "question": "从「佩佩」出发，经过一个中间实体可以到达「萨尔贡」。这个中间实体叫什么？",
+     "gold": [
+      "缇缇"
+     ],
+     "gold_in_graph": [
+      "缇缇"
+     ],
+     "anchors": [
+      "佩佩",
+      "萨尔贡"
+     ],
+     "anchors_in_graph": [
+      "佩佩",
+      "萨尔贡"
+     ],
+     "gold_chunk_ids": [
+      "activities/act35side/level_act35side_01_end#000",
+      "activities/act48side/level_act48side_st03#003"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 7,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "佩佩前往黄金之城。缇缇交谈佩佩。玛夏耶尔隶属萨尔贡。娜仁图亚前往辉煌之城。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900024",
+     "question": "从「车尔尼」出发，经过一个中间实体可以到达「赤冬」。这个中间实体叫什么？",
+     "gold": [
+      "罗德岛"
+     ],
+     "gold_in_graph": [
+      "罗德岛"
+     ],
+     "anchors": [
+      "车尔尼",
+      "赤冬"
+     ],
+     "anchors_in_graph": [
+      "车尔尼",
+      "赤冬"
+     ],
+     "gold_chunk_ids": [
+      "obt/memory/story_akafyu_1_1#004",
+      "obt/memory/story_pianst_1_1#006"
+     ],
+     "n_hits": 20,
+     "n_units": 9,
+     "n_claims": 53,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "芙蓉交谈车尔尼。车尔尼交谈乌尔苏拉。车尔尼位于夕照区。白垩交谈车尔尼。车尔尼交谈黑键。车尔尼交谈芙蓉。车尔尼交谈白垩。黑键交谈车尔尼。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900025",
+     "question": "从「活塞」出发，经过一个中间实体可以到达「近卫局」。这个中间实体叫什么？",
+     "gold": [
+      "罗德岛"
+     ],
+     "gold_in_graph": [
+      "罗德岛"
+     ],
+     "anchors": [
+      "活塞",
+      "近卫局"
+     ],
+     "anchors_in_graph": [
+      "活塞",
+      "近卫局"
+     ],
+     "gold_chunk_ids": [
+      "obt/main/level_main_06-01_end#002",
+      "obt/memory/story_susuro_1_1#006"
+     ],
+     "n_hits": 20,
+     "n_units": 11,
+     "n_claims": 20,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "近卫局位于龙门。近卫局指挥罗德岛。菲勒加斯交谈活塞。活塞交谈菲勒加斯。活塞隶属罗德岛。陈隶属近卫局。近卫局交战整合运动。近卫局交战兵俑。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900027",
+     "question": "从「布莉吉」出发，经过一个中间实体可以到达「莫兰」。这个中间实体叫什么？",
+     "gold": [
+      "苇草"
+     ],
+     "gold_in_graph": [
+      "苇草"
+     ],
+     "anchors": [
+      "布莉吉",
+      "莫兰"
+     ],
+     "anchors_in_graph": [
+      "布莉吉",
+      "莫兰"
+     ],
+     "gold_chunk_ids": [
+      "activities/act41side/level_act41side_06_end#001",
+      "activities/act41side/level_act41side_st01#005"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 23,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "布莉吉交谈莫兰。布莉吉交谈伊芙琳。伊芙琳交谈布莉吉。莫兰交谈艾玛。布莉吉救助伊芙琳。布莉吉前往罗德岛。布莉吉交谈苇草。布莉吉前往纳斯尔纱。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900028",
+     "question": "从「黛柯绮·银币」出发，经过一个中间实体可以到达「哈维尔」。这个中间实体叫什么？",
+     "gold": [
+      "极境"
+     ],
+     "gold_in_graph": [
+      "极境"
+     ],
+     "anchors": [
+      "黛柯绮·银币",
+      "哈维尔"
+     ],
+     "anchors_in_graph": [
+      "黛柯绮·银币",
+      "哈维尔"
+     ],
+     "gold_chunk_ids": [
+      "activities/act20side/level_act20side_07_end#004",
+      "activities/act39side/level_act39side_05_end#001"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 38,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "卡奇·叙光交谈黛柯绮·银币。黛柯绮·银币交谈卡奇·叙光。黛柯绮·银币交谈森蚺。森蚺交谈黛柯绮·银币。黛柯绮·银币交谈极境。极境交谈黛柯绮·银币。嘉维尔交谈黛柯绮·银币。黛柯绮·银币交谈耶奇·地心。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900029",
+     "question": "已知「米莎」通过唯一一个中间实体与「维特」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "阿米娅"
+     ],
+     "gold_in_graph": [
+      "阿米娅"
+     ],
+     "anchors": [
+      "米莎",
+      "维特"
+     ],
+     "anchors_in_graph": [
+      "米莎",
+      "维特"
+     ],
+     "gold_chunk_ids": [
+      "obt/main/level_main_02-04_end#000",
+      "obt/main/level_main_17-02_beg#004"
+     ],
+     "n_hits": 20,
+     "n_units": 11,
+     "n_claims": 27,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "阿米娅交谈米莎。碎骨交谈米莎。米莎交谈阿米娅。整合运动敌对米莎。龙门敌对米莎。罗德岛救助米莎。阿米娅保护米莎。芙兰卡交谈米莎。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900030",
+     "question": "从「三角初华」出发，经过一个中间实体可以到达「源石技艺」。这个中间实体叫什么？",
+     "gold": [
+      "阿黛尔"
+     ],
+     "gold_in_graph": [
+      "阿黛尔"
+     ],
+     "anchors": [
+      "三角初华",
+      "源石技艺"
+     ],
+     "anchors_in_graph": [
+      "三角初华",
+      "源石技艺"
+     ],
+     "gold_chunk_ids": [
+      "activities/act45side/level_act45side_04_end#000",
+      "obt/memory/story_amgoat_2_1#005"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 30,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": false,
+     "C_gold_in_context": false,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "三角初华交谈阿黛尔。三角初华交谈丰川祥子。丰川祥子交谈三角初华。三角初华交谈热心的船夫。三角初华任职别墅。三角初华使用壁炉。祐天寺若麦冲突三角初华。三角初华保护Ave Mujica。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900032",
+     "question": "已知「罗索」通过唯一一个中间实体与「西西里夫人」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "莱昂图索"
+     ],
+     "gold_in_graph": [
+      "莱昂图索"
+     ],
+     "anchors": [
+      "罗索",
+      "西西里夫人"
+     ],
+     "anchors_in_graph": [
+      "罗索",
+      "西西里夫人"
+     ],
+     "gold_chunk_ids": [
+      "activities/act21side/level_act21side_10_end#002",
+      "obt/memory/story_vigil_2_1#007"
+     ],
+     "n_hits": 20,
+     "n_units": 9,
+     "n_claims": 30,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "莱昂图索交谈西西里夫人。西西里夫人交谈莱昂图索。阿格尼尔交谈西西里夫人。西西里夫人交谈阿格尼尔。西西里夫人交谈文。西西里夫人交谈德克萨斯。拉维妮娅交谈西西里夫人。阿格尼尔同行西西里夫人。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900035",
+     "question": "已知「绩」通过唯一一个中间实体与「风絮」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "年"
+     ],
+     "gold_in_graph": [
+      "年"
+     ],
+     "anchors": [
+      "绩",
+      "风絮"
+     ],
+     "anchors_in_graph": [
+      "绩",
+      "风絮"
+     ],
+     "gold_chunk_ids": [
+      "activities/act31side/level_act31side_04_beg#001",
+      "activities/act49side/level_act49side_st02#002"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 10,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "风絮交谈年。风絮源自萨尔贡。风絮持有戥秤。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900036",
+     "question": "已知「赫拉提娅」通过唯一一个中间实体与「布雷奥甘」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "歌蕾蒂娅"
+     ],
+     "gold_in_graph": [
+      "歌蕾蒂娅"
+     ],
+     "anchors": [
+      "赫拉提娅",
+      "布雷奥甘"
+     ],
+     "anchors_in_graph": [
+      "赫拉提娅",
+      "布雷奥甘"
+     ],
+     "gold_chunk_ids": [
+      "activities/act17side/level_act17side_st06#001",
+      "activities/act34side/level_act34side_01_end#002"
+     ],
+     "n_hits": 20,
+     "n_units": 8,
+     "n_claims": 23,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "赫拉提娅交谈克莱门莎。克莱门莎交谈赫拉提娅。赫拉提娅交谈凯尔希。歌蕾蒂娅交谈赫拉提娅。凯尔希交谈赫拉提娅。布雷奥甘敌对阿戈尔。布雷奥甘制造灯塔。赫拉提娅创建航道计划。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900040",
+     "question": "已知「亡寒萨满」通过唯一一个中间实体与「乌萨斯」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "寒檀"
+     ],
+     "gold_in_graph": [
+      "寒檀"
+     ],
+     "anchors": [
+      "亡寒萨满",
+      "乌萨斯"
+     ],
+     "anchors_in_graph": [
+      "亡寒萨满",
+      "乌萨斯"
+     ],
+     "gold_chunk_ids": [
+      "obt/memory/story_sntlla_1_1#002",
+      "obt/rogue/rogue_3/monthrecord/month_record_rogue_3_3_2#000"
+     ],
+     "n_hits": 20,
+     "n_units": 9,
+     "n_claims": 16,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "整合运动敌对乌萨斯。亡寒萨满交谈寒檀。寒檀交谈亡寒萨满。乌萨斯敌对萨米。亡寒萨满领导亡寒。萨米敌对乌萨斯。内卫隶属乌萨斯。寒檀前往乌萨斯。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900041",
+     "question": "从「Mon3tr」出发，经过一个中间实体可以到达「芙兰卡」。这个中间实体叫什么？",
+     "gold": [
+      "阿米娅"
+     ],
+     "gold_in_graph": [
+      "阿米娅"
+     ],
+     "anchors": [
+      "Mon3tr",
+      "芙兰卡"
+     ],
+     "anchors_in_graph": [
+      "Mon3tr",
+      "芙兰卡"
+     ],
+     "gold_chunk_ids": [
+      "obt/main/level_main_03-03_beg#000",
+      "obt/main/level_main_16-04_beg#000"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 38,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "玫兰莎交谈芙兰卡。芙兰卡交谈香草。芙兰卡交谈迈尔斯。芙兰卡源自哥伦比亚。芙兰卡交谈雷蛇。芙兰卡隶属罗德岛。芙兰卡离开维多利亚。芙兰卡感染矿石病。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900044",
+     "question": "已知「克洛维希娅」通过唯一一个中间实体与「诺伯特区」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "推进之王"
+     ],
+     "gold_in_graph": [
+      "推进之王"
+     ],
+     "anchors": [
+      "克洛维希娅",
+      "诺伯特区"
+     ],
+     "anchors_in_graph": [
+      "克洛维希娅",
+      "诺伯特区"
+     ],
+     "gold_chunk_ids": [
+      "obt/main/level_main_10-14_end#003",
+      "obt/main/level_main_12-02_beg#002"
+     ],
+     "n_hits": 20,
+     "n_units": 9,
+     "n_claims": 24,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "克洛维希娅交谈阿米娅。洛洛交谈克洛维希娅。克洛维希娅指挥哈默。克洛维希娅交谈Logos。克洛维希娅交谈莱托中校。推进之王交谈克洛维希娅。特蕾西娅位于诺伯特区。推进之王前往诺伯特区。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900048",
+     "question": "已知「蜜蜡」通过唯一一个中间实体与「阿消」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "伊芙利特"
+     ],
+     "gold_in_graph": [
+      "伊芙利特"
+     ],
+     "anchors": [
+      "蜜蜡",
+      "阿消"
+     ],
+     "anchors_in_graph": [
+      "蜜蜡",
+      "阿消"
+     ],
+     "gold_chunk_ids": [
+      "obt/memory/story_ifrit_1_1#004",
+      "obt/memory/story_sqrrel_1_1#006"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 21,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "玛露西尔交谈蜜蜡。蜜蜡交谈玛露西尔。阿消交谈资深近卫局成员。阿消交谈魏彦吾。魏彦吾交谈阿消。资深近卫局成员交谈阿消。博士指导蜜蜡。蜜蜡交谈卡涅利安。",
+     "abstained": false
+    }
+   ]
+  },
+  "clean": {
+   "agg": {
+    "n": 24,
+    "A_gold_known_name": 24,
+    "B_gold_in_hits": 22,
+    "C_gold_in_context": 20,
+    "D_gold_in_claim": 21,
+    "E_all_anchors_known": 24,
+    "F_gold_edge_to_anchor": 21
+   },
+   "rows": [
+    {
+     "question_id": "q-mh-900002",
+     "question": "从「凯尔希」出发，经过一个中间实体可以到达「蜜蜡」。这个中间实体叫什么？",
+     "gold": [
+      "伊芙利特"
+     ],
+     "gold_in_graph": [
+      "伊芙利特"
+     ],
+     "anchors": [
+      "凯尔希",
+      "蜜蜡"
+     ],
+     "anchors_in_graph": [
+      "凯尔希",
+      "蜜蜡"
+     ],
+     "gold_chunk_ids": [
+      "activities/act11d7/level_act11d7_st01#006",
+      "activities/act25side/level_act25side_02_beg#004"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 30,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": false,
+     "C_gold_in_context": false,
+     "D_gold_in_claim": false,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": false,
+     "judge": null,
+     "answer": "凯尔希交谈博士。可露希尔交谈凯尔希。卡涅利安交谈凯尔希。蜜蜡交谈卡涅利安。博士指导蜜蜡。蜜蜡隶属罗德岛。卡涅利安保护蜜蜡。凯尔希交谈玻利瓦尔。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900003",
+     "question": "从「左乐」出发，经过一个中间实体可以到达「大荒城」。这个中间实体叫什么？",
+     "gold": [
+      "禾生"
+     ],
+     "gold_in_graph": [
+      "禾生"
+     ],
+     "anchors": [
+      "左乐",
+      "大荒城"
+     ],
+     "anchors_in_graph": [
+      "左乐",
+      "大荒城"
+     ],
+     "gold_chunk_ids": [
+      "activities/act31side/level_act31side_08_end#002",
+      "activities/act31side/level_act31side_st02#000"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 37,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "左乐前往大荒城。左乐交谈禾生。大荒城属于炎国。绩前往大荒城。绩离开大荒城。宁辞秋交谈左乐。左乐交谈宁辞秋。左乐任职秉烛人。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900004",
+     "question": "已知「达里奥」通过唯一一个中间实体与「德鲁莎」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "艾丽妮"
+     ],
+     "gold_in_graph": [
+      "艾丽妮"
+     ],
+     "anchors": [
+      "达里奥",
+      "德鲁莎"
+     ],
+     "anchors_in_graph": [
+      "达里奥",
+      "德鲁莎"
+     ],
+     "gold_chunk_ids": [
+      "activities/act17side/level_act17side_05_end#003",
+      "activities/act52side/level_act52side_st02#006"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 25,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "德鲁莎交谈南多。德鲁莎交谈斐戴拉。斐戴拉交谈德鲁莎。艾丽妮交谈德鲁莎。达里奥听命于圣徒卡门。德鲁莎任职审判庭。克莱门莎交谈德鲁莎。克莱门莎雇用德鲁莎。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900007",
+     "question": "从「地下怪医」出发，经过一个中间实体可以到达「老鲤」。这个中间实体叫什么？",
+     "gold": [
+      "槐琥"
+     ],
+     "gold_in_graph": [
+      "槐琥"
+     ],
+     "anchors": [
+      "地下怪医",
+      "老鲤"
+     ],
+     "anchors_in_graph": [
+      "地下怪医",
+      "老鲤"
+     ],
+     "gold_chunk_ids": [
+      "activities/act13mini/level_act13mini_st01#001",
+      "activities/act6d5/level_act6d5_st02#008"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 39,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "老鲤交谈槐琥。槐琥交谈老鲤。乌有交谈老鲤。地下怪医交谈槐琥。吽听命于老鲤。地下怪医交谈吽。地下怪医交谈近卫局。老鲤保护槐琥。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900011",
+     "question": "从「星熊」出发，经过一个中间实体可以到达「坚雷」。这个中间实体叫什么？",
+     "gold": [
+      "铸铁"
+     ],
+     "gold_in_graph": [
+      "铸铁"
+     ],
+     "anchors": [
+      "星熊",
+      "坚雷"
+     ],
+     "anchors_in_graph": [
+      "星熊",
+      "坚雷"
+     ],
+     "gold_chunk_ids": [
+      "activities/act12side/level_act12side_04_end#002",
+      "obt/memory/story_sidero_1_1#000"
+     ],
+     "n_hits": 20,
+     "n_units": 11,
+     "n_claims": 36,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": false,
+     "D_gold_in_claim": false,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": false,
+     "judge": null,
+     "answer": "凛冬交谈坚雷。汉克交谈坚雷。星熊属于金石会。星熊交谈Missy。铁斋交谈星熊。星熊位于锻冶町。星熊交谈铁斋。汉克师从坚雷。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900012",
+     "question": "从「猎蜂」出发，经过一个中间实体可以到达「自治团」。这个中间实体叫什么？",
+     "gold": [
+      "烈夏"
+     ],
+     "gold_in_graph": [
+      "烈夏"
+     ],
+     "anchors": [
+      "猎蜂",
+      "自治团"
+     ],
+     "anchors_in_graph": [
+      "猎蜂",
+      "自治团"
+     ],
+     "gold_chunk_ids": [
+      "activities/act10d5/level_act10d5_st05#004",
+      "activities/act51side/level_act51side_st01#013"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 20,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "烈夏交谈猎蜂。自治团隶属学生联合大会。猎蜂交谈烈夏。自治团源自切尔诺伯格。猎蜂交谈安东尼。猎蜂保护烈夏。早露隶属自治团。列昂尼德敌对自治团。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900015",
+     "question": "从「Medic」出发，经过一个中间实体可以到达「芬」。这个中间实体叫什么？",
+     "gold": [
+      "可露希尔"
+     ],
+     "gold_in_graph": [
+      "可露希尔"
+     ],
+     "anchors": [
+      "Medic",
+      "芬"
+     ],
+     "anchors_in_graph": [
+      "Medic",
+      "芬"
+     ],
+     "gold_chunk_ids": [
+      "obt/main/level_main_14-03_end#006",
+      "obt/memory/story_closur_1_1#003"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 4,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": false,
+     "D_gold_in_claim": false,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": false,
+     "judge": null,
+     "answer": "安洁莉娜前往洋蓟村。安洁莉娜前往南境。崖心前往罗德岛。谬因前往罗德岛。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900016",
+     "question": "已知「尤卡坦」通过唯一一个中间实体与「莫希」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "休露丝"
+     ],
+     "gold_in_graph": [
+      "休露丝"
+     ],
+     "anchors": [
+      "尤卡坦",
+      "莫希"
+     ],
+     "anchors_in_graph": [
+      "尤卡坦",
+      "莫希"
+     ],
+     "gold_chunk_ids": [
+      "activities/act14side/level_act14side_st03#009",
+      "activities/act30side/level_act30side_08_beg#007"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 25,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "莫希保护尤卡坦。尤卡坦交谈菈塔托丝。尤卡坦保护休露丝。休露丝亲属尤卡坦。魏斯敌对尤卡坦。休露丝保护莫希。莫希隶属休露丝。尤卡坦亲属休露丝。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900017",
+     "question": "从「董阿伯」出发，经过一个中间实体可以到达「孑」。这个中间实体叫什么？",
+     "gold": [
+      "星熊"
+     ],
+     "gold_in_graph": [
+      "星熊"
+     ],
+     "anchors": [
+      "董阿伯",
+      "孑"
+     ],
+     "anchors_in_graph": [
+      "董阿伯",
+      "孑"
+     ],
+     "gold_chunk_ids": [
+      "obt/memory/story_hsguma_1_1#000",
+      "obt/memory/story_strong_1_1#008"
+     ],
+     "n_hits": 20,
+     "n_units": 11,
+     "n_claims": 16,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "鼠王交谈董阿伯。孑交谈董阿伯。星熊交谈董阿伯。董阿伯交谈星熊。董阿伯前往哥伦比亚。鼠王领导董阿伯。董阿伯保护魏彦吾。董阿伯同盟林先生。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900020",
+     "question": "从「开斯特公爵」出发，经过一个中间实体可以到达「阿德颂」。这个中间实体叫什么？",
+     "gold": [
+      "恩希欧迪斯"
+     ],
+     "gold_in_graph": [
+      "恩希欧迪斯"
+     ],
+     "anchors": [
+      "开斯特公爵",
+      "阿德颂"
+     ],
+     "anchors_in_graph": [
+      "开斯特公爵",
+      "阿德颂"
+     ],
+     "gold_chunk_ids": [
+      "activities/act46side/level_act46side_06_beg#002",
+      "activities/act46side/level_act46side_07_beg#007"
+     ],
+     "n_hits": 20,
+     "n_units": 11,
+     "n_claims": 45,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "阿德颂敌对开斯特公爵。开斯特公爵隶属维多利亚。开斯特公爵交谈高多汀公爵。阿德颂领导蔓珠院。茱安娜交谈阿德颂。开斯特公爵敌对谢拉格。阿德颂前往圣山。开斯特公爵领导维多利亚。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900023",
+     "question": "从「佩佩」出发，经过一个中间实体可以到达「萨尔贡」。这个中间实体叫什么？",
+     "gold": [
+      "缇缇"
+     ],
+     "gold_in_graph": [
+      "缇缇"
+     ],
+     "anchors": [
+      "佩佩",
+      "萨尔贡"
+     ],
+     "anchors_in_graph": [
+      "佩佩",
+      "萨尔贡"
+     ],
+     "gold_chunk_ids": [
+      "activities/act35side/level_act35side_01_end#000",
+      "activities/act48side/level_act48side_st03#003"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 7,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "佩佩前往黄金之城。缇缇交谈佩佩。玛夏耶尔隶属萨尔贡。娜仁图亚前往辉煌之城。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900024",
+     "question": "从「车尔尼」出发，经过一个中间实体可以到达「赤冬」。这个中间实体叫什么？",
+     "gold": [
+      "罗德岛"
+     ],
+     "gold_in_graph": [
+      "罗德岛"
+     ],
+     "anchors": [
+      "车尔尼",
+      "赤冬"
+     ],
+     "anchors_in_graph": [
+      "车尔尼",
+      "赤冬"
+     ],
+     "gold_chunk_ids": [
+      "obt/memory/story_akafyu_1_1#004",
+      "obt/memory/story_pianst_1_1#006"
+     ],
+     "n_hits": 20,
+     "n_units": 9,
+     "n_claims": 53,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "芙蓉交谈车尔尼。车尔尼交谈乌尔苏拉。车尔尼位于夕照区。白垩交谈车尔尼。车尔尼交谈黑键。车尔尼交谈芙蓉。车尔尼交谈白垩。黑键交谈车尔尼。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900025",
+     "question": "从「活塞」出发，经过一个中间实体可以到达「近卫局」。这个中间实体叫什么？",
+     "gold": [
+      "罗德岛"
+     ],
+     "gold_in_graph": [
+      "罗德岛"
+     ],
+     "anchors": [
+      "活塞",
+      "近卫局"
+     ],
+     "anchors_in_graph": [
+      "活塞",
+      "近卫局"
+     ],
+     "gold_chunk_ids": [
+      "obt/main/level_main_06-01_end#002",
+      "obt/memory/story_susuro_1_1#006"
+     ],
+     "n_hits": 20,
+     "n_units": 11,
+     "n_claims": 20,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "近卫局位于龙门。近卫局指挥罗德岛。菲勒加斯交谈活塞。活塞交谈菲勒加斯。活塞隶属罗德岛。陈隶属近卫局。近卫局交战整合运动。近卫局交战兵俑。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900027",
+     "question": "从「布莉吉」出发，经过一个中间实体可以到达「莫兰」。这个中间实体叫什么？",
+     "gold": [
+      "苇草"
+     ],
+     "gold_in_graph": [
+      "苇草"
+     ],
+     "anchors": [
+      "布莉吉",
+      "莫兰"
+     ],
+     "anchors_in_graph": [
+      "布莉吉",
+      "莫兰"
+     ],
+     "gold_chunk_ids": [
+      "activities/act41side/level_act41side_06_end#001",
+      "activities/act41side/level_act41side_st01#005"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 23,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "布莉吉交谈莫兰。布莉吉交谈伊芙琳。伊芙琳交谈布莉吉。莫兰交谈艾玛。布莉吉救助伊芙琳。布莉吉前往罗德岛。布莉吉交谈苇草。布莉吉前往纳斯尔纱。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900028",
+     "question": "从「黛柯绮·银币」出发，经过一个中间实体可以到达「哈维尔」。这个中间实体叫什么？",
+     "gold": [
+      "极境"
+     ],
+     "gold_in_graph": [
+      "极境"
+     ],
+     "anchors": [
+      "黛柯绮·银币",
+      "哈维尔"
+     ],
+     "anchors_in_graph": [
+      "黛柯绮·银币",
+      "哈维尔"
+     ],
+     "gold_chunk_ids": [
+      "activities/act20side/level_act20side_07_end#004",
+      "activities/act39side/level_act39side_05_end#001"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 38,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "卡奇·叙光交谈黛柯绮·银币。黛柯绮·银币交谈卡奇·叙光。黛柯绮·银币交谈森蚺。森蚺交谈黛柯绮·银币。黛柯绮·银币交谈极境。极境交谈黛柯绮·银币。嘉维尔交谈黛柯绮·银币。黛柯绮·银币交谈耶奇·地心。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900029",
+     "question": "已知「米莎」通过唯一一个中间实体与「维特」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "阿米娅"
+     ],
+     "gold_in_graph": [
+      "阿米娅"
+     ],
+     "anchors": [
+      "米莎",
+      "维特"
+     ],
+     "anchors_in_graph": [
+      "米莎",
+      "维特"
+     ],
+     "gold_chunk_ids": [
+      "obt/main/level_main_02-04_end#000",
+      "obt/main/level_main_17-02_beg#004"
+     ],
+     "n_hits": 20,
+     "n_units": 11,
+     "n_claims": 27,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "阿米娅交谈米莎。碎骨交谈米莎。米莎交谈阿米娅。整合运动敌对米莎。龙门敌对米莎。罗德岛救助米莎。阿米娅保护米莎。芙兰卡交谈米莎。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900030",
+     "question": "从「三角初华」出发，经过一个中间实体可以到达「源石技艺」。这个中间实体叫什么？",
+     "gold": [
+      "阿黛尔"
+     ],
+     "gold_in_graph": [
+      "阿黛尔"
+     ],
+     "anchors": [
+      "三角初华",
+      "源石技艺"
+     ],
+     "anchors_in_graph": [
+      "三角初华",
+      "源石技艺"
+     ],
+     "gold_chunk_ids": [
+      "activities/act45side/level_act45side_04_end#000",
+      "obt/memory/story_amgoat_2_1#005"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 30,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": false,
+     "C_gold_in_context": false,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "三角初华交谈阿黛尔。三角初华交谈丰川祥子。丰川祥子交谈三角初华。三角初华交谈热心的船夫。三角初华任职别墅。三角初华使用壁炉。祐天寺若麦冲突三角初华。三角初华保护Ave Mujica。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900032",
+     "question": "已知「罗索」通过唯一一个中间实体与「西西里夫人」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "莱昂图索"
+     ],
+     "gold_in_graph": [
+      "莱昂图索"
+     ],
+     "anchors": [
+      "罗索",
+      "西西里夫人"
+     ],
+     "anchors_in_graph": [
+      "罗索",
+      "西西里夫人"
+     ],
+     "gold_chunk_ids": [
+      "activities/act21side/level_act21side_10_end#002",
+      "obt/memory/story_vigil_2_1#007"
+     ],
+     "n_hits": 20,
+     "n_units": 9,
+     "n_claims": 30,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "莱昂图索交谈西西里夫人。西西里夫人交谈莱昂图索。阿格尼尔交谈西西里夫人。西西里夫人交谈阿格尼尔。西西里夫人交谈文。西西里夫人交谈德克萨斯。拉维妮娅交谈西西里夫人。阿格尼尔同行西西里夫人。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900035",
+     "question": "已知「绩」通过唯一一个中间实体与「风絮」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "年"
+     ],
+     "gold_in_graph": [
+      "年"
+     ],
+     "anchors": [
+      "绩",
+      "风絮"
+     ],
+     "anchors_in_graph": [
+      "绩",
+      "风絮"
+     ],
+     "gold_chunk_ids": [
+      "activities/act31side/level_act31side_04_beg#001",
+      "activities/act49side/level_act49side_st02#002"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 10,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "风絮交谈年。风絮源自萨尔贡。风絮持有戥秤。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900036",
+     "question": "已知「赫拉提娅」通过唯一一个中间实体与「布雷奥甘」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "歌蕾蒂娅"
+     ],
+     "gold_in_graph": [
+      "歌蕾蒂娅"
+     ],
+     "anchors": [
+      "赫拉提娅",
+      "布雷奥甘"
+     ],
+     "anchors_in_graph": [
+      "赫拉提娅",
+      "布雷奥甘"
+     ],
+     "gold_chunk_ids": [
+      "activities/act17side/level_act17side_st06#001",
+      "activities/act34side/level_act34side_01_end#002"
+     ],
+     "n_hits": 20,
+     "n_units": 8,
+     "n_claims": 23,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "赫拉提娅交谈克莱门莎。克莱门莎交谈赫拉提娅。赫拉提娅交谈凯尔希。歌蕾蒂娅交谈赫拉提娅。凯尔希交谈赫拉提娅。布雷奥甘敌对阿戈尔。布雷奥甘制造灯塔。赫拉提娅创建航道计划。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900040",
+     "question": "已知「亡寒萨满」通过唯一一个中间实体与「乌萨斯」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "寒檀"
+     ],
+     "gold_in_graph": [
+      "寒檀"
+     ],
+     "anchors": [
+      "亡寒萨满",
+      "乌萨斯"
+     ],
+     "anchors_in_graph": [
+      "亡寒萨满",
+      "乌萨斯"
+     ],
+     "gold_chunk_ids": [
+      "obt/memory/story_sntlla_1_1#002",
+      "obt/rogue/rogue_3/monthrecord/month_record_rogue_3_3_2#000"
+     ],
+     "n_hits": 20,
+     "n_units": 9,
+     "n_claims": 16,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "整合运动敌对乌萨斯。亡寒萨满交谈寒檀。寒檀交谈亡寒萨满。乌萨斯敌对萨米。亡寒萨满领导亡寒。萨米敌对乌萨斯。内卫隶属乌萨斯。寒檀前往乌萨斯。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900041",
+     "question": "从「Mon3tr」出发，经过一个中间实体可以到达「芙兰卡」。这个中间实体叫什么？",
+     "gold": [
+      "阿米娅"
+     ],
+     "gold_in_graph": [
+      "阿米娅"
+     ],
+     "anchors": [
+      "Mon3tr",
+      "芙兰卡"
+     ],
+     "anchors_in_graph": [
+      "Mon3tr",
+      "芙兰卡"
+     ],
+     "gold_chunk_ids": [
+      "obt/main/level_main_03-03_beg#000",
+      "obt/main/level_main_16-04_beg#000"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 38,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "玫兰莎交谈芙兰卡。芙兰卡交谈香草。芙兰卡交谈迈尔斯。芙兰卡源自哥伦比亚。芙兰卡交谈雷蛇。芙兰卡隶属罗德岛。芙兰卡离开维多利亚。芙兰卡感染矿石病。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900044",
+     "question": "已知「克洛维希娅」通过唯一一个中间实体与「诺伯特区」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "推进之王"
+     ],
+     "gold_in_graph": [
+      "推进之王"
+     ],
+     "anchors": [
+      "克洛维希娅",
+      "诺伯特区"
+     ],
+     "anchors_in_graph": [
+      "克洛维希娅",
+      "诺伯特区"
+     ],
+     "gold_chunk_ids": [
+      "obt/main/level_main_10-14_end#003",
+      "obt/main/level_main_12-02_beg#002"
+     ],
+     "n_hits": 20,
+     "n_units": 9,
+     "n_claims": 24,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "克洛维希娅交谈阿米娅。洛洛交谈克洛维希娅。克洛维希娅指挥哈默。克洛维希娅交谈Logos。克洛维希娅交谈莱托中校。推进之王交谈克洛维希娅。特蕾西娅位于诺伯特区。推进之王前往诺伯特区。",
+     "abstained": false
+    },
+    {
+     "question_id": "q-mh-900048",
+     "question": "已知「蜜蜡」通过唯一一个中间实体与「阿消」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+     "gold": [
+      "伊芙利特"
+     ],
+     "gold_in_graph": [
+      "伊芙利特"
+     ],
+     "anchors": [
+      "蜜蜡",
+      "阿消"
+     ],
+     "anchors_in_graph": [
+      "蜜蜡",
+      "阿消"
+     ],
+     "gold_chunk_ids": [
+      "obt/memory/story_ifrit_1_1#004",
+      "obt/memory/story_sqrrel_1_1#006"
+     ],
+     "n_hits": 20,
+     "n_units": 10,
+     "n_claims": 21,
+     "A_gold_known_name": true,
+     "B_gold_in_hits": true,
+     "C_gold_in_context": true,
+     "D_gold_in_claim": true,
+     "E_all_anchors_known": true,
+     "F_gold_edge_to_anchor": true,
+     "judge": null,
+     "answer": "玛露西尔交谈蜜蜡。蜜蜡交谈玛露西尔。阿消交谈资深近卫局成员。阿消交谈魏彦吾。魏彦吾交谈阿消。资深近卫局成员交谈阿消。博士指导蜜蜡。蜜蜡交谈卡涅利安。",
+     "abstained": false
+    }
+   ]
+  }
+ }
+}

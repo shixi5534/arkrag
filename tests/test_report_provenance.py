@@ -89,6 +89,10 @@ AUDITED_REPORTS: tuple[str, ...] = (
     "k3_threshold_gate.json",
     "k4_drill.json",
     "p1c_leak_audit.json",
+    # p0_item5_drill.json 是 P0 第 5 项（隔离副本审批/发布/回滚/归档）的门报告。
+    # 它七字段齐备（`provenance.verify` 逐项 pass），所以既不在债表里，
+    # 也必须在这里被体检——漏列就等于给它一份免检豁免。
+    "p0_item5_drill.json",
 )
 
 
@@ -353,7 +357,16 @@ class TestRealReportsAreAudited:
         只做「不合格就登记」的名单会越积越厚，最后没人相信里面有活条目；
         「修好了也要改名单」才让这笔债有下行压力。
         """
-        stale = [name for name, verdict in self._verdicts().items() if verdict == provenance.PASS]
+        # 只看**已登记**的那些。这条门判的是「登记了、但其实已经合格」，
+        # 不是「盘上有合格报告」。原实现遍历全量 `_verdicts()`，于是任何一份
+        # 从未登记过、七字段齐备的新报告都会让它假红——实测加进
+        # `p0_item5_drill.json` 后报 stale=['p0_item5_drill.json']，而它从来
+        # 就不在债表里。假红会让人学会忽略这条门。
+        stale = [
+            name
+            for name, verdict in self._verdicts().items()
+            if verdict == provenance.PASS and name in REPORTS_AWAITING_PROVENANCE
+        ]
         assert not stale, (
             f"这些报告已经满足七字段了，请从 `REPORTS_AWAITING_PROVENANCE` 删掉：{stale}"
         )

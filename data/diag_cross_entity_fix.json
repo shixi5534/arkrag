@@ -1,0 +1,25 @@
+{
+ "n_items": 38,
+ "summary": {
+  "6000": {
+   "n": 38,
+   "eq_current": 12,
+   "eq_fix_Gname_and_ctx": 15,
+   "eq_ceil_Gname": 37,
+   "extra_total_current": 17,
+   "miss_total_current": 35,
+   "extra_total_fix": 0,
+   "miss_total_fix": 35
+  },
+  "12000": {
+   "n": 38,
+   "eq_current": 11,
+   "eq_fix_Gname_and_ctx": 22,
+   "eq_ceil_Gname": 37,
+   "extra_total_current": 46,
+   "miss_total_current": 23,
+   "extra_total_fix": 0,
+   "miss_total_fix": 23
+  }
+ }
+}

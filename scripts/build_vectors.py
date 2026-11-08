@@ -75,9 +75,15 @@ def generation_chunks(generation_id: str) -> tuple[list[dict], str, str]:
     if not content_digest:
         raise SystemExit("[2] 索引 meta 缺 index_content_digest，向量无法绑定世代内容")
 
-    from arkrag import config
+    # 块正文必须来自**这一代自己**那份，且必须经 `resolve_chunks` 证明。
+    # 这里曾经读 `config.chunks_path()`（全局最新块文件），实测 06a741 的
+    # 13,798 块里有 17 块在全局文件（13,786 块）里不存在——若当时没被
+    # 「缺正文就硬错」挡住，那 17 块会被编码成空串，得到一批彼此高度相似的
+    # 无意义向量，而 §2.1 的向量召回率会被这一个 bug 拉低，且没有任何症状。
+    # 见 `tests/test_chunks_source.py` 的 `CHUNKS_SOURCE_DEBT`。
+    from arkrag import pipeline
 
-    chunks_path = config.chunks_path()
+    chunks_path = pipeline.resolve_chunks(gen, manifest)
     texts: dict[str, dict] = {}
     for rec in read_jsonl(chunks_path):
         cid = str(rec.get("chunk_id") or "")

@@ -1,0 +1,24 @@
+{
+ "gold_set": "data/goldset/gold-v2.json",
+ "n": 640,
+ "n_abstain": 52,
+ "n_answer": 588,
+ "base_r5": 210,
+ "title_r5": 314,
+ "both_r5": 336,
+ "abstain_ok": {
+  "base": 10,
+  "title": 10,
+  "both": 10
+ },
+ "broke_abstain": [],
+ "regressed": [],
+ "citation_failures": 16,
+ "clean_gain": 57,
+ "verdict": {
+  "A1_no_abstain_regression": true,
+  "A2_no_answer_regression": true,
+  "A3_zero_citation_failure": false,
+  "all_pass": false
+ }
+}

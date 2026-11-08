@@ -1,0 +1,393 @@
+{
+ "triggers": [
+  "不同阶段",
+  "先后出现",
+  "抽取矛盾",
+  "剧情演进",
+  "这两条记录应如何理解",
+  "如何理解"
+ ],
+ "splits": {
+  "dev": {
+   "n": 350,
+   "trigger_by_cat": {
+    "time_conflict": 38
+   },
+   "cur": "198/285",
+   "new": "198/285",
+   "up": [],
+   "down": [],
+   "time_conflict_detail": [
+    {
+     "qid": "q-tc-000003",
+     "triggers": [
+      "不同阶段",
+      "这两条记录应如何理解",
+      "如何理解"
+     ],
+     "signal": [
+      {
+       "pair": [
+        "克洛宁",
+        "赫尔曼"
+       ],
+       "predicates": [
+        "背叛",
+        "隶属"
+       ],
+       "docs": [
+        "activities/act3d0/level_act3d0_st04",
+        "activities/act3d0/level_act3d0_07_end"
+       ]
+      }
+     ],
+     "cur_pass": null
+    },
+    {
+     "qid": "q-tc-000004",
+     "triggers": [
+      "不同阶段",
+      "这两条记录应如何理解",
+      "如何理解"
+     ],
+     "signal": [],
+     "cur_pass": null
+    },
+    {
+     "qid": "q-tc-000005",
+     "triggers": [
+      "不同阶段",
+      "这两条记录应如何理解",
+      "如何理解"
+     ],
+     "signal": [
+      {
+       "pair": [
+        "玉门",
+        "重岳"
+       ],
+       "predicates": [
+        "驻守",
+        "离开"
+       ],
+       "docs": [
+        "obt/memory/story_chyue_1_1",
+        "activities/act49side/level_act49side_06_end"
+       ]
+      }
+     ],
+     "cur_pass": null
+    },
+    {
+     "qid": "q-tc-000006",
+     "triggers": [
+      "不同阶段",
+      "这两条记录应如何理解",
+      "如何理解"
+     ],
+     "signal": [
+      {
+       "pair": [
+        "暴行",
+        "雷姆必拓"
+       ],
+       "predicates": [
+        "离开",
+        "驻守"
+       ],
+       "docs": [
+        "obt/memory/story_savage_2_2",
+        "obt/memory/story_savage_1_1"
+       ]
+      }
+     ],
+     "cur_pass": null
+    },
+    {
+     "qid": "q-tc-000007",
+     "triggers": [
+      "不同阶段",
+      "这两条记录应如何理解",
+      "如何理解"
+     ],
+     "signal": [
+      {
+       "pair": [
+        "斯卡蒂",
+        "格拉尼"
+       ],
+       "predicates": [
+        "交战",
+        "保护"
+       ],
+       "docs": [
+        "activities/a001/level_a001_06_beg",
+        "activities/a001/level_a001_03_beg"
+       ]
+      }
+     ],
+     "cur_pass": null
+    },
+    {
+     "qid": "q-tc-000008",
+     "triggers": [
+      "先后出现",
+      "抽取矛盾",
+      "剧情演进"
+     ],
+     "signal": [],
+     "cur_pass": null
+    }
+   ]
+  },
+  "holdout": {
+   "n": 238,
+   "trigger_by_cat": {
+    "time_conflict": 26
+   },
+   "cur": "132/196",
+   "new": "132/196",
+   "up": [],
+   "down": [],
+   "time_conflict_detail": [
+    {
+     "qid": "q-tc-000001",
+     "triggers": [
+      "先后出现",
+      "抽取矛盾",
+      "剧情演进"
+     ],
+     "signal": [
+      {
+       "pair": [
+        "萨卢佐家族",
+        "贝洛内家族"
+       ],
+       "predicates": [
+        "敌对",
+        "同盟"
+       ],
+       "docs": [
+        "activities/act21side/level_act21side_09_beg",
+        "activities/act21side/level_act21side_09_end"
+       ]
+      }
+     ],
+     "cur_pass": null
+    },
+    {
+     "qid": "q-tc-000002",
+     "triggers": [
+      "先后出现",
+      "抽取矛盾",
+      "剧情演进"
+     ],
+     "signal": [],
+     "cur_pass": null
+    },
+    {
+     "qid": "q-tc-000009",
+     "triggers": [
+      "先后出现",
+      "抽取矛盾",
+      "剧情演进"
+     ],
+     "signal": [
+      {
+       "pair": [
+        "维多利亚",
+        "菈塔托丝"
+       ],
+       "predicates": [
+        "同盟",
+        "敌对"
+       ],
+       "docs": [
+        "activities/act46side/level_act46side_04_beg",
+        "activities/act46side/level_act46side_08_beg"
+       ]
+      }
+     ],
+     "cur_pass": null
+    },
+    {
+     "qid": "q-tc-000011",
+     "triggers": [
+      "不同阶段",
+      "这两条记录应如何理解",
+      "如何理解"
+     ],
+     "signal": [],
+     "cur_pass": null
+    },
+    {
+     "qid": "q-tc-000012",
+     "triggers": [
+      "不同阶段",
+      "这两条记录应如何理解",
+      "如何理解"
+     ],
+     "signal": [
+      {
+       "pair": [
+        "八幡海铃",
+        "弗朗西斯"
+       ],
+       "predicates": [
+        "敌对",
+        "同盟"
+       ],
+       "docs": [
+        "activities/act45side/level_act45side_03_beg",
+        "activities/act45side/level_act45side_08_beg"
+       ]
+      }
+     ],
+     "cur_pass": null
+    },
+    {
+     "qid": "q-tc-000014",
+     "triggers": [
+      "不同阶段",
+      "这两条记录应如何理解",
+      "如何理解"
+     ],
+     "signal": [],
+     "cur_pass": null
+    }
+   ]
+  },
+  "clean": {
+   "n": 144,
+   "trigger_by_cat": {
+    "time_conflict": 16
+   },
+   "cur": "83/120",
+   "new": "83/120",
+   "up": [],
+   "down": [],
+   "time_conflict_detail": [
+    {
+     "qid": "q-tc-900002",
+     "triggers": [
+      "不同阶段",
+      "这两条记录应如何理解",
+      "如何理解"
+     ],
+     "signal": [
+      {
+       "pair": [
+        "深池",
+        "萨卡兹"
+       ],
+       "predicates": [
+        "敌对",
+        "同盟"
+       ],
+       "docs": [
+        "obt/main/level_main_10-02_end",
+        "obt/main/level_main_10-01_end"
+       ]
+      }
+     ],
+     "cur_pass": null
+    },
+    {
+     "qid": "q-tc-900007",
+     "triggers": [
+      "不同阶段",
+      "这两条记录应如何理解",
+      "如何理解"
+     ],
+     "signal": [
+      {
+       "pair": [
+        "瓦拉赫",
+        "贝洛内家族"
+       ],
+       "predicates": [
+        "敌对",
+        "同盟"
+       ],
+       "docs": [
+        "activities/act21side/level_act21side_09_end",
+        "activities/act21side/level_act21side_08_beg"
+       ]
+      }
+     ],
+     "cur_pass": null
+    },
+    {
+     "qid": "q-tc-900008",
+     "triggers": [
+      "先后出现",
+      "抽取矛盾",
+      "剧情演进"
+     ],
+     "signal": [
+      {
+       "pair": [
+        "乔万娜",
+        "德克萨斯"
+       ],
+       "predicates": [
+        "同盟",
+        "敌对"
+       ],
+       "docs": [
+        "activities/act21side/level_act21side_07_beg",
+        "activities/act21side/level_act21side_06_end"
+       ]
+      }
+     ],
+     "cur_pass": null
+    },
+    {
+     "qid": "q-tc-900009",
+     "triggers": [
+      "先后出现",
+      "抽取矛盾",
+      "剧情演进"
+     ],
+     "signal": [],
+     "cur_pass": null
+    },
+    {
+     "qid": "q-tc-900010",
+     "triggers": [
+      "先后出现",
+      "抽取矛盾",
+      "剧情演进"
+     ],
+     "signal": [
+      {
+       "pair": [
+        "塞雷娅",
+        "斐尔迪南"
+       ],
+       "predicates": [
+        "同盟",
+        "敌对"
+       ],
+       "docs": [
+        "activities/act25side/level_act25side_07_end",
+        "activities/act25side/level_act25side_04_end"
+       ]
+      }
+     ],
+     "cur_pass": null
+    },
+    {
+     "qid": "q-tc-900013",
+     "triggers": [
+      "不同阶段",
+      "这两条记录应如何理解",
+      "如何理解"
+     ],
+     "signal": [],
+     "cur_pass": null
+    }
+   ]
+  }
+ }
+}

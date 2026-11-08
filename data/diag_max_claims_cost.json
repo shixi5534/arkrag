@@ -1,0 +1,40 @@
+{
+ "dev": {
+  "n": 285,
+  "summary": {
+   "5": {
+    "claims": 3.23,
+    "chars": 32.3,
+    "relevant": 2.99,
+    "noise": 0.24,
+    "cites": 0.0
+   },
+   "12": {
+    "claims": 6.33,
+    "chars": 61.6,
+    "relevant": 5.94,
+    "noise": 0.39,
+    "cites": 0.0
+   }
+  }
+ },
+ "holdout": {
+  "n": 195,
+  "summary": {
+   "5": {
+    "claims": 3.08,
+    "chars": 31.3,
+    "relevant": 2.85,
+    "noise": 0.23,
+    "cites": 0.0
+   },
+   "12": {
+    "claims": 6.04,
+    "chars": 59.5,
+    "relevant": 5.67,
+    "noise": 0.37,
+    "cites": 0.0
+   }
+  }
+ }
+}

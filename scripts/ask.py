@@ -216,8 +216,24 @@ def _stratified_sample(items: list[dict], limit: int, *, seed: int = 20261101) -
     return picked
 
 
-def evaluate(gold_path: Path, *, limit: int, generation_id: str = "") -> dict:
-    """跑 Gold Set 并返回七项指标 + 每项的分母。"""
+def evaluate(
+    gold_path: Path,
+    *,
+    limit: int,
+    generation_id: str = "",
+    token_budget: int | None = None,
+    prod: bool = False,
+) -> dict:
+    """跑 Gold Set 并返回七项指标 + 每项的分母。
+
+    `token_budget` 覆盖上下文预算；`None` 表示吃 `retrieve.DEFAULT_BUDGET`
+    的默认值。评测时它必须能显式给，否则台账里 6000 档的历史读数
+    在默认值改动之后就再也复现不出来了。
+
+    `prod=True` 走 `pipeline.PROD_PROFILE`（引文定位 + 桥接 + 图证据预留 +
+    24000 预算）。默认 `False`：这个脚本的默认口径是历史默认档，台账里每一格
+    旧读数都靠它复现。
+    """
     if not gold_path.exists():
         raise SystemExit(f"[2] Gold Set 不存在：{gold_path}")
     try:
@@ -233,6 +249,14 @@ def evaluate(gold_path: Path, *, limit: int, generation_id: str = "") -> dict:
     pipeline = build_pipeline(loaded, top_k=20, graph_depth=1)
     pipeline["generation_id"] = gid
     pipeline["entities"] = loaded["graph"].get("entities") or []
+    # 生产档先把预算写进实例属性，所以下面那行显式 `token_budget` 仍然能覆盖它
+    # （显式给的优先，`None` 才是"沿用档里的值"）。
+    options = pipeline_mod.apply_prod_profile(pipeline) if prod else None
+    # `Retriever.budget` 是实例属性，`build_context` 无 `token_budget` 实参时
+    # 直接读 `self.budget["max_context_tokens"]`。这里改它，整条评测链
+    # （含 `ask_once`）就都在这个预算下跑。`None` = 不改，沿用默认。
+    if token_budget is not None:
+        pipeline["retriever"].budget["max_context_tokens"] = int(token_budget)
 
     selected = _stratified_sample(items, limit)
 
@@ -254,7 +278,7 @@ def evaluate(gold_path: Path, *, limit: int, generation_id: str = "") -> dict:
         should_abstain = bool(item.get("should_abstain"))
         category = str(item.get("category") or "")
 
-        result = ask_once(pipeline, question)
+        result = ask_once(pipeline, question, options=options)
         hits = _hit_ids(result["search"]["hits"])
         ans = result["answer"]
 
@@ -455,7 +479,28 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--generation", default="", help="世代 id（评测时默认取最近的 ark-rag-3）")
     parser.add_argument("--top-k", type=int, default=20, help="检索命中块数，默认 20")
     parser.add_argument("--graph-depth", type=int, default=1, help="图扩展深度，默认 1")
+    parser.add_argument(
+        "--token-budget",
+        type=int,
+        default=retrieve_mod.DEFAULT_BUDGET["max_context_tokens"],
+        help=(
+            "上下文 token 预算，默认取 retrieve.DEFAULT_BUDGET "
+            f'({retrieve_mod.DEFAULT_BUDGET["max_context_tokens"]})。'
+            "必须能显式给：scripts/ 下 40 多个历史脚本调 build_pipeline "
+            "时吃的都是默认值，台账里 6000 档的那些读数只有用 "
+            "--token-budget 6000 才能原样复现。"
+        ),
+    )
     parser.add_argument("--json", default="", help="把完整结果写到这个文件")
+    parser.add_argument(
+        "--prod",
+        action="store_true",
+        help=(
+            "按生产档跑（引文定位 + 桥接 + 图证据预留，预算取 "
+            "pipeline.PROD_PROFILE）。**默认不开**：本脚本的默认口径必须继续是"
+            "历史默认档，否则台账里 6000/12000 档的读数全部复现不出来。"
+        ),
+    )
     parser.add_argument("--evaluate", action="store_true", help="跑 Gold Set 评测")
     parser.add_argument("--gold-set", default="", help="Gold Set 路径（评测必填）")
     parser.add_argument("--limit", type=int, default=50, help="评测题数上限，默认 50")
@@ -468,8 +513,15 @@ def main(argv: list[str] | None = None) -> int:
         if args.limit < 1:
             print("[2] --limit 必须 >= 1", file=sys.stderr)
             return 2
-        report = evaluate(Path(args.gold_set), limit=args.limit,
-                          generation_id=args.generation)
+        report = evaluate(
+            Path(args.gold_set), limit=args.limit,
+            generation_id=args.generation,
+            # 与单问分支同一条优先级规则：`--prod` 下"没显式改预算"就交回
+            # `None`（= 沿用生产档的 24000），显式给了别值才覆盖。
+            token_budget=(None if args.prod
+                          and args.token_budget == parser.get_default("token_budget")
+                          else args.token_budget),
+            prod=args.prod)
         print_evaluation(report)
         if args.json:
             Path(args.json).write_text(
@@ -490,8 +542,18 @@ def main(argv: list[str] | None = None) -> int:
     pipeline = build_pipeline(loaded, top_k=args.top_k, graph_depth=args.graph_depth)
     pipeline["generation_id"] = gid
     pipeline["entities"] = loaded["graph"].get("entities") or []
+    options = pipeline_mod.apply_prod_profile(pipeline) if args.prod else None
+    # 同 `evaluate()`：`Retriever.budget` 是唯一生效入口。
+    #
+    # `--prod` 与 `--token-budget` 的优先级：**显式给的预算永远赢**，但"没给"
+    # 不能被误判成"给了默认值"。`argparse` 的 default 是 12000（这是历史档口径，
+    # 有测试钉着），所以这里拿 `get_default()` 比一次——等于默认值就说明用户
+    # 没提这个参数，此时 `--prod` 的 24000 必须留着，否则生产档会被悄悄降成
+    # 12000，而那组合实测比不开桥接还差（dev 最高 75.44%）。
+    if not (args.prod and args.token_budget == parser.get_default("token_budget")):
+        pipeline["retriever"].budget["max_context_tokens"] = int(args.token_budget)
 
-    result = ask_once(pipeline, question)
+    result = ask_once(pipeline, question, options=options)
     verified = answer_mod.verify_citations(result["answer"], loaded["chunks"])
     result["answer_verified"] = verified
     result["answer"] = verified

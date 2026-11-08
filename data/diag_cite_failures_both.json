@@ -1,0 +1,157 @@
+{
+ "label": "TITLE+CHAPTER 开",
+ "n_cases": 16,
+ "by_reason": {
+  "evidence_too_short(3)": 15,
+  "evidence_too_short(2)": 1
+ },
+ "by_source": {
+  "claim": 16
+ },
+ "cases": [
+  {
+   "qid": "q-al-000019",
+   "category": "alias",
+   "chunk_id": "activities/act11d0/level_act11d0_st01#003",
+   "reason": "evidence_too_short(3)",
+   "source": "claim",
+   "claim": "亚叶交谈铃兰",
+   "evidence": "不行。"
+  },
+  {
+   "qid": "q-al-000046",
+   "category": "alias",
+   "chunk_id": "activities/act23side/level_act23side_06_end#004",
+   "reason": "evidence_too_short(3)",
+   "source": "claim",
+   "claim": "孟铁衣交谈林雨霞",
+   "evidence": "拿去。"
+  },
+  {
+   "qid": "q-mh-000009",
+   "category": "multihop",
+   "chunk_id": "activities/act11d0/level_act11d0_st01#003",
+   "reason": "evidence_too_short(3)",
+   "source": "claim",
+   "claim": "亚叶交谈铃兰",
+   "evidence": "不行。"
+  },
+  {
+   "qid": "q-mh-000016",
+   "category": "multihop",
+   "chunk_id": "activities/act23side/level_act23side_06_end#000",
+   "reason": "evidence_too_short(3)",
+   "source": "claim",
+   "claim": "太傅交谈重岳",
+   "evidence": "多谢。"
+  },
+  {
+   "qid": "q-mh-000022",
+   "category": "multihop",
+   "chunk_id": "obt/main/level_main_11-12_beg#002",
+   "reason": "evidence_too_short(3)",
+   "source": "claim",
+   "claim": "阿斯卡纶交谈莱托中校",
+   "evidence": "这血液"
+  },
+  {
+   "qid": "q-tc-000005",
+   "category": "time_conflict",
+   "chunk_id": "activities/act23side/level_act23side_06_end#000",
+   "reason": "evidence_too_short(3)",
+   "source": "claim",
+   "claim": "太傅交谈重岳",
+   "evidence": "多谢。"
+  },
+  {
+   "qid": "q-sc-900063",
+   "category": "single_chunk",
+   "chunk_id": "activities/act26side/level_act26side_04_beg#002",
+   "reason": "evidence_too_short(3)",
+   "source": "claim",
+   "claim": "费德里科交谈蕾缪安",
+   "evidence": "不会。"
+  },
+  {
+   "qid": "q-al-900037",
+   "category": "alias",
+   "chunk_id": "activities/act24side/level_act24side_07_beg#000",
+   "reason": "evidence_too_short(3)",
+   "source": "claim",
+   "claim": "泷居未来交谈黑角",
+   "evidence": "是呀。"
+  },
+  {
+   "qid": "q-al-900037",
+   "category": "alias",
+   "chunk_id": "activities/act24side/level_act24side_07_beg#001",
+   "reason": "evidence_too_short(2)",
+   "source": "claim",
+   "claim": "黑角交谈泷居未来",
+   "evidence": "哦。"
+  },
+  {
+   "qid": "q-al-900037",
+   "category": "alias",
+   "chunk_id": "activities/act24side/level_act24side_07_beg#002",
+   "reason": "evidence_too_short(3)",
+   "source": "claim",
+   "claim": "黑角交谈泷居未来",
+   "evidence": "但是？"
+  },
+  {
+   "qid": "q-mh-900017",
+   "category": "multihop",
+   "chunk_id": "obt/memory/story_hsguma_1_1#000",
+   "reason": "evidence_too_short(3)",
+   "source": "claim",
+   "claim": "星熊交谈董阿伯",
+   "evidence": "谢了。"
+  },
+  {
+   "qid": "q-tc-900021",
+   "category": "time_conflict",
+   "chunk_id": "activities/act4d0/level_act4d0_st01#007",
+   "reason": "evidence_too_short(3)",
+   "source": "claim",
+   "claim": "赫拉格交谈爱国者",
+   "evidence": "说吧。"
+  },
+  {
+   "qid": "q-tc-900021",
+   "category": "time_conflict",
+   "chunk_id": "activities/act4d0/level_act4d0_st01#000",
+   "reason": "evidence_too_short(3)",
+   "source": "claim",
+   "claim": "爱国者交谈赫拉格",
+   "evidence": "将军。"
+  },
+  {
+   "qid": "q-tc-900030",
+   "category": "time_conflict",
+   "chunk_id": "activities/act21side/level_act21side_06_end#000",
+   "reason": "evidence_too_short(3)",
+   "source": "claim",
+   "claim": "德克萨斯敌对罗塞蒂家族",
+   "evidence": "让开。"
+  },
+  {
+   "qid": "q-na-900004",
+   "category": "negative_abstain",
+   "chunk_id": "activities/act11d0/level_act11d0_sub-1-1_end#000",
+   "reason": "evidence_too_short(3)",
+   "source": "claim",
+   "claim": "毕德曼交谈塞弗林",
+   "evidence": "请进。"
+  },
+  {
+   "qid": "q-na-900012",
+   "category": "negative_abstain",
+   "chunk_id": "activities/act24side/level_act24side_08_end#000",
+   "reason": "evidence_too_short(3)",
+   "source": "claim",
+   "claim": "泷居应交谈柏生明",
+   "evidence": "阿明！"
+  }
+ ]
+}

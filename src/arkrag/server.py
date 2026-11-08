@@ -91,6 +91,7 @@ from . import index as index_mod
 from . import pipeline as pipeline_mod
 from . import query as query_mod
 from . import release
+from . import retrieve as retrieve_mod
 
 # ---------------------------------------------------------------- 常量
 
@@ -111,6 +112,19 @@ DEFAULT_MAX_TOP_K = 50
 #: 图扩展深度上限。`retrieve.DEFAULT_BUDGET["max_depth"]` 是 2，计划 J2 要求
 #: "限制图深度"，这里取同一个数而不是另编一个。
 DEFAULT_MAX_GRAPH_DEPTH = 2
+
+#: 服务端默认上下文预算。**从 `pipeline.PROD_PROFILE` 派生，不在这里写数字**：
+#: 这个项目的事故形态之一是"同一判定写两处"——服务和检索各自手抄一个数，
+#: 改一处忘一处，于是 `/query` 的 `limits.max_context_tokens` 与真正生效的
+#: 预算各说各话。
+#:
+#: 为什么不再是 `retrieve.DEFAULT_BUDGET`：服务端服务的是**生产档**——引文定位 +
+#: 桥接 + 图证据预留 + 24000 预算，这一整套的四个数只有 `PROD_PROFILE` 一个出处。
+#: 预算单独抄一份出来，就会出现"服务端开了桥接但预算还是 12000"这种半套配置：
+#: 实测那组合比不开桥接还差（12000 档装不下 40 个直接单元 + 12000 预留，
+#: dev 最高只到 75.44%）。`retrieve.DEFAULT_BUDGET` 仍是 12000 —— 那是**检索库
+#: 的默认**，`scripts/` 下 40 多个历史脚本与台账读数靠它复现，两者不是同一个数。
+DEFAULT_MAX_CONTEXT_TOKENS = pipeline_mod.PROD_PROFILE["max_context_tokens"]
 
 #: 单次请求的墙钟上限（秒）。检索链路 P95 在 210 ms 量级，20 s 是"明显已经卡死"的量级。
 DEFAULT_TIMEOUT_S = 20.0
@@ -149,7 +163,7 @@ class Settings:
     max_record_chars: int = DEFAULT_MAX_RECORD_CHARS
     max_top_k: int = DEFAULT_MAX_TOP_K
     max_graph_depth: int = DEFAULT_MAX_GRAPH_DEPTH
-    max_context_tokens: int = 6000
+    max_context_tokens: int = DEFAULT_MAX_CONTEXT_TOKENS
     timeout_s: float = DEFAULT_TIMEOUT_S
     concurrency: int = DEFAULT_CONCURRENCY
     rate_limit_calls: int = DEFAULT_RATE_LIMIT_CALLS
@@ -187,7 +201,7 @@ class Settings:
             max_record_chars=_int("ARKRAG_SERVE_MAX_RECORD_CHARS", DEFAULT_MAX_RECORD_CHARS),
             max_top_k=_int("ARKRAG_SERVE_MAX_TOP_K", DEFAULT_MAX_TOP_K),
             max_graph_depth=_int("ARKRAG_SERVE_MAX_GRAPH_DEPTH", DEFAULT_MAX_GRAPH_DEPTH),
-            max_context_tokens=_int("ARKRAG_SERVE_MAX_CONTEXT_TOKENS", 6000),
+            max_context_tokens=_int("ARKRAG_SERVE_MAX_CONTEXT_TOKENS", DEFAULT_MAX_CONTEXT_TOKENS),
             timeout_s=_float("ARKRAG_SERVE_TIMEOUT_S", DEFAULT_TIMEOUT_S),
             concurrency=_int("ARKRAG_SERVE_CONCURRENCY", DEFAULT_CONCURRENCY),
             rate_limit_calls=_int("ARKRAG_SERVE_RATE_LIMIT_CALLS", DEFAULT_RATE_LIMIT_CALLS),
@@ -1252,8 +1266,14 @@ class Handler(BaseHTTPRequestHandler):
         timings: dict = {}
         t0 = time.perf_counter()
 
+        # 生产档的三个检索开关（引文定位 / 桥接 / 图证据预留）。**服务端必须传**：
+        # `ask_once(options=None)` 是历史默认档（三开关全关），只用来复现台账里
+        # 6000/12000 档的旧读数。线上跑历史默认档 = 服务端悄悄比评测低 10.5 个百分点。
+        prod_opts = pipeline_mod.prod_options()
+
         def work() -> dict:
-            result = pipeline_mod.ask_once(pipe, question, timings=timings)
+            result = pipeline_mod.ask_once(
+                pipe, question, timings=timings, options=prod_opts)
             return result
 
         result = self.state.run_bounded(work)

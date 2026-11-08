@@ -1,0 +1,121 @@
+{
+ "generation": "g-20261103T132152Z-06a741",
+ "budget": 6000,
+ "top_k": 20,
+ "n": 300,
+ "n_hit": 237,
+ "off_r5_all": 106,
+ "on_r5_all": 158,
+ "title_applied": 52,
+ "loc_ok": 52,
+ "loc_bad": 0,
+ "no_cite": 0,
+ "gold_cited": 52,
+ "non_gold_cited": 0,
+ "flip_better": [
+  "q-sc-000001",
+  "q-sc-000002",
+  "q-sc-000004",
+  "q-sc-000005",
+  "q-sc-000006",
+  "q-sc-000008",
+  "q-sc-000009",
+  "q-sc-000010",
+  "q-sc-000011",
+  "q-sc-000012",
+  "q-sc-000013",
+  "q-sc-000015",
+  "q-sc-000016",
+  "q-sc-000017",
+  "q-sc-000018",
+  "q-sc-000019",
+  "q-sc-000021",
+  "q-sc-000022",
+  "q-sc-000023",
+  "q-sc-000025",
+  "q-sc-000026",
+  "q-sc-000028",
+  "q-sc-000029",
+  "q-sc-000030",
+  "q-sc-000032",
+  "q-sc-000033",
+  "q-sc-000034",
+  "q-sc-000035",
+  "q-sc-000037",
+  "q-sc-000038",
+  "q-sc-000039",
+  "q-sc-000040",
+  "q-sc-000042",
+  "q-sc-000043",
+  "q-sc-000044",
+  "q-sc-000046",
+  "q-sc-000047",
+  "q-sc-000048",
+  "q-sc-000049",
+  "q-sc-000050",
+  "q-sc-000051",
+  "q-sc-000052",
+  "q-sc-000053",
+  "q-sc-000054",
+  "q-sc-000055",
+  "q-sc-000058",
+  "q-sc-000059",
+  "q-sc-000060",
+  "q-sc-000061",
+  "q-sc-000062",
+  "q-sc-000063",
+  "q-sc-000064"
+ ],
+ "flip_worse": [],
+ "by_category": {
+  "adversarial": {
+   "n": 16,
+   "off": 0,
+   "on": 0,
+   "delta": 0
+  },
+  "alias": {
+   "n": 48,
+   "off": 42,
+   "on": 42,
+   "delta": 0
+  },
+  "cross_chunk": {
+   "n": 32,
+   "off": 0,
+   "on": 0,
+   "delta": 0
+  },
+  "direct_relation": {
+   "n": 48,
+   "off": 37,
+   "on": 37,
+   "delta": 0
+  },
+  "multihop": {
+   "n": 48,
+   "off": 27,
+   "on": 27,
+   "delta": 0
+  },
+  "negative_abstain": {
+   "n": 12,
+   "off": 0,
+   "on": 0,
+   "delta": 0
+  },
+  "single_chunk": {
+   "n": 64,
+   "off": 0,
+   "on": 52,
+   "delta": 52
+  },
+  "time_conflict": {
+   "n": 32,
+   "off": 0,
+   "on": 0,
+   "delta": 0
+  }
+ },
+ "untriggered_same": true
+}

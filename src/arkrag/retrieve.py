@@ -43,7 +43,8 @@
 * **不排序不收敛的图游走**。深度上限 2，每实体邻居上限 20，节点上限 80；
   这些数字是为了"一次问答能在两秒内完成"，不是"覆盖整张图"。
 * `token` 估算用与建库同一套分词器（`index.tokenize`）。它与任何真实 LLM 的
-  分词都不同；写成文档是为了让"6000 token"这个数字可复现，不是声称精确。
+  分词都不同；写成文档是为了让 `DEFAULT_BUDGET["max_context_tokens"]` 这个
+  数字可复现，不是声称精确。数字只写在那一处，这里不再抄一遍。
 """
 from __future__ import annotations
 
@@ -67,7 +68,28 @@ DEFAULT_BUDGET: dict = {
     # `交谈` 边就带着 121 条断言，直接吃掉整个 max_assertions 预算，于是
     # 整次扩展只产出 1 条边——预算被一条边独占，其余邻居一个都进不来。
     "max_assertions_per_edge": 5,
-    "max_context_tokens": 6000,
+    # 上下文预算 12000 token（词法口径，实测约 8312 字、9.8 块）。
+    #
+    # 为什么是 12000 而不是更大：dev 350 题里可判 285 题，6000 档 191/285，
+    # 12000 档 225/285；再往上 18000/24000/40000 的通过数是 236/240/246/251，
+    # 边际递减。更要紧的是 cross_chunk 题（判据是 gold 章节**集合相等**）：
+    # 40000 档开始出现"多列章节"的虚增——靠多塞几章去碰对，集合相等判据下
+    # 40000 只有 232/285，而 12000 是 225/285，只多 7 题；可 6000 -> 12000
+    # 是 +34。增益从 +34 掉到 +7，说明大预算已从"排得准"转成"堆量"。
+    #
+    # 双报（holdout 里 94 题与 gold-v1 重复，clean holdout 只有 144 题、
+    # 可判 120 题，所以 holdout 整体会偏乐观，必须两个数字一起看）：
+    #   dev     191/285 (67.02%) -> 225/285 (78.95%)
+    #   holdout 137/195 (70.26%) -> 149/195 (76.41%)
+    #   clean holdout 87/120 (72.50%) -> 97/120 (80.83%)
+    # 延迟上这次改动几乎免费：上下文从 5.0 单位/4038 字涨到 9.8 单位/8312 字，
+    # 检索+装配 P50 从 149 ms 到 148 ms——贵在装配次数，不在 token 数。
+    #
+    # 回滚：把这一行改回 6000。`server.Settings` 与 `scripts/ask.py` 的
+    # `--token-budget` 默认值都从这一处派生，改这一行全站生效；同时
+    # `tests/test_context_budget.py` 里钉住 12000 的用例会变红，
+    # 那是门在正常工作，不要为了让它们过而改测试。
+    "max_context_tokens": 12000,
     "timeout_ms": 2000,
     # 第 3 档的门槛：出现至少两次才算"可信度较高"。设成 2 而不是 1，是因为
     # 实测 28,625 条边里有相当一部分 support_count=1；全算高可信等于没有这一档。
@@ -188,7 +210,8 @@ def estimate_tokens(text: str, *, tokenizer_version: str = index_mod.TOKENIZER_V
     """用建库同一套分词器估 token 数。
 
     与真实 LLM 分词不同，这一点在模块 docstring 里已如实声明。用同一套的好处是
-    "上下文 6000 token"这个结论在测试里可复现，不会因为环境不同而漂。
+    "上下文预算这么多 token"这个结论在测试里可复现，不会因为环境不同而漂
+    （具体数字在 `DEFAULT_BUDGET["max_context_tokens"]`，这里不抄第二份）。
     """
     if not text:
         return 0
@@ -812,6 +835,7 @@ class Retriever:
         *,
         token_budget: int | None = None,
         query_analysis: dict | None = None,
+        graph_reserve_tokens: int = 0,
     ) -> dict:
         """把检索命中与图扩展拼成上下文单元。
 
@@ -828,6 +852,19 @@ class Retriever:
           `text[start:end]` 逐字比对。
 
         返回 `{units:[...], context_digest, stats:{...}}`。
+
+        ## `graph_reserve_tokens`（默认 0 = 与改造前逐位等价）
+
+        直接证据单元先装，但**只用到 `budget_tokens - graph_reserve_tokens`**；剩下的
+        额度留给纯图扩展单元，装完图单元再回来补装剩余的直接单元。总预算不变。
+
+        为什么需要：`top_k=40` 的 40 个直接单元单独就吃 42k–52k token，远超 24000
+        预算——纯图单元排在尾部，几乎必然整批出局（实测：两跳路径的证据块只有
+        3/62 能进上下文；同一方案把预算放到 60000 就有 22/62，放到 200000 有 31/62）。
+        这不是"多吐上下文"：总预算一分没加，只是让图证据不再被直接证据挤掉。
+
+        默认 0 时**行为与改造前逐位相同**（`used_tokens + cost > budget - 0` 就是原判据），
+        所以历史读数不受影响；调用方要显式传值才开启。
         """
         budget_tokens = int(
             token_budget if token_budget is not None else self.budget["max_context_tokens"]
@@ -938,18 +975,64 @@ class Retriever:
         kept: list[dict] = []
         used_tokens = 0
         truncated: list[str] = []
-        for unit in ordered:
-            cost = estimate_tokens(
+        # `graph_reserve_tokens > 0` 时先把额度切成两段：直接证据段、图证据段。
+        # 直接证据只能吃 `direct_cap`，装完再按剩余额度补装。默认 0 时
+        # `direct_cap == budget_tokens`，与改造前逐位等价。
+        reserve = max(0, int(graph_reserve_tokens or 0))
+        direct_cap = max(0, budget_tokens - reserve) if reserve else budget_tokens
+
+        def cost_of(unit: dict) -> int:
+            return estimate_tokens(
                 f"{unit['title']} {unit['chapter']} {unit['text']}",
                 tokenizer_version=getattr(self.index, "tokenizer_version", index_mod.TOKENIZER_VERSION),
                 name_terms=getattr(self.index, "name_terms", None),
             )
-            unit["tokens"] = cost
-            if used_tokens + cost > budget_tokens:
-                truncated.append(unit["chunk_id"])
-                continue
-            used_tokens += cost
-            kept.append(unit)
+
+        if reserve:
+            # 两段装填：直接证据 → 图证据 → 剩余直接证据。
+            # 顺序理由：图证据是本轮唯一被挤掉的一类，必须保证它在"剩余额度"里
+            # 抢到位置；如果把剩余直接证据排在前面，图证据又会重演"排在尾部"。
+            direct_units = [u for u in ordered if direct(u)]
+            graph_units = [u for u in ordered if not direct(u)]
+            taken: set[str] = set()
+            for unit in direct_units:
+                cost = cost_of(unit)
+                unit["tokens"] = cost
+                if used_tokens + cost > direct_cap:
+                    continue
+                used_tokens += cost
+                kept.append(unit)
+                taken.add(unit["chunk_id"])
+            for unit in graph_units:
+                cost = cost_of(unit)
+                unit["tokens"] = cost
+                if used_tokens + cost > budget_tokens:
+                    continue
+                used_tokens += cost
+                kept.append(unit)
+                taken.add(unit["chunk_id"])
+            for unit in direct_units:
+                if unit["chunk_id"] in taken:
+                    continue
+                cost = unit.get("tokens") or cost_of(unit)
+                unit["tokens"] = cost
+                if used_tokens + cost > budget_tokens:
+                    continue
+                used_tokens += cost
+                kept.append(unit)
+                taken.add(unit["chunk_id"])
+            truncated = [u["chunk_id"] for u in ordered if u["chunk_id"] not in taken]
+            # 恢复"直接证据在前"的展示序：装填顺序变了，但喂给答案器的顺序不该变。
+            kept.sort(key=lambda u: (0 if direct(u) else 1, -u["score"], u["chunk_id"]))
+        else:
+            for unit in ordered:
+                cost = cost_of(unit)
+                unit["tokens"] = cost
+                if used_tokens + cost > budget_tokens:
+                    truncated.append(unit["chunk_id"])
+                    continue
+                used_tokens += cost
+                kept.append(unit)
 
         payload = [
             {
@@ -963,7 +1046,7 @@ class Retriever:
             json.dumps(payload, ensure_ascii=False, sort_keys=True).encode("utf-8")
         ).hexdigest()
 
-        return {
+        result = {
             "units": kept,
             "context_digest": digest,
             "stats": {
@@ -978,6 +1061,11 @@ class Retriever:
                 "evidence_spans": sum(len(u["evidence_spans"]) for u in kept),
             },
         }
+        if reserve:
+            # 只在开启预留时加这个键：默认路径的 `stats` 字面量与改造前逐位相同，
+            # 历史台账里对 `stats` 做等值比较的测试不会因新键而失败。
+            result["stats"]["graph_reserve_tokens"] = reserve
+        return result
 
 
 def _tier_reason(tier: int) -> str:

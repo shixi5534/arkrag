@@ -710,11 +710,16 @@ class TestQueryEndpoint:
     def test_custom_context_budget_does_not_leak_between_requests(self, servable):
         """`_with_budget` 必须克隆：原地改预算会让并发请求读到别人的预算。"""
         gid, _data = servable
+        want = int(server.pipeline_mod.PROD_PROFILE["max_context_tokens"])
         with _serve(gid) as client:
             first = client.post("/query", {"question": "凯尔希", "max_context_tokens": 300})[2]
             second = client.post("/query", {"question": "凯尔希"})[2]
             assert first["limits"]["max_context_tokens"] == 300
-            assert second["limits"]["max_context_tokens"] == 6000
+            assert second["limits"]["max_context_tokens"] == want, (
+                f"默认预算应当来自 pipeline.PROD_PROFILE（{want}）；"
+                f"拿到 {second['limits']['max_context_tokens']} 说明服务端要么抄着旧数字，"
+                f"要么退回成了检索库默认（12000，历史默认档）"
+            )
 
     def test_query_writes_a_log_record_without_the_question(self, servable):
         """J3：默认不记录问句原文，只记长度与摘要。"""

@@ -1,0 +1,746 @@
+{{cbox2|lv=1|icon=satellite|text=本条目为泰拉大典计划附属条目，适用相关[[泰拉大典:编辑指南|编辑规范]]。}}
+{{参考客户端版本|text=<br>本条目同时参考的 Yostar 外服客户端版本号为'''31.5.80'''（EN/JP/KR）。}}
+
+本条目记载了由鹰角网络在游戏内外写明的涉及《明日方舟》世界观的各种词语在中文及外文中的写法，同时提供部分来自海外发行商Yostar的翻译文本以供参考。
+
+语源为日语，或出现于语音文本中的词语，注明相应的日文文本；尚无鹰角版本外文文本的词语，注明相应的悠星版本。
+
+内容为“-”表示不存在对应内容或无需记载，内容为空白表示该词语在对应语种文本中尚未出现或该部分内容的编辑尚未完成。
+
+==基础设定==
+关于这片大地。
+{|class="wikitable" style="width:min(800px, 100%); display:table; text-align:center; white-space:normal;"
+!colspan="3"|鹰角文本
+!colspan="2"|悠星文本
+|-
+!scope="col"|中文
+!scope="col"|英文
+!scope="col"|其他
+!scope="col"|日文
+!scope="col"|英文
+|-
+|源石||Originiums||-||{{Ruby|源石|オリジニウム}}||-
+|-
+|源石技艺||Originium Arts||-||アーツ||-
+|-
+|感染者||Infected||-||感染者||-
+|-
+|矿石病||Oripathy||-||{{Ruby|鉱石病|オリパシー}}||-
+|-
+|移动城市||Nomadic City||-||移動都市||-
+|}
+
+==地名==
+大地上的地名。
+<div class="ak-table-scroll">
+{|class="wikitable" style="width:min(800px, 100%); display:table; text-align:center; white-space:normal;"
+!colspan="3"|鹰角文本
+!colspan="2"|悠星文本
+|-
+!scope="col"|中文
+!scope="col"|英文
+!scope="col"|其他
+!scope="col"|日文
+!scope="col"|英文
+|-
+|泰拉||Terra||-||テラ||-
+|-
+|炎||Yan||-||-||-
+|-
+|百灶||Baizao||-||-||-
+|-
+|龙门||Lungmen||-||龍門||-
+|-
+|尚蜀||Shangshu||-||-||-
+|-
+|玉门||Yumen||-||-||-
+|-
+|哥伦比亚||Columbia||-||クルビア||-
+|-
+|麦克斯哥伦比亚特区||Max, District of Columbia||-||-||-
+|-
+|提卡伦多||Tkaronto||-||-||-
+|-
+|特里蒙||Trimounts||-||-||-
+|-
+|达维镇||Davistown||-||-||-
+|-
+|东||Higashi||-||極東||-
+|-
+|锁川||Kusarikawa||-||-||-
+|-
+|御机||Mitsukue||-||-||-
+|-
+|卡西米尔||Kazimierz||-||カジミエーシュ||-
+|-
+|卡瓦莱利亚基||Kawalerielki||-||-||-
+|-
+|谢拉格||Kjerag||-||イェラグ||-
+|-
+|拉特兰||Laterano||-||ラテラーノ||-
+|-
+|莱塔尼亚||Leithanien||-||リターニア||-
+|-
+|沃伦姆德||Wolumonde||-||ウォルモンド||-
+|-
+|维谢海姆||Vyseheim||-||-||-
+|-
+|崔林特尔梅||Zwillingstürme||-||-||-
+|-
+|雷姆必拓||Rim Billiton||-||レム・ビリトン||-
+|-
+|终极大铁屯||Ultramassive||-||-||-
+|-
+|萨米||Sami||-||サーミ||-
+|-
+|米诺斯||Minos||-||ミノス||-
+|-
+|雅赛努斯||Athenus||-||-||-
+|-
+|科林尼亚||||-||コリニア||-
+|-
+|荷谟伊||Hymnoi||-||ヒュムノイ||-
+|-
+|玻利瓦尔||Bolívar||-||ボリバル||-
+|-
+|大辛德拉卡托||Gran Sinderacato||-||-||-
+|-
+|拉乌尼达||La Unidad||-||-||-
+|-
+|多索雷斯/双日城||Dossoles||-||ドッソレス||-
+|-
+|萨尔贡||Sargon||-||サルゴン||-
+|-
+|沙尔-阿加德||Shar-Agade||-||-||-
+|-
+|瓦伊凡||Vyvern||-||ワイバーン||-
+|-
+|长泉镇||Long Spring||-||-||-
+|-
+|阿卡胡拉||Acahualla||-||-||-
+|-
+|叙拉古||Siracusa||-||シラクーザ||-
+|-
+|蒙特卢佩||Montelupe||-||-||-
+|-
+|沃尔西尼||Volsinii||-||-||-
+|-
+|乌萨斯帝国/乌萨斯||Ursus||Урсус Империя||ウルサス||-
+|-
+|圣骏堡||Deity Grypherburg||Святой Грифенбург||-||-
+|-
+|切尔诺伯格||Chernobog||Чернобог||チェルノボーグ||-
+|-
+|维多利亚帝国/维多利亚||Victoria Empire/Victoria||-||ヴィクトリア||-
+|-
+|塔拉||Tara||-||ターラー||Tara
+|-
+|伦蒂尼姆||Londinium||-||-||-
+|-
+|多伦郡||Toron County|||-||ドルン||-
+|-
+|小丘郡||County Hillock||-||-||-
+|-
+|卡拉顿||Caladon||-||-||-
+|-
+|克莱布拉松||Celaiblason||-||-||Calais-Blason
+|-
+|汐斯塔||Siesta||-||シエスタ||-
+|-
+|卡兹戴尔||Kazdel||-||カズデル||-
+|-
+|伊比利亚王国/伊比利亚||Iberia||Reino de Iberia||イベリア||-
+|-
+|雷亚-伊比利亚||Real-Iberia||-||-||-
+|-
+|佩尔多尼||Perdoni||-||-||-
+|-
+|格兰法洛||Gran Faro||-||-||-
+|-
+|阿戈尔||Ægir||-||エーギル||-
+|-
+|杜林||Durin||-||-||-
+|-
+|际崖城||Zeruertza||-||-||-
+|-
+|阿加门||Agamem||-||-||-
+|-
+|高卢||Gaul||-||-||-
+|-
+|林贡斯||Lingones||-||-||-
+|-
+|骏鹰王国||Hippogryphic Kingdom||-||-||-
+|-
+|焚风热土||Foehn Hotlands||-||-||-
+|-
+|因非冰原||Infy Icefield||-||-||-
+|-
+|科罗萨主矿脉||Kolossal Prime Vain||-||-||-
+|-
+|璟屿主矿脉||Jingyu Prime Vain||-||-||-
+|-
+|塔尔干主矿脉||Targanglis Prime Vain||-||-||-
+|}
+</div>
+
+==组织==
+大地上的组织。
+<div class="ak-table-scroll">
+{| class="wikitable" style="width:min(800px, 100%); display:table; text-align:center; white-space:normal;"
+! colspan="3" |鹰角文本
+! colspan="2" |悠星文本
+|-
+! scope="col" |中文
+! scope="col" |英文
+! scope="col" |其他
+! scope="col" |日文
+! scope="col" |英文
+|-
+|罗德岛/罗德岛制药公司||Rhodes Island/Rhodes Island Pharmaceutical Inc.||-||ロドス||-
+|-
+|罗德岛-精英干员||Rhodes-Elite Op||-||エリートオペレーター||Rhodes Island-Elite Operator
+|-
+|行动组A4||Op Team A4/<br />Operations Detachment Alpha 4||-||行動隊A4||Op Team A4
+|-
+|行动预备组A1||Re-Op Team A1/<br />Operations Preparation Detachment Alpha 1||-||行動予備隊A1||Reserve Op Team A1
+|-
+|行动预备组A4||Re-Op Team A4/<br />Operations Preparation Detachment Alpha 4||-||行動予備隊A4||Reserve Op Team A4
+|-
+|行动预备组A6||Re-Op Team A6/<br />Operations Preparation Detachment Alpha 6||-||行動予備隊A6||Reserve Op Team A6
+|-
+|S.W.E.E.P||S.W.E.E.P||-||-||-
+|-
+|巴别塔||Babel||-||バベル||Babel
+|-
+|深海猎人||Abyssal Hunters||-||アビサルハンター||Abyssal Hunters
+|-
+|黑钢国际||BSW/Blacksteel Worldwide||-||BSW||Blacksteel Worldwide
+|-
+|格拉斯哥帮||Glasgow||-||グラスゴー||Glasgow
+|-
+|喀兰贸易||Karlan Trade||-||カランド貿易||Karlan Trade CO., LTD
+|-
+|龙门近卫局||L.G.D./Lungmen Guard Department||-||龍門近衛局||Lungmen Guard Department
+|-
+|企鹅物流||Penguin Logistics||-||ペンギン急便||Penguin Logistics
+|-
+|莱茵生命||Rhine Lab LLC.||-||ライン生命||Rhine Lab
+|-
+|岁||Sui||-||-||-
+|-
+|贾维团伙||Chiave Gang||-||キアーベ一味||Chiave Gang
+|-
+|使徒||Followers||-||使徒||Followers
+|-
+|赦罪师|| ||-||聴罪師||-
+|-
+|鲤氏侦探事务所||Lee's Detective Agency||-||リー探偵事務所||Lee's Detective Agency
+|-
+|彩虹小队||Team Rainbow||-||レインボー小隊||Team Rainbow
+|-
+|乌萨斯学生自治团||U.S.S.G/Ursus Student Self-Government Group||Урсуский Ученический Союз Самоуправления||ウルサス学生自治団||Ursus Student Self-Governing Group
+|-
+|阿撒兹勒|| ||-||アザゼル||-
+|-
+|卡西米尔无胄盟||Armorless Union||-||カジミエーシュ無冑盟||Kazimierz Scionless Alliance
+|-
+|卡西米尔商业联合会||Kazimierz General Chamber of Commerce||-||-||-
+|-
+|卡西米尔监正会||Adeptus Sprawiedliwi Kazimierz||-||-||-
+|-
+|卡兹戴尔军事委员会||Military Commission of Kazdel||-||-||-
+|-
+|整合运动||Reunion||-||レユニオン||-
+|-
+|深池||Dublinn||-||ダブリン||Dublinn
+|-
+|伦蒂尼姆市民自救军||Eartha||-||-||-
+|-
+|雷神工业||Raythean||-||レイジアン工業||-
+|-
+|瓦伊凡联盟||Vyvern||-||ワイバーン アライアンス||-
+|-
+|诺斯伍德大骑士团||Northwood Knightorder||-||-||-
+|-
+|呼啸骑士团||Road Knightclub||-||-||-
+|-
+|沸血骑士团||Bloodboil||-||-||-
+|-
+|雪踵骑士团||Snowyheel||-||-||-
+|-
+|红松骑士团||Pinus Sylvestris||-||レッドパイン騎士団||Pinus Sylvestris
+|-
+|拉特兰中庭公证所||Laterano Notarial Hall||S.N.C.L./Secretaria Notariorum Curise Laterani||-||-
+|-
+|梅兰德基金会||Maylander Foundation||-||-||-
+|-
+|沙滩伞公司||Beachbrella||-||-||-
+|-
+|约翰老妈||Mama John's||-||-||-
+|-
+|辛嘉斯王朝/玻利瓦尔王国||Singas Dynasty||-||-||-
+|-
+|玻利瓦尔联合政府/玻利瓦尔独立国||Coalition Government||-||-||-
+|-
+|真正玻利瓦尔人解放运动||True Bolívarians||-||-||-
+|-
+|塔山生物科技||Tower Mountains||-||-||-
+|-
+|沃尔沃特科钦斯基||VolvortKochinski||-||-||-
+|-
+|锈锤||Rusthammer||-||-||-
+|-
+|太阳谷机械工业||Sunvalley Industries||-||-||-
+|}
+</div>
+
+==种族==
+大地上的种族。
+{| class="wikitable" style="width:min(800px, 100%); display:table; text-align:center; white-space:normal;"
+! colspan="3" |鹰角文本
+! colspan="2" |悠星文本
+|-
+! scope="col" |中文
+! scope="col" |英文
+! scope="col" |其他
+! scope="col" |日文
+! scope="col" |英文
+|-
+|龙||Lung||-||-||-
+|-
+|黎博利||Liberi||-||リーベリ||-
+|-
+|鲁珀||Lupo||-||ループス||-
+|-
+|鬼|| || ||鬼||Oni
+|-
+|阿达克利斯||Archosauria||-||アダクリス||-
+|-
+|阿纳缇||Anaty||-||アナティ||-
+|-
+|萨科塔||Sankta||-||サンクタ||-
+|-
+|萨弗拉||Savra||-||サヴラ||-
+|-
+|萨卡兹||Sarkaz||-||サルカズ||-
+|-
+|血魔|| || ||ブラッドブルード||Vampire
+|-
+|温迪戈|| || ||ウェンディゴ||Wendigo
+|-
+|菲林||Feline||-||フェリーン||-
+|-
+|瓦伊凡||Vouivre||-||ヴイーヴル||-
+|-
+|德拉克||Draco||-||ドラコ||-
+|-
+|瑞柏巴||Reproba||-||レプロバ||Rebbah
+|-
+|沃尔珀||Vulpo||-||ヴァルポ||-
+|-
+|杜林||Durin||-||ドゥリン||-
+|-
+|札拉克||Zalak||-||ザラック||-
+|-
+|曼提柯||Manticore||-||マンティコア||-
+|-
+|库兰塔||Kuranta||-||クランタ||-
+|-
+|安努拉||Anura||-||アヌーラ||-
+|-
+|埃拉菲亚||Elafia||-||エラフィア||-
+|-
+|卡特斯||Cautus||-||コータス||-
+|-
+|卡普里尼||Caprinae||-||-||-
+|-
+|匹特拉姆||Petram||-||ペートラム||-
+|-
+|依特拉||Itra||-||イトラ||-
+|-
+|佩洛||Perro||-||ペッロー||-
+|-
+|丰蹄||Forte||-||フォルテ||-
+|-
+|乌萨斯||Ursus||-||-||-
+|-
+|奇美拉|| || ||キメラ||Chimera
+|-
+|阿斯兰||Aslan||-||アスラン||-
+|-
+|麒麟||Kylin||-||麒麟||-
+|-
+|阿戈尔||Ægir||-||エーギル||-
+|-
+|皮洛萨||Pilosa||-||-||-
+|-
+|斐迪亚||Phidia||-||-||-
+|-
+|塞拉托||Cerato||-||-||-
+|}
+
+==角色==
+{{参阅|角色真名|游戏内使用代号角色的真实姓名}}
+===干员代号===
+罗德岛干员的代号。
+<div class="ak-table-scroll">
+{|class="wikitable mw-collapsible mw-collapsed" style="width:min(800px, 100%); display:table; text-align:center; white-space:normal;"
+!colspan="3"|鹰角文本
+!colspan="2"|悠星文本
+|-
+!scope="col"|中文
+!scope="col"|英文
+!scope="col"|其他
+!scope="col"|日文
+!scope="col"|英文
+|-
+{{#ask:[[分类:干员]][[稀有度::>1]][[干员序号::>0]][[干员名::!阿米娅(近卫)]]
+|?干员外文名
+|?干员名jp
+|limit=500
+|format=template
+|template=泰拉词库/干员代号
+|sort=干员序号
+|order=asc
+}}
+|}
+</div>
+
+===其他角色===
+{{编辑中}}
+出现在剧情和档案中的人名，按照出场地点或所属组织简单分类
+
+'''罗德岛'''
+{| class="wikitable mw-collapsible mw-collapsed" style="display:table; white-space:normal; width:min(800px, 100%); text-align:center;"
+! scope="col" |{{#tsl:zh|中文}}{{#tsl:ja|中国語}}{{#tsl:nozhja|Chinese}}
+! scope="col" |{{#tsl:zh|日文}}{{#tsl:ja|日本語}}{{#tsl:nozhja|Japanese}}
+! scope="col" |{{#tsl:zh|英文}}{{#tsl:ja|英語}}{{#tsl:nozhja|English}}
+|-
+|博士||ドクター||Doctor/Dr.
+|-
+|可露希尔||クロージャ||Closure
+|-
+|PRTS<br>原生罗德岛终端服务||-||PRTS/P.R.T.S/<br>Primitive Rhodes Island Terminal Service
+|-
+|Ace<br>王牌||-||Ace
+|-
+|Scout<br>斥候||-||Scout
+|-
+|西蒙娜||シモーネ||Simone
+|-
+|Sharp<br>锋刃||シャープ||Sharp
+|-
+|Stormeye<br>风暴眼||ストームアイ||Stormeye
+|-
+|Pith<br>术髓||ピス||Pith
+|-
+|Touch<br>触痕||タッチ||Touch
+|-
+|郁金香||チューリップ||Tulip
+|}
+
+'''整合运动'''
+{| class="wikitable mw-collapsible mw-collapsed" style="display:table; white-space:normal; width:min(800px, 100%); text-align:center;"
+! scope="col" |{{#tsl:zh|中文}}{{#tsl:ja|中国語}}{{#tsl:nozhja|Chinese}}
+! scope="col" |{{#tsl:zh|日文}}{{#tsl:ja|日本語}}{{#tsl:nozhja|Japanese}}
+! scope="col" |{{#tsl:zh|英文}}{{#tsl:ja|英語}}{{#tsl:nozhja|English}}
+|-
+|塔露拉||タルラ||Talulah
+|-
+|弑君者||クラウンスレイヤー||Crownslayer
+|-
+|浮士德||ファウスト||Faust
+|-
+|梅菲斯特||メフィスト||Mephisto
+|-
+|霜星||フロストノヴァ||Frostnova
+|-
+|爱国者||パトリオット||Patriot
+|-
+|碎骨||スカルシュレッダー||Skullshatterer
+|}
+
+'''巴别塔'''
+{| class="wikitable mw-collapsible mw-collapsed" style="display:table; white-space:normal; width:min(800px, 100%); text-align:center;"
+! scope="col" |{{#tsl:zh|中文}}{{#tsl:ja|中国語}}{{#tsl:nozhja|Chinese}}
+! scope="col" |{{#tsl:zh|日文}}{{#tsl:ja|日本語}}{{#tsl:nozhja|Japanese}}
+! scope="col" |{{#tsl:zh|英文}}{{#tsl:ja|英語}}{{#tsl:nozhja|English}}
+|-
+|特蕾西娅||テレジア||Theresia
+|}
+
+'''莱茵生命'''
+{| class="wikitable mw-collapsible mw-collapsed" style="display:table; white-space:normal; width:min(800px, 100%); text-align:center;"
+! scope="col" |{{#tsl:zh|中文}}{{#tsl:ja|中国語}}{{#tsl:nozhja|Chinese}}
+! scope="col" |{{#tsl:zh|日文}}{{#tsl:ja|日本語}}{{#tsl:nozhja|Japanese}}
+! scope="col" |{{#tsl:zh|英文}}{{#tsl:ja|英語}}{{#tsl:nozhja|English}}
+|-
+|阿伦茨·帕尔维斯||-||Ahrens Parvis
+|-
+|斐尔迪南·克鲁尼||-||Ferdinand Clooney
+|-
+|克丽斯腾·莱特||-||Kristen Wright
+|-
+|小贾斯汀·菲茨罗伊||-||Justin Fitzroy Jr.
+|-
+|娜斯提·鲁诺瑞伊||-||Nasti Lunorey
+|-
+|雅拉·B·威尔森||-||Jara B. Wilson
+|-
+|安德涅特·马里亚姆||-||Andenate Maryam
+|}
+
+'''黑钢国际'''
+{| class="wikitable mw-collapsible mw-collapsed" style="display:table; white-space:normal; width:min(800px, 100%); text-align:center;"
+! scope="col" |{{#tsl:zh|中文}}{{#tsl:ja|中国語}}{{#tsl:nozhja|Chinese}}
+! scope="col" |{{#tsl:zh|日文}}{{#tsl:ja|日本語}}{{#tsl:nozhja|Japanese}}
+! scope="col" |{{#tsl:zh|英文}}{{#tsl:ja|英語}}{{#tsl:nozhja|English}}
+|-
+|珍妮特·朗费罗||-||Janet Longfellow
+|}
+
+'''汐斯塔'''
+{| class="wikitable mw-collapsible mw-collapsed" style="display:table; white-space:normal; width:min(800px, 100%); text-align:center;"
+! scope="col" |{{#tsl:zh|中文}}{{#tsl:ja|中国語}}{{#tsl:nozhja|Chinese}}
+! scope="col" |{{#tsl:zh|日文}}{{#tsl:ja|日本語}}{{#tsl:nozhja|Japanese}}
+! scope="col" |{{#tsl:zh|英文}}{{#tsl:ja|英語}}{{#tsl:nozhja|English}}
+|-
+|克洛宁||クローニン||Cronin
+|-
+|赫尔曼·道尔科斯||ヘルマン||Herman Dolcos
+|-
+|芭芭拉·道尔科斯 || ||
+|-
+|恶魔破坏龙||デストラクティブ・ドラゴン・デーモン（悪魔破壊竜）||Destructive Dragon Demon/'''D.D.D.'''
+|-
+|Alty||-||Alty
+|}
+
+'''龙门'''
+{| class="wikitable mw-collapsible mw-collapsed" style="display:table; white-space:normal; width:min(800px, 100%); text-align:center;"
+! scope="col" |{{#tsl:zh|中文}}{{#tsl:ja|中国語}}{{#tsl:nozhja|Chinese}}
+! scope="col" |{{#tsl:zh|日文}}{{#tsl:ja|日本語}}{{#tsl:nozhja|Japanese}}
+! scope="col" |{{#tsl:zh|英文}}{{#tsl:ja|英語}}{{#tsl:nozhja|English}}
+|-
+|魏彦吾 ||ウェイ||Wei Yenwu
+|-
+|文月||フミヅキ||Fumizuki
+|-
+|米莎||ミーシャ||Misha
+|-
+|阿发||ファー||Ah Faat
+|-
+|卡彭||カポネ||Capone
+|-
+|甘比诺||ガンビーノ||Gambino
+|-
+|董阿伯||董のおじさん||Uncle Tung
+|-
+|伊斯||イース||Yith
+|-
+|鼠王||鼠王|| Rat King
+|-
+|欧厄尔·彼得斯||オエル・ピーターズ||Eurill Pides
+|-
+|大帝||エンペラー||Emperor
+|}
+
+'''卡西米尔'''
+{| class="wikitable mw-collapsible mw-collapsed" style="display:table; white-space:normal; width:min(800px, 100%); text-align:center;"
+! scope="col" |{{#tsl:zh|中文}}{{#tsl:ja|中国語}}{{#tsl:nozhja|Chinese}}
+! scope="col" |{{#tsl:zh|日文}}{{#tsl:ja|日本語}}{{#tsl:nozhja|Japanese}}
+! scope="col" |{{#tsl:zh|英文}}{{#tsl:ja|英語}}{{#tsl:nozhja|English}}
+|-
+|可萝尔||キャロル||Carol
+|-
+|黑骑士||-||Black Knight
+|-
+|凋零骑士||-||Desecrated Knight
+|-
+|腐败骑士||-||Defiled Knight
+|-
+|血骑士||-||Blood Knight
+|-
+|瑟奇亚克||-||Szewczyk
+|-
+|托兰||-||Toland
+|-
+|切斯柏||-||Czcibor
+|}
+
+'''叙拉古'''
+{| class="wikitable mw-collapsible mw-collapsed" style="display:table; white-space:normal; width:min(800px, 100%); text-align:center;"
+! scope="col" |{{#tsl:zh|中文}}{{#tsl:ja|中国語}}{{#tsl:nozhja|Chinese}}
+! scope="col" |{{#tsl:zh|日文}}{{#tsl:ja|日本語}}{{#tsl:nozhja|Japanese}}
+! scope="col" |{{#tsl:zh|英文}}{{#tsl:ja|英語}}{{#tsl:nozhja|English}}
+|-
+|迪伦马特||デュレンマット||Dürrenmatt
+|-
+|阿格尼尔||-||Agenir
+|-
+|乔万娜·罗塞蒂||-||Giovanna Rossati
+|-
+|德米特里·切塔尔多||-||Demetri Certaldo
+|-
+|丹布朗·莱奥帕尔迪||-||Danbrown Leopardi
+|-
+|文||-||Ben
+|}
+
+'''维多利亚'''
+{| class="wikitable mw-collapsible mw-collapsed" style="display:table; white-space:normal; width:min(800px, 100%); text-align:center;"
+! scope="col" |{{#tsl:zh|中文}}{{#tsl:ja|中国語}}{{#tsl:nozhja|Chinese}}
+! scope="col" |{{#tsl:zh|日文}}{{#tsl:ja|日本語}}{{#tsl:nozhja|Japanese}}
+! scope="col" |{{#tsl:zh|英文}}{{#tsl:ja|英語}}{{#tsl:nozhja|English}}
+|-
+|蔓德拉||-||Mandragora
+|-
+|莉薇娅·吉尔达斯||-||Livia Gildas
+|-
+|理查·西摩||-||Richard Seymour
+|-
+|露西娅·斯卡曼德罗斯||-||Lucia Skamandros
+|-
+|雷顿·孟塔古||-||Rayton Montague
+|-
+|杰弗里·梅斯||-||Jeffrey Metz
+|-
+|温德米尔公爵||-||Duke of Windermere
+|-
+|威灵顿公爵||-||Duke of Wellington
+|-
+|弗雷德里克三世||-||Frederick Ⅲ
+|}
+
+'''哥伦比亚'''
+{| class="wikitable mw-collapsible mw-collapsed" style="display:table; white-space:normal; width:min(800px, 100%); text-align:center;"
+! scope="col" |{{#tsl:zh|中文}}{{#tsl:ja|中国語}}{{#tsl:nozhja|Chinese}}
+! scope="col" |{{#tsl:zh|日文}}{{#tsl:ja|日本語}}{{#tsl:nozhja|Japanese}}
+! scope="col" |{{#tsl:zh|英文}}{{#tsl:ja|英語}}{{#tsl:nozhja|English}}
+|-
+|杰斯顿||-||Jesselton Miller
+|-
+|马克·麦克斯||-||Mk-MAX
+|}
+
+'''高卢'''
+{| class="wikitable mw-collapsible mw-collapsed" style="display:table; white-space:normal; width:min(800px, 100%); text-align:center;"
+! scope="col" |{{#tsl:zh|中文}}{{#tsl:ja|中国語}}{{#tsl:nozhja|Chinese}}
+! scope="col" |{{#tsl:zh|日文}}{{#tsl:ja|日本語}}{{#tsl:nozhja|Japanese}}
+! scope="col" |{{#tsl:zh|英文}}{{#tsl:ja|英語}}{{#tsl:nozhja|English}}
+|-
+|科西嘉一世||-||Corsica Ⅰ
+|-
+|德·黎博利||-||Emmanuel de Liberi
+|}
+
+'''卡兹戴尔'''
+{| class="wikitable mw-collapsible mw-collapsed" style="display:table; white-space:normal; width:min(800px, 100%); text-align:center;"
+! scope="col" |{{#tsl:zh|中文}}{{#tsl:ja|中国語}}{{#tsl:nozhja|Chinese}}
+! scope="col" |{{#tsl:zh|日文}}{{#tsl:ja|日本語}}{{#tsl:nozhja|Japanese}}
+! scope="col" |{{#tsl:zh|英文}}{{#tsl:ja|英語}}{{#tsl:nozhja|English}}
+|-
+|特雷西斯||-||Theresis
+|-
+|曼弗雷德||-||Manfred
+|}
+
+'''拉特兰'''
+{| class="wikitable mw-collapsible mw-collapsed" style="display:table; white-space:normal; width:min(800px, 100%); text-align:center;"
+! scope="col" |{{#tsl:zh|中文}}{{#tsl:ja|中国語}}{{#tsl:nozhja|Chinese}}
+! scope="col" |{{#tsl:zh|日文}}{{#tsl:ja|日本語}}{{#tsl:nozhja|Japanese}}
+! scope="col" |{{#tsl:zh|英文}}{{#tsl:ja|英語}}{{#tsl:nozhja|English}}
+|-
+|塞茜莉亚||-||Cecilia
+|-
+|安多恩||-||Androne
+|-
+|蕾缪安||-||Lemuen
+|-
+|克莱芒·杜波瓦||-||Clément Dubois
+|-
+|斯特凡诺·托雷格罗萨||-||Stefano Torregrossa
+|-
+|伊万杰利斯塔十一世||-||Yvangelista PP.Ⅺ
+|}
+
+'''玻利瓦尔'''
+{| class="wikitable mw-collapsible mw-collapsed" style="display:table; white-space:normal; width:min(800px, 100%); text-align:center;"
+! scope="col" |{{#tsl:zh|中文}}{{#tsl:ja|中国語}}{{#tsl:nozhja|Chinese}}
+! scope="col" |{{#tsl:zh|日文}}{{#tsl:ja|日本語}}{{#tsl:nozhja|Japanese}}
+! scope="col" |{{#tsl:zh|英文}}{{#tsl:ja|英語}}{{#tsl:nozhja|English}}
+|-
+|坎黛拉||-||Candela
+|-
+|潘乔||-||Pancho
+|}
+
+'''莱塔尼亚'''
+{| class="wikitable mw-collapsible mw-collapsed" style="display:table; white-space:normal; width:min(800px, 100%); text-align:center;"
+! scope="col" |{{#tsl:zh|中文}}{{#tsl:ja|中国語}}{{#tsl:nozhja|Chinese}}
+! scope="col" |{{#tsl:zh|日文}}{{#tsl:ja|日本語}}{{#tsl:nozhja|Japanese}}
+! scope="col" |{{#tsl:zh|英文}}{{#tsl:ja|英語}}{{#tsl:nozhja|English}}
+|-
+|赫尔昏佐伦/巫王||-||Herkunftshorn
+|-
+|利奥波德大公||-||Erzherzog von Leopold
+|-
+|塞弗林·霍索恩||-||Severin Hawthorn
+|-
+|塔佳娜||-||Tatjana
+|-
+|托尔瓦尔德·霍索恩||-||Thorwald Hawthorn
+|-
+|毕德曼||-||Biederman
+|-
+|埃克哈德||-||Eckehard
+|-
+|凯文||-||Kevin
+|}
+
+==杂项==
+各种不能归于以上分类的词语。
+{| class="wikitable" style="width:min(800px, 100%); display:table; text-align:center; white-space:normal;"
+! scope="col" |{{#tsl:zh|中文}}{{#tsl:ja|中国語}}{{#tsl:nozhja|Chinese}}
+! scope="col" |{{#tsl:zh|日文}}{{#tsl:ja|日本語}}{{#tsl:nozhja|Japanese}}
+! scope="col" |{{#tsl:zh|英文}}{{#tsl:ja|英語}}{{#tsl:nozhja|English}}
+! scope="col" |{{#tsl:zh|备注}}{{#tsl:ja|備考}}{{#tsl:nozhja|Remarks}}
+|-
+|明日方舟||アークナイツ||Arknights||-
+|-
+|法杖||アーツロッド/アーツユニット||wand/Arts staff/staff||-
+|-
+|咪波||ミーボ||Meeboo||梅尔制造的线控机械装置。
+|-
+|西绪福斯||シーシュポス||Sisyphus||莱茵生命出品的机械装置。
+|-
+|柯克西卡||ココシュカ||Kirkika||莱茵生命出品的机械装置。
+|-
+|罗德岛基建||-||R.I.I.C/<br />Rhodes Island Infrastructure Complex||-<!--RIIC (KEEP FOR SEO)-->
+|-
+|驮兽||-||Burdenbeast||-
+|-
+|瘤兽||-||Cystybeast||-
+|-
+|沙地兽||-||Sandbeast||-
+|-
+|裂兽||-||Manglerbeast||-
+|-
+|钳兽||-||Gloompincer||-
+|-
+|云兽||-||Cloudbeast||-
+|-
+|循兽||-||Beckbeast||-
+|-
+|鼷兽||-||Musbeast||-
+|-
+|海嗣/恐鱼||-||Sea Terror/Seaborn||-
+|-
+|四国战争||-||War of the Four Nations||-
+|-
+|大叛乱||-||The Great Rebellion||-
+|}
+
+==注释与链接==
+<references />
+{{分析与考据导航}}
