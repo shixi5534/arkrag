@@ -1169,7 +1169,84 @@ class TestSuiteSizeIsMonotonic:
     #     `test_unknown_policy_is_rejected_even_off_trigger` 红；
     #   H 去掉"只认 `ranked[0]`"的身份核对 ⇒
     #     `test_pick_is_bound_to_ranked_top1_only` 红。
-    N = 2135
+    # 2135 → 2276（W4；两个子工作项在同一个值上，**以收口时的实测为准**）：
+    # W4 的判据 v2 拆成两个子代理并行做，各自新增一个测试文件，两者都进
+    # `TEST_FILES`：
+    #   · `tests/test_w4_judge_v2.py` 65 个（判据 v2 的三轴 + loss 向量）；
+    #   · `tests/test_w4_eval_dual.py` 68 个（`--judge v1|v2|both` 双口径、
+    #     翻转四类、簇键、地板三行、方差膨胀诚实性）；
+    #   · 两个新文件让本文件四个按 `TEST_FILES` 展开的 parametrize 各多两项，+8。
+    # 算术：2135 + 65 + 68 + 8 = 2276，与 `--collect-only` 实测 2276 一致
+    # （本文件自身由 272 涨到 274）。**注意核对方式与过去几笔不同**：
+    # `--ignore=<新文件>` 会把该文件同时从四个 parametrize 里摘掉，所以
+    # 「总数 − ignore 后总数」不等于该文件的用例数；这次按「单文件 collected」
+    # 与「全量 collected」两个数分别记录，两个都对上了。
+    # ⚠️ 这两个数**在同一轮里变过四次**（W4b 落 N 时是 62/61 = 2266；W4a 收口时
+    # 读到的 `test_w4_judge_v2.py` 65、`test_w4_eval_dual.py` 65 = 2273；再测一次
+    # 后者已是 68 = 2276）。**谁最后改谁负责重新实测这个数**，不许按增量手算——
+    # 本条门的失败文案就是为这件事准备的：它宁可红，也不要一个过期的登记值。
+    #
+    # W4a 那两条补出来的门（写在 `tests/test_w4_judge_v2.py` 的同名 docstring 里）：
+    #   · `test_misplaced_assertion_cannot_be_revived_by_another_citation`：
+    #     错位检查必须有两层——第一层"这个块被引用过"，第二层"被引错位置的那条
+    #     断言本身排除"。只有第一层时，一条合格引用会把错位断言重新洗成 witness
+    #     （反向实测第 2 笔就是这么漏的）。
+    #   · `test_plain_text_answer_without_citations_is_no_citations`：正文串 +
+    #     不给引用 ⇒ `support:no_citations`。这条钉的是**接线风险**：
+    #     `eval_answer_quality.py` 按位置把 `text`（str）传进来，若那条链路不另把
+    #     `ans["citations"]` 传进来，v2 的 support 轴会对所有题判 False。判据这边
+    #     不许为此把"无引用"当"有支撑"，但调用方必须知道这个降级是可数的。
+    #
+    # 这次换来的门（W4b 那一半，逐条写明）：
+    #   · `TestV1ProductIsByteIdentical` 4 条钉 J3：v1 档的顶层键与行键必须是
+    #     **改造前逐字抄下来的那两张清单**，`totals` 必须等于冻结字面量，
+    #     stdout 的旧三行必须仍在且在地板三行之前。失效方式极隐蔽——
+    #     把 `judge_mode: null` 顺手写进默认档，屏幕上完全一样、分数一个字不变，
+    #     但历史产物全部变成新字节。
+    #   · `TestVarianceInflationHonesty` 7 条钉 J4 的诚实性：单臂 / 零方差 /
+    #     单簇 / 零重抽一律"不可估计"，且整块 JSON 里不许出现 1.9 这个设计量级
+    #     估算被当成实测值；另配一条正向控制（真有配对样本时必须算出比值），
+    #     否则前几条可能只是在断言一个恒 None 的东西。
+    #   · `TestCorrectedRateDomain` 7 条钉 J5 的定义域：`floor > pass` 必须
+    #     返回不可估计而**不是负数**（负数会被读成"改进是负的"），
+    #     分母不同（285 的地板塞进 195 的 split）也不许相减。
+    #   · `TestFloorsAreAlwaysReported` 6 条钉"三行必报且各带自己的分母与方法"，
+    #     以及 `rate == count/n` 的自洽性——后者是反向实测补出来的：
+    #     原先只断言 `floor_rate` 常量，把手填的 68 改成 70 **一条都没红**。
+    #
+    # 反向实测 14 笔（`tmp_w4b_reverse.py`，每笔改坏一处 → 指定用例红 → 还原绿）：
+    #   A `run(judge_mode=...)` 默认改 v2 → `test_run_signature_defaults_to_v1`；
+    #   B v1 也塞 W4b 附加块 → `test_v1_top_level_keys_are_exactly_the_legacy_ones`；
+    #   C 缺 judge_v2 时静默退回 → `test_v2_without_the_module_exits_two...`；
+    #   D v2 不可判当成失败 → `test_undecidable_v2_is_not_counted_as_failure`；
+    #   E PF 归因改成多标签 → `test_pf_groups_are_mutually_exclusive`；
+    #   F 校正指标不护定义域 → `test_floor_above_pass_is_not_estimable`；
+    #   G 不打印地板三行 → `test_print_report_always_prints_the_three_floors`；
+    #   H 簇键恒不聚 → `test_same_template_lands_in_the_same_cluster`；
+    #   I 整簇重抽退回逐题重抽 → `test_cluster_resampling_is_whole_cluster`；
+    #   J 方差膨胀缺重抽也给数 → `test_zero_reps_is_not_estimable`；
+    #   K 地板分子改成 70（rate 仍 0.2386）→ `test_the_reported_rate_matches_its_own_count`；
+    #   L 落地入口只传正文（丢引用）→
+    #     `test_shipped_entry_receives_the_answer_dict_for_citations`；
+    #   M v1 分支也打开 → `test_v1_does_not_call_judge_v2_at_all`；
+    #   N chapter_cap 不转发给 v2 → `test_chapter_cap_is_forwarded_only_when_enabled`。
+    # 第一轮 E/I/J/K 四笔**没变红**（选择器选错一条 / 断言没覆盖那条路径），
+    # 补出 4 条用例、并改掉两处突变锚点后才全绿。
+    # M 那笔头版也「红错地方」：它先红在行键清单上，而不是机制用例。
+    # 原因是突变后 `judge_v2` 局部变量仍是 None，`_v2_call` 直接返回
+    # `no_entry_point`、**一次调用都没发生**，只看调用计数的用例照样绿。
+    # 补成三层（不解析模块 / 不调用 / 行里不出现 `judge_v2` 键）后才红对。
+    #
+    # ⚠️ 接线时踩到的一处真缺陷（记在这里，因为它险些变成"结论"）：
+    # 接口约定写的是 `judge_answer_v2(category, answer_text, ...)`，而落地的
+    # `arkrag/judge_v2.py` 把入口叫 `judge_v2.judge_v2`，并且它的 `frozen_input`
+    # **从答案 dict 里取 citations**（只给正文 ⇒ `citations=[]` ⇒
+    # `support_ok` 恒 False）。第一版脚本按约定只传 `text`，桩世界里实测
+    # 两题全是 `support:no_citations` —— 那份报告会读成"v2 把两题都拒了，
+    # 所以 v2 更严"，而真实原因是**引用根本没接上**。
+    # 现在按入口名分流传参（`resolve_v2_entry` + `SHIPPED_V2_ENTRY`），
+    # 并把 `judge_v2_entry` / `judge_v2_call` 写进报告，让"用了什么输入"可核对。
+    N = 2276
 
     def test_declared_count_matches_actual(self) -> None:
         """用 pytest 自己数一遍当前收集到的用例数，与本文件登记值比对。"""
