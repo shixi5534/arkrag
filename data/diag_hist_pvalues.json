@@ -1,0 +1,397 @@
+{
+ "schema": "arkrag.diag_hist_pvalues/1",
+ "purpose": "用聚类 bootstrap 重算三条历史通路的显著性（计划书 J4）",
+ "generated_at": "2026-11-10T12:15:22Z",
+ "python": "3.13.18",
+ "os": "Windows-11-10.0.26200-SP0",
+ "command": "python scripts/run_guarded.py -- python scripts/diag_hist_pvalues.py",
+ "generation": "g-20261103T132152Z-06a741",
+ "base_options": {
+  "quote_locate": true,
+  "bridge": true,
+  "bridge_search_top_k": 40,
+  "graph_reserve_tokens": 12000,
+  "chapter_cap": 4
+ },
+ "arms": [
+  {
+   "name": "quote_locate",
+   "exp": {
+    "quote_locate": true
+   },
+   "ctl": {
+    "quote_locate": false
+   }
+  },
+  {
+   "name": "bridge+reserve",
+   "exp": {
+    "bridge": true,
+    "graph_reserve_tokens": 12000
+   },
+   "ctl": {
+    "bridge": false,
+    "graph_reserve_tokens": 0
+   }
+  },
+  {
+   "name": "graph_reserve",
+   "exp": {
+    "graph_reserve_tokens": 12000
+   },
+   "ctl": {
+    "graph_reserve_tokens": 0
+   }
+  }
+ ],
+ "planned_reference": {
+  "quote_locate_p": 0.0021,
+  "bridge_ci": [
+   5,
+   18
+  ],
+  "graph_reserve_holdout_p": 0.1562,
+  "note": "这三个是历史读数，用 iid 口径算的。本文件的 cluster 列才是可比的；在新 cluster CI 出来前不预写「仍显著/不被推翻」。"
+ },
+ "results": {
+  "quote_locate": {
+   "dev": {
+    "n_paired": 285,
+    "n_clusters": 166,
+    "exp_pass": 231,
+    "ctl_pass": 224,
+    "delta_pp": 2.456140350877193,
+    "iid": {
+     "delta_pp": 2.456140350877193,
+     "delta_count": 7,
+     "ci_low_pp": 0.7017543859649122,
+     "ci_high_pp": 4.56140350877193,
+     "p_one_sided": 0.002,
+     "reps": 2000,
+     "var": 8.80775623268698e-05,
+     "n_clusters": 0,
+     "degenerate": false,
+     "note": "iid_resample_questions"
+    },
+    "cluster": {
+     "delta_pp": 2.456140350877193,
+     "delta_count": 7,
+     "ci_low_pp": 0.8403361344537815,
+     "ci_high_pp": 4.918032786885246,
+     "p_one_sided": 0.0005,
+     "reps": 2000,
+     "var": 0.0001116984154901976,
+     "n_clusters": 166,
+     "degenerate": false,
+     "note": "cluster_resample"
+    },
+    "variance_inflation": {
+     "estimable": true,
+     "value": 1.2681824126293035,
+     "reason": "簇方差 0.000111698 / iid 方差 8.80776e-05"
+    },
+    "elapsed_s": 136.4
+   },
+   "holdout": {
+    "n_paired": 195,
+    "n_clusters": 116,
+    "exp_pass": 154,
+    "ctl_pass": 148,
+    "delta_pp": 3.076923076923077,
+    "iid": {
+     "delta_pp": 3.076923076923077,
+     "delta_count": 6,
+     "ci_low_pp": 1.0256410256410255,
+     "ci_high_pp": 5.641025641025641,
+     "p_one_sided": 0.002,
+     "reps": 2000,
+     "var": 0.00014303484549638395,
+     "n_clusters": 0,
+     "degenerate": false,
+     "note": "iid_resample_questions"
+    },
+    "cluster": {
+     "delta_pp": 3.076923076923077,
+     "delta_count": 6,
+     "ci_low_pp": 0.8547008547008548,
+     "ci_high_pp": 6.338028169014084,
+     "p_one_sided": 0.004,
+     "reps": 2000,
+     "var": 0.00021006072918799016,
+     "n_clusters": 116,
+     "degenerate": false,
+     "note": "cluster_resample"
+    },
+    "variance_inflation": {
+     "estimable": true,
+     "value": 1.4685982877738746,
+     "reason": "簇方差 0.000210061 / iid 方差 0.000143035"
+    },
+    "elapsed_s": 96.7
+   },
+   "clean": {
+    "n_paired": 120,
+    "n_clusters": 76,
+    "exp_pass": 98,
+    "ctl_pass": 94,
+    "delta_pp": 3.3333333333333335,
+    "iid": {
+     "delta_pp": 3.3333333333333335,
+     "delta_count": 4,
+     "ci_low_pp": 0.8333333333333334,
+     "ci_high_pp": 6.666666666666667,
+     "p_one_sided": 0.0165,
+     "reps": 2000,
+     "var": 0.00027036526041666664,
+     "n_clusters": 0,
+     "degenerate": false,
+     "note": "iid_resample_questions"
+    },
+    "cluster": {
+     "delta_pp": 3.3333333333333335,
+     "delta_count": 4,
+     "ci_low_pp": 0.7142857142857143,
+     "ci_high_pp": 7.608695652173914,
+     "p_one_sided": 0.0145,
+     "reps": 2000,
+     "var": 0.0003212494702643218,
+     "n_clusters": 76,
+     "degenerate": false,
+     "note": "cluster_resample"
+    },
+    "variance_inflation": {
+     "estimable": true,
+     "value": 1.1882054290896553,
+     "reason": "簇方差 0.000321249 / iid 方差 0.000270365"
+    },
+    "elapsed_s": 55.7
+   }
+  },
+  "bridge+reserve": {
+   "dev": {
+    "n_paired": 285,
+    "n_clusters": 166,
+    "exp_pass": 231,
+    "ctl_pass": 212,
+    "delta_pp": 6.666666666666667,
+    "iid": {
+     "delta_pp": 6.666666666666667,
+     "delta_count": 19,
+     "ci_low_pp": 3.8596491228070176,
+     "ci_high_pp": 9.824561403508772,
+     "p_one_sided": 0.0,
+     "reps": 2000,
+     "var": 0.0002507184702985534,
+     "n_clusters": 0,
+     "degenerate": false,
+     "note": "iid_resample_questions"
+    },
+    "cluster": {
+     "delta_pp": 6.666666666666667,
+     "delta_count": 19,
+     "ci_low_pp": 3.0927835051546393,
+     "ci_high_pp": 11.618257261410788,
+     "p_one_sided": 0.0,
+     "reps": 2000,
+     "var": 0.0004631491580067116,
+     "n_clusters": 166,
+     "degenerate": false,
+     "note": "cluster_resample"
+    },
+    "variance_inflation": {
+     "estimable": true,
+     "value": 1.847287746511845,
+     "reason": "簇方差 0.000463149 / iid 方差 0.000250718"
+    },
+    "elapsed_s": 144.9
+   },
+   "holdout": {
+    "n_paired": 195,
+    "n_clusters": 116,
+    "exp_pass": 154,
+    "ctl_pass": 146,
+    "delta_pp": 4.102564102564102,
+    "iid": {
+     "delta_pp": 4.102564102564102,
+     "delta_count": 8,
+     "ci_low_pp": 0.5128205128205128,
+     "ci_high_pp": 7.6923076923076925,
+     "p_one_sided": 0.0115,
+     "reps": 2000,
+     "var": 0.00030509422090729783,
+     "n_clusters": 0,
+     "degenerate": false,
+     "note": "iid_resample_questions"
+    },
+    "cluster": {
+     "delta_pp": 4.102564102564102,
+     "delta_count": 8,
+     "ci_low_pp": -0.8333333333333334,
+     "ci_high_pp": 10.408921933085502,
+     "p_one_sided": 0.096,
+     "reps": 2000,
+     "var": 0.0008978616554328933,
+     "n_clusters": 116,
+     "degenerate": false,
+     "note": "cluster_resample"
+    },
+    "variance_inflation": {
+     "estimable": true,
+     "value": 2.9428995828331552,
+     "reason": "簇方差 0.000897862 / iid 方差 0.000305094"
+    },
+    "elapsed_s": 96.0
+   },
+   "clean": {
+    "n_paired": 120,
+    "n_clusters": 76,
+    "exp_pass": 98,
+    "ctl_pass": 94,
+    "delta_pp": 3.3333333333333335,
+    "iid": {
+     "delta_pp": 3.3333333333333335,
+     "delta_count": 4,
+     "ci_low_pp": -0.8333333333333334,
+     "ci_high_pp": 8.333333333333332,
+     "p_one_sided": 0.0835,
+     "reps": 2000,
+     "var": 0.0005201104861111111,
+     "n_clusters": 0,
+     "degenerate": false,
+     "note": "iid_resample_questions"
+    },
+    "cluster": {
+     "delta_pp": 3.3333333333333335,
+     "delta_count": 4,
+     "ci_low_pp": -2.7522935779816518,
+     "ci_high_pp": 11.009174311926607,
+     "p_one_sided": 0.224,
+     "reps": 2000,
+     "var": 0.0012404785418744712,
+     "n_clusters": 76,
+     "degenerate": false,
+     "note": "cluster_resample"
+    },
+    "variance_inflation": {
+     "estimable": true,
+     "value": 2.385028902511818,
+     "reason": "簇方差 0.00124048 / iid 方差 0.00052011"
+    },
+    "elapsed_s": 57.5
+   }
+  },
+  "graph_reserve": {
+   "dev": {
+    "n_paired": 285,
+    "n_clusters": 166,
+    "exp_pass": 231,
+    "ctl_pass": 220,
+    "delta_pp": 3.8596491228070176,
+    "iid": {
+     "delta_pp": 3.8596491228070176,
+     "delta_count": 11,
+     "ci_low_pp": 1.4035087719298245,
+     "ci_high_pp": 6.666666666666667,
+     "p_one_sided": 0.003,
+     "reps": 2000,
+     "var": 0.00018546937211449678,
+     "n_clusters": 0,
+     "degenerate": false,
+     "note": "iid_resample_questions"
+    },
+    "cluster": {
+     "delta_pp": 3.8596491228070176,
+     "delta_count": 11,
+     "ci_low_pp": 1.694915254237288,
+     "ci_high_pp": 6.956521739130435,
+     "p_one_sided": 0.0,
+     "reps": 2000,
+     "var": 0.00017683894995469926,
+     "n_clusters": 166,
+     "degenerate": false,
+     "note": "cluster_resample"
+    },
+    "variance_inflation": {
+     "estimable": true,
+     "value": 0.9534671301174749,
+     "reason": "簇方差 0.000176839 / iid 方差 0.000185469"
+    },
+    "elapsed_s": 143.8
+   },
+   "holdout": {
+    "n_paired": 195,
+    "n_clusters": 116,
+    "exp_pass": 154,
+    "ctl_pass": 149,
+    "delta_pp": 2.564102564102564,
+    "iid": {
+     "delta_pp": 2.564102564102564,
+     "delta_count": 5,
+     "ci_low_pp": -0.5128205128205128,
+     "ci_high_pp": 5.641025641025641,
+     "p_one_sided": 0.0845,
+     "reps": 2000,
+     "var": 0.0002885043984220907,
+     "n_clusters": 0,
+     "degenerate": false,
+     "note": "iid_resample_questions"
+    },
+    "cluster": {
+     "delta_pp": 2.564102564102564,
+     "delta_count": 5,
+     "ci_low_pp": -0.8333333333333334,
+     "ci_high_pp": 6.306306306306306,
+     "p_one_sided": 0.1065,
+     "reps": 2000,
+     "var": 0.0003522551520078867,
+     "n_clusters": 116,
+     "degenerate": false,
+     "note": "cluster_resample"
+    },
+    "variance_inflation": {
+     "estimable": true,
+     "value": 1.220969780476368,
+     "reason": "簇方差 0.000352255 / iid 方差 0.000288504"
+    },
+    "elapsed_s": 100.3
+   },
+   "clean": {
+    "n_paired": 120,
+    "n_clusters": 76,
+    "exp_pass": 98,
+    "ctl_pass": 97,
+    "delta_pp": 0.8333333333333334,
+    "iid": {
+     "delta_pp": 0.8333333333333334,
+     "delta_count": 1,
+     "ci_low_pp": -3.3333333333333335,
+     "ci_high_pp": 5.0,
+     "p_one_sided": 0.3955,
+     "reps": 2000,
+     "var": 0.0004827159548611111,
+     "n_clusters": 0,
+     "degenerate": false,
+     "note": "iid_resample_questions"
+    },
+    "cluster": {
+     "delta_pp": 0.8333333333333334,
+     "delta_count": 1,
+     "ci_low_pp": -3.061224489795918,
+     "ci_high_pp": 4.545454545454546,
+     "p_one_sided": 0.4185,
+     "reps": 2000,
+     "var": 0.0003620901011394957,
+     "n_clusters": 76,
+     "degenerate": false,
+     "note": "cluster_resample"
+    },
+    "variance_inflation": {
+     "estimable": true,
+     "value": 0.7501100750723635,
+     "reason": "簇方差 0.00036209 / iid 方差 0.000482716"
+    },
+    "elapsed_s": 60.1
+   }
+  }
+ }
+}

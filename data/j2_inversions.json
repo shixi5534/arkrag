@@ -1,0 +1,126 @@
+{
+ "schema": "arkrag.j2_inversions/1",
+ "purpose": "J2：逐题重判历史逆序对 + cap=4 造成的翻转（两组必须分开）",
+ "warning": "计划书的『5 个逆序对』是按 F1 序 vs 判据序算的；cap=4 造成的翻转也是 5 个。两组数字相同但含义完全不同，不可混用。",
+ "group_A_named_inversions": {
+  "q-cx-000011": {
+   "question_id": "q-cx-000011",
+   "category": "cross_chunk",
+   "question": "「汐斯塔火山」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "old_prod_pass": false,
+   "old_prod_reason": "chapter_set_missing",
+   "old_answer": "act27side、act3d0、memory_buildr",
+   "new_prod_pass": false,
+   "new_prod_reason": "chapter_set_missing",
+   "new_answer": "act27side、act3d0、memory_buildr",
+   "v1_pass_current": false,
+   "v1_reason_current": "chapter_set_missing",
+   "v2_pass": false,
+   "v2_reason": "value:chapter_set_missing",
+   "v2_axes": {
+    "value_ok": false,
+    "support_ok": true,
+    "cardinality_ok": true
+   },
+   "v2_loss": {
+    "missing_or_wrong_values": 1,
+    "extra_values": 0,
+    "unsupported_values": 0,
+    "cardinality_over": 0
+   }
+  },
+  "q-cx-900027": {
+   "question_id": "q-cx-900027",
+   "category": "cross_chunk",
+   "question": "「炎魔」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "old_prod_pass": true,
+   "old_prod_reason": "extra_chapters_all_real_and_bounded",
+   "old_answer": "act15d0、act19side、act25side、main_ep13、main_ep14、main_st12、memory_plosis、rogue_rogue_4",
+   "new_prod_pass": false,
+   "new_prod_reason": "chapter_set_missing",
+   "new_answer": "act15d0、main_ep13、main_ep14、rogue_rogue_4",
+   "v1_pass_current": false,
+   "v1_reason_current": "chapter_set_missing",
+   "v2_pass": false,
+   "v2_reason": "value:chapter_set_missing",
+   "v2_axes": {
+    "value_ok": false,
+    "support_ok": true,
+    "cardinality_ok": true
+   },
+   "v2_loss": {
+    "missing_or_wrong_values": 1,
+    "extra_values": 1,
+    "unsupported_values": 0,
+    "cardinality_over": 0
+   }
+  }
+ },
+ "group_B_cap_flips": {
+  "q-cx-000006": {
+   "question_id": "q-cx-000006",
+   "category": "cross_chunk",
+   "old_pass": false,
+   "old_reason": "extra_chapters_outnumber_gold",
+   "old_answer": "act13d5、act17d0、act19side、act24side、act38side、act47side、act6d5、main_ep16、memory_shotst",
+   "new_pass": true,
+   "new_reason": "extra_chapters_all_real_and_bounded",
+   "new_answer": "act17d0、act24side、act38side、act6d5",
+   "v2_pass": true,
+   "v2_reason": "all_axes_pass",
+   "direction": "FAIL->PASS"
+  },
+  "q-cx-000027": {
+   "question_id": "q-cx-000027",
+   "category": "cross_chunk",
+   "old_pass": false,
+   "old_reason": "extra_chapters_outnumber_gold",
+   "old_answer": "act11d0、act13side、act16mini、act28side、rogue_rogue_4",
+   "new_pass": true,
+   "new_reason": "extra_chapters_all_real_and_bounded",
+   "new_answer": "act11d0、act13side、act16mini、act28side",
+   "v2_pass": true,
+   "v2_reason": "all_axes_pass",
+   "direction": "FAIL->PASS"
+  },
+  "q-cx-900008": {
+   "question_id": "q-cx-900008",
+   "category": "cross_chunk",
+   "old_pass": false,
+   "old_reason": "extra_chapters_outnumber_gold",
+   "old_answer": "act13mini、act31side、memory_bstalk、memory_cammou、memory_ctable、memory_flower",
+   "new_pass": true,
+   "new_reason": "extra_chapters_all_real_and_bounded",
+   "new_answer": "act13mini、act31side、memory_bstalk、memory_flower",
+   "v2_pass": true,
+   "v2_reason": "all_axes_pass",
+   "direction": "FAIL->PASS"
+  },
+  "q-cx-900018": {
+   "question_id": "q-cx-900018",
+   "category": "cross_chunk",
+   "old_pass": false,
+   "old_reason": "extra_chapters_outnumber_gold",
+   "old_answer": "act22side、act41side、main_ep09、main_ep10、main_st09",
+   "new_pass": true,
+   "new_reason": "extra_chapters_all_real_and_bounded",
+   "new_answer": "act22side、act41side、main_ep09、main_ep10",
+   "v2_pass": true,
+   "v2_reason": "all_axes_pass",
+   "direction": "FAIL->PASS"
+  },
+  "q-cx-900027": {
+   "question_id": "q-cx-900027",
+   "category": "cross_chunk",
+   "old_pass": true,
+   "old_reason": "extra_chapters_all_real_and_bounded",
+   "old_answer": "act15d0、act19side、act25side、main_ep13、main_ep14、main_st12、memory_plosis、rogue_rogue_4",
+   "new_pass": false,
+   "new_reason": "chapter_set_missing",
+   "new_answer": "act15d0、main_ep13、main_ep14、rogue_rogue_4",
+   "v2_pass": false,
+   "v2_reason": "value:chapter_set_missing",
+   "direction": "PASS->FAIL"
+  }
+ }
+}

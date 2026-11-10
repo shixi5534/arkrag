@@ -1,0 +1,67 @@
+补齐轮：五项未闭合项全部实测，bridge 的 holdout 显著性被推翻
+
+五项全部跑完，其中一项推翻历史结论。
+
+## 最重要：bridge 在 holdout 上的显著性消失
+
+用聚类 bootstrap 重算三条历史通路（data/diag_hist_pvalues.json）：
+
+| 通路 | dev cluster CI | holdout cluster CI | clean |
+|---|---|---|---|
+| quote_locate | [+0.84,+4.92] | [+0.85,+6.34] | [+0.71,+7.61] |
+| bridge+reserve | [+3.09,+11.62] | [-0.83,+10.41] 跨零 | [-2.75,+11.01] 跨零 |
+| graph_reserve | [+1.69,+6.96] | [-0.83,+6.31] 跨零 | [-3.06,+4.55] 跨零 |
+
+- quote_locate：三份 cluster CI 全不跨零，正向效应依然显著
+- bridge+reserve：holdout iid 不跨零(+0.51) 但 cluster 跨零(-0.83)，膨胀 2.94
+  即计划书记录的 iid CI[+5,+18] 的方向，在正确口径下证不出来
+- graph_reserve：holdout/clean 跨零，与历史 p=0.1562 一致，未被推翻
+
+边界：bridge 是组合臂，Δ=+4.10pt(8题) 点估计为正，只是 CI 跨零。
+不等于没用，而是以 holdout 为确认集、聚类为口径时证不出显著。
+
+## W1 K2/K4/K6 全部实测 PASS
+
+- K2 truncation_overtake = 0 / 428 题，all_prefix_ok=true
+- K6 桥接候选 428/428 子集，缺失 0
+- K4 相对口径 PASS：三轮 P95 -5.3%/-23.2%/-25.4%，合并 -18.5%，P50 -17.6%
+  绝对口径 FAIL 是环境漂移（本机基线 343.51ms 是计划书 136.6ms 的 2.5 倍），
+  两个判定已分开报
+
+## W3 cap 触发率 64.06%
+
+64 道 cross_chunk 中 41 道触发。若为 0 就是开关没接线，实测 64% 说明旋钮真在起作用。
+
+## W4 witness_level：比担心的轻
+
+1090 个值：endpoint 551(50.6%)、chunk_field 332(30.5%)、none 118(10.8%)、
+predicate 89(8.2%)、evidence 0(0%)。
+
+按类别拆开后：
+- chunk_field 332 个全部来自 cross_chunk(205) 与 single_chunk(127)，
+  这两类答案本来就是章节名/标题，用 chunk_field 见证是设计如此，不是退化
+- none 118 个里 108 个来自三个结构类（本来就不打分），是正确行为
+- 真正可疑的只有 9 个（direct_relation 7 + alias 2）= 0.83%
+- evidence 层 0 次命中，兜底路径未被真实样本检验过
+
+## J2 逆序对：A/B 两组必须分开
+
+- A 组（计划书点名）：q-cx-900027 旧 True 变 False，
+  cap=4 与 v2 一致地修正了 v1 的误判（v1 靠 extra_chapters 判 PASS 尽管 P=0.50）
+- B 组（cap=4 造成的翻转）：4 涨 1 跌，净 +3
+- 两组「5」不是同一件事，data/j2_inversions.json 已分开存并写 warning
+
+## 新增
+
+scripts/diag_j2_inversions.py、diag_k2_k6_caprate.py、diag_k4_latency.py、
+diag_witness_level.py、diag_hist_pvalues.py
+data/j2_inversions.json、diag_k2_k6_caprate.json、diag_k4_latency.json、
+diag_witness_level.json、diag_hist_pvalues.json
+docs/补齐轮-五项实测-20261110.md
+
+## 仍未闭合
+
+W1 K1 已 FAIL（dev -2）、K3 未取到（报告不存 timings 的 context_tokens 字段）；
+J2 的 A 组只覆盖 2 题（计划书未给其余 3 题题号）。
+
+全量测试 2258 passed / 1 failed（仍是 test_portable_paths 存量债）。
