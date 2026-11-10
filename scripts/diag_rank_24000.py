@@ -69,6 +69,10 @@ from arkrag import vocab  # noqa: E402
 
 GENERATION = "g-20261103T132152Z-06a741"
 GOLD_SET = ROOT / "data" / "goldset" / "gold-v2.json"
+#: gold-v1 的题号集合。`clean` 分区**不是** gold-v2 里的一个 `split` 值，而是
+#: "holdout 里且不在 gold-v1 里的题"（见 `scripts/eval_answer_quality.py::pick_items`）。
+#: 不读这个文件，`clean` 分区就会是空的——本次实测踩过这个坑。
+GOLD_V1 = ROOT / "data" / "goldset" / "gold-v1.json"
 DEFAULT_OUT = ROOT / "data" / "diag_rank_24000.json"
 
 #: 生产档口径：**只从 `PROD_PROFILE` 读，不在这里手抄一份**。
@@ -111,7 +115,37 @@ def read_gold() -> list[dict]:
     return list(items or [])
 
 
-def rank_bucket(rank: int | None) -> str:
+def load_v1_ids() -> set[str]:
+    """gold-v1 的题号集合。`clean` 分区的定义依赖它。"""
+    if not GOLD_V1.exists():
+        return set()
+    doc = json.loads(GOLD_V1.read_text(encoding="utf-8"))
+    items = doc.get("items") if isinstance(doc, dict) else doc
+    return {str(it.get("question_id")) for it in items or []}
+
+
+def pick_items(items: list[dict], split: str, v1_ids: set[str]) -> list[dict]:
+    """按 split 选题。**逐字对齐 `scripts/eval_answer_quality.py::pick_items`。**
+
+    为什么要抄这一份而不是各写各的：口径一旦不同，W0 的 `clean` 与台账里
+    97/120 那个数就不是同一个分母，两张表无法并列。这里有三个真实陷阱：
+
+    * `clean` **不是** `gold-v2` 里的一个 `split` 值。它是「holdout 里、有 gold、
+      且题号不在 gold-v1 里」的题。按 `split == "clean"` 过滤会得到 0 题——
+      本次首跑就是这么空的。
+    * 每类都要求 `gold_chunk_ids` 非空。结构类题（`time_conflict` /
+      `negative_abstain` / `adversarial`）没有 gold，本来就不进分母。
+    * 因此 `有 gold` 这个分母**本来就等于**评测脚本的选题结果，
+      不该再用"全部输入"当分母。
+    """
+    if split == "all":
+        return [it for it in items if it.get("gold_chunk_ids")]
+    if split == "clean":
+        return [it for it in items
+                if it.get("split") == "holdout" and it.get("gold_chunk_ids")
+                and str(it.get("question_id")) not in v1_ids]
+    return [it for it in items
+            if it.get("split") == split and it.get("gold_chunk_ids")]
     """名次分桶。与 `diag_context_positions.json` 的口径**同名同义**（A1 要求）。"""
     if rank is None:
         return "无 gold 在 hits"
@@ -128,6 +162,26 @@ def rank_bucket(rank: int | None) -> str:
 
 def _pct(num: int, den: int) -> float | None:
     return round(num / den, 4) if den else None
+
+
+def rank_bucket(rank: int | None) -> str:
+    """名次分桶。与 `diag_context_positions.json` 的 `c_ctx_pos_dist` **同名同义**。
+
+    `None` 单独成一桶（"无 gold 在 hits"），不并进 `11+`：
+    前者是**检索层**没召回到，后者是**装配层**召回到了没装进去。混在一起，
+    台账就无法区分这两种完全不同的失效。
+    """
+    if rank is None:
+        return "无 gold 在 hits"
+    if rank <= 1:
+        return "1"
+    if rank <= 3:
+        return "2-3"
+    if rank <= 5:
+        return "4-5"
+    if rank <= 10:
+        return "6-10"
+    return "11+"
 
 
 def measure_one(pipe: dict, retriever, it: dict) -> dict:
@@ -147,6 +201,10 @@ def measure_one(pipe: dict, retriever, it: dict) -> dict:
         "question_id": qid, "split": split, "category": category,
         "question": question, "n_gold": len(gold),
         "gold_chunk_ids": gold, "should_abstain": should_abstain,
+        # `selected_by` 记下**这道题被哪些分区选中**。`clean` ⊂ `holdout`，
+        # 同一道题会同时属于两个分区；只记一个 `split` 字段就无法在 clean 下
+        # 统计它，那正是首跑 clean 分区为空的原因。
+        "selected_by": str(it.get("_selected_by") or split),
     }
 
     # ---- 结构性拒答题（时间冲突 / 负向 / 对抗）没有 gold，必须显式区分 ----
@@ -269,8 +327,12 @@ def _is_bridge(question: str) -> bool:
 
 
 def summarize(rows: list[dict], split: str) -> dict:
-    """一个 split 的汇总。**分母逐个报出，不许只给一个比率。**"""
-    sub = [r for r in rows if r.get("split") == split]
+    """一个 split 的汇总。**分母逐个报出，不许只给一个比率。**
+
+    `clean` ⊂ `holdout`，所以按 `selected_by` 筛而不是按 `split` 字段筛——
+    同一道题可以同时属于两个分区。
+    """
+    sub = [r for r in rows if split in str(r.get("selected_by") or "")]
     n_all = len(sub)
     with_gold = [r for r in sub if int(r.get("n_gold") or 0) > 0]
     scorable = [r for r in with_gold if not r.get("should_abstain")]
@@ -394,11 +456,42 @@ def main(argv=None) -> int:
     args = ap.parse_args(argv)
 
     splits = [s.strip() for s in args.splits.split(",") if s.strip()]
-    items = [it for it in read_gold() if str(it.get("split") or "") in splits]
+    v1_ids = load_v1_ids()
+    all_items = read_gold()
+
+    # 按 split 选题，**逐 split 调 `pick_items`**（口径与评测脚本一致）。
+    # `clean` 与 `holdout` 有重叠（clean ⊂ holdout），所以不能简单按 `split`
+    # 字段过滤再拼起来——那会让 holdout 的题在 clean 下重复计入，
+    # 也让 clean 恒为空。这里给每道题**打上它被哪些分区选中**的标记。
+    picked: list[dict] = []
+    for sp in splits:
+        for it in pick_items(all_items, sp, v1_ids):
+            rec = dict(it)
+            rec["_selected_by"] = sp
+            picked.append(rec)
+    # `clean` 是 holdout 的子集：同题会命中两个分区。按 (split, question_id) 去重，
+    # 但把"被哪些分区选中"合并进一条记录，避免重复跑同一道题。
+    merged: dict[str, dict] = {}
+    for rec in picked:
+        qid = str(rec.get("question_id") or "")
+        if qid in merged:
+            merged[qid]["_selected_by"] = ",".join(
+                sorted({merged[qid]["_selected_by"], rec["_selected_by"]}))
+            continue
+        merged[qid] = rec
+
+    items = list(merged.values())
+    # 稳定顺序：dev → holdout → clean，同分区内按 gold 原序
+    order = {sp: i for i, sp in enumerate(splits)}
+    items.sort(key=lambda r: (order.get(str(r.get("split") or ""), 99),
+                              str(r.get("question_id") or "")))
     if args.limit:
         items = items[: args.limit]
 
     print(f"[w0] 计划 {len(items)} 题，split={splits}，预算={BUDGET}", flush=True)
+    print(f"[w0] 各分区选题数="
+          f"{ {sp: sum(1 for r in items if sp in (r.get('_selected_by') or '')) for sp in splits} }",
+          flush=True)
     print(f"[w0] options={json.dumps(OPTIONS, ensure_ascii=False)}", flush=True)
 
     t0 = time.time()
@@ -425,6 +518,7 @@ def main(argv=None) -> int:
                 "split": str(it.get("split") or ""),
                 "category": str(it.get("category") or ""),
                 "question": str(it.get("question") or ""),
+                "selected_by": str(it.get("_selected_by") or it.get("split") or ""),
                 "status": "run_error",
                 "error": f"{type(exc).__name__}: {exc}",
             })
