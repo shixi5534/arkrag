@@ -12,8 +12,8 @@
   "chapter_cap": 4
  },
  "n_items": 350,
- "elapsed_ms": 42902.1,
- "per_item_ms": 122.6,
+ "elapsed_ms": 70601.8,
+ "per_item_ms": 201.7,
  "judge_schema": "arkrag.judge/1",
  "chapters_seen": 494,
  "per_category": {
@@ -16635,6 +16635,1543 @@
   "v2_undecidable": [],
   "v2_undecidable_n": 0,
   "structural": 65,
+  "parse_failures": {
+   "n_v2_rows": 285,
+   "n_empty_answer": 3,
+   "n_zero_loss": 191,
+   "zero_loss_rate": 0.6702,
+   "suspect_zero_loss_items": [
+    {
+     "question_id": "q-sc-000005",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "最后的怯薛"
+    },
+    {
+     "question_id": "q-sc-000007",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "蓝耳酒窖"
+    },
+    {
+     "question_id": "q-sc-000009",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "红日留驻"
+    },
+    {
+     "question_id": "q-sc-000010",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "野蛮肇事者"
+    },
+    {
+     "question_id": "q-sc-000012",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "牺牲与代价"
+    },
+    {
+     "question_id": "q-sc-000013",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "地堡防线"
+    },
+    {
+     "question_id": "q-sc-000015",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "耶拉冈德在上"
+    },
+    {
+     "question_id": "q-sc-000016",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "沉默者之怒-1"
+    },
+    {
+     "question_id": "q-sc-000017",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "干员间切磋指南"
+    },
+    {
+     "question_id": "q-sc-000018",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "问道"
+    },
+    {
+     "question_id": "q-sc-000020",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "枷锁之中"
+    },
+    {
+     "question_id": "q-sc-000021",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "归乡"
+    },
+    {
+     "question_id": "q-sc-000022",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "礼仪广场"
+    },
+    {
+     "question_id": "q-sc-000023",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "自光辉中奔涌"
+    },
+    {
+     "question_id": "q-sc-000024",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "黄金三角"
+    },
+    {
+     "question_id": "q-sc-000026",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "嘉维尔之拳"
+    },
+    {
+     "question_id": "q-sc-000027",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "各自流亡"
+    },
+    {
+     "question_id": "q-sc-000028",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "火山制造"
+    },
+    {
+     "question_id": "q-sc-000029",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "万物有灵"
+    },
+    {
+     "question_id": "q-sc-000030",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "完整的缺损"
+    },
+    {
+     "question_id": "q-sc-000031",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "或许有时"
+    },
+    {
+     "question_id": "q-sc-000032",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "失乐园"
+    },
+    {
+     "question_id": "q-sc-000033",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "向死寻生"
+    },
+    {
+     "question_id": "q-sc-000034",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "护身符"
+    },
+    {
+     "question_id": "q-sc-000035",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "一问之答"
+    },
+    {
+     "question_id": "q-sc-000036",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "核心舱攻防战"
+    },
+    {
+     "question_id": "q-sc-000037",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "不治的命运"
+    },
+    {
+     "question_id": "q-sc-000038",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "毗牟题，或解答"
+    },
+    {
+     "question_id": "q-sc-000039",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "留下的人"
+    },
+    {
+     "question_id": "q-sc-000042",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "第一次接触"
+    },
+    {
+     "question_id": "q-sc-000045",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "自由射手"
+    },
+    {
+     "question_id": "q-sc-000046",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "蒙眬"
+    },
+    {
+     "question_id": "q-sc-000047",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "柳暗花明"
+    },
+    {
+     "question_id": "q-sc-000048",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "降生"
+    },
+    {
+     "question_id": "q-sc-000049",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "补票！"
+    },
+    {
+     "question_id": "q-sc-000050",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "黄沙尽头"
+    },
+    {
+     "question_id": "q-sc-000052",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "复航"
+    },
+    {
+     "question_id": "q-sc-000056",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "商业联合"
+    },
+    {
+     "question_id": "q-sc-000057",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "捂住耳朵"
+    },
+    {
+     "question_id": "q-sc-000059",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "崩落"
+    },
+    {
+     "question_id": "q-sc-000060",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "凛刃出匣"
+    },
+    {
+     "question_id": "q-sc-000061",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "升华之夜"
+    },
+    {
+     "question_id": "q-sc-000062",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "“何谓存续？”"
+    },
+    {
+     "question_id": "q-sc-000064",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "“卡托加区欢迎你”"
+    },
+    {
+     "question_id": "q-al-000002",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "罗德岛干员交谈繁藏。缠丸交谈繁藏。"
+    },
+    {
+     "question_id": "q-al-000003",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "卡奇·叙光交谈斯第奇·画布。斯第奇·画布交谈卡奇·叙光。极境交谈卡奇·叙光。卡奇·叙光交谈黛柯绮·银币。黛柯绮·银币交谈"
+    },
+    {
+     "question_id": "q-al-000004",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "哈莉交谈汤姆。埃尼斯交谈汤姆。雪雉交谈汤姆。拜松交谈汤姆。"
+    },
+    {
+     "question_id": "q-al-000006",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "罗德岛同盟自救军。自救军冲突萨卡兹。自救军位于萨迪恩区。萨卡兹交战自救军。罗德岛救助自救军。汤米隶属自救军。自救军离开伦"
+    },
+    {
+     "question_id": "q-al-000007",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "蔓珠院位于喀兰峰顶。"
+    },
+    {
+     "question_id": "q-al-000008",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "科谢尼娅研究奥卡。科谢尼娅交谈Mon3tr。科谢尼娅师从伊利亚。特蕾西娅交谈马尔科。Raidian交谈科谢尼娅。科谢尼娅"
+    },
+    {
+     "question_id": "q-al-000009",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "卡提亚·瑙曼亲属阿黛尔。凯勒同行卡提亚·瑙曼。卡提亚·瑙曼交谈阿黛尔。卡提亚·瑙曼研究源石。阿黛尔亲属卡提亚·瑙曼。卡提"
+    },
+    {
+     "question_id": "q-al-000011",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "莫不服交谈煌。莫不服交谈老姜。麟青砚交谈莫不服。莫不服交谈麟青砚。莫不服属于鼎丰楼。莫不服前往百灶。莫不服交谈余味居。莫"
+    },
+    {
+     "question_id": "q-al-000012",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "灰喉交谈断崖。断崖交谈小克鲁斯。断崖交谈莱恩哈特。莱恩哈特交谈断崖。断崖保护莱恩哈特。断崖救助卡达。断崖任职天灾信使。莱"
+    },
+    {
+     "question_id": "q-al-000013",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "蒸汽甲胄属于坎伯兰家族。蒸汽甲胄属于坎伯兰。凯瑟琳制造蒸汽甲胄。阿勒黛交谈蒸汽甲胄。蒸汽甲胄属于坎伯兰家。"
+    },
+    {
+     "question_id": "q-al-000016",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "莱辛交谈黑键。埃芒加德交谈莱辛。莱辛保护黑键。莱辛交谈米夏埃尔。莱辛师从格哈德。莱辛隶属路德维格大学。黑键交谈莱辛。莱辛"
+    },
+    {
+     "question_id": "q-al-000018",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "源石位于岁陵。真龙使用源石。递质源自源石。心相原质源自源石。奥卡属于源石。乌萨斯使用源石。夜刀研究源石。"
+    },
+    {
+     "question_id": "q-al-000019",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "英格丽亲属铃兰。铃兰师从凯尔希。铃兰隶属罗德岛。铃兰交谈亚叶。亚叶交谈铃兰。铃兰交谈安洁莉娜。铃兰赠予安洁莉娜。可颂交谈"
+    },
+    {
+     "question_id": "q-al-000020",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "慑砂交谈杜林。杜林交谈慑砂。慑砂指挥杜林。"
+    },
+    {
+     "question_id": "q-al-000022",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "阿振交谈老于。老于交谈阿振。"
+    },
+    {
+     "question_id": "q-al-000024",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "赫拉格交谈锡兰。锡兰亲属赫尔曼。锡兰交谈克洛宁。锡兰出生于汐斯塔。锡兰交谈赫拉格。阿黛尔交谈锡兰。医疗干员交谈锡兰。锡兰"
+    },
+    {
+     "question_id": "q-al-000031",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "萨卡兹位于卡兹戴尔。深池听命于萨卡兹。伦蒂尼姆工人B敌对萨卡兹。萨卡兹冲突伦蒂尼姆。萨卡兹前往卡兹戴尔。萨卡兹冲突罗伯逊"
+    },
+    {
+     "question_id": "q-al-000033",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "迪亚兹交谈特克诺。艾拉交谈迪亚兹。雷内尔交谈迪亚兹。迪亚兹交谈艾拉。迪亚兹交谈雷内尔。迪亚兹交谈马特奥。雷内尔敌对迪亚兹"
+    },
+    {
+     "question_id": "q-al-000034",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "天火交谈昂斯特。昂斯特交谈天火。夜烟交谈昂斯特。天火师从昂斯特。昂斯特持有感染者社区。天火受保护于昂斯特。昂斯特雇用天火"
+    },
+    {
+     "question_id": "q-al-000035",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "普罗旺斯交谈地灵。地灵隶属罗德岛。地灵师从巴赫曼教授。地灵交谈巴赫曼小姐。阿黛尔交谈地灵。地灵听命于博士。地灵交谈凯利。"
+    },
+    {
+     "question_id": "q-al-000036",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "阿斯卡纶交谈特蕾西娅。Misery交谈阿斯卡纶。特蕾西娅交谈阿斯卡纶。阿斯卡纶交谈曼弗雷德。曼弗雷德交谈阿斯卡纶。阿斯卡"
+    },
+    {
+     "question_id": "q-al-000037",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "闪灵交谈奎萨图什塔。闪灵敌对奎萨图什塔。奎萨图什塔创建卡兹戴尔。奎萨图什塔亲属闪灵。闪灵背叛奎萨图什塔。闪灵交战奎萨图什"
+    },
+    {
+     "question_id": "q-al-000038",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "诗怀雅交谈埃尼斯。诗怀雅交谈林雨霞。魏彦吾交谈诗怀雅。亚当斯·施怀雅亲属诗怀雅。诗怀雅交谈魏彦吾。诗怀雅亲属亚当斯·施怀"
+    },
+    {
+     "question_id": "q-al-000040",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "歌蕾蒂娅交谈奥卢斯。奥卢斯隶属深海教会。奥卢斯前往伊比利亚。奥卢斯交谈斯特凡诺。奥卢斯研究实验。斯卡蒂交谈奥卢斯。奥卢斯"
+    },
+    {
+     "question_id": "q-al-000044",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "雅拉交谈韦恩。"
+    },
+    {
+     "question_id": "q-al-000045",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "阿尔图罗交谈赫尔昏佐伦。席德佳交谈阿尔图罗。阿尔图罗持有大提琴。阿尔图罗前往罗德岛。费德里科亲属阿尔图罗。阿尔图罗交谈伊"
+    },
+    {
+     "question_id": "q-al-000046",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "林雨霞交谈孟铁衣。孟铁衣交谈林雨霞。林雨霞隶属近卫局。孟铁衣敌对林雨霞。孟铁衣救助林雨霞。诗怀雅交谈林雨霞。林雨霞亲属鼠"
+    },
+    {
+     "question_id": "q-al-000047",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "麟青砚交谈解真。左乐交谈麟青砚。麟青砚交谈谌彻。左乐亲属麟青砚。麟青砚交谈胡君。麟青砚前往邙山镇。麟青砚前往天师府。麟青"
+    },
+    {
+     "question_id": "q-al-000048",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "Logos使用穿刺。"
+    },
+    {
+     "question_id": "q-dr-000001",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "凯尔希交谈伊利亚。伊利亚师从凯尔希。伊利亚交谈凯尔希。凯尔希交谈博士。可露希尔交谈凯尔希。伊利亚指导科谢尼娅。科谢尼娅师"
+    },
+    {
+     "question_id": "q-dr-000003",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "费斯特指挥洛洛。费斯特交谈洛洛。洛洛交谈费斯特。费斯特同行洛洛。费斯特领导洛洛。洛洛同行费斯特。洛洛隶属自救军。可露希尔"
+    },
+    {
+     "question_id": "q-dr-000004",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "菈塔托丝隶属布朗陶。菈塔托丝领导布朗陶。菈塔托丝交谈休露丝。菈塔托丝领导布朗陶家。菈塔托丝交谈尤卡坦。维多利亚同盟布朗陶"
+    },
+    {
+     "question_id": "q-dr-000006",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "乌尔比安交谈海嗣。乌尔比安敌对海嗣。海嗣交谈乌尔比安。乌尔比安同行海嗣。乌尔比安研究海嗣。乌尔比安交战海嗣。歌蕾蒂娅交谈"
+    },
+    {
+     "question_id": "q-dr-000007",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "太尉效忠大炎。太尉任职大炎。真龙交谈太尉。太尉交谈真龙。太尉敌对岁兽。太尉指挥玉门。太傅交谈太尉。太尉敌对真龙。"
+    },
+    {
+     "question_id": "q-dr-000010",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "崔林特尔梅位于莱塔尼亚。尤利娅位于莱塔尼亚。帝国音乐学院位于崔林特尔梅。伊维格娜德领导莱塔尼亚。赫尔昏佐伦领导莱塔尼亚。"
+    },
+    {
+     "question_id": "q-dr-000011",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "埃芒加德交谈莱辛。莱辛交谈埃芒加德。埃芒加德亲属莱辛。埃芒加德隶属巫妖。莱辛交谈米夏埃尔。埃芒加德交谈赫德雷。黑键交谈埃"
+    },
+    {
+     "question_id": "q-dr-000012",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "乌萨斯远北地区位于乌萨斯。乌萨斯敌对骏鹰。布列斯克位于乌萨斯。乌萨斯持有石棺。乌萨斯前往远北地区。乌萨斯包含远北地区。叶"
+    },
+    {
+     "question_id": "q-dr-000013",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "Dan隶属日落即逝。Aya隶属日落即逝。凯尔希同盟日落即逝。Alty隶属日落即逝。Frost隶属日落即逝。"
+    },
+    {
+     "question_id": "q-dr-000015",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "赫默研究递质。递质产自359号基地。多萝西研究递质。多萝西使用递质。斐尔迪南使用递质。帕尔维斯研究递质。赫默持有递质。帕"
+    },
+    {
+     "question_id": "q-dr-000016",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "萨迪恩区位于伦蒂尼姆。萨卡兹位于萨迪恩区。洛洛位于伦蒂尼姆。洛洛出生于萨迪恩区。伦蒂尼姆包含源石。九前往伦蒂尼姆。费斯特"
+    },
+    {
+     "question_id": "q-dr-000021",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "马克维茨任职商业联合会。马克维茨隶属商业联合会。马克维茨交谈博士。麦基交谈马克维茨。白金交谈马克维茨。马克维茨交谈白金。"
+    },
+    {
+     "question_id": "q-dr-000022",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "临光同行杜宾。杜宾交谈临光。临光指挥杜宾。临光交谈杜宾。阿米娅交谈杜宾。杜宾敌对整合运动。阿米娅交谈临光。临光敌对整合运"
+    },
+    {
+     "question_id": "q-dr-000027",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "制铳圣堂位于米迦莱昂区。梵里妮前往制铳圣堂。公证所位于米迦莱昂区。"
+    },
+    {
+     "question_id": "q-dr-000028",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "普瑞赛斯交谈凯尔希。普瑞赛斯敌对凯尔希。普瑞赛斯创建凯尔希。凯尔希交谈普瑞赛斯。凯尔希背叛普瑞赛斯。凯尔希敌对普瑞赛斯。"
+    },
+    {
+     "question_id": "q-dr-000029",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "异变发生于雪山。异兽导致异变。熔火蜗破坏雪山。熔火蜗位于雪山。"
+    },
+    {
+     "question_id": "q-dr-000030",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "伦蒂尼姆位于泰拉。城防军驻守伦蒂尼姆。萨卡兹冲突伦蒂尼姆。海布里区位于伦蒂尼姆。伦蒂尼姆位于维多利亚。碎片大厦位于伦蒂尼"
+    },
+    {
+     "question_id": "q-dr-000031",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "天火使用源石技艺。天火交谈薄绿。桑葚交谈天火。天火交谈锡兰。天火属于蒙贝兰家。薄绿交谈天火。天火指挥薄绿。普罗旺斯交谈天"
+    },
+    {
+     "question_id": "q-dr-000032",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "闪灵敌对赦罪师。赦罪师交谈闪灵。闪灵交战赦罪师。闪灵师从赦罪师。闪灵背叛赦罪师。赦罪师亲属闪灵。闪灵交谈赦罪师。萨卢斯交"
+    },
+    {
+     "question_id": "q-dr-000033",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "血魔大君领导鲜血王庭。血魔大君交谈特雷西斯。阿米娅交战血魔大君。特雷西斯交谈血魔大君。厄尔苏拉交谈血魔大君。血魔大君敌对"
+    },
+    {
+     "question_id": "q-dr-000034",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "凯尔希交谈阿米娅。可露希尔交谈凯尔希。凯尔希交谈Raidian。凯尔希交谈Mon3tr。普瑞赛斯交谈凯尔希。凯尔希敌对普"
+    },
+    {
+     "question_id": "q-dr-000037",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "左乐冲突司岁台。左乐隶属司岁台。左乐任职司岁台。左乐前往司岁台。莫佚交谈左乐。左乐交谈麟青砚。司岁台隶属大炎。司岁台同盟"
+    },
+    {
+     "question_id": "q-dr-000038",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "拉普兰德隶属萨卢佐家族。拉普兰德离开萨卢佐家族。拉普兰德背叛萨卢佐家族。拉普兰德前往萨卢佐家族。拉普兰德交谈德克萨斯。拉"
+    },
+    {
+     "question_id": "q-dr-000040",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "塔露拉领导整合运动。九交谈塔露拉。塔露拉交谈九。塔露拉交谈陈。罗德岛敌对塔露拉。塔露拉离开维多利亚。爱布拉娜交谈塔露拉。"
+    },
+    {
+     "question_id": "q-dr-000042",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "卡彭敌对企鹅物流。甘比诺敌对企鹅物流。拜松隶属企鹅物流。空隶属企鹅物流。能天使隶属企鹅物流。拜松离开企鹅物流。罗德岛同盟"
+    },
+    {
+     "question_id": "q-dr-000044",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "司岁台持有书刀。书刀位于天镜阁。陈持有书刀。太尉使用书刀。颉持有书刀。均持有书刀。大理寺研究书刀。书刀破坏真龙实录。"
+    },
+    {
+     "question_id": "q-dr-000045",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "塔露拉隶属整合运动。塔露拉领导整合运动。塔露拉创建整合运动。塔露拉背叛整合运动。塔露拉导致整合运动。塔露拉指挥整合运动。"
+    },
+    {
+     "question_id": "q-dr-000047",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "可露希尔交谈博士。博士交谈阿米娅。凯尔希交谈博士。Ace交谈博士。Scout交谈博士。博士交谈凯尔希。凯尔希保护博士。T"
+    },
+    {
+     "question_id": "q-cx-000003",
+     "category": "cross_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "main_ep16、main_st17"
+    },
+    {
+     "question_id": "q-cx-000005",
+     "category": "cross_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "main_ep14、main_st11"
+    },
+    {
+     "question_id": "q-cx-000007",
+     "category": "cross_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "memory_huang、memory_weedy"
+    },
+    {
+     "question_id": "q-cx-000008",
+     "category": "cross_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "rogue_rogue_6、roguelike_level_rogue6_ending_4"
+    },
+    {
+     "question_id": "q-cx-000014",
+     "category": "cross_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "act7mini、memory_bluep、memory_glacus、memory_indigo"
+    },
+    {
+     "question_id": "q-cx-000021",
+     "category": "cross_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "act14mini、act16d5、memory_saga"
+    },
+    {
+     "question_id": "q-cx-000024",
+     "category": "cross_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "act42side、memory_graceb"
+    },
+    {
+     "question_id": "q-cx-000026",
+     "category": "cross_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "act43side、memory_tippi"
+    },
+    {
+     "question_id": "q-cx-000030",
+     "category": "cross_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "act29side、act42side"
+    },
+    {
+     "question_id": "q-sc-900002",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "共融"
+    },
+    {
+     "question_id": "q-sc-900003",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "历史的航向"
+    },
+    {
+     "question_id": "q-sc-900004",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "一波又起"
+    },
+    {
+     "question_id": "q-sc-900005",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "命途何在"
+    },
+    {
+     "question_id": "q-sc-900011",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "新秩序"
+    },
+    {
+     "question_id": "q-sc-900012",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "无法再一次踏入的河"
+    },
+    {
+     "question_id": "q-sc-900013",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "缺席的人"
+    },
+    {
+     "question_id": "q-sc-900015",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "过去与现在的终点"
+    },
+    {
+     "question_id": "q-sc-900017",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "凌绝顶"
+    },
+    {
+     "question_id": "q-sc-900019",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "在卡兹戴尔"
+    },
+    {
+     "question_id": "q-sc-900020",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "降生"
+    },
+    {
+     "question_id": "q-sc-900021",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "未定型的现在"
+    },
+    {
+     "question_id": "q-sc-900022",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "惊愕"
+    },
+    {
+     "question_id": "q-sc-900023",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "试飞日"
+    },
+    {
+     "question_id": "q-sc-900025",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "凌绝顶"
+    },
+    {
+     "question_id": "q-sc-900028",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "无畏·3"
+    },
+    {
+     "question_id": "q-sc-900029",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "烤串与预言"
+    },
+    {
+     "question_id": "q-sc-900030",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "疑惑之影"
+    },
+    {
+     "question_id": "q-sc-900031",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "生灵火花"
+    },
+    {
+     "question_id": "q-sc-900033",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "血潮翻涌"
+    },
+    {
+     "question_id": "q-sc-900034",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "“狼之主”"
+    },
+    {
+     "question_id": "q-sc-900036",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "高空拒阻行动"
+    },
+    {
+     "question_id": "q-sc-900037",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "瑟瑟秋华"
+    },
+    {
+     "question_id": "q-sc-900041",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "走出那条长长的走廊"
+    },
+    {
+     "question_id": "q-sc-900042",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "狂奔的瓶树"
+    },
+    {
+     "question_id": "q-sc-900043",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "漫游症"
+    },
+    {
+     "question_id": "q-sc-900047",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "月光沉沦"
+    },
+    {
+     "question_id": "q-sc-900048",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "禁飞区"
+    },
+    {
+     "question_id": "q-sc-900054",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "“堕天”"
+    },
+    {
+     "question_id": "q-sc-900057",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "告别时刻"
+    },
+    {
+     "question_id": "q-sc-900062",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "分身有术"
+    },
+    {
+     "question_id": "q-sc-900063",
+     "category": "single_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "乐园"
+    },
+    {
+     "question_id": "q-al-900001",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "格兰特交谈夜烟。格兰特领导巫女林。夜烟交谈格兰特。格兰特保护夜烟。格兰特指挥苏菲。格兰特指挥夜烟。格兰特隶属巫女林。"
+    },
+    {
+     "question_id": "q-al-900005",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "陈持有赤霄。陈使用赤霄。魏彦吾持有赤霄。"
+    },
+    {
+     "question_id": "q-al-900006",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "乌露露交谈安洁莉娜。安洁莉娜交谈乌露露。乌露露指挥瑞万。嘉辛塔交谈乌露露。乌露露位于红砂镇。瑞万交谈乌露露。乌露露属于红"
+    },
+    {
+     "question_id": "q-al-900008",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "玛莉娅交谈佐菲娅。佐菲娅交谈光头马丁。佐菲娅指导玛莉娅。佐菲娅亲属玛莉娅。佐菲娅交谈玛嘉烈·临光。佐菲娅隶属临光家。佐菲"
+    },
+    {
+     "question_id": "q-al-900009",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "高级管理人员交谈蒂拉。蒂拉前往楼顶。蒂拉隶属黑钢。克里夫交谈蒂拉。克里夫部署蒂拉。蒂拉下属克里夫。黑钢先遣队员交谈蒂拉。"
+    },
+    {
+     "question_id": "q-al-900010",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "瑞恩交谈莱欧斯。瑞恩交谈玛露西尔。瑞恩交谈刻俄柏。莱欧斯交谈瑞恩。瑞恩交谈拓荒者A。拓荒者A交谈瑞恩。瑞恩隶属罗德岛。玛"
+    },
+    {
+     "question_id": "q-al-900011",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "第四集团军前往奥克特里格区。奥克特里格区位于核心城。第四集团军位于奥克特里格区。奥克特里格区位于伦蒂尼姆。碎片大厦位于奥"
+    },
+    {
+     "question_id": "q-al-900012",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "伊雷妮交谈拉维妮娅。鲁杰罗交谈伊雷妮。伊雷妮隶属运输保障署。伊雷妮赠予柳德米拉。伊雷妮任职运输保障署。伊雷妮交谈德克萨斯"
+    },
+    {
+     "question_id": "q-al-900013",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "外来的教士交谈怪异的画家。怪异的画家交谈外来的教士。外来的教士敌对怪异的画家。外来的教士使用标记。"
+    },
+    {
+     "question_id": "q-al-900015",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "石棺称为原型。"
+    },
+    {
+     "question_id": "q-al-900016",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "陈使用天喟之剑。"
+    },
+    {
+     "question_id": "q-al-900018",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "孟铁衣交谈左宣辽。左宣辽指挥左乐。左宣辽交谈重岳。左宣辽交谈孟铁衣。梁洵交谈左宣辽。左宣辽敌对山海众。左宣辽交谈魏彦吾。"
+    },
+    {
+     "question_id": "q-al-900022",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "血骑士交战玛嘉烈。玛嘉烈交谈血骑士。血骑士交谈玛嘉烈。血骑士交战逐魇骑士。血骑士交谈逐魇骑士。血骑士隶属赤盏骑士团。血骑"
+    },
+    {
+     "question_id": "q-al-900024",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "Logos交谈血魔大君。孽茨雷交谈血魔大君。血魔大君交谈孽茨雷。特雷西斯交谈血魔大君。血魔大君领导血魔王庭。血魔大君交谈"
+    },
+    {
+     "question_id": "q-al-900033",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "尤拉持有炸药。锡人持有炸药。阿盖使用炸药。夏娜研究炸药。炸药导致夏娜。卢奇诺持有炸药。"
+    },
+    {
+     "question_id": "q-al-900035",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "薇薇安娜敌对辉煌盾。奥比娜破坏辉煌盾。薇薇安娜冲突辉煌盾。辉煌盾参与奥格尼斯科。辉煌盾冲突奥比娜。辉煌盾隶属商业联合会。"
+    },
+    {
+     "question_id": "q-al-900036",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "阿兰娜交谈石棉。石棉交谈阿兰娜。石棉前往大瀑布。石棉前往咧嘴谷。石棉前往大风滩。石棉隶属罗德岛。依娜姆交谈石棉。石棉同行"
+    },
+    {
+     "question_id": "q-al-900037",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "泷居未来交谈黑角。黑角交谈泷居未来。泷居未来交谈学者猫。学者猫交谈泷居未来。泷居未来亲属泷居应。泷居未来交谈泷居应。泷居"
+    },
+    {
+     "question_id": "q-al-900039",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "食腐者交战推进之王。萨卡兹驻守银石崖。银石崖位于伦蒂尼姆。先锋纵队交战食腐者。银石崖位于赤鬃山脉。开斯特公爵前往银石崖。"
+    },
+    {
+     "question_id": "q-al-900041",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "阿梅利亚交谈阿什顿。阿什顿交谈阿梅利亚。安洁莉娜交谈阿什顿。阿什顿隶属纵贯红土公司。阿什顿任职纵贯红土公司。嘉辛塔交谈阿"
+    },
+    {
+     "question_id": "q-al-900044",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "雅赛努斯属于米诺斯。里底娅任职雅赛努斯。缇缇前往雅赛努斯。克瑞斯拉前往雅赛努斯。赞索斯前往雅赛努斯。赞索斯位于雅赛努斯。"
+    },
+    {
+     "question_id": "q-al-900045",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "佩利佩交谈锡兰。诗怀雅交谈佩利佩。佩利佩交谈诗怀雅。佩利佩持有黑曜石。佩利佩亲属贝亚特·布朗。佩利佩持有晶洞。锡兰交谈佩"
+    },
+    {
+     "question_id": "q-al-900047",
+     "category": "alias",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "吉雅离开拉特兰。吉雅交谈娜仁图亚。吉雅感染矿石病。"
+    },
+    {
+     "question_id": "q-dr-900001",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "行板隶属罗德岛。芙蓉交谈行板。恩希欧迪斯同盟罗德岛。行板交谈芙蓉。爷爷交谈行板。行板交谈爷爷。芙蓉隶属罗德岛。行板交谈白"
+    },
+    {
+     "question_id": "q-dr-900002",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "希瓦艾什家敌对佩尔罗契家。佩尔罗契家敌对希瓦艾什家。恩希欧迪斯隶属希瓦艾什家。布朗陶家敌对希瓦艾什家。希瓦艾什家部署圣山"
+    },
+    {
+     "question_id": "q-dr-900003",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "维多利亚同盟布朗陶。布朗陶同盟维多利亚。维多利亚敌对谢拉格。维多利亚交谈菈塔托丝。维多利亚敌对希瓦艾什。布朗陶敌对佩尔罗"
+    },
+    {
+     "question_id": "q-dr-900006",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "莱昂图索任职建设部。莱昂图索交谈德克萨斯。莱昂图索交谈罗索。拉维妮娅交谈莱昂图索。莱昂图索交谈拉维妮娅。莱昂图索隶属贝洛"
+    },
+    {
+     "question_id": "q-dr-900007",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "阿洛伊泽隶属近卫军皇家直属营。Raidian交谈阿洛伊泽。阿洛伊泽交谈Raidian。阿洛伊泽隶属近卫军。阿洛伊泽前往圣"
+    },
+    {
+     "question_id": "q-dr-900011",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "特雷西斯位于碎片大厦。特雷西斯使用碎片大厦。特雷西斯驻守碎片大厦。血魔大君交谈特雷西斯。碎片大厦位于伦蒂尼姆。特雷西斯同"
+    },
+    {
+     "question_id": "q-dr-900015",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "杰斯顿交谈罗宾。罗宾交谈杰斯顿。罗宾敌对杰斯顿。杰斯顿指挥罗宾。罗宾同盟杰斯顿。杰斯顿雇用罗宾。安东尼敌对杰斯顿。杰斯顿"
+    },
+    {
+     "question_id": "q-dr-900017",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "小古莉感染矿石病。索默尔亲属小古莉。伊雷妮亲属小古莉。莉莉娅研究矿石病。蜜莓研究矿石病。索默尔交谈小古莉。嘉维尔感染矿石"
+    },
+    {
+     "question_id": "q-dr-900020",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "苦根隶属罗德岛。夏栎交谈苦根。苦根交谈苏茜。苏茜交谈苦根。苦根交谈凯特。苦根交谈夜烟。天火交谈苦根。吉姆斯交谈苦根。"
+    },
+    {
+     "question_id": "q-dr-900023",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "整合运动敌对乌萨斯。乌萨斯赠予整合运动。整合运动敌对罗德岛。阿米娅敌对整合运动。杜宾敌对整合运动。近卫局交战整合运动。整"
+    },
+    {
+     "question_id": "q-dr-900024",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "斯卡蒂隶属深海猎人。斯卡蒂属于深海猎人。斯卡蒂交谈博士。布兰都斯研究深海猎人。深海猎人使用自适应接点。斯卡蒂交谈歌蕾蒂娅"
+    },
+    {
+     "question_id": "q-dr-900027",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "蔓珠院位于谢拉格。谢拉格包含蔓珠院。蔓珠院包含藏经阁。蔓珠院敌对喀兰贸易。佩尔罗契家同盟蔓珠院。弗雷隶属蔓珠院。阿德颂指"
+    },
+    {
+     "question_id": "q-dr-900029",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "阿洛伊泽交谈普拉多。普拉多交谈阿洛伊泽。阿洛伊泽同行普拉多。阿洛伊泽赠予普拉多。阿洛伊泽指挥普拉多。Raidian交谈阿"
+    },
+    {
+     "question_id": "q-dr-900031",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "锡人前往卡兹戴尔。锡人离开卡兹戴尔。锡人研究卡兹戴尔。娜斯提交谈锡人。锡人交谈娜斯提。妮芙交谈锡人。卡兹戴尔包含魂灵熔炉"
+    },
+    {
+     "question_id": "q-dr-900032",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "迷迭香交谈阿米娅。迷迭香同行阿米娅。阿米娅保护迷迭香。阿米娅交谈迷迭香。阿米娅同行迷迭香。阿米娅指挥迷迭香。阿米娅交谈博"
+    },
+    {
+     "question_id": "q-dr-900035",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "塞雷娅保护伊芙利特。伊芙利特交谈塞雷娅。塞雷娅交谈伊芙利特。伊芙利特保护塞雷娅。塞雷娅指挥伊芙利特。伊芙利特获救于塞雷娅"
+    },
+    {
+     "question_id": "q-dr-900036",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "第四集团军前往远北地区。叶甫根尼指挥第四集团军。布列斯克同盟第四集团军。第二集团军交战第四集团军。远北政府赠予第四集团军"
+    },
+    {
+     "question_id": "q-dr-900038",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "汉密尔顿上校交谈波顿男爵。号角交谈汉密尔顿上校。汉密尔顿上校交谈号角。汉密尔顿上校驻守小丘郡。汉密尔顿上校敌对塔拉人。汉"
+    },
+    {
+     "question_id": "q-dr-900041",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "星熊隶属近卫局。星熊任职近卫局。星熊交谈诗怀雅。近卫局同盟罗德岛。星熊交谈风笛。陈隶属近卫局。星熊交谈阿森。大头交谈星熊"
+    },
+    {
+     "question_id": "q-dr-900042",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "城防军驻守伦蒂尼姆。城防军位于伦蒂尼姆。诺伯特区位于伦蒂尼姆。莱托任职城防军。莱托中校领导城防军。军事委员会敌对城防军。"
+    },
+    {
+     "question_id": "q-dr-900043",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "图林交谈塔露拉。塔露拉交谈图林。图林同盟塔露拉。塔露拉指挥图林。图林交谈柳德米拉。图林交谈可露希尔。可露希尔交谈塔露拉。"
+    },
+    {
+     "question_id": "q-dr-900046",
+     "category": "direct_relation",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "雷尔金敌对霍里。雷尔金交谈霍里。霍里交谈雷尔金。尼克托交谈雷尔金。雷尔金前往乌卡边境。雷尔金指挥尼克托。尼克托交谈霍里。"
+    },
+    {
+     "question_id": "q-cx-900011",
+     "category": "cross_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "act51side、memory_headb2"
+    },
+    {
+     "question_id": "q-cx-900012",
+     "category": "cross_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "act26side、memory_spuria"
+    },
+    {
+     "question_id": "q-cx-900014",
+     "category": "cross_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "act14side、act30side、memory_blackd"
+    },
+    {
+     "question_id": "q-cx-900016",
+     "category": "cross_chunk",
+     "v1_pass": true,
+     "v2_pass": true,
+     "v2_reason": "all_axes_pass",
+     "answer_head": "act15side、act31side、act40side、act49side"
+    }
+   ],
+   "limitation": "四项 loss 全零可能是解析器没抓到值，也可能是答案真的完美——本计数只负责把这一格暴露出来，不判定它是哪一种。必须抽审 suspect_zero_loss_items 才能区分，这也是计划书反证条件 4 要求「不能用低分证明严格」的直接落地。"
+  },
   "fp_items": []
  },
  "stats": {

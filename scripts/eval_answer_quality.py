@@ -381,6 +381,7 @@ def flip_counts(rows: list[dict]) -> dict:
         "v2_undecidable": undecidable,
         "v2_undecidable_n": len(undecidable),
         "structural": structural,
+        "parse_failures": _parse_failure_report(rows),
         "fp_items": [
             {"question_id": r.get("question_id"), "category": r.get("category"),
              "v2_reason": (r.get("judge_v2") or {}).get("reason")}
@@ -388,6 +389,63 @@ def flip_counts(rows: list[dict]) -> dict:
             if (r.get("judge") or {}).get("pass") is False
             and (r.get("judge_v2") or {}).get("pass") is True
         ],
+    }
+
+
+def _parse_failure_report(rows: list[dict]) -> dict:
+    """**解析失败单独计数**——计划书 W4 反证条件 4 点名的形态。
+
+    原文：`v2 把大量 FF 通过解析失败统一拒绝，却隐藏解析失败数 ⇒ 属于判据退化，
+    必须单列并修复，不能用低分证明严格。`
+
+    为什么必须单列：W4a 的实现报告里明确警告过——
+    `parsed_values == []` 时，`support_ok` 与 `cardinality_ok` 会**空真通过**，
+    `loss` 的四个计数也全是 0。于是"解析器挂了"和"答案完美"在 `loss` 上长得一模一样。
+    不单独数一下，就无法区分"v2 严格"和"v2 根本没解析出来"。
+
+    判定口径（可机检，不依赖 v2 内部）：
+    逐题看 `judge_v2.loss` 四项是否**全为 0**且该题**非空答案**。
+    非空答案 + 四项全零 = 解析器没抓到任何值（因为任何真解析都会在
+    `missing_or_wrong` 或 `extra` 上留下非零），记一次 `suspect_parse_failure`。
+
+    **这不是断言"它一定解析失败了"**，是"这一格需要人看一眼"。所以字段名叫
+    `suspect_*` 而不是 `parse_failed_*`——一个答得完美的题也会四项全零，
+    两者只能靠抽审分开，不能靠这个计数分开。
+    """
+    sub = _scorable(rows)
+    v2_rows = [r for r in sub if isinstance(r.get("judge_v2"), dict)]
+    suspects: list[dict] = []
+    empty_answers = 0
+    for r in v2_rows:
+        text = str(r.get("answer") or "")
+        if not text.strip():
+            empty_answers += 1
+            continue
+        loss = (r.get("judge_v2") or {}).get("loss") or {}
+        vals = [int(loss.get(k) or 0) for k in
+                ("missing_or_wrong_values", "extra_values",
+                 "unsupported_values", "cardinality_over")]
+        if vals and all(v == 0 for v in vals):
+            suspects.append({
+                "question_id": r.get("question_id"),
+                "category": r.get("category"),
+                "v1_pass": (r.get("judge") or {}).get("pass"),
+                "v2_pass": (r.get("judge_v2") or {}).get("pass"),
+                "v2_reason": (r.get("judge_v2") or {}).get("reason"),
+                "answer_head": text[:60],
+            })
+    return {
+        "n_v2_rows": len(v2_rows),
+        "n_empty_answer": empty_answers,
+        "n_zero_loss": len(suspects),
+        "zero_loss_rate": round(len(suspects) / len(v2_rows), 4) if v2_rows else None,
+        "suspect_zero_loss_items": suspects,
+        "limitation": (
+            "四项 loss 全零可能是解析器没抓到值，也可能是答案真的完美——"
+            "本计数只负责把这一格暴露出来，不判定它是哪一种。"
+            "必须抽审 suspect_zero_loss_items 才能区分，"
+            "这也是计划书反证条件 4 要求「不能用低分证明严格」的直接落地。"
+        ),
     }
 
 
