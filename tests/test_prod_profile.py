@@ -191,31 +191,61 @@ class TestCliWiresTheOptions:
 
         默认关是硬要求：这个脚本的默认口径要能复现台账里 6000/12000 档的旧读数，
         改成默认开会让几十个历史数字失去可比性。
+
+        ## 为什么改成纯 AST 静态检查，而不是起一个假 parser 调 `mod.main([])`
+
+        原实现替换 `mod.argparse.ArgumentParser` 再调 `mod.main([])`，有两个
+        无法回避的缺陷：
+
+        1. **无限递归**：`mod.argparse` 与测试自己 import 的 `argparse` 是
+           **同一个模块对象**，替换它等于全局替换。`_Cap` 继承自
+           `argparse.ArgumentParser`，而后者此时已是 `_Cap` 本身 —— 构造
+           `_Cap()` 要引用 `_Cap`，`RecursionError`。这条门此前一直报假红。
+        2. **它验证的东西比看上去少**：即使不递归，`mod.main([])` 也会走到
+           `question == ""` 的早退分支，真正想钉的"`--prod` 默认关"根本没被执行。
+
+        静态读源码没有这两个问题：`add_argument("--prod", action="store_true")`
+        这件事在 AST 里是确定的，且不依赖任何运行期替换。
         """
-        parser = None
-        import argparse
+        src = (ROOT / "scripts" / "ask.py").read_text("utf-8")
+        tree = ast.parse(src)
 
-        class _Cap(argparse.ArgumentParser):
-            def parse_args(self, *a, **kw):
-                nonlocal parser
-                parser = self
-                return argparse.Namespace(
-                    question="", generation="", top_k=20, graph_depth=1,
-                    token_budget=retrieve.DEFAULT_BUDGET["max_context_tokens"],
-                    json="", prod=False, evaluate=False, gold_set="", limit=50,
+        prod_args: list[ast.Call] = []
+        for node in ast.walk(tree):
+            if not isinstance(node, ast.Call):
+                continue
+            fn = node.func
+            if (getattr(fn, "attr", "") or getattr(fn, "id", "")) != "add_argument":
+                continue
+            for arg in node.args:
+                if isinstance(arg, ast.Constant) and arg.value == "--prod":
+                    prod_args.append(node)
+
+        assert prod_args, "`scripts/ask.py` 没有 `--prod`"
+        call = prod_args[0]
+
+        # `store_true` 的默认值语义由 argparse 保证是 False；若显式写了
+        # `default=`，则必须是 `False`，不许是 `True`。
+        for kw in call.keywords:
+            if kw.arg == "default":
+                assert isinstance(kw.value, ast.Constant) \
+                    and kw.value.value is False, (
+                    "`--prod` 的默认值必须是 False："
+                    "默认开会让台账里 6000/12000 档的读数失去可比性"
                 )
-
-        real = mod.argparse.ArgumentParser
-        mod.argparse.ArgumentParser = _Cap
-        try:
-            mod.main([])
-        finally:
-            mod.argparse.ArgumentParser = real
-        assert parser is not None
-        actions = getattr(parser, "_option_string_actions", {})
-        assert "--prod" in actions, "`scripts/ask.py` 没有 `--prod`"
-        assert actions["--prod"].default is False, (
-            "`--prod` 的默认值必须是 False：默认开会让台账里 6000/12000 档的读数失去可比性"
+        actions = {
+            kw.value.value
+            for kw in call.keywords
+            if kw.arg == "action" and isinstance(kw.value, ast.Constant)
+        }
+        has_store_true = "store_true" in actions
+        has_false_default = any(
+            kw.arg == "default" and isinstance(kw.value, ast.Constant)
+            and kw.value.value is False
+            for kw in call.keywords)
+        assert has_store_true or has_false_default, (
+            f"`--prod` 既不是 `action='store_true'` 也没显式给 "
+            f"`default=False`（实际 action={actions}）：无法证明它默认关"
         )
 
     def test_evaluate_accepts_prod_and_defaults_off(self, mod):
@@ -291,11 +321,18 @@ class TestDefaultPathIsUnchanged:
             if isinstance(node, ast.FunctionDef) and node.name == "ask_once":
                 fn = node
         assert fn is not None
-        opts = [a for a in fn.args.args if a.arg == "options"]
+        # `options` 是**关键字参数**（在 `*` 之后），所以它在 `kwonlyargs` 里，
+        # 不在 `args` 里。原来只查 `fn.args.args` 会恒判「没有 options 参数」——
+        # 这条门一直报的是假红（方向错了：它说"参数没了"，其实参数好好的）。
+        # 本次修正只改观测面，不放宽门槛：查不到仍然是 FAIL。
+        all_params = list(fn.args.args) + list(fn.args.kwonlyargs)
+        opts = [a for a in all_params if a.arg == "options"]
         assert opts, "`ask_once` 没有 `options` 参数"
-        defaults = fn.args.defaults
-        assert defaults and isinstance(defaults[-1], ast.Constant) \
-            and defaults[-1].value is None, (
+        # 关键字参数的默认值在 `kw_defaults`（与 `args` 位置对齐，可能含 None），
+        # 不在 `defaults` 里。
+        idx = [a.arg for a in fn.args.kwonlyargs].index("options")
+        default = fn.args.kw_defaults[idx]
+        assert isinstance(default, ast.Constant) and default.value is None, (
             "`ask_once` 的 `options` 默认值不是 None："
             "默认档一变，台账里 6000/12000 档的读数全部失去可比性"
         )

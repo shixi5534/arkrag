@@ -165,6 +165,16 @@ def load_generation(generation_id: str) -> dict:
 
 
 # ---------------------------------------------------------------- 管线
+def is_chapter_question(question: str) -> bool:
+    """问句是否落在「问章节代号」这一类（`cross_chunk` 骨架）。
+
+    单一事实来源在 `answer.CHAPTER_TRIGGERS`：这里**只转发**，不另写一份触发词。
+    本项目已因「同一判定写两处、取最松的那份生效」出过三次同型事故。
+    """
+    q = str(question or "")
+    return any(t in q for t in answer_mod.CHAPTER_TRIGGERS)
+
+
 def build_pipeline(loaded: dict, *, top_k: int, graph_depth: int,
                    vector_union=None) -> dict:
     """装配一条问答链。`vector_union` 为 `None` 时**与改造前完全等价**。
@@ -257,6 +267,7 @@ def ask_once(pipeline: dict, question: str, *, timings: dict | None = None,
     | `graph_reserve_tokens` | 0 | 传给 `build_context` 的图证据预留额度 |
     | `bridge_search_top_k` | 0 | 桥接题单独使用的候选数（0 = 用 `pipeline["top_k"]`） |
     | `search_top_k` | `pipeline["top_k"]` | 覆盖本次检索的候选数 |
+    | `max_direct_units` | 0 | W1：直接证据单元进入上下文的条数上限（0 = 现状） |
 
     三个开关全部默认关，且**每一条都只改检索/装配，不改判据**；关掉时返回的
     `search.hits` / `context.stats` 与改造前逐位相同，历史台账读数不受影响。
@@ -363,18 +374,26 @@ def ask_once(pipeline: dict, question: str, *, timings: dict | None = None,
     reserve = int(opts.get("graph_reserve_tokens") or 0)
     if reserve and not bridge.is_bridge_question(question):
         reserve = 0
-    # 只在真的要用到预留额度时才传这个形参：默认路径（`reserve == 0`）与改造前
-    # 逐位相同，连调用形状都一样——这样任何既有 `build_context` 替身（测试桩、
+    # ---- W1：直接单元 cap 的门控（默认 0 = 现状） ------------------------
+    # cap **只对「非桥接、非章节」题生效**，这是实测决定的：
+    #   * multihop 有 56.7% 的 gold 落在 rank 9–20，而 `bridge_search_top_k=40`
+    #     正是为它加的 —— 对它 cap 等于拆掉桥接通路；
+    #   * cross_chunk 的章节答案由 W3 单独管，cap 它会与章节截断互相污染。
+    # 这与 `graph_reserve_tokens`（只对桥接题生效）恰好互补。
+    max_direct = int(opts.get("max_direct_units") or 0)
+    if max_direct and (bridge.is_bridge_question(question)
+                       or is_chapter_question(question)):
+        max_direct = 0
+    # 只在真的要传时才拼关键字：默认路径（`reserve == 0` 且 `max_direct == 0`）与
+    # 改造前**连调用形状都一样**——这样任何既有 `build_context` 替身（测试桩、
     # 旧版实现）都不会因为多一个关键字参数而 TypeError。
+    ctx_kwargs: dict = {}
     if reserve:
-        context = retriever.build_context(
-            found["hits"], expanded["expansions"], query_analysis=qa,
-            graph_reserve_tokens=reserve,
-        )
-    else:
-        context = retriever.build_context(
-            found["hits"], expanded["expansions"], query_analysis=qa,
-        )
+        ctx_kwargs["graph_reserve_tokens"] = reserve
+    if max_direct:
+        ctx_kwargs["max_direct_units"] = max_direct
+    context = retriever.build_context(
+        found["hits"], expanded["expansions"], query_analysis=qa, **ctx_kwargs)
     if timings is not None:
         timings["context_ms"] = (time.perf_counter() - _t2) * 1000.0
     _t3 = time.perf_counter()
@@ -395,9 +414,15 @@ def ask_once(pipeline: dict, question: str, *, timings: dict | None = None,
         # 后者被 `build_context` 按焦点实体谓词过滤，`X—A`/`X—B` 那条边的另一端
         # 不是焦点实体，会被过滤掉，实测少捞 6 题（dev multihop 20 → 26）。
         # 两种来源都只覆盖本次上下文里的块，接地口径不变。
+        #
+        # **W1 的桥接候选池**：cap 开启时 `build_context` 会额外返回
+        # `bridge_candidates`（cap **之前**的完整接地候选单元）。桥接必须读它，
+        # 否则 cap 会顺手砍掉桥接的候选池，违背 W1「解耦检索宽度与上下文宽度」。
+        # 默认（cap=0）没有这个键，`or` 落回 `units`，逐位等价。
+        bridge_units = context.get("bridge_candidates") or context.get("units") or []
         br = bridge.find_bridge(
             question,
-            context.get("units") or [],
+            bridge_units,
             chunk_assertions=retriever.assertions_by_chunk.get,
             display=retriever.display_name,
         )

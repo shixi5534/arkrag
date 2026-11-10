@@ -8,21 +8,57 @@
 
 ## 1. 环境准备
 
-**Python**：3.11 或更高（实际开发与验证环境为 3.14.3）。`py -3 --version` 确认。
+**Python**：3.11 或更高。**运行时依赖：零第三方库。** `src/`、`scripts/` 只用标准库，这样离线机器上不需要联网装包就能跑全流程。
+
+### 1.1 推荐：conda 环境（可分发、可复现）
+
+仓库根目录有 `environment.yml`，把解释器与测试依赖做成一份**声明**，不再依赖某台机器上恰好装着的全局 Python：
 
 ```powershell
-py -3 --version        # 应 >= 3.11
+conda create -n arkrag --override-channels -c conda-forge `
+    python=3.13 "pytest>=9.0,<10" pip -y
+conda activate arkrag
+python -m pytest tests
 ```
 
-**运行时依赖：零第三方库。** `src/`、`scripts/` 只用标准库，这样离线机器上不需要联网装包就能跑全流程。
+> `conda env create -f environment.yml` 在部分机器上会被 `defaults` 渠道的 ToS 拦截，
+> 因此上面给的是**实际可用**的等价命令。`environment.yml` 仍是给人读的规格说明。
 
-**开发依赖（只有跑测试需要）**：
+为什么强调"不再依赖全局 Python"：本项目此前一直跑在全局 3.14.3 上，排查两次
+`0xC00000FD` 崩溃与三次整机内存耗尽时，反复卡在同一个问题——没人说得清"跑的是
+哪个解释器"。环境不固定，任何"跑一次看看"的实验都可能落在不同世界上。详见
+`docs/事故-内存耗尽与熔断器-20261110.md` 与 `docs/基线-环境标准化与测试基线-20261110.md`。
+
+**当前测试基线**：2038 passed / 2 failed / 16 skipped / 1 xfailed（约 21 分钟）。
+那 2 个 failed 是 `test_portable_paths.py` 的既存存量债（历史入库 JSON 写死绝对
+机台路径），非本次引入。因耗时较长，全量跑请重定向到文件并后台执行：
 
 ```powershell
-py -3 -m pip install -r requirements-dev.txt
+python -m pytest tests *> _full_test_out.txt
 ```
 
-锁定版本的清单在 `requirements.lock.txt`（仅记录实际验证过的版本，便于复现）。
+### 1.2 备选：项目内 venv
+
+不想装 conda 时，用任意 3.11+ 解释器建 venv：
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
+```
+
+`pyproject.toml` 已声明 `requires-python = ">=3.11"` 与 `dev = ["pytest==9.2.0"]`，
+`testpaths = ["tests"]` 保证在仓库根跑 `pytest` 不会收集到散落的历史诊断脚本。
+
+### 1.3 依赖清单的关系
+
+| 文件 | 作用 |
+|---|---|
+| `pyproject.toml` | 声明支持的 Python 版本、测试依赖、pytest 收集范围 |
+| `environment.yml` | conda 环境规格（解释器 + pytest），用于分发 |
+| `requirements-dev.txt` | 最小开发依赖（`pytest>=8.0`） |
+| `requirements.lock.txt` | 实际验证过的精确版本（含具名传递依赖） |
+
+**新增任何运行时第三方依赖都要先改变"零依赖"那条约束**，不该被悄悄塞进任一文件。
 
 ---
 

@@ -1085,7 +1085,18 @@ class TestSuiteSizeIsMonotonic:
     # 98.7/98.1/96.9% 唯一率、p50=16）都写进了对应源码注释并有机检断言。
     # 突变验证：`tmp_mutate_gates.py` 实跑 13 组突变，**13/13 按预期命中**
     # （其中 1 组是双突变——`s == o` 与 `- set(anc)` 互为备份，单条改都不红）。
-    N = 2017
+    # 2017 -> 2057（W1 + pyproject）：新增 `tests/test_w1_direct_cap.py` 的 13 个用例，
+    # 钉的是白名单式**代数性质**，不是分数：默认路径逐位等价、cap 路径是有序
+    # 前缀且首超预算即停（逆序归零）、桥接候选池不受 cap 影响、
+    # `bridge_candidates` 不进 `context_digest`。
+    # 这三条各自都能变红：把默认路径也换成 `break`、把 cap 写成过滤而非前缀、
+    # 或在 cap 之后才拍候选快照，都会立刻 FAIL。
+    #
+    # 2017 + 13 = 2030 只是新增文件的直接增量；实测 2057 比它多 27，
+    # 因为本文件自己也把 `test_*.py` 加进了 `TEST_FILES`，使四个 `parametrize`
+    # （本文件多处按文件列表展开）各多展开若干项。**登记值一律以
+    # `--collect-only` 实测为准**，不按增量手算——手算漏项正是这条门存在的理由。
+    N = 2057
 
     def test_declared_count_matches_actual(self) -> None:
         """用 pytest 自己数一遍当前收集到的用例数，与本文件登记值比对。"""

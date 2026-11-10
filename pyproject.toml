@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "arkrag"
+version = "0.1.0"
+description = "离线抽取式图 RAG（Arknights 设定库），运行时零第三方依赖"
+readme = "README.md"
+#: 运行时只用标准库；这里声明的是**能跑测试的最低与已验证版本**。
+#:
+#: 下限 3.11 不是随便挑的：代码用了 `from __future__ import annotations`、
+#: `X | None` 联合语法、`dict[str, int]` 内建泛型、`match` 之外的新语法糖，
+#: 3.10 及以下跑不起来。
+#:
+#: 上限刻意**不写死**：项目零第三方运行时依赖，跟着 CPython 走补丁版本是安全的。
+#: 但要注意本机踩过的坑——默认的 3.14.3 曾经在跑组合测试时
+#: `0xC00000FD`（STATUS_STACK_OVERFLOW）退出，所以开发环境钉在 3.14.7
+#: （见 `.venv`）。这只是"本机验证过的版本"，不是"只有它能跑"的断言。
+requires-python = ">=3.11"
+
+# 运行时零第三方依赖：src/ 与 scripts/ 全部只 import 标准库。
+# 这条是项目的一等约束（见 README 与 docs/），不是巧合。
+dependencies = []
+
+[project.optional-dependencies]
+#: 跑测试需要的东西。与 `requirements.lock.txt` 保持同一组版本。
+dev = ["pytest==9.2.0"]
+
+[tool.pytest.ini_options]
+#: 测试只收 `tests/` 下的 `test_*.py`。
+#:
+#: **必须显式指定 `testpaths`**：仓库根目录和 `data/_tmp_*` 下散落着大量历史
+#: 诊断脚本，其中若干文件名形如 `tmp_*_test.py`。不限定路径时在仓库根跑
+#: `pytest` 会收集到它们并报 3 个 collection error（anchor not found 等），
+#: 与本项目的测试健康度无关。
+testpaths = ["tests"]
+
+#: **刻意不设 `addopts`。**
+#:
+#: 曾经加过 `-q -p no:cacheprovider`，结果打红了
+#: `tests/test_regression_entry.py`：那条用例起子进程跑一个必然失败的测试，
+#: 断言输出里含 `"1 failed"`。`-q` 会改变汇总行格式，`"1 failed"` 不再出现——
+#: 门报的是"入口没透出失败码"，而真实原因是父进程把汇总格式改了。
+#:
+#: 这是本项目记过多次的同型事故：**为了让命令短一点而加的参数，把一条判据的
+#: 观测面改掉了**。运行时的 `-q` / `--basetemp` 由调用方在命令行显式给。

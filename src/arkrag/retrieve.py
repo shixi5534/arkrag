@@ -836,6 +836,7 @@ class Retriever:
         token_budget: int | None = None,
         query_analysis: dict | None = None,
         graph_reserve_tokens: int = 0,
+        max_direct_units: int = 0,
     ) -> dict:
         """把检索命中与图扩展拼成上下文单元。
 
@@ -865,10 +866,36 @@ class Retriever:
 
         默认 0 时**行为与改造前逐位相同**（`used_tokens + cost > budget - 0` 就是原判据），
         所以历史读数不受影响；调用方要显式传值才开启。
+
+        ## `max_direct_units`（默认 0 = 与改造前逐位等价）
+
+        把**直接证据单元**进入上下文的条数限制到前 N 条（W1）。它只砍"进上下文的
+        量"，不动"检索的宽度"——`hits` 一个不减，被排除的单元仍在
+        `stats["capped_units"]` 里可查，桥接用的完整接地候选池放在
+        `bridge_candidates`（见下）。
+
+        三条实现约束，每条都对着一个具体的失效模式：
+
+        1. **cap 作用在 `ordered` 的直接单元子序列上，不是原始 `hits` 名次**。
+           `ordered` 已经去重、合并、并按 `(直接优先, -score, chunk_id)` 定序；
+           用 `hits` 名次会把同一 chunk 的多条命中重复计数。
+
+        2. **cap 路径用"有序前缀 + 首个超预算即停"，不是原来的 `continue`**。
+           原实现装不下就 `continue` 试下一个更小的单元，于是会出现"排名更差的
+           单元反而挤进来"的逆序（台账 193/350 那道悬案）。cap 路径必须严格按
+           前缀取，第一个装不下就停。**这条只对 cap 路径生效**：`cap=0` 时仍走
+           原来的 `continue`，与改造前逐位相同。
+
+        3. **必须同时返回 `bridge_candidates`**。`pipeline` 把 `context["units"]`
+           交给 `bridge.find_bridge`；若只砍 `units`，桥接候选池会被一并砍小，
+           违背"解耦检索宽度与上下文宽度"的目的。`bridge_candidates` 是 cap
+           **之前**的完整接地单元列表，只读用途，**不参与** `context_digest`
+           的构造（否则摘要会声称回答器看到了它没看到的证据）。
         """
         budget_tokens = int(
             token_budget if token_budget is not None else self.budget["max_context_tokens"]
         )
+        max_direct = max(0, int(max_direct_units or 0))
         qa = query_analysis or {}
         hint_predicates = {
             str(h.get("canonical") or h.get("raw") or "") for h in (qa.get("relation_hints") or [])
@@ -988,6 +1015,23 @@ class Retriever:
                 name_terms=getattr(self.index, "name_terms", None),
             )
 
+        # ---- W1：直接单元的 cap（默认 0 = 不 cap，逐位等价） ----------------
+        # `bridge_candidates` 是 cap **之前**的完整接地单元列表，只读用途：
+        # 桥接必须看到被 cap 排除的那些单元，否则 cap 会顺手砍小桥接候选池。
+        # 默认（cap=0）**不返回这个键**，`result` 的字典字面量与改造前逐位相同。
+        bridge_candidates: list[dict] | None = None
+        capped_ids: list[str] = []
+        if max_direct:
+            direct_ordered = [u for u in ordered if direct(u)]
+            graph_ordered = [u for u in ordered if not direct(u)]
+            # 有序前缀：取前 N 条直接单元，其余记入 capped（仍可从 bridge_candidates 读到）
+            prefix = direct_ordered[:max_direct]
+            capped_ids = [u["chunk_id"] for u in direct_ordered[max_direct:]]
+            ordered = prefix + graph_ordered
+            # 只读快照：先复制列表（不是深拷贝单元），单元本身在下面装填时会被
+            # 写入 `tokens`，但那不影响"候选集合"这个用途。
+            bridge_candidates = list(direct_ordered) + list(graph_ordered)
+
         if reserve:
             # 两段装填：直接证据 → 图证据 → 剩余直接证据。
             # 顺序理由：图证据是本轮唯一被挤掉的一类，必须保证它在"剩余额度"里
@@ -1025,14 +1069,34 @@ class Retriever:
             # 恢复"直接证据在前"的展示序：装填顺序变了，但喂给答案器的顺序不该变。
             kept.sort(key=lambda u: (0 if direct(u) else 1, -u["score"], u["chunk_id"]))
         else:
-            for unit in ordered:
-                cost = cost_of(unit)
-                unit["tokens"] = cost
-                if used_tokens + cost > budget_tokens:
-                    truncated.append(unit["chunk_id"])
-                    continue
-                used_tokens += cost
-                kept.append(unit)
+            if max_direct:
+                # ---- W1 cap 路径：有序前缀 + 首个超预算即停 ------------------
+                # 为什么这里必须是 `break` 而不是原路径的 `continue`：原实现在
+                # 装不下时继续试下一个（更小的）单元，于是名次更差的单元会挤进来，
+                # 形成"逆序"——台账里 193/350 那道悬案的成因。
+                # cap 路径承诺的是"严格按前缀取，第一个装不下就停"，所以
+                # `truncation_overtake` 在这条路径上恒为 0（K2）。
+                # **默认路径（cap=0）不走这里**，仍用下面的 `continue`，逐位等价。
+                for unit in ordered:
+                    cost = cost_of(unit)
+                    unit["tokens"] = cost
+                    if used_tokens + cost > budget_tokens:
+                        # 首个装不下即停：后续单元不论大小一律不进，
+                        # 保证"进了上下文的直接单元 = 前缀"。
+                        break
+                    used_tokens += cost
+                    kept.append(unit)
+                truncated = [u["chunk_id"] for u in ordered
+                             if u["chunk_id"] not in {k["chunk_id"] for k in kept}]
+            else:
+                for unit in ordered:
+                    cost = cost_of(unit)
+                    unit["tokens"] = cost
+                    if used_tokens + cost > budget_tokens:
+                        truncated.append(unit["chunk_id"])
+                        continue
+                    used_tokens += cost
+                    kept.append(unit)
 
         payload = [
             {
@@ -1065,6 +1129,15 @@ class Retriever:
             # 只在开启预留时加这个键：默认路径的 `stats` 字面量与改造前逐位相同，
             # 历史台账里对 `stats` 做等值比较的测试不会因新键而失败。
             result["stats"]["graph_reserve_tokens"] = reserve
+        if max_direct:
+            # 同理：只有 cap 开启时才加这三个键。默认路径的 `result` / `stats`
+            # 字典字面量与改造前**逐位相同**（兼容性门禁的机检依据）。
+            result["stats"]["max_direct_units"] = max_direct
+            result["stats"]["capped_units"] = capped_ids
+            # `bridge_candidates` 是 cap 之前的完整接地单元，**只读**。
+            # 关键：它**不进入** `payload`/`context_digest`——摘要必须只描述
+            # 回答器真实看到的证据，否则等于声称它看了没给它的东西。
+            result["bridge_candidates"] = bridge_candidates
         return result
 
 

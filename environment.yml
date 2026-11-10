@@ -1,0 +1,89 @@
+# conda 环境规格（ArkRAG）
+#
+# 用途：把本项目的**运行与测试环境**做成一份可分发、可复现的声明，而不是
+# 依赖某台机器上恰好装着的全局 Python。
+#
+# 为什么现在补这个文件：本机此前一直用全局 Python 3.14.3，出过两次
+# `0xC00000FD`（STATUS_STACK_OVERFLOW）与三次提交内存被打满导致整机失稳。
+# 排查时反复出现同一个问题——**没人说得清"这台机器上跑的是哪个解释器"**。
+# 环境不固定，任何"跑一次看看"的实验都可能落在不同世界上。
+#
+# 详见 docs/事故-内存耗尽与熔断器-20261110.md。
+#
+# ---- 用法 ----------------------------------------------------------------
+#
+#   ⚠️ 本机实测：`conda env create -f environment.yml` **走不通**。
+#   原因不是文件写错，是 `~/.condarc` 里的 `defaults` 渠道有 ToS 未接受，
+#   conda 26.7.1 会直接拒绝解析（CondaToSNonInteractiveError）。
+#   `conda env create` 又不接受 `--override-channels`，无法绕开。
+#
+#   因此**实际可用**的创建命令是（与环境名/版本完全等价）：
+#
+#     conda create -n arkrag --override-channels -c conda-forge \
+#         python=3.13 "pytest>=9.0,<10" pip -y
+#
+#   激活：
+#     conda activate arkrag
+#
+#   跑测试（本机实测 2038 passed / 2 failed，约 21 分钟，必须后台跑）：
+#     python -m pytest tests *> _full_test_out.txt
+#
+#   跑评测（**必须走熔断器**）：
+#     python scripts/run_guarded.py -- python scripts/eval_answer_quality.py --split dev --prod
+#
+#   导出精确锁定（分发用）：
+#     conda env export > environment.lock.yml            # 同平台精确复现
+#     conda env export --from-history > environment.min.yml   # 跨平台重建
+#
+#   本文件仍是给人读的**规格说明**（说明要哪几个包、为什么），
+#   但复现命令以上面那条 `conda create` 为准。
+#
+# ---- 为什么钉 3.13 而不是 3.14 -------------------------------------------
+#
+# 本项目运行时零第三方依赖（src/ 与 scripts/ 只 import 标准库），所以理论上
+# 跟着最新 CPython 走没有生态风险。但实测在本机 3.14.3 上跑组合测试时会
+# `0xC00000FD` 退出，而在 3.14.7 上同样复现——**根因是沙箱的临时目录限制，
+# 不是解释器缺陷**（见下）。
+#
+# 即便如此，这里选 3.13 作为分发基线，理由是它更保守：
+#   * 3.13 是当前主线稳定版本，conda-forge 的构建最全；
+#   * 项目只用到 `from __future__ import annotations`、`X | None`、
+#     内建泛型这些 3.10 就有的特性，3.13 完全够用；
+#   * 想在 3.14 上跑的人改 `python=3.14` 即可，代码本身没有 3.14 专属依赖。
+#
+# ---- 那条必须写死的约束：不要加 addopts -------------------------------
+#
+# `pyproject.toml` 里**刻意不设** `addopts`。曾加过 `-q`，结果打红了
+# `tests/test_regression_entry.py`：它起子进程跑一个必然失败的测试，断言输出含
+# `"1 failed"`，而 `-q` 改了汇总行格式，`"1 failed"` 不再出现。
+# 门报的是"入口没透出失败码"，真实原因是父进程把汇总格式改了。
+#
+# 结论：运行时的 `-q` / `--basetemp` 一律由调用方在命令行显式给，不写进配置。
+#
+# 另：本机沙箱曾拒绝对系统临时目录（`%TEMP%\pytest-of-*`）执行 `mkdir`/`rmtree`，
+# 导致所有 `tmp_path` 用例 ERROR。**迁移到 conda 环境后该问题已消失**
+# （`test_retrieve.py` 29 个 `tmp_path` 用例全绿），故不再要求 `--basetemp`。
+
+name: arkrag
+
+channels:
+  - conda-forge
+
+dependencies:
+  # 解释器。见文件头"为什么钉 3.13"。
+  - python=3.13
+
+  # 测试依赖。与 requirements.lock.txt 的 pytest 大版本一致（9.x）。
+  #
+  # 运行时零第三方依赖是项目的一等约束，所以这里**刻意只有 pytest**——
+  # 任何新增运行时依赖都必须先改变那条约束，不该被悄悄塞进环境文件。
+  - pytest>=9.0,<10
+
+  # pip 只在需要 `pip install -e .` 时才用；项目本身不打包分发。
+  - pip
+
+  - pip:
+      # 项目以 `src/` 布局提供 `arkrag` 包，测试通过 `tests/conftest.py`
+      # 把 `src` 插进 `sys.path`，因此**不需要**可编辑安装。
+      # 若将来要 `import arkrag` 在任意目录可用，取消下一行注释：
+      # - -e .

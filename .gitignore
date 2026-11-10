@@ -63,6 +63,19 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 
+# conda 环境目录（`conda env create -p ./.conda` 时会产生；具名环境不落在仓库里）。
+# 规格文件 environment.yml 必须入库，环境本身不入库。
+.conda/
+env/
+
+# uv 的本地缓存（本机 `%LOCALAPPDATA%\uv\cache` 被沙箱拒绝，
+# 安装依赖时用 `UV_CACHE_DIR=E:\图rag\_uvcache` 重定向到这里）。
+_uvcache/
+
+# pytest 的 `--basetemp` 目录。本机沙箱拒绝写系统临时目录，
+# 只能指到项目内；它是运行副产物，不入库。
+_pytest_tmp/
+
 data/arkrag/staging/
 
 # 一次性临时文件（提交说明、诊断输出）。这些不该入库：
