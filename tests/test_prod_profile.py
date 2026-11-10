@@ -38,8 +38,13 @@ from arkrag import server
 ROOT = Path(__file__).resolve().parents[1]
 
 #: 实测读数（`scripts/eval_answer_quality.py --split {dev,holdout,clean} --prod`）。
-#: 三份必须一起报：dev 80.00% / holdout 77.95% / clean 80.83%。
-MEASURED = {"dev": "228/285", "holdout": "152/195", "clean": "97/120"}
+#: 三份必须一起报：dev 81.05% / holdout 78.97% / clean 81.67%。
+#:
+#: **2026-11-10 更新**（W3 `chapter_cap=4` 进生产档）：此前是
+#: 228/285、152/195、97/120（80.00% / 77.95% / 80.83%）。新版三份全为正、
+#: 零掉分，增益全部来自 `cross_chunk`（23→26 / 16→18 / 12→13）。
+#: 依据：`docs/W3-验收结论-20261110.md`。
+MEASURED = {"dev": "231/285", "holdout": "154/195", "clean": "98/120"}
 
 
 def _module_by_path(name: str, rel: str):
@@ -76,21 +81,34 @@ class TestProfileNumbersArePinned:
             f"改这个数必须重跑 dev/holdout/clean 三份。"
         )
 
-    def test_all_four_switches_are_on(self):
-        """四个开关缺一个就掉档，所以四个都必须点名钉住。"""
+    def test_all_switches_are_on(self):
+        """五个开关缺一个就掉档，所以五个都必须点名钉住。"""
         opts = pipeline.PROD_PROFILE["options"]
         assert opts == {
             "quote_locate": True,
             "bridge": True,
             "bridge_search_top_k": 40,
             "graph_reserve_tokens": 12000,
+            "chapter_cap": 4,
         }, (
-            f"生产档的开关集合变了：{opts}。四个数各有实测依据——"
+            f"生产档的开关集合变了：{opts}。五个数各有实测依据——"
             f"bridge 与 graph_reserve_tokens 必须同时开（只开桥接不预留，"
             f"dev multihop 只 8→11）；bridge_search_top_k=40 只对桥接题生效"
             f"（全局抬 top_k 会掉 single_chunk 1 题）；"
-            f"quote_locate 的门控命中集是 single_chunk 128/640、其余类别 0。"
+            f"quote_locate 的门控命中集是 single_chunk 128/640、其余类别 0；"
+            f"chapter_cap=4 是 W3 实测最优点（三份 split 全为正、零掉分："
+            f"dev +3 / holdout +2 / clean +1），且必须**正好 4**——"
+            f"cap=3 是 +4/−6（净 −2），cap=5/6 都是 +0/−1。"
         )
+        # W2 的 `bridge_policy` **刻意不在**生产档里：它实测零收益
+        # （dev 228→228），见 `docs/W2-验收结论-20261110.md`。
+        assert "bridge_policy" not in opts, (
+            "`bridge_policy` 被加进了生产档：W2 实测 dev Δ=0、holdout/clean 未跑，"
+            "零收益的开关不该进生产默认")
+        # W1 的 `max_direct_units` 同理：dev Δ=−2，已按反证条件回滚。
+        assert "max_direct_units" not in opts, (
+            "`max_direct_units` 被加进了生产档：W1 实测 dev Δ=−2（226/285），"
+            "反证条件 1 触发，已回滚")
 
     def test_profile_is_a_mapping_and_options_is_a_nested_dict(self):
         """形状也要钉：`apply_prod_profile` 会做 `dict(...)` 与 `int(...)`。"""

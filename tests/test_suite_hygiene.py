@@ -1096,7 +1096,80 @@ class TestSuiteSizeIsMonotonic:
     # 因为本文件自己也把 `test_*.py` 加进了 `TEST_FILES`，使四个 `parametrize`
     # （本文件多处按文件列表展开）各多展开若干项。**登记值一律以
     # `--collect-only` 实测为准**，不按增量手算——手算漏项正是这条门存在的理由。
-    N = 2057
+    # 2057 → 2081（W3）：新增 `tests/test_w3_chapter_cap.py` 的 20 个用例；
+    # 该文件进入 `TEST_FILES` 后让四个 parametrize（本文件 61/130/150/184 行附近的
+    # 四道按 `TEST_FILES` 展开的门）各多一项，+4。
+    # 20 + 4 = 24，2057 + 24 = 2081，与 `--collect-only` 实测一致。
+    # 这 20 条里有一条是被反向实测补出来的（见下第二个 bullet 的第二段）。
+    # 这次换来的门是「截断帽的默认档必须逐位等价」与「排序键的失误形态被钉住」：
+    #   · `chapter_cap` 默认 0 时，答案串、引用列表、返回 dict 的键、
+    #     `stats["chapter_path"]` 的键集合都必须与改动前一致，而且
+    #     `_chapter_answer` 的**调用形状**也不许多一个关键字（用 monkeypatch
+    #     换掉该函数直接看 kwargs）。失效方式很现实：把 0 顺手实现成"取前 0 章"
+    #     或"取全部但重排"，历史台账里所有 `chapter_path` 的读数一起漂移。
+    #   · 排序键 `(-Σ unit.score, -len(units), chapter)` 的**质量是未知的**：
+    #     计划书要求先交 `data/diag_cx_rank_keys.json` 四键对照表（判据 C5，
+    #     「未交不出分」），而生成它要跑全量世代。本轮产出不了，于是用例不假装
+    #     键是好的，而是把它的失误形态钉死 ——「Σ score 打平时 3 个弱单元压过
+    #     gold 的 1 个强单元」这条**必须保持为当前行为**，转红＝有人偷换排序键。
+    #     这正是本项目「不能为了让测试好看而改判据」的反向用法。
+    #   · 反向实测六笔（A 把 cap>0 的判断去掉 ⇒ 8 failed；B 把排序键换成
+    #     "个数优先" ⇒ 3 failed；C 让呈现顺序跟着排序键走 ⇒ 1 failed；
+    #     D 默认档也拼 `chapter_cap` 关键字 ⇒ 1 failed；E 去掉字典序兜底 ⇒ 1 failed；
+    #     F `if cap > 0` 改 `if True` ⇒ **第一轮 19 条全绿**）。
+    #     C 与 F 两笔是「用例没测到那个判据」的活标本，两处都已写进用例注释：
+    #     C 第一版夹具里排序键的顺序与字典序恰好相同，改成 `list(ranked[:cap])`
+    #     照样 19 passed —— 改成最高分落在字典序末尾的 ep04 才红；
+    #     F 之所以浮不到公开返回值上（`answer()` 只在 cap>0 时读那些键），
+    #     所以补了一条直接调 `_chapter_answer` 检查它自己返回 dict 键集合的用例。
+    # 2081 → 2135（W2）：新增 `tests/test_w2_bridge_margin.py` 的 50 个用例；
+    # 该文件进入 `TEST_FILES` 后让本文件按 `TEST_FILES` 展开的四个 parametrize
+    # 各多一项，+4。50 + 4 = 54，2081 + 54 = 2135，与 `--collect-only` 实测一致。
+    #
+    # ⚠️ **这个 `N` 是两个工作项共用的**。W2 与 W3 在同一轮里各新增了一个测试
+    # 文件，谁后提交谁必须用 `--collect-only` **重新实测**，不许按增量手算相加
+    # （手算漏项正是这条门存在的理由）。核对单文件增量的办法：再跑一次
+    # `--ignore=<新文件>` 相减。
+    #
+    # 这 50 条换来的门是三件"改桥接决策层就一定会静默出错"的事：
+    #   · **默认档逐位等价**：文件里内嵌一份改造前 `find_bridge` 的冻结副本
+    #     （`_legacy_find_bridge`），对 11 个覆盖每个 `status` 分支的合成场景
+    #     逐个比对返回值 dict。失效方式：新分支顺手改了 `unique_only` 的返回
+    #     结构或 `status`，而历史台账的每一格读数都建立在那条分支上。
+    #     刻意**不**重构那份副本——它存在的意义就是"没经历过任何重构"。
+    #   · **`ask_once` 的调用形状不变**：用记录参数的桩替换 `find_bridge`，
+    #     断言默认档下桩收到的关键字恰好是 `{chunk_assertions, display}`。
+    #     多传一个 `policy=` 就会让按旧签名写的桩与替身在默认档上换行为
+    #     （`scripts/audit_round6.py` 正是按位置 + 两关键字调用）。
+    #   · **校准是两段纯逻辑、可以无产物单测**：`fit(样本) -> 单调映射` 与
+    #     `decide(映射) -> 答/不答`。单调性由 PAVA 强制（违反单调的相邻桶被
+    #     拉平并共享 `pool` 编号），阈值只有概率阈值 2/3（由 `c_误答=2`、
+    #     `c_误拒=1` 算出），`p == 2/3` 判拒答，桶里没样本返回 `None` 而不是
+    #     `0.0`，映射文件不许改写代价比。**本文件不做校准**：那要跑
+    #     `load_generation()` 落盘逐题样本，是另一件事（计划书 M0）。
+    #
+    # 反向实测八笔（每笔都是"改坏一处 → 指定用例红 → 还原后绿"，脚本
+    # `tmp_w2_reverse.py` 实跑；第一轮有两笔没变红，两处都已补在用例里）：
+    #   A 让 `find_bridge` 在 `unique_only` 下也走排序 ⇒
+    #     `test_unique_only_ignores_calibration` 红。
+    #     **第一版没红**：`_scenarios()` 里四个多候选场景的 margin 全是 0，
+    #     于是"唯一才答"与"按概率决定"恰好都给出拒答，突变与修复结果相同。
+    #     补了一个 `n_cands=2 & margin=2`（校准 p=0.8）的场景才有判别力。
+    #   B `ask_once` 无条件拼 `policy=` ⇒ `test_default_options_do_not_pass_policy` 红；
+    #   C 去掉 `tie` 检查 ⇒ `test_tie_abstains_even_with_probability_one` 红；
+    #   D `should_answer` 的 `>` 改成 `>=` ⇒ `test_boundary_abstains` 红。
+    #     **第一版没红**：原实现比的是 `expected_gain(p) > 0`，而
+    #     `expected_gain(2/3)` 因浮点误差算出 −1.1e-16，改成 `>=` 仍为假 ——
+    #     "边界拒答"当时靠的是舍入巧合，不是判据。改成直接比 `threshold()` 后
+    #     运算符的差别才可见。
+    #   E `probability` 的 `return None` 改成 `return 0.0` ⇒
+    #     `test_probability_returns_none_not_zero_for_unseen_bucket` 红；
+    #   F PAVA 的合并条件反过来 ⇒ `test_violating_buckets_get_pooled` 红；
+    #   G 把策略名校验挪到触发面判断之后 ⇒
+    #     `test_unknown_policy_is_rejected_even_off_trigger` 红；
+    #   H 去掉"只认 `ranked[0]`"的身份核对 ⇒
+    #     `test_pick_is_bound_to_ranked_top1_only` 红。
+    N = 2135
 
     def test_declared_count_matches_actual(self) -> None:
         """用 pytest 自己数一遍当前收集到的用例数，与本文件登记值比对。"""

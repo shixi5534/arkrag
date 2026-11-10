@@ -172,9 +172,107 @@ CHAPTER_ANSWER_PATH = True
 # 触发词与 `cross_chunk` 骨架一一对应（实测 38/38 命中、零混入其他类别）。
 CHAPTER_TRIGGERS = ("章节代号",)
 
+# ---- W3：章节答案的截断帽（`chapter_cap`） ---------------------------------
+# 默认 `0` = 不截断 = **与改造前逐位相同**（答案串、引用列表、返回 dict 的键
+# 一个不多一个不少；连 `_chapter_answer` 的调用形状都不变）。
+#
+# ## 它要解决的问题（口径订正）
+#
+# 台账写「`cross_chunk` 剩余缺口 100% 在容量层」。**这条只对 8 道
+# `chapter_set_missing`（`W ⊄ O`）成立**；另外 7 道是
+# `extra_chapters_outnumber_gold`：`W ⊆ O` 且 `|O| > 2|W|`，其中 **7/7 的
+# R=1.00**（gold 章节一个不落全找到了），只因 `|O|` 太大被
+# `judge.judge_answer` 的 `cross_chunk` 分支判错。**它们缺的是精度不是容量。**
+# 本工作项就是这个订正本身：判据**不动**（`judge.py` 不在改动面内），只让
+# **答案本身**少列无关章节。
+#
+# ## ⚠️ 两件必须分清的事（本节最大的陷阱）
+#
+# 1. `cap` 只消除 `|O| > 2|W|` 这一类失败。当前 64 题 gold 章节数分布
+#    `|W|=2 → 35 题 / 3 → 20 / 4 → 9`，即 `min|W| = 2`，于是
+#    **`|O| ≤ 4` 时 `|O| ≤ 2|W|` 恒成立** —— 截断到 4 章不可能再触发基数闸
+#    （前提是 gold schema 不变）。`cap=4` 同时是安全地板：`|W|>2` 时更小的
+#    cap 必然漏 gold。
+# 2. **基数闸通过不等于答案正确。** 若 `W ⊄ O`，cap 再小也救不回来（更糟）。
+#    所以 W3 的目标是**让更多 gold 完整保留**，不是把 `|O|` 压低 —— 这两件事
+#    经常被混为一谈，`cap` 换来的"pass 数上涨"也可能只是基数闸变松了。
+#
+# ## ⚠️ 唯一必须命名的风险：排序键质量未知
+#
+# 截断要保住 gold，就依赖一个章节排序键，而这个键**从未被实测过"当序用"**
+# （计划书里 `nh` 只被当**阈值**测过：`nh≥2` 掉到 2/38、`nh≥3` 归零；当序用
+# 一次都没测过）。计划书要求先出 `data/diag_cx_rank_keys.json`（四个预登记键
+# 的 top-k 保 gold 对照表）再定 cap 值，并写明「未交不出分」（判据 C5）。
+# **那份对照表本轮没有产出** —— 生成它要跑全量世代，而本工作项的纪律禁止
+# 加载数据产物。所以：
+#   * 下面的排序键是**先验选择**（理由写在 `_chapter_rank_key` 的 docstring 里），
+#     不是实测最优，也不许被写成实测最优；
+#   * `chapter_cap` 默认 0（关闭），**在对照表出来之前不得打开**；
+#   * 在 `diag_cx_rank_keys.json` 出现之前，任何「截断后分数会涨」的说法都只是
+#     猜测。风险上界（计划书的风险控制式 `UCB[L(cap)] ≤ 5%`）同样没有算过。
+CHAPTER_CAP_DEFAULT = 0
+
+
+def _chapter_rank_key(chapter: str, units: list[dict]) -> tuple:
+    """章节排序键：`(-Σ unit.score, -len(units), chapter)`，升序即「好的在前」。
+
+    三个分量各自回答一个问题，没有一个是为了凑数：
+
+    1. `Σ unit.score`（降序）—— 本章节里**被检索判为相关**的块有多强。
+       它是 `unit` 上**唯一连续的、检索侧的证据强度信号**（`build_context`
+       写进去的是本轮各通道融合分的 `max`；纯图扩展单元的 `score` 恒为 0.0）。
+       之所以把 `score` 放在第一位、而不是「该章单元个数」：个数那个键在**已
+       实测的数据上近乎退化**——`_chapter_answer` 的入选判据已经是「该章下有
+       单元正文含焦点实体名」（即 `nh ≥ 1`），而实测 `nh ≥ 2` 一当**阈值**就
+       掉到 2/38，说明**大多数 gold 章节的 `nh` 恰好是 1**。于是「按个数排」
+       会把 gold 与额外章节**大面积并列在 1 上**，最后由章节名兜底——那等于用
+       一个不含任何证据的键做决定。
+       （"大多数 gold 章节 nh==1"是由 `nh≥2 → 2/38` **推出**的，不是逐章实测；
+       如实记在这里，不当成实测结论。）
+
+    2. `len(units)` 即 `nh`（降序）—— 在本实现里它就**等于**该章含焦点实体名
+       的单元数（`by_chapter` 只收这类单元）。`Σ score` 相同时，命中块更多的
+       章节更可能不是巧合。
+
+    3. `chapter`（升序）—— **纯确定性兜底，不含任何证据主张**。没有它，同分
+       章节的先后会取决于 `dict` 插入顺序（即上下文装配顺序），同一份输入两次
+       跑可能给出不同答案。加上它之后排序是**全序**，`sorted` 的稳定性不再被
+       依赖。
+
+    ## 它在什么情况下会选错（不许省略）
+
+    * **纯图扩展章节被系统性压低**：`score` 恒 0.0，哪怕正文真的提到实体，只要
+      该章的所有单元都是图扩展来的，`Σ score` 就是 0，排在所有直接命中章节之后。
+      gold 若只能经图扩展到达，会被先截掉。
+    * **多而弱压过少而强**：`Σ score` 本质是「个数 × 平均分」。噪声章节若有 3 个
+      弱相关块（各 0.3），会赢过 gold 的 1 个强相关块（0.8）。
+      这是本键最现实的失误形态 —— `tests/test_w3_chapter_cap.py` 里有一条用例
+      **把这个行为钉住**（不修、不美化，注释写明这是已知风险）。
+    * **分数量纲跨通道不可比**：`retrieve.search` 的 bm25 / entity / speaker 三路
+      加权后落在同一个 `score` 上，它们的可比性从未被验证。
+    * 这些都是「这个键可能选错」的风险，**不是「选错了也没关系」**。
+
+    ## 硬约束
+
+    只消费 `unit` 上现成的 `score` 与此次上下文里的单元本身。**不许**读
+    `entity["chunks"]`、goldset 或任何额外章节索引：那等于用答案去挑答案，
+    计划书判据 C7 把这种行为直接判注水。
+    """
+    total = 0.0
+    for unit in units:
+        raw = unit.get("score")
+        try:
+            total += float(raw if raw is not None else 0.0)
+        except (TypeError, ValueError):
+            # 分数不是数就按 0 算：这个键只是**排序**用的启发式，不是判据；
+            # 为一个畸形字段抛异常会让整条答案通路崩掉，代价远大于失序。
+            continue
+    return (-total, -len(units), str(chapter))
+
 
 def _chapter_answer(question: str, units: list[dict],
-                    query_analysis: dict | None = None) -> dict | None:
+                    query_analysis: dict | None = None,
+                    chapter_cap: int = CHAPTER_CAP_DEFAULT) -> dict | None:
     """问句问「出现过哪些章节代号」时，用上下文单元自带的 `chapter` 组合作答。
 
     判据：某章节进答案，当且仅当该章节下有**至少一个单元正文含问句焦点实体名**
@@ -208,7 +306,24 @@ def _chapter_answer(question: str, units: list[dict],
     if not by_chapter:
         return None
 
-    chapters = sorted(by_chapter)
+    # 章节集合：`sorted(by_chapter)` 是**答案的呈现顺序**（字典序，与改动前一致）。
+    chapters_all = sorted(by_chapter)
+
+    # ---- W3 截断（`chapter_cap > 0` 才生效；0/负数 = 现状，一步都不多走） ----
+    # 截断**只决定留下哪几章**，不决定呈现顺序：留下的章节仍然按字典序拼成答案。
+    # 这样 `chapter_cap >= 章节数` 时结果与不截断**逐位相同**（有测试钉住），
+    # 下游任何按「、」切分的读法（`judge._CHAPTER_SPLIT`）都不受影响。
+    cap = int(chapter_cap or 0)
+    chapters_truncated = False
+    if cap > 0 and len(chapters_all) > cap:
+        ranked = sorted(chapters_all,
+                        key=lambda c: _chapter_rank_key(c, by_chapter[c]))
+        kept = set(ranked[:cap])
+        chapters = [c for c in chapters_all if c in kept]  # 字典序，稳定
+        chapters_truncated = True
+    else:
+        chapters = chapters_all
+
     answer = "、".join(chapters)
 
     # 每块取第一行含焦点实体且够长的行当引用（同一块只发一条，避免同块多行重复）
@@ -233,15 +348,25 @@ def _chapter_answer(question: str, units: list[dict],
                 break
 
     if not citations:
+        # 截断后一章都发不出引用 ⇒ 仍然返回 None（落回 claim 通路），**不许**
+        # 发一个"有章节、无引用"的答案：`verify_citations` 会把它清空并改判
+        # 拒答（`no_valid_citation`），那是本项目记录在案的 `q-cx-900024` 事故形态。
+        # 代价如实记：cap 打开时，这条分支比不截断时**更容易**触发（留下的章节更少）。
         return None
 
-    return {
+    hit = {
         "answer": answer,
         "chapters": chapters,
         "citations": citations,
         "n_chapters": len(chapters),
         "chapter_source": "unit.chapter",
     }
+    if cap > 0:
+        # 只在 cap 打开时加键：`chapter_cap == 0` 的返回 dict 必须与改动前逐位相同。
+        hit["chapter_cap"] = cap
+        hit["n_chapters_found"] = len(chapters_all)
+        hit["chapters_truncated"] = chapters_truncated
+    return hit
 
 
 def _line_bounds(text: str, start: int, end: int) -> tuple[int, int]:
@@ -503,6 +628,7 @@ class ExtractiveAnswerer:
         top_score: float = 0.0,
         query_analysis: dict | None = None,
         retrieval_stats: dict | None = None,
+        chapter_cap: int = CHAPTER_CAP_DEFAULT,
     ) -> dict:
         """把上下文拼成带引用的答案，或如实拒答。
 
@@ -511,6 +637,13 @@ class ExtractiveAnswerer:
 
         `versions` 里记的是**判据版本**（本模块常量 + 上下文摘要），不是模型版本：
         抽取式回答没有模型，硬写一个模型名属于虚构。
+
+        `chapter_cap`（W3，默认 0 = 现状）
+            只在章节包通路（`CHAPTER_ANSWER_PATH` + `CHAPTER_TRIGGERS`）生效：
+            章节集合按 `_chapter_rank_key` 排序后取前 N 章。`0` 时**与改动前
+            逐位相同**——不仅答案不变，连 `_chapter_answer` 的关键字形状都不变
+            （0 时不传 `chapter_cap` … 见下方调用点）。风险与「排序键质量未知」
+            见 `CHAPTER_CAP_DEFAULT` 上方那段模块级注释。
         """
         units = list(context.get("units") or [])
         warnings: list[str] = []
@@ -596,7 +729,16 @@ class ExtractiveAnswerer:
         # ---- 章节包答案通路（新增答案形态，2026-11-07 起默认开） ------------
         # 同样放在三道拒答闸之后、claim 机制之前，理由与标题通路一致。
         if CHAPTER_ANSWER_PATH:
-            chapter_hit = _chapter_answer(question, units, qa)
+            # W3：**只在真的要截断时才拼关键字**。默认 `chapter_cap == 0` 时连
+            # 调用形状都与改动前一样（与 `pipeline.ask_once` 里
+            # `graph_reserve_tokens` / `max_direct_units` 同一个做法）——这样任何
+            # 既有 `_chapter_answer` 替身（测试桩、旧版实现）都不会因为多一个
+            # 关键字参数而 TypeError，历史读数也逐位不变。
+            cap = int(chapter_cap or 0)
+            chapter_kwargs: dict = {}
+            if cap > 0:
+                chapter_kwargs["chapter_cap"] = cap
+            chapter_hit = _chapter_answer(question, units, qa, **chapter_kwargs)
             if chapter_hit is not None:
                 base["answer"] = chapter_hit["answer"]
                 base["citations"] = [
@@ -619,6 +761,14 @@ class ExtractiveAnswerer:
                     "chapter_source": chapter_hit["chapter_source"],
                     "citations": len(chapter_hit["citations"]),
                 }
+                if cap > 0:
+                    # cap 打开时才记账：截断前后的章节数必须同时可见，否则
+                    # 「gold 完整保留率」的分母无从复算（计划书判据 C7）。
+                    base["stats"]["chapter_path"]["chapter_cap"] = cap
+                    base["stats"]["chapter_path"]["n_chapters_found"] = (
+                        chapter_hit["n_chapters_found"])
+                    base["stats"]["chapter_path"]["chapters_truncated"] = (
+                        chapter_hit["chapters_truncated"])
                 return base
             base["stats"]["chapter_path"] = {"applied": False}
 

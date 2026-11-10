@@ -1,0 +1,3215 @@
+{
+ "schema": "arkrag.diag_bridge_margin/1",
+ "purpose": "W2.1：桥接候选 margin 真实样本 + 校准表，判 M0 可行性",
+ "generated_at": "2026-11-10T08:26:08Z",
+ "python": "3.13.18",
+ "os": "Windows-11-10.0.26200-SP0",
+ "command": "python scripts/run_guarded.py -- python scripts/diag_bridge_margin.py",
+ "generation": "g-20261103T132152Z-06a741",
+ "gold_set": "data\\goldset\\gold-v2.json",
+ "gold_set_sha": "069375f8e355e4b9c3b4253e14959532f87e05bc129d5a7a6da39e07f357a108",
+ "config_digest": "e290f49a81df08a52d313cc86a02f8f4a33d18abc91faec7d716ea42538b8459",
+ "elapsed_ms": 26216.8,
+ "n_per_question": 96,
+ "gold_proxy": "候选实体名出现在任一 gold 块正文里（代理口径，非真值）",
+ "calibration": {
+  "n_fit_samples": 31,
+  "mapping": {
+   "schema": "arkrag.bridge_calib/1",
+   "feature_keys": [
+    "raw_margin"
+   ],
+   "monotone_in": "raw_margin",
+   "cost": {
+    "answer": 2,
+    "refuse": 1
+   },
+   "threshold": 0.6666666666666666,
+   "n_samples": 31,
+   "n_excluded_tie": 0,
+   "buckets": [
+    {
+     "key": {
+      "raw_margin": 1
+     },
+     "n": 4,
+     "correct": 4,
+     "p": 0.95,
+     "pool": 0
+    },
+    {
+     "key": {
+      "raw_margin": 2
+     },
+     "n": 11,
+     "correct": 11,
+     "p": 0.95,
+     "pool": 0
+    },
+    {
+     "key": {
+      "raw_margin": 3
+     },
+     "n": 5,
+     "correct": 4,
+     "p": 0.95,
+     "pool": 0
+    },
+    {
+     "key": {
+      "raw_margin": 4
+     },
+     "n": 6,
+     "correct": 6,
+     "p": 1.0,
+     "pool": 1
+    },
+    {
+     "key": {
+      "raw_margin": 5
+     },
+     "n": 2,
+     "correct": 2,
+     "p": 1.0,
+     "pool": 2
+    },
+    {
+     "key": {
+      "raw_margin": 6
+     },
+     "n": 2,
+     "correct": 2,
+     "p": 1.0,
+     "pool": 3
+    },
+    {
+     "key": {
+      "raw_margin": 7
+     },
+     "n": 1,
+     "correct": 1,
+     "p": 1.0,
+     "pool": 4
+    }
+   ]
+  },
+  "bucket_stats": {
+   "0.95": {
+    "n": 20,
+    "gold": 19,
+    "rate": 0.95
+   },
+   "1.0": {
+    "n": 11,
+    "gold": 11,
+    "rate": 1.0
+   }
+  },
+  "threshold": 0.6666666666666666,
+  "calib_roundtrip_ok": true,
+  "calib_path": "E:\\图rag\\data\\bridge_calib.json"
+ },
+ "summary": {
+  "n_questions": 96,
+  "n_ok": 58,
+  "status_counts": {
+   "ok": 58,
+   "not_bridge": 0,
+   "no_grounded_triples": 0,
+   "no_common_neighbor": 38,
+   "no_candidates": 0,
+   "run_error": 0
+  },
+  "unique_only": {
+   "answers": 39,
+   "answers_correct": 37,
+   "rate_of_all": 0.6724,
+   "precision": 0.9487
+  },
+  "top1_by_support": {
+   "correct": 54,
+   "rate": 0.931,
+   "unique_rate": 0.6724,
+   "headroom_pt": 29.31
+  },
+  "margin_dist": {
+   "median": 3.0,
+   "mean": 3.052,
+   "min": 0.0,
+   "max": 11.0,
+   "n_zero": 2
+  },
+  "split_dev": {
+   "n_questions": 57,
+   "n_ok": 31,
+   "status_counts": {
+    "ok": 31,
+    "not_bridge": 0,
+    "no_grounded_triples": 0,
+    "no_common_neighbor": 26,
+    "no_candidates": 0,
+    "run_error": 0
+   },
+   "unique_only": {
+    "answers": 23,
+    "answers_correct": 22,
+    "rate_of_all": 0.7419,
+    "precision": 0.9565
+   },
+   "top1_by_support": {
+    "correct": 30,
+    "rate": 0.9677,
+    "unique_rate": 0.7419,
+    "headroom_pt": 25.81
+   },
+   "margin_dist": {
+    "median": 3.0,
+    "mean": 3.032,
+    "min": 1.0,
+    "max": 7.0,
+    "n_zero": 0
+   }
+  },
+  "split_holdout": {
+   "n_questions": 39,
+   "n_ok": 27,
+   "status_counts": {
+    "ok": 27,
+    "not_bridge": 0,
+    "no_grounded_triples": 0,
+    "no_common_neighbor": 12,
+    "no_candidates": 0,
+    "run_error": 0
+   },
+   "unique_only": {
+    "answers": 16,
+    "answers_correct": 15,
+    "rate_of_all": 0.5926,
+    "precision": 0.9375
+   },
+   "top1_by_support": {
+    "correct": 24,
+    "rate": 0.8889,
+    "unique_rate": 0.5926,
+    "headroom_pt": 33.33
+   },
+   "margin_dist": {
+    "median": 3.0,
+    "mean": 3.074,
+    "min": 0.0,
+    "max": 11.0,
+    "n_zero": 2
+   }
+  },
+  "split_clean": {
+   "n_questions": 24,
+   "n_ok": 19,
+   "status_counts": {
+    "ok": 19,
+    "not_bridge": 0,
+    "no_grounded_triples": 0,
+    "no_common_neighbor": 5,
+    "no_candidates": 0,
+    "run_error": 0
+   },
+   "unique_only": {
+    "answers": 10,
+    "answers_correct": 10,
+    "rate_of_all": 0.5263,
+    "precision": 1.0
+   },
+   "top1_by_support": {
+    "correct": 17,
+    "rate": 0.8947,
+    "unique_rate": 0.5263,
+    "headroom_pt": 36.84
+   },
+   "margin_dist": {
+    "median": 3.0,
+    "mean": 2.789,
+    "min": 0.0,
+    "max": 11.0,
+    "n_zero": 2
+   }
+  }
+ },
+ "per_question": [
+  {
+   "question_id": "q-mh-900002",
+   "split": "holdout",
+   "category": "multihop",
+   "question": "从「凯尔希」出发，经过一个中间实体可以到达「蜜蜡」。这个中间实体叫什么？",
+   "selected_by": "clean,holdout",
+   "n_units": 20,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 3,
+   "features": {
+    "n_cands": 3,
+    "support_top1": 3,
+    "support_top2": 3,
+    "raw_margin": 0
+   },
+   "support_sum_top1": 3.0,
+   "support_sum_top2": 3.0,
+   "raw_margin": 0.0,
+   "top1_is_gold": true,
+   "unique_only_answers": false,
+   "unique_only_correct": false,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "博士",
+     "name": "博士",
+     "support_sum": 3.0,
+     "assert_count": 3,
+     "degree": 6,
+     "n_cands": 3,
+     "raw_margin": 0.0,
+     "is_top1": true,
+     "x_is_gold": true
+    },
+    {
+     "rank": 2,
+     "x": "卡涅利安",
+     "name": "卡涅利安",
+     "support_sum": 3.0,
+     "assert_count": 2,
+     "degree": 4,
+     "n_cands": 3,
+     "raw_margin": 0.0,
+     "is_top1": false,
+     "x_is_gold": false
+    },
+    {
+     "rank": 3,
+     "x": "罗德岛",
+     "name": "罗德岛",
+     "support_sum": 2.0,
+     "assert_count": 1,
+     "degree": 8,
+     "n_cands": 3,
+     "raw_margin": 0.0,
+     "is_top1": false,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-900003",
+   "split": "holdout",
+   "category": "multihop",
+   "question": "从「左乐」出发，经过一个中间实体可以到达「大荒城」。这个中间实体叫什么？",
+   "selected_by": "clean,holdout",
+   "n_units": 23,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 2,
+   "features": {
+    "n_cands": 2,
+    "support_top1": 4,
+    "support_top2": 3,
+    "raw_margin": 1
+   },
+   "support_sum_top1": 4.0,
+   "support_sum_top2": 3.0,
+   "raw_margin": 1.0,
+   "top1_is_gold": false,
+   "unique_only_answers": false,
+   "unique_only_correct": false,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "老乡长",
+     "name": "老乡长",
+     "support_sum": 4.0,
+     "assert_count": 3,
+     "degree": 5,
+     "n_cands": 2,
+     "raw_margin": 1.0,
+     "is_top1": true,
+     "x_is_gold": false
+    },
+    {
+     "rank": 2,
+     "x": "黍",
+     "name": "黍",
+     "support_sum": 3.0,
+     "assert_count": 3,
+     "degree": 7,
+     "n_cands": 2,
+     "raw_margin": 1.0,
+     "is_top1": false,
+     "x_is_gold": false
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-900004",
+   "split": "holdout",
+   "category": "multihop",
+   "question": "已知「达里奥」通过唯一一个中间实体与「德鲁莎」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "clean,holdout",
+   "n_units": 20,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 1,
+   "features": {
+    "n_cands": 1,
+    "support_top1": 4,
+    "support_top2": 0,
+    "raw_margin": 4
+   },
+   "support_sum_top1": 4.0,
+   "support_sum_top2": 0.0,
+   "raw_margin": 4.0,
+   "top1_is_gold": true,
+   "unique_only_answers": true,
+   "unique_only_correct": true,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "艾丽妮",
+     "name": "艾丽妮",
+     "support_sum": 4.0,
+     "assert_count": 3,
+     "degree": 7,
+     "n_cands": 1,
+     "raw_margin": 4.0,
+     "is_top1": true,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-900007",
+   "split": "holdout",
+   "category": "multihop",
+   "question": "从「地下怪医」出发，经过一个中间实体可以到达「老鲤」。这个中间实体叫什么？",
+   "selected_by": "clean,holdout",
+   "n_units": 20,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 2,
+   "features": {
+    "n_cands": 2,
+    "support_top1": 5,
+    "support_top2": 5,
+    "raw_margin": 0
+   },
+   "support_sum_top1": 5.0,
+   "support_sum_top2": 5.0,
+   "raw_margin": 0.0,
+   "top1_is_gold": true,
+   "unique_only_answers": false,
+   "unique_only_correct": false,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "吽",
+     "name": "吽",
+     "support_sum": 5.0,
+     "assert_count": 2,
+     "degree": 4,
+     "n_cands": 2,
+     "raw_margin": 0.0,
+     "is_top1": true,
+     "x_is_gold": true
+    },
+    {
+     "rank": 2,
+     "x": "槐琥",
+     "name": "槐琥",
+     "support_sum": 5.0,
+     "assert_count": 2,
+     "degree": 7,
+     "n_cands": 2,
+     "raw_margin": 0.0,
+     "is_top1": false,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-900011",
+   "split": "holdout",
+   "category": "multihop",
+   "question": "从「星熊」出发，经过一个中间实体可以到达「坚雷」。这个中间实体叫什么？",
+   "selected_by": "clean,holdout",
+   "n_units": 22,
+   "n_gold_chunks": 2,
+   "status": "no_common_neighbor",
+   "samples": [],
+   "tri_size": 82,
+   "neigh_size": 56
+  },
+  {
+   "question_id": "q-mh-900012",
+   "split": "holdout",
+   "category": "multihop",
+   "question": "从「猎蜂」出发，经过一个中间实体可以到达「自治团」。这个中间实体叫什么？",
+   "selected_by": "clean,holdout",
+   "n_units": 20,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 2,
+   "features": {
+    "n_cands": 2,
+    "support_top1": 5,
+    "support_top2": 2,
+    "raw_margin": 3
+   },
+   "support_sum_top1": 5.0,
+   "support_sum_top2": 2.0,
+   "raw_margin": 3.0,
+   "top1_is_gold": true,
+   "unique_only_answers": false,
+   "unique_only_correct": false,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "烈夏",
+     "name": "烈夏",
+     "support_sum": 5.0,
+     "assert_count": 4,
+     "degree": 7,
+     "n_cands": 2,
+     "raw_margin": 3.0,
+     "is_top1": true,
+     "x_is_gold": true
+    },
+    {
+     "rank": 2,
+     "x": "罗德岛",
+     "name": "罗德岛",
+     "support_sum": 2.0,
+     "assert_count": 1,
+     "degree": 4,
+     "n_cands": 2,
+     "raw_margin": 3.0,
+     "is_top1": false,
+     "x_is_gold": false
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-900015",
+   "split": "holdout",
+   "category": "multihop",
+   "question": "从「Medic」出发，经过一个中间实体可以到达「芬」。这个中间实体叫什么？",
+   "selected_by": "clean,holdout",
+   "n_units": 19,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 1,
+   "features": {
+    "n_cands": 1,
+    "support_top1": 2,
+    "support_top2": 0,
+    "raw_margin": 2
+   },
+   "support_sum_top1": 2.0,
+   "support_sum_top2": 0.0,
+   "raw_margin": 2.0,
+   "top1_is_gold": true,
+   "unique_only_answers": true,
+   "unique_only_correct": true,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "罗德岛",
+     "name": "罗德岛",
+     "support_sum": 2.0,
+     "assert_count": 1,
+     "degree": 13,
+     "n_cands": 1,
+     "raw_margin": 2.0,
+     "is_top1": true,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-900016",
+   "split": "holdout",
+   "category": "multihop",
+   "question": "已知「尤卡坦」通过唯一一个中间实体与「莫希」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "clean,holdout",
+   "n_units": 22,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 2,
+   "features": {
+    "n_cands": 2,
+    "support_top1": 13,
+    "support_top2": 2,
+    "raw_margin": 11
+   },
+   "support_sum_top1": 13.0,
+   "support_sum_top2": 2.0,
+   "raw_margin": 11.0,
+   "top1_is_gold": true,
+   "unique_only_answers": false,
+   "unique_only_correct": false,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "休露丝",
+     "name": "休露丝",
+     "support_sum": 13.0,
+     "assert_count": 8,
+     "degree": 8,
+     "n_cands": 2,
+     "raw_margin": 11.0,
+     "is_top1": true,
+     "x_is_gold": true
+    },
+    {
+     "rank": 2,
+     "x": "魏斯",
+     "name": "魏斯",
+     "support_sum": 2.0,
+     "assert_count": 2,
+     "degree": 7,
+     "n_cands": 2,
+     "raw_margin": 11.0,
+     "is_top1": false,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-900017",
+   "split": "holdout",
+   "category": "multihop",
+   "question": "从「董阿伯」出发，经过一个中间实体可以到达「孑」。这个中间实体叫什么？",
+   "selected_by": "clean,holdout",
+   "n_units": 21,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 2,
+   "features": {
+    "n_cands": 2,
+    "support_top1": 5,
+    "support_top2": 3,
+    "raw_margin": 2
+   },
+   "support_sum_top1": 5.0,
+   "support_sum_top2": 3.0,
+   "raw_margin": 2.0,
+   "top1_is_gold": false,
+   "unique_only_answers": false,
+   "unique_only_correct": false,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "鼠王",
+     "name": "鼠王",
+     "support_sum": 5.0,
+     "assert_count": 3,
+     "degree": 6,
+     "n_cands": 2,
+     "raw_margin": 2.0,
+     "is_top1": true,
+     "x_is_gold": false
+    },
+    {
+     "rank": 2,
+     "x": "星熊",
+     "name": "星熊",
+     "support_sum": 3.0,
+     "assert_count": 1,
+     "degree": 11,
+     "n_cands": 2,
+     "raw_margin": 2.0,
+     "is_top1": false,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-900020",
+   "split": "holdout",
+   "category": "multihop",
+   "question": "从「开斯特公爵」出发，经过一个中间实体可以到达「阿德颂」。这个中间实体叫什么？",
+   "selected_by": "clean,holdout",
+   "n_units": 20,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 2,
+   "features": {
+    "n_cands": 2,
+    "support_top1": 5,
+    "support_top2": 4,
+    "raw_margin": 1
+   },
+   "support_sum_top1": 5.0,
+   "support_sum_top2": 4.0,
+   "raw_margin": 1.0,
+   "top1_is_gold": true,
+   "unique_only_answers": false,
+   "unique_only_correct": false,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "恩希欧迪斯",
+     "name": "恩希欧迪斯",
+     "support_sum": 5.0,
+     "assert_count": 2,
+     "degree": 6,
+     "n_cands": 2,
+     "raw_margin": 1.0,
+     "is_top1": true,
+     "x_is_gold": true
+    },
+    {
+     "rank": 2,
+     "x": "蔓珠院",
+     "name": "蔓珠院",
+     "support_sum": 4.0,
+     "assert_count": 4,
+     "degree": 3,
+     "n_cands": 2,
+     "raw_margin": 1.0,
+     "is_top1": false,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-900023",
+   "split": "holdout",
+   "category": "multihop",
+   "question": "从「佩佩」出发，经过一个中间实体可以到达「萨尔贡」。这个中间实体叫什么？",
+   "selected_by": "clean,holdout",
+   "n_units": 20,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 1,
+   "features": {
+    "n_cands": 1,
+    "support_top1": 4,
+    "support_top2": 0,
+    "raw_margin": 4
+   },
+   "support_sum_top1": 4.0,
+   "support_sum_top2": 0.0,
+   "raw_margin": 4.0,
+   "top1_is_gold": true,
+   "unique_only_answers": true,
+   "unique_only_correct": true,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "阿娜特",
+     "name": "阿娜特",
+     "support_sum": 4.0,
+     "assert_count": 3,
+     "degree": 6,
+     "n_cands": 1,
+     "raw_margin": 4.0,
+     "is_top1": true,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-900024",
+   "split": "holdout",
+   "category": "multihop",
+   "question": "从「车尔尼」出发，经过一个中间实体可以到达「赤冬」。这个中间实体叫什么？",
+   "selected_by": "clean,holdout",
+   "n_units": 19,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 1,
+   "features": {
+    "n_cands": 1,
+    "support_top1": 3,
+    "support_top2": 0,
+    "raw_margin": 3
+   },
+   "support_sum_top1": 3.0,
+   "support_sum_top2": 0.0,
+   "raw_margin": 3.0,
+   "top1_is_gold": true,
+   "unique_only_answers": true,
+   "unique_only_correct": true,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "罗德岛",
+     "name": "罗德岛",
+     "support_sum": 3.0,
+     "assert_count": 3,
+     "degree": 5,
+     "n_cands": 1,
+     "raw_margin": 3.0,
+     "is_top1": true,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-900025",
+   "split": "holdout",
+   "category": "multihop",
+   "question": "从「活塞」出发，经过一个中间实体可以到达「近卫局」。这个中间实体叫什么？",
+   "selected_by": "clean,holdout",
+   "n_units": 23,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 1,
+   "features": {
+    "n_cands": 1,
+    "support_top1": 5,
+    "support_top2": 0,
+    "raw_margin": 5
+   },
+   "support_sum_top1": 5.0,
+   "support_sum_top2": 0.0,
+   "raw_margin": 5.0,
+   "top1_is_gold": true,
+   "unique_only_answers": true,
+   "unique_only_correct": true,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "罗德岛",
+     "name": "罗德岛",
+     "support_sum": 5.0,
+     "assert_count": 4,
+     "degree": 15,
+     "n_cands": 1,
+     "raw_margin": 5.0,
+     "is_top1": true,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-900027",
+   "split": "holdout",
+   "category": "multihop",
+   "question": "从「布莉吉」出发，经过一个中间实体可以到达「莫兰」。这个中间实体叫什么？",
+   "selected_by": "clean,holdout",
+   "n_units": 19,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 2,
+   "features": {
+    "n_cands": 2,
+    "support_top1": 5,
+    "support_top2": 4,
+    "raw_margin": 1
+   },
+   "support_sum_top1": 5.0,
+   "support_sum_top2": 4.0,
+   "raw_margin": 1.0,
+   "top1_is_gold": true,
+   "unique_only_answers": false,
+   "unique_only_correct": false,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "苇草",
+     "name": "苇草",
+     "support_sum": 5.0,
+     "assert_count": 2,
+     "degree": 7,
+     "n_cands": 2,
+     "raw_margin": 1.0,
+     "is_top1": true,
+     "x_is_gold": true
+    },
+    {
+     "rank": 2,
+     "x": "艾玛",
+     "name": "艾玛",
+     "support_sum": 4.0,
+     "assert_count": 2,
+     "degree": 2,
+     "n_cands": 2,
+     "raw_margin": 1.0,
+     "is_top1": false,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-900028",
+   "split": "holdout",
+   "category": "multihop",
+   "question": "从「黛柯绮·银币」出发，经过一个中间实体可以到达「哈维尔」。这个中间实体叫什么？",
+   "selected_by": "clean,holdout",
+   "n_units": 20,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 1,
+   "features": {
+    "n_cands": 1,
+    "support_top1": 3,
+    "support_top2": 0,
+    "raw_margin": 3
+   },
+   "support_sum_top1": 3.0,
+   "support_sum_top2": 0.0,
+   "raw_margin": 3.0,
+   "top1_is_gold": true,
+   "unique_only_answers": true,
+   "unique_only_correct": true,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "极境",
+     "name": "极境",
+     "support_sum": 3.0,
+     "assert_count": 1,
+     "degree": 8,
+     "n_cands": 1,
+     "raw_margin": 3.0,
+     "is_top1": true,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-900029",
+   "split": "holdout",
+   "category": "multihop",
+   "question": "已知「米莎」通过唯一一个中间实体与「维特」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "clean,holdout",
+   "n_units": 22,
+   "n_gold_chunks": 2,
+   "status": "no_common_neighbor",
+   "samples": [],
+   "tri_size": 86,
+   "neigh_size": 55
+  },
+  {
+   "question_id": "q-mh-900030",
+   "split": "holdout",
+   "category": "multihop",
+   "question": "从「三角初华」出发，经过一个中间实体可以到达「源石技艺」。这个中间实体叫什么？",
+   "selected_by": "clean,holdout",
+   "n_units": 20,
+   "n_gold_chunks": 2,
+   "status": "no_common_neighbor",
+   "samples": [],
+   "tri_size": 98,
+   "neigh_size": 70
+  },
+  {
+   "question_id": "q-mh-900032",
+   "split": "holdout",
+   "category": "multihop",
+   "question": "已知「罗索」通过唯一一个中间实体与「西西里夫人」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "clean,holdout",
+   "n_units": 18,
+   "n_gold_chunks": 2,
+   "status": "no_common_neighbor",
+   "samples": [],
+   "tri_size": 109,
+   "neigh_size": 52
+  },
+  {
+   "question_id": "q-mh-900035",
+   "split": "holdout",
+   "category": "multihop",
+   "question": "已知「绩」通过唯一一个中间实体与「风絮」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "clean,holdout",
+   "n_units": 19,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 1,
+   "features": {
+    "n_cands": 1,
+    "support_top1": 3,
+    "support_top2": 0,
+    "raw_margin": 3
+   },
+   "support_sum_top1": 3.0,
+   "support_sum_top2": 0.0,
+   "raw_margin": 3.0,
+   "top1_is_gold": true,
+   "unique_only_answers": true,
+   "unique_only_correct": true,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "黍",
+     "name": "黍",
+     "support_sum": 3.0,
+     "assert_count": 3,
+     "degree": 5,
+     "n_cands": 1,
+     "raw_margin": 3.0,
+     "is_top1": true,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-900036",
+   "split": "holdout",
+   "category": "multihop",
+   "question": "已知「赫拉提娅」通过唯一一个中间实体与「布雷奥甘」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "clean,holdout",
+   "n_units": 19,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 2,
+   "features": {
+    "n_cands": 2,
+    "support_top1": 5,
+    "support_top2": 4,
+    "raw_margin": 1
+   },
+   "support_sum_top1": 5.0,
+   "support_sum_top2": 4.0,
+   "raw_margin": 1.0,
+   "top1_is_gold": true,
+   "unique_only_answers": false,
+   "unique_only_correct": false,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "阿戈尔",
+     "name": "阿戈尔",
+     "support_sum": 5.0,
+     "assert_count": 5,
+     "degree": 9,
+     "n_cands": 2,
+     "raw_margin": 1.0,
+     "is_top1": true,
+     "x_is_gold": true
+    },
+    {
+     "rank": 2,
+     "x": "歌蕾蒂娅",
+     "name": "歌蕾蒂娅",
+     "support_sum": 4.0,
+     "assert_count": 3,
+     "degree": 8,
+     "n_cands": 2,
+     "raw_margin": 1.0,
+     "is_top1": false,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-900040",
+   "split": "holdout",
+   "category": "multihop",
+   "question": "已知「亡寒萨满」通过唯一一个中间实体与「乌萨斯」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "clean,holdout",
+   "n_units": 20,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 1,
+   "features": {
+    "n_cands": 1,
+    "support_top1": 4,
+    "support_top2": 0,
+    "raw_margin": 4
+   },
+   "support_sum_top1": 4.0,
+   "support_sum_top2": 0.0,
+   "raw_margin": 4.0,
+   "top1_is_gold": true,
+   "unique_only_answers": true,
+   "unique_only_correct": true,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "寒檀",
+     "name": "寒檀",
+     "support_sum": 4.0,
+     "assert_count": 3,
+     "degree": 13,
+     "n_cands": 1,
+     "raw_margin": 4.0,
+     "is_top1": true,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-900041",
+   "split": "holdout",
+   "category": "multihop",
+   "question": "从「Mon3tr」出发，经过一个中间实体可以到达「芙兰卡」。这个中间实体叫什么？",
+   "selected_by": "clean,holdout",
+   "n_units": 21,
+   "n_gold_chunks": 2,
+   "status": "no_common_neighbor",
+   "samples": [],
+   "tri_size": 96,
+   "neigh_size": 50
+  },
+  {
+   "question_id": "q-mh-900044",
+   "split": "holdout",
+   "category": "multihop",
+   "question": "已知「克洛维希娅」通过唯一一个中间实体与「诺伯特区」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "clean,holdout",
+   "n_units": 19,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 1,
+   "features": {
+    "n_cands": 1,
+    "support_top1": 2,
+    "support_top2": 0,
+    "raw_margin": 2
+   },
+   "support_sum_top1": 2.0,
+   "support_sum_top2": 0.0,
+   "raw_margin": 2.0,
+   "top1_is_gold": true,
+   "unique_only_answers": true,
+   "unique_only_correct": true,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "推进之王",
+     "name": "推进之王",
+     "support_sum": 2.0,
+     "assert_count": 2,
+     "degree": 2,
+     "n_cands": 1,
+     "raw_margin": 2.0,
+     "is_top1": true,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-900048",
+   "split": "holdout",
+   "category": "multihop",
+   "question": "已知「蜜蜡」通过唯一一个中间实体与「阿消」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "clean,holdout",
+   "n_units": 20,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 1,
+   "features": {
+    "n_cands": 1,
+    "support_top1": 3,
+    "support_top2": 0,
+    "raw_margin": 3
+   },
+   "support_sum_top1": 3.0,
+   "support_sum_top2": 0.0,
+   "raw_margin": 3.0,
+   "top1_is_gold": true,
+   "unique_only_answers": true,
+   "unique_only_correct": true,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "罗德岛",
+     "name": "罗德岛",
+     "support_sum": 3.0,
+     "assert_count": 2,
+     "degree": 6,
+     "n_cands": 1,
+     "raw_margin": 3.0,
+     "is_top1": true,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-000001",
+   "split": "dev",
+   "category": "multihop",
+   "question": "已知「云兽」通过唯一一个中间实体与「变形者集群」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "dev",
+   "n_units": 21,
+   "n_gold_chunks": 2,
+   "status": "no_common_neighbor",
+   "samples": [],
+   "tri_size": 65,
+   "neigh_size": 53
+  },
+  {
+   "question_id": "q-mh-000003",
+   "split": "dev",
+   "category": "multihop",
+   "question": "从「凯尔希」出发，经过一个中间实体可以到达「安东尼奥」。这个中间实体叫什么？",
+   "selected_by": "dev",
+   "n_units": 20,
+   "n_gold_chunks": 2,
+   "status": "no_common_neighbor",
+   "samples": [],
+   "tri_size": 96,
+   "neigh_size": 66
+  },
+  {
+   "question_id": "q-mh-000004",
+   "split": "dev",
+   "category": "multihop",
+   "question": "从「厄尔苏拉」出发，经过一个中间实体可以到达「切尔诺伯格」。这个中间实体叫什么？",
+   "selected_by": "dev",
+   "n_units": 19,
+   "n_gold_chunks": 2,
+   "status": "no_common_neighbor",
+   "samples": [],
+   "tri_size": 81,
+   "neigh_size": 50
+  },
+  {
+   "question_id": "q-mh-000005",
+   "split": "dev",
+   "category": "multihop",
+   "question": "从「霜叶」出发，经过一个中间实体可以到达「乔迪」。这个中间实体叫什么？",
+   "selected_by": "dev",
+   "n_units": 23,
+   "n_gold_chunks": 2,
+   "status": "no_common_neighbor",
+   "samples": [],
+   "tri_size": 69,
+   "neigh_size": 40
+  },
+  {
+   "question_id": "q-mh-000006",
+   "split": "dev",
+   "category": "multihop",
+   "question": "从「月见夜」出发，经过一个中间实体可以到达「龙门」。这个中间实体叫什么？",
+   "selected_by": "dev",
+   "n_units": 20,
+   "n_gold_chunks": 2,
+   "status": "no_common_neighbor",
+   "samples": [],
+   "tri_size": 80,
+   "neigh_size": 51
+  },
+  {
+   "question_id": "q-mh-000008",
+   "split": "dev",
+   "category": "multihop",
+   "question": "从「夏栎」出发，经过一个中间实体可以到达「沃伦姆德」。这个中间实体叫什么？",
+   "selected_by": "dev",
+   "n_units": 20,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 1,
+   "features": {
+    "n_cands": 1,
+    "support_top1": 2,
+    "support_top2": 0,
+    "raw_margin": 2
+   },
+   "support_sum_top1": 2.0,
+   "support_sum_top2": 0.0,
+   "raw_margin": 2.0,
+   "top1_is_gold": true,
+   "unique_only_answers": true,
+   "unique_only_correct": true,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "罗德岛",
+     "name": "罗德岛",
+     "support_sum": 2.0,
+     "assert_count": 2,
+     "degree": 7,
+     "n_cands": 1,
+     "raw_margin": 2.0,
+     "is_top1": true,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-000009",
+   "split": "dev",
+   "category": "multihop",
+   "question": "已知「铃兰」通过唯一一个中间实体与「监正会」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "dev",
+   "n_units": 24,
+   "n_gold_chunks": 2,
+   "status": "no_common_neighbor",
+   "samples": [],
+   "tri_size": 70,
+   "neigh_size": 52
+  },
+  {
+   "question_id": "q-mh-000010",
+   "split": "dev",
+   "category": "multihop",
+   "question": "从「Scout」出发，经过一个中间实体可以到达「企鹅物流」。这个中间实体叫什么？",
+   "selected_by": "dev",
+   "n_units": 21,
+   "n_gold_chunks": 2,
+   "status": "no_common_neighbor",
+   "samples": [],
+   "tri_size": 111,
+   "neigh_size": 43
+  },
+  {
+   "question_id": "q-mh-000012",
+   "split": "dev",
+   "category": "multihop",
+   "question": "从「柳德米拉」出发，经过一个中间实体可以到达「妮芙」。这个中间实体叫什么？",
+   "selected_by": "dev",
+   "n_units": 19,
+   "n_gold_chunks": 2,
+   "status": "no_common_neighbor",
+   "samples": [],
+   "tri_size": 59,
+   "neigh_size": 35
+  },
+  {
+   "question_id": "q-mh-000013",
+   "split": "dev",
+   "category": "multihop",
+   "question": "已知「希尔达」通过唯一一个中间实体与「蜜莓」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "dev",
+   "n_units": 20,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 1,
+   "features": {
+    "n_cands": 1,
+    "support_top1": 3,
+    "support_top2": 0,
+    "raw_margin": 3
+   },
+   "support_sum_top1": 3.0,
+   "support_sum_top2": 0.0,
+   "raw_margin": 3.0,
+   "top1_is_gold": true,
+   "unique_only_answers": true,
+   "unique_only_correct": true,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "罗德岛",
+     "name": "罗德岛",
+     "support_sum": 3.0,
+     "assert_count": 3,
+     "degree": 7,
+     "n_cands": 1,
+     "raw_margin": 3.0,
+     "is_top1": true,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-000014",
+   "split": "dev",
+   "category": "multihop",
+   "question": "从「莱欧斯」出发，经过一个中间实体可以到达「赤霄」。这个中间实体叫什么？",
+   "selected_by": "dev",
+   "n_units": 21,
+   "n_gold_chunks": 2,
+   "status": "no_common_neighbor",
+   "samples": [],
+   "tri_size": 58,
+   "neigh_size": 26
+  },
+  {
+   "question_id": "q-mh-000015",
+   "split": "dev",
+   "category": "multihop",
+   "question": "已知「嘉维尔」通过唯一一个中间实体与「W」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "dev",
+   "n_units": 20,
+   "n_gold_chunks": 2,
+   "status": "no_common_neighbor",
+   "samples": [],
+   "tri_size": 104,
+   "neigh_size": 51
+  },
+  {
+   "question_id": "q-mh-000016",
+   "split": "dev",
+   "category": "multihop",
+   "question": "已知「慎楼」通过唯一一个中间实体与「太傅」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "dev",
+   "n_units": 20,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 2,
+   "features": {
+    "n_cands": 2,
+    "support_top1": 7,
+    "support_top2": 4,
+    "raw_margin": 3
+   },
+   "support_sum_top1": 7.0,
+   "support_sum_top2": 4.0,
+   "raw_margin": 3.0,
+   "top1_is_gold": true,
+   "unique_only_answers": false,
+   "unique_only_correct": false,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "梁洵",
+     "name": "梁洵",
+     "support_sum": 7.0,
+     "assert_count": 3,
+     "degree": 8,
+     "n_cands": 2,
+     "raw_margin": 3.0,
+     "is_top1": true,
+     "x_is_gold": true
+    },
+    {
+     "rank": 2,
+     "x": "太合",
+     "name": "太合",
+     "support_sum": 4.0,
+     "assert_count": 2,
+     "degree": 8,
+     "n_cands": 2,
+     "raw_margin": 3.0,
+     "is_top1": false,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-000017",
+   "split": "dev",
+   "category": "multihop",
+   "question": "已知「熔泉」通过唯一一个中间实体与「Friston-3」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "dev",
+   "n_units": 19,
+   "n_gold_chunks": 2,
+   "status": "no_common_neighbor",
+   "samples": [],
+   "tri_size": 74,
+   "neigh_size": 58
+  },
+  {
+   "question_id": "q-mh-000018",
+   "split": "dev",
+   "category": "multihop",
+   "question": "从「岳羽由加莉」出发，经过一个中间实体可以到达「思绪」。这个中间实体叫什么？",
+   "selected_by": "dev",
+   "n_units": 19,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 1,
+   "features": {
+    "n_cands": 1,
+    "support_top1": 6,
+    "support_top2": 0,
+    "raw_margin": 6
+   },
+   "support_sum_top1": 6.0,
+   "support_sum_top2": 0.0,
+   "raw_margin": 6.0,
+   "top1_is_gold": true,
+   "unique_only_answers": true,
+   "unique_only_correct": true,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "阿米娅",
+     "name": "阿米娅",
+     "support_sum": 6.0,
+     "assert_count": 3,
+     "degree": 8,
+     "n_cands": 1,
+     "raw_margin": 6.0,
+     "is_top1": true,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-000020",
+   "split": "dev",
+   "category": "multihop",
+   "question": "从「雷尔金」出发，经过一个中间实体可以到达「高卢」。这个中间实体叫什么？",
+   "selected_by": "dev",
+   "n_units": 18,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 1,
+   "features": {
+    "n_cands": 1,
+    "support_top1": 2,
+    "support_top2": 0,
+    "raw_margin": 2
+   },
+   "support_sum_top1": 2.0,
+   "support_sum_top2": 0.0,
+   "raw_margin": 2.0,
+   "top1_is_gold": true,
+   "unique_only_answers": true,
+   "unique_only_correct": true,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "乌萨斯",
+     "name": "乌萨斯",
+     "support_sum": 2.0,
+     "assert_count": 2,
+     "degree": 4,
+     "n_cands": 1,
+     "raw_margin": 2.0,
+     "is_top1": true,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-000021",
+   "split": "dev",
+   "category": "multihop",
+   "question": "已知「吽」通过唯一一个中间实体与「六十七」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "dev",
+   "n_units": 20,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 1,
+   "features": {
+    "n_cands": 1,
+    "support_top1": 4,
+    "support_top2": 0,
+    "raw_margin": 4
+   },
+   "support_sum_top1": 4.0,
+   "support_sum_top2": 0.0,
+   "raw_margin": 4.0,
+   "top1_is_gold": true,
+   "unique_only_answers": true,
+   "unique_only_correct": true,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "小黑",
+     "name": "小黑",
+     "support_sum": 4.0,
+     "assert_count": 2,
+     "degree": 9,
+     "n_cands": 1,
+     "raw_margin": 4.0,
+     "is_top1": true,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-000024",
+   "split": "dev",
+   "category": "multihop",
+   "question": "已知「布克」通过唯一一个中间实体与「多索雷斯」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "dev",
+   "n_units": 18,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 1,
+   "features": {
+    "n_cands": 1,
+    "support_top1": 7,
+    "support_top2": 0,
+    "raw_margin": 7
+   },
+   "support_sum_top1": 7.0,
+   "support_sum_top2": 0.0,
+   "raw_margin": 7.0,
+   "top1_is_gold": true,
+   "unique_only_answers": true,
+   "unique_only_correct": true,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "坎黛拉",
+     "name": "坎黛拉",
+     "support_sum": 7.0,
+     "assert_count": 7,
+     "degree": 7,
+     "n_cands": 1,
+     "raw_margin": 7.0,
+     "is_top1": true,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-000025",
+   "split": "dev",
+   "category": "multihop",
+   "question": "已知「卡珊卓拉」通过唯一一个中间实体与「米奥」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "dev",
+   "n_units": 20,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 1,
+   "features": {
+    "n_cands": 1,
+    "support_top1": 5,
+    "support_top2": 0,
+    "raw_margin": 5
+   },
+   "support_sum_top1": 5.0,
+   "support_sum_top2": 0.0,
+   "raw_margin": 5.0,
+   "top1_is_gold": true,
+   "unique_only_answers": true,
+   "unique_only_correct": true,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "缇缇",
+     "name": "缇缇",
+     "support_sum": 5.0,
+     "assert_count": 2,
+     "degree": 9,
+     "n_cands": 1,
+     "raw_margin": 5.0,
+     "is_top1": true,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-000026",
+   "split": "dev",
+   "category": "multihop",
+   "question": "从「禾生」出发，经过一个中间实体可以到达「神农」。这个中间实体叫什么？",
+   "selected_by": "dev",
+   "n_units": 20,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 1,
+   "features": {
+    "n_cands": 1,
+    "support_top1": 4,
+    "support_top2": 0,
+    "raw_margin": 4
+   },
+   "support_sum_top1": 4.0,
+   "support_sum_top2": 0.0,
+   "raw_margin": 4.0,
+   "top1_is_gold": true,
+   "unique_only_answers": true,
+   "unique_only_correct": true,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "黍",
+     "name": "黍",
+     "support_sum": 4.0,
+     "assert_count": 2,
+     "degree": 5,
+     "n_cands": 1,
+     "raw_margin": 4.0,
+     "is_top1": true,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-000029",
+   "split": "dev",
+   "category": "multihop",
+   "question": "已知「左乐」通过唯一一个中间实体与「雷姆必拓」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "dev",
+   "n_units": 24,
+   "n_gold_chunks": 2,
+   "status": "no_common_neighbor",
+   "samples": [],
+   "tri_size": 93,
+   "neigh_size": 60
+  },
+  {
+   "question_id": "q-mh-000033",
+   "split": "dev",
+   "category": "multihop",
+   "question": "已知「柳德米拉」通过唯一一个中间实体与「德拉克」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "dev",
+   "n_units": 20,
+   "n_gold_chunks": 2,
+   "status": "no_common_neighbor",
+   "samples": [],
+   "tri_size": 76,
+   "neigh_size": 49
+  },
+  {
+   "question_id": "q-mh-000034",
+   "split": "dev",
+   "category": "multihop",
+   "question": "从「薇尔丽芙」出发，经过一个中间实体可以到达「龙门」。这个中间实体叫什么？",
+   "selected_by": "dev",
+   "n_units": 19,
+   "n_gold_chunks": 2,
+   "status": "no_common_neighbor",
+   "samples": [],
+   "tri_size": 102,
+   "neigh_size": 66
+  },
+  {
+   "question_id": "q-mh-000035",
+   "split": "dev",
+   "category": "multihop",
+   "question": "已知「老船夫」通过唯一一个中间实体与「林雨霞」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "dev",
+   "n_units": 20,
+   "n_gold_chunks": 2,
+   "status": "no_common_neighbor",
+   "samples": [],
+   "tri_size": 74,
+   "neigh_size": 45
+  },
+  {
+   "question_id": "q-mh-000036",
+   "split": "dev",
+   "category": "multihop",
+   "question": "从「艾丝黛尔」出发，经过一个中间实体可以到达「龙门贫民区」。这个中间实体叫什么？",
+   "selected_by": "dev",
+   "n_units": 21,
+   "n_gold_chunks": 2,
+   "status": "no_common_neighbor",
+   "samples": [],
+   "tri_size": 73,
+   "neigh_size": 42
+  },
+  {
+   "question_id": "q-mh-000037",
+   "split": "dev",
+   "category": "multihop",
+   "question": "从「莉莉娅」出发，经过一个中间实体可以到达「切尔诺伯格」。这个中间实体叫什么？",
+   "selected_by": "dev",
+   "n_units": 22,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 1,
+   "features": {
+    "n_cands": 1,
+    "support_top1": 5,
+    "support_top2": 0,
+    "raw_margin": 5
+   },
+   "support_sum_top1": 5.0,
+   "support_sum_top2": 0.0,
+   "raw_margin": 5.0,
+   "top1_is_gold": true,
+   "unique_only_answers": true,
+   "unique_only_correct": true,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "凯尔希",
+     "name": "凯尔希",
+     "support_sum": 5.0,
+     "assert_count": 4,
+     "degree": 11,
+     "n_cands": 1,
+     "raw_margin": 5.0,
+     "is_top1": true,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-000038",
+   "split": "dev",
+   "category": "multihop",
+   "question": "从「格拉尼」出发，经过一个中间实体可以到达「沃伦姆德」。这个中间实体叫什么？",
+   "selected_by": "dev",
+   "n_units": 24,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 1,
+   "features": {
+    "n_cands": 1,
+    "support_top1": 2,
+    "support_top2": 0,
+    "raw_margin": 2
+   },
+   "support_sum_top1": 2.0,
+   "support_sum_top2": 0.0,
+   "raw_margin": 2.0,
+   "top1_is_gold": true,
+   "unique_only_answers": true,
+   "unique_only_correct": true,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "罗德岛",
+     "name": "罗德岛",
+     "support_sum": 2.0,
+     "assert_count": 2,
+     "degree": 4,
+     "n_cands": 1,
+     "raw_margin": 2.0,
+     "is_top1": true,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-000041",
+   "split": "dev",
+   "category": "multihop",
+   "question": "已知「生态园」通过唯一一个中间实体与「生态科」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "dev",
+   "n_units": 20,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 1,
+   "features": {
+    "n_cands": 1,
+    "support_top1": 2,
+    "support_top2": 0,
+    "raw_margin": 2
+   },
+   "support_sum_top1": 2.0,
+   "support_sum_top2": 0.0,
+   "raw_margin": 2.0,
+   "top1_is_gold": true,
+   "unique_only_answers": true,
+   "unique_only_correct": true,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "缪尔赛思",
+     "name": "缪尔赛思",
+     "support_sum": 2.0,
+     "assert_count": 2,
+     "degree": 14,
+     "n_cands": 1,
+     "raw_margin": 2.0,
+     "is_top1": true,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-000042",
+   "split": "dev",
+   "category": "multihop",
+   "question": "已知「特蕾西娅」通过唯一一个中间实体与「萨尔贡」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "dev",
+   "n_units": 19,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 1,
+   "features": {
+    "n_cands": 1,
+    "support_top1": 3,
+    "support_top2": 0,
+    "raw_margin": 3
+   },
+   "support_sum_top1": 3.0,
+   "support_sum_top2": 0.0,
+   "raw_margin": 3.0,
+   "top1_is_gold": false,
+   "unique_only_answers": true,
+   "unique_only_correct": false,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "巴别塔",
+     "name": "巴别塔",
+     "support_sum": 3.0,
+     "assert_count": 3,
+     "degree": 7,
+     "n_cands": 1,
+     "raw_margin": 3.0,
+     "is_top1": true,
+     "x_is_gold": false
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-000043",
+   "split": "dev",
+   "category": "multihop",
+   "question": "已知「Guard」通过唯一一个中间实体与「文明的存续」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "dev",
+   "n_units": 21,
+   "n_gold_chunks": 2,
+   "status": "no_common_neighbor",
+   "samples": [],
+   "tri_size": 68,
+   "neigh_size": 40
+  },
+  {
+   "question_id": "q-mh-000044",
+   "split": "dev",
+   "category": "multihop",
+   "question": "从「莫不服」出发，经过一个中间实体可以到达「温蒂」。这个中间实体叫什么？",
+   "selected_by": "dev",
+   "n_units": 21,
+   "n_gold_chunks": 2,
+   "status": "no_common_neighbor",
+   "samples": [],
+   "tri_size": 81,
+   "neigh_size": 47
+  },
+  {
+   "question_id": "q-mh-000045",
+   "split": "dev",
+   "category": "multihop",
+   "question": "从「莱伊」出发，经过一个中间实体可以到达「灰礼帽」。这个中间实体叫什么？",
+   "selected_by": "dev",
+   "n_units": 22,
+   "n_gold_chunks": 2,
+   "status": "no_common_neighbor",
+   "samples": [],
+   "tri_size": 77,
+   "neigh_size": 40
+  },
+  {
+   "question_id": "q-mh-000047",
+   "split": "dev",
+   "category": "multihop",
+   "question": "从「弥利亚留姆」出发，经过一个中间实体可以到达「信标塔」。这个中间实体叫什么？",
+   "selected_by": "dev",
+   "n_units": 19,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 3,
+   "features": {
+    "n_cands": 3,
+    "support_top1": 5,
+    "support_top2": 2,
+    "raw_margin": 3
+   },
+   "support_sum_top1": 5.0,
+   "support_sum_top2": 2.0,
+   "raw_margin": 3.0,
+   "top1_is_gold": true,
+   "unique_only_answers": false,
+   "unique_only_correct": false,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "海嗣",
+     "name": "海嗣",
+     "support_sum": 5.0,
+     "assert_count": 5,
+     "degree": 13,
+     "n_cands": 3,
+     "raw_margin": 3.0,
+     "is_top1": true,
+     "x_is_gold": true
+    },
+    {
+     "rank": 2,
+     "x": "布雷奥甘",
+     "name": "布雷奥甘",
+     "support_sum": 2.0,
+     "assert_count": 2,
+     "degree": 2,
+     "n_cands": 3,
+     "raw_margin": 3.0,
+     "is_top1": false,
+     "x_is_gold": false
+    },
+    {
+     "rank": 3,
+     "x": "乌尔比安",
+     "name": "乌尔比安",
+     "support_sum": 2.0,
+     "assert_count": 2,
+     "degree": 7,
+     "n_cands": 3,
+     "raw_margin": 3.0,
+     "is_top1": false,
+     "x_is_gold": false
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-900001",
+   "split": "dev",
+   "category": "multihop",
+   "question": "已知「九」通过唯一一个中间实体与「坎黛拉」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "dev",
+   "n_units": 19,
+   "n_gold_chunks": 2,
+   "status": "no_common_neighbor",
+   "samples": [],
+   "tri_size": 60,
+   "neigh_size": 30
+  },
+  {
+   "question_id": "q-mh-900005",
+   "split": "dev",
+   "category": "multihop",
+   "question": "从「华法琳」出发，经过一个中间实体可以到达「黑冠」。这个中间实体叫什么？",
+   "selected_by": "dev",
+   "n_units": 21,
+   "n_gold_chunks": 2,
+   "status": "no_common_neighbor",
+   "samples": [],
+   "tri_size": 77,
+   "neigh_size": 53
+  },
+  {
+   "question_id": "q-mh-900006",
+   "split": "dev",
+   "category": "multihop",
+   "question": "从「杜宾」出发，经过一个中间实体可以到达「佐菲娅」。这个中间实体叫什么？",
+   "selected_by": "dev",
+   "n_units": 22,
+   "n_gold_chunks": 2,
+   "status": "no_common_neighbor",
+   "samples": [],
+   "tri_size": 51,
+   "neigh_size": 31
+  },
+  {
+   "question_id": "q-mh-900008",
+   "split": "dev",
+   "category": "multihop",
+   "question": "从「陈昭芊」出发，经过一个中间实体可以到达「诗怀雅」。这个中间实体叫什么？",
+   "selected_by": "dev",
+   "n_units": 21,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 1,
+   "features": {
+    "n_cands": 1,
+    "support_top1": 4,
+    "support_top2": 0,
+    "raw_margin": 4
+   },
+   "support_sum_top1": 4.0,
+   "support_sum_top2": 0.0,
+   "raw_margin": 4.0,
+   "top1_is_gold": true,
+   "unique_only_answers": true,
+   "unique_only_correct": true,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "陈",
+     "name": "陈",
+     "support_sum": 4.0,
+     "assert_count": 2,
+     "degree": 17,
+     "n_cands": 1,
+     "raw_margin": 4.0,
+     "is_top1": true,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-900009",
+   "split": "dev",
+   "category": "multihop",
+   "question": "从「鲁斯」出发，经过一个中间实体可以到达「塞斯克」。这个中间实体叫什么？",
+   "selected_by": "dev",
+   "n_units": 20,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 4,
+   "features": {
+    "n_cands": 4,
+    "support_top1": 5,
+    "support_top2": 4,
+    "raw_margin": 1
+   },
+   "support_sum_top1": 5.0,
+   "support_sum_top2": 4.0,
+   "raw_margin": 1.0,
+   "top1_is_gold": true,
+   "unique_only_answers": false,
+   "unique_only_correct": false,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "伊西多",
+     "name": "伊西多",
+     "support_sum": 5.0,
+     "assert_count": 2,
+     "degree": 7,
+     "n_cands": 4,
+     "raw_margin": 1.0,
+     "is_top1": true,
+     "x_is_gold": true
+    },
+    {
+     "rank": 2,
+     "x": "胡安娜",
+     "name": "胡安娜",
+     "support_sum": 4.0,
+     "assert_count": 3,
+     "degree": 11,
+     "n_cands": 4,
+     "raw_margin": 1.0,
+     "is_top1": false,
+     "x_is_gold": true
+    },
+    {
+     "rank": 3,
+     "x": "哈维尔",
+     "name": "哈维尔",
+     "support_sum": 4.0,
+     "assert_count": 2,
+     "degree": 12,
+     "n_cands": 4,
+     "raw_margin": 1.0,
+     "is_top1": false,
+     "x_is_gold": true
+    },
+    {
+     "rank": 4,
+     "x": "蒂奇",
+     "name": "蒂奇",
+     "support_sum": 3.0,
+     "assert_count": 1,
+     "degree": 4,
+     "n_cands": 4,
+     "raw_margin": 1.0,
+     "is_top1": false,
+     "x_is_gold": false
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-900010",
+   "split": "dev",
+   "category": "multihop",
+   "question": "已知「福尔图娜」通过唯一一个中间实体与「斯特凡诺」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "dev",
+   "n_units": 20,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 4,
+   "features": {
+    "n_cands": 4,
+    "support_top1": 4,
+    "support_top2": 3,
+    "raw_margin": 1
+   },
+   "support_sum_top1": 4.0,
+   "support_sum_top2": 3.0,
+   "raw_margin": 1.0,
+   "top1_is_gold": true,
+   "unique_only_answers": false,
+   "unique_only_correct": false,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "克莱芒",
+     "name": "克莱芒",
+     "support_sum": 4.0,
+     "assert_count": 2,
+     "degree": 6,
+     "n_cands": 4,
+     "raw_margin": 1.0,
+     "is_top1": true,
+     "x_is_gold": true
+    },
+    {
+     "rank": 2,
+     "x": "里凯莱",
+     "name": "里凯莱",
+     "support_sum": 3.0,
+     "assert_count": 1,
+     "degree": 7,
+     "n_cands": 4,
+     "raw_margin": 1.0,
+     "is_top1": false,
+     "x_is_gold": true
+    },
+    {
+     "rank": 3,
+     "x": "拉特兰",
+     "name": "拉特兰",
+     "support_sum": 2.0,
+     "assert_count": 2,
+     "degree": 3,
+     "n_cands": 4,
+     "raw_margin": 1.0,
+     "is_top1": false,
+     "x_is_gold": true
+    },
+    {
+     "rank": 4,
+     "x": "安布罗修修道院",
+     "name": "安布罗修修道院",
+     "support_sum": 2.0,
+     "assert_count": 2,
+     "degree": 6,
+     "n_cands": 4,
+     "raw_margin": 1.0,
+     "is_top1": false,
+     "x_is_gold": false
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-900013",
+   "split": "dev",
+   "category": "multihop",
+   "question": "从「雷蛇」出发，经过一个中间实体可以到达「早露」。这个中间实体叫什么？",
+   "selected_by": "dev",
+   "n_units": 21,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 1,
+   "features": {
+    "n_cands": 1,
+    "support_top1": 2,
+    "support_top2": 0,
+    "raw_margin": 2
+   },
+   "support_sum_top1": 2.0,
+   "support_sum_top2": 0.0,
+   "raw_margin": 2.0,
+   "top1_is_gold": true,
+   "unique_only_answers": true,
+   "unique_only_correct": true,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "罗德岛",
+     "name": "罗德岛",
+     "support_sum": 2.0,
+     "assert_count": 1,
+     "degree": 5,
+     "n_cands": 1,
+     "raw_margin": 2.0,
+     "is_top1": true,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-900014",
+   "split": "dev",
+   "category": "multihop",
+   "question": "从「阿玛丽」出发，经过一个中间实体可以到达「里凯莱」。这个中间实体叫什么？",
+   "selected_by": "dev",
+   "n_units": 20,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 1,
+   "features": {
+    "n_cands": 1,
+    "support_top1": 4,
+    "support_top2": 0,
+    "raw_margin": 4
+   },
+   "support_sum_top1": 4.0,
+   "support_sum_top2": 0.0,
+   "raw_margin": 4.0,
+   "top1_is_gold": true,
+   "unique_only_answers": true,
+   "unique_only_correct": true,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "斯普莉雅",
+     "name": "斯普莉雅",
+     "support_sum": 4.0,
+     "assert_count": 1,
+     "degree": 8,
+     "n_cands": 1,
+     "raw_margin": 4.0,
+     "is_top1": true,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-900018",
+   "split": "dev",
+   "category": "multihop",
+   "question": "从「哈莉」出发，经过一个中间实体可以到达「汐斯塔火山」。这个中间实体叫什么？",
+   "selected_by": "dev",
+   "n_units": 19,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 2,
+   "features": {
+    "n_cands": 2,
+    "support_top1": 5,
+    "support_top2": 3,
+    "raw_margin": 2
+   },
+   "support_sum_top1": 5.0,
+   "support_sum_top2": 3.0,
+   "raw_margin": 2.0,
+   "top1_is_gold": true,
+   "unique_only_answers": false,
+   "unique_only_correct": false,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "埃尼斯",
+     "name": "埃尼斯",
+     "support_sum": 5.0,
+     "assert_count": 3,
+     "degree": 10,
+     "n_cands": 2,
+     "raw_margin": 2.0,
+     "is_top1": true,
+     "x_is_gold": true
+    },
+    {
+     "rank": 2,
+     "x": "阿黛尔",
+     "name": "阿黛尔",
+     "support_sum": 3.0,
+     "assert_count": 2,
+     "degree": 12,
+     "n_cands": 2,
+     "raw_margin": 2.0,
+     "is_top1": false,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-900019",
+   "split": "dev",
+   "category": "multihop",
+   "question": "从「潘乔」出发，经过一个中间实体可以到达「天镜阁」。这个中间实体叫什么？",
+   "selected_by": "dev",
+   "n_units": 20,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 1,
+   "features": {
+    "n_cands": 1,
+    "support_top1": 2,
+    "support_top2": 0,
+    "raw_margin": 2
+   },
+   "support_sum_top1": 2.0,
+   "support_sum_top2": 0.0,
+   "raw_margin": 2.0,
+   "top1_is_gold": true,
+   "unique_only_answers": true,
+   "unique_only_correct": true,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "陈",
+     "name": "陈",
+     "support_sum": 2.0,
+     "assert_count": 2,
+     "degree": 9,
+     "n_cands": 1,
+     "raw_margin": 2.0,
+     "is_top1": true,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-900021",
+   "split": "dev",
+   "category": "multihop",
+   "question": "已知「苏茜」通过唯一一个中间实体与「特里蒙」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "dev",
+   "n_units": 19,
+   "n_gold_chunks": 2,
+   "status": "no_common_neighbor",
+   "samples": [],
+   "tri_size": 82,
+   "neigh_size": 44
+  },
+  {
+   "question_id": "q-mh-900022",
+   "split": "dev",
+   "category": "multihop",
+   "question": "从「萨尔瓦多」出发，经过一个中间实体可以到达「瓦列里奥」。这个中间实体叫什么？",
+   "selected_by": "dev",
+   "n_units": 18,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 2,
+   "features": {
+    "n_cands": 2,
+    "support_top1": 7,
+    "support_top2": 6,
+    "raw_margin": 1
+   },
+   "support_sum_top1": 7.0,
+   "support_sum_top2": 6.0,
+   "raw_margin": 1.0,
+   "top1_is_gold": true,
+   "unique_only_answers": false,
+   "unique_only_correct": false,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "特菲",
+     "name": "特菲",
+     "support_sum": 7.0,
+     "assert_count": 4,
+     "degree": 11,
+     "n_cands": 2,
+     "raw_margin": 1.0,
+     "is_top1": true,
+     "x_is_gold": true
+    },
+    {
+     "rank": 2,
+     "x": "圣徒卡门",
+     "name": "圣徒卡门",
+     "support_sum": 6.0,
+     "assert_count": 5,
+     "degree": 6,
+     "n_cands": 2,
+     "raw_margin": 1.0,
+     "is_top1": false,
+     "x_is_gold": false
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-900026",
+   "split": "dev",
+   "category": "multihop",
+   "question": "已知「预言家」通过唯一一个中间实体与「文森特伯爵」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "dev",
+   "n_units": 19,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 1,
+   "features": {
+    "n_cands": 1,
+    "support_top1": 6,
+    "support_top2": 0,
+    "raw_margin": 6
+   },
+   "support_sum_top1": 6.0,
+   "support_sum_top2": 0.0,
+   "raw_margin": 6.0,
+   "top1_is_gold": true,
+   "unique_only_answers": true,
+   "unique_only_correct": true,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "凯尔希",
+     "name": "凯尔希",
+     "support_sum": 6.0,
+     "assert_count": 3,
+     "degree": 9,
+     "n_cands": 1,
+     "raw_margin": 6.0,
+     "is_top1": true,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-900031",
+   "split": "dev",
+   "category": "multihop",
+   "question": "从「维多利亚」出发，经过一个中间实体可以到达「海嗣」。这个中间实体叫什么？",
+   "selected_by": "dev",
+   "n_units": 21,
+   "n_gold_chunks": 2,
+   "status": "no_common_neighbor",
+   "samples": [],
+   "tri_size": 104,
+   "neigh_size": 67
+  },
+  {
+   "question_id": "q-mh-900033",
+   "split": "dev",
+   "category": "multihop",
+   "question": "已知「铁斋」通过唯一一个中间实体与「神社」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "dev",
+   "n_units": 20,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 3,
+   "features": {
+    "n_cands": 3,
+    "support_top1": 5,
+    "support_top2": 3,
+    "raw_margin": 2
+   },
+   "support_sum_top1": 5.0,
+   "support_sum_top2": 3.0,
+   "raw_margin": 2.0,
+   "top1_is_gold": true,
+   "unique_only_answers": false,
+   "unique_only_correct": false,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "星熊",
+     "name": "星熊",
+     "support_sum": 5.0,
+     "assert_count": 4,
+     "degree": 17,
+     "n_cands": 3,
+     "raw_margin": 2.0,
+     "is_top1": true,
+     "x_is_gold": true
+    },
+    {
+     "rank": 2,
+     "x": "三船",
+     "name": "三船",
+     "support_sum": 3.0,
+     "assert_count": 3,
+     "degree": 16,
+     "n_cands": 3,
+     "raw_margin": 2.0,
+     "is_top1": false,
+     "x_is_gold": true
+    },
+    {
+     "rank": 3,
+     "x": "吉星",
+     "name": "吉星",
+     "support_sum": 2.0,
+     "assert_count": 2,
+     "degree": 4,
+     "n_cands": 3,
+     "raw_margin": 2.0,
+     "is_top1": false,
+     "x_is_gold": false
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-900034",
+   "split": "dev",
+   "category": "multihop",
+   "question": "从「暴行」出发，经过一个中间实体可以到达「石棺」。这个中间实体叫什么？",
+   "selected_by": "dev",
+   "n_units": 19,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 1,
+   "features": {
+    "n_cands": 1,
+    "support_top1": 2,
+    "support_top2": 0,
+    "raw_margin": 2
+   },
+   "support_sum_top1": 2.0,
+   "support_sum_top2": 0.0,
+   "raw_margin": 2.0,
+   "top1_is_gold": true,
+   "unique_only_answers": true,
+   "unique_only_correct": true,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "凯尔希",
+     "name": "凯尔希",
+     "support_sum": 2.0,
+     "assert_count": 2,
+     "degree": 7,
+     "n_cands": 1,
+     "raw_margin": 2.0,
+     "is_top1": true,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-900037",
+   "split": "dev",
+   "category": "multihop",
+   "question": "从「温蒂」出发，经过一个中间实体可以到达「近卫局」。这个中间实体叫什么？",
+   "selected_by": "dev",
+   "n_units": 22,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 1,
+   "features": {
+    "n_cands": 1,
+    "support_top1": 4,
+    "support_top2": 0,
+    "raw_margin": 4
+   },
+   "support_sum_top1": 4.0,
+   "support_sum_top2": 0.0,
+   "raw_margin": 4.0,
+   "top1_is_gold": true,
+   "unique_only_answers": true,
+   "unique_only_correct": true,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "罗德岛",
+     "name": "罗德岛",
+     "support_sum": 4.0,
+     "assert_count": 4,
+     "degree": 7,
+     "n_cands": 1,
+     "raw_margin": 4.0,
+     "is_top1": true,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-900038",
+   "split": "dev",
+   "category": "multihop",
+   "question": "已知「守院人」通过唯一一个中间实体与「玻利瓦尔」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "dev",
+   "n_units": 18,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 1,
+   "features": {
+    "n_cands": 1,
+    "support_top1": 3,
+    "support_top2": 0,
+    "raw_margin": 3
+   },
+   "support_sum_top1": 3.0,
+   "support_sum_top2": 0.0,
+   "raw_margin": 3.0,
+   "top1_is_gold": true,
+   "unique_only_answers": true,
+   "unique_only_correct": true,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "杜宾",
+     "name": "杜宾",
+     "support_sum": 3.0,
+     "assert_count": 2,
+     "degree": 6,
+     "n_cands": 1,
+     "raw_margin": 3.0,
+     "is_top1": true,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-900039",
+   "split": "dev",
+   "category": "multihop",
+   "question": "已知「飞空艇的“幽灵”」通过唯一一个中间实体与「Logos」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "dev",
+   "n_units": 22,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 1,
+   "features": {
+    "n_cands": 1,
+    "support_top1": 4,
+    "support_top2": 0,
+    "raw_margin": 4
+   },
+   "support_sum_top1": 4.0,
+   "support_sum_top2": 0.0,
+   "raw_margin": 4.0,
+   "top1_is_gold": true,
+   "unique_only_answers": true,
+   "unique_only_correct": true,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "阿米娅",
+     "name": "阿米娅",
+     "support_sum": 4.0,
+     "assert_count": 2,
+     "degree": 10,
+     "n_cands": 1,
+     "raw_margin": 4.0,
+     "is_top1": true,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-900042",
+   "split": "dev",
+   "category": "multihop",
+   "question": "已知「洛肯」通过唯一一个中间实体与「镇痛剂」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "dev",
+   "n_units": 19,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 1,
+   "features": {
+    "n_cands": 1,
+    "support_top1": 2,
+    "support_top2": 0,
+    "raw_margin": 2
+   },
+   "support_sum_top1": 2.0,
+   "support_sum_top2": 0.0,
+   "raw_margin": 2.0,
+   "top1_is_gold": true,
+   "unique_only_answers": true,
+   "unique_only_correct": true,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "罗德岛",
+     "name": "罗德岛",
+     "support_sum": 2.0,
+     "assert_count": 2,
+     "degree": 7,
+     "n_cands": 1,
+     "raw_margin": 2.0,
+     "is_top1": true,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-900043",
+   "split": "dev",
+   "category": "multihop",
+   "question": "已知「贝尔德」通过唯一一个中间实体与「帕特尔」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "dev",
+   "n_units": 20,
+   "n_gold_chunks": 2,
+   "status": "no_common_neighbor",
+   "samples": [],
+   "tri_size": 92,
+   "neigh_size": 49
+  },
+  {
+   "question_id": "q-mh-900045",
+   "split": "dev",
+   "category": "multihop",
+   "question": "从「香草」出发，经过一个中间实体可以到达「伦蒂尼姆」。这个中间实体叫什么？",
+   "selected_by": "dev",
+   "n_units": 18,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 1,
+   "features": {
+    "n_cands": 1,
+    "support_top1": 2,
+    "support_top2": 0,
+    "raw_margin": 2
+   },
+   "support_sum_top1": 2.0,
+   "support_sum_top2": 0.0,
+   "raw_margin": 2.0,
+   "top1_is_gold": true,
+   "unique_only_answers": true,
+   "unique_only_correct": true,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "罗德岛",
+     "name": "罗德岛",
+     "support_sum": 2.0,
+     "assert_count": 2,
+     "degree": 6,
+     "n_cands": 1,
+     "raw_margin": 2.0,
+     "is_top1": true,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-900046",
+   "split": "dev",
+   "category": "multihop",
+   "question": "已知「行板」通过唯一一个中间实体与「车尔尼」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "dev",
+   "n_units": 19,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 2,
+   "features": {
+    "n_cands": 2,
+    "support_top1": 4,
+    "support_top2": 3,
+    "raw_margin": 1
+   },
+   "support_sum_top1": 4.0,
+   "support_sum_top2": 3.0,
+   "raw_margin": 1.0,
+   "top1_is_gold": true,
+   "unique_only_answers": false,
+   "unique_only_correct": false,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "芙蓉",
+     "name": "芙蓉",
+     "support_sum": 4.0,
+     "assert_count": 1,
+     "degree": 10,
+     "n_cands": 2,
+     "raw_margin": 1.0,
+     "is_top1": true,
+     "x_is_gold": true
+    },
+    {
+     "rank": 2,
+     "x": "白垩",
+     "name": "白垩",
+     "support_sum": 3.0,
+     "assert_count": 1,
+     "degree": 6,
+     "n_cands": 2,
+     "raw_margin": 1.0,
+     "is_top1": false,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-900047",
+   "split": "dev",
+   "category": "multihop",
+   "question": "从「均」出发，经过一个中间实体可以到达「监察司」。这个中间实体叫什么？",
+   "selected_by": "dev",
+   "n_units": 21,
+   "n_gold_chunks": 2,
+   "status": "no_common_neighbor",
+   "samples": [],
+   "tri_size": 103,
+   "neigh_size": 70
+  },
+  {
+   "question_id": "q-mh-000002",
+   "split": "holdout",
+   "category": "multihop",
+   "question": "已知「岳羽由加莉」通过唯一一个中间实体与「整合运动」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "holdout",
+   "n_units": 22,
+   "n_gold_chunks": 2,
+   "status": "no_common_neighbor",
+   "samples": [],
+   "tri_size": 87,
+   "neigh_size": 40
+  },
+  {
+   "question_id": "q-mh-000007",
+   "split": "holdout",
+   "category": "multihop",
+   "question": "从「律法」出发，经过一个中间实体可以到达「马切洛」。这个中间实体叫什么？",
+   "selected_by": "holdout",
+   "n_units": 21,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 2,
+   "features": {
+    "n_cands": 2,
+    "support_top1": 8,
+    "support_top2": 2,
+    "raw_margin": 6
+   },
+   "support_sum_top1": 8.0,
+   "support_sum_top2": 2.0,
+   "raw_margin": 6.0,
+   "top1_is_gold": true,
+   "unique_only_answers": false,
+   "unique_only_correct": false,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "费德里科",
+     "name": "费德里科",
+     "support_sum": 8.0,
+     "assert_count": 4,
+     "degree": 10,
+     "n_cands": 2,
+     "raw_margin": 6.0,
+     "is_top1": true,
+     "x_is_gold": true
+    },
+    {
+     "rank": 2,
+     "x": "阿尔图罗",
+     "name": "阿尔图罗",
+     "support_sum": 2.0,
+     "assert_count": 2,
+     "degree": 5,
+     "n_cands": 2,
+     "raw_margin": 6.0,
+     "is_top1": false,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-000011",
+   "split": "holdout",
+   "category": "multihop",
+   "question": "从「文月」出发，经过一个中间实体可以到达「霜叶」。这个中间实体叫什么？",
+   "selected_by": "holdout",
+   "n_units": 23,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 1,
+   "features": {
+    "n_cands": 1,
+    "support_top1": 4,
+    "support_top2": 0,
+    "raw_margin": 4
+   },
+   "support_sum_top1": 4.0,
+   "support_sum_top2": 0.0,
+   "raw_margin": 4.0,
+   "top1_is_gold": true,
+   "unique_only_answers": true,
+   "unique_only_correct": true,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "阿米娅",
+     "name": "阿米娅",
+     "support_sum": 4.0,
+     "assert_count": 1,
+     "degree": 7,
+     "n_cands": 1,
+     "raw_margin": 4.0,
+     "is_top1": true,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-000019",
+   "split": "holdout",
+   "category": "multihop",
+   "question": "从「西西里夫人」出发，经过一个中间实体可以到达「市政厅」。这个中间实体叫什么？",
+   "selected_by": "holdout",
+   "n_units": 18,
+   "n_gold_chunks": 2,
+   "status": "no_common_neighbor",
+   "samples": [],
+   "tri_size": 119,
+   "neigh_size": 59
+  },
+  {
+   "question_id": "q-mh-000022",
+   "split": "holdout",
+   "category": "multihop",
+   "question": "已知「阿斯卡纶」通过唯一一个中间实体与「城防炮」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "holdout",
+   "n_units": 21,
+   "n_gold_chunks": 2,
+   "status": "no_common_neighbor",
+   "samples": [],
+   "tri_size": 95,
+   "neigh_size": 46
+  },
+  {
+   "question_id": "q-mh-000023",
+   "split": "holdout",
+   "category": "multihop",
+   "question": "从「苦艾」出发，经过一个中间实体可以到达「特雷西斯」。这个中间实体叫什么？",
+   "selected_by": "holdout",
+   "n_units": 19,
+   "n_gold_chunks": 2,
+   "status": "no_common_neighbor",
+   "samples": [],
+   "tri_size": 86,
+   "neigh_size": 47
+  },
+  {
+   "question_id": "q-mh-000027",
+   "split": "holdout",
+   "category": "multihop",
+   "question": "从「梓兰」出发，经过一个中间实体可以到达「杰斯顿」。这个中间实体叫什么？",
+   "selected_by": "holdout",
+   "n_units": 20,
+   "n_gold_chunks": 2,
+   "status": "no_common_neighbor",
+   "samples": [],
+   "tri_size": 65,
+   "neigh_size": 39
+  },
+  {
+   "question_id": "q-mh-000028",
+   "split": "holdout",
+   "category": "multihop",
+   "question": "已知「老科利」通过唯一一个中间实体与「珀耳」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "holdout",
+   "n_units": 21,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 1,
+   "features": {
+    "n_cands": 1,
+    "support_top1": 6,
+    "support_top2": 0,
+    "raw_margin": 6
+   },
+   "support_sum_top1": 6.0,
+   "support_sum_top2": 0.0,
+   "raw_margin": 6.0,
+   "top1_is_gold": true,
+   "unique_only_answers": true,
+   "unique_only_correct": true,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "锡人",
+     "name": "锡人",
+     "support_sum": 6.0,
+     "assert_count": 4,
+     "degree": 12,
+     "n_cands": 1,
+     "raw_margin": 6.0,
+     "is_top1": true,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-000030",
+   "split": "holdout",
+   "category": "multihop",
+   "question": "已知「红豆」通过唯一一个中间实体与「埃芒加德」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "holdout",
+   "n_units": 20,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 1,
+   "features": {
+    "n_cands": 1,
+    "support_top1": 2,
+    "support_top2": 0,
+    "raw_margin": 2
+   },
+   "support_sum_top1": 2.0,
+   "support_sum_top2": 0.0,
+   "raw_margin": 2.0,
+   "top1_is_gold": true,
+   "unique_only_answers": true,
+   "unique_only_correct": true,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "泥岩",
+     "name": "泥岩",
+     "support_sum": 2.0,
+     "assert_count": 1,
+     "degree": 3,
+     "n_cands": 1,
+     "raw_margin": 2.0,
+     "is_top1": true,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-000031",
+   "split": "holdout",
+   "category": "multihop",
+   "question": "已知「迪伦」通过唯一一个中间实体与「特雷西斯」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "holdout",
+   "n_units": 19,
+   "n_gold_chunks": 2,
+   "status": "no_common_neighbor",
+   "samples": [],
+   "tri_size": 106,
+   "neigh_size": 64
+  },
+  {
+   "question_id": "q-mh-000032",
+   "split": "holdout",
+   "category": "multihop",
+   "question": "从「甘比诺」出发，经过一个中间实体可以到达「狂欢节」。这个中间实体叫什么？",
+   "selected_by": "holdout",
+   "n_units": 20,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 1,
+   "features": {
+    "n_cands": 1,
+    "support_top1": 6,
+    "support_top2": 0,
+    "raw_margin": 6
+   },
+   "support_sum_top1": 6.0,
+   "support_sum_top2": 0.0,
+   "raw_margin": 6.0,
+   "top1_is_gold": true,
+   "unique_only_answers": true,
+   "unique_only_correct": true,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "拉普兰德",
+     "name": "拉普兰德",
+     "support_sum": 6.0,
+     "assert_count": 5,
+     "degree": 10,
+     "n_cands": 1,
+     "raw_margin": 6.0,
+     "is_top1": true,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-000039",
+   "split": "holdout",
+   "category": "multihop",
+   "question": "从「山海众」出发，经过一个中间实体可以到达「莫佚」。这个中间实体叫什么？",
+   "selected_by": "holdout",
+   "n_units": 21,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 1,
+   "features": {
+    "n_cands": 1,
+    "support_top1": 2,
+    "support_top2": 0,
+    "raw_margin": 2
+   },
+   "support_sum_top1": 2.0,
+   "support_sum_top2": 0.0,
+   "raw_margin": 2.0,
+   "top1_is_gold": false,
+   "unique_only_answers": true,
+   "unique_only_correct": false,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "睚",
+     "name": "睚",
+     "support_sum": 2.0,
+     "assert_count": 2,
+     "degree": 5,
+     "n_cands": 1,
+     "raw_margin": 2.0,
+     "is_top1": true,
+     "x_is_gold": false
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-000040",
+   "split": "holdout",
+   "category": "multihop",
+   "question": "已知「杰西卡」通过唯一一个中间实体与「变形者集群」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "holdout",
+   "n_units": 21,
+   "n_gold_chunks": 2,
+   "status": "no_common_neighbor",
+   "samples": [],
+   "tri_size": 75,
+   "neigh_size": 33
+  },
+  {
+   "question_id": "q-mh-000046",
+   "split": "holdout",
+   "category": "multihop",
+   "question": "已知「米格鲁」通过唯一一个中间实体与「格雷伊」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "selected_by": "holdout",
+   "n_units": 19,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 1,
+   "features": {
+    "n_cands": 1,
+    "support_top1": 3,
+    "support_top2": 0,
+    "raw_margin": 3
+   },
+   "support_sum_top1": 3.0,
+   "support_sum_top2": 0.0,
+   "raw_margin": 3.0,
+   "top1_is_gold": true,
+   "unique_only_answers": true,
+   "unique_only_correct": true,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "罗德岛",
+     "name": "罗德岛",
+     "support_sum": 3.0,
+     "assert_count": 2,
+     "degree": 6,
+     "n_cands": 1,
+     "raw_margin": 3.0,
+     "is_top1": true,
+     "x_is_gold": true
+    }
+   ]
+  },
+  {
+   "question_id": "q-mh-000048",
+   "split": "holdout",
+   "category": "multihop",
+   "question": "从「菲亚梅塔」出发，经过一个中间实体可以到达「斯普莉雅」。这个中间实体叫什么？",
+   "selected_by": "holdout",
+   "n_units": 21,
+   "n_gold_chunks": 2,
+   "status": "ok",
+   "n_cands": 4,
+   "features": {
+    "n_cands": 4,
+    "support_top1": 5,
+    "support_top2": 4,
+    "raw_margin": 1
+   },
+   "support_sum_top1": 5.0,
+   "support_sum_top2": 4.0,
+   "raw_margin": 1.0,
+   "top1_is_gold": true,
+   "unique_only_answers": false,
+   "unique_only_correct": false,
+   "samples": [
+    {
+     "rank": 1,
+     "x": "莫斯提马",
+     "name": "莫斯提马",
+     "support_sum": 5.0,
+     "assert_count": 3,
+     "degree": 6,
+     "n_cands": 4,
+     "raw_margin": 1.0,
+     "is_top1": true,
+     "x_is_gold": true
+    },
+    {
+     "rank": 2,
+     "x": "蕾缪安",
+     "name": "蕾缪安",
+     "support_sum": 4.0,
+     "assert_count": 1,
+     "degree": 6,
+     "n_cands": 4,
+     "raw_margin": 1.0,
+     "is_top1": false,
+     "x_is_gold": true
+    },
+    {
+     "rank": 3,
+     "x": "里凯莱",
+     "name": "里凯莱",
+     "support_sum": 4.0,
+     "assert_count": 1,
+     "degree": 6,
+     "n_cands": 4,
+     "raw_margin": 1.0,
+     "is_top1": false,
+     "x_is_gold": false
+    },
+    {
+     "rank": 4,
+     "x": "拉特兰",
+     "name": "拉特兰",
+     "support_sum": 2.0,
+     "assert_count": 2,
+     "degree": 3,
+     "n_cands": 4,
+     "raw_margin": 1.0,
+     "is_top1": false,
+     "x_is_gold": true
+    }
+   ]
+  }
+ ],
+ "run_digest": "1c5cab42c4bd0962f47ff8976d07362f8337757bfd20cc813c0a45716bcf3d26"
+}

@@ -1,0 +1,79 @@
+{
+  "buckets": [
+    {
+      "correct": 4,
+      "key": {
+        "raw_margin": 1
+      },
+      "n": 4,
+      "p": 0.95,
+      "pool": 0
+    },
+    {
+      "correct": 11,
+      "key": {
+        "raw_margin": 2
+      },
+      "n": 11,
+      "p": 0.95,
+      "pool": 0
+    },
+    {
+      "correct": 4,
+      "key": {
+        "raw_margin": 3
+      },
+      "n": 5,
+      "p": 0.95,
+      "pool": 0
+    },
+    {
+      "correct": 6,
+      "key": {
+        "raw_margin": 4
+      },
+      "n": 6,
+      "p": 1.0,
+      "pool": 1
+    },
+    {
+      "correct": 2,
+      "key": {
+        "raw_margin": 5
+      },
+      "n": 2,
+      "p": 1.0,
+      "pool": 2
+    },
+    {
+      "correct": 2,
+      "key": {
+        "raw_margin": 6
+      },
+      "n": 2,
+      "p": 1.0,
+      "pool": 3
+    },
+    {
+      "correct": 1,
+      "key": {
+        "raw_margin": 7
+      },
+      "n": 1,
+      "p": 1.0,
+      "pool": 4
+    }
+  ],
+  "cost": {
+    "answer": 2,
+    "refuse": 1
+  },
+  "feature_keys": [
+    "raw_margin"
+  ],
+  "monotone_in": "raw_margin",
+  "n_excluded_tie": 0,
+  "n_samples": 31,
+  "schema": "arkrag.bridge_calib/1",
+  "threshold": 0.6666666666666666
+}

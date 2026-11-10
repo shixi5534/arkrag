@@ -219,6 +219,14 @@ def build_pipeline(loaded: dict, *, top_k: int, graph_depth: int,
 #:   实测 12000 档最高只到 75.44%（dev），只有 24000 档能到 80%。
 #:   代价：上下文单位 9.8 → 19.5、token 11.7k → 23.7k，延迟几乎不变
 #:   （P50 73 → 81 ms、P95 132 → 137 ms）。
+#: * `chapter_cap=4` —— W3：`cross_chunk` 章节答案截断到 4 章。**三份 split 全为正、
+#:   零掉分**：dev 228→**231**（+3）、holdout 152→**154**（+2）、clean 97→**98**（+1），
+#:   全部增益来自 `cross_chunk`（23→26 / 16→18 / 12→13）。
+#:   为什么是 4：这是预登记值，也是实测最优点——cap=3 是 +4/−6（净 −2），
+#:   cap=5 与 cap=6 都是 +0/−1。**不是"截得越狠越好"，必须正好 4。**
+#:   为什么它有效：`cross_chunk` 判据要求 `|O| ≤ 2|W|`，基线常因顺带列了太多
+#:   无关章节而失败；截到 4 章能消掉这一类，且 gold 章节的排序质量已实测
+#:   （`data/diag_cx_rank_keys.json`：当前排序键 hit@4 = 55/57 = 96.5%）。
 PROD_PROFILE: dict = {
     "max_context_tokens": 24000,
     "options": {
@@ -226,6 +234,7 @@ PROD_PROFILE: dict = {
         "bridge": True,
         "bridge_search_top_k": 40,
         "graph_reserve_tokens": 12000,
+        "chapter_cap": 4,
     },
 }
 
@@ -268,6 +277,9 @@ def ask_once(pipeline: dict, question: str, *, timings: dict | None = None,
     | `bridge_search_top_k` | 0 | 桥接题单独使用的候选数（0 = 用 `pipeline["top_k"]`） |
     | `search_top_k` | `pipeline["top_k"]` | 覆盖本次检索的候选数 |
     | `max_direct_units` | 0 | W1：直接证据单元进入上下文的条数上限（0 = 现状） |
+    | `chapter_cap` | 0 | W3：`cross_chunk` 章节答案的章节数上限（0 = 现状） |
+    | `bridge_policy` | `"unique_only"` | W2：桥接候选策略（`unique_only` = 现状；`top1_margin` = 概率化 top-1） |
+    | `bridge_calibration` | None | W2：`bridge_calib` 的映射表（仅 `top1_margin` 会读；不做隐式文件读取） |
 
     三个开关全部默认关，且**每一条都只改检索/装配，不改判据**；关掉时返回的
     `search.hits` / `context.stats` 与改造前逐位相同，历史台账读数不受影响。
@@ -397,6 +409,20 @@ def ask_once(pipeline: dict, question: str, *, timings: dict | None = None,
     if timings is not None:
         timings["context_ms"] = (time.perf_counter() - _t2) * 1000.0
     _t3 = time.perf_counter()
+    # ---- W3：章节答案截断（默认 0 = 现状，不传关键字） --------------------
+    # 与 `max_direct_units` 同一套写法：**只有非默认值才拼进 `**kwargs`**，
+    # 这样默认路径连调用形状都和改造前一样，任何既有 `answer()` 替身
+    # （测试桩、旧版实现）都不会因为多一个关键字参数而 TypeError。
+    #
+    # 门控：只对章节题生效。非章节题根本走不到 `_chapter_answer`，
+    # 传进去也只是白挂着——但显式门控能让"这个旋钮影响谁"在代码里可读，
+    # 而不是靠读 `answer()` 内部实现才知道。
+    chapter_cap = int(opts.get("chapter_cap") or 0)
+    if chapter_cap and not is_chapter_question(question):
+        chapter_cap = 0
+    ans_kwargs: dict = {}
+    if chapter_cap:
+        ans_kwargs["chapter_cap"] = chapter_cap
     ans = pipeline["answerer"].answer(
         question,
         context,
@@ -404,6 +430,7 @@ def ask_once(pipeline: dict, question: str, *, timings: dict | None = None,
         top_score=float(found["stats"].get("top_score") or 0.0),
         query_analysis=qa,
         retrieval_stats=found["stats"],
+        **ans_kwargs,
     )
     # ---- 多跳桥接（可选，默认关） -------------------------------------
     # 放在答案器**之后**：它不替换原答案，只是把两条真实断言句前置，让
@@ -420,11 +447,25 @@ def ask_once(pipeline: dict, question: str, *, timings: dict | None = None,
         # 否则 cap 会顺手砍掉桥接的候选池，违背 W1「解耦检索宽度与上下文宽度」。
         # 默认（cap=0）没有这个键，`or` 落回 `units`，逐位等价。
         bridge_units = context.get("bridge_candidates") or context.get("units") or []
+        # ---- W2：桥接策略（默认 `unique_only` = 现状） --------------------
+        # **只在非默认策略时拼关键字**：默认路径与改造前**连调用形状都一样**
+        # （与 W1 的 `ctx_kwargs` 同一处置）。理由不只是洁癖：`tests/test_bridge.py`
+        # 与 `scripts/audit_round6.py` 都会 `inspect.signature(find_bridge)` /
+        # 直接按位置+两关键字调用；多传一个 `policy=` 会让那些替身与桩在默认档
+        # 上表现不同，而默认档正是所有历史读数所在的那一档。
+        policy = str(opts.get("bridge_policy") or bridge.DEFAULT_POLICY)
+        br_kwargs: dict = {}
+        if policy != bridge.DEFAULT_POLICY:
+            br_kwargs["policy"] = policy
+            # 校准表**只从 options 显式传入**，不在这里读文件：pipeline 是每问都
+            # 走的路径，隐式 I/O 会让"同一输入两次跑"依赖磁盘状态。
+            br_kwargs["calibration"] = opts.get("bridge_calibration")
         br = bridge.find_bridge(
             question,
             bridge_units,
             chunk_assertions=retriever.assertions_by_chunk.get,
             display=retriever.display_name,
+            **br_kwargs,
         )
         bridge_info = {"status": br["status"], "x": br["x"]}
         if br["status"] == "ok":

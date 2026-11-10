@@ -1,0 +1,5411 @@
+{
+ "schema": "arkrag.diag_cx_rank_keys/1",
+ "purpose": "W3 前置：证明章节排序键能把 gold 章节排到前面，再谈 cap",
+ "generated_at": "2026-11-10T08:15:42Z",
+ "python": "3.13.18",
+ "os": "Windows-11-10.0.26200-SP0",
+ "command": "python scripts/run_guarded.py -- python scripts/diag_cx_rank_keys.py",
+ "generation": "g-20261103T132152Z-06a741",
+ "gold_set": "data\\goldset\\gold-v2.json",
+ "gold_set_sha": "069375f8e355e4b9c3b4253e14959532f87e05bc129d5a7a6da39e07f357a108",
+ "config_digest": "e290f49a81df08a52d313cc86a02f8f4a33d18abc91faec7d716ea42538b8459",
+ "elapsed_ms": 7226.3,
+ "n_per_question": 64,
+ "summary": {
+  "n_questions": 64,
+  "n_ok": 57,
+  "per_key": {
+   "sum_score": {
+    "gold_rank_median": 1,
+    "gold_rank_mean": 1.58,
+    "n_with_rank": 57,
+    "hit_at": {
+     "2": {
+      "n": 50,
+      "rate": 0.8772
+     },
+     "3": {
+      "n": 54,
+      "rate": 0.9474
+     },
+     "4": {
+      "n": 55,
+      "rate": 0.9649
+     },
+     "5": {
+      "n": 55,
+      "rate": 0.9649
+     },
+     "6": {
+      "n": 55,
+      "rate": 0.9649
+     },
+     "7": {
+      "n": 56,
+      "rate": 0.9825
+     },
+     "8": {
+      "n": 56,
+      "rate": 0.9825
+     }
+    }
+   },
+   "max_score": {
+    "gold_rank_median": 1,
+    "gold_rank_mean": 1.63,
+    "n_with_rank": 57,
+    "hit_at": {
+     "2": {
+      "n": 48,
+      "rate": 0.8421
+     },
+     "3": {
+      "n": 53,
+      "rate": 0.9298
+     },
+     "4": {
+      "n": 54,
+      "rate": 0.9474
+     },
+     "5": {
+      "n": 55,
+      "rate": 0.9649
+     },
+     "6": {
+      "n": 55,
+      "rate": 0.9649
+     },
+     "7": {
+      "n": 56,
+      "rate": 0.9825
+     },
+     "8": {
+      "n": 56,
+      "rate": 0.9825
+     }
+    }
+   },
+   "count": {
+    "gold_rank_median": 1,
+    "gold_rank_mean": 1.63,
+    "n_with_rank": 57,
+    "hit_at": {
+     "2": {
+      "n": 46,
+      "rate": 0.807
+     },
+     "3": {
+      "n": 54,
+      "rate": 0.9474
+     },
+     "4": {
+      "n": 56,
+      "rate": 0.9825
+     },
+     "5": {
+      "n": 56,
+      "rate": 0.9825
+     },
+     "6": {
+      "n": 56,
+      "rate": 0.9825
+     },
+     "7": {
+      "n": 56,
+      "rate": 0.9825
+     },
+     "8": {
+      "n": 56,
+      "rate": 0.9825
+     }
+    }
+   },
+   "evidence": {
+    "gold_rank_median": 1,
+    "gold_rank_mean": 1.3,
+    "n_with_rank": 57,
+    "hit_at": {
+     "2": {
+      "n": 53,
+      "rate": 0.9298
+     },
+     "3": {
+      "n": 55,
+      "rate": 0.9649
+     },
+     "4": {
+      "n": 56,
+      "rate": 0.9825
+     },
+     "5": {
+      "n": 56,
+      "rate": 0.9825
+     },
+     "6": {
+      "n": 56,
+      "rate": 0.9825
+     },
+     "7": {
+      "n": 56,
+      "rate": 0.9825
+     },
+     "8": {
+      "n": 57,
+      "rate": 1.0
+     }
+    }
+   },
+   "sum_score_then_count": {
+    "gold_rank_median": 1,
+    "gold_rank_mean": 1.58,
+    "n_with_rank": 57,
+    "hit_at": {
+     "2": {
+      "n": 50,
+      "rate": 0.8772
+     },
+     "3": {
+      "n": 54,
+      "rate": 0.9474
+     },
+     "4": {
+      "n": 55,
+      "rate": 0.9649
+     },
+     "5": {
+      "n": 55,
+      "rate": 0.9649
+     },
+     "6": {
+      "n": 55,
+      "rate": 0.9649
+     },
+     "7": {
+      "n": 56,
+      "rate": 0.9825
+     },
+     "8": {
+      "n": 56,
+      "rate": 0.9825
+     }
+    }
+   }
+  },
+  "current_key": "sum_score_then_count",
+  "best_key_at_4": "count",
+  "current_vs_best_at_4": {
+   "current_n": 55,
+   "best_n": 56,
+   "best_key": "count"
+  },
+  "split_dev": {
+   "n_questions": 38,
+   "n_ok": 32,
+   "per_key": {
+    "sum_score": {
+     "gold_rank_median": 1,
+     "gold_rank_mean": 1.47,
+     "n_with_rank": 32,
+     "hit_at": {
+      "2": {
+       "n": 29,
+       "rate": 0.9062
+      },
+      "3": {
+       "n": 31,
+       "rate": 0.9688
+      },
+      "4": {
+       "n": 31,
+       "rate": 0.9688
+      },
+      "5": {
+       "n": 31,
+       "rate": 0.9688
+      },
+      "6": {
+       "n": 31,
+       "rate": 0.9688
+      },
+      "7": {
+       "n": 32,
+       "rate": 1.0
+      },
+      "8": {
+       "n": 32,
+       "rate": 1.0
+      }
+     }
+    },
+    "max_score": {
+     "gold_rank_median": 1,
+     "gold_rank_mean": 1.5,
+     "n_with_rank": 32,
+     "hit_at": {
+      "2": {
+       "n": 28,
+       "rate": 0.875
+      },
+      "3": {
+       "n": 30,
+       "rate": 0.9375
+      },
+      "4": {
+       "n": 30,
+       "rate": 0.9375
+      },
+      "5": {
+       "n": 31,
+       "rate": 0.9688
+      },
+      "6": {
+       "n": 31,
+       "rate": 0.9688
+      },
+      "7": {
+       "n": 32,
+       "rate": 1.0
+      },
+      "8": {
+       "n": 32,
+       "rate": 1.0
+      }
+     }
+    },
+    "count": {
+     "gold_rank_median": 1,
+     "gold_rank_mean": 1.5,
+     "n_with_rank": 32,
+     "hit_at": {
+      "2": {
+       "n": 26,
+       "rate": 0.8125
+      },
+      "3": {
+       "n": 31,
+       "rate": 0.9688
+      },
+      "4": {
+       "n": 32,
+       "rate": 1.0
+      },
+      "5": {
+       "n": 32,
+       "rate": 1.0
+      },
+      "6": {
+       "n": 32,
+       "rate": 1.0
+      },
+      "7": {
+       "n": 32,
+       "rate": 1.0
+      },
+      "8": {
+       "n": 32,
+       "rate": 1.0
+      }
+     }
+    },
+    "evidence": {
+     "gold_rank_median": 1,
+     "gold_rank_mean": 1.06,
+     "n_with_rank": 32,
+     "hit_at": {
+      "2": {
+       "n": 32,
+       "rate": 1.0
+      },
+      "3": {
+       "n": 32,
+       "rate": 1.0
+      },
+      "4": {
+       "n": 32,
+       "rate": 1.0
+      },
+      "5": {
+       "n": 32,
+       "rate": 1.0
+      },
+      "6": {
+       "n": 32,
+       "rate": 1.0
+      },
+      "7": {
+       "n": 32,
+       "rate": 1.0
+      },
+      "8": {
+       "n": 32,
+       "rate": 1.0
+      }
+     }
+    },
+    "sum_score_then_count": {
+     "gold_rank_median": 1,
+     "gold_rank_mean": 1.47,
+     "n_with_rank": 32,
+     "hit_at": {
+      "2": {
+       "n": 29,
+       "rate": 0.9062
+      },
+      "3": {
+       "n": 31,
+       "rate": 0.9688
+      },
+      "4": {
+       "n": 31,
+       "rate": 0.9688
+      },
+      "5": {
+       "n": 31,
+       "rate": 0.9688
+      },
+      "6": {
+       "n": 31,
+       "rate": 0.9688
+      },
+      "7": {
+       "n": 32,
+       "rate": 1.0
+      },
+      "8": {
+       "n": 32,
+       "rate": 1.0
+      }
+     }
+    }
+   },
+   "current_key": "sum_score_then_count",
+   "best_key_at_4": "count",
+   "current_vs_best_at_4": {
+    "current_n": 31,
+    "best_n": 32,
+    "best_key": "count"
+   }
+  },
+  "split_holdout": {
+   "n_questions": 26,
+   "n_ok": 25,
+   "per_key": {
+    "sum_score": {
+     "gold_rank_median": 1,
+     "gold_rank_mean": 1.72,
+     "n_with_rank": 25,
+     "hit_at": {
+      "2": {
+       "n": 21,
+       "rate": 0.84
+      },
+      "3": {
+       "n": 23,
+       "rate": 0.92
+      },
+      "4": {
+       "n": 24,
+       "rate": 0.96
+      },
+      "5": {
+       "n": 24,
+       "rate": 0.96
+      },
+      "6": {
+       "n": 24,
+       "rate": 0.96
+      },
+      "7": {
+       "n": 24,
+       "rate": 0.96
+      },
+      "8": {
+       "n": 24,
+       "rate": 0.96
+      }
+     }
+    },
+    "max_score": {
+     "gold_rank_median": 1,
+     "gold_rank_mean": 1.8,
+     "n_with_rank": 25,
+     "hit_at": {
+      "2": {
+       "n": 20,
+       "rate": 0.8
+      },
+      "3": {
+       "n": 23,
+       "rate": 0.92
+      },
+      "4": {
+       "n": 24,
+       "rate": 0.96
+      },
+      "5": {
+       "n": 24,
+       "rate": 0.96
+      },
+      "6": {
+       "n": 24,
+       "rate": 0.96
+      },
+      "7": {
+       "n": 24,
+       "rate": 0.96
+      },
+      "8": {
+       "n": 24,
+       "rate": 0.96
+      }
+     }
+    },
+    "count": {
+     "gold_rank_median": 1,
+     "gold_rank_mean": 1.8,
+     "n_with_rank": 25,
+     "hit_at": {
+      "2": {
+       "n": 20,
+       "rate": 0.8
+      },
+      "3": {
+       "n": 23,
+       "rate": 0.92
+      },
+      "4": {
+       "n": 24,
+       "rate": 0.96
+      },
+      "5": {
+       "n": 24,
+       "rate": 0.96
+      },
+      "6": {
+       "n": 24,
+       "rate": 0.96
+      },
+      "7": {
+       "n": 24,
+       "rate": 0.96
+      },
+      "8": {
+       "n": 24,
+       "rate": 0.96
+      }
+     }
+    },
+    "evidence": {
+     "gold_rank_median": 1,
+     "gold_rank_mean": 1.6,
+     "n_with_rank": 25,
+     "hit_at": {
+      "2": {
+       "n": 21,
+       "rate": 0.84
+      },
+      "3": {
+       "n": 23,
+       "rate": 0.92
+      },
+      "4": {
+       "n": 24,
+       "rate": 0.96
+      },
+      "5": {
+       "n": 24,
+       "rate": 0.96
+      },
+      "6": {
+       "n": 24,
+       "rate": 0.96
+      },
+      "7": {
+       "n": 24,
+       "rate": 0.96
+      },
+      "8": {
+       "n": 25,
+       "rate": 1.0
+      }
+     }
+    },
+    "sum_score_then_count": {
+     "gold_rank_median": 1,
+     "gold_rank_mean": 1.72,
+     "n_with_rank": 25,
+     "hit_at": {
+      "2": {
+       "n": 21,
+       "rate": 0.84
+      },
+      "3": {
+       "n": 23,
+       "rate": 0.92
+      },
+      "4": {
+       "n": 24,
+       "rate": 0.96
+      },
+      "5": {
+       "n": 24,
+       "rate": 0.96
+      },
+      "6": {
+       "n": 24,
+       "rate": 0.96
+      },
+      "7": {
+       "n": 24,
+       "rate": 0.96
+      },
+      "8": {
+       "n": 24,
+       "rate": 0.96
+      }
+     }
+    }
+   },
+   "current_key": "sum_score_then_count",
+   "best_key_at_4": "sum_score",
+   "current_vs_best_at_4": {
+    "current_n": 24,
+    "best_n": 24,
+    "best_key": "sum_score"
+   }
+  },
+  "split_clean": {
+   "n_questions": 16,
+   "n_ok": 16,
+   "per_key": {
+    "sum_score": {
+     "gold_rank_median": 1,
+     "gold_rank_mean": 1.81,
+     "n_with_rank": 16,
+     "hit_at": {
+      "2": {
+       "n": 14,
+       "rate": 0.875
+      },
+      "3": {
+       "n": 15,
+       "rate": 0.9375
+      },
+      "4": {
+       "n": 15,
+       "rate": 0.9375
+      },
+      "5": {
+       "n": 15,
+       "rate": 0.9375
+      },
+      "6": {
+       "n": 15,
+       "rate": 0.9375
+      },
+      "7": {
+       "n": 15,
+       "rate": 0.9375
+      },
+      "8": {
+       "n": 15,
+       "rate": 0.9375
+      }
+     }
+    },
+    "max_score": {
+     "gold_rank_median": 1,
+     "gold_rank_mean": 1.94,
+     "n_with_rank": 16,
+     "hit_at": {
+      "2": {
+       "n": 13,
+       "rate": 0.8125
+      },
+      "3": {
+       "n": 15,
+       "rate": 0.9375
+      },
+      "4": {
+       "n": 15,
+       "rate": 0.9375
+      },
+      "5": {
+       "n": 15,
+       "rate": 0.9375
+      },
+      "6": {
+       "n": 15,
+       "rate": 0.9375
+      },
+      "7": {
+       "n": 15,
+       "rate": 0.9375
+      },
+      "8": {
+       "n": 15,
+       "rate": 0.9375
+      }
+     }
+    },
+    "count": {
+     "gold_rank_median": 1,
+     "gold_rank_mean": 1.94,
+     "n_with_rank": 16,
+     "hit_at": {
+      "2": {
+       "n": 13,
+       "rate": 0.8125
+      },
+      "3": {
+       "n": 15,
+       "rate": 0.9375
+      },
+      "4": {
+       "n": 15,
+       "rate": 0.9375
+      },
+      "5": {
+       "n": 15,
+       "rate": 0.9375
+      },
+      "6": {
+       "n": 15,
+       "rate": 0.9375
+      },
+      "7": {
+       "n": 15,
+       "rate": 0.9375
+      },
+      "8": {
+       "n": 15,
+       "rate": 0.9375
+      }
+     }
+    },
+    "evidence": {
+     "gold_rank_median": 1,
+     "gold_rank_mean": 1.38,
+     "n_with_rank": 16,
+     "hit_at": {
+      "2": {
+       "n": 14,
+       "rate": 0.875
+      },
+      "3": {
+       "n": 15,
+       "rate": 0.9375
+      },
+      "4": {
+       "n": 16,
+       "rate": 1.0
+      },
+      "5": {
+       "n": 16,
+       "rate": 1.0
+      },
+      "6": {
+       "n": 16,
+       "rate": 1.0
+      },
+      "7": {
+       "n": 16,
+       "rate": 1.0
+      },
+      "8": {
+       "n": 16,
+       "rate": 1.0
+      }
+     }
+    },
+    "sum_score_then_count": {
+     "gold_rank_median": 1,
+     "gold_rank_mean": 1.81,
+     "n_with_rank": 16,
+     "hit_at": {
+      "2": {
+       "n": 14,
+       "rate": 0.875
+      },
+      "3": {
+       "n": 15,
+       "rate": 0.9375
+      },
+      "4": {
+       "n": 15,
+       "rate": 0.9375
+      },
+      "5": {
+       "n": 15,
+       "rate": 0.9375
+      },
+      "6": {
+       "n": 15,
+       "rate": 0.9375
+      },
+      "7": {
+       "n": 15,
+       "rate": 0.9375
+      },
+      "8": {
+       "n": 15,
+       "rate": 0.9375
+      }
+     }
+    }
+   },
+   "current_key": "sum_score_then_count",
+   "best_key_at_4": "evidence",
+   "current_vs_best_at_4": {
+    "current_n": 15,
+    "best_n": 16,
+    "best_key": "evidence"
+   }
+  }
+ },
+ "per_question": [
+  {
+   "question_id": "q-cx-900001",
+   "split": "holdout",
+   "category": "cross_chunk",
+   "question": "「溟痕」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "selected_by": "clean,holdout",
+   "n_units": 19,
+   "n_chapters": 4,
+   "n_gold_chunks": 3,
+   "n_gold_in_ctx": 2,
+   "status": "ok",
+   "gold_chapters": [
+    "act17side",
+    "rogue_rogue_2"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "act17side",
+    "act34side",
+    "rogue_rogue_2",
+    "act52side"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900003",
+   "split": "holdout",
+   "category": "cross_chunk",
+   "question": "「远逐者」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "selected_by": "clean,holdout",
+   "n_units": 18,
+   "n_chapters": 10,
+   "n_gold_chunks": 3,
+   "n_gold_in_ctx": 3,
+   "status": "ok",
+   "gold_chapters": [
+    "act42side",
+    "main_ep13",
+    "main_ep14"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "main_ep14",
+    "act13side",
+    "rogue_rogue_4",
+    "act42side",
+    "main_ep13",
+    "act17side",
+    "act46side",
+    "act25side",
+    "main_ep17",
+    "act19side"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 2,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900004",
+   "split": "holdout",
+   "category": "cross_chunk",
+   "question": "「秉烛人」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "selected_by": "clean,holdout",
+   "n_units": 19,
+   "n_chapters": 5,
+   "n_gold_chunks": 3,
+   "n_gold_in_ctx": 1,
+   "status": "ok",
+   "gold_chapters": [
+    "rogue_rogue_5"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "act49side",
+    "rogue_rogue_5",
+    "act31side",
+    "roguelike_level_rogue5_ending_1",
+    "act15side"
+   ],
+   "ranks": {
+    "sum_score": 2,
+    "max_score": 2,
+    "count": 3,
+    "evidence": 4,
+    "sum_score_then_count": 2
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": false,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": false,
+     "3": false,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900006",
+   "split": "holdout",
+   "category": "cross_chunk",
+   "question": "「玄极巨兵」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "selected_by": "clean,holdout",
+   "n_units": 18,
+   "n_chapters": 12,
+   "n_gold_chunks": 2,
+   "n_gold_in_ctx": 2,
+   "status": "ok",
+   "gold_chapters": [
+    "act49side",
+    "act6d5"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "act49side",
+    "act16d5",
+    "act6d5",
+    "rogue_rogue_3",
+    "act25side",
+    "main_ep15",
+    "act16side",
+    "act46side",
+    "act42side",
+    "memory_falco",
+    "memory_platnm",
+    "main_ep14"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900007",
+   "split": "holdout",
+   "category": "cross_chunk",
+   "question": "「维多利亚军队」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "selected_by": "clean,holdout",
+   "n_units": 18,
+   "n_chapters": 10,
+   "n_gold_chunks": 2,
+   "n_gold_in_ctx": 1,
+   "status": "ok",
+   "gold_chapters": [
+    "memory_bpipe"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "main_ep09",
+    "main_ep14",
+    "main_ep13",
+    "act22side",
+    "act30side",
+    "main_ep12",
+    "act18mini",
+    "act46side",
+    "main_ep10",
+    "memory_bpipe"
+   ],
+   "ranks": {
+    "sum_score": 10,
+    "max_score": 10,
+    "count": 10,
+    "evidence": 1,
+    "sum_score_then_count": 10
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": false,
+     "3": false,
+     "4": false,
+     "5": false,
+     "6": false,
+     "7": false,
+     "8": false
+    },
+    "max_score": {
+     "2": false,
+     "3": false,
+     "4": false,
+     "5": false,
+     "6": false,
+     "7": false,
+     "8": false
+    },
+    "count": {
+     "2": false,
+     "3": false,
+     "4": false,
+     "5": false,
+     "6": false,
+     "7": false,
+     "8": false
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": false,
+     "3": false,
+     "4": false,
+     "5": false,
+     "6": false,
+     "7": false,
+     "8": false
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900009",
+   "split": "holdout",
+   "category": "cross_chunk",
+   "question": "「米沃什」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "selected_by": "clean,holdout",
+   "n_units": 19,
+   "n_chapters": 1,
+   "n_gold_chunks": 2,
+   "n_gold_in_ctx": 1,
+   "status": "ok",
+   "gold_chapters": [
+    "act32side"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "act32side"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900010",
+   "split": "holdout",
+   "category": "cross_chunk",
+   "question": "「邙山」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "selected_by": "clean,holdout",
+   "n_units": 19,
+   "n_chapters": 5,
+   "n_gold_chunks": 2,
+   "n_gold_in_ctx": 2,
+   "status": "ok",
+   "gold_chapters": [
+    "act19mini",
+    "act49side"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "act19mini",
+    "act49side",
+    "rogue_rogue_5",
+    "memory_f12yin",
+    "act42side"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900015",
+   "split": "holdout",
+   "category": "cross_chunk",
+   "question": "「彼得拉设夫斯基小组」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "selected_by": "clean,holdout",
+   "n_units": 19,
+   "n_chapters": 13,
+   "n_gold_chunks": 2,
+   "n_gold_in_ctx": 2,
+   "status": "ok",
+   "gold_chapters": [
+    "act51side",
+    "main_st16"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "act51side",
+    "main_st16",
+    "memory_turdus",
+    "act28side",
+    "act9d0",
+    "main_ep17",
+    "rogue_rogue_3",
+    "act10d5",
+    "memory_headb2",
+    "memory_surfer",
+    "main_st17",
+    "main_ep05",
+    "act25side"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900019",
+   "split": "holdout",
+   "category": "cross_chunk",
+   "question": "「诺威尔」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "selected_by": "clean,holdout",
+   "n_units": 19,
+   "n_chapters": 4,
+   "n_gold_chunks": 4,
+   "n_gold_in_ctx": 1,
+   "status": "ok",
+   "gold_chapters": [
+    "memory_nowell"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "act18mini",
+    "memory_nowell",
+    "main_st13",
+    "main_ep13"
+   ],
+   "ranks": {
+    "sum_score": 2,
+    "max_score": 3,
+    "count": 2,
+    "evidence": 2,
+    "sum_score_then_count": 2
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": false,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900020",
+   "split": "holdout",
+   "category": "cross_chunk",
+   "question": "「图林」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "selected_by": "clean,holdout",
+   "n_units": 19,
+   "n_chapters": 4,
+   "n_gold_chunks": 4,
+   "n_gold_in_ctx": 2,
+   "status": "ok",
+   "gold_chapters": [
+    "act51side",
+    "main_ep17"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "main_ep17",
+    "main_st17",
+    "memory_tanya",
+    "act51side"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900023",
+   "split": "holdout",
+   "category": "cross_chunk",
+   "question": "「防护服」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "selected_by": "clean,holdout",
+   "n_units": 18,
+   "n_chapters": 13,
+   "n_gold_chunks": 3,
+   "n_gold_in_ctx": 2,
+   "status": "ok",
+   "gold_chapters": [
+    "act27side",
+    "memory_otter"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "act27side",
+    "memory_aurora",
+    "memory_popka",
+    "main_st14",
+    "main_ep09",
+    "memory_tanya",
+    "main_ep17",
+    "memory_hibisc",
+    "memory_otter",
+    "memory_savage",
+    "act8mini",
+    "memory_ansel",
+    "act10d5"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 2,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900025",
+   "split": "holdout",
+   "category": "cross_chunk",
+   "question": "「麦克斯特区」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "selected_by": "clean,holdout",
+   "n_units": 18,
+   "n_chapters": 9,
+   "n_gold_chunks": 2,
+   "n_gold_in_ctx": 2,
+   "status": "ok",
+   "gold_chapters": [
+    "act18mini",
+    "act47side"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "act47side",
+    "main_ep12",
+    "act25side",
+    "main_ep09",
+    "act18mini",
+    "act48side",
+    "act42side",
+    "rogue_rogue_4",
+    "rogue_rogue_6"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900028",
+   "split": "holdout",
+   "category": "cross_chunk",
+   "question": "「磁山二号」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "selected_by": "clean,holdout",
+   "n_units": 18,
+   "n_chapters": 14,
+   "n_gold_chunks": 3,
+   "n_gold_in_ctx": 3,
+   "status": "ok",
+   "gold_chapters": [
+    "act17d0",
+    "act32side",
+    "memory_fuze"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "act32side",
+    "act17d0",
+    "memory_fuze",
+    "memory_iana",
+    "main_ep17",
+    "act51side",
+    "memory_demkni",
+    "act47side",
+    "memory_wanqin",
+    "memory_f12yin",
+    "act16side",
+    "act25side",
+    "main_ep12",
+    "memory_bubble"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900029",
+   "split": "holdout",
+   "category": "cross_chunk",
+   "question": "「罗本」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "selected_by": "clean,holdout",
+   "n_units": 20,
+   "n_chapters": 3,
+   "n_gold_chunks": 3,
+   "n_gold_in_ctx": 1,
+   "status": "ok",
+   "gold_chapters": [
+    "main_ep14"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "main_ep10",
+    "main_ep12",
+    "main_ep14"
+   ],
+   "ranks": {
+    "sum_score": 3,
+    "max_score": 3,
+    "count": 3,
+    "evidence": 3,
+    "sum_score_then_count": 3
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": false,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": false,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": false,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": false,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": false,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900031",
+   "split": "holdout",
+   "category": "cross_chunk",
+   "question": "「啤酒花」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "selected_by": "clean,holdout",
+   "n_units": 18,
+   "n_chapters": 6,
+   "n_gold_chunks": 2,
+   "n_gold_in_ctx": 2,
+   "status": "ok",
+   "gold_chapters": [
+    "memory_mudrok",
+    "memory_wyvern"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "memory_wyvern",
+    "memory_mudrok",
+    "act12mini",
+    "memory_firwhl",
+    "act11d0",
+    "act36side"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900032",
+   "split": "holdout",
+   "category": "cross_chunk",
+   "question": "「信标发射井」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "selected_by": "clean,holdout",
+   "n_units": 17,
+   "n_chapters": 8,
+   "n_gold_chunks": 2,
+   "n_gold_in_ctx": 2,
+   "status": "ok",
+   "gold_chapters": [
+    "act34side",
+    "act52side"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "act34side",
+    "act52side",
+    "act25side",
+    "rogue_rogue_4",
+    "act30side",
+    "act15mini",
+    "act37side",
+    "main_ep15"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000001",
+   "split": "dev",
+   "category": "cross_chunk",
+   "question": "「以勒什」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "selected_by": "dev",
+   "n_units": 18,
+   "n_chapters": 8,
+   "n_gold_chunks": 2,
+   "n_gold_in_ctx": 2,
+   "status": "ok",
+   "gold_chapters": [
+    "act33side",
+    "main_ep14"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "act33side",
+    "main_ep14",
+    "act27side",
+    "act18side",
+    "act17mini",
+    "act42side",
+    "act46side",
+    "act19side"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000003",
+   "split": "dev",
+   "category": "cross_chunk",
+   "question": "「米拉娜」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "selected_by": "dev",
+   "n_units": 19,
+   "n_chapters": 9,
+   "n_gold_chunks": 2,
+   "n_gold_in_ctx": 2,
+   "status": "ok",
+   "gold_chapters": [
+    "main_ep16",
+    "main_st17"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "main_st17",
+    "act38side",
+    "main_ep12",
+    "main_ep14",
+    "act41side",
+    "main_ep16",
+    "main_st13",
+    "memory_shotst",
+    "act22side"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000004",
+   "split": "dev",
+   "category": "cross_chunk",
+   "question": "「海洋」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "selected_by": "dev",
+   "n_units": 19,
+   "n_chapters": 7,
+   "n_gold_chunks": 3,
+   "n_gold_in_ctx": 1,
+   "status": "ok",
+   "gold_chapters": [
+    "memory_deepcl"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "act34side",
+    "act17side",
+    "rogue_rogue_2",
+    "rogue_rogue_5",
+    "act39side",
+    "roguelike_level_rogue2_ending_3",
+    "memory_deepcl"
+   ],
+   "ranks": {
+    "sum_score": 7,
+    "max_score": 7,
+    "count": 4,
+    "evidence": 1,
+    "sum_score_then_count": 7
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": false,
+     "3": false,
+     "4": false,
+     "5": false,
+     "6": false,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": false,
+     "3": false,
+     "4": false,
+     "5": false,
+     "6": false,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": false,
+     "3": false,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": false,
+     "3": false,
+     "4": false,
+     "5": false,
+     "6": false,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000005",
+   "split": "dev",
+   "category": "cross_chunk",
+   "question": "「维多利亚议会」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "selected_by": "dev",
+   "n_units": 18,
+   "n_chapters": 7,
+   "n_gold_chunks": 2,
+   "n_gold_in_ctx": 2,
+   "status": "ok",
+   "gold_chapters": [
+    "main_ep14",
+    "main_st11"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "act37side",
+    "main_ep14",
+    "act46side",
+    "memory_skfire",
+    "main_ep11",
+    "main_st11",
+    "memory_siege"
+   ],
+   "ranks": {
+    "sum_score": 2,
+    "max_score": 1,
+    "count": 3,
+    "evidence": 1,
+    "sum_score_then_count": 2
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": false,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000006",
+   "split": "dev",
+   "category": "cross_chunk",
+   "question": "「源石引擎」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "selected_by": "dev",
+   "n_units": 19,
+   "n_chapters": 12,
+   "n_gold_chunks": 2,
+   "n_gold_in_ctx": 2,
+   "status": "ok",
+   "gold_chapters": [
+    "act17d0",
+    "act24side"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "act24side",
+    "act12d0",
+    "act47side",
+    "act13d5",
+    "act38side",
+    "main_ep15",
+    "act17d0",
+    "act6d5",
+    "main_ep16",
+    "act19side",
+    "memory_shotst",
+    "memory_toddi"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 3,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": false,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000007",
+   "split": "dev",
+   "category": "cross_chunk",
+   "question": "「蓄水炮」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "selected_by": "dev",
+   "n_units": 18,
+   "n_chapters": 13,
+   "n_gold_chunks": 2,
+   "n_gold_in_ctx": 2,
+   "status": "ok",
+   "gold_chapters": [
+    "memory_huang",
+    "memory_weedy"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "memory_weedy",
+    "act20side",
+    "memory_huang",
+    "main_ep06",
+    "act39side",
+    "act31side",
+    "main_ep07",
+    "act16side",
+    "main_ep10",
+    "act52side",
+    "memory_bubble",
+    "act14mini",
+    "act47side"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000008",
+   "split": "dev",
+   "category": "cross_chunk",
+   "question": "「卡萨斯」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "selected_by": "dev",
+   "n_units": 18,
+   "n_chapters": 10,
+   "n_gold_chunks": 2,
+   "n_gold_in_ctx": 2,
+   "status": "ok",
+   "gold_chapters": [
+    "rogue_rogue_6",
+    "roguelike_level_rogue6_ending_4"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "rogue_rogue_6",
+    "roguelike_level_rogue6_ending_4",
+    "act38side",
+    "act4d0",
+    "act18d0",
+    "act51side",
+    "memory_sunbr",
+    "main_ep02",
+    "main_ep14",
+    "act42side"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000009",
+   "split": "dev",
+   "category": "cross_chunk",
+   "question": "「古寺」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "selected_by": "dev",
+   "n_units": 19,
+   "n_chapters": 7,
+   "n_gold_chunks": 2,
+   "n_gold_in_ctx": 2,
+   "status": "ok",
+   "gold_chapters": [
+    "act40side",
+    "act49side"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "act40side",
+    "rogue_rogue_5",
+    "act49side",
+    "act31side",
+    "act42side",
+    "main_ep14",
+    "memory_sunbr"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000010",
+   "split": "dev",
+   "category": "cross_chunk",
+   "question": "「乌卡边境」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "selected_by": "dev",
+   "n_units": 18,
+   "n_chapters": 6,
+   "n_gold_chunks": 2,
+   "n_gold_in_ctx": 2,
+   "status": "ok",
+   "gold_chapters": [
+    "main_ep16",
+    "main_spst16"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "main_ep16",
+    "main_st17",
+    "act15mini",
+    "main_spst16",
+    "act7mini",
+    "act13side"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000011",
+   "split": "dev",
+   "category": "cross_chunk",
+   "question": "「汐斯塔火山」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "selected_by": "dev",
+   "n_units": 19,
+   "n_chapters": 3,
+   "n_gold_chunks": 4,
+   "n_gold_in_ctx": 2,
+   "status": "ok",
+   "gold_chapters": [
+    "act3d0",
+    "memory_buildr"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "act27side",
+    "act3d0",
+    "memory_buildr"
+   ],
+   "ranks": {
+    "sum_score": 2,
+    "max_score": 1,
+    "count": 2,
+    "evidence": 2,
+    "sum_score_then_count": 2
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000014",
+   "split": "dev",
+   "category": "cross_chunk",
+   "question": "「格劳克斯」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "selected_by": "dev",
+   "n_units": 19,
+   "n_chapters": 4,
+   "n_gold_chunks": 4,
+   "n_gold_in_ctx": 3,
+   "status": "ok",
+   "gold_chapters": [
+    "act7mini",
+    "memory_bluep",
+    "memory_glacus"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "act7mini",
+    "memory_glacus",
+    "memory_bluep",
+    "memory_indigo"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000016",
+   "split": "dev",
+   "category": "cross_chunk",
+   "question": "「银行」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "selected_by": "dev",
+   "n_units": 19,
+   "n_chapters": 2,
+   "n_gold_chunks": 2,
+   "n_gold_in_ctx": 0,
+   "status": "no_gold_in_context",
+   "gold_chapters": [],
+   "ranks": {},
+   "hit_at": {}
+  },
+  {
+   "question_id": "q-cx-000017",
+   "split": "dev",
+   "category": "cross_chunk",
+   "question": "「识字班」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "selected_by": "dev",
+   "n_units": 19,
+   "n_chapters": 9,
+   "n_gold_chunks": 2,
+   "n_gold_in_ctx": 2,
+   "status": "ok",
+   "gold_chapters": [
+    "memory_mitm",
+    "memory_nymph"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "memory_mitm",
+    "memory_nymph",
+    "main_ep13",
+    "memory_frostl",
+    "main_ep14",
+    "act42side",
+    "act46side",
+    "act51side",
+    "memory_meteo"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000020",
+   "split": "dev",
+   "category": "cross_chunk",
+   "question": "「恐鱼」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "selected_by": "dev",
+   "n_units": 20,
+   "n_chapters": 4,
+   "n_gold_chunks": 3,
+   "n_gold_in_ctx": 1,
+   "status": "ok",
+   "gold_chapters": [
+    "act17side"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "act17side",
+    "act52side",
+    "rogue_rogue_2",
+    "act18d3"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000021",
+   "split": "dev",
+   "category": "cross_chunk",
+   "question": "「嵯峨」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "selected_by": "dev",
+   "n_units": 21,
+   "n_chapters": 3,
+   "n_gold_chunks": 3,
+   "n_gold_in_ctx": 1,
+   "status": "ok",
+   "gold_chapters": [
+    "memory_saga"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "act16d5",
+    "act14mini",
+    "memory_saga"
+   ],
+   "ranks": {
+    "sum_score": 3,
+    "max_score": 1,
+    "count": 3,
+    "evidence": 2,
+    "sum_score_then_count": 3
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": false,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": false,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": false,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000022",
+   "split": "dev",
+   "category": "cross_chunk",
+   "question": "「杰克」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "selected_by": "dev",
+   "n_units": 19,
+   "n_chapters": 4,
+   "n_gold_chunks": 3,
+   "n_gold_in_ctx": 2,
+   "status": "ok",
+   "gold_chapters": [
+    "memory_jaksel",
+    "memory_tiger"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "memory_jaksel",
+    "act25side",
+    "act47side",
+    "memory_tiger"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000024",
+   "split": "dev",
+   "category": "cross_chunk",
+   "question": "「潘格尼尼」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "selected_by": "dev",
+   "n_units": 19,
+   "n_chapters": 2,
+   "n_gold_chunks": 2,
+   "n_gold_in_ctx": 1,
+   "status": "ok",
+   "gold_chapters": [
+    "act42side"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "act42side",
+    "memory_graceb"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000026",
+   "split": "dev",
+   "category": "cross_chunk",
+   "question": "「蒂比」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "selected_by": "dev",
+   "n_units": 19,
+   "n_chapters": 2,
+   "n_gold_chunks": 2,
+   "n_gold_in_ctx": 0,
+   "status": "no_gold_in_context",
+   "gold_chapters": [],
+   "ranks": {},
+   "hit_at": {}
+  },
+  {
+   "question_id": "q-cx-000027",
+   "split": "dev",
+   "category": "cross_chunk",
+   "question": "「动力炉」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "selected_by": "dev",
+   "n_units": 20,
+   "n_chapters": 6,
+   "n_gold_chunks": 2,
+   "n_gold_in_ctx": 1,
+   "status": "ok",
+   "gold_chapters": [
+    "act11d0"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "act28side",
+    "act11d0",
+    "act16mini",
+    "act13side",
+    "rogue_rogue_4",
+    "act25side"
+   ],
+   "ranks": {
+    "sum_score": 2,
+    "max_score": 3,
+    "count": 2,
+    "evidence": 1,
+    "sum_score_then_count": 2
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": false,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000029",
+   "split": "dev",
+   "category": "cross_chunk",
+   "question": "「收音机」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "selected_by": "dev",
+   "n_units": 19,
+   "n_chapters": 8,
+   "n_gold_chunks": 3,
+   "n_gold_in_ctx": 2,
+   "status": "ok",
+   "gold_chapters": [
+    "act22side",
+    "rogue_rogue_4"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "act21side",
+    "act21mini",
+    "act22side",
+    "act38side",
+    "memory_haak",
+    "main_ep17",
+    "rogue_rogue_3",
+    "rogue_rogue_4"
+   ],
+   "ranks": {
+    "sum_score": 3,
+    "max_score": 5,
+    "count": 3,
+    "evidence": 1,
+    "sum_score_then_count": 3
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": false,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": false,
+     "3": false,
+     "4": false,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": false,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": false,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000030",
+   "split": "dev",
+   "category": "cross_chunk",
+   "question": "「荒域」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "selected_by": "dev",
+   "n_units": 18,
+   "n_chapters": 4,
+   "n_gold_chunks": 2,
+   "n_gold_in_ctx": 2,
+   "status": "ok",
+   "gold_chapters": [
+    "act29side",
+    "act42side"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "act29side",
+    "act42side",
+    "act16side",
+    "act17d0"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000032",
+   "split": "dev",
+   "category": "cross_chunk",
+   "question": "「轮胎」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "selected_by": "dev",
+   "n_units": 20,
+   "n_chapters": 10,
+   "n_gold_chunks": 2,
+   "n_gold_in_ctx": 2,
+   "status": "ok",
+   "gold_chapters": [
+    "act38side",
+    "main_ep14"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "act38side",
+    "memory_coldst",
+    "memory_jnight",
+    "act12side",
+    "act32side",
+    "memory_wscoot",
+    "act45side",
+    "act47side",
+    "main_ep14",
+    "act53side"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 2,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900002",
+   "split": "dev",
+   "category": "cross_chunk",
+   "question": "「安妮塔」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "selected_by": "dev",
+   "n_units": 21,
+   "n_chapters": 1,
+   "n_gold_chunks": 3,
+   "n_gold_in_ctx": 0,
+   "status": "no_gold_in_context",
+   "gold_chapters": [],
+   "ranks": {},
+   "hit_at": {}
+  },
+  {
+   "question_id": "q-cx-900005",
+   "split": "dev",
+   "category": "cross_chunk",
+   "question": "「贝纳尔多」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "selected_by": "dev",
+   "n_units": 19,
+   "n_chapters": 1,
+   "n_gold_chunks": 4,
+   "n_gold_in_ctx": 1,
+   "status": "ok",
+   "gold_chapters": [
+    "act21side"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "act21side"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900008",
+   "split": "dev",
+   "category": "cross_chunk",
+   "question": "「豆豆」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "selected_by": "dev",
+   "n_units": 20,
+   "n_chapters": 13,
+   "n_gold_chunks": 2,
+   "n_gold_in_ctx": 2,
+   "status": "ok",
+   "gold_chapters": [
+    "memory_bstalk",
+    "memory_flower"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "memory_bstalk",
+    "act31side",
+    "rogue_month_chat_rogue_1_1",
+    "memory_flower",
+    "act13mini",
+    "memory_ctable",
+    "memory_cammou",
+    "act16side",
+    "memory_bubble",
+    "main_st09",
+    "act15d5",
+    "act25side",
+    "act47side"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900011",
+   "split": "dev",
+   "category": "cross_chunk",
+   "question": "「学生联合大会」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "selected_by": "dev",
+   "n_units": 19,
+   "n_chapters": 2,
+   "n_gold_chunks": 2,
+   "n_gold_in_ctx": 2,
+   "status": "ok",
+   "gold_chapters": [
+    "act51side",
+    "memory_headb2"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "act51side",
+    "memory_headb2"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900012",
+   "split": "dev",
+   "category": "cross_chunk",
+   "question": "「斯普莉雅」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "selected_by": "dev",
+   "n_units": 19,
+   "n_chapters": 2,
+   "n_gold_chunks": 2,
+   "n_gold_in_ctx": 0,
+   "status": "no_gold_in_context",
+   "gold_chapters": [],
+   "ranks": {},
+   "hit_at": {}
+  },
+  {
+   "question_id": "q-cx-900013",
+   "split": "dev",
+   "category": "cross_chunk",
+   "question": "「技术院」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "selected_by": "dev",
+   "n_units": 17,
+   "n_chapters": 4,
+   "n_gold_chunks": 3,
+   "n_gold_in_ctx": 3,
+   "status": "ok",
+   "gold_chapters": [
+    "act34side",
+    "act52side",
+    "main_ep15"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "act34side",
+    "main_ep15",
+    "act52side",
+    "rogue_rogue_2"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900014",
+   "split": "dev",
+   "category": "cross_chunk",
+   "question": "「图里卡姆」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "selected_by": "dev",
+   "n_units": 19,
+   "n_chapters": 10,
+   "n_gold_chunks": 3,
+   "n_gold_in_ctx": 3,
+   "status": "ok",
+   "gold_chapters": [
+    "act14side",
+    "act30side",
+    "memory_blackd"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "act14side",
+    "memory_blackd",
+    "act30side",
+    "act51side",
+    "memory_tecno",
+    "main_st17",
+    "act16side",
+    "act9d0",
+    "act33side",
+    "memory_bubble"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900016",
+   "split": "dev",
+   "category": "cross_chunk",
+   "question": "「宁辞秋」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "selected_by": "dev",
+   "n_units": 20,
+   "n_chapters": 4,
+   "n_gold_chunks": 4,
+   "n_gold_in_ctx": 4,
+   "status": "ok",
+   "gold_chapters": [
+    "act15side",
+    "act31side",
+    "act40side",
+    "act49side"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "act40side",
+    "act31side",
+    "act49side",
+    "act15side"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900017",
+   "split": "dev",
+   "category": "cross_chunk",
+   "question": "「日落街酒店」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "selected_by": "dev",
+   "n_units": 19,
+   "n_chapters": 11,
+   "n_gold_chunks": 3,
+   "n_gold_in_ctx": 3,
+   "status": "ok",
+   "gold_chapters": [
+    "main_ep12",
+    "main_st12",
+    "memory_morgan"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "main_ep12",
+    "memory_utage",
+    "memory_morgan",
+    "act37side",
+    "main_st12",
+    "act16side",
+    "act20mini",
+    "act15d5",
+    "act15side",
+    "act25side",
+    "act3d0"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900018",
+   "split": "dev",
+   "category": "cross_chunk",
+   "question": "「雄辩家」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "selected_by": "dev",
+   "n_units": 20,
+   "n_chapters": 11,
+   "n_gold_chunks": 2,
+   "n_gold_in_ctx": 2,
+   "status": "ok",
+   "gold_chapters": [
+    "act22side",
+    "act41side"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "main_ep09",
+    "act41side",
+    "act22side",
+    "act48side",
+    "main_ep15",
+    "main_ep10",
+    "main_st09",
+    "act46side",
+    "act16side",
+    "main_ep08",
+    "memory_bubble"
+   ],
+   "ranks": {
+    "sum_score": 2,
+    "max_score": 2,
+    "count": 3,
+    "evidence": 1,
+    "sum_score_then_count": 2
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": false,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900021",
+   "split": "dev",
+   "category": "cross_chunk",
+   "question": "「法伦」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "selected_by": "dev",
+   "n_units": 19,
+   "n_chapters": 16,
+   "n_gold_chunks": 3,
+   "n_gold_in_ctx": 3,
+   "status": "ok",
+   "gold_chapters": [
+    "act7d5",
+    "memory_blitz",
+    "memory_melan"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "memory_melan",
+    "act7d5",
+    "memory_blitz",
+    "memory_durnar",
+    "act42side",
+    "main_ep14",
+    "act46side",
+    "act4d0",
+    "act25side",
+    "act15mini",
+    "act19side",
+    "act34side",
+    "main_ep17",
+    "main_ep15",
+    "memory_bubble",
+    "memory_svrash"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900022",
+   "split": "dev",
+   "category": "cross_chunk",
+   "question": "「巫术」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "selected_by": "dev",
+   "n_units": 19,
+   "n_chapters": 10,
+   "n_gold_chunks": 2,
+   "n_gold_in_ctx": 0,
+   "status": "no_gold_in_context",
+   "gold_chapters": [],
+   "ranks": {},
+   "hit_at": {}
+  },
+  {
+   "question_id": "q-cx-900024",
+   "split": "dev",
+   "category": "cross_chunk",
+   "question": "「帕特」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "selected_by": "dev",
+   "n_units": 18,
+   "n_chapters": 2,
+   "n_gold_chunks": 2,
+   "n_gold_in_ctx": 0,
+   "status": "no_gold_in_context",
+   "gold_chapters": [],
+   "ranks": {},
+   "hit_at": {}
+  },
+  {
+   "question_id": "q-cx-900026",
+   "split": "dev",
+   "category": "cross_chunk",
+   "question": "「蒂姆」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "selected_by": "dev",
+   "n_units": 19,
+   "n_chapters": 9,
+   "n_gold_chunks": 3,
+   "n_gold_in_ctx": 3,
+   "status": "ok",
+   "gold_chapters": [
+    "act29side",
+    "act41side",
+    "memory_lessng"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "memory_lessng",
+    "main_ep10",
+    "memory_beewax",
+    "act16side",
+    "act41side",
+    "memory_bubble",
+    "act29side",
+    "act25side",
+    "main_ep12"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900027",
+   "split": "dev",
+   "category": "cross_chunk",
+   "question": "「炎魔」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "selected_by": "dev",
+   "n_units": 19,
+   "n_chapters": 8,
+   "n_gold_chunks": 4,
+   "n_gold_in_ctx": 3,
+   "status": "ok",
+   "gold_chapters": [
+    "main_ep13",
+    "main_ep14",
+    "memory_plosis"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "main_ep13",
+    "act15d0",
+    "rogue_rogue_4",
+    "main_ep14",
+    "act19side",
+    "act25side",
+    "main_st12",
+    "memory_plosis"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 3,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": false,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900030",
+   "split": "dev",
+   "category": "cross_chunk",
+   "question": "「勾吴」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "selected_by": "dev",
+   "n_units": 20,
+   "n_chapters": 7,
+   "n_gold_chunks": 2,
+   "n_gold_in_ctx": 2,
+   "status": "ok",
+   "gold_chapters": [
+    "memory_sqrrel",
+    "rogue_rogue_5"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "act16d5",
+    "memory_sqrrel",
+    "memory_nothin",
+    "act49side",
+    "rogue_rogue_5",
+    "act23side",
+    "act15side"
+   ],
+   "ranks": {
+    "sum_score": 2,
+    "max_score": 1,
+    "count": 2,
+    "evidence": 1,
+    "sum_score_then_count": 2
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000002",
+   "split": "holdout",
+   "category": "cross_chunk",
+   "question": "「扎罗」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "selected_by": "holdout",
+   "n_units": 19,
+   "n_chapters": 3,
+   "n_gold_chunks": 3,
+   "n_gold_in_ctx": 1,
+   "status": "ok",
+   "gold_chapters": [
+    "memory_whitw2"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "act38side",
+    "act21side",
+    "memory_whitw2"
+   ],
+   "ranks": {
+    "sum_score": 3,
+    "max_score": 3,
+    "count": 3,
+    "evidence": 3,
+    "sum_score_then_count": 3
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": false,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": false,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": false,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": false,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": false,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000012",
+   "split": "holdout",
+   "category": "cross_chunk",
+   "question": "「工程部干员」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "selected_by": "holdout",
+   "n_units": 18,
+   "n_chapters": 10,
+   "n_gold_chunks": 2,
+   "n_gold_in_ctx": 2,
+   "status": "ok",
+   "gold_chapters": [
+    "act13mini",
+    "memory_pudd"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "memory_pudd",
+    "memory_pinecn",
+    "memory_beagle",
+    "memory_hpsts",
+    "memory_greyy2",
+    "act53side",
+    "memory_serum",
+    "main_ep15",
+    "act38side",
+    "act13mini"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000013",
+   "split": "holdout",
+   "category": "cross_chunk",
+   "question": "「加斯特里尔」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "selected_by": "holdout",
+   "n_units": 18,
+   "n_chapters": 5,
+   "n_gold_chunks": 4,
+   "n_gold_in_ctx": 2,
+   "status": "ok",
+   "gold_chapters": [
+    "main_ep14",
+    "main_st14"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "main_ep14",
+    "act18mini",
+    "act37side",
+    "main_st14",
+    "act22side"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000015",
+   "split": "holdout",
+   "category": "cross_chunk",
+   "question": "「彼得」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "selected_by": "holdout",
+   "n_units": 18,
+   "n_chapters": 14,
+   "n_gold_chunks": 4,
+   "n_gold_in_ctx": 4,
+   "status": "ok",
+   "gold_chapters": [
+    "act29side",
+    "main_st17",
+    "memory_pinecn",
+    "memory_turdus"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "memory_turdus",
+    "main_st17",
+    "act38side",
+    "act29side",
+    "act51side",
+    "act42side",
+    "main_ep17",
+    "memory_pinecn",
+    "main_ep14",
+    "act10d5",
+    "act46side",
+    "memory_headb2",
+    "memory_bubble",
+    "memory_absin"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000018",
+   "split": "holdout",
+   "category": "cross_chunk",
+   "question": "「维伊」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "selected_by": "holdout",
+   "n_units": 18,
+   "n_chapters": 12,
+   "n_gold_chunks": 2,
+   "n_gold_in_ctx": 2,
+   "status": "ok",
+   "gold_chapters": [
+    "main_ep17",
+    "main_st17"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "main_ep17",
+    "act38side",
+    "act20mini",
+    "main_st17",
+    "main_st16",
+    "act42side",
+    "act16side",
+    "memory_sqrrel",
+    "main_ep12",
+    "act29side",
+    "act52side",
+    "memory_bubble"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 1,
+    "evidence": 8,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": false,
+     "3": false,
+     "4": false,
+     "5": false,
+     "6": false,
+     "7": false,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000019",
+   "split": "holdout",
+   "category": "cross_chunk",
+   "question": "「弗雷德」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "selected_by": "holdout",
+   "n_units": 19,
+   "n_chapters": 7,
+   "n_gold_chunks": 2,
+   "n_gold_in_ctx": 0,
+   "status": "no_gold_in_context",
+   "gold_chapters": [],
+   "ranks": {},
+   "hit_at": {}
+  },
+  {
+   "question_id": "q-cx-000023",
+   "split": "holdout",
+   "category": "cross_chunk",
+   "question": "「白轮」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "selected_by": "holdout",
+   "n_units": 20,
+   "n_chapters": 9,
+   "n_gold_chunks": 2,
+   "n_gold_in_ctx": 2,
+   "status": "ok",
+   "gold_chapters": [
+    "main_ep10",
+    "main_ep14"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "main_ep10",
+    "main_ep14",
+    "act42side",
+    "act46side",
+    "act39side",
+    "act19side",
+    "main_ep17",
+    "main_ep15",
+    "memory_bubble"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000025",
+   "split": "holdout",
+   "category": "cross_chunk",
+   "question": "「集市」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "selected_by": "holdout",
+   "n_units": 20,
+   "n_chapters": 13,
+   "n_gold_chunks": 2,
+   "n_gold_in_ctx": 2,
+   "status": "ok",
+   "gold_chapters": [
+    "act12d0",
+    "act15mini"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "memory_rfalcn",
+    "act18d0",
+    "act23side",
+    "act15mini",
+    "act15d5",
+    "act27side",
+    "act19mini",
+    "act12d0",
+    "act16d5",
+    "memory_confes",
+    "rogue_rogue_5",
+    "act17mini",
+    "act47side"
+   ],
+   "ranks": {
+    "sum_score": 4,
+    "max_score": 4,
+    "count": 4,
+    "evidence": 1,
+    "sum_score_then_count": 4
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": false,
+     "3": false,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": false,
+     "3": false,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": false,
+     "3": false,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": false,
+     "3": false,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000028",
+   "split": "holdout",
+   "category": "cross_chunk",
+   "question": "「滑板」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "selected_by": "holdout",
+   "n_units": 20,
+   "n_chapters": 8,
+   "n_gold_chunks": 3,
+   "n_gold_in_ctx": 3,
+   "status": "ok",
+   "gold_chapters": [
+    "memory_acdrop",
+    "memory_medic2",
+    "memory_pinecn"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "memory_pinecn",
+    "memory_medic2",
+    "memory_acdrop",
+    "act27side",
+    "memory_fang",
+    "memory_jnight",
+    "rogue_rogue_6",
+    "act16side"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000031",
+   "split": "holdout",
+   "category": "cross_chunk",
+   "question": "「切斯特」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "selected_by": "holdout",
+   "n_units": 18,
+   "n_chapters": 3,
+   "n_gold_chunks": 3,
+   "n_gold_in_ctx": 3,
+   "status": "ok",
+   "gold_chapters": [
+    "act14side",
+    "act30side",
+    "act46side"
+   ],
+   "chapters_ordered_by_sum_score": [
+    "act14side",
+    "act46side",
+    "act30side"
+   ],
+   "ranks": {
+    "sum_score": 1,
+    "max_score": 1,
+    "count": 1,
+    "evidence": 1,
+    "sum_score_then_count": 1
+   },
+   "hit_at": {
+    "sum_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "max_score": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "evidence": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    },
+    "sum_score_then_count": {
+     "2": true,
+     "3": true,
+     "4": true,
+     "5": true,
+     "6": true,
+     "7": true,
+     "8": true
+    }
+   }
+  }
+ ],
+ "run_digest": "368076003e56c68f9077a5c39138f35e90833a092b3aa47213bb920631731eca"
+}

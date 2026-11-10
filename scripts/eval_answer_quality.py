@@ -23,6 +23,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import sys
 import time
@@ -106,8 +107,32 @@ def tally(rows: list[dict], arms: list[str]) -> dict:
     return {"per_category": per_cat, "totals": totals}
 
 
+def _options_for_report(options: dict | None) -> dict:
+    """报告里记 options 的可打印形态。
+
+    `bridge_calibration` 是一整张映射表（几十个桶），原样塞进报告会让每份 JSON
+    多出十几 KB，且它本身可以从 `--calibration` 指的路径重新读到。
+    这里只记一个摘要（键名 + 桶数 + 阈值），既保留可追溯性又不灌水。
+    """
+    if not options:
+        return {}
+    out = dict(options)
+    calib = out.get("bridge_calibration")
+    if isinstance(calib, dict):
+        out["bridge_calibration"] = {
+            "feature_keys": list(calib.get("feature_keys") or ()),
+            "n_buckets": len(calib.get("buckets") or ()),
+            "digest": hashlib.sha256(
+                json.dumps(calib, ensure_ascii=False, sort_keys=True).encode("utf-8")
+            ).hexdigest()[:16],
+        }
+    return out
+
+
 def run(generation_id: str, gold_path: Path, *, split: str, limit: int,
-        token_budget: int | None, prod: bool = False) -> dict:
+        token_budget: int | None, prod: bool = False,
+        extra_options: dict | None = None,
+        calibration_path: Path | None = None) -> dict:
     """跑一份 split。
 
     `prod=True` 时走 `pipeline.PROD_PROFILE`（生产档：引文定位 + 桥接 + 图证据预留
@@ -121,6 +146,22 @@ def run(generation_id: str, gold_path: Path, *, split: str, limit: int,
     options: dict | None = None
     if prod:
         options = pipeline_mod.apply_prod_profile(pipe)
+    # ---- 实验开关（默认空 = 与历史读数逐位等价）----------------------------
+    # 只允许**追加/覆盖** `ask_once` 的 options 键，不允许改任何默认值。
+    # `extra_options` 为 `None` 或空 dict 时，`options` 与改造前完全相同。
+    # 这条是为 W1 的 cap 扫档服务的：不同 cap 必须能在同一条命令上切换，
+    # 而不是各自改一份脚本（改脚本就会让"实验"和"实现"变成两份事实源）。
+    if extra_options:
+        options = dict(options or {})
+        options.update(extra_options)
+    # ---- W2 校准表（默认不读，给了路径才注入）------------------------------
+    # **不在 pipeline 里隐式读文件**：那会让"同一份 options"在不同机器上行为不同
+    # （一条路径存在与否就能改结果），也让复现性无法从 options 本身证明。
+    # 这里显式读、显式注入，路径进报告。
+    if calibration_path is not None:
+        from arkrag import bridge_calib as _bridge_calib
+        options = dict(options or {})
+        options["bridge_calibration"] = _bridge_calib.load_mapping(calibration_path)
     budget = int(token_budget) if token_budget is not None else \
         int(pipe["retriever"].budget["max_context_tokens"])
     pipe["retriever"].budget["max_context_tokens"] = budget
@@ -164,7 +205,7 @@ def run(generation_id: str, gold_path: Path, *, split: str, limit: int,
         "split": split,
         "token_budget": budget,
         "prod_profile": bool(prod),
-        "prod_options": dict(options or {}),
+        "prod_options": _options_for_report(options),
         "n_items": len(rows),
         "elapsed_ms": round(elapsed, 1),
         "per_item_ms": round(elapsed / len(rows), 1) if rows else 0.0,
@@ -212,10 +253,40 @@ def main(argv: list[str] | None = None) -> int:
                     help="按生产档跑（引文定位 + 桥接 + 图证据预留 + 预算取 PROD_PROFILE）；"
                          "不传则是历史默认档，6000/12000 档的旧读数靠它复现")
     ap.add_argument("--json", default="", help="报告落盘路径")
+    ap.add_argument("--option", action="append", default=[], metavar="K=V",
+                    help="实验开关，可重复：追加/覆盖 ask_once 的 options 键。"
+                         "默认空 = 与历史读数逐位等价。"
+                         "例：`--option max_direct_units=14`（W1 cap）。"
+                         "值会被解析成 int/bool/str（'true'/'false' -> bool）。")
+    ap.add_argument("--calibration", default="",
+                    help="W2：bridge_calib 映射表 JSON 路径。给了就注入 "
+                         "options['bridge_calibration']。不传则 options 里没有这个键"
+                         "（`top1_margin` 会因此全部 fail-closed 拒答）。")
     args = ap.parse_args(argv)
 
+    extra: dict = {}
+    for raw in args.option:
+        if "=" not in raw:
+            print(f"[2] --option 需要 K=V 形式，收到 {raw!r}", file=sys.stderr)
+            return 2
+        k, _, v = raw.partition("=")
+        k, v = k.strip(), v.strip()
+        if not k:
+            print(f"[2] --option 的键为空：{raw!r}", file=sys.stderr)
+            return 2
+        low = v.lower()
+        if low in ("true", "false"):
+            extra[k] = (low == "true")
+        else:
+            try:
+                extra[k] = int(v)
+            except ValueError:
+                extra[k] = v
+
     rep = run(args.generation, Path(args.gold_set), split=args.split,
-              limit=args.limit, token_budget=args.token_budget, prod=args.prod)
+              limit=args.limit, token_budget=args.token_budget, prod=args.prod,
+              extra_options=extra or None,
+              calibration_path=Path(args.calibration) if args.calibration else None)
     print_report(rep)
     if args.json:
         out = Path(args.json)
