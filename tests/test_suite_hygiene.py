@@ -1246,7 +1246,7 @@ class TestSuiteSizeIsMonotonic:
     # 所以 v2 更严"，而真实原因是**引用根本没接上**。
     # 现在按入口名分流传参（`resolve_v2_entry` + `SHIPPED_V2_ENTRY`），
     # 并把 `judge_v2_entry` / `judge_v2_call` 写进报告，让"用了什么输入"可核对。
-    N = 2390
+    N = 2403
 
     def test_declared_count_matches_actual(self) -> None:
         """用 pytest 自己数一遍当前收集到的用例数，与本文件登记值比对。"""

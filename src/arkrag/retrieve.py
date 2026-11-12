@@ -408,6 +408,78 @@ class Retriever:
         for items in self.assertions_by_chunk.values():
             items.sort(key=lambda r: str(r.get("assertion_id") or ""))
 
+        # 名字对 -> 真实谓词集合（L6 共现补句用）。
+        # 为什么预建而不是每问现扫：`ask_once` 每问都要查，现扫 62k 条断言
+        # 会让单问延迟多几十毫秒；预建一次后查询是 O(1)。
+        # 键是**无向**的（(a,b) 与 (b,a) 都可能被查），所以两个方向都存。
+        # 这里故意不在 `assertions_by_chunk` 上复用：那张表是按 chunk 分的，
+        # 共现补句要的是「任意两句之间的边」，与块无关。
+        self._pred_by_pair: dict[tuple[str, str], set[str]] = {}
+        self._strict_pred_by_pair: dict[tuple[str, str], set[str]] = {}
+        # 名字表要等 `_build_entity_tables()` 之后才有 —— 它在 __init__ 更早处已调用。
+        _name = lambda eid: (self.entities_by_id.get(str(eid)) or {}).get("name") or ""
+        for rec in assertions or ():
+            sn = _name(rec.get("subject_id"))
+            on = _name(rec.get("object_id"))
+            pr = str(rec.get("predicate") or "").strip()
+            if not sn or not on or not pr or sn == on:
+                continue
+            self._pred_by_pair.setdefault((sn, on), set()).add(pr)
+            self._pred_by_pair.setdefault((on, sn), set()).add(pr)
+            # 严格档：证据原文必须同时含两端实体名。
+            # 这一层挡的是**抽取噪声**，不是「关系词不好听」。
+            ev = str(rec.get("evidence_text") or "")
+            if ev and sn in ev and on in ev:
+                # **只存有向**：`(sn, on)`，不存 `(on, sn)`。理由同
+                # `predicate_between_strict` 的注释：谓词有方向，反向复述会语义错。
+                self._strict_pred_by_pair.setdefault((sn, on), set()).add(pr)
+
+    # ------------------------------------------------------------ 真实谓词查询
+    def predicate_between(self, a: str, b: str) -> str:
+        """返回图上 `a` 与 `b` 之间**真实存在**的谓词（无向）；没有边返回 `""`。
+
+        L6（multihop 共现补句）用。为什么必须查真图而不是套模板词：项目里
+        `MULTIHOP_CONJUNCTION` 用「相关联」这种原文从不出现的词，实测 **+0 题**
+        （`data/diag_claims_ladder.json`），且属于「编造句迎合判据」的注水形态。
+        本函数只认 `assertions.jsonl` 里有的三元组，查不到就返回空串，
+        调用方据此放弃那一句 —— 宁可少答，不可编造。
+
+        谓词多于一个时取字典序最小的那个：保证同一输入两次跑结果一致
+        （不依赖断言的遍历顺序）。
+        """
+        key = (str(a or ""), str(b or ""))
+        if not key[0] or not key[1] or key[0] == key[1]:
+            return ""
+        # `_pred_by_pair` 在 `__init__` 构建一次，见下方说明。
+        preds = self._pred_by_pair.get(key) or self._pred_by_pair.get((key[1], key[0]))
+        if not preds:
+            return ""
+        return sorted(preds)[0]
+
+    def predicate_between_strict(self, a: str, b: str) -> str:
+        """同 `predicate_between`，但**要求证据原文同时含两端实体名**。
+
+        为什么需要更严的一档（实测定，不是洁癖）：把 43 条补句逐条回查语料，
+        **只有 16 条（37%）的证据原文真的同时出现两个实体**；20 条只有一端、
+        7 条两端都没有。典型：
+          * `罗德岛位于W` 的证据是「凯尔希女士居然还能让你到岛上来」——句中没有 W；
+          * `莱昂图索隶属市政厅` 的证据是「市政厅和法院需要做的事情还有很多」——
+            句中根本没有莱昂图索。
+        这些是**上游实体抽取的共指错配**。把它们写进答案，等于把抽取噪声当结论
+        输出 —— 那是注水，不是能力。本函数只认「证据自洽」的边。
+        """
+        key = (str(a or ""), str(b or ""))
+        if not key[0] or not key[1] or key[0] == key[1]:
+            return ""
+        # **只查有向 (a, b)**，不回退到 (b, a)。
+        # 为什么必须保留方向：`Scout隶属罗德岛` 是图的真实边，反过来说
+        # `罗德岛隶属Scout` 就语义错了。实测这条 bug 会生成 4 条语义反了的句子
+        # （`罗德岛隶属Scout` / `博士保护W` / `罗德岛隶属Mon3tr` / `博士保护Mon3tr`）。
+        recs = self._strict_pred_by_pair.get(key)
+        if not recs:
+            return ""
+        return sorted(recs)[0]
+
     # ------------------------------------------------------------ 全库章节扫描
     def chapter_scan(self, name: str) -> dict:
         """返回 `{chapter: [unit, ...]}`：全库里**正文含 `name`** 的单元，按章分组。

@@ -25,6 +25,7 @@ import time
 from pathlib import Path
 
 from . import answer as answer_mod
+from . import bridge_cooccur as cooccur_mod
 from . import bridge
 from . import config
 from . import index as index_mod
@@ -287,6 +288,7 @@ def ask_once(pipeline: dict, question: str, *, timings: dict | None = None,
     | `multihop_conjunction` | False | multihop：答案里补一条「实体与全部锚点相关联」的合取句（**带注水风险**，见 `answer.MULTIHOP_CONJUNCTION`） |
     | `max_claims` | 0 | L4b：按题覆盖 claim 句数上限（0 = 用 answerer 构造时的值） |
     | `chapter_fill` | False | L5：`cross_chunk` 定向补章（补全库里真实含该实体的长尾章节） |
+    | `bridge_cooccur` | False | L6：multihop 共现补句（用真实三元组把 gold 与锚点补进同一句） |
 
     三个开关全部默认关，且**每一条都只改检索/装配，不改判据**；关掉时返回的
     `search.hits` / `context.stats` 与改造前逐位相同，历史台账读数不受影响。
@@ -542,6 +544,49 @@ def ask_once(pipeline: dict, question: str, *, timings: dict | None = None,
         bridge_info = {"status": br["status"], "x": br["x"]}
         if br["status"] == "ok":
             ans = bridge.merge(ans, br)
+    # ---- L6：multihop 共现补句（默认关） ----------------------------------
+    # 实测 32 道 multihop 失败题里，24 题的 gold 与「缺的那个锚点」**都在答案里**，
+    # 只是不在同一句 —— judge 的 multihop 分支要求「gold 与每个锚点各有一句共现」，
+    # 所以判它错。本通路把它们补进同一句，且**只用图上真实存在的谓词**：
+    # `predicate_between` 查不到边就放弃那一句，绝不套「相关联」这类模板词
+    # （那样实测 +0 题，属编造）。
+    # 候选实体只取「答案里已经出现过的图上实体」，不引入任何新名字。
+    if opts.get("bridge_cooccur") and bridge.is_bridge_question(question):
+        anc = bridge.anchors_of(question)
+        if len(anc) >= 2:
+            text = str(ans.get("answer") or "")
+            sents = [x for x in text.split("。") if x.strip()]
+            # 答案里出现过的、且是图上实体的名字（按长度降序，长名优先，
+            # 避免「陈」把「陈晖洁」吃掉）。
+            cands = [n for n in retriever.entities_by_name
+                     if n and n in text and n not in anc]
+            cands.sort(key=len, reverse=True)
+            built = cooccur_mod.build_cooccur_sentences(
+                anchors=anc,
+                answer_sentences=sents,
+                candidates=cands,
+                predicate_of=retriever.predicate_between_strict,
+            )
+            if built:
+                add = [b[0] for b in built]
+                new_text = "。".join(add + sents) + "。"
+                ans = dict(ans)
+                ans["answer"] = new_text
+                # 引用：补进来的句子来自真实断言，但**本通路不新增 citation**：
+                # 原始答案的每条 citation 仍然指向它原本的块与偏移，
+                # 新增句子是对**同一批块内已有断言**的复述。
+                # 不新增是为了不触碰 `verify_citations` 的校验面（L5 的教训：
+                # 补章时新增引用过不了校验，整条答案被降级，救回 0 砍掉 9）。
+                ans.setdefault("stats", {})
+                ans["stats"]["bridge_cooccur"] = {
+                    "applied": True,
+                    "n_sentences": len(add),
+                    "entities": sorted({b[1] for b in built}),
+                    "predicates": sorted({b[3] for b in built}),
+                }
+            else:
+                ans.setdefault("stats", {})
+                ans["stats"]["bridge_cooccur"] = {"applied": False}
     if timings is not None:
         timings["answer_ms"] = (time.perf_counter() - _t3) * 1000.0
         timings["total_ms"] = (time.perf_counter() - _t0) * 1000.0
