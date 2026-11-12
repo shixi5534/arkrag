@@ -110,3 +110,30 @@ data/rerank_features.json
 
 # 一次性的表格打印小抄（读 `data/_tmp_rerank_opt.json`，该文件本身已在上面被忽略）。
 /_tab.py
+
+# ---- 受限令牌下由 `mkdir(mode=0o700)` 造出的不可访问目录（2026-11-12 纳管）------
+# 成因见 `tests/conftest.py` 里 `tmp_path` 覆盖的 docstring：Windows 上给 mkdir 传
+# mode 会重写 DACL、不继承父目录授权，于是当前受限令牌**连列举都做不到**
+# （`scandir` 报 WinError 5），`rd /s /q`、`icacls /reset` 也一并被拒。
+# 它们删不掉，但也不该让 `git status` 每次刷 4 条 warning，所以在这里显式忽略。
+# 真要清掉得提权或在完整权限的会话里 `rd /s /q`——不影响任何构建与测试。
+/chk_mode700/
+/probe_dir/
+/_pytest_tmp/
+/.tmp_pytest/
+/_pt_%RANDOM%/
+/_bt_probe/
+/_probe_plain_dir/
+
+# ---- 发布包与打包中间产物 ---------------------------------------------------
+# dist/ 是一次性发布产物：ArkRAG-YYYYMMDD.zip（约 62 MB）加上解包后的
+# dist/arkrag/（约 290 MB）。后者含**完整世代副本**（chunks.jsonl 66 MB、
+# lexical.json 102 MB、assertions.jsonl 66 MB、graph.json 30 MB、adjacency.json
+# 25 MB）、19 个 __pycache__/*.pyc、以及 data/arkrag/logs/queries.jsonl。
+#
+# 这些都是**已有文件的副本**：世代产物本身已在上面被各自规则忽略，日志也在
+# data/arkrag/logs/ 那条里。所以 dist 不带来任何新信息，只带来 357 MB。
+#
+# 不写这一条的风险是实打实的：git add -A 会把 357 MB 一次灌进仓库，
+# 而 .git 一旦吃进去，删掉也还在历史里。
+/dist/

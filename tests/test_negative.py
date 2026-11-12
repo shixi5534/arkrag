@@ -39,7 +39,10 @@ def expect(cond: bool, message: str) -> None:
 
 
 def synthetic(payload: dict, name: str) -> Path:
-    tmp = Path(tempfile.mkdtemp()) / name
+    # 走 `config.make_temp_dir()` 而不是 `tempfile.mkdtemp()`：后者用
+    # `mode=0o700`，在 Windows 受限令牌下建出的目录不继承 DACL，连列举与写入
+    # 都会 `WinError 5`。理由与实测对照见 `config.make_temp_dir` 的 docstring。
+    tmp = config.make_temp_dir("neg-") / name
     tmp.parent.mkdir(parents=True, exist_ok=True)
     tmp.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8", newline="\n")
     return tmp
@@ -218,7 +221,8 @@ def test_cache_key_excludes_normalizer() -> None:
 
 def test_circuit_open_blocks_dispatch() -> None:
     """熔断命中后剩余块一个都不许发起调用。"""
-    with tempfile.TemporaryDirectory() as tmp:
+    tmp = config.make_temp_dir("neg-circuit-")
+    try:
         marker = Path(tmp) / "circuit_open.json"
         marker.write_text(json.dumps({"reason": "quota"}), encoding="utf-8")
         original = config.CIRCUIT_OPEN_PATH
@@ -237,6 +241,10 @@ def test_circuit_open_blocks_dispatch() -> None:
             expect(all(r["cache"] == "circuit" for r in results), "熔断后的块未标记为 circuit")
         finally:
             config.CIRCUIT_OPEN_PATH = original
+    finally:
+        import shutil
+
+        shutil.rmtree(tmp, ignore_errors=True)
 
 
 def extract_dispatch(client, chunk):

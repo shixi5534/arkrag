@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import os
+import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -30,6 +31,33 @@ GRAPH_SCHEMA_IDENTITY = "ark-rag-3"
 def _env_path(name: str, default: Path) -> Path:
     raw = os.environ.get(name)
     return Path(raw) if raw else default
+
+
+def make_temp_dir(prefix: str) -> Path:
+    """在系统临时区建一个唯一目录，**不传 mode**，返回 Path。
+
+    ## 为什么不直接用 `tempfile.mkdtemp()`
+
+    `mkdtemp()` 内部用 `mode=0o700`。在 Windows 上，只要给建目录传了 mode，
+    Python 就**不再从父目录继承 DACL**，而是新写一个只授权所有者、不含
+    `S-1-4-*`（受限令牌那条授权）的 ACL。本机 DSH 受限令牌正是靠 `S-1-4-*`
+    拿访问权的，于是目录一建好，**建它的进程自己都列举不了它**
+    （`scandir` → `PermissionError: [WinError 5]`），既写不进去也删不掉。
+
+    实测对照（同一父目录）：
+        mkdir(mode=0o700) -> scandir 失败
+        makedirs()        -> scandir 正常
+
+    在干净环境（能继承 DACL 的普通令牌）下两者语义相同，所以这样建目录
+    **不改变任何真实环境下的行为**，只是让受限令牌下也能用。
+
+    唯一性用 `pid + uuid4` 保证，等价于 `mkdtemp` 的保证强度。
+    """
+    import uuid
+
+    base = Path(tempfile.gettempdir()) / f"{prefix}{os.getpid()}-{uuid.uuid4().hex[:12]}"
+    os.makedirs(base)  # 不传 mode：继承父目录 DACL
+    return base
 
 
 def rel_to_root(path) -> str:

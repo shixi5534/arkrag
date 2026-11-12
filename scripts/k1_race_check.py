@@ -81,7 +81,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
     print(
         "结论：有并发冲突。检查 scripts/k1_checks.py 里 check_rollback_tested() 的 "
-        "tmp_dir 是否又变回了固定路径（应为 tempfile.mkdtemp(prefix=\"k1_rollback_probe_\")）"
+        "tmp_dir 是否又变回了固定路径（应为 config.make_temp_dir(prefix=\"k1_rollback_probe_\")）"
     )
     return 1
 

@@ -111,17 +111,45 @@ def atomic_write_json(path: Path, obj: Any, *, indent: int | None = 2) -> None:
 
 
 def append_jsonl(path: Path, record: dict) -> None:
-    """追加写一行。日志类文件要求「行不撕裂」，故单次 write + flush + fsync。"""
+    """追加写一行。日志类文件要求「行不撕裂」，且**不许静默丢行**。
+
+    ## 为什么不是单纯 `O_APPEND` + `os.write`
+
+    原实现只靠 `O_APPEND` 保证"落在文件末尾"，这在 POSIX 上成立，但 **Windows
+    上不成立**：CPython 用 `_O_APPEND` 让 CRT 在每次写前 seek 到末尾，而两个写者
+    各自 `open` 时拿到的是同一个末尾偏移，于是**后写覆盖先写**。实测（8 线程 ×
+    300 条）只落 1940～2072 行，丢 300～460 行，**无异常、无撕裂行、`os.write`
+    报满长**——这种"成功返回但数据没了"是最坏的一类缺陷。
+
+    `server.py` 的审计日志（`audit()` / `log_query()`）正是多线程写这里：
+    管理操作的可追溯性会被静默破坏，而"回滚了但没人知道是谁做的"正是这个项目
+    最不能接受的失败形态。
+
+    ## 修法
+
+    两层串行：进程内按路径加一把锁（挡住同进程多线程），外层再套 `file_lock()`
+    （挡住多进程，Windows 走 `msvcrt.locking`、POSIX 走 `flock`）。
+    代价是每行一次加锁，对审计/查询日志这个量级可以忽略；正确性优先。
+    """
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
     line = (json.dumps(record, ensure_ascii=False) + "\n").encode("utf-8")
-    # O_APPEND 保证每次写落在文件末尾，多个写者不会互相覆盖
-    fd = os.open(str(path), os.O_WRONLY | os.O_CREAT | os.O_APPEND, 0o644)
-    try:
-        os.write(fd, line)
-        os.fsync(fd)
-    finally:
-        os.close(fd)
+
+    key = str(path)
+    with _PROC_LOCKS_GUARD:
+        proc_lock = _PROC_LOCKS.setdefault(key, _ProcLock())
+
+    with proc_lock:
+        with file_lock(path):
+            fd = os.open(str(path), os.O_WRONLY | os.O_CREAT | os.O_APPEND, 0o644)
+            try:
+                # 持锁期间显式 seek 到末尾：即便平台忽略 O_APPEND 语义，
+                # 这一段也不会写到别处去。
+                os.lseek(fd, 0, os.SEEK_END)
+                os.write(fd, line)
+                os.fsync(fd)
+            finally:
+                os.close(fd)
 
 
 class _ProcLock:

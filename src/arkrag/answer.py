@@ -836,6 +836,20 @@ def _claim_supported_by_line(claim: dict, text: str) -> dict:
     }
 
 
+def _offset_or_missing(raw: Any) -> int:
+    """把引用里的偏移读成 int；缺失/None/非数字一律返回 -1（= 视为缺偏移）。
+
+    单独一个函数是因为 `verify_citations` 与 `quote_locate` 一类调用都要同一口径：
+    **缺偏移是"这条引用不合格"，绝不能升级成服务端 500。**
+    """
+    if raw is None or isinstance(raw, bool):
+        return -1
+    try:
+        return int(raw)
+    except (TypeError, ValueError):
+        return -1
+
+
 def verify_citations(answer: dict, chunks) -> dict:
     """逐条校验引用，并把不合格的引用剔除。
 
@@ -854,8 +868,13 @@ def verify_citations(answer: dict, chunks) -> dict:
     for cite in answer.get("citations") or []:
         cid = str(cite.get("chunk_id") or "")
         ev = str(cite.get("evidence") or "")
-        start = int(cite.get("start", -1))
-        end = int(cite.get("end", -1))
+        # `int(x.get("start", -1))` 只挡住"键不存在"，挡不住"键在、值是 None"。
+        # 后者对 JSON 来说完全合法（`{"start": null}`），而 `int(None)` 抛
+        # `TypeError` —— 这会让 `/query` 直接 500，而不是"这条引用不合规"。
+        # `judge.citations_support()` 早就按 `offsets_missing` 处理同一形态，
+        # 两处口径必须一致：缺偏移是**引用不合格**，不是服务端故障。
+        start = _offset_or_missing(cite.get("start"))
+        end = _offset_or_missing(cite.get("end"))
         rec = by_id.get(cid)
         reason = ""
         if not cid:

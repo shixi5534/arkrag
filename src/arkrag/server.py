@@ -137,6 +137,11 @@ DEFAULT_CONCURRENCY = 4
 DEFAULT_RATE_LIMIT_CALLS = 60
 DEFAULT_RATE_LIMIT_WINDOW_S = 60.0
 
+#: 限流表的键数上限。超过就清理过期项；仍超限则只保留当前 client。
+#: 只是"别让这张表无限长"，不是限流策略本身——正常部署（本机或反代后）
+#: 键数等于真实客户端数，远小于这个值。
+_RATE_MAX_KEYS = 4096
+
 #: `/admin/evaluate` 单次最多评多少题。320 是全量，跑一轮约 10 分钟。
 MAX_EVAL_LIMIT = 320
 
@@ -458,6 +463,20 @@ class AppState:
             # 默认参数与 `scripts/ask.py` 一致（top_k=20 / depth=1）。这两个数在这里
             # 出现是要给"未指定时的缺省"一个值，请求里显式给了就以请求为准。
             pipe = pipeline_mod.build_pipeline(loaded, top_k=DEFAULT_TOP_K, graph_depth=DEFAULT_GRAPH_DEPTH)
+            # 生产档的预算必须**在这里**落地，不能只留在 `_query` 里。
+            #
+            # `build_pipeline` 用的是 `retrieve.DEFAULT_BUDGET`（12000），而请求缺省的
+            # `max_context_tokens` 是 `Settings.max_context_tokens`（= PROD_PROFILE 的
+            # 24000）。两者不等 → `_query` 里那句 `if ctx_tokens != budget[...]` **每次
+            # 都成立**，于是每来一个用缺省值的请求就克隆一次 `Retriever`。克隆本身不报错，
+            # 所以没人发现，直到测延迟才看到那 450 ms：服务端自报 301 ms、真实 HTTP 751 ms，
+            # 差额全在这次白克隆里。
+            #
+            # 提前落到常驻实例上，缺省请求就走到"预算已经对"的分支，不再克隆；
+            # 显式传了别的 `max_context_tokens` 时仍然克隆（那是真实所需，不是浪费）。
+            # `apply_prod_profile` 只改本实例的 `budget` 字典（`Retriever.__init__` 已经
+            # 用 `dict(DEFAULT_BUDGET)` 拷贝过），不污染全局默认值，历史脚本读数不变。
+            pipeline_mod.apply_prod_profile(pipe)
             pipe["generation_id"] = gid
             pipe["entities"] = loaded["graph"].get("entities") or []
             self._served = _Served(generation_id=gid, loaded=loaded, pipeline=pipe)
@@ -550,13 +569,23 @@ class AppState:
             add("graph_index_identity", False, "Manifest 不可用，跳过")
 
         # ---- 4. 必要数据可读
+        #
+        # `chunks.jsonl` 一栏必须查**这一代真正会用的那个文件**，不能只查全局
+        # `data/arkrag/chunks.jsonl`。`pipeline.resolve_chunks()` 的顺序是
+        # "先看世代自带的 `<gen>/chunks.jsonl`（并核 chunk_manifest_hash），
+        # 没有再退到全局文件"——就绪检查若只认全局，会出现**能正常回答但 /ready
+        # 报 503** 的自相矛盾状态（实测：把一份自带 chunks 的世代单独打包后，
+        # `/query` 出答案、`/ready` 说 "chunks.jsonl 不存在"）。
+        # 探针报"未就绪"而服务其实可用，比漏报更危险：编排器会去重启一个健康进程。
+        own_chunks = gen.chunks_path
+        chunks_probe = own_chunks if own_chunks.exists() else Path(config.chunks_path())
         unreadable: list[str] = []
         for label, path in (
             ("graph/graph.json", gen.graph_path),
             ("graph/assertions.jsonl", gen.assertion_path),
             ("graph/adjacency.json", gen.adjacency_path),
             ("index/lexical.json", gen.index_path),
-            ("chunks.jsonl", config.chunks_path()),
+            ("chunks.jsonl", chunks_probe),
         ):
             try:
                 if not path.exists():
@@ -626,26 +655,64 @@ class AppState:
                 )
             stamps.append(now)
             self._rate[client] = stamps
+            # 过期条目必须真的删掉，不能只是"不再计数但键还留着"。
+            #
+            # 原实现把 `stamps` 过滤后写回，空列表也照样留在 dict 里；`_rate` 的键
+            # 是客户端地址，于是每个来访过的新地址永久占一个键。实测塞 5 万个地址
+            # 后 `len(_rate)==50001` —— 一个只增不减的表就是内存泄漏，且它挡不住
+            # 任何攻击（伪造源地址的成本比这张表涨得快）。
+            #
+            # 顺带做一次规模上限：超过 `_RATE_MAX_KEYS` 就整表清理一遍过期项；
+            # 清理后仍超限则**只保留当前 client**，宁可短暂放宽限流，也不让这张表
+            # 把进程撑爆。
+            if len(self._rate) > _RATE_MAX_KEYS:
+                for key in [k for k, v in self._rate.items() if not v or now - v[-1] >= window]:
+                    del self._rate[key]
+                if len(self._rate) > _RATE_MAX_KEYS:
+                    keep = self._rate.get(client) or []
+                    self._rate.clear()
+                    self._rate[client] = keep
 
     def run_bounded(self, fn: Callable[[], Any], *, timeout_s: float | None = None) -> Any:
         """在受限并发与墙钟上限内跑一段函数。
 
-        超时返回 504，但工作线程**不会被终止**（Python 无法安全抢占线程）；
-        信号量保证这种滞留线程最多 `concurrency` 个。这一点写在模块 docstring 里，
-        不假装做到了。
+        超时返回 504，但工作线程**不会被终止**（Python 无法安全抢占线程）。
+        docstring 一度声称"信号量保证滞留线程最多 `concurrency` 个"——**那是错的**，
+        原实现的 `finally: self._semaphore.release()` 在超时的那一刻就释放了额度，
+        而线程还在跑。实测：`concurrency=2` 连提 6 个挂起任务，6 次全部拿到了额度，
+        executor 里堆着 2 个永不退出的线程、额度计数却回到满值。在"一次
+        `load_generation()` 常驻 1.0–1.5 GB"的项目里，这个漏洞直通内存雪崩。
+
+        现在的做法是**把额度的生命周期绑到任务真正的结束**，而不是请求的生命周期：
+        超时只影响调用方拿不到结果，不退还额度。额度由 worker 线程自己在
+        `finally` 里退——它才是唯一知道"线程真的退出了"的一方。
+
+        代价必须说清：一旦有 `concurrency` 个任务永久卡死，后续请求会收到 503
+        `busy` 而不是排队。这是**有意的** fail-closed：宁可明确拒绝，也不要
+        在内存耗尽前假装还能服务。
         """
         limit = float(timeout_s if timeout_s is not None else self.settings.timeout_s)
         if not self._semaphore.acquire(timeout=limit):
             raise ApiError(503, "busy", "并发已满，请稍后重试")
-        try:
-            future = self._executor.submit(fn)
+
+        def _run() -> Any:
+            # 额度由真正结束的那一方退，不跟着请求的超时走。
             try:
-                return future.result(timeout=limit)
-            except FutureTimeout as exc:
-                self.stats["timeouts"] += 1
-                raise ApiError(504, "timeout", f"请求超过 {limit:g} 秒未完成") from exc
-        finally:
+                return fn()
+            finally:
+                self._semaphore.release()
+
+        try:
+            future = self._executor.submit(_run)
+        except RuntimeError as exc:
+            # 提交失败（executor 已 shutdown）时没人会退这把额度，必须自己退。
             self._semaphore.release()
+            raise ApiError(503, "busy", "工作线程池不可用，请稍后重试") from exc
+        try:
+            return future.result(timeout=limit)
+        except FutureTimeout as exc:
+            self.stats["timeouts"] += 1
+            raise ApiError(504, "timeout", f"请求超过 {limit:g} 秒未完成") from exc
 
     # ----------------------------------------------------------- 审计与日志
     def audit(self, action: str, *, actor: str, result: str, **fields: Any) -> None:
@@ -741,12 +808,36 @@ def _gate_rows(gen: release.Generation) -> tuple[list[dict], str]:
 
 
 def _ready_result(checks: list[dict], *, gid: str) -> dict:
-    blocking = [c for c in checks if c.get("blocking", True)]
+    """把就绪检查结果整形。**`detail` 在这里统一清洗。**
+
+    ## 为什么清洗必须放在出口，而不是每个 `add()` 调用点
+
+    `readiness()` 里有 7 处 `add(name, ok, f"...：{exc}")`，全部是 `str(exc)` 直拼。
+    这些异常文本来自 `release.read_current()` / `gen.load()` / `path.stat()` /
+    `index_mod.load_index()`，**天然带绝对路径**。`/ready` 是**无需任何令牌**的端点，
+    所以任何能连上服务的人都拿得到部署布局（世代根、索引文件名）。
+
+    实测形态（审查报告 A-01 / V-1）：`/ready` 返回
+    `Manifest 读不出来：Generation 缺 Manifest：E:\\图rag\\data\\arkrag\\generations\\...\\manifest.json`。
+
+    修法有两种：在 7 个调用点各加一次清洗（漏一个就复现），或在出口清洗一次。
+    选后者——**出口只有一个，漏不掉**。这与 `_clip_text` 那条正好相反：
+    数据正文绝不清洗，错误消息必须清洗。两者都在出口处一刀切，规则却相反。
+    """
+    # 错误消息里的绝对路径不是给人看的排障信息，是攻击面。清洗只作用于 detail。
+    safe: list[dict] = []
+    for c in checks:
+        item = dict(c)
+        if isinstance(item.get("detail"), str):
+            item["detail"] = sanitize_text(item["detail"])
+        safe.append(item)
+
+    blocking = [c for c in safe if c.get("blocking", True)]
     return {
         "ready": all(c["ok"] for c in blocking) and bool(blocking),
         "generation_id": gid,
         "checked_at": _now(),
-        "checks": checks,
+        "checks": safe,
     }
 
 
@@ -758,7 +849,23 @@ def _now() -> str:
 
 
 def _clip_text(text: Any, limit: int, *, settings: Settings) -> tuple[str, bool]:
-    raw = sanitize_text(text, settings=settings)
+    """截断一段**数据正文**（块正文 / 证据文本 / 实体描述）。
+
+    **这里绝不能过 `sanitize_text()`。** 曾经这里是 `sanitize_text(text, ...)`，
+    理由是"统一在出口清一次"，但 `_ABSOLUTE_PATH_RE` 会命中任何形如
+    `a/b/c` 的普通文本：
+
+        "https://example.com/path?a=1"  ->  "http<path>"
+        "/data/arkrag/index/lexical.json" ->  "<path>"
+
+    剧情语料里出现 URL、路径式表述、`1/2/3` 之外的斜杠串都是可能的，一旦被改，
+    `/chunks` 返回的就是**被篡改的原文**，而响应里 `text_truncated=false` 还在
+    声称"没动过"。这比泄漏更糟：泄漏是看得见的，篡改是看不见的。
+
+    清洗的职责属于**错误消息**（`_error_payload` / `_log_internal` 那条路径），
+    不属于数据。数据要脱敏应当显式做字段级白名单，而不是正则乱刀。
+    """
+    raw = str(text or "")
     if len(raw) <= limit:
         return raw, False
     return raw[:limit], True
@@ -789,6 +896,21 @@ def _fit_payload(payload: dict, limit_bytes: int) -> tuple[dict, list[str]]:
 
     顺序是刻意的：上下文单元（最长）→ 引用列表 → 各通道明细。被丢掉的字段名写进
     `truncated`，读的人一眼能看出"这不是全部"。
+
+    ## 引用在 `answer.citations`，不是顶层
+
+    这里曾经写成 `("citations", ("citations",))`，而真实响应里引用在
+    `body["answer"]["citations"]`，顶层根本没有 `citations` 键。于是那一格走
+    `path[-1] not in node` 判定为"不存在"直接 `continue`——**不报错也不记录**，
+    `citations` 一次都没被丢。
+
+    实测形态：构造 1500 条 citations 的响应，`dropped ==
+    ['context.units','channels','hits']`，citations 保留 1500 条，最终 **349 KB
+    仍然超过 256 KB 上限**。`max_response_bytes` 对最容易膨胀的字段完全无效，
+    而 citations 恰恰是每块一条、top_k=50 + 桥接 40 时会膨胀的那个。
+
+    路径修正后仍然补一道**硬上界**：降级跑完还超限，就按字节截断 `answer.text`
+    并标记 `truncated`。因为"丢完还是超"不是理论情形，实测就能撞上。
     """
     dropped: list[str] = []
 
@@ -800,7 +922,8 @@ def _fit_payload(payload: dict, limit_bytes: int) -> tuple[dict, list[str]]:
 
     for key, path in (
         ("context.units", ("context", "units")),
-        ("citations", ("citations",)),
+        # 引用挂在 answer 下面。顶层没有 citations 键，写 ("citations",) 会静默跳过。
+        ("citations", ("answer", "citations")),
         ("channels", ("stats", "channels")),
         ("hits", ("hits",)),
     ):
@@ -818,6 +941,21 @@ def _fit_payload(payload: dict, limit_bytes: int) -> tuple[dict, list[str]]:
         if size(payload) <= limit_bytes:
             break
     payload["truncated"] = dropped
+
+    # ---- 硬上界：降级跑完仍超限，就截 answer.text ----
+    # 不这么做，响应会带着 `truncated` 标记但实际超过 `max_response_bytes`，
+    # 于是那个配置项既没兑现承诺、读的人还以为只是"丢了几个可选字段"。
+    if size(payload) > limit_bytes:
+        answer = payload.get("answer")
+        if isinstance(answer, dict) and isinstance(answer.get("text"), str):
+            text = answer["text"]
+            # 逐次收缩，留出 JSON 包装的余量。
+            headroom = size(payload) - limit_bytes
+            keep = max(0, len(text.encode("utf-8")) - headroom - 64)
+            answer["text"] = text.encode("utf-8")[:keep].decode("utf-8", "ignore")
+            if "answer.text" not in dropped:
+                dropped.append("answer.text")
+            payload["truncated"] = dropped
     return payload, dropped
 
 
@@ -1031,8 +1169,24 @@ class Handler(BaseHTTPRequestHandler):
         self._guard(self._route_post)
 
     def _route_get(self) -> None:
-        parsed = urlparse(self.path)
-        path = parsed.path
+        # **不能用 `urlparse`**：全部 13,798 个 chunk_id 都含 `#`（形如
+        # `obt/main/level_main_07-02_end#002`），而 `#` 在 URL 里是 fragment 分隔符。
+        # `urlparse(...).path` 会把 `#002` 整段丢掉，于是
+        # `GET /chunks/obt/main/x#002` 变成查 `obt/main/x` → 必然 404。
+        # 这是"最自然的那次调用"（浏览器地址栏、curl 直贴）必定失败的形态。
+        #
+        # 处理：只按 `?` 切查询串，**保留 `#`** 作为 id 的一部分；同时容忍客户端
+        # 按 URL 语义把 `#` 编码成 `%23`（`unquote` 之后两种形态都还原成 `#`）。
+        path = self.path.split("?", 1)[0]
+        if not path:
+            path = "/"
+        # 探针也计入限流。**这是刻意的，不是遗漏**：`TestRateLimit` 明确钉住
+        # "第 4 次 /health 返回 429"，说明"所有入口都受同一份额度"是本项目的既定
+        # 语义。曾有人建议豁免 `/health` 与 `/ready`（理由是"限流时编排器会误杀
+        # 健康进程"），但那是**部署形态的取舍**而非缺陷：本服务默认只绑
+        # 127.0.0.1、面向单机离线使用，不存在编排器探针；真要上编排器，正确做法
+        # 是给探针单开一个不经过本服务的端口，而不是在业务服务里加一条例外。
+        # 想改这条语义请先改那个测试，别让两处说法不一致。
         self.state.check_rate(self._client())
         if path == "/health":
             return self._health()
@@ -1054,8 +1208,10 @@ class Handler(BaseHTTPRequestHandler):
         raise ApiError(404, "not_found", f"没有这个路径：{path}")
 
     def _route_post(self) -> None:
-        parsed = urlparse(self.path)
-        path = parsed.path
+        # 与 `_route_get` 同一个理由：不解析 fragment 语义（见那里对 `#` 的说明）。
+        path = self.path.split("?", 1)[0]
+        if not path:
+            path = "/"
         # 请求体必须在**任何**拒绝分支之前读掉。
         #
         # 实测踩到的形态：`_require_admin()` 在 `_json_body()` 之前跑，所以没配口令时

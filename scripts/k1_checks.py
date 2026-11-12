@@ -747,7 +747,11 @@ def check_rollback_tested(ctx: dict) -> dict:
     # 用 `tempfile.mkdtemp()` 而不是在 `data/arkrag` 下加进程号：进程号会被
     # 复用，而这个目录出现在冻结基线目录里本身就不该。`mkdtemp` 保证
     # 唯一且落在系统临时区；`finally` 里整目录清掉。
-    tmp_dir = Path(tempfile.mkdtemp(prefix="k1_rollback_probe_"))
+    # 用 `config.make_temp_dir()` 而不是 `tempfile.mkdtemp()`：后者内部走
+    # `mode=0o700`，在 Windows 受限令牌下建出的目录**连列举都做不到**
+    # （不继承 DACL → 丢掉 S-1-4-* 授权），随后 `write_text` 直接 WinError 5。
+    # 唯一性与"落在系统临时区"的保证不变，见该函数 docstring 的实测对照。
+    tmp_dir = config.make_temp_dir(prefix="k1_rollback_probe_")
     tmp_pointer = tmp_dir / "current.json"
     original = release.CURRENT_PATH
     problems: list[str] = []

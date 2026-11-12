@@ -655,6 +655,44 @@ def verify_generation(gen: Generation) -> list[str]:
                         f"chunk_manifest_hash Manifest={want[:16]} 文件={got[:16]}"
                     )
 
+    # ---- 门禁结论：**报告里写过非 PASS 就不许发布** ----------------------
+    #
+    # 此前这一层只核"报告字节还是不是 Manifest 记的那份"（`gate_report_hash`），
+    # 从不读报告里的 `verdict`。两个后果：
+    #
+    #   1. `publish()` 的 docstring 写"发布前自己再查一遍"，但查的全是**字节自洽**，
+    #      不看门禁结论——一份 `verdict:"FAIL"` 的报告能 100% 通过校验。标准构建
+    #      路径有 `build_generation.py` 的 `hard_fails` 拦着，所以平时不炸；但任何
+    #      **旁路**（手工把世代标成 READY 再 publish，或 `rollback` 到一代被改过的
+    #      历史产物）就只剩这一层，而这一层原本不判好坏。
+    #   2. 报告缺失时 `gate_report_hash` 是空串；若 Manifest 里也是空串，
+    #      `"" == ""` 会判"一致"——空对空的假通过。
+    #
+    # 判定口径与 `build_generation.py` 完全一致（`verdict != "PASS"` 即不通过），
+    # 不另造第二套。
+    if not gen.gate_report_path.exists():
+        problems.append(f"门禁报告不存在：{gen.gate_report_path}")
+    else:
+        try:
+            rows = json.loads(gen.gate_report_path.read_text("utf-8"))
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+            problems.append(f"门禁报告不可解析：{exc}")
+        else:
+            if isinstance(rows, dict):
+                rows = rows.get("gates") or rows.get("items") or []
+            if not isinstance(rows, list) or not rows:
+                problems.append("门禁报告为空：没有可核的门禁行")
+            else:
+                bad = [
+                    str(r.get("name") or "?")
+                    for r in rows
+                    if isinstance(r, dict) and str(r.get("verdict") or "") != "PASS"
+                ]
+                if bad:
+                    problems.append(
+                        f"门禁未全部 PASS（{len(bad)}/{len(rows)} 项）：{', '.join(bad[:5])}"
+                    )
+
     return problems
 
 

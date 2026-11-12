@@ -1246,7 +1246,44 @@ class TestSuiteSizeIsMonotonic:
     # 所以 v2 更严"，而真实原因是**引用根本没接上**。
     # 现在按入口名分流传参（`resolve_v2_entry` + `SHIPPED_V2_ENTRY`），
     # 并把 `judge_v2_entry` / `judge_v2_call` 写进报告，让"用了什么输入"可核对。
-    N = 2403
+    # 2403 → 2487（A 阶段：agent 接入层）：新增 tests/test_agent_api.py 的 80 个用例，
+    # 该文件进入 `TEST_FILES` 后让四个 parametrize（本文件 61/130/150/184 行）
+    # 各多一项（+4）。2403 + 80 + 4 = 2487，与 `--collect-only` 实测一致。
+    # 这次换来的门是「协议层的失败形态」——它们不崩、只是静默错：
+    #   ① stdout 混进一行 `print()` 会让 MCP 客户端报"JSON 解析失败"，
+    #      而它不会说是谁写的。用例用**真子进程**跑 scripts/serve_mcp.py，
+    #      逐行断言 stdout 里每个行都能 json.loads。
+    #   ② OpenAPI 里声明的 `/tools/<name>` 若没被服务端实现，文档就成了一张假菜单；
+    #      用例遍历文档里的每个工具路径并真的 POST 一次。
+    #   ③ 在"还没读请求体"的分支上拒绝（403/404/406）会让客户端收到 RST
+    #      而不是那条状态码——实测这一条在我自己写的 406 上就复现了一次。
+    #   ④ 管理类工具在没配 ARKRAG_ADMIN_TOKEN 时必须 fail-closed（503），
+    #      且令牌不许出现在任何 input_schema 里。
+    #   ⑤ query/search 的 top_k 与 graph_depth 必须是同一份 schema 对象，
+    #      不是两次拷贝——拷贝就会漂移，而漂移后生效的是较松的那份。
+    #
+    # 2487 -> 2489：新增 `TestFitPayload` 的两条用例，守的是审查报告 A-09。
+    # 它们各自能变红（已做反向突变验证：把 citations 路径改回顶层
+    # `("citations",)`，两条同时 FAIL）：
+    #   ① `test_drops_citations_at_their_real_path_under_answer`
+    #      —— 引用在 `answer.citations`，原清单写成顶层 `("citations",)`，
+    #      于是那一格静默 continue，`max_response_bytes` 对最易膨胀字段完全无效。
+    #      上一版夹具用的是顶层形状，所以这条 bug 一直没被抓到。
+    #   ② `test_result_never_exceeds_the_limit_after_degrade`
+    #      —— 降级跑完仍可能超限（实测 349 KB > 256 KB），`truncated` 的语义
+    #      于是退化成"我知道我超了但就这样发"。
+    #
+    # 2489 -> 2491：新增 `TestReadyChecks` 的两条用例，守的是审查报告 A-01。
+    #   ① `test_error_detail_does_not_leak_absolute_paths`
+    #      —— `/ready` 是**无鉴权**端点，`readiness()` 里 7 处
+    #      `add(..., f"...：{exc}")` 全是 `str(exc)` 直拼，异常天然带绝对路径。
+    #      修法选的是在 `_ready_result()` **出口**清洗一次（出口只有一个，漏不掉），
+    #      而不是指望 7 个调用点各自记得。已做反向突变：去掉清洗后立刻 FAIL。
+    #   ② `test_clean_detail_is_left_alone`
+    #      —— 清洗只碰路径，不许把普通中文说明改写掉。这条与 A-03 的
+    #      `_clip_text` 方向相反（数据正文绝不清洗、错误消息必须清洗），
+    #      两条规则都在出口一刀切，所以各有一条门钉住。
+    N = 2491
 
     def test_declared_count_matches_actual(self) -> None:
         """用 pytest 自己数一遍当前收集到的用例数，与本文件登记值比对。"""

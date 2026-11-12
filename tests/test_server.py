@@ -311,8 +311,17 @@ class TestHealthIsNotReady:
         这与 `/ready` 分开的理由就在这里——合并之后"活着但数据坏了"会被报成健康。
         """
         gid, data_dir = servable
-        # 把块正文整个删掉：/ready 会挂，/health 必须仍然 200
-        (data_dir / "chunks.jsonl").unlink()
+        # 把块正文删掉：/ready 会挂，/health 必须仍然 200
+        #
+        # 删的必须是**这一代真正会用的那一份**。`build_generation.py` 现在把块正文
+        # 随世代落盘（`<gen>/chunks.jsonl`），而 `pipeline.resolve_chunks()` **只认
+        # 自带的那份**；全局 `data/arkrag/chunks.jsonl` 只是没有自带文件时的退路。
+        # 只删全局文件，服务其实照常可用 —— 那样这条用例就测不到"未就绪"，会变成
+        # 一个永远绿的假门。所以这里两处都删，确保真的没有块正文可用。
+        (data_dir / "chunks.jsonl").unlink(missing_ok=True)
+        own = release.Generation(gid).chunks_path
+        if own.exists():
+            own.unlink()
         with _serve(gid) as client:
             status, _h, body = client.get("/health")
             assert status == 200
@@ -332,6 +341,52 @@ class TestHealthIsNotReady:
 
 
 class TestReadyChecks:
+    def test_error_detail_does_not_leak_absolute_paths(self):
+        """`/ready` 是无鉴权端点，`detail` 里的绝对路径必须被清洗。
+
+        ## 这条门守的是一个"7 处漏一处就复现"的形态
+
+        `readiness()` 里有 7 处 `add(name, ok, f"...：{exc}")`，全部是 `str(exc)`
+        直拼。这些异常来自 `release.read_current()` / `gen.load()` / `path.stat()` /
+        `index_mod.load_index()`，**天然带绝对路径**。而 `/ready` 不需要任何令牌。
+
+        审查报告 A-01 / V-1 的实测输出就是
+        `Manifest 读不出来：Generation 缺 Manifest：E:\\图rag\\data\\arkrag\\generations\\...\\manifest.json`。
+
+        修法选的是**在出口清洗一次**而不是在 7 个调用点各加一次——出口只有一个，漏不掉。
+        这条用例直接喂一个带盘符的 detail 给 `_ready_result()`，不依赖任何真实世代目录。
+        """
+        leak = (
+            r"Manifest 读不出来：Generation 缺 Manifest："
+            r"E:\图rag\data\arkrag\generations\g-xxx\manifest.json"
+        )
+        out = server._ready_result(
+            [{"id": "manifest_complete", "ok": False, "blocking": True,
+              "detail": leak}],
+            gid="g-xxx",
+        )
+        detail = out["checks"][0]["detail"]
+        assert "E:\\" not in detail, (
+            f"detail 仍含盘符路径：{detail!r}。"
+            f"清洗要放在 `_ready_result()` 出口，而不是指望 7 个 add() 调用点各自记得。"
+        )
+        assert "图rag\\data" not in detail, f"detail 仍含仓库布局：{detail!r}"
+        # 判定逻辑不许被清洗带偏：不 ok 的阻塞项仍然把 ready 压成 false。
+        assert out["ready"] is False
+
+    def test_clean_detail_is_left_alone(self):
+        """清洗只碰路径，不该把普通中文说明改写成别的东西。
+
+        与 `_clip_text` 那条正好相反：数据正文绝不清洗，错误消息必须清洗。
+        两条规则都在出口一刀切，方向相反，所以各有一条门钉住。
+        """
+        msg = "门禁报告缺 verdict 字段"
+        out = server._ready_result(
+            [{"id": "gates_pass", "ok": False, "blocking": True, "detail": msg}],
+            gid="g-1",
+        )
+        assert out["checks"][0]["detail"] == msg
+
     def test_all_blocking_checks_pass_on_a_good_generation(self, servable):
         gid, _data = servable
         with _serve(gid) as client:
@@ -969,6 +1024,61 @@ class TestFitPayload:
         assert dropped[0] == "context.units"
         assert out["truncated"] == dropped
         assert out["context"]["units"] == []
+
+    def test_drops_citations_at_their_real_path_under_answer(self):
+        """引用挂在 `answer.citations` 下，不是顶层。
+
+        ## 这条门守的是一个静默失效
+
+        原实现的丢弃清单写的是 `("citations", ("citations",))`，而真实响应里
+        引用在 `body["answer"]["citations"]`，**顶层没有 `citations` 键**。
+        于是那一格走 `path[-1] not in node` 判定为"不存在"直接 `continue`：
+        不报错、不记录、`citations` 一次都没被丢。
+
+        实测形态：1500 条 citations 时 `dropped ==
+        ['context.units','channels','hits']`，citations 保留 1500 条，
+        最终 349 KB 仍超过 256 KB 上限——`max_response_bytes` 对最容易膨胀的
+        字段完全无效，而 citations 恰恰是每块一条、top_k=50 + 桥接 40 时膨胀的那个。
+
+        上一版测试用 `{"citations": [...]}` 这种**顶层**形状，所以从来没抓到它。
+        这里按真实响应形状构造：引用在 `answer` 下。
+        """
+        payload = {
+            "answer": {"text": "答案", "citations": [{"c": "y" * 400} for _ in range(20)]},
+            "context": {"units": []},
+            "stats": {"channels": []},
+            "hits": [],
+        }
+        out, dropped = server._fit_payload(payload, 2000)
+        assert "citations" in dropped, (
+            f"citations 没被丢：dropped={dropped}。"
+            f"检查丢弃清单里 citations 的路径是不是写成了顶层 (\"citations\",)"
+        )
+        assert out["answer"]["citations"] == []
+
+    def test_result_never_exceeds_the_limit_after_degrade(self):
+        """降级跑完仍超限时，必须真的把响应压进上限。
+
+        `truncated` 标记的语义是"这不是全部"，不是"我知道我超限了但就这样发"。
+        实测原实现丢完 citations 之外的字段后仍可能 349 KB > 256 KB，
+        于是那个配置项既没兑现承诺、读的人还以为只是丢了几个可选字段。
+        """
+        limit = 4000
+        payload = {
+            "answer": {"text": "长" * 3000, "citations": [{"c": "y" * 200}] * 50},
+            "context": {"units": [{"u": "z" * 200}] * 50},
+            "stats": {"channels": [{"c": 1}]},
+            "hits": [{"h": 1}],
+        }
+        before = len(json.dumps(payload, ensure_ascii=False).encode("utf-8"))
+        assert before > limit, "夹具本身必须超限，否则这条门测不到东西"
+        out, dropped = server._fit_payload(payload, limit)
+        after = len(json.dumps(out, ensure_ascii=False).encode("utf-8"))
+        assert after <= limit, (
+            f"降级后仍然 {after} B > 上限 {limit} B："
+            f"dropped={dropped}。必须补按字节截断的硬上界。"
+        )
+        assert dropped, "压进上限了就必须说明丢了什么"
 
 
 class TestIntField:
