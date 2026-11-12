@@ -278,8 +278,15 @@ def ask_once(pipeline: dict, question: str, *, timings: dict | None = None,
     | `search_top_k` | `pipeline["top_k"]` | 覆盖本次检索的候选数 |
     | `max_direct_units` | 0 | W1：直接证据单元进入上下文的条数上限（0 = 现状） |
     | `chapter_cap` | 0 | W3：`cross_chunk` 章节答案的章节数上限（0 = 现状） |
+    | `chapter_rank` | `"score"` | L2：`chapter_cap` 打开时的章节排序键（`"score"` = 现状） |
     | `bridge_policy` | `"unique_only"` | W2：桥接候选策略（`unique_only` = 现状；`top1_margin` = 概率化 top-1） |
     | `bridge_calibration` | None | W2：`bridge_calib` 的映射表（仅 `top1_margin` 会读；不做隐式文件读取） |
+    | `alias_answer` | False | L3：别名规范化答案通路（「「X」的规范名是什么」按图别名表反查） |
+    | `evidence_window` | 0 | L4：证据窗口装填（0 = 现状；1 = 长尾单元只按含断言的轮次计价） |
+    | `window_head_units` | None | L4：前 N 个单元装整块（None = `retrieve.WINDOW_HEAD_DEFAULT`；0 合法） |
+    | `multihop_conjunction` | False | multihop：答案里补一条「实体与全部锚点相关联」的合取句（**带注水风险**，见 `answer.MULTIHOP_CONJUNCTION`） |
+    | `max_claims` | 0 | L4b：按题覆盖 claim 句数上限（0 = 用 answerer 构造时的值） |
+    | `chapter_fill` | False | L5：`cross_chunk` 定向补章（补全库里真实含该实体的长尾章节） |
 
     三个开关全部默认关，且**每一条都只改检索/装配，不改判据**；关掉时返回的
     `search.hits` / `context.stats` 与改造前逐位相同，历史台账读数不受影响。
@@ -404,6 +411,19 @@ def ask_once(pipeline: dict, question: str, *, timings: dict | None = None,
         ctx_kwargs["graph_reserve_tokens"] = reserve
     if max_direct:
         ctx_kwargs["max_direct_units"] = max_direct
+    # ---- L4：证据窗口（默认 0 = 关，不传关键字） --------------------------
+    # 同一套写法：只有非默认值才拼进 `**kwargs`，默认路径连调用形状都与改造前
+    # 一样（既有 `build_context` 替身不会 TypeError）。
+    #
+    # **不门控在题型上**：窗口只改"长尾单元算多少 token"，不改任何判据，
+    # 对哪些题型有效是端到端才能回答的问题——在这里按题型门控等于用未验证的
+    # 假设去限制一个未验证的改动，两级不确定叠在一起就没人能归因了。
+    # 头部整块的条数由 `window_head_units` 单独给（0 是合法值，表示整批按窗口
+    # 计价），所以这里只在真的传入时才拼关键字，不用 `or` 把 0 吞掉。
+    if opts.get("evidence_window"):
+        ctx_kwargs["evidence_window"] = 1
+        if opts.get("window_head_units") is not None:
+            ctx_kwargs["window_head_units"] = int(opts["window_head_units"])
     context = retriever.build_context(
         found["hits"], expanded["expansions"], query_analysis=qa, **ctx_kwargs)
     if timings is not None:
@@ -423,6 +443,58 @@ def ask_once(pipeline: dict, question: str, *, timings: dict | None = None,
     ans_kwargs: dict = {}
     if chapter_cap:
         ans_kwargs["chapter_cap"] = chapter_cap
+    # ---- L2：章节排序键（默认 `"score"` = 现状，不传关键字） ----------------
+    # 与 `chapter_cap` 同一套写法：非默认值才拼进 `**kwargs`，这样默认档连
+    # `answer()` 的调用形状都与改造前一样（既有替身不会 TypeError）。
+    #
+    # **不额外门控在 `chapter_cap` 上**：`chapter_rank` 只在真要截断时才被读取
+    # （`_chapter_answer` 里 `cap > 0` 分支），所以 cap=0 时传了也是空转。
+    # 不门控的代价是"传了个不起作用的键"，门控的代价是**静默吞掉取值** ——
+    # 后者更坏：调用方以为开了、读数不变，会去查别处。这里选前者。
+    chapter_rank = str(opts.get("chapter_rank") or answer_mod.CHAPTER_RANK_DEFAULT)
+    if chapter_rank != answer_mod.CHAPTER_RANK_DEFAULT:
+        ans_kwargs["chapter_rank"] = chapter_rank
+    # ---- L5：`cross_chunk` 定向补章（默认关，非默认才拼关键字） --------------
+    # 为什么需要扫全库：`_chapter_answer` 只看**本次上下文单元**，而长尾章节
+    # （某实体在全库只出现 1 次的章）向量检索召不回来。实测 10 道 cross_chunk
+    # 失败题全是「缺 1 个 gold 章节」，而那些块在全库里都存在。
+    # 回调由这里注入，`answer.py` 不碰磁盘 —— 与 `bridge_calibration` 同一条纪律：
+    # 回答层不许有隐式 I/O，否则「同一输入两次跑」会依赖磁盘状态。
+    if opts.get("chapter_fill"):
+        ans_kwargs["chapter_fill"] = True
+        ans_kwargs["chapter_scan"] = retriever.chapter_scan
+    # ---- L3：别名规范化答案通路（默认关，不传关键字） --------------------
+    # 与 `chapter_cap` / `max_direct_units` 同一处置：**只有显式开启时才拼
+    # `alias_context` 关键字**，默认路径连调用形状都与改造前一样，任何既有
+    # `answer()` 替身（测试桩、旧版实现）都不会因为多一个关键字参数而 TypeError。
+    #
+    # 传的是 `retriever.query_context`（`query.QueryContext`）：它持有与本次
+    # 查询**同一张**别名表（`_alias_owner_map` 的产物），回答侧反查规范名时
+    # 不会出现"索引里有 `罗德岛制药公司`、查询侧拆成两个名字"这种对不齐。
+    # **不在这里读任何文件**：pipeline 是每问都走的路径，隐式 I/O 会让
+    # "同一输入两次跑"依赖磁盘状态。
+    if opts.get("alias_answer"):
+        ans_kwargs["alias_context"] = getattr(retriever, "query_context", None)
+    # ---- multihop 多锚点合取装配（默认关，不传关键字） --------------------
+    # 与 `chapter_cap` / `max_direct_units` / `alias_answer` 同一处置：**只有显式
+    # 开启时才拼关键字**，默认路径连调用形状都与改造前一样，任何既有 `answer()`
+    # 替身（测试桩、旧版实现）都不会因为多一个关键字参数而 TypeError。
+    #
+    # 门控：只对**多跳题**生效。判据与 `bridge` 共用同一个 `is_bridge_question`
+    # （实测 96/96 全命中 multihop、其余七类 0 道），这里显式门控是为了让
+    # "这个旋钮影响谁"在代码里可读，而不是靠读 `answer()` 内部实现才知道。
+    #
+    # ⚠️ 这条通路**天然带注水风险**（合取句是装配出来的，不是原文三元组），
+    # 记账口径见 `answer.MULTIHOP_CONJUNCTION` 上方那段模块级注释。
+    if opts.get("multihop_conjunction") and bridge.is_bridge_question(question):
+        ans_kwargs["multihop_conjunction"] = True
+    # ---- L4b：按题覆盖 claim 句数上限（默认 0 = 不传关键字，调用形状不变）----
+    # L4 证据窗口把进上下文的单元数抬高后，`MAX_CLAIMS=8` 变成真正的瓶颈：
+    # 参与竞争的 claim 变多，gold 句更容易被挤出前 8。实测 16 题因此从 pass 变 fail。
+    # 这个旋钮默认 0，不传就不会有任何行为变化。
+    max_claims_opt = int(opts.get("max_claims") or 0)
+    if max_claims_opt > 0:
+        ans_kwargs["max_claims"] = max_claims_opt
     ans = pipeline["answerer"].answer(
         question,
         context,

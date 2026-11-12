@@ -302,7 +302,8 @@ class QueryContext:
     到别的世代上。
     """
 
-    __slots__ = ("claims", "name_table", "rel_table", "dropped_synonyms", "term_count")
+    __slots__ = ("claims", "name_table", "rel_table", "dropped_synonyms", "term_count",
+                 "names_by_id")
 
     def __init__(self, entities, aliases=None, vocab=None) -> None:
         self.claims = _alias_owner_map(entities, aliases)
@@ -312,6 +313,79 @@ class QueryContext:
             vocab if vocab is not None else _EMPTY_VOCAB
         )
         self.term_count = len(table_terms)
+        # `entity_id -> 规范名`。只由 `resolve_alias` 使用：它把「」里的称呼反查成
+        # 规范名时要给出人读的名字。**与 `claims` 同源同一批 `entities`**，
+        # 不另读别名表（否则就是第二份事实源）。
+        self.names_by_id: dict[str, str] = {}
+        for ent in entities or ():
+            eid = str((ent or {}).get("id") or "").strip()
+            name = str((ent or {}).get("name") or "").strip()
+            if eid and name:
+                self.names_by_id[eid] = name
+
+    def resolve_alias(self, term: str) -> dict:
+        """把一个**称呼**解析成图里认领它的实体的规范名，歧义原样保留。
+
+        供 `answer._alias_answer` 使用（`alias` 类「「X」的规范名是什么」）。
+        判据只有一条：`claims`（由 `_alias_owner_map` 建立，与查询侧候选识别
+        同一张表）里恰好一个实体认领这个文本，才给 `unique=True`。
+
+        ## 为什么允许剥后缀重试
+
+        语料里同一实体在不同场合被叫「Stormeye」「Stormeye先生」、被叫
+        「佩德罗」「佩德罗叔叔」。图里的别名表收的是**规范写法**，问句里的
+        称呼常带敬称。所以原名反查失败时按 `ALIAS_STRIP_SUFFIXES` 逐条剥离
+        重试（长后缀在前）。剥完必须仍 ≥2 字——1 字文本无法定位引用。
+
+        ## 为什么歧义不取第一个
+
+        `query` 模块的规矩是「歧义必须原样保留」（「女妖」之于 Logos、
+        「乌萨斯」之于「乌萨斯帝国」）。在答案侧偷偷取一个，等于把一个未经
+        验证的合并结论当答案发出去。所以 `unique=False`，由调用方决定不作答。
+
+        返回 `{term, owners, unique, n_owners, entity_id, entity_name,
+        suffix_tries, ambiguous}`。**只读**，不改任何状态。
+        """
+        text = str(term or "").strip()
+
+        def attempt(key: str, kind: str) -> list[dict]:
+            return [
+                {"entity_id": str(o.get("entity_id") or ""),
+                 "kind": str(o.get("kind") or ""),
+                 "entity_name": self.names_by_id.get(str(o.get("entity_id") or ""), ""),
+                 "matched_text": key,
+                 "match": kind}
+                for o in (self.claims.get(key) or ())
+            ]
+
+        owners = attempt(text, "exact") if text else []
+        tries: list[dict] = []
+        if not owners and text:
+            from .answer import ALIAS_STRIP_SUFFIXES  # 局部 import：避免模块循环
+
+            for suffix in ALIAS_STRIP_SUFFIXES:
+                if not text.endswith(suffix):
+                    continue
+                stem = text[: -len(suffix)]
+                if len(stem) < 2:
+                    continue
+                hit = attempt(stem, f"strip:{suffix}")
+                if hit:
+                    tries.append({"stem": stem, "suffix": suffix,
+                                  "n_owners": len(hit)})
+                    owners = hit
+                    break
+        ids = sorted({o["entity_id"] for o in owners if o["entity_id"]})
+        return {
+            "term": text,
+            "owners": owners,
+            "unique": len(ids) == 1,
+            "n_owners": len(ids),
+            "entity_id": ids[0] if len(ids) == 1 else "",
+            "entity_name": (owners[0]["entity_name"] if owners else ""),
+            "suffix_tries": tries,
+            "ambiguous": len(ids) > 1,
+        }
 
     def __repr__(self) -> str:  # 便于排查"这问句用的是哪张表"
         return f"<QueryContext terms={self.term_count} relations={len(self.rel_table)}>"

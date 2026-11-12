@@ -1,0 +1,409 @@
+================================================================================================
+L2 诊断：cross_chunk chapter_set_missing   世代 g-20261103T132152Z-06a741   生产档 cap=4
+失败题 20  分列 {'dev': 12, 'holdout': 8}
+gold 章节数分布 {'3': 5, '4': 5, '2': 10}   答案章节数分布 {'4': 14, '3': 1, '2': 2, '1': 3}
+缺口分桶（按**缺失章节**计数）{'C_name_present_but_dropped': 11, 'A_chunk_absent': 17}
+题级 gold 块在上下文里的覆盖 {'gold_all_in_ctx': 5, 'gold_partly_in_ctx': 10, 'gold_none_in_ctx': 5}
+只换排序键就可能全中的题 7: ['q-cx-000032', 'q-cx-900022', 'q-cx-900027', 'q-cx-900030', 'q-cx-000012', 'q-cx-000015', 'q-cx-000025']
+================================================================================================
+
+## 阶段 B：换排序键的端到端上界（判据用真的 `judge.judge_answer`）
+   复现自检 replication_ok = True  (判据不一致 0 题：[])
+   生产档实测答对 44/64
+   键                           答对    +    -         dev    holdout
+   sum_score_then_count        44    0    0   26/38     18/26       
+   sum_score                   44    0    0   26/38     18/26       
+   max_score                   44    0    0   26/38     18/26       
+   count                       43    0    1   25/38     18/26       
+   evidence                    47    4    1   28/38     19/26       
+   evidence_then_score         47    3    0   27/38     20/26       
+   mean_score                  44    0    0   26/38     18/26       
+   max_score_then_count        44    0    0   26/38     18/26       
+   assertions                  47    3    0   27/38     20/26       
+   focus_assertions            48    4    0   28/38     20/26       
+   direct_units                44    0    0   26/38     18/26       
+   entities_mentioned          47    3    0   27/38     20/26       
+   净最好：focus_assertions  48/64  (+4 / -0)
+
+## 阶段 B 逐题翻转明细（净最好的那个键）
+   + q-cx-000012 (holdout)  生产: 'memory_beagle、memory_hpsts、memory_pinecn、memory_pudd'
+     -> 'act13mini、memory_beagle、memory_pinecn、memory_pudd'   gold=['act13mini', 'memory_pudd']
+   + q-cx-000015 (holdout)  生产: 'act29side、act51side、main_st17、memory_turdus'
+     -> 'act29side、main_st17、memory_pinecn、memory_turdus'   gold=['act29side', 'main_st17', 'memory_pinecn', 'memory_turdus']
+   + q-cx-000032 (dev)  生产: 'act12side、act38side、memory_coldst、memory_jnight'
+     -> 'act38side、main_ep14、memory_coldst、memory_jnight'   gold=['act38side', 'main_ep14']
+   + q-cx-900027 (dev)  生产: 'act15d0、main_ep13、main_ep14、rogue_rogue_4'
+     -> 'act15d0、main_ep13、main_ep14、memory_plosis'   gold=['act15d0', 'main_ep13', 'main_ep14', 'memory_plosis']
+
+## 阶段 C：重选章节这条路的天花板 + A 桶缺章的来源
+   oracle 键（gold 排最前，**上界不是方案**）: 7/20 （生产档在同一批上 0）
+   仍然失败的 13 题: ['q-cx-000004', 'q-cx-000011', 'q-cx-000013', 'q-cx-000016', 'q-cx-000019', 'q-cx-000022', 'q-cx-000029', 'q-cx-900002', 'q-cx-900005', 'q-cx-900007', 'q-cx-900009', 'q-cx-900023', 'q-cx-900024']
+   A 桶缺章 17 处：属于焦点实体自己的章节 17 处，连实体索引里也没有 0 处
+      q-cx-000004    dev      rogue_rogue_6    实体索引里 = True
+      q-cx-000011    dev      memory_bryota    实体索引里 = True
+      q-cx-000016    dev      memory_tinman    实体索引里 = True
+      q-cx-000022    dev      memory_dagda     实体索引里 = True
+      q-cx-000029    dev      memory_confes    实体索引里 = True
+      q-cx-900002    dev      act36side        实体索引里 = True
+      q-cx-900002    dev      act52side        实体索引里 = True
+      q-cx-900005    dev      act38side        实体索引里 = True
+      q-cx-900005    dev      memory_demetr    实体索引里 = True
+      q-cx-900005    dev      memory_vigil     实体索引里 = True
+      q-cx-900024    dev      main_ep11        实体索引里 = True
+      q-cx-900024    dev      main_ep12        实体索引里 = True
+      q-cx-000013    holdout  act41side        实体索引里 = True
+      q-cx-000019    holdout  memory_peper     实体索引里 = True
+      q-cx-900007    holdout  act10mini        实体索引里 = True
+      q-cx-900009    holdout  memory_ela       实体索引里 = True
+      q-cx-900023    holdout  rogue_rogue_4    实体索引里 = True
+
+
+## 阶段 A 逐题
+
+[dev] q-cx-000004  判据=chapter_set_missing
+  问句: 「海洋」这个实体横跨了多个章节。请给出它出现过的章节代号。
+  W(gold) = ['act17side', 'memory_deepcl', 'rogue_rogue_6']
+  O(答案) = ['act17side', 'act34side', 'rogue_rogue_2', 'rogue_rogue_5']     缺 = ['memory_deepcl', 'rogue_rogue_6']   多 = ['act34side', 'rogue_rogue_2', 'rogue_rogue_5']
+  答案串 = 'act17side、act34side、rogue_rogue_2、rogue_rogue_5'
+  章节通路: {'applied': True, 'n_chapters': 4, 'chapter_source': 'unit.chapter', 'citations': 16, 'chapter_cap': 4, 'n_chapters_found': 7, 'chapters_truncated': True}
+  候选集(|sum_score_then_count|) = 7 章   W ⊆ 候选集 = False   只换键可救 = False
+  焦点名(entity_candidates[:2]) = ['海洋']  (全候选 1 个)  问句锚点 = ['海洋']
+  上下文: 19 单元 / 7 章 ['act17side', 'act34side', 'act39side', 'memory_deepcl', 'rogue_rogue_2', 'rogue_rogue_5', 'roguelike_level_rogue2_ending_3']
+  gold 块在上下文的 = 1/3 -> 覆盖章 ['memory_deepcl']
+    缺章 memory_deepcl    -> C_name_present_but_dropped  (当前键名次 7 / focus_assertions 键名次 1)
+       该章在上下文的单元 1 个，含焦点名 1 个，含问句锚点 1 个
+       该章候选内：断言 1 条 / 其中端点命中焦点名 1 条 / evidence_spans 1
+       该章全语料正文含锚点: {'海洋': True}
+       该章上下文单元分数: [1.0975]
+       ★ gold 块就在这些单元里: ['obt/memory/story_deepcl_2_1#004']
+       锚点命中 obt/memory/story_deepcl_2_1#004: …已经是尽头了，你要去哪里？ 深海色踏入了海洋。 深海色：她被海洋带走了，不是吗？ “助祭”：被海洋浸湿，就再也回不去了。 深海色：她有得选吗？ “助祭”：没有。…
+    缺章 rogue_rogue_6    -> A_chunk_absent  (当前键名次 None / focus_assertions 键名次 None)
+       该章在上下文的单元 0 个，含焦点名 0 个，含问句锚点 0 个
+       该章全语料正文含锚点: {'海洋': True}
+
+[dev] q-cx-000011  判据=chapter_set_missing
+  问句: 「汐斯塔火山」这个实体横跨了多个章节。请给出它出现过的章节代号。
+  W(gold) = ['act27side', 'act3d0', 'memory_bryota', 'memory_buildr']
+  O(答案) = ['act27side', 'act3d0', 'memory_buildr']     缺 = ['memory_bryota']   多 = []
+  答案串 = 'act27side、act3d0、memory_buildr'
+  章节通路: {'applied': True, 'n_chapters': 3, 'chapter_source': 'unit.chapter', 'citations': 17, 'chapter_cap': 4, 'n_chapters_found': 3, 'chapters_truncated': False}
+  候选集(|sum_score_then_count|) = 3 章   W ⊆ 候选集 = False   只换键可救 = False
+  焦点名(entity_candidates[:2]) = ['汐斯塔火山']  (全候选 1 个)  问句锚点 = ['汐斯塔火山']
+  上下文: 19 单元 / 3 章 ['act27side', 'act3d0', 'memory_buildr']
+  gold 块在上下文的 = 2/4 -> 覆盖章 ['act3d0', 'memory_buildr']
+    缺章 memory_bryota    -> A_chunk_absent  (当前键名次 None / focus_assertions 键名次 None)
+       该章在上下文的单元 0 个，含焦点名 0 个，含问句锚点 0 个
+       该章全语料正文含锚点: {'汐斯塔火山': True}
+
+[dev] q-cx-000016  判据=chapter_set_missing
+  问句: 「银行」在哪些章节的正文里出现过？请列出全部章节代号。
+  W(gold) = ['act28side', 'memory_tinman']
+  O(答案) = ['act28side', 'memory_almond']     缺 = ['memory_tinman']   多 = ['memory_almond']
+  答案串 = 'act28side、memory_almond'
+  章节通路: {'applied': True, 'n_chapters': 2, 'chapter_source': 'unit.chapter', 'citations': 19, 'chapter_cap': 4, 'n_chapters_found': 2, 'chapters_truncated': False}
+  候选集(|sum_score_then_count|) = 2 章   W ⊆ 候选集 = False   只换键可救 = False
+  焦点名(entity_candidates[:2]) = ['银行']  (全候选 1 个)  问句锚点 = ['银行']
+  上下文: 19 单元 / 2 章 ['act28side', 'memory_almond']
+  gold 块在上下文的 = 0/2 -> 覆盖章 []
+    缺章 memory_tinman    -> A_chunk_absent  (当前键名次 None / focus_assertions 键名次 None)
+       该章在上下文的单元 0 个，含焦点名 0 个，含问句锚点 0 个
+       该章全语料正文含锚点: {'银行': True}
+
+[dev] q-cx-000022  判据=chapter_set_missing
+  问句: 「杰克」这个实体横跨了多个章节。请给出它出现过的章节代号。
+  W(gold) = ['memory_dagda', 'memory_jaksel', 'memory_tiger']
+  O(答案) = ['act25side', 'act47side', 'memory_jaksel', 'memory_tiger']     缺 = ['memory_dagda']   多 = ['act25side', 'act47side']
+  答案串 = 'act25side、act47side、memory_jaksel、memory_tiger'
+  章节通路: {'applied': True, 'n_chapters': 4, 'chapter_source': 'unit.chapter', 'citations': 19, 'chapter_cap': 4, 'n_chapters_found': 4, 'chapters_truncated': False}
+  候选集(|sum_score_then_count|) = 4 章   W ⊆ 候选集 = False   只换键可救 = False
+  焦点名(entity_candidates[:2]) = ['杰克']  (全候选 1 个)  问句锚点 = ['杰克']
+  上下文: 19 单元 / 4 章 ['act25side', 'act47side', 'memory_jaksel', 'memory_tiger']
+  gold 块在上下文的 = 2/3 -> 覆盖章 ['memory_jaksel', 'memory_tiger']
+    缺章 memory_dagda     -> A_chunk_absent  (当前键名次 None / focus_assertions 键名次 None)
+       该章在上下文的单元 0 个，含焦点名 0 个，含问句锚点 0 个
+       该章全语料正文含锚点: {'杰克': True}
+
+[dev] q-cx-000029  判据=chapter_set_missing
+  问句: 「收音机」这个实体横跨了多个章节。请给出它出现过的章节代号。
+  W(gold) = ['act22side', 'memory_confes', 'rogue_rogue_4']
+  O(答案) = ['act21mini', 'act21side', 'act22side', 'act38side']     缺 = ['memory_confes', 'rogue_rogue_4']   多 = ['act21mini', 'act21side', 'act38side']
+  答案串 = 'act21mini、act21side、act22side、act38side'
+  章节通路: {'applied': True, 'n_chapters': 4, 'chapter_source': 'unit.chapter', 'citations': 15, 'chapter_cap': 4, 'n_chapters_found': 8, 'chapters_truncated': True}
+  候选集(|sum_score_then_count|) = 8 章   W ⊆ 候选集 = False   只换键可救 = False
+  焦点名(entity_candidates[:2]) = ['收音机']  (全候选 1 个)  问句锚点 = ['收音机']
+  上下文: 19 单元 / 8 章 ['act21mini', 'act21side', 'act22side', 'act38side', 'main_ep17', 'memory_haak', 'rogue_rogue_3', 'rogue_rogue_4']
+  gold 块在上下文的 = 2/3 -> 覆盖章 ['act22side', 'rogue_rogue_4']
+    缺章 memory_confes    -> A_chunk_absent  (当前键名次 None / focus_assertions 键名次 None)
+       该章在上下文的单元 0 个，含焦点名 0 个，含问句锚点 0 个
+       该章全语料正文含锚点: {'收音机': True}
+    缺章 rogue_rogue_4    -> C_name_present_but_dropped  (当前键名次 8 / focus_assertions 键名次 8)
+       该章在上下文的单元 1 个，含焦点名 1 个，含问句锚点 1 个
+       该章候选内：断言 0 条 / 其中端点命中焦点名 0 条 / evidence_spans 0
+       该章全语料正文含锚点: {'收音机': True}
+       该章上下文单元分数: [0.982]
+       ★ gold 块就在这些单元里: ['obt/rogue/rogue_4/endbook/endbook_rogue_4_1_3#002']
+       锚点命中 obt/rogue/rogue_4/endbook/endbook_rogue_4_1_3#002: …不知道是谁啧了一声，收音机便像被一只无形的巨手攥住，瞬间变为了一坨冒烟的废铁。 “一百五十金券。”锡人说，“从你们的零花钱里扣。” 大拉里松…
+
+[dev] q-cx-000032  判据=chapter_set_missing
+  问句: 「轮胎」这个实体横跨了多个章节。请给出它出现过的章节代号。
+  W(gold) = ['act38side', 'main_ep14']
+  O(答案) = ['act12side', 'act38side', 'memory_coldst', 'memory_jnight']     缺 = ['main_ep14']   多 = ['act12side', 'memory_coldst', 'memory_jnight']
+  答案串 = 'act12side、act38side、memory_coldst、memory_jnight'
+  章节通路: {'applied': True, 'n_chapters': 4, 'chapter_source': 'unit.chapter', 'citations': 14, 'chapter_cap': 4, 'n_chapters_found': 10, 'chapters_truncated': True}
+  候选集(|sum_score_then_count|) = 10 章   W ⊆ 候选集 = True   只换键可救 = True
+  焦点名(entity_candidates[:2]) = ['轮胎']  (全候选 1 个)  问句锚点 = ['轮胎']
+  上下文: 20 单元 / 10 章 ['act12side', 'act32side', 'act38side', 'act45side', 'act47side', 'act53side', 'main_ep14', 'memory_coldst', 'memory_jnight', 'memory_wscoot']
+  gold 块在上下文的 = 2/2 -> 覆盖章 ['act38side', 'main_ep14']
+    缺章 main_ep14        -> C_name_present_but_dropped  (当前键名次 9 / focus_assertions 键名次 2)
+       该章在上下文的单元 1 个，含焦点名 1 个，含问句锚点 1 个
+       该章候选内：断言 1 条 / 其中端点命中焦点名 1 条 / evidence_spans 1
+       该章全语料正文含锚点: {'轮胎': True}
+       该章上下文单元分数: [1.1014]
+       ★ gold 块就在这些单元里: ['obt/main/level_main_14-04_end#002']
+       锚点命中 obt/main/level_main_14-04_end#002: ….. “吊塔”：结果遇到了那几个怪物！“轮胎”“刺盾”“螺母”全都被吃了！ “吊塔”：剩下的人拼了命地跑，不知道为什么那几个怪物一点也不敢往这边追，我们也没法出…
+
+[dev] q-cx-900002  判据=chapter_set_missing
+  问句: 「安妮塔」这个实体横跨了多个章节。请给出它出现过的章节代号。
+  W(gold) = ['act18d3', 'act36side', 'act52side']
+  O(答案) = ['act18d3']     缺 = ['act36side', 'act52side']   多 = []
+  答案串 = 'act18d3'
+  章节通路: {'applied': True, 'n_chapters': 1, 'chapter_source': 'unit.chapter', 'citations': 21, 'chapter_cap': 4, 'n_chapters_found': 1, 'chapters_truncated': False}
+  候选集(|sum_score_then_count|) = 1 章   W ⊆ 候选集 = False   只换键可救 = False
+  焦点名(entity_candidates[:2]) = ['安妮塔']  (全候选 1 个)  问句锚点 = ['安妮塔']
+  上下文: 21 单元 / 1 章 ['act18d3']
+  gold 块在上下文的 = 0/3 -> 覆盖章 []
+    缺章 act36side        -> A_chunk_absent  (当前键名次 None / focus_assertions 键名次 None)
+       该章在上下文的单元 0 个，含焦点名 0 个，含问句锚点 0 个
+       该章全语料正文含锚点: {'安妮塔': True}
+    缺章 act52side        -> A_chunk_absent  (当前键名次 None / focus_assertions 键名次 None)
+       该章在上下文的单元 0 个，含焦点名 0 个，含问句锚点 0 个
+       该章全语料正文含锚点: {'安妮塔': True}
+
+[dev] q-cx-900005  判据=chapter_set_missing
+  问句: 「贝纳尔多」在哪些章节的正文里出现过？请列出全部章节代号。
+  W(gold) = ['act21side', 'act38side', 'memory_demetr', 'memory_vigil']
+  O(答案) = ['act21side']     缺 = ['act38side', 'memory_demetr', 'memory_vigil']   多 = []
+  答案串 = 'act21side'
+  章节通路: {'applied': True, 'n_chapters': 1, 'chapter_source': 'unit.chapter', 'citations': 19, 'chapter_cap': 4, 'n_chapters_found': 1, 'chapters_truncated': False}
+  候选集(|sum_score_then_count|) = 1 章   W ⊆ 候选集 = False   只换键可救 = False
+  焦点名(entity_candidates[:2]) = ['贝纳尔多']  (全候选 1 个)  问句锚点 = ['贝纳尔多']
+  上下文: 19 单元 / 1 章 ['act21side']
+  gold 块在上下文的 = 1/4 -> 覆盖章 ['act21side']
+    缺章 act38side        -> A_chunk_absent  (当前键名次 None / focus_assertions 键名次 None)
+       该章在上下文的单元 0 个，含焦点名 0 个，含问句锚点 0 个
+       该章全语料正文含锚点: {'贝纳尔多': True}
+    缺章 memory_demetr    -> A_chunk_absent  (当前键名次 None / focus_assertions 键名次 None)
+       该章在上下文的单元 0 个，含焦点名 0 个，含问句锚点 0 个
+       该章全语料正文含锚点: {'贝纳尔多': True}
+    缺章 memory_vigil     -> A_chunk_absent  (当前键名次 None / focus_assertions 键名次 None)
+       该章在上下文的单元 0 个，含焦点名 0 个，含问句锚点 0 个
+       该章全语料正文含锚点: {'贝纳尔多': True}
+
+[dev] q-cx-900022  判据=chapter_set_missing
+  问句: 「巫术」这个实体横跨了多个章节。请给出它出现过的章节代号。
+  W(gold) = ['main_ep11', 'main_ep14']
+  O(答案) = ['act29side', 'act47side', 'main_ep13', 'main_ep14']     缺 = ['main_ep11']   多 = ['act29side', 'act47side', 'main_ep13']
+  答案串 = 'act29side、act47side、main_ep13、main_ep14'
+  章节通路: {'applied': True, 'n_chapters': 4, 'chapter_source': 'unit.chapter', 'citations': 12, 'chapter_cap': 4, 'n_chapters_found': 10, 'chapters_truncated': True}
+  候选集(|sum_score_then_count|) = 10 章   W ⊆ 候选集 = True   只换键可救 = True
+  焦点名(entity_candidates[:2]) = ['巫术']  (全候选 1 个)  问句锚点 = ['巫术']
+  上下文: 19 单元 / 10 章 ['act13side', 'act17mini', 'act29side', 'act37side', 'act47side', 'main_ep07', 'main_ep11', 'main_ep13', 'main_ep14', 'memory_lava2']
+  gold 块在上下文的 = 0/2 -> 覆盖章 []
+    缺章 main_ep11        -> C_name_present_but_dropped  (当前键名次 10 / focus_assertions 键名次 10)
+       该章在上下文的单元 1 个，含焦点名 1 个，含问句锚点 1 个
+       该章候选内：断言 0 条 / 其中端点命中焦点名 0 条 / evidence_spans 0
+       该章全语料正文含锚点: {'巫术': True}
+       该章上下文单元分数: [0.9898]
+       锚点命中 obt/main/level_main_11-13_beg#003: ….. 克洛维希娅：......是赦罪师的巫术。这些萨卡兹是赦罪师的卫兵。 克洛维希娅：医疗法术也来不及挽救被这样的巫术急速消耗的生命。 克洛维希娅：让费斯特带着…
+
+[dev] q-cx-900024  判据=chapter_set_missing
+  问句: 「帕特」在哪些章节的正文里出现过？请列出全部章节代号。
+  W(gold) = ['main_ep11', 'main_ep12']
+  O(答案) = ['act42side', 'memory_phenxi']     缺 = ['main_ep11', 'main_ep12']   多 = ['act42side', 'memory_phenxi']
+  答案串 = 'act42side、memory_phenxi'
+  章节通路: {'applied': True, 'n_chapters': 2, 'chapter_source': 'unit.chapter', 'citations': 18, 'chapter_cap': 4, 'n_chapters_found': 2, 'chapters_truncated': False}
+  候选集(|sum_score_then_count|) = 2 章   W ⊆ 候选集 = False   只换键可救 = False
+  焦点名(entity_candidates[:2]) = ['帕特']  (全候选 1 个)  问句锚点 = ['帕特']
+  上下文: 18 单元 / 2 章 ['act42side', 'memory_phenxi']
+  gold 块在上下文的 = 0/2 -> 覆盖章 []
+    缺章 main_ep11        -> A_chunk_absent  (当前键名次 None / focus_assertions 键名次 None)
+       该章在上下文的单元 0 个，含焦点名 0 个，含问句锚点 0 个
+       该章全语料正文含锚点: {'帕特': True}
+    缺章 main_ep12        -> A_chunk_absent  (当前键名次 None / focus_assertions 键名次 None)
+       该章在上下文的单元 0 个，含焦点名 0 个，含问句锚点 0 个
+       该章全语料正文含锚点: {'帕特': True}
+
+[dev] q-cx-900027  判据=chapter_set_missing
+  问句: 「炎魔」这个实体横跨了多个章节。请给出它出现过的章节代号。
+  W(gold) = ['act15d0', 'main_ep13', 'main_ep14', 'memory_plosis']
+  O(答案) = ['act15d0', 'main_ep13', 'main_ep14', 'rogue_rogue_4']     缺 = ['memory_plosis']   多 = ['rogue_rogue_4']
+  答案串 = 'act15d0、main_ep13、main_ep14、rogue_rogue_4'
+  章节通路: {'applied': True, 'n_chapters': 4, 'chapter_source': 'unit.chapter', 'citations': 13, 'chapter_cap': 4, 'n_chapters_found': 8, 'chapters_truncated': True}
+  候选集(|sum_score_then_count|) = 8 章   W ⊆ 候选集 = True   只换键可救 = True
+  焦点名(entity_candidates[:2]) = ['炎魔']  (全候选 1 个)  问句锚点 = ['炎魔']
+  上下文: 19 单元 / 8 章 ['act15d0', 'act19side', 'act25side', 'main_ep13', 'main_ep14', 'main_st12', 'memory_plosis', 'rogue_rogue_4']
+  gold 块在上下文的 = 3/4 -> 覆盖章 ['main_ep13', 'main_ep14', 'memory_plosis']
+    缺章 memory_plosis    -> C_name_present_but_dropped  (当前键名次 8 / focus_assertions 键名次 4)
+       该章在上下文的单元 1 个，含焦点名 1 个，含问句锚点 1 个
+       该章候选内：断言 1 条 / 其中端点命中焦点名 1 条 / evidence_spans 1
+       该章全语料正文含锚点: {'炎魔': True}
+       该章上下文单元分数: [1.095]
+       ★ gold 块就在这些单元里: ['obt/memory/story_plosis_1_1#006']
+       锚点命中 obt/memory/story_plosis_1_1#006: …重担已经太多了。 日记：伊芙利特身上的“炎魔”，以及她与塞雷娅要面对的问题。 日记：但是......如果我的命运已经注定。 日记：我多么希望赫默医生与伊芙利特能…
+
+[dev] q-cx-900030  判据=chapter_set_missing
+  问句: 「勾吴」在哪些章节的正文里出现过？请列出全部章节代号。
+  W(gold) = ['memory_sqrrel', 'rogue_rogue_5']
+  O(答案) = ['act16d5', 'act49side', 'memory_nothin', 'memory_sqrrel']     缺 = ['rogue_rogue_5']   多 = ['act16d5', 'act49side', 'memory_nothin']
+  答案串 = 'act16d5、act49side、memory_nothin、memory_sqrrel'
+  章节通路: {'applied': True, 'n_chapters': 4, 'chapter_source': 'unit.chapter', 'citations': 15, 'chapter_cap': 4, 'n_chapters_found': 7, 'chapters_truncated': True}
+  候选集(|sum_score_then_count|) = 7 章   W ⊆ 候选集 = True   只换键可救 = True
+  焦点名(entity_candidates[:2]) = ['勾吴']  (全候选 1 个)  问句锚点 = ['勾吴']
+  上下文: 20 单元 / 7 章 ['act15side', 'act16d5', 'act23side', 'act49side', 'memory_nothin', 'memory_sqrrel', 'rogue_rogue_5']
+  gold 块在上下文的 = 2/2 -> 覆盖章 ['memory_sqrrel', 'rogue_rogue_5']
+    缺章 rogue_rogue_5    -> C_name_present_but_dropped  (当前键名次 5 / focus_assertions 键名次 5)
+       该章在上下文的单元 2 个，含焦点名 2 个，含问句锚点 2 个
+       该章候选内：断言 0 条 / 其中端点命中焦点名 0 条 / evidence_spans 0
+       该章全语料正文含锚点: {'勾吴': True}
+       该章上下文单元分数: [0.7851, 0.7451]
+       ★ gold 块就在这些单元里: ['obt/rogue/rogue_5/monthrecord/month_record_rogue_5_7_2#000']
+       锚点命中 obt/rogue/rogue_5/endbook/endbook_rogue_5_1_3#000: … 但和小穆想的不同，在走过入口那座巨大的勾吴石山后，一路上似乎并没有太多人，这让她多少有些意外。中午在邙山镇落脚时，那人山人海的队伍无疑是朝着界园来的。可现在……
+       锚点命中 obt/rogue/rogue_5/monthrecord/month_record_rogue_5_7_2#000: …口冬笋丝。”高老板冷笑，“显得特地派人从勾吴带回熏兽腿的我就像个傻子。” “熏兽腿？”小大厨低着的头微微抬了起来，“瞎配。这次的熏兽腿烟熏味太冲，放在清蒸鲥鳞里…
+
+[holdout] q-cx-000012  判据=chapter_set_missing
+  问句: 「工程部干员」这个实体横跨了多个章节。请给出它出现过的章节代号。
+  W(gold) = ['act13mini', 'memory_pudd']
+  O(答案) = ['memory_beagle', 'memory_hpsts', 'memory_pinecn', 'memory_pudd']     缺 = ['act13mini']   多 = ['memory_beagle', 'memory_hpsts', 'memory_pinecn']
+  答案串 = 'memory_beagle、memory_hpsts、memory_pinecn、memory_pudd'
+  章节通路: {'applied': True, 'n_chapters': 4, 'chapter_source': 'unit.chapter', 'citations': 12, 'chapter_cap': 4, 'n_chapters_found': 10, 'chapters_truncated': True}
+  候选集(|sum_score_then_count|) = 10 章   W ⊆ 候选集 = True   只换键可救 = True
+  焦点名(entity_candidates[:2]) = ['工程部干员']  (全候选 1 个)  问句锚点 = ['工程部干员']
+  上下文: 18 单元 / 10 章 ['act13mini', 'act38side', 'act53side', 'main_ep15', 'memory_beagle', 'memory_greyy2', 'memory_hpsts', 'memory_pinecn', 'memory_pudd', 'memory_serum']
+  gold 块在上下文的 = 2/2 -> 覆盖章 ['act13mini', 'memory_pudd']
+    缺章 act13mini        -> C_name_present_but_dropped  (当前键名次 10 / focus_assertions 键名次 2)
+       该章在上下文的单元 1 个，含焦点名 1 个，含问句锚点 1 个
+       该章候选内：断言 1 条 / 其中端点命中焦点名 1 条 / evidence_spans 1
+       该章全语料正文含锚点: {'工程部干员': True}
+       该章上下文单元分数: [1.4207]
+       ★ gold 块就在这些单元里: ['activities/act13mini/level_act13mini_st06#000']
+       锚点命中 activities/act13mini/level_act13mini_st06#000: …一个。 冷静的孩子：？ 比丢：Biu！ 工程部干员：——？ 工程部干员：什么东西？你要干什么？！ 工程部干员：那是刚做出来的零件，不能吃——！ 工程部干员：喔—…
+
+[holdout] q-cx-000013  判据=chapter_set_missing
+  问句: 「加斯特里尔」在哪些章节的正文里出现过？请列出全部章节代号。
+  W(gold) = ['act18mini', 'act41side', 'main_ep14', 'main_st14']
+  O(答案) = ['act18mini', 'act37side', 'main_ep14', 'main_st14']     缺 = ['act41side']   多 = ['act37side']
+  答案串 = 'act18mini、act37side、main_ep14、main_st14'
+  章节通路: {'applied': True, 'n_chapters': 4, 'chapter_source': 'unit.chapter', 'citations': 17, 'chapter_cap': 4, 'n_chapters_found': 5, 'chapters_truncated': True}
+  候选集(|sum_score_then_count|) = 5 章   W ⊆ 候选集 = False   只换键可救 = False
+  焦点名(entity_candidates[:2]) = ['加斯特里尔']  (全候选 1 个)  问句锚点 = ['加斯特里尔']
+  上下文: 18 单元 / 5 章 ['act18mini', 'act22side', 'act37side', 'main_ep14', 'main_st14']
+  gold 块在上下文的 = 2/4 -> 覆盖章 ['main_ep14', 'main_st14']
+    缺章 act41side        -> A_chunk_absent  (当前键名次 None / focus_assertions 键名次 None)
+       该章在上下文的单元 0 个，含焦点名 0 个，含问句锚点 0 个
+       该章全语料正文含锚点: {'加斯特里尔': True}
+
+[holdout] q-cx-000015  判据=chapter_set_missing
+  问句: 「彼得」这个实体横跨了多个章节。请给出它出现过的章节代号。
+  W(gold) = ['act29side', 'main_st17', 'memory_pinecn', 'memory_turdus']
+  O(答案) = ['act29side', 'act51side', 'main_st17', 'memory_turdus']     缺 = ['memory_pinecn']   多 = ['act51side']
+  答案串 = 'act29side、act51side、main_st17、memory_turdus'
+  章节通路: {'applied': True, 'n_chapters': 4, 'chapter_source': 'unit.chapter', 'citations': 7, 'chapter_cap': 4, 'n_chapters_found': 10, 'chapters_truncated': True}
+  候选集(|sum_score_then_count|) = 10 章   W ⊆ 候选集 = True   只换键可救 = True
+  焦点名(entity_candidates[:2]) = ['彼得']  (全候选 1 个)  问句锚点 = ['彼得']
+  上下文: 18 单元 / 14 章 ['act10d5', 'act29side', 'act38side', 'act42side', 'act46side', 'act51side', 'main_ep14', 'main_ep17', 'main_st17', 'memory_absin', 'memory_bubble', 'memory_headb2', 'memory_pinecn', 'memory_turdus']
+  gold 块在上下文的 = 4/4 -> 覆盖章 ['act29side', 'main_st17', 'memory_pinecn', 'memory_turdus']
+    缺章 memory_pinecn    -> C_name_present_but_dropped  (当前键名次 6 / focus_assertions 键名次 3)
+       该章在上下文的单元 1 个，含焦点名 1 个，含问句锚点 1 个
+       该章候选内：断言 1 条 / 其中端点命中焦点名 1 条 / evidence_spans 1
+       该章全语料正文含锚点: {'彼得': True}
+       该章上下文单元分数: [0.9948]
+       ★ gold 块就在这些单元里: ['obt/memory/story_pinecn_1_1#003']
+       锚点命中 obt/memory/story_pinecn_1_1#003: …找我。 不过爸爸已经找到工作了！ 还记得彼得叔叔吗？就是爸爸以前的工友，他现在当上了工头。这家伙还挺仗义的，把我叫了过去，不枉我当时经常帮他顶班！ 我们现在的项…
+
+[holdout] q-cx-000019  判据=chapter_set_missing
+  问句: 「弗雷德」在哪些章节的正文里出现过？请列出全部章节代号。
+  W(gold) = ['main_ep09', 'memory_peper']
+  O(答案) = ['main_ep09', 'main_ep10', 'main_ep14', 'main_st14']     缺 = ['memory_peper']   多 = ['main_ep10', 'main_ep14', 'main_st14']
+  答案串 = 'main_ep09、main_ep10、main_ep14、main_st14'
+  章节通路: {'applied': True, 'n_chapters': 4, 'chapter_source': 'unit.chapter', 'citations': 16, 'chapter_cap': 4, 'n_chapters_found': 7, 'chapters_truncated': True}
+  候选集(|sum_score_then_count|) = 7 章   W ⊆ 候选集 = False   只换键可救 = False
+  焦点名(entity_candidates[:2]) = ['弗雷德']  (全候选 1 个)  问句锚点 = ['弗雷德']
+  上下文: 19 单元 / 7 章 ['act33side', 'main_ep09', 'main_ep10', 'main_ep12', 'main_ep13', 'main_ep14', 'main_st14']
+  gold 块在上下文的 = 0/2 -> 覆盖章 []
+    缺章 memory_peper     -> A_chunk_absent  (当前键名次 None / focus_assertions 键名次 None)
+       该章在上下文的单元 0 个，含焦点名 0 个，含问句锚点 0 个
+       该章全语料正文含锚点: {'弗雷德': True}
+
+[holdout] q-cx-000025  判据=chapter_set_missing
+  问句: 「集市」这个实体横跨了多个章节。请给出它出现过的章节代号。
+  W(gold) = ['act12d0', 'act15mini']
+  O(答案) = ['act15mini', 'act18d0', 'act23side', 'memory_rfalcn']     缺 = ['act12d0']   多 = ['act18d0', 'act23side', 'memory_rfalcn']
+  答案串 = 'act15mini、act18d0、act23side、memory_rfalcn'
+  章节通路: {'applied': True, 'n_chapters': 4, 'chapter_source': 'unit.chapter', 'citations': 11, 'chapter_cap': 4, 'n_chapters_found': 13, 'chapters_truncated': True}
+  候选集(|sum_score_then_count|) = 13 章   W ⊆ 候选集 = True   只换键可救 = True
+  焦点名(entity_candidates[:2]) = ['集市']  (全候选 1 个)  问句锚点 = ['集市']
+  上下文: 20 单元 / 13 章 ['act12d0', 'act15d5', 'act15mini', 'act16d5', 'act17mini', 'act18d0', 'act19mini', 'act23side', 'act27side', 'act47side', 'memory_confes', 'memory_rfalcn', 'rogue_rogue_5']
+  gold 块在上下文的 = 2/2 -> 覆盖章 ['act12d0', 'act15mini']
+    缺章 act12d0          -> C_name_present_but_dropped  (当前键名次 8 / focus_assertions 键名次 8)
+       该章在上下文的单元 1 个，含焦点名 1 个，含问句锚点 1 个
+       该章候选内：断言 0 条 / 其中端点命中焦点名 0 条 / evidence_spans 0
+       该章全语料正文含锚点: {'集市': True}
+       该章上下文单元分数: [1.1458]
+       ★ gold 块就在这些单元里: ['activities/act12d0/level_act12d0_05_beg#002']
+       锚点命中 activities/act12d0/level_act12d0_05_beg#002: …在找她呢，你见到她了？ 依娜姆：你可以去集市那边看看。 阿达克利斯人A：走过路过不要错过！新鲜出炉的原木雕刻！ 阿达克利斯人B：看看瞧瞧，从我阿爷那一代传下来的…
+
+[holdout] q-cx-900007  判据=chapter_set_missing
+  问句: 「维多利亚军队」这个实体横跨了多个章节。请给出它出现过的章节代号。
+  W(gold) = ['act10mini', 'memory_bpipe']
+  O(答案) = ['act22side', 'act30side', 'main_ep09', 'main_ep13']     缺 = ['act10mini', 'memory_bpipe']   多 = ['act22side', 'act30side', 'main_ep09', 'main_ep13']
+  答案串 = 'act22side、act30side、main_ep09、main_ep13'
+  章节通路: {'applied': True, 'n_chapters': 4, 'chapter_source': 'unit.chapter', 'citations': 7, 'chapter_cap': 4, 'n_chapters_found': 7, 'chapters_truncated': True}
+  候选集(|sum_score_then_count|) = 7 章   W ⊆ 候选集 = False   只换键可救 = False
+  焦点名(entity_candidates[:2]) = ['维多利亚军队']  (全候选 1 个)  问句锚点 = ['维多利亚军队']
+  上下文: 18 单元 / 10 章 ['act18mini', 'act22side', 'act30side', 'act46side', 'main_ep09', 'main_ep10', 'main_ep12', 'main_ep13', 'main_ep14', 'memory_bpipe']
+  gold 块在上下文的 = 1/2 -> 覆盖章 ['memory_bpipe']
+    缺章 act10mini        -> A_chunk_absent  (当前键名次 None / focus_assertions 键名次 None)
+       该章在上下文的单元 0 个，含焦点名 0 个，含问句锚点 0 个
+       该章全语料正文含锚点: {'维多利亚军队': True}
+    缺章 memory_bpipe     -> C_name_present_but_dropped  (当前键名次 7 / focus_assertions 键名次 1)
+       该章在上下文的单元 1 个，含焦点名 1 个，含问句锚点 1 个
+       该章候选内：断言 1 条 / 其中端点命中焦点名 1 条 / evidence_spans 1
+       该章全语料正文含锚点: {'维多利亚军队': True}
+       该章上下文单元分数: [1.1785]
+       ★ gold 块就在这些单元里: ['obt/memory/story_bpipe_1_1#001']
+       锚点命中 obt/memory/story_bpipe_1_1#001: …，我有一点不明白。你连命都差点没了，那帮维多利亚军队的老头子不该给你颁上一堆奖章吗？ 风笛：奖励？算啦，案子没查完，我从来没想过。 风笛：但至少......我以…
+
+[holdout] q-cx-900009  判据=chapter_set_missing
+  问句: 「米沃什」这个实体横跨了多个章节。请给出它出现过的章节代号。
+  W(gold) = ['act32side', 'memory_ela']
+  O(答案) = ['act32side']     缺 = ['memory_ela']   多 = []
+  答案串 = 'act32side'
+  章节通路: {'applied': True, 'n_chapters': 1, 'chapter_source': 'unit.chapter', 'citations': 19, 'chapter_cap': 4, 'n_chapters_found': 1, 'chapters_truncated': False}
+  候选集(|sum_score_then_count|) = 1 章   W ⊆ 候选集 = False   只换键可救 = False
+  焦点名(entity_candidates[:2]) = ['米沃什']  (全候选 1 个)  问句锚点 = ['米沃什']
+  上下文: 19 单元 / 1 章 ['act32side']
+  gold 块在上下文的 = 1/2 -> 覆盖章 ['act32side']
+    缺章 memory_ela       -> A_chunk_absent  (当前键名次 None / focus_assertions 键名次 None)
+       该章在上下文的单元 0 个，含焦点名 0 个，含问句锚点 0 个
+       该章全语料正文含锚点: {'米沃什': True}
+
+[holdout] q-cx-900023  判据=chapter_set_missing
+  问句: 「防护服」在哪些章节的正文里出现过？请列出全部章节代号。
+  W(gold) = ['act27side', 'memory_otter', 'rogue_rogue_4']
+  O(答案) = ['act27side', 'main_st14', 'memory_aurora', 'memory_popka']     缺 = ['memory_otter', 'rogue_rogue_4']   多 = ['main_st14', 'memory_aurora', 'memory_popka']
+  答案串 = 'act27side、main_st14、memory_aurora、memory_popka'
+  章节通路: {'applied': True, 'n_chapters': 4, 'chapter_source': 'unit.chapter', 'citations': 9, 'chapter_cap': 4, 'n_chapters_found': 13, 'chapters_truncated': True}
+  候选集(|sum_score_then_count|) = 13 章   W ⊆ 候选集 = False   只换键可救 = False
+  焦点名(entity_candidates[:2]) = ['防护服']  (全候选 1 个)  问句锚点 = ['防护服']
+  上下文: 18 单元 / 13 章 ['act10d5', 'act27side', 'act8mini', 'main_ep09', 'main_ep17', 'main_st14', 'memory_ansel', 'memory_aurora', 'memory_hibisc', 'memory_otter', 'memory_popka', 'memory_savage', 'memory_tanya']
+  gold 块在上下文的 = 2/3 -> 覆盖章 ['act27side', 'memory_otter']
+    缺章 memory_otter     -> C_name_present_but_dropped  (当前键名次 9 / focus_assertions 键名次 2)
+       该章在上下文的单元 1 个，含焦点名 1 个，含问句锚点 1 个
+       该章候选内：断言 1 条 / 其中端点命中焦点名 1 条 / evidence_spans 1
+       该章全语料正文含锚点: {'防护服': True}
+       该章上下文单元分数: [1.1451]
+       ★ gold 块就在这些单元里: ['obt/memory/story_otter_1_1#000']
+       锚点命中 obt/memory/story_otter_1_1#000: …收个尾，然后等她来就行。 梅尔：塞雷娅的防护服检修委托？主要是刷新涂料吧......糟了，我是不是没订涂料？！ 梅尔：啊——还好还好，上次的没用完。 梅尔：今天…
+    缺章 rogue_rogue_4    -> A_chunk_absent  (当前键名次 None / focus_assertions 键名次 None)
+       该章在上下文的单元 0 个，含焦点名 0 个，含问句锚点 0 个
+       该章全语料正文含锚点: {'防护服': True}

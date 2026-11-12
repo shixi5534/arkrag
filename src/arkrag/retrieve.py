@@ -218,6 +218,101 @@ def estimate_tokens(text: str, *, tokenizer_version: str = index_mod.TOKENIZER_V
     return len(index_mod.tokenize(text, version=tokenizer_version, name_terms=name_terms))
 
 
+# ---------------------------------------------------------------- 证据窗口（L4）
+#: 「头部单元装整块」的默认条数。`evidence_window=1` 且未显式给
+#: `window_head_units` 时用它。
+#:
+#: 为什么需要头部例外：`answer._title_answer` / `_chapter_answer` 都用
+#: `unit["text"].splitlines()` 逐行定位引文，`unit["text"]` 里被窗口丢掉的那些轮
+#: 一旦真的不喂给下游，title/chapter 通路的引文就定位不到（L4 预登记里量的
+#: 上限是 942 次命中中 159 次落在窗口外，14.4%）。头部前 12 个单元是绝大多数
+#: title/chapter 命中所在的位置（`gold` 名次 ≤ 12 的题占绝大多数），所以先保住
+#: 这一段，长尾才按窗口计价。
+#:
+#: 12 这个数**是预登记值，不是扫出来的最优点**：本轮不允许跑端到端评测
+#: （内存只够一份，Lead 串行跑），所以这个默认值必须在报告里如实标注为
+#: 「未经端到端验证的预登记值」。诊断脚本扫了 0/4/8/12/16 五档（只有结构容量，
+#: 没有分数）；要收敛必须由 Lead 在这几档上跑三份 split。
+WINDOW_HEAD_DEFAULT = 12
+
+
+def _clamp_span(start, end, n: int) -> tuple[int, int] | None:
+    """把 `[start, end)` 夹进 `[0, n)`；不合法返回 None（不猜位置）。"""
+    try:
+        s = int(start)
+        e = int(end)
+    except (TypeError, ValueError):
+        return None
+    if s < 0 or e <= s:
+        return None
+    s = max(0, min(s, n))
+    e = max(0, min(e, n))
+    if e <= s:
+        return None
+    return s, e
+
+
+def _evidence_turns(text: str, turn_spans, spans) -> list[int]:
+    """哪些轮的正文与证据区间相交（返回 `turn_spans` 的下标，升序）。
+
+    `turn_spans` 与 `evidence_start/end` 是**同一个坐标系**：两者都是
+    `chunk.py::_render()` 把同一批轮次用 `"\\n".join` 拼出来的 `text` 上的字符
+    偏移（见 `chunk.split_scene` 里 `cursor = end + 1  # "\\n"`）。所以这里可以
+    直接做区间相交，不需要任何文本 find。
+
+    相交判据用开区间 `s < turn_end and e > turn_start`：证据正好落在轮次边界上
+    时归给后一轮（与 `chunk.py` 的 `end` 不含换行一致）。
+    """
+    n = len(text or "")
+    if n <= 0 or not turn_spans or not spans:
+        return []
+    hit: list[int] = []
+    for idx, sp in enumerate(turn_spans):
+        if not isinstance(sp, dict):
+            continue
+        t = _clamp_span(sp.get("start"), sp.get("end"), n)
+        if t is None:
+            continue
+        t0, t1 = t
+        for ev in spans:
+            e = _clamp_span(ev.get("start"), ev.get("end"), n)
+            if e is None:
+                continue
+            if e[0] < t1 and e[1] > t0:
+                hit.append(idx)
+                break
+    return hit
+
+
+def _evidence_window_span(text: str, turn_spans, spans) -> tuple[int, int] | None:
+    """证据覆盖的**连续**窗口 `[start, end)`；取不到返回 None。
+
+    取"最小证据轮的开头 .. 最大证据轮的结尾"而不是拼接若干段：下游一切按
+    `text[start:end]` 校验偏移的代码（`verify_citations`、`_line_bounds`）都只认
+    连续区间，拼出来的多段文本会让偏移立刻对不上。代价是两段证据之间的轮次
+    也被一并计入——这是**有意**的，宁可多算几个 token，也不制造一个偏移不可校验
+    的正文。
+
+    `turn_spans` 缺失（老世代 / 合成块）或没有任何合法证据偏移时返回 None，
+    调用方据此退回"整块计价"，绝不猜一个窗口出来。
+    """
+    idxs = _evidence_turns(text, turn_spans, spans)
+    if not idxs:
+        return None
+    n = len(text or "")
+    lo = None
+    hi = None
+    for i in idxs:
+        t = _clamp_span(turn_spans[i].get("start"), turn_spans[i].get("end"), n)
+        if t is None:
+            continue
+        lo = t[0] if lo is None else min(lo, t[0])
+        hi = t[1] if hi is None else max(hi, t[1])
+    if lo is None or hi is None or hi <= lo:
+        return None
+    return lo, hi
+
+
 def _norm_scores(hits: list[tuple[str, float]]) -> dict[str, float]:
     """把一路得分归一到 [0, 1]。空输入返回空 dict。"""
     if not hits:
@@ -312,6 +407,35 @@ class Retriever:
                 self.assertions_by_chunk[cid].append(rec)
         for items in self.assertions_by_chunk.values():
             items.sort(key=lambda r: str(r.get("assertion_id") or ""))
+
+    # ------------------------------------------------------------ 全库章节扫描
+    def chapter_scan(self, name: str) -> dict:
+        """返回 `{chapter: [unit, ...]}`：全库里**正文含 `name`** 的单元，按章分组。
+
+        L5（`cross_chunk` 定向补章）用。为什么不复用 `search`：长尾章节里该实体
+        常常只出现 1 次，BM25/向量都召不回来，而这里要的是「穷举」，不是「排序」。
+
+        只做**字面子串**匹配，不做模糊、不做同义扩展：
+        判据里 `chapter_set` 读的是答案文本，补进来的章必须真的含这个名字，
+        否则就是把「换了个定义作答」当成答对（`judge.py` 模块头记的那次事故）。
+
+        结果按章名排序后的 dict，保证同一输入两次跑顺序一致。
+        """
+        key = str(name or "")
+        if not key:
+            return {}
+        out: dict[str, list[dict]] = {}
+        for cid, rec in self.chunks.items():
+            text = str(rec.get("text") or "")
+            if key not in text:
+                continue
+            chapter = str(rec.get("chapter") or "").strip()
+            if not chapter:
+                continue
+            out.setdefault(chapter, []).append(rec)
+        for items in out.values():
+            items.sort(key=lambda r: str(r.get("chunk_id") or ""))
+        return {c: out[c] for c in sorted(out)}
 
     # ------------------------------------------------------------ 实体表
     def _build_entity_tables(self) -> None:
@@ -837,6 +961,8 @@ class Retriever:
         query_analysis: dict | None = None,
         graph_reserve_tokens: int = 0,
         max_direct_units: int = 0,
+        evidence_window: int = 0,
+        window_head_units: int | None = None,
     ) -> dict:
         """把检索命中与图扩展拼成上下文单元。
 
@@ -891,11 +1017,41 @@ class Retriever:
            违背"解耦检索宽度与上下文宽度"的目的。`bridge_candidates` 是 cap
            **之前**的完整接地单元列表，只读用途，**不参与** `context_digest`
            的构造（否则摘要会声称回答器看到了它没看到的证据）。
+
+        ## `evidence_window`（L4，默认 0 = 与改造前逐位等价）
+
+        `1` 时按**证据窗口**给长尾单元计价：只把「含断言的那几轮正文」算进
+        `budget_tokens`，同一批块、同一份索引、同一份断言，一块都不重抽。
+        动机是结构量而不是分数：块上限 900 字、median 32 轮，而一个问句真正
+        相关的证据通常只在 5 轮里——整块计价时 24000 只能装 19.7 个单元，
+        按证据轮计价中位数约 5.7 倍压缩（Lead 独立复核 823 个 gold 块）。
+
+        **分层，不全局裁。** `ordered` 里前 `window_head_units`（默认
+        `WINDOW_HEAD_DEFAULT`=12）个单元装**整块**，只有长尾按窗口计价。理由：
+        `answer._title_answer` / `_chapter_answer` 用
+        `unit["text"].splitlines()` 逐行定位引文，落在被丢弃轮次里的引文会定位
+        失败（Lead 量到的上限 942 次命中里 159 次 = 14.4%）。头部例外把这条代价
+        限制在长尾，而且**不需要改判据、不需要改 `answer.py` 的既有分支**。
+
+        **`unit["text"]` 永远是完整原文，一个字符都不截。** 窗口只新增
+        `window_text` / `window_start` / `window_end` / `window_tokens` /
+        `window_applied` / `full_tokens` 六个字段。`verify_citations` 按
+        `unit["text"][start:end] == evidence` 校验，`unit["text"]` 一动整条引用
+        就废；`stats.tokens_used` 也被 `tests/test_context_budget.py` 钉着。
+
+        `window_start/end` 是**连续区间**（最小证据轮开头 .. 最大证据轮结尾），
+        不是多段拼接：下游一切校验偏移的代码都只认连续区间。
+        取不到 `turn_spans`（老世代 / 合成块）或没有合法证据偏移时**退回整块
+        计价**并标 `window_applied=False`，绝不猜一个窗口出来。
         """
         budget_tokens = int(
             token_budget if token_budget is not None else self.budget["max_context_tokens"]
         )
         max_direct = max(0, int(max_direct_units or 0))
+        # ---- L4：证据窗口（默认 0 = 关闭，与改造前逐位等价） ------------------
+        window_on = bool(int(evidence_window or 0))
+        win_head = WINDOW_HEAD_DEFAULT if window_head_units is None \
+            else max(0, int(window_head_units))
         qa = query_analysis or {}
         hint_predicates = {
             str(h.get("canonical") or h.get("raw") or "") for h in (qa.get("relation_hints") or [])
@@ -998,6 +1154,12 @@ class Retriever:
             units.values(),
             key=lambda u: (0 if direct(u) else 1, -u["score"], u["chunk_id"]),
         )
+        # L4 的"头部单元"名次取自**cap 之前**的 `ordered`：cap 会把 `ordered`
+        # 重排成「前缀直接单元 + 图单元」，但"谁是头部"必须由名次本身决定，
+        # 否则同一批候选在 cap 开/关两种配置下会被计成不同的层。
+        rank_of: dict[str, int] = {}
+        if window_on:
+            rank_of = {str(u["chunk_id"]): i for i, u in enumerate(ordered)}
 
         kept: list[dict] = []
         used_tokens = 0
@@ -1014,6 +1176,86 @@ class Retriever:
                 tokenizer_version=getattr(self.index, "tokenizer_version", index_mod.TOKENIZER_VERSION),
                 name_terms=getattr(self.index, "name_terms", None),
             )
+
+        def _tok(text: str) -> int:
+            return estimate_tokens(
+                text,
+                tokenizer_version=getattr(self.index, "tokenizer_version", index_mod.TOKENIZER_VERSION),
+                name_terms=getattr(self.index, "name_terms", None),
+            )
+
+        # ---- L4：证据窗口的计价与标注（`window_on` 为假时一个字节都不碰） ------
+        # 分层规则：`ordered` 里前 `win_head` 个单元按**整块**计价并标注
+        # `window_start/window_end == 0/len(text)`；其余单元按证据窗口计价。
+        #
+        # 为什么分层而不是全局裁：`title` / `chapter` 通路用
+        # `unit["text"].splitlines()` 逐行定位引文。整块保留的单元不会因为窗口
+        # 丢掉任何一行；而窗口单元一旦真的只喂窗口正文，落在窗口外的引文就定位
+        # 不到（Lead 量到的上限：942 次命中里 159 次落在窗口外）。
+        # 头部是按 `ordered` 名次算的，**不是按装填先后**：`reserve` 两段装填会
+        # 改变装填顺序，但"谁是头部单元"必须由名次决定，否则同一批候选在不同
+        # 装填路径下会被计成不同的层，读数无法互相比较。
+        # `rank_of` 已经在上面按 **cap 之前**的 `ordered` 建好，这里绝不许重置：
+        # 重建成空 dict 会让每个单元的 `rank` 都落到默认值 0，于是整批单元全被判成
+        # 「头部」——窗口一个都不生效，而读数看起来"跑过了"（本轮实测踩到）。
+        # 只在 `window_on` 时进 `stats`（默认路径的 `stats` 字面量必须逐位不变）。
+        window_stats = {"windowed_units": 0, "full_units": 0, "window_saved_tokens": 0}
+        #: `chunk_id -> 已计入预算的 token`（只在 `window_on` 时用）
+        _charged: dict[str, int] = {}
+
+        def window_cost(unit: dict, rank: int) -> int:
+            """按分层规则计价，并把窗口信息写到单元上。返回要计入预算的 token。"""
+            cid = str(unit.get("chunk_id") or "")
+            text = str(unit.get("text") or "")
+            full = cost_of(unit)
+            unit["window_start"] = 0
+            unit["window_end"] = len(text)
+            unit["window_text"] = text
+            unit["window_tokens"] = full
+            unit["window_applied"] = False
+            unit["full_tokens"] = full
+            if rank < win_head:
+                window_stats["full_units"] += 1
+                return full
+            rec = self.chunks.get(cid) or {}
+            win = _evidence_window_span(text, rec.get("turn_spans"), unit["evidence_spans"])
+            if win is None:
+                # 没有 turn_spans（老世代 / 合成块）或没有合法证据偏移：退回整块。
+                # **不猜窗口**——猜出来的窗口会让 `text[start:end]` 对不上。
+                window_stats["full_units"] += 1
+                return full
+            start, end = win
+            head = f"{unit['title']} {unit['chapter']} "
+            win_cost = _tok(f"{head}{text[start:end]}")
+            if win_cost >= full:
+                # 窗口没省下任何 token（极小块 / 证据覆盖整块）：不标注、不记账，
+                # 免得读数里出现"窗口省了 0 个"这种噪音项。
+                window_stats["full_units"] += 1
+                return full
+            unit["window_start"] = start
+            unit["window_end"] = end
+            unit["window_text"] = text[start:end]
+            unit["window_tokens"] = win_cost
+            unit["window_applied"] = True
+            window_stats["windowed_units"] += 1
+            window_stats["window_saved_tokens"] += full - win_cost
+            return win_cost
+
+        def charge_of(unit: dict) -> int:
+            """本次装填要计入预算的 token 数。`window_on` 为假时等于 `cost_of`。
+
+            **按 `chunk_id` 记忆化**：`reserve` 路径会对同一单元调用两次
+            （装填 + 补装），不记忆化就会把 `window_stats` 记两遍，
+            且第二次会拿已经算好的结果再算一遍——账目对不上。
+            """
+            if not window_on:
+                return cost_of(unit)
+            cid = str(unit["chunk_id"])
+            got = _charged.get(cid)
+            if got is None:
+                got = window_cost(unit, rank_of.get(cid, 0))
+                _charged[cid] = got
+            return got
 
         # ---- W1：直接单元的 cap（默认 0 = 不 cap，逐位等价） ----------------
         # `bridge_candidates` 是 cap **之前**的完整接地单元列表，只读用途：
@@ -1040,7 +1282,7 @@ class Retriever:
             graph_units = [u for u in ordered if not direct(u)]
             taken: set[str] = set()
             for unit in direct_units:
-                cost = cost_of(unit)
+                cost = charge_of(unit)
                 unit["tokens"] = cost
                 if used_tokens + cost > direct_cap:
                     continue
@@ -1048,7 +1290,7 @@ class Retriever:
                 kept.append(unit)
                 taken.add(unit["chunk_id"])
             for unit in graph_units:
-                cost = cost_of(unit)
+                cost = charge_of(unit)
                 unit["tokens"] = cost
                 if used_tokens + cost > budget_tokens:
                     continue
@@ -1058,7 +1300,7 @@ class Retriever:
             for unit in direct_units:
                 if unit["chunk_id"] in taken:
                     continue
-                cost = unit.get("tokens") or cost_of(unit)
+                cost = unit.get("tokens") or charge_of(unit)
                 unit["tokens"] = cost
                 if used_tokens + cost > budget_tokens:
                     continue
@@ -1078,7 +1320,7 @@ class Retriever:
                 # `truncation_overtake` 在这条路径上恒为 0（K2）。
                 # **默认路径（cap=0）不走这里**，仍用下面的 `continue`，逐位等价。
                 for unit in ordered:
-                    cost = cost_of(unit)
+                    cost = charge_of(unit)
                     unit["tokens"] = cost
                     if used_tokens + cost > budget_tokens:
                         # 首个装不下即停：后续单元不论大小一律不进，
@@ -1090,7 +1332,7 @@ class Retriever:
                              if u["chunk_id"] not in {k["chunk_id"] for k in kept}]
             else:
                 for unit in ordered:
-                    cost = cost_of(unit)
+                    cost = charge_of(unit)
                     unit["tokens"] = cost
                     if used_tokens + cost > budget_tokens:
                         truncated.append(unit["chunk_id"])
@@ -1138,6 +1380,17 @@ class Retriever:
             # 关键：它**不进入** `payload`/`context_digest`——摘要必须只描述
             # 回答器真实看到的证据，否则等于声称它看了没给它的东西。
             result["bridge_candidates"] = bridge_candidates
+        if window_on:
+            # 同理：只有窗口开启时才加这几个键。默认路径的 `stats` /
+            # `units[i]` 字段集与改造前**逐位相同**——这是 `tests/test_context_budget.py`
+            # 与台账等值比较的门在看着的地方。
+            result["stats"]["evidence_window"] = 1
+            result["stats"]["window_head_units"] = win_head
+            result["stats"]["windowed_units"] = window_stats["windowed_units"]
+            result["stats"]["window_full_units"] = window_stats["full_units"]
+            result["stats"]["window_saved_tokens"] = window_stats["window_saved_tokens"]
+            result["stats"]["window_chars_kept_pct"] = _window_chars_pct(
+                kept, window_stats["windowed_units"])
         return result
 
 
@@ -1183,6 +1436,20 @@ def _push_span(unit: dict, rec: dict) -> None:
             "end": end,
         }
     )
+
+
+def _window_chars_pct(kept: list[dict], n_windowed: int) -> float | None:
+    """窗口单元保留了多少比例的原始字符（`windowed` 为空时返回 None）。
+
+    只统计 `window_applied` 的单元：整块单元（头部 + 退化的）保留率恒为 100%，
+    把它们算进来会把压缩比冲淡成一个看不出差别的数。
+    """
+    total = sum(len(str(u.get("text") or "")) for u in kept if u.get("window_applied"))
+    keptc = sum(int(u.get("window_end", 0)) - int(u.get("window_start", 0))
+                for u in kept if u.get("window_applied"))
+    if not total or not n_windowed:
+        return None
+    return round(100.0 * keptc / total, 2)
 
 
 def _assertion_brief(rec: dict, display) -> dict:

@@ -1,0 +1,27 @@
+============================================================================================
+L2 端到端实测：chapter_rank 开关   世代 g-20261103T132152Z-06a741
+生产档 {"max_context_tokens": 24000, "options": {"quote_locate": true, "bridge": true, "bridge_search_top_k": 40, "graph_reserve_tokens": 12000, "chapter_cap": 4}}
+============================================================================================
+
+[dev]  可判 285
+   A_base     231/285 = 81.05%   cross_chunk 26/38
+   B_focus    233/285 = 81.75%   cross_chunk 28/38
+   +2 / -0   gain=['q-cx-000032', 'q-cx-900027']  loss=[]
+     q-cx-000032  A='act12side、act38side、memory_coldst、memory_jnight' (chapter_set_missing)
+                  B='act38side、main_ep14、memory_coldst、memory_jnight' (extra_chapters_all_real_and_bounded)
+     q-cx-900027  A='act15d0、main_ep13、main_ep14、rogue_rogue_4' (chapter_set_missing)
+                  B='act15d0、main_ep13、main_ep14、memory_plosis' (chapter_set_equal)
+
+[holdout]  可判 195
+   A_base     154/195 = 78.97%   cross_chunk 18/26
+   B_focus    156/195 = 80.00%   cross_chunk 20/26
+   +2 / -0   gain=['q-cx-000012', 'q-cx-000015']  loss=[]
+     q-cx-000012  A='memory_beagle、memory_hpsts、memory_pinecn、memory_pudd' (chapter_set_missing)
+                  B='act13mini、memory_beagle、memory_pinecn、memory_pudd' (extra_chapters_all_real_and_bounded)
+     q-cx-000015  A='act29side、act51side、main_st17、memory_turdus' (chapter_set_missing)
+                  B='act29side、main_st17、memory_pinecn、memory_turdus' (chapter_set_equal)
+
+[clean]  可判 120
+   A_base     98/120 = 81.67%   cross_chunk 13/16
+   B_focus    98/120 = 81.67%   cross_chunk 13/16
+   +0 / -0   gain=[]  loss=[]

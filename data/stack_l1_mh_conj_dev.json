@@ -1,0 +1,7465 @@
+{
+ "generation_id": "g-20261103T132152Z-06a741",
+ "gold_set": "data\\goldset\\gold-v2.json",
+ "split": "dev",
+ "token_budget": 24000,
+ "prod_profile": true,
+ "prod_options": {
+  "quote_locate": true,
+  "bridge": true,
+  "bridge_search_top_k": 40,
+  "graph_reserve_tokens": 12000,
+  "chapter_cap": 4,
+  "multihop_conjunction": true
+ },
+ "n_items": 350,
+ "elapsed_ms": 68953.2,
+ "per_item_ms": 197.0,
+ "judge_schema": "arkrag.judge/1",
+ "chapters_seen": 494,
+ "per_category": {
+  "single_chunk": {
+   "n": 76,
+   "scorable": true,
+   "arms": {
+    "prod": {
+     "pass": 76,
+     "opened": 76
+    }
+   }
+  },
+  "alias": {
+   "n": 57,
+   "scorable": true,
+   "arms": {
+    "prod": {
+     "pass": 52,
+     "opened": 54
+    }
+   }
+  },
+  "direct_relation": {
+   "n": 57,
+   "scorable": true,
+   "arms": {
+    "prod": {
+     "pass": 50,
+     "opened": 57
+    }
+   }
+  },
+  "multihop": {
+   "n": 57,
+   "scorable": true,
+   "arms": {
+    "prod": {
+     "pass": 27,
+     "opened": 57
+    }
+   }
+  },
+  "cross_chunk": {
+   "n": 38,
+   "scorable": true,
+   "arms": {
+    "prod": {
+     "pass": 26,
+     "opened": 38
+    }
+   }
+  },
+  "time_conflict": {
+   "n": 38,
+   "scorable": false,
+   "arms": {
+    "prod": {
+     "pass": null,
+     "opened": 38
+    }
+   }
+  },
+  "negative_abstain": {
+   "n": 8,
+   "scorable": false,
+   "arms": {
+    "prod": {
+     "pass": null,
+     "opened": 8
+    }
+   }
+  },
+  "adversarial": {
+   "n": 19,
+   "scorable": false,
+   "arms": {
+    "prod": {
+     "pass": null,
+     "opened": 19
+    }
+   }
+  }
+ },
+ "totals": {
+  "prod": {
+   "scorable_n": 285,
+   "scorable_pass": 231,
+   "scorable_rate": 0.810526,
+   "all_n": 350,
+   "all_rate": 0.66,
+   "opened": 347,
+   "opened_rate": 0.991429
+  }
+ },
+ "rows": [
+  {
+   "question_id": "q-sc-000005",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《最后的怯薛》的正文里，出现了这样一句话：「玛莉娅，我认识一些优秀的工匠。」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "最后的怯薛",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000007",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "下面这段原文来自哪一段剧情？「在战胜了“塑料”瑟奇亚克至今」请回答该段的标题。",
+   "answer": "蓝耳酒窖",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000009",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《红日留驻》的正文里，出现了这样一句话：「他刚才还给了达雅干木柴」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "红日留驻",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000010",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《野蛮肇事者》的正文里，出现了这样一句话：「我警告过你们不许进入森林。」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "野蛮肇事者",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000012",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《牺牲与代价》的正文里，出现了这样一句话：「布兰都斯，关于这场手术，你是否还有什么其他的事项需要交代？」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "牺牲与代价",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000013",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《地堡防线》的正文里，出现了这样一句话：「皮加尔：这是我听过的最疯狂的作战计划。」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "地堡防线",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000015",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《耶拉冈德在上》的正文里，出现了这样一句话：「谢拉格只想保卫自身的安全，而无意掠夺别国的利益。」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "耶拉冈德在上",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000016",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《沉默者之怒-1》的正文里，出现了这样一句话：「迷迭香，我们行动」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "沉默者之怒-1",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000017",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "下面这段原文来自哪一段剧情？「喂，我说你，你是看不起老子吗？」请回答该段的标题。",
+   "answer": "干员间切磋指南",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000018",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "下面这段原文来自哪一段剧情？「找到了在这雾中的唯一一座小木屋」请回答该段的标题。",
+   "answer": "问道",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000020",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "下面这段原文来自哪一段剧情？「乌萨斯为什么会变成这样？」请回答该段的标题。",
+   "answer": "枷锁之中",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000021",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "下面这段原文来自哪一段剧情？「对于驻守北地的战士而言，如此事实，或许也无关紧要。」请回答该段的标题。",
+   "answer": "归乡",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000022",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《礼仪广场》的正文里，出现了这样一句话：「斯图提斐拉上的一切都是伊比利亚的宝贵财产」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "礼仪广场",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000023",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《自光辉中奔涌》的正文里，出现了这样一句话：「很快堆满了萨卡兹的尸体，以及祭坛的碎片」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "自光辉中奔涌",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000024",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "下面这段原文来自哪一段剧情？「可萝尔还在等我们呢！」请回答该段的标题。",
+   "answer": "黄金三角",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000026",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《嘉维尔之拳》的正文里，出现了这样一句话：「祖玛玛，抱歉啊，只能把它拆掉了。」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "嘉维尔之拳",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000027",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《各自流亡》的正文里，出现了这样一句话：「格罗莫夫申请了那么多物资」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "各自流亡",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000028",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "下面这段原文来自哪一段剧情？「这已经是一小时内你第十次抱怨了，天火大小姐。」请回答该段的标题。",
+   "answer": "火山制造",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000029",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《万物有灵》的正文里，出现了这样一句话：「老鲤：不知姑娘尊姓大名？如此冒昧来访，又是为了什么？」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "万物有灵",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000030",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《完整的缺损》的正文里，出现了这样一句话：「第四集团军仍然与第二集团军相持不下。」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "完整的缺损",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000031",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《或许有时》的正文里，出现了这样一句话：「怎么了，一惊一乍的，出什么事了？」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "或许有时",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000032",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《失乐园》的正文里，出现了这样一句话：「每个人的性格都不一样，你的想法我也能够理解。」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "失乐园",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000033",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "下面这段原文来自哪一段剧情？「让我带你走出来。」请回答该段的标题。",
+   "answer": "向死寻生",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000034",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "下面这段原文来自哪一段剧情？「医疗部有规定，不能随意收受患者的礼物。」请回答该段的标题。",
+   "answer": "护身符",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000035",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《一问之答》的正文里，出现了这样一句话：「岂不是枉费了我一番教诲？」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "一问之答",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000036",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《核心舱攻防战》的正文里，出现了这样一句话：「阿米娅：死魂灵。」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "核心舱攻防战",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000037",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《不治的命运》的正文里，出现了这样一句话：「哪怕海嗣已经威胁到阿戈尔的存续」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "不治的命运",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000038",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "下面这段原文来自哪一段剧情？「于是与奎隆一道，广授觉法」请回答该段的标题。",
+   "answer": "毗牟题，或解答",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000039",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《留下的人》的正文里，出现了这样一句话：「塞雷娅，你是不是头晕得厉害？」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "留下的人",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000042",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "下面这段原文来自哪一段剧情？「海嗣与巨兽同源。」请回答该段的标题。",
+   "answer": "第一次接触",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000045",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "下面这段原文来自哪一段剧情？「可我来高庭区根本没申请」请回答该段的标题。",
+   "answer": "自由射手",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000046",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "下面这段原文来自哪一段剧情？「没有经过特殊训练的人，手握出鞘的兵刃入睡实在太危险了。」请回答该段的标题。",
+   "answer": "蒙眬",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000047",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《柳暗花明》的正文里，出现了这样一句话：「小贾斯汀：娜斯提·鲁诺瑞伊女士。」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "柳暗花明",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000048",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "下面这段原文来自哪一段剧情？「一如当年在泥泞里跋涉的提卡兹」请回答该段的标题。",
+   "answer": "降生",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000049",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《补票！》的正文里，出现了这样一句话：「重要的......是耶拉冈德像脚下的湖心岛」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "补票！",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000050",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《黄沙尽头》的正文里，出现了这样一句话：「缇缇教自己把观众看成博物馆里的文物」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "黄沙尽头",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000052",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《复航》的正文里，出现了这样一句话：「她直接回了359实验基地」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "复航",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000056",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《商业联合》的正文里，出现了这样一句话：「这不可能，你？治疗我？」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "商业联合",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000057",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "下面这段原文来自哪一段剧情？「我在想......你觉得，国王是什么？」请回答该段的标题。",
+   "answer": "捂住耳朵",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000059",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "下面这段原文来自哪一段剧情？「我们做的每一件事，都逃不过耶拉冈德的眼睛。」请回答该段的标题。",
+   "answer": "崩落",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000060",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《凛刃出匣》的正文里，出现了这样一句话：「那就容我们见证，长老。」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "凛刃出匣",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000061",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "下面这段原文来自哪一段剧情？「在我被送到实验场之前，女皇陛下推翻了巫王。我得救了。」请回答该段的标题。",
+   "answer": "升华之夜",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000062",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《“何谓存续？”》的正文里，出现了这样一句话：「我们会以弥利亚留姆为端口，向岸上输送人才与技术」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "“何谓存续？”",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-000064",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《“卡托加区欢迎你”》的正文里，出现了这样一句话：「你父亲安德烈如今又在何处？」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "“卡托加区欢迎你”",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 2,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-000002",
+   "category": "alias",
+   "split": "dev",
+   "question": "在剧情正文里，「热情的村民」被用来指代哪个角色或事物？请给出它的规范名。",
+   "answer": "罗德岛干员交谈繁藏。缠丸交谈繁藏。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 2,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-000003",
+   "category": "alias",
+   "split": "dev",
+   "question": "「卡奇」是《下坠》中出现的称呼，它的规范名（规范实体名）是什么？",
+   "answer": "卡奇·叙光交谈斯第奇·画布。斯第奇·画布交谈卡奇·叙光。极境交谈卡奇·叙光。卡奇·叙光交谈黛柯绮·银币。黛柯绮·银币交谈卡奇·叙光。嘉维尔交谈卡奇·叙光。卡奇·叙光交谈耶奇·地心。卡奇·叙光交谈依娜姆。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 44,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-000004",
+   "category": "alias",
+   "split": "dev",
+   "question": "「冷饮店店主」是《爱之歌》中出现的称呼，它的规范名（规范实体名）是什么？",
+   "answer": "哈莉交谈汤姆。埃尼斯交谈汤姆。雪雉交谈汤姆。拜松交谈汤姆。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 6,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-000006",
+   "category": "alias",
+   "split": "dev",
+   "question": "「伦蒂尼姆市民自救军」是《城市的呼吸》中出现的称呼，它的规范名（规范实体名）是什么？",
+   "answer": "罗德岛同盟自救军。自救军冲突萨卡兹。自救军位于萨迪恩区。萨卡兹交战自救军。罗德岛救助自救军。汤米隶属自救军。自救军离开伦蒂尼姆。费斯特隶属自救军。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 10,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-000007",
+   "category": "alias",
+   "split": "dev",
+   "question": "「喀兰峰」是《猎场》中出现的称呼，它的规范名（规范实体名）是什么？",
+   "answer": "蔓珠院位于喀兰峰顶。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-000008",
+   "category": "alias",
+   "split": "dev",
+   "question": "「科谢尼娅·马尔科芙娜·涅留朵娃」是《道路以目》中出现的称呼，它的规范名（规范实体名）是什么？",
+   "answer": "科谢尼娅研究奥卡。科谢尼娅交谈Mon3tr。科谢尼娅师从伊利亚。特蕾西娅交谈马尔科。Raidian交谈科谢尼娅。科谢尼娅同行Mon3tr。Mon3tr同行科谢尼娅。科谢尼娅交谈凯尔希。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 23,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-000009",
+   "category": "alias",
+   "split": "dev",
+   "question": "「卡提亚」是《爱之歌》中出现的称呼，它的规范名（规范实体名）是什么？",
+   "answer": "卡提亚·瑙曼亲属阿黛尔。凯勒同行卡提亚·瑙曼。卡提亚·瑙曼交谈阿黛尔。卡提亚·瑙曼研究源石。阿黛尔亲属卡提亚·瑙曼。卡提亚·瑙曼研究源石技艺。卡提亚·瑙曼前往乌纳火山。凯勒交谈卡提亚·瑙曼。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 12,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-000010",
+   "category": "alias",
+   "split": "dev",
+   "question": "在剧情正文里，「办事处干员B」被用来指代哪个角色或事物？请给出它的规范名。",
+   "answer": "",
+   "abstained": true,
+   "judge": {
+    "pass": false,
+    "reason": "empty"
+   },
+   "citations_ok": true,
+   "n_citations": 0,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "empty",
+     "answered": false
+    }
+   }
+  },
+  {
+   "question_id": "q-al-000011",
+   "category": "alias",
+   "split": "dev",
+   "question": "「莫小六」是《雪里蕻》中出现的称呼，它的规范名（规范实体名）是什么？",
+   "answer": "莫不服交谈煌。莫不服交谈老姜。麟青砚交谈莫不服。莫不服交谈麟青砚。莫不服属于鼎丰楼。莫不服前往百灶。莫不服交谈余味居。莫不服位于鼎丰楼。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 20,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-000012",
+   "category": "alias",
+   "split": "dev",
+   "question": "在剧情正文里，「艾尔斯」被用来指代哪个角色或事物？请给出它的规范名。",
+   "answer": "灰喉交谈断崖。断崖交谈小克鲁斯。断崖交谈莱恩哈特。莱恩哈特交谈断崖。断崖保护莱恩哈特。断崖救助卡达。断崖任职天灾信使。莱恩哈特同行断崖。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 26,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-000013",
+   "category": "alias",
+   "split": "dev",
+   "question": "在剧情正文里，「甲胄」被用来指代哪个角色或事物？请给出它的规范名。",
+   "answer": "蒸汽甲胄属于坎伯兰家族。蒸汽甲胄属于坎伯兰。凯瑟琳制造蒸汽甲胄。阿勒黛交谈蒸汽甲胄。蒸汽甲胄属于坎伯兰家。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 6,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-000014",
+   "category": "alias",
+   "split": "dev",
+   "question": "在剧情正文里，「玛丽安娜·布莱克」被用来指代哪个角色或事物？请给出它的规范名。",
+   "answer": "赫默交谈布莱克。布莱克破坏莱茵生命。布莱克隶属国防部。杰克逊交谈布莱克。布莱克敌对克丽斯腾。斐尔迪南交谈布莱克。布莱克交谈斐尔迪南。布莱克敌对杰克逊。",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "gold_absent"
+   },
+   "citations_ok": true,
+   "n_citations": 22,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "gold_absent",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-000016",
+   "category": "alias",
+   "split": "dev",
+   "question": "「莱辛·梅耶尔」是《华尔兹“假面”》中出现的称呼，它的规范名（规范实体名）是什么？",
+   "answer": "莱辛交谈黑键。埃芒加德交谈莱辛。莱辛保护黑键。莱辛交谈米夏埃尔。莱辛师从格哈德。莱辛隶属路德维格大学。黑键交谈莱辛。莱辛敌对黑键。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 20,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-000018",
+   "category": "alias",
+   "split": "dev",
+   "question": "「不反」是《双飞燕》中出现的称呼，它的规范名（规范实体名）是什么？",
+   "answer": "源石位于岁陵。真龙使用源石。递质源自源石。心相原质源自源石。奥卡属于源石。乌萨斯使用源石。夜刀研究源石。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 7,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-000019",
+   "category": "alias",
+   "split": "dev",
+   "question": "在剧情正文里，「小丽萨」被用来指代哪个角色或事物？请给出它的规范名。",
+   "answer": "英格丽亲属铃兰。铃兰师从凯尔希。铃兰隶属罗德岛。铃兰交谈亚叶。亚叶交谈铃兰。铃兰交谈安洁莉娜。铃兰赠予安洁莉娜。可颂交谈铃兰。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 18,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-000020",
+   "category": "alias",
+   "split": "dev",
+   "question": "在剧情正文里，「新人小哥」被用来指代哪个角色或事物？请给出它的规范名。",
+   "answer": "慑砂交谈杜林。杜林交谈慑砂。慑砂指挥杜林。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 3,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-000022",
+   "category": "alias",
+   "split": "dev",
+   "question": "「强壮的男人」是《惊弓一夜》中出现的称呼，它的规范名（规范实体名）是什么？",
+   "answer": "阿振交谈老于。老于交谈阿振。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 5,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-000024",
+   "category": "alias",
+   "split": "dev",
+   "question": "在剧情正文里，「锡兰小姐」被用来指代哪个角色或事物？请给出它的规范名。",
+   "answer": "赫拉格交谈锡兰。锡兰亲属赫尔曼。锡兰交谈克洛宁。锡兰出生于汐斯塔。锡兰交谈赫拉格。阿黛尔交谈锡兰。医疗干员交谈锡兰。锡兰交谈阿黛尔。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 20,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-000025",
+   "category": "alias",
+   "split": "dev",
+   "question": "「旧王城的遗址」是《溺火》中出现的称呼，它的规范名（规范实体名）是什么？",
+   "answer": "",
+   "abstained": true,
+   "judge": {
+    "pass": false,
+    "reason": "empty"
+   },
+   "citations_ok": true,
+   "n_citations": 0,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "empty",
+     "answered": false
+    }
+   }
+  },
+  {
+   "question_id": "q-al-000028",
+   "category": "alias",
+   "split": "dev",
+   "question": "「外勤干员A」是《两难》中出现的称呼，它的规范名（规范实体名）是什么？",
+   "answer": "爱丽丝交谈外勤干员。外勤干员交谈爱丽丝。普通办事员交谈外勤干员。外勤干员指导爱丽丝。外勤干员救助朵拉。外勤干员赠予莓莓。外勤干员交谈普通办事员。",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "gold_absent"
+   },
+   "citations_ok": true,
+   "n_citations": 12,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "gold_absent",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-000031",
+   "category": "alias",
+   "split": "dev",
+   "question": "在剧情正文里，「萨卡兹们」被用来指代哪个角色或事物？请给出它的规范名。",
+   "answer": "萨卡兹位于卡兹戴尔。深池听命于萨卡兹。伦蒂尼姆工人B敌对萨卡兹。萨卡兹冲突伦蒂尼姆。萨卡兹前往卡兹戴尔。萨卡兹冲突罗伯逊。护符属于萨卡兹。号角敌对萨卡兹。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 8,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-000033",
+   "category": "alias",
+   "split": "dev",
+   "question": "「迪亚兹·冈萨雷斯」是《反艺术运动》中出现的称呼，它的规范名（规范实体名）是什么？",
+   "answer": "迪亚兹交谈特克诺。艾拉交谈迪亚兹。雷内尔交谈迪亚兹。迪亚兹交谈艾拉。迪亚兹交谈雷内尔。迪亚兹交谈马特奥。雷内尔敌对迪亚兹。迪亚兹救助特克诺。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 24,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-000034",
+   "category": "alias",
+   "split": "dev",
+   "question": "「昂斯特议员」是《我如浮萍》中出现的称呼，它的规范名（规范实体名）是什么？",
+   "answer": "天火交谈昂斯特。昂斯特交谈天火。夜烟交谈昂斯特。天火师从昂斯特。昂斯特持有感染者社区。天火受保护于昂斯特。昂斯特雇用天火。昂斯特交谈雷德。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 18,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-000035",
+   "category": "alias",
+   "split": "dev",
+   "question": "在剧情正文里，「地灵前辈」被用来指代哪个角色或事物？请给出它的规范名。",
+   "answer": "普罗旺斯交谈地灵。地灵隶属罗德岛。地灵师从巴赫曼教授。地灵交谈巴赫曼小姐。阿黛尔交谈地灵。地灵听命于博士。地灵交谈凯利。地灵交谈普罗旺斯。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 21,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-000036",
+   "category": "alias",
+   "split": "dev",
+   "question": "「刺客」是《阴影显现》中出现的称呼，它的规范名（规范实体名）是什么？",
+   "answer": "阿斯卡纶交谈特蕾西娅。Misery交谈阿斯卡纶。特蕾西娅交谈阿斯卡纶。阿斯卡纶交谈曼弗雷德。曼弗雷德交谈阿斯卡纶。阿斯卡纶师从特雷西斯。特雷西斯指导阿斯卡纶。阿斯卡纶指挥W。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 14,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-000037",
+   "category": "alias",
+   "split": "dev",
+   "question": "在剧情正文里，「白角魔王」被用来指代哪个角色或事物？请给出它的规范名。",
+   "answer": "闪灵交谈奎萨图什塔。闪灵敌对奎萨图什塔。奎萨图什塔创建卡兹戴尔。奎萨图什塔亲属闪灵。闪灵背叛奎萨图什塔。闪灵交战奎萨图什塔。奎萨图什塔领导赦罪师。奎萨图什塔使用源石。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 11,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-000038",
+   "category": "alias",
+   "split": "dev",
+   "question": "「碧翠克斯」是《有口难言》中出现的称呼，它的规范名（规范实体名）是什么？",
+   "answer": "诗怀雅交谈埃尼斯。诗怀雅交谈林雨霞。魏彦吾交谈诗怀雅。亚当斯·施怀雅亲属诗怀雅。诗怀雅交谈魏彦吾。诗怀雅亲属亚当斯·施怀雅。星熊交谈诗怀雅。陈交谈诗怀雅。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 14,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-000040",
+   "category": "alias",
+   "split": "dev",
+   "question": "「主教」是《我曾舍命为你》中出现的称呼，它的规范名（规范实体名）是什么？",
+   "answer": "歌蕾蒂娅交谈奥卢斯。奥卢斯隶属深海教会。奥卢斯前往伊比利亚。奥卢斯交谈斯特凡诺。奥卢斯研究实验。斯卡蒂交谈奥卢斯。奥卢斯交谈赫曼。奥卢斯交谈克莱门莎。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 10,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-000044",
+   "category": "alias",
+   "split": "dev",
+   "question": "「韦恩议员」是《交叉航线》中出现的称呼，它的规范名（规范实体名）是什么？",
+   "answer": "雅拉交谈韦恩。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-000045",
+   "category": "alias",
+   "split": "dev",
+   "question": "「阿尔图罗小姐」是《鸢尾花》中出现的称呼，它的规范名（规范实体名）是什么？",
+   "answer": "阿尔图罗交谈赫尔昏佐伦。席德佳交谈阿尔图罗。阿尔图罗持有大提琴。阿尔图罗前往罗德岛。费德里科亲属阿尔图罗。阿尔图罗交谈伊万杰利斯塔十一世。伊万杰利斯塔十一世交谈阿尔图罗。阿米娅交谈阿尔图罗。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 15,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-000046",
+   "category": "alias",
+   "split": "dev",
+   "question": "「临时督察」是《瑟瑟秋华》中出现的称呼，它的规范名（规范实体名）是什么？",
+   "answer": "林雨霞交谈孟铁衣。孟铁衣交谈林雨霞。林雨霞隶属近卫局。孟铁衣敌对林雨霞。孟铁衣救助林雨霞。诗怀雅交谈林雨霞。林雨霞亲属鼠王。鼠王交谈林雨霞。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 17,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-000047",
+   "category": "alias",
+   "split": "dev",
+   "question": "在剧情正文里，「青砚小姨」被用来指代哪个角色或事物？请给出它的规范名。",
+   "answer": "麟青砚交谈解真。左乐交谈麟青砚。麟青砚交谈谌彻。左乐亲属麟青砚。麟青砚交谈胡君。麟青砚前往邙山镇。麟青砚前往天师府。麟青砚交谈易。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 11,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-000048",
+   "category": "alias",
+   "split": "dev",
+   "question": "在剧情正文里，「“穿刺”」被用来指代哪个角色或事物？请给出它的规范名。",
+   "answer": "Logos使用穿刺。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-000001",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "「凯尔希」对「伊利亚」处于哪种关系？",
+   "answer": "凯尔希交谈伊利亚。伊利亚师从凯尔希。伊利亚交谈凯尔希。凯尔希交谈博士。可露希尔交谈凯尔希。伊利亚指导科谢尼娅。科谢尼娅师从伊利亚。凯尔希指导科谢尼娅。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 14,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-000003",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "「洛洛」对「费斯特」处于哪种关系？",
+   "answer": "费斯特指挥洛洛。费斯特交谈洛洛。洛洛交谈费斯特。费斯特同行洛洛。费斯特领导洛洛。洛洛同行费斯特。洛洛隶属自救军。可露希尔交谈洛洛。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 27,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-000004",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "根据剧情，「菈塔托丝」与「布朗陶」之间的关系是什么？请用词表里的一个关系词回答。",
+   "answer": "菈塔托丝隶属布朗陶。菈塔托丝领导布朗陶。菈塔托丝交谈休露丝。菈塔托丝领导布朗陶家。菈塔托丝交谈尤卡坦。维多利亚同盟布朗陶。维多利亚交谈菈塔托丝。菈塔托丝交谈维多利亚。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 15,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-000006",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "根据剧情，「乌尔比安」与「海嗣」之间的关系是什么？请用词表里的一个关系词回答。",
+   "answer": "乌尔比安交谈海嗣。乌尔比安敌对海嗣。海嗣交谈乌尔比安。乌尔比安同行海嗣。乌尔比安研究海嗣。乌尔比安交战海嗣。歌蕾蒂娅交谈乌尔比安。斯卡蒂敌对海嗣。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 21,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-000007",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "「太尉」对「大炎」处于哪种关系？",
+   "answer": "太尉效忠大炎。太尉任职大炎。真龙交谈太尉。太尉交谈真龙。太尉敌对岁兽。太尉指挥玉门。太傅交谈太尉。太尉敌对真龙。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 21,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-000010",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "根据剧情，「崔林特尔梅」与「莱塔尼亚」之间的关系是什么？请用词表里的一个关系词回答。",
+   "answer": "崔林特尔梅位于莱塔尼亚。尤利娅位于莱塔尼亚。帝国音乐学院位于崔林特尔梅。伊维格娜德领导莱塔尼亚。赫尔昏佐伦领导莱塔尼亚。女皇庆典发生于崔林特尔梅。双子女皇塔位于崔林特尔梅。薇薇安娜前往崔林特尔梅。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 9,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-000011",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "根据剧情，「莱辛」与「埃芒加德」之间的关系是什么？请用词表里的一个关系词回答。",
+   "answer": "埃芒加德交谈莱辛。莱辛交谈埃芒加德。埃芒加德亲属莱辛。埃芒加德隶属巫妖。莱辛交谈米夏埃尔。埃芒加德交谈赫德雷。黑键交谈埃芒加德。埃芒加德交谈珀耳。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 19,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-000012",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "「乌萨斯远北地区」对「乌萨斯」处于哪种关系？",
+   "answer": "乌萨斯远北地区位于乌萨斯。乌萨斯敌对骏鹰。布列斯克位于乌萨斯。乌萨斯持有石棺。乌萨斯前往远北地区。乌萨斯包含远北地区。叶甫根尼保护乌萨斯。中心矿区位于乌萨斯。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 13,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-000013",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "根据剧情，「Aya」与「日落即逝」之间的关系是什么？请用词表里的一个关系词回答。",
+   "answer": "Dan隶属日落即逝。Aya隶属日落即逝。凯尔希同盟日落即逝。Alty隶属日落即逝。Frost隶属日落即逝。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 9,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-000015",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "根据剧情，「递质」与「359号基地」之间的关系是什么？请用词表里的一个关系词回答。",
+   "answer": "赫默研究递质。递质产自359号基地。多萝西研究递质。多萝西使用递质。斐尔迪南使用递质。帕尔维斯研究递质。赫默持有递质。帕尔维斯持有递质。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 13,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-000016",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "「萨迪恩区」对「伦蒂尼姆」处于哪种关系？",
+   "answer": "萨迪恩区位于伦蒂尼姆。萨卡兹位于萨迪恩区。洛洛位于伦蒂尼姆。洛洛出生于萨迪恩区。伦蒂尼姆包含源石。九前往伦蒂尼姆。费斯特位于萨迪恩区。萨卡兹驻守伦蒂尼姆。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 12,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-000018",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "根据剧情，「莱托中校」与「城防军」之间的关系是什么？请用词表里的一个关系词回答。",
+   "answer": "莱托中校任职城防军。莱托中校隶属城防军。莱托中校交谈戈尔丁。莱托中校源自高卢。莱托中校指挥凯瑟琳。军事委员会敌对城防军。莱托中校赠予前城防军成员。莱托中校救助前城防军成员。",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "no_single_claim_with_all_anchors"
+   },
+   "citations_ok": true,
+   "n_citations": 15,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "no_single_claim_with_all_anchors",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-000019",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "「W」对「整合运动」处于哪种关系？",
+   "answer": "整合运动敌对乌萨斯。近卫局交战整合运动。整合运动破坏切尔诺伯格。整合运动位于切尔诺伯格。整合运动交谈W。整合运动驻守切尔诺伯格。整合运动救助碎骨。W救助整合运动。",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "no_single_claim_with_all_anchors"
+   },
+   "citations_ok": true,
+   "n_citations": 9,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "no_single_claim_with_all_anchors",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-000020",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "根据剧情，「萨卡兹」与「维多利亚」之间的关系是什么？请用词表里的一个关系词回答。",
+   "answer": "萨卡兹敌对维多利亚。萨卡兹位于卡兹戴尔。查尔斯·林奇保护维多利亚。查尔斯·林奇交战萨卡兹。萨卡兹敌对自救军。斯塔福德冲突维多利亚。号角隶属维多利亚。达格达交战萨卡兹。",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "no_single_claim_with_all_anchors"
+   },
+   "citations_ok": true,
+   "n_citations": 9,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "no_single_claim_with_all_anchors",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-000021",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "根据剧情，「马克维茨」与「商业联合会」之间的关系是什么？请用词表里的一个关系词回答。",
+   "answer": "马克维茨任职商业联合会。马克维茨隶属商业联合会。马克维茨交谈博士。麦基交谈马克维茨。白金交谈马克维茨。马克维茨交谈白金。马克维茨交谈阿米娅。阿米娅交谈马克维茨。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 18,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-000022",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "根据剧情，「临光」与「杜宾」之间的关系是什么？请用词表里的一个关系词回答。",
+   "answer": "临光同行杜宾。杜宾交谈临光。临光指挥杜宾。临光交谈杜宾。阿米娅交谈杜宾。杜宾敌对整合运动。阿米娅交谈临光。临光敌对整合运动。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 21,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-000025",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "根据剧情，「乌萨斯」与「源石」之间的关系是什么？请用词表里的一个关系词回答。",
+   "answer": "整合运动敌对乌萨斯。萨米敌对乌萨斯。乌萨斯敌对萨米。罗德岛驻圣骏堡办事处位于乌萨斯。乌萨斯研究石棺。罗德岛位于乌萨斯。内卫隶属乌萨斯。寒檀前往乌萨斯。",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "no_single_claim_with_all_anchors"
+   },
+   "citations_ok": true,
+   "n_citations": 9,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "no_single_claim_with_all_anchors",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-000027",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "「制铳圣堂」对「米迦莱昂区」处于哪种关系？",
+   "answer": "制铳圣堂位于米迦莱昂区。梵里妮前往制铳圣堂。公证所位于米迦莱昂区。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 7,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-000028",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "根据剧情，「普瑞赛斯」与「凯尔希」之间的关系是什么？请用词表里的一个关系词回答。",
+   "answer": "普瑞赛斯交谈凯尔希。普瑞赛斯敌对凯尔希。普瑞赛斯创建凯尔希。凯尔希交谈普瑞赛斯。凯尔希背叛普瑞赛斯。凯尔希敌对普瑞赛斯。凯尔希交谈博士。可露希尔交谈凯尔希。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 26,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-000029",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "「异变」对「雪山」处于哪种关系？",
+   "answer": "异变发生于雪山。异兽导致异变。熔火蜗破坏雪山。熔火蜗位于雪山。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 5,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-000030",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "「伦蒂尼姆」对「泰拉」处于哪种关系？",
+   "answer": "伦蒂尼姆位于泰拉。城防军驻守伦蒂尼姆。萨卡兹冲突伦蒂尼姆。海布里区位于伦蒂尼姆。伦蒂尼姆位于维多利亚。碎片大厦位于伦蒂尼姆。罗德岛前往伦蒂尼姆。诺伯特区位于伦蒂尼姆。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 9,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-000031",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "根据剧情，「天火」与「源石技艺」之间的关系是什么？请用词表里的一个关系词回答。",
+   "answer": "天火使用源石技艺。天火交谈薄绿。桑葚交谈天火。天火交谈锡兰。天火属于蒙贝兰家。薄绿交谈天火。天火指挥薄绿。普罗旺斯交谈天火。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 15,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-000032",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "「闪灵」对「赦罪师」处于哪种关系？",
+   "answer": "闪灵敌对赦罪师。赦罪师交谈闪灵。闪灵交战赦罪师。闪灵师从赦罪师。闪灵背叛赦罪师。赦罪师亲属闪灵。闪灵交谈赦罪师。萨卢斯交谈闪灵。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 16,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-000033",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "「血魔大君」对「鲜血王庭」处于哪种关系？",
+   "answer": "血魔大君领导鲜血王庭。血魔大君交谈特雷西斯。阿米娅交战血魔大君。特雷西斯交谈血魔大君。厄尔苏拉交谈血魔大君。血魔大君敌对阿米娅。阿米娅冲突血魔大君。血魔大君领导血魔王庭。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 16,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-000034",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "「Mon3tr」对「凯尔希」处于哪种关系？",
+   "answer": "凯尔希交谈阿米娅。可露希尔交谈凯尔希。凯尔希交谈Raidian。凯尔希交谈Mon3tr。普瑞赛斯交谈凯尔希。凯尔希敌对普瑞赛斯。阿米娅保护凯尔希。凯尔希交谈普瑞赛斯。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 21,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-000035",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "「煌」对「迷迭香」处于哪种关系？",
+   "answer": "迷迭香交谈阿米娅。洛肯交谈迷迭香。凯尔希交谈迷迭香。伊芙利特交谈迷迭香。迷迭香交谈凯尔希。迷迭香同行阿米娅。迷迭香前往特里蒙。迷迭香交谈洛肯。",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "no_single_claim_with_all_anchors"
+   },
+   "citations_ok": true,
+   "n_citations": 15,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "no_single_claim_with_all_anchors",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-000037",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "「左乐」对「司岁台」处于哪种关系？",
+   "answer": "左乐冲突司岁台。左乐隶属司岁台。左乐任职司岁台。左乐前往司岁台。莫佚交谈左乐。左乐交谈麟青砚。司岁台隶属大炎。司岁台同盟巡防营。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 18,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-000038",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "根据剧情，「拉普兰德」与「萨卢佐家族」之间的关系是什么？请用词表里的一个关系词回答。",
+   "answer": "拉普兰德隶属萨卢佐家族。拉普兰德离开萨卢佐家族。拉普兰德背叛萨卢佐家族。拉普兰德前往萨卢佐家族。拉普兰德交谈德克萨斯。拉普兰德隶属萨卢佐。阿尔贝托交谈拉普兰德。拉普兰德交谈甘比诺。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 19,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-000040",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "根据剧情，「九」与「塔露拉」之间的关系是什么？请用词表里的一个关系词回答。",
+   "answer": "塔露拉领导整合运动。九交谈塔露拉。塔露拉交谈九。塔露拉交谈陈。罗德岛敌对塔露拉。塔露拉离开维多利亚。爱布拉娜交谈塔露拉。塔露拉隶属整合运动。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 19,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-000042",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "「空」对「企鹅物流」处于哪种关系？",
+   "answer": "卡彭敌对企鹅物流。甘比诺敌对企鹅物流。拜松隶属企鹅物流。空隶属企鹅物流。能天使隶属企鹅物流。拜松离开企鹅物流。罗德岛同盟企鹅物流。能天使任职企鹅物流。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 14,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-000044",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "根据剧情，「均」与「书刀」之间的关系是什么？请用词表里的一个关系词回答。",
+   "answer": "司岁台持有书刀。书刀位于天镜阁。陈持有书刀。太尉使用书刀。颉持有书刀。均持有书刀。大理寺研究书刀。书刀破坏真龙实录。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 13,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-000045",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "根据剧情，「塔露拉」与「整合运动」之间的关系是什么？请用词表里的一个关系词回答。",
+   "answer": "塔露拉隶属整合运动。塔露拉领导整合运动。塔露拉创建整合运动。塔露拉背叛整合运动。塔露拉导致整合运动。塔露拉指挥整合运动。塔露拉离开维多利亚。深池敌对整合运动。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 12,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-000047",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "「博士」对「Ace」处于哪种关系？",
+   "answer": "可露希尔交谈博士。博士交谈阿米娅。凯尔希交谈博士。Ace交谈博士。Scout交谈博士。博士交谈凯尔希。凯尔希保护博士。Touch交谈博士。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 15,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-000001",
+   "category": "multihop",
+   "split": "dev",
+   "question": "已知「云兽」通过唯一一个中间实体与「变形者集群」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "answer": "Logos交谈变形者集群。变形者集群交谈Logos。变形者集群交谈戈尔丁。变形者集群交谈凯尔希。阿米娅交谈变形者集群。戈尔丁交谈变形者集群。爱布拉娜交谈变形者集群。变形者集群交谈特蕾西娅。",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "gold_not_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 20,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "gold_not_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-000003",
+   "category": "multihop",
+   "split": "dev",
+   "question": "从「凯尔希」出发，经过一个中间实体可以到达「安东尼奥」。这个中间实体叫什么？",
+   "answer": "凯尔希交谈博士。凯尔希隶属罗德岛。圣徒卡门交谈凯尔希。可露希尔交谈凯尔希。凯尔希交谈圣徒卡门。凯尔希保护博士。安东尼奥交谈老威尼斯。安东尼奥交谈卡尔。",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "no_claim_links_gold_to_any_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 17,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "no_claim_links_gold_to_any_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-000004",
+   "category": "multihop",
+   "split": "dev",
+   "question": "从「厄尔苏拉」出发，经过一个中间实体可以到达「切尔诺伯格」。这个中间实体叫什么？",
+   "answer": "切尔诺伯格位于乌萨斯。整合运动冲突切尔诺伯格。厄尔苏拉隶属疤痕商场。厄尔苏拉敌对伊内丝。厄尔苏拉效忠军事委员会。厄尔苏拉交谈血魔大君。厄尔苏拉交谈曼弗雷德。整合运动交战切尔诺伯格。",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "gold_not_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 13,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "gold_not_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-000005",
+   "category": "multihop",
+   "split": "dev",
+   "question": "从「霜叶」出发，经过一个中间实体可以到达「乔迪」。这个中间实体叫什么？",
+   "answer": "蒂亚戈交谈乔迪。艾丽妮交谈乔迪。乔迪交谈艾丽妮。乔迪交谈蒂亚戈。乌尔比安交谈乔迪。霜叶交谈杰西卡。乔迪交谈乌尔比安。杰西卡交谈霜叶。",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "no_claim_links_gold_to_any_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 18,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "no_claim_links_gold_to_any_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-000006",
+   "category": "multihop",
+   "split": "dev",
+   "question": "从「月见夜」出发，经过一个中间实体可以到达「龙门」。这个中间实体叫什么？",
+   "answer": "月见夜交谈梓兰。梓兰交谈月见夜。月见夜交谈泡普卡。月见夜保护泡普卡。武士交谈月见夜。月见夜指挥狩猎团。月见夜冲突雷之主。月见夜感染矿石病。",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "no_claim_links_gold_to_any_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 23,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "no_claim_links_gold_to_any_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-000008",
+   "category": "multihop",
+   "split": "dev",
+   "question": "从「夏栎」出发，经过一个中间实体可以到达「沃伦姆德」。这个中间实体叫什么？",
+   "answer": "罗德岛。罗德岛隶属夏栎。罗德岛前往沃伦姆德。苦根交谈夏栎。夏栎交谈苦根。夏栎交谈天火。格拉尼交谈夏栎。天火交谈夏栎。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 23,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-000009",
+   "category": "multihop",
+   "split": "dev",
+   "question": "已知「铃兰」通过唯一一个中间实体与「监正会」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "answer": "铃兰交谈亚叶。亚叶交谈铃兰。铃兰隶属罗德岛。铃兰交谈塞弗林。塞弗林交谈铃兰。铃兰师从凯尔希。铃兰交谈塔佳娜。监正会敌对商业联合会。",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "gold_not_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 24,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "gold_not_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-000010",
+   "category": "multihop",
+   "split": "dev",
+   "question": "从「Scout」出发，经过一个中间实体可以到达「企鹅物流」。这个中间实体叫什么？",
+   "answer": "卡彭敌对企鹅物流。鼠王敌对企鹅物流。甘比诺敌对企鹅物流。罗德岛同盟企鹅物流。企鹅物流位于龙门。拜松隶属企鹅物流。空隶属企鹅物流。能天使隶属企鹅物流。",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "gold_not_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 14,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "gold_not_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-000012",
+   "category": "multihop",
+   "split": "dev",
+   "question": "从「柳德米拉」出发，经过一个中间实体可以到达「妮芙」。这个中间实体叫什么？",
+   "answer": "珀耳交谈妮芙。妮芙交谈珀耳。埃芒加德交谈妮芙。伊雷妮交谈柳德米拉。妮芙交谈埃芒加德。雷德交谈柳德米拉。妮芙使用探测装置。柳德米拉前往乌萨斯。",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "no_claim_links_gold_to_any_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 26,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "no_claim_links_gold_to_any_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-000013",
+   "category": "multihop",
+   "split": "dev",
+   "question": "已知「希尔达」通过唯一一个中间实体与「蜜莓」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "answer": "罗德岛。罗德岛前往希尔达。罗德岛赠予蜜莓。阿纳托利交谈希尔达。屈光者交谈希尔达。希尔达救助阿纳托利。巴尔斯交谈希尔达。希尔达前往泽尔格勒。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 20,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-000014",
+   "category": "multihop",
+   "split": "dev",
+   "question": "从「莱欧斯」出发，经过一个中间实体可以到达「赤霄」。这个中间实体叫什么？",
+   "answer": "莱欧斯交谈齐尔查克。莱欧斯交谈墨魉。莱欧斯交谈黎。莱欧斯研究墨魉。刻俄柏交谈莱欧斯。阿米娅交谈莱欧斯。莱欧斯研究黎博利。莱欧斯交谈阿米娅。",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "gold_not_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 28,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "gold_not_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-000015",
+   "category": "multihop",
+   "split": "dev",
+   "question": "已知「嘉维尔」通过唯一一个中间实体与「W」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "answer": "特米米交谈嘉维尔。嘉维尔交谈特米米。嘉维尔交谈博士。嘉维尔隶属罗德岛。嘉维尔感染矿石病。嘉维尔救助特米米。嘉维尔交谈煌。嘉维尔交谈燧石。",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "no_claim_links_gold_to_any_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 34,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "no_claim_links_gold_to_any_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-000016",
+   "category": "multihop",
+   "split": "dev",
+   "question": "已知「慎楼」通过唯一一个中间实体与「太傅」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "answer": "太合交谈慎楼。太傅交谈重岳。乌有交谈慎楼。慎楼交谈太合。太傅交谈年。太傅交谈太尉。梁洵交谈慎楼。梁洵交谈太傅。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 17,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-000017",
+   "category": "multihop",
+   "split": "dev",
+   "question": "已知「熔泉」通过唯一一个中间实体与「Friston-3」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "answer": "熔泉交谈森蚺。森蚺交谈熔泉。煌交谈熔泉。沙蜥帮敌对熔泉。熔泉交谈煌。老乔交谈熔泉。熔泉交谈老乔。熔泉交谈嘉维尔。",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "gold_not_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 18,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "gold_not_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-000018",
+   "category": "multihop",
+   "split": "dev",
+   "question": "从「岳羽由加莉」出发，经过一个中间实体可以到达「思绪」。这个中间实体叫什么？",
+   "answer": "阿米娅。阿米娅交谈岳羽由加莉。阿米娅交谈思绪。埃癸斯交谈岳羽由加莉。天田乾交谈岳羽由加莉。岳羽由加莉交谈阿米娅。思绪交谈阿米娅。岳羽由加莉交谈博士。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 23,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-000020",
+   "category": "multihop",
+   "split": "dev",
+   "question": "从「雷尔金」出发，经过一个中间实体可以到达「高卢」。这个中间实体叫什么？",
+   "answer": "乌萨斯。乌萨斯敌对雷尔金。乌萨斯交战高卢。维多利亚交战高卢。雷尔金交谈Raidian。Raidian交谈雷尔金。雷尔金同行别乔克。雷尔金位于中心矿区。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 17,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-000021",
+   "category": "multihop",
+   "split": "dev",
+   "question": "已知「吽」通过唯一一个中间实体与「六十七」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "answer": "小黑。小黑交谈吽。小黑交谈六十七。小黑与吽、六十七相关联。小黑交谈六十七。小沅交谈六十七。小沅持有六十七。小黑救助六十七。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 17,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-000024",
+   "category": "multihop",
+   "split": "dev",
+   "question": "已知「布克」通过唯一一个中间实体与「多索雷斯」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "answer": "坎黛拉。坎黛拉隶属布克。坎黛拉位于多索雷斯。多索雷斯位于玻利瓦尔。布克听命于坎黛拉。埃内斯托交谈布克。布克隶属坎黛拉。布克交谈埃内斯托。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 17,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-000025",
+   "category": "multihop",
+   "split": "dev",
+   "question": "已知「卡珊卓拉」通过唯一一个中间实体与「米奥」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "answer": "缇缇。缇缇交谈卡珊卓拉。缇缇交谈米奥。缇缇交谈米奥。拉恕尔交谈米奥。赞索斯交谈卡珊卓拉。卡珊卓拉交谈里底娅。祖拜尔交谈米奥。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 18,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-000026",
+   "category": "multihop",
+   "split": "dev",
+   "question": "从「禾生」出发，经过一个中间实体可以到达「神农」。这个中间实体叫什么？",
+   "answer": "黍。黍师从禾生。黍交谈神农。禾生交谈左乐。禾生交谈小满。老乡长交谈禾生。禾生任职天师府。神农创建二十四节气。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 23,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-000029",
+   "category": "multihop",
+   "split": "dev",
+   "question": "已知「左乐」通过唯一一个中间实体与「雷姆必拓」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "answer": "左乐隶属司岁台。左乐交谈克洛丝。克洛丝交谈左乐。左乐交谈太合。太合交谈左乐。左乐交谈麟青砚。乌有交谈左乐。左乐交谈尚冢。",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "gold_not_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 25,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "gold_not_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-000033",
+   "category": "multihop",
+   "split": "dev",
+   "question": "已知「柳德米拉」通过唯一一个中间实体与「德拉克」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "answer": "柳德米拉交谈伊雷妮。柳德米拉交谈索默尔。柳德米拉交谈红。雷德交谈柳德米拉。柳德米拉位于新沃尔西尼。古米交谈柳德米拉。坚雷交谈柳德米拉。柳德米拉交谈坚雷。",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "no_claim_links_gold_to_any_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 20,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "no_claim_links_gold_to_any_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-000034",
+   "category": "multihop",
+   "split": "dev",
+   "question": "从「薇尔丽芙」出发，经过一个中间实体可以到达「龙门」。这个中间实体叫什么？",
+   "answer": "帕特里奇昂交谈薇尔丽芙。薇尔丽芙交谈伊万杰利斯塔十一世。崖心交谈薇尔丽芙。菲亚梅塔交谈薇尔丽芙。薇尔丽芙交谈安多恩。安多恩交谈薇尔丽芙。薇尔丽芙交谈菲亚梅塔。薇尔丽芙敌对安多恩。",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "no_claim_links_gold_to_any_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 11,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "no_claim_links_gold_to_any_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-000035",
+   "category": "multihop",
+   "split": "dev",
+   "question": "已知「老船夫」通过唯一一个中间实体与「林雨霞」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "answer": "林雨霞交谈陈。老船夫交谈老鲤。老鲤交谈老船夫。杜遥夜交谈林雨霞。槐琥交谈林雨霞。太傅交谈老船夫。老船夫位于尚蜀。孟铁衣交谈林雨霞。",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "gold_not_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 11,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "gold_not_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-000036",
+   "category": "multihop",
+   "split": "dev",
+   "question": "从「艾丝黛尔」出发，经过一个中间实体可以到达「龙门贫民区」。这个中间实体叫什么？",
+   "answer": "特米米交谈艾丝黛尔。艾丝黛尔交谈特米米。艾丝黛尔隶属罗德岛。灰掌交谈艾丝黛尔。艾丝黛尔保护特米米。艾丝黛尔同行微风。艾丝黛尔交谈克莱赫尔爵士。特米米同行艾丝黛尔。",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "gold_not_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 28,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "gold_not_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-000037",
+   "category": "multihop",
+   "split": "dev",
+   "question": "从「莉莉娅」出发，经过一个中间实体可以到达「切尔诺伯格」。这个中间实体叫什么？",
+   "answer": "凯尔希。凯尔希交谈莉莉娅。凯尔希前往切尔诺伯格。莉莉娅交谈凯尔希。切尔诺伯格位于乌萨斯。整合运动冲突切尔诺伯格。整合运动交战切尔诺伯格。莉莉娅敌对万尼亚大公。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 19,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-000038",
+   "category": "multihop",
+   "split": "dev",
+   "question": "从「格拉尼」出发，经过一个中间实体可以到达「沃伦姆德」。这个中间实体叫什么？",
+   "answer": "罗德岛。罗德岛隶属格拉尼。罗德岛前往沃伦姆德。格拉尼交谈可萝尔。格拉尼保护可萝尔。格拉尼隶属罗德岛。格拉尼交谈苏茜。斯卡蒂交谈格拉尼。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 19,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-000041",
+   "category": "multihop",
+   "split": "dev",
+   "question": "已知「生态园」通过唯一一个中间实体与「生态科」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "answer": "缪尔赛思。缪尔赛思属于生态园。缪尔赛思任职生态科。生态园包含极地区。鞘叶榉位于生态园。克丽斯腾创建生态园。装置树位于生态园。生态园属于缪尔赛思。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 12,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-000042",
+   "category": "multihop",
+   "split": "dev",
+   "question": "已知「特蕾西娅」通过唯一一个中间实体与「萨尔贡」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "answer": "巴别塔。巴别塔任职特蕾西娅。巴别塔同盟萨尔贡。特蕾西娅交谈阿米娅。凯尔希交谈特蕾西娅。特蕾西娅交谈博士。特蕾西娅交谈特雷西斯。特蕾西娅交谈凯尔希。",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "gold_not_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 24,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "gold_not_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-000043",
+   "category": "multihop",
+   "split": "dev",
+   "question": "已知「Guard」通过唯一一个中间实体与「文明的存续」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "answer": "特蕾西娅使用文明的存续。阿米娅使用文明的存续。凯尔希使用文明的存续。王冠称为文明的存续。特蕾西娅持有文明的存续。阿米娅称为文明的存续。阿米娅前往文明的存续。阿米娅离开文明的存续。",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "gold_not_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 10,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "gold_not_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-000044",
+   "category": "multihop",
+   "split": "dev",
+   "question": "从「莫不服」出发，经过一个中间实体可以到达「温蒂」。这个中间实体叫什么？",
+   "answer": "极境交谈温蒂。温蒂交谈极境。温蒂隶属罗德岛。莫不服交谈老姜。温蒂指挥小叶。莫不服属于鼎丰楼。莫不服前往百灶。温蒂使用液氮大炮。",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "no_claim_links_gold_to_any_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 20,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "no_claim_links_gold_to_any_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-000045",
+   "category": "multihop",
+   "split": "dev",
+   "question": "从「莱伊」出发，经过一个中间实体可以到达「灰礼帽」。这个中间实体叫什么？",
+   "answer": "莱伊交谈阿兰娜。阿兰娜交谈莱伊。小锅盖交谈莱伊。杰里交谈莱伊。烈夏交谈灰礼帽。灰礼帽隶属开斯特公爵。灰礼帽交谈伊内丝。莱伊前往咧嘴谷。",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "no_claim_links_gold_to_any_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 19,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "no_claim_links_gold_to_any_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-000047",
+   "category": "multihop",
+   "split": "dev",
+   "question": "从「弥利亚留姆」出发，经过一个中间实体可以到达「信标塔」。这个中间实体叫什么？",
+   "answer": "信标塔位于弥利亚留姆。弥利亚留姆参与航道计划。弥利亚留姆交战海嗣。乌尔比安驻守信标塔。海嗣位于信标塔。克莱门莎指挥弥利亚留姆。布雷奥甘参与信标塔。布雷奥甘前往弥利亚留姆。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 9,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000001",
+   "category": "cross_chunk",
+   "split": "dev",
+   "question": "「以勒什」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "answer": "act17mini、act33side、main_ep14",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "extra_chapters_all_real_and_bounded"
+   },
+   "citations_ok": true,
+   "n_citations": 10,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "extra_chapters_all_real_and_bounded",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000003",
+   "category": "cross_chunk",
+   "split": "dev",
+   "question": "「米拉娜」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "answer": "main_ep16、main_st17",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "chapter_set_equal"
+   },
+   "citations_ok": true,
+   "n_citations": 7,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "chapter_set_equal",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000004",
+   "category": "cross_chunk",
+   "split": "dev",
+   "question": "「海洋」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "answer": "act17side、act34side、rogue_rogue_2、rogue_rogue_5",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "chapter_set_missing"
+   },
+   "citations_ok": true,
+   "n_citations": 16,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "chapter_set_missing",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000005",
+   "category": "cross_chunk",
+   "split": "dev",
+   "question": "「维多利亚议会」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "answer": "main_ep14、main_st11",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "chapter_set_equal"
+   },
+   "citations_ok": true,
+   "n_citations": 4,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "chapter_set_equal",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000006",
+   "category": "cross_chunk",
+   "split": "dev",
+   "question": "「源石引擎」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "answer": "act17d0、act24side、act38side、act6d5",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "extra_chapters_all_real_and_bounded"
+   },
+   "citations_ok": true,
+   "n_citations": 6,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "extra_chapters_all_real_and_bounded",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000007",
+   "category": "cross_chunk",
+   "split": "dev",
+   "question": "「蓄水炮」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "answer": "memory_huang、memory_weedy",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "chapter_set_equal"
+   },
+   "citations_ok": true,
+   "n_citations": 4,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "chapter_set_equal",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000008",
+   "category": "cross_chunk",
+   "split": "dev",
+   "question": "「卡萨斯」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "answer": "rogue_rogue_6、roguelike_level_rogue6_ending_4",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "chapter_set_equal"
+   },
+   "citations_ok": true,
+   "n_citations": 8,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "chapter_set_equal",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000009",
+   "category": "cross_chunk",
+   "split": "dev",
+   "question": "「古寺」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "answer": "act31side、act40side、act49side、rogue_rogue_5",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "extra_chapters_all_real_and_bounded"
+   },
+   "citations_ok": true,
+   "n_citations": 11,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "extra_chapters_all_real_and_bounded",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000010",
+   "category": "cross_chunk",
+   "split": "dev",
+   "question": "「乌卡边境」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "answer": "main_ep16、main_spst16、main_st17",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "extra_chapters_all_real_and_bounded"
+   },
+   "citations_ok": true,
+   "n_citations": 12,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "extra_chapters_all_real_and_bounded",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000011",
+   "category": "cross_chunk",
+   "split": "dev",
+   "question": "「汐斯塔火山」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "answer": "act27side、act3d0、memory_buildr",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "chapter_set_missing"
+   },
+   "citations_ok": true,
+   "n_citations": 17,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "chapter_set_missing",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000014",
+   "category": "cross_chunk",
+   "split": "dev",
+   "question": "「格劳克斯」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "answer": "act7mini、memory_bluep、memory_glacus、memory_indigo",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "chapter_set_equal"
+   },
+   "citations_ok": true,
+   "n_citations": 19,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "chapter_set_equal",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000016",
+   "category": "cross_chunk",
+   "split": "dev",
+   "question": "「银行」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "answer": "act28side、memory_almond",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "chapter_set_missing"
+   },
+   "citations_ok": true,
+   "n_citations": 19,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "chapter_set_missing",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000017",
+   "category": "cross_chunk",
+   "split": "dev",
+   "question": "「识字班」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "answer": "main_ep13、memory_mitm、memory_nymph",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "extra_chapters_all_real_and_bounded"
+   },
+   "citations_ok": true,
+   "n_citations": 11,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "extra_chapters_all_real_and_bounded",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000020",
+   "category": "cross_chunk",
+   "split": "dev",
+   "question": "「恐鱼」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "answer": "act17side、act18d3、act52side、rogue_rogue_2",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "extra_chapters_all_real_and_bounded"
+   },
+   "citations_ok": true,
+   "n_citations": 20,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "extra_chapters_all_real_and_bounded",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000021",
+   "category": "cross_chunk",
+   "split": "dev",
+   "question": "「嵯峨」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "answer": "act14mini、act16d5、memory_saga",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "chapter_set_equal"
+   },
+   "citations_ok": true,
+   "n_citations": 21,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "chapter_set_equal",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000022",
+   "category": "cross_chunk",
+   "split": "dev",
+   "question": "「杰克」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "answer": "act25side、act47side、memory_jaksel、memory_tiger",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "chapter_set_missing"
+   },
+   "citations_ok": true,
+   "n_citations": 19,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "chapter_set_missing",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000024",
+   "category": "cross_chunk",
+   "split": "dev",
+   "question": "「潘格尼尼」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "answer": "act42side、memory_graceb",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "chapter_set_equal"
+   },
+   "citations_ok": true,
+   "n_citations": 19,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "chapter_set_equal",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000026",
+   "category": "cross_chunk",
+   "split": "dev",
+   "question": "「蒂比」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "answer": "act43side、memory_tippi",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "chapter_set_equal"
+   },
+   "citations_ok": true,
+   "n_citations": 19,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "chapter_set_equal",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000027",
+   "category": "cross_chunk",
+   "split": "dev",
+   "question": "「动力炉」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "answer": "act11d0、act13side、act16mini、act28side",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "extra_chapters_all_real_and_bounded"
+   },
+   "citations_ok": true,
+   "n_citations": 18,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "extra_chapters_all_real_and_bounded",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000029",
+   "category": "cross_chunk",
+   "split": "dev",
+   "question": "「收音机」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "answer": "act21mini、act21side、act22side、act38side",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "chapter_set_missing"
+   },
+   "citations_ok": true,
+   "n_citations": 15,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "chapter_set_missing",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000030",
+   "category": "cross_chunk",
+   "split": "dev",
+   "question": "「荒域」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "answer": "act29side、act42side",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "chapter_set_equal"
+   },
+   "citations_ok": true,
+   "n_citations": 16,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "chapter_set_equal",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-000032",
+   "category": "cross_chunk",
+   "split": "dev",
+   "question": "「轮胎」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "answer": "act12side、act38side、memory_coldst、memory_jnight",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "chapter_set_missing"
+   },
+   "citations_ok": true,
+   "n_citations": 14,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "chapter_set_missing",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-tc-000003",
+   "category": "time_conflict",
+   "split": "dev",
+   "question": "「克洛宁」与「赫尔曼」在剧情不同阶段分别被描述为「隶属」和「背叛」。这两条记录应如何理解？",
+   "answer": "赫尔曼交谈克洛宁。克洛宁交谈赫尔曼。克洛宁师从赫尔曼。克洛宁背叛赫尔曼。克洛宁隶属赫尔曼。赫尔曼雇用克洛宁。赫尔曼亲属锡兰。欧厄尔交谈赫尔曼。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 13,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-tc-000004",
+   "category": "time_conflict",
+   "split": "dev",
+   "question": "「莱昂图索」与「贝洛内家族」在剧情不同阶段分别被描述为「隶属」和「背叛」。这两条记录应如何理解？",
+   "answer": "莱昂图索交谈德克萨斯。莱昂图索交谈瓦拉赫。莱昂图索交谈罗索。莱昂图索离开贝洛内。贝纳尔多领导贝洛内家族。拉维妮娅交谈莱昂图索。莱昂图索交谈埃里奥。贝洛内家族交战罗塞蒂家族。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 14,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-tc-000005",
+   "category": "time_conflict",
+   "split": "dev",
+   "question": "「重岳」与「玉门」在剧情不同阶段分别被描述为「离开」和「驻守」。这两条记录应如何理解？",
+   "answer": "重岳驻守玉门。重岳离开玉门。重岳保护玉门。令交谈重岳。重岳交谈槐天裴。玉门前往百灶。太傅交谈重岳。重岳交谈令。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 18,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-tc-000006",
+   "category": "time_conflict",
+   "split": "dev",
+   "question": "「暴行」与「雷姆必拓」在剧情不同阶段分别被描述为「离开」和「驻守」。这两条记录应如何理解？",
+   "answer": "暴行离开雷姆必拓。暴行前往雷姆必拓。暴行驻守雷姆必拓。暴行交谈阿米娅。暴行交谈博士。阿米娅交谈暴行。暴行交谈老约翰。罗德岛医疗干员交谈暴行。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 26,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-tc-000007",
+   "category": "time_conflict",
+   "split": "dev",
+   "question": "「格拉尼」与「斯卡蒂」在剧情不同阶段分别被描述为「保护」和「交战」。这两条记录应如何理解？",
+   "answer": "斯卡蒂交谈格拉尼。格拉尼交谈斯卡蒂。斯卡蒂敌对格拉尼。格拉尼敌对斯卡蒂。格拉尼交战斯卡蒂。格拉尼保护斯卡蒂。格拉尼交谈可萝尔。格拉尼保护可萝尔。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 27,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-tc-000008",
+   "category": "time_conflict",
+   "split": "dev",
+   "question": "同两个实体「特蕾西娅」与「特雷西斯」之间先后出现「同盟」与「敌对」两种相反关系。这是抽取矛盾还是剧情演进？请说明理由。",
+   "answer": "特蕾西娅交谈特雷西斯。特雷西斯交谈特蕾西娅。特雷西斯赠予特蕾西娅。特蕾西娅敌对特雷西斯。特雷西斯指挥特蕾西娅。特雷西斯效忠特蕾西娅。特蕾西娅交谈阿斯卡纶。特雷西斯指导阿斯卡纶。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 29,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-tc-000010",
+   "category": "time_conflict",
+   "split": "dev",
+   "question": "「特雷西斯」与「特蕾西娅」在剧情不同阶段分别被描述为「交战」和「保护」。这两条记录应如何理解？",
+   "answer": "特蕾西娅交谈特雷西斯。特雷西斯交谈特蕾西娅。特蕾西娅敌对特雷西斯。特雷西斯赠予特蕾西娅。特雷西斯指挥特蕾西娅。特蕾西娅领导巴别塔。特雷西斯指挥曼弗雷德。特雷西斯交谈阿斯卡纶。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 26,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-tc-000013",
+   "category": "time_conflict",
+   "split": "dev",
+   "question": "「贝纳尔多」与「扎罗」在剧情不同阶段分别被描述为「效忠」和「背叛」。这两条记录应如何理解？",
+   "answer": "贝纳尔多师从扎罗。扎罗交谈贝纳尔多。扎罗敌对贝纳尔多。贝纳尔多背叛扎罗。扎罗指导贝纳尔多。贝纳尔多交谈扎罗。贝纳尔多听命于扎罗。贝纳尔多效忠扎罗。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 11,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-tc-000017",
+   "category": "time_conflict",
+   "split": "dev",
+   "question": "「西西里夫人」与「莱昂图索」在剧情不同阶段分别被描述为「同盟」和「敌对」。这两条记录应如何理解？",
+   "answer": "莱昂图索交谈西西里夫人。西西里夫人交谈莱昂图索。西西里夫人同盟莱昂图索。莱昂图索敌对西西里夫人。莱昂图索交谈贝纳尔多。西西里夫人交谈德克萨斯。拉维妮娅交谈西西里夫人。西西里夫人创建灰厅。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 17,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-tc-000018",
+   "category": "time_conflict",
+   "split": "dev",
+   "question": "「安东尼奥」与「英格丽」在剧情不同阶段分别被描述为「保护」和「交战」。这两条记录应如何理解？",
+   "answer": "英格丽交谈安东尼奥。安东尼奥交谈英格丽。英格丽敌对安东尼奥。安东尼奥亲属英格丽。英格丽交战安东尼奥。英格丽救助安东尼奥。安东尼奥保护英格丽。英格丽交谈老威尼斯。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 28,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-tc-000019",
+   "category": "time_conflict",
+   "split": "dev",
+   "question": "「霜星」与「塔露拉」在剧情不同阶段分别被描述为「交战」和「保护」。这两条记录应如何理解？",
+   "answer": "塔露拉交谈霜星。塔露拉冲突霜星。霜星赠予塔露拉。塔露拉指挥霜星。霜星交谈塔露拉。霜星敌对塔露拉。霜星交战塔露拉。塔露拉隶属整合运动。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 16,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-tc-000020",
+   "category": "time_conflict",
+   "split": "dev",
+   "question": "「三船」与「铁斋」在剧情不同阶段分别被描述为「效忠」和「背叛」。这两条记录应如何理解？",
+   "answer": "三船敌对铁斋。铁斋交谈三船。三船交谈铁斋。三船听命于铁斋。三船师从铁斋。三船效忠铁斋。三船冲突铁斋。三船背叛铁斋。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 15,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-tc-000022",
+   "category": "time_conflict",
+   "split": "dev",
+   "question": "同两个实体「监正会」与「商业联合会」之间先后出现「敌对」与「同盟」两种相反关系。这是抽取矛盾还是剧情演进？请说明理由。",
+   "answer": "监正会敌对商业联合会。商业联合会敌对监正会。监正会同盟商业联合会。商业联合会冲突监正会。监正会冲突商业联合会。索娜敌对商业联合会。商业联合会创建零号地块。马克维茨隶属商业联合会。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 12,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-tc-000023",
+   "category": "time_conflict",
+   "split": "dev",
+   "question": "同两个实体「凯尔希」与「霍尔海雅」之间先后出现「同盟」与「敌对」两种相反关系。这是抽取矛盾还是剧情演进？请说明理由。",
+   "answer": "凯尔希同盟霍尔海雅。霍尔海雅交谈凯尔希。凯尔希交谈霍尔海雅。凯尔希指挥霍尔海雅。凯尔希敌对霍尔海雅。凯尔希交谈博士。可露希尔交谈凯尔希。霍尔海雅敌对锡人。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 15,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-tc-000024",
+   "category": "time_conflict",
+   "split": "dev",
+   "question": "「Logos」与「巴别塔」在剧情不同阶段分别被描述为「隶属」和「背叛」。这两条记录应如何理解？",
+   "answer": "Logos背叛巴别塔。Logos隶属巴别塔。巴别塔成员隶属巴别塔。巴别塔位于卡兹戴尔。特蕾西娅领导巴别塔。Ace隶属巴别塔。阿斯卡纶隶属巴别塔。巴别塔同盟哥伦比亚。（注：以上关系存在互斥记录，见 warnings，不作单一结论。）",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 12,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-tc-000025",
+   "category": "time_conflict",
+   "split": "dev",
+   "question": "「阿斯兰」与「德拉克」在剧情不同阶段分别被描述为「敌对」和「同盟」。这两条记录应如何理解？",
+   "answer": "阿斯兰敌对德拉克。阿斯兰同盟德拉克。钥匙属于阿斯兰。钥匙属于德拉克。阿斯兰源自萨尔贡。阿斯兰领导维多利亚。爱布拉娜隶属德拉克。爱布拉娜敌对阿斯兰。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 10,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-tc-000026",
+   "category": "time_conflict",
+   "split": "dev",
+   "question": "同两个实体「乌萨斯」与「罗德岛」之间先后出现「敌对」与「同盟」两种相反关系。这是抽取矛盾还是剧情演进？请说明理由。",
+   "answer": "罗德岛同盟乌萨斯。整合运动敌对乌萨斯。萨米敌对乌萨斯。罗德岛前往切尔诺伯格。阿米娅领导罗德岛。爱国者离开乌萨斯。落日峡谷位于乌萨斯。第三集团军隶属乌萨斯。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 10,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-tc-000027",
+   "category": "time_conflict",
+   "split": "dev",
+   "question": "同两个实体「赫德雷」与「W」之间先后出现「同盟」与「敌对」两种相反关系。这是抽取矛盾还是剧情演进？请说明理由。",
+   "answer": "赫德雷听命于特雷西斯。赫德雷指挥伊内丝。赫德雷指挥W。阿米娅交谈赫德雷。赫德雷离开卡兹戴尔。推进之王交谈赫德雷。明椒交谈赫德雷。赫德雷同盟罗德岛。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 16,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-tc-000028",
+   "category": "time_conflict",
+   "split": "dev",
+   "question": "同两个实体「W」与「凯尔希」之间先后出现「敌对」与「同盟」两种相反关系。这是抽取矛盾还是剧情演进？请说明理由。",
+   "answer": "凯尔希交谈博士。可露希尔交谈凯尔希。阿米娅交谈凯尔希。凯尔希交谈阿米娅。凯尔希指挥Raidian。凯尔希指挥迷迭香。凯尔希交谈玻利瓦尔。赫拉提娅交谈凯尔希。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 19,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-tc-000029",
+   "category": "time_conflict",
+   "split": "dev",
+   "question": "「休露丝」与「布朗陶家」在剧情不同阶段分别被描述为「隶属」和「背叛」。这两条记录应如何理解？",
+   "answer": "休露丝背叛布朗陶家。休露丝隶属布朗陶家。菈塔托丝交谈休露丝。休露丝隶属布朗陶。尤卡坦亲属休露丝。休露丝救助尤卡坦。休露丝交谈恩希欧迪斯。休露丝交谈哈里森。（注：以上关系存在互斥记录，见 warnings，不作单一结论。）",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 18,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-tc-000030",
+   "category": "time_conflict",
+   "split": "dev",
+   "question": "同两个实体「萨尔贡」与「米诺斯」之间先后出现「同盟」与「敌对」两种相反关系。这是抽取矛盾还是剧情演进？请说明理由。",
+   "answer": "米诺斯交战萨尔贡。萨尔贡敌对米诺斯。玛夏耶尔隶属萨尔贡。玛拉帕夏破坏米诺斯。玛拉帕夏属于萨尔贡。特尔斐运河位于米诺斯。缇缇任职萨尔贡。赞索斯敌对萨尔贡。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 11,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-tc-000031",
+   "category": "time_conflict",
+   "split": "dev",
+   "question": "「菈塔托丝」与「喀兰贸易」在剧情不同阶段分别被描述为「敌对」和「同盟」。这两条记录应如何理解？",
+   "answer": "菈塔托丝敌对喀兰贸易。菈塔托丝同盟喀兰贸易。菈塔托丝隶属布朗陶。菈塔托丝交谈恩希欧迪斯。菈塔托丝交谈莫希。莫希听命于菈塔托丝。开斯特公爵敌对喀兰贸易。菈塔托丝前往蔓珠院。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 15,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-na-000001",
+   "category": "negative_abstain",
+   "split": "dev",
+   "question": "原文写道「隐德来希：“玫瑰河畔不再参与巴别塔相关的事务”，这是我订下的规矩」。据此判断：「玫瑰河畔」参与其中这件事是否发生？",
+   "answer": "隐德来希隶属玫瑰河畔。玫瑰河畔敌对巴别塔。隐德来希前往巴别塔。凯尔希交谈隐德来希。隐德来希交谈凯尔希。弥尔顿交谈隐德来希。隐德来希交谈弥尔顿。隐德来希破坏血魔大君。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 25,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-na-000003",
+   "category": "negative_abstain",
+   "split": "dev",
+   "question": "原文写道「阿芙朵嘉：杜林人从来没有前往地面过」。据此判断：「杜林人」前往这件事是否发生？",
+   "answer": "阿芙朵嘉交谈嘉维尔。大祭司交谈阿芙朵嘉。阿芙朵嘉交谈极境。阿芙朵嘉交谈卡奇·叙光。阿芙朵嘉隶属际崖城。嘉维尔交谈阿芙朵嘉。极境交谈阿芙朵嘉。阿芙朵嘉持有蜜酒。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 22,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-na-000004",
+   "category": "negative_abstain",
+   "split": "dev",
+   "question": "原文写道「学者猫：它只是沾染了活性源石粉尘，只要不长期在源石环境中，火龙就不会导致活性源石粉尘扩散了喵」。据此判断：「火龙」导致这件事是否发生？",
+   "answer": "源石感染火龙。夜刀交战火龙。学者猫交谈夜刀。夜刀交谈学者猫。学者猫指挥工匠猫。黑角交战火龙。学者猫隶属艾露猫。源石导致天灾。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 16,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-na-000007",
+   "category": "negative_abstain",
+   "split": "dev",
+   "question": "原文写道「菈玛莲：将军，我想昨日叙旧时我们已经达成了共识——女妖不会参与其中」。据此判断：「女妖」参与其中这件事是否发生？",
+   "answer": "菈玛莲交谈拂哀菈。菈玛莲交谈特蕾西娅。菈玛莲隶属女妖王庭。特蕾西娅交谈菈玛莲。菈玛莲领导女妖王庭。菈玛莲亲属哀珐尼尔。拂哀菈交谈菈玛莲。锡人交谈菈玛莲。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 23,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-na-000008",
+   "category": "negative_abstain",
+   "split": "dev",
+   "question": "原文写道「浮士德：霜星不会背叛」。据此判断：「霜星」背叛对方这件事是否发生？",
+   "answer": "霜星指导浮士德。浮士德交谈梅菲斯特。霜星位于龙门。霜星交战罗德岛。浮士德交谈灰喉。霜星交谈罗德岛。浮士德指挥梅菲斯特。浮士德敌对灰喉。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 14,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-na-000009",
+   "category": "negative_abstain",
+   "split": "dev",
+   "question": "原文写道「凯尔希：侯爵没有保护科学家们」。据此判断：「侯爵」受到保护这件事是否发生？",
+   "answer": "谢尔盖师从凯尔希。凯尔希任职鲍里斯集团。凯尔希交谈阿米娅。凯尔希研究源石。凯尔希前往哥伦比亚。凯尔希破坏切尔诺伯格。凯尔希指挥阿米娅。凯尔希位于松心山谷疗养院。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 14,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-na-000011",
+   "category": "negative_abstain",
+   "split": "dev",
+   "question": "据原文「凯尔希：侯爵并没有保护科学家们的实力，他被军队的高级将领们压得抬不起头」，「侯爵」是否受到保护？",
+   "answer": "凯尔希交谈博士。可露希尔交谈凯尔希。谢尔盖师从凯尔希。凯尔希任职鲍里斯集团。凯尔希交谈阿米娅。凯尔希研究源石。凯尔希前往哥伦比亚。凯尔希破坏切尔诺伯格。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 13,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-na-000012",
+   "category": "negative_abstain",
+   "split": "dev",
+   "question": "据原文「香草：源石虫不会感染矿石病」，「源石虫」是否被感染？",
+   "answer": "香草研究源石虫。香草研究矿石病。香草救助源石虫。源石虫治愈矿石病。查德交谈香草。史都华德交谈香草。香草交谈查德。香草隶属罗德岛。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 23,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-ad-000001",
+   "category": "adversarial",
+   "split": "dev",
+   "question": "「卡拉顿城镇议会」与「卡拉」名字相近，它们是同一个实体吗？若不是，请说明区别。",
+   "answer": "卡拉指导结城理。卡拉顿城镇议会雇用苦根。罗德岛同盟卡拉顿城镇议会。卡拉交谈阿米娅。卡拉交谈结城理。卡拉交谈梵里妮。卡拉交谈安德切尔。安德切尔交谈卡拉。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 9,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-ad-000004",
+   "category": "adversarial",
+   "split": "dev",
+   "question": "有两个名字相近的实体：「太空鳞兽零五四」与「太空鳞兽」。它们指同一个东西吗？请给出判断依据。",
+   "answer": "高登指挥太空鳞兽零五四。太空鳞兽零五四交谈雅斯彭。太空鳞兽冲突古斯塔夫。高登使用太空鳞兽。高登制造太空鳞兽。太空鳞兽属于管理局。太空鳞兽属于高登。太空鳞兽听命于高登。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 10,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-ad-000005",
+   "category": "adversarial",
+   "split": "dev",
+   "question": "「玻利瓦尔第二独立国」与「玻利瓦尔」名字相近，它们是同一个实体吗？若不是，请说明区别。",
+   "answer": "杜宾隶属玻利瓦尔第二独立国。玻利瓦尔隶属莱塔尼亚。多索雷斯位于玻利瓦尔。哥伦比亚前往玻利瓦尔。热狗产自玻利瓦尔。球场位于玻利瓦尔。特科马位于玻利瓦尔。伊比利亚前往玻利瓦尔。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 10,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-ad-000007",
+   "category": "adversarial",
+   "split": "dev",
+   "question": "有两个名字相近的实体：「莱茵生命观测站」与「莱茵生命」。它们指同一个东西吗？请给出判断依据。",
+   "answer": "莱茵生命研究星荚。莱茵生命隶属探索协会。赫默隶属莱茵生命。埃琳娜隶属莱茵生命。莱茵生命同盟喀兰贸易。莱茵生命观测站位于谢拉格。谢拉格冲突莱茵生命。哥伦比亚保护莱茵生命。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 14,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-ad-000009",
+   "category": "adversarial",
+   "split": "dev",
+   "question": "「新沃尔西尼警察局」与「新沃尔西尼」名字相近，它们是同一个实体吗？若不是，请说明区别。",
+   "answer": "莱昂图索交谈新沃尔西尼。新沃尔西尼位于叙拉古。诺埃米隶属新沃尔西尼警察局。卡彭位于新沃尔西尼。新沃尔西尼港位于新沃尔西尼。新沃尔西尼使用哥伦比亚。警察学校位于新沃尔西尼。拉维妮娅任职新沃尔西尼。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 10,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-ad-000010",
+   "category": "adversarial",
+   "split": "dev",
+   "question": "有两个名字相近的实体：「第四集团军军队哗变事件」与「第四集团军」。它们指同一个东西吗？请给出判断依据。",
+   "answer": "第四集团军前往泽尔格勒。雅科夫·彼得洛夫参与第四集团军军队哗变事件。第二集团军交战第四集团军。远北政府赠予第四集团军。安德里安领导第四集团军。第四集团军听命于帝国议会。第四集团军敌对第一集团军。西尔卡隶属第四集团军。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 11,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-ad-000011",
+   "category": "adversarial",
+   "split": "dev",
+   "question": "有两个名字相近的实体：「银行行长」与「银行」。它们指同一个东西吗？请给出判断依据。",
+   "answer": "银行行长交谈克里夫。克里夫交谈银行行长。银行位于达维镇。银行听命于州政府。保险库属于银行。黑钢赠予银行。银行离开达维镇。海伦娜冲突银行。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 32,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-ad-000012",
+   "category": "adversarial",
+   "split": "dev",
+   "question": "有两个名字相近的实体：「船长阿方索历险记」与「船长阿方索」。它们指同一个东西吗？请给出判断依据。",
+   "answer": "船长阿方索交谈加西亚。船长阿方索交谈艾丽妮。船长阿方索交谈幽灵鲨。艾丽妮交谈船长阿方索。船长阿方索交谈斯卡蒂。船长阿方索交战海嗣。船长阿方索持有愚人号。歌蕾蒂娅交谈船长阿方索。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 44,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-ad-000013",
+   "category": "adversarial",
+   "split": "dev",
+   "question": "「行裕物流」与「行裕」名字相近，它们是同一个实体吗？若不是，请说明区别。",
+   "answer": "杜遥夜隶属行裕物流。铸剑坊敌对行裕物流。杜遥夜任职行裕物流。杜遥夜创建行裕物流。行裕位于尚蜀。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 6,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-ad-000014",
+   "category": "adversarial",
+   "split": "dev",
+   "question": "「圣骏堡电力调度中心」与「圣骏堡」名字相近，它们是同一个实体吗？若不是，请说明区别。",
+   "answer": "集团军敌对圣骏堡。别乔克前往圣骏堡。阿洛伊泽前往圣骏堡。中央集团军驻守圣骏堡。凛冬离开圣骏堡。第四集团军敌对圣骏堡。维特前往圣骏堡。近卫军位于圣骏堡。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 10,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-ad-000015",
+   "category": "adversarial",
+   "split": "dev",
+   "question": "有两个名字相近的实体：「哥伦比亚占星研究协会」与「哥伦比亚」。它们指同一个东西吗？请给出判断依据。",
+   "answer": "哥伦比亚交谈恩希欧迪斯。哥伦比亚保护莱茵生命。霍尔海雅任职哥伦比亚占星研究协会。恩希欧迪斯交谈哥伦比亚。锡人交谈哥伦比亚。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 5,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-900002",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《共融》的正文里，出现了这样一句话：「却还是不肯脱下这身铳骑的甲胄」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "共融",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-900003",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "下面这段原文来自哪一段剧情？「我可是你的军师，维娜，我可放心不下你。」请回答该段的标题。",
+   "answer": "历史的航向",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-900004",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "下面这段原文来自哪一段剧情？「你和锡人先生有什么计划的话」请回答该段的标题。",
+   "answer": "一波又起",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-900005",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "下面这段原文来自哪一段剧情？「我只好把这个莱塔尼亚人亲手送给殿下了。」请回答该段的标题。",
+   "answer": "命途何在",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-900011",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "下面这段原文来自哪一段剧情？「我们是商人，德米特里先生，我们天生就是追求利益最大化的。」请回答该段的标题。",
+   "answer": "新秩序",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-900012",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《无法再一次踏入的河》的正文里，出现了这样一句话：「如果有一天你和施特罗斯伯伯住的地方」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "无法再一次踏入的河",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-900013",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《缺席的人》的正文里，出现了这样一句话：「他这个样子......唉......」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "缺席的人",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-900015",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《过去与现在的终点》的正文里，出现了这样一句话：「那是开斯特公爵阁下的“荣光”号的一部分」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "过去与现在的终点",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-900017",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "下面这段原文来自哪一段剧情？「只能是由《武典》映射出的幻象」请回答该段的标题。",
+   "answer": "凌绝顶",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-900019",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "下面这段原文来自哪一段剧情？「先回营地吧。我已经等不及要喝啤酒了。」请回答该段的标题。",
+   "answer": "在卡兹戴尔",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-900020",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "下面这段原文来自哪一段剧情？「在玻利瓦尔的这十年，我从未有一刻忘记过它！」请回答该段的标题。",
+   "answer": "降生",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-900021",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《未定型的现在》的正文里，出现了这样一句话：「要从哥伦比亚人和莱塔尼亚人手里解放玻利瓦尔人」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "未定型的现在",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-900022",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《惊愕》的正文里，出现了这样一句话：「我希望你和白垩立刻在空间上分开，越快越好。」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "惊愕",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-900023",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《试飞日》的正文里，出现了这样一句话：「不管你的源石技艺能做到什么程度」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "试飞日",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-900025",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《凌绝顶》的正文里，出现了这样一句话：「听上去阿爸确实来了这里。」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "凌绝顶",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-900028",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《无畏·3》的正文里，出现了这样一句话：「处理内部的害虫说到底是我们玻利瓦尔的家务事」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "无畏·3",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-900029",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《烤串与预言》的正文里，出现了这样一句话：「与其在这里漫无目的地寻找齐尔查克，不如就地生火。」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "烤串与预言",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-900030",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《疑惑之影》的正文里，出现了这样一句话：「这些事都写在你我的合约之中」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "疑惑之影",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-900031",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《生灵火花》的正文里，出现了这样一句话：「并未超出我的预期，阿赫茉妮」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "生灵火花",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-900033",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "下面这段原文来自哪一段剧情？「特雷西斯在他建立的这套系统里」请回答该段的标题。",
+   "answer": "血潮翻涌",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-900034",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "下面这段原文来自哪一段剧情？「抱歉，西西里夫人，我想过无数种与您面对面的形式」请回答该段的标题。",
+   "answer": "“狼之主”",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-900036",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《高空拒阻行动》的正文里，出现了这样一句话：「W小姐，还差一点，这个距离」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "高空拒阻行动",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-900037",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "下面这段原文来自哪一段剧情？「但你还是教出了无数于大炎有用的人才」请回答该段的标题。",
+   "answer": "瑟瑟秋华",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-900041",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《走出那条长长的走廊》的正文里，出现了这样一句话：「给你爸爸妈妈的衣服不是已经做好了吗？这件是什么？」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "走出那条长长的走廊",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-900042",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《狂奔的瓶树》的正文里，出现了这样一句话：「没关系的，暴行姐姐，这已经足够了」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "狂奔的瓶树",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-900043",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "下面这段原文来自哪一段剧情？「大哥哥说话真奇怪，你不会也是病人吧。」请回答该段的标题。",
+   "answer": "漫游症",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-900047",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《月光沉沦》的正文里，出现了这样一句话：「你们居然真的赢了我。」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "月光沉沦",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-900048",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《禁飞区》的正文里，出现了这样一句话：「俺的眼睛被面罩挡住了，什么都看不见！」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "禁飞区",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-900054",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《“堕天”》的正文里，出现了这样一句话：「克里夫先生是一位可靠的领袖」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "“堕天”",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-900057",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "在剧情《告别时刻》的正文里，出现了这样一句话：「铃兰：小白，早上好啊！」。这句话出自哪个文本块？请给出该块的标题。",
+   "answer": "告别时刻",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-900062",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "下面这段原文来自哪一段剧情？「什么？问题真的都解决了？」请回答该段的标题。",
+   "answer": "分身有术",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-sc-900063",
+   "category": "single_chunk",
+   "split": "dev",
+   "question": "下面这段原文来自哪一段剧情？「现在管你的是蕾缪安」请回答该段的标题。",
+   "answer": "乐园",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-900001",
+   "category": "alias",
+   "split": "dev",
+   "question": "在剧情正文里，「大女巫格兰特」被用来指代哪个角色或事物？请给出它的规范名。",
+   "answer": "格兰特交谈夜烟。格兰特领导巫女林。夜烟交谈格兰特。格兰特保护夜烟。格兰特指挥苏菲。格兰特指挥夜烟。格兰特隶属巫女林。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 9,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-900005",
+   "category": "alias",
+   "split": "dev",
+   "question": "「云裂之剑」是《别离之夜》中出现的称呼，它的规范名（规范实体名）是什么？",
+   "answer": "陈持有赤霄。陈使用赤霄。魏彦吾持有赤霄。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 9,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-900006",
+   "category": "alias",
+   "split": "dev",
+   "question": "在剧情正文里，「引领者」被用来指代哪个角色或事物？请给出它的规范名。",
+   "answer": "乌露露交谈安洁莉娜。安洁莉娜交谈乌露露。乌露露指挥瑞万。嘉辛塔交谈乌露露。乌露露位于红砂镇。瑞万交谈乌露露。乌露露属于红砂镇。乌露露位于雷姆必拓。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 16,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-900008",
+   "category": "alias",
+   "split": "dev",
+   "question": "在剧情正文里，「佐菲娅小姐」被用来指代哪个角色或事物？请给出它的规范名。",
+   "answer": "玛莉娅交谈佐菲娅。佐菲娅交谈光头马丁。佐菲娅指导玛莉娅。佐菲娅亲属玛莉娅。佐菲娅交谈玛嘉烈·临光。佐菲娅隶属临光家。佐菲娅交谈稚嫩的记者。佐菲娅交谈逐魇骑士。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 25,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-900009",
+   "category": "alias",
+   "split": "dev",
+   "question": "在剧情正文里，「寻澜」被用来指代哪个角色或事物？请给出它的规范名。",
+   "answer": "高级管理人员交谈蒂拉。蒂拉前往楼顶。蒂拉隶属黑钢。克里夫交谈蒂拉。克里夫部署蒂拉。蒂拉下属克里夫。黑钢先遣队员交谈蒂拉。管理人员交谈蒂拉。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 12,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-900010",
+   "category": "alias",
+   "split": "dev",
+   "question": "「小锤子瑞恩」是《健康零食》中出现的称呼，它的规范名（规范实体名）是什么？",
+   "answer": "瑞恩交谈莱欧斯。瑞恩交谈玛露西尔。瑞恩交谈刻俄柏。莱欧斯交谈瑞恩。瑞恩交谈拓荒者A。拓荒者A交谈瑞恩。瑞恩隶属罗德岛。玛露西尔交谈瑞恩。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 31,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-900011",
+   "category": "alias",
+   "split": "dev",
+   "question": "在剧情正文里，「中央区」被用来指代哪个角色或事物？请给出它的规范名。",
+   "answer": "第四集团军前往奥克特里格区。奥克特里格区位于核心城。第四集团军位于奥克特里格区。奥克特里格区位于伦蒂尼姆。碎片大厦位于奥克特里格区。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 6,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-900012",
+   "category": "alias",
+   "split": "dev",
+   "question": "在剧情正文里，「伊雷妮署长」被用来指代哪个角色或事物？请给出它的规范名。",
+   "answer": "伊雷妮交谈拉维妮娅。鲁杰罗交谈伊雷妮。伊雷妮隶属运输保障署。伊雷妮赠予柳德米拉。伊雷妮任职运输保障署。伊雷妮交谈德克萨斯。伊雷妮保护拉维妮娅。山姆交谈伊雷妮。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 21,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-900013",
+   "category": "alias",
+   "split": "dev",
+   "question": "在剧情正文里，「奇怪的外来人」被用来指代哪个角色或事物？请给出它的规范名。",
+   "answer": "外来的教士交谈怪异的画家。怪异的画家交谈外来的教士。外来的教士敌对怪异的画家。外来的教士使用标记。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 10,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-900015",
+   "category": "alias",
+   "split": "dev",
+   "question": "在剧情正文里，「原型核心」被用来指代哪个角色或事物？请给出它的规范名。",
+   "answer": "石棺称为原型。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-900016",
+   "category": "alias",
+   "split": "dev",
+   "question": "「天喟」是《镇神头》中出现的称呼，它的规范名（规范实体名）是什么？",
+   "answer": "陈使用天喟之剑。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 1,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-900018",
+   "category": "alias",
+   "split": "dev",
+   "question": "「平祟侯」是《光与影》中出现的称呼，它的规范名（规范实体名）是什么？",
+   "answer": "孟铁衣交谈左宣辽。左宣辽指挥左乐。左宣辽交谈重岳。左宣辽交谈孟铁衣。梁洵交谈左宣辽。左宣辽敌对山海众。左宣辽交谈魏彦吾。左宣辽效忠大炎。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 18,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-900019",
+   "category": "alias",
+   "split": "dev",
+   "question": "在剧情正文里，「AMa-10」被用来指代哪个角色或事物？请给出它的规范名。",
+   "answer": "",
+   "abstained": true,
+   "judge": {
+    "pass": false,
+    "reason": "empty"
+   },
+   "citations_ok": true,
+   "n_citations": 0,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "empty",
+     "answered": false
+    }
+   }
+  },
+  {
+   "question_id": "q-al-900022",
+   "category": "alias",
+   "split": "dev",
+   "question": "在剧情正文里，「炽斧骑士」被用来指代哪个角色或事物？请给出它的规范名。",
+   "answer": "血骑士交战玛嘉烈。玛嘉烈交谈血骑士。血骑士交谈玛嘉烈。血骑士交战逐魇骑士。血骑士交谈逐魇骑士。血骑士隶属赤盏骑士团。血骑士源自米诺斯。血骑士隶属米诺斯。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 27,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-900024",
+   "category": "alias",
+   "split": "dev",
+   "question": "在剧情正文里，「王庭之主」被用来指代哪个角色或事物？请给出它的规范名。",
+   "answer": "Logos交谈血魔大君。孽茨雷交谈血魔大君。血魔大君交谈孽茨雷。特雷西斯交谈血魔大君。血魔大君领导血魔王庭。血魔大君交谈菈玛莲。阿米娅冲突血魔大君。温德米尔公爵交谈血魔大君。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 13,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-900033",
+   "category": "alias",
+   "split": "dev",
+   "question": "「源石炸药」是《过去与现在的交会》中出现的称呼，它的规范名（规范实体名）是什么？",
+   "answer": "尤拉持有炸药。锡人持有炸药。阿盖使用炸药。夏娜研究炸药。炸药导致夏娜。卢奇诺持有炸药。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 6,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-900035",
+   "category": "alias",
+   "split": "dev",
+   "question": "「梅什科公司」是《辉煌盾工业》中出现的称呼，它的规范名（规范实体名）是什么？",
+   "answer": "薇薇安娜敌对辉煌盾。奥比娜破坏辉煌盾。薇薇安娜冲突辉煌盾。辉煌盾参与奥格尼斯科。辉煌盾冲突奥比娜。辉煌盾隶属商业联合会。辉煌盾冲突奥格尼斯科。大嘴莫布隶属梅什科集团。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 8,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-900036",
+   "category": "alias",
+   "split": "dev",
+   "question": "「姑奶奶」是《狂奔的瓶树》中出现的称呼，它的规范名（规范实体名）是什么？",
+   "answer": "阿兰娜交谈石棉。石棉交谈阿兰娜。石棉前往大瀑布。石棉前往咧嘴谷。石棉前往大风滩。石棉隶属罗德岛。依娜姆交谈石棉。石棉同行塔季扬娜。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 12,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-900037",
+   "category": "alias",
+   "split": "dev",
+   "question": "在剧情正文里，「未来」被用来指代哪个角色或事物？请给出它的规范名。",
+   "answer": "泷居未来交谈黑角。黑角交谈泷居未来。泷居未来交谈学者猫。学者猫交谈泷居未来。泷居未来亲属泷居应。泷居未来交谈泷居应。泷居未来赠予黑角。泷居未来持有信号烟雾棒。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 146,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-900039",
+   "category": "alias",
+   "split": "dev",
+   "question": "「银石崖隘口」是《执行反制作战》中出现的称呼，它的规范名（规范实体名）是什么？",
+   "answer": "食腐者交战推进之王。萨卡兹驻守银石崖。银石崖位于伦蒂尼姆。先锋纵队交战食腐者。银石崖位于赤鬃山脉。开斯特公爵前往银石崖。活性源石位于银石崖。不明地质变化破坏银石崖。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 8,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-900041",
+   "category": "alias",
+   "split": "dev",
+   "question": "在剧情正文里，「阿什顿部长」被用来指代哪个角色或事物？请给出它的规范名。",
+   "answer": "阿梅利亚交谈阿什顿。阿什顿交谈阿梅利亚。安洁莉娜交谈阿什顿。阿什顿隶属纵贯红土公司。阿什顿任职纵贯红土公司。嘉辛塔交谈阿什顿。阿什顿交谈嘉辛塔。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 39,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-900044",
+   "category": "alias",
+   "split": "dev",
+   "question": "在剧情正文里，「旧雅赛努斯城」被用来指代哪个角色或事物？请给出它的规范名。",
+   "answer": "雅赛努斯属于米诺斯。里底娅任职雅赛努斯。缇缇前往雅赛努斯。克瑞斯拉前往雅赛努斯。赞索斯前往雅赛努斯。赞索斯位于雅赛努斯。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 12,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-900045",
+   "category": "alias",
+   "split": "dev",
+   "question": "在剧情正文里，「佩利佩·布朗」被用来指代哪个角色或事物？请给出它的规范名。",
+   "answer": "佩利佩交谈锡兰。诗怀雅交谈佩利佩。佩利佩交谈诗怀雅。佩利佩持有黑曜石。佩利佩亲属贝亚特·布朗。佩利佩持有晶洞。锡兰交谈佩利佩。诗怀雅赠予佩利佩。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 20,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-al-900047",
+   "category": "alias",
+   "split": "dev",
+   "question": "在剧情正文里，「吉雅阿」被用来指代哪个角色或事物？请给出它的规范名。",
+   "answer": "吉雅离开拉特兰。吉雅交谈娜仁图亚。吉雅感染矿石病。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_in_answer"
+   },
+   "citations_ok": true,
+   "n_citations": 4,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_in_answer",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-900001",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "根据剧情，「行板」与「罗德岛」之间的关系是什么？请用词表里的一个关系词回答。",
+   "answer": "行板隶属罗德岛。芙蓉交谈行板。恩希欧迪斯同盟罗德岛。行板交谈芙蓉。爷爷交谈行板。行板交谈爷爷。芙蓉隶属罗德岛。行板交谈白垩。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 25,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-900002",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "根据剧情，「佩尔罗契家」与「希瓦艾什家」之间的关系是什么？请用词表里的一个关系词回答。",
+   "answer": "希瓦艾什家敌对佩尔罗契家。佩尔罗契家敌对希瓦艾什家。恩希欧迪斯隶属希瓦艾什家。布朗陶家敌对希瓦艾什家。希瓦艾什家部署圣山。阿克托斯属于佩尔罗契家。茱安娜隶属佩尔罗契家。希瓦艾什同盟佩尔罗契家。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 10,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-900003",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "「维多利亚」对「布朗陶」处于哪种关系？",
+   "answer": "维多利亚同盟布朗陶。布朗陶同盟维多利亚。维多利亚敌对谢拉格。维多利亚交谈菈塔托丝。维多利亚敌对希瓦艾什。布朗陶敌对佩尔罗契。菈塔托丝同盟维多利亚。菈塔托丝交谈维多利亚。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 13,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-900006",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "根据剧情，「莱昂图索」与「建设部」之间的关系是什么？请用词表里的一个关系词回答。",
+   "answer": "莱昂图索任职建设部。莱昂图索交谈德克萨斯。莱昂图索交谈罗索。拉维妮娅交谈莱昂图索。莱昂图索交谈拉维妮娅。莱昂图索隶属贝洛内。莱昂图索指挥德克萨斯。卡拉奇任职建设部。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 20,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-900007",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "「阿洛伊泽」对「近卫军皇家直属营」处于哪种关系？",
+   "answer": "阿洛伊泽隶属近卫军皇家直属营。Raidian交谈阿洛伊泽。阿洛伊泽交谈Raidian。阿洛伊泽隶属近卫军。阿洛伊泽前往圣骏堡。阿洛伊泽交谈罗德岛。瓦西里交谈阿洛伊泽。阿洛伊泽交谈阿米娅。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 20,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-900010",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "根据剧情，「红」与「罗德岛」之间的关系是什么？请用词表里的一个关系词回答。",
+   "answer": "整合运动交战罗德岛。恩希欧迪斯同盟罗德岛。塞雷娅同盟罗德岛。缪尔赛思同盟罗德岛。罗德岛研究矿石病。石棺位于罗德岛。费德里科前往罗德岛。红云前往罗德岛。",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "no_single_claim_with_all_anchors"
+   },
+   "citations_ok": true,
+   "n_citations": 9,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "no_single_claim_with_all_anchors",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-900011",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "根据剧情，「特雷西斯」与「碎片大厦」之间的关系是什么？请用词表里的一个关系词回答。",
+   "answer": "特雷西斯位于碎片大厦。特雷西斯使用碎片大厦。特雷西斯驻守碎片大厦。血魔大君交谈特雷西斯。碎片大厦位于伦蒂尼姆。特雷西斯同盟赦罪师。特雷西斯使用阿喃那。W敌对特雷西斯。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 11,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-900015",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "根据剧情，「杰斯顿」与「罗宾」之间的关系是什么？请用词表里的一个关系词回答。",
+   "answer": "杰斯顿交谈罗宾。罗宾交谈杰斯顿。罗宾敌对杰斯顿。杰斯顿指挥罗宾。罗宾同盟杰斯顿。杰斯顿雇用罗宾。安东尼敌对杰斯顿。杰斯顿隶属沙滩伞公司。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 18,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-900017",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "根据剧情，「小古莉」与「矿石病」之间的关系是什么？请用词表里的一个关系词回答。",
+   "answer": "小古莉感染矿石病。索默尔亲属小古莉。伊雷妮亲属小古莉。莉莉娅研究矿石病。蜜莓研究矿石病。索默尔交谈小古莉。嘉维尔感染矿石病。罗德岛研究矿石病。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 15,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-900020",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "根据剧情，「苦根」与「罗德岛」之间的关系是什么？请用词表里的一个关系词回答。",
+   "answer": "苦根隶属罗德岛。夏栎交谈苦根。苦根交谈苏茜。苏茜交谈苦根。苦根交谈凯特。苦根交谈夜烟。天火交谈苦根。吉姆斯交谈苦根。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 37,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-900022",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "「阿米娅」对「龙门」处于哪种关系？",
+   "answer": "整合运动敌对龙门。罗德岛同盟龙门。龙门敌对整合运动。凯尔希位于龙门。阿米娅交谈博士。杜宾交谈阿米娅。阿米娅隶属罗德岛。阿米娅交谈陈。",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "no_single_claim_with_all_anchors"
+   },
+   "citations_ok": true,
+   "n_citations": 16,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "no_single_claim_with_all_anchors",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-900023",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "根据剧情，「乌萨斯」与「整合运动」之间的关系是什么？请用词表里的一个关系词回答。",
+   "answer": "整合运动敌对乌萨斯。乌萨斯赠予整合运动。整合运动敌对罗德岛。阿米娅敌对整合运动。杜宾敌对整合运动。近卫局交战整合运动。整合运动破坏切尔诺伯格。爱国者指挥整合运动。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 10,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-900024",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "根据剧情，「斯卡蒂」与「深海猎人」之间的关系是什么？请用词表里的一个关系词回答。",
+   "answer": "斯卡蒂隶属深海猎人。斯卡蒂属于深海猎人。斯卡蒂交谈博士。布兰都斯研究深海猎人。深海猎人使用自适应接点。斯卡蒂交谈歌蕾蒂娅。幽灵鲨交谈斯卡蒂。斯卡蒂隶属阿戈尔。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 20,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-900027",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "「蔓珠院」对「谢拉格」处于哪种关系？",
+   "answer": "蔓珠院位于谢拉格。谢拉格包含蔓珠院。蔓珠院包含藏经阁。蔓珠院敌对喀兰贸易。佩尔罗契家同盟蔓珠院。弗雷隶属蔓珠院。阿德颂指挥蔓珠院。蔓珠院同盟维多利亚。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 12,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-900029",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "「阿洛伊泽」对「普拉多」处于哪种关系？",
+   "answer": "阿洛伊泽交谈普拉多。普拉多交谈阿洛伊泽。阿洛伊泽同行普拉多。阿洛伊泽赠予普拉多。阿洛伊泽指挥普拉多。Raidian交谈阿洛伊泽。阿洛伊泽交谈Raidian。阿洛伊泽隶属近卫军。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 18,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-900031",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "根据剧情，「锡人」与「卡兹戴尔」之间的关系是什么？请用词表里的一个关系词回答。",
+   "answer": "锡人前往卡兹戴尔。锡人离开卡兹戴尔。锡人研究卡兹戴尔。娜斯提交谈锡人。锡人交谈娜斯提。妮芙交谈锡人。卡兹戴尔包含魂灵熔炉。锡人交谈珀耳。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 16,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-900032",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "「阿米娅」对「迷迭香」处于哪种关系？",
+   "answer": "迷迭香交谈阿米娅。迷迭香同行阿米娅。阿米娅保护迷迭香。阿米娅交谈迷迭香。阿米娅同行迷迭香。阿米娅指挥迷迭香。阿米娅交谈博士。迷迭香敌对塔露拉。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 24,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-900035",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "「塞雷娅」对「伊芙利特」处于哪种关系？",
+   "answer": "塞雷娅保护伊芙利特。伊芙利特交谈塞雷娅。塞雷娅交谈伊芙利特。伊芙利特保护塞雷娅。塞雷娅指挥伊芙利特。伊芙利特获救于塞雷娅。塞雷娅同行伊芙利特。伊芙利特同行塞雷娅。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 21,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-900036",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "根据剧情，「第四集团军」与「远北地区」之间的关系是什么？请用词表里的一个关系词回答。",
+   "answer": "第四集团军前往远北地区。叶甫根尼指挥第四集团军。布列斯克同盟第四集团军。第二集团军交战第四集团军。远北政府赠予第四集团军。安德里安领导第四集团军。乌萨斯前往远北地区。乌萨斯包含远北地区。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 8,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-900038",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "「汉密尔顿上校」对「波顿男爵」处于哪种关系？",
+   "answer": "汉密尔顿上校交谈波顿男爵。号角交谈汉密尔顿上校。汉密尔顿上校交谈号角。汉密尔顿上校驻守小丘郡。汉密尔顿上校敌对塔拉人。汉密尔顿上校指挥希尔。威廉姆斯交谈汉密尔顿上校。汉密尔顿上校交谈威廉姆斯。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 33,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-900041",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "「星熊」对「近卫局」处于哪种关系？",
+   "answer": "星熊隶属近卫局。星熊任职近卫局。星熊交谈诗怀雅。近卫局同盟罗德岛。星熊交谈风笛。陈隶属近卫局。星熊交谈阿森。大头交谈星熊。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 29,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-900042",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "根据剧情，「城防军」与「伦蒂尼姆」之间的关系是什么？请用词表里的一个关系词回答。",
+   "answer": "城防军驻守伦蒂尼姆。城防军位于伦蒂尼姆。诺伯特区位于伦蒂尼姆。莱托任职城防军。莱托中校领导城防军。军事委员会敌对城防军。莱托中校任职城防军。萨卡兹位于伦蒂尼姆。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 12,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-900043",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "根据剧情，「图林」与「塔露拉」之间的关系是什么？请用词表里的一个关系词回答。",
+   "answer": "图林交谈塔露拉。塔露拉交谈图林。图林同盟塔露拉。塔露拉指挥图林。图林交谈柳德米拉。图林交谈可露希尔。可露希尔交谈塔露拉。霜星交谈塔露拉。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 15,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-dr-900046",
+   "category": "direct_relation",
+   "split": "dev",
+   "question": "「雷尔金」对「霍里」处于哪种关系？",
+   "answer": "雷尔金敌对霍里。雷尔金交谈霍里。霍里交谈雷尔金。尼克托交谈雷尔金。雷尔金前往乌卡边境。雷尔金指挥尼克托。尼克托交谈霍里。雷尔金敌对乌萨斯。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "one_claim_all_anchors_and_gold"
+   },
+   "citations_ok": true,
+   "n_citations": 28,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "one_claim_all_anchors_and_gold",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-900001",
+   "category": "multihop",
+   "split": "dev",
+   "question": "已知「九」通过唯一一个中间实体与「坎黛拉」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "answer": "坎黛拉任职多索雷斯。坎黛拉交谈D.D.D.。陈交谈坎黛拉。坎黛拉交谈林雨霞。坎黛拉交谈星熊。坎黛拉前往卡西米尔。坎黛拉保护多索雷斯。潘乔交谈坎黛拉。",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "gold_not_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 11,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "gold_not_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-900005",
+   "category": "multihop",
+   "split": "dev",
+   "question": "从「华法琳」出发，经过一个中间实体可以到达「黑冠」。这个中间实体叫什么？",
+   "answer": "华法琳救助克洛伊。华法琳交谈泥岩。华法琳交谈红豆。华法琳交谈克洛伊。华法琳交谈安洁莉娜。华法琳研究矿石病。华法琳指导嘉维尔。华法琳使用安慰剂。",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "no_claim_links_gold_to_any_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 12,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "no_claim_links_gold_to_any_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-900006",
+   "category": "multihop",
+   "split": "dev",
+   "question": "从「杜宾」出发，经过一个中间实体可以到达「佐菲娅」。这个中间实体叫什么？",
+   "answer": "佐菲娅交谈玛莉娅。玛莉娅交谈佐菲娅。佐菲娅交谈光头马丁。佐菲娅交谈玛嘉烈。佐菲娅指导玛莉娅。佐菲娅亲属玛莉娅。佐菲娅隶属临光家。佐菲娅指挥玛莉娅。",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "gold_not_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 35,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "gold_not_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-900008",
+   "category": "multihop",
+   "split": "dev",
+   "question": "从「陈昭芊」出发，经过一个中间实体可以到达「诗怀雅」。这个中间实体叫什么？",
+   "answer": "陈。陈交谈陈昭芊。陈交谈诗怀雅。诗怀雅交谈星熊。诗怀雅交谈埃尼斯。诗怀雅隶属近卫局。林雨霞交谈诗怀雅。诗怀雅交谈阿黛尔。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 17,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-900009",
+   "category": "multihop",
+   "split": "dev",
+   "question": "从「鲁斯」出发，经过一个中间实体可以到达「塞斯克」。这个中间实体叫什么？",
+   "answer": "鲁斯交谈塞斯克。塞斯克交谈鲁斯。鲁斯指挥塞斯克。塞斯克听命于鲁斯。鲁斯交谈哈维尔。鲁斯交谈伊西多。伊西多交谈鲁斯。塞斯克交谈伊西多。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 34,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-900010",
+   "category": "multihop",
+   "split": "dev",
+   "question": "已知「福尔图娜」通过唯一一个中间实体与「斯特凡诺」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "answer": "福尔图娜交谈斯特凡诺。斯特凡诺交谈福尔图娜。杰拉尔德交谈斯特凡诺。福尔图娜交谈德尔菲娜。斯特凡诺交谈杰拉尔德。斯特凡诺任职安布罗修修道院。里凯莱交谈斯特凡诺。蕾缪安交谈斯特凡诺。",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "gold_not_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 14,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "gold_not_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-900013",
+   "category": "multihop",
+   "split": "dev",
+   "question": "从「雷蛇」出发，经过一个中间实体可以到达「早露」。这个中间实体叫什么？",
+   "answer": "罗德岛。罗德岛隶属雷蛇。罗德岛隶属早露。芙兰卡交谈雷蛇。雷蛇交谈芙兰卡。早露交谈凛冬。早露隶属自治团。真理交谈早露。",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "no_claim_links_gold_to_any_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 22,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "no_claim_links_gold_to_any_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-900014",
+   "category": "multihop",
+   "split": "dev",
+   "question": "从「阿玛丽」出发，经过一个中间实体可以到达「里凯莱」。这个中间实体叫什么？",
+   "answer": "斯普莉雅。斯普莉雅交谈阿玛丽。斯普莉雅交谈里凯莱。里凯莱交谈费德里科。费德里科交谈里凯莱。里凯莱隶属公证所。里凯莱持有机密文件。里凯莱交谈斯普莉雅。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 27,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-900018",
+   "category": "multihop",
+   "split": "dev",
+   "question": "从「哈莉」出发，经过一个中间实体可以到达「汐斯塔火山」。这个中间实体叫什么？",
+   "answer": "哈莉亲属埃尼斯。埃尼斯亲属哈莉。伯德交谈哈莉。哈莉交谈阿黛尔。哈莉敌对赫尔曼。哈莉交谈科斯达。科斯达交谈哈莉。哈莉持有纯白火山。",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "gold_not_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 13,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "gold_not_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-900019",
+   "category": "multihop",
+   "split": "dev",
+   "question": "从「潘乔」出发，经过一个中间实体可以到达「天镜阁」。这个中间实体叫什么？",
+   "answer": "陈。陈交谈潘乔。陈前往天镜阁。拉菲艾拉亲属潘乔。潘乔亲属埃内斯托。潘乔交谈拉菲艾拉。拉菲艾拉交谈潘乔。潘乔交谈陈。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 15,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-900021",
+   "category": "multihop",
+   "split": "dev",
+   "question": "已知「苏茜」通过唯一一个中间实体与「特里蒙」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "answer": "夏栎交谈苏茜。苏茜交谈夏栎。毕恩交谈苏茜。苏茜前往卡拉顿。苏茜交谈天火。苏茜交谈吉姆斯。深靛交谈苏茜。格劳克斯交谈苏茜。",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "no_claim_links_gold_to_any_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 30,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "no_claim_links_gold_to_any_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-900022",
+   "category": "multihop",
+   "split": "dev",
+   "question": "从「萨尔瓦多」出发，经过一个中间实体可以到达「瓦列里奥」。这个中间实体叫什么？",
+   "answer": "特菲交谈萨尔瓦多。伊格纳西奥交谈瓦列里奥。奥卢斯交谈瓦列里奥。瓦列里奥敌对圣徒卡门。瓦列里奥交谈特菲。萨尔瓦多效忠圣徒卡门。特菲保护萨尔瓦多。特菲交谈瓦列里奥。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 14,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-900026",
+   "category": "multihop",
+   "split": "dev",
+   "question": "已知「预言家」通过唯一一个中间实体与「文森特伯爵」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "answer": "凯尔希。凯尔希交谈预言家。凯尔希交谈文森特伯爵。凯尔希交谈文森特伯爵。海蒂交谈文森特伯爵。文森特伯爵前往伦蒂尼姆。文森特伯爵交谈海蒂。文森特伯爵交谈理查德。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 20,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-900031",
+   "category": "multihop",
+   "split": "dev",
+   "question": "从「维多利亚」出发，经过一个中间实体可以到达「海嗣」。这个中间实体叫什么？",
+   "answer": "幽灵鲨交谈海嗣。海嗣交谈乌尔比安。幽灵鲨交战海嗣。阿玛雅交谈海嗣。斯卡蒂敌对海嗣。海嗣交谈幽灵鲨。艾丽妮交战海嗣。船长阿方索交战海嗣。",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "no_claim_links_gold_to_any_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 17,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "no_claim_links_gold_to_any_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-900033",
+   "category": "multihop",
+   "split": "dev",
+   "question": "已知「铁斋」通过唯一一个中间实体与「神社」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "answer": "三船敌对铁斋。铁斋交谈星熊。铁斋领导金石会。铁斋持有锻冶町。哲也交谈铁斋。星熊亲属铁斋。星熊前往神社。哲也亲属铁斋。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 20,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-900034",
+   "category": "multihop",
+   "split": "dev",
+   "question": "从「暴行」出发，经过一个中间实体可以到达「石棺」。这个中间实体叫什么？",
+   "answer": "凯尔希。凯尔希交谈暴行。凯尔希研究石棺。暴行交谈博士。石棺位于切尔诺伯格。暴行前往雷姆必拓。乌萨斯研究石棺。博士交谈暴行。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 19,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-900037",
+   "category": "multihop",
+   "split": "dev",
+   "question": "从「温蒂」出发，经过一个中间实体可以到达「近卫局」。这个中间实体叫什么？",
+   "answer": "罗德岛。罗德岛隶属温蒂。罗德岛指挥近卫局。极境交谈温蒂。温蒂交谈极境。温蒂隶属罗德岛。近卫局敌对整合运动。近卫局同盟罗德岛。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 19,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-900038",
+   "category": "multihop",
+   "split": "dev",
+   "question": "已知「守院人」通过唯一一个中间实体与「玻利瓦尔」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "answer": "杜宾。杜宾交谈守院人。杜宾离开玻利瓦尔。守院人位于玻利瓦尔。守院人交谈杜宾。杜宾交谈守院人。守院人制造石雕。杜宾离开玻利瓦尔。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 20,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-900039",
+   "category": "multihop",
+   "split": "dev",
+   "question": "已知「飞空艇的“幽灵”」通过唯一一个中间实体与「Logos」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "answer": "阿米娅。阿米娅交谈飞空艇的“幽灵”。阿米娅交谈Logos。飞空艇与飞空艇的“幽灵”、Logos相关联。飞空艇前往阿喃那。死魂灵位于飞空艇。W敌对飞空艇。Logos前往飞空艇。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 14,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-900042",
+   "category": "multihop",
+   "split": "dev",
+   "question": "已知「洛肯」通过唯一一个中间实体与「镇痛剂」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "answer": "罗德岛。罗德岛敌对洛肯。罗德岛制造镇痛剂。洛肯交谈迷迭香。迷迭香交谈洛肯。缪尔赛思交谈洛肯。梅兰德基金会敌对洛肯。洛肯敌对梅兰德基金会。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 23,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-900043",
+   "category": "multihop",
+   "split": "dev",
+   "question": "已知「贝尔德」通过唯一一个中间实体与「帕特尔」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "answer": "因陀罗交谈贝尔德。贝尔德隶属格拉斯哥帮。贝尔德交谈麦克拉伦。贝尔德持有蝴蝶刀。贝尔德位于诺伯特区。贝琳亲属帕特尔。帕特尔交谈贝琳。帕特尔赠予贝琳。",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "no_claim_links_gold_to_any_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 15,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "no_claim_links_gold_to_any_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-900045",
+   "category": "multihop",
+   "split": "dev",
+   "question": "从「香草」出发，经过一个中间实体可以到达「伦蒂尼姆」。这个中间实体叫什么？",
+   "answer": "罗德岛。罗德岛隶属香草。罗德岛前往伦蒂尼姆。伦蒂尼姆位于维多利亚。史都华德交谈香草。香草隶属黑钢。伦蒂尼姆属于维多利亚。香草隶属罗德岛。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 14,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-900046",
+   "category": "multihop",
+   "split": "dev",
+   "question": "已知「行板」通过唯一一个中间实体与「车尔尼」相连（中间实体经由两条独立关系相连）。这个中间实体是谁？",
+   "answer": "黑键交谈车尔尼。车尔尼交谈芙蓉。芙蓉交谈行板。行板交谈芙蓉。乌尔苏拉交谈车尔尼。车尔尼交谈乌尔苏拉。行板隶属罗德岛。车尔尼创建晨暮。",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "gold_linked_to_every_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 24,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "gold_linked_to_every_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-mh-900047",
+   "category": "multihop",
+   "split": "dev",
+   "question": "从「均」出发，经过一个中间实体可以到达「监察司」。这个中间实体叫什么？",
+   "answer": "太合与均、监察司相关联。太合交谈监察司。煌交谈监察司。魏彦吾敌对监察司。左乐前往界园。",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "no_claim_links_gold_to_any_anchor"
+   },
+   "citations_ok": true,
+   "n_citations": 5,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "no_claim_links_gold_to_any_anchor",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900002",
+   "category": "cross_chunk",
+   "split": "dev",
+   "question": "「安妮塔」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "answer": "act18d3",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "chapter_set_missing"
+   },
+   "citations_ok": true,
+   "n_citations": 21,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "chapter_set_missing",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900005",
+   "category": "cross_chunk",
+   "split": "dev",
+   "question": "「贝纳尔多」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "answer": "act21side",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "chapter_set_missing"
+   },
+   "citations_ok": true,
+   "n_citations": 19,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "chapter_set_missing",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900008",
+   "category": "cross_chunk",
+   "split": "dev",
+   "question": "「豆豆」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "answer": "act13mini、act31side、memory_bstalk、memory_flower",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "extra_chapters_all_real_and_bounded"
+   },
+   "citations_ok": true,
+   "n_citations": 7,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "extra_chapters_all_real_and_bounded",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900011",
+   "category": "cross_chunk",
+   "split": "dev",
+   "question": "「学生联合大会」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "answer": "act51side、memory_headb2",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "chapter_set_equal"
+   },
+   "citations_ok": true,
+   "n_citations": 14,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "chapter_set_equal",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900012",
+   "category": "cross_chunk",
+   "split": "dev",
+   "question": "「斯普莉雅」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "answer": "act26side、memory_spuria",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "chapter_set_equal"
+   },
+   "citations_ok": true,
+   "n_citations": 19,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "chapter_set_equal",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900013",
+   "category": "cross_chunk",
+   "split": "dev",
+   "question": "「技术院」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "answer": "act34side、act52side、main_ep15、rogue_rogue_2",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "extra_chapters_all_real_and_bounded"
+   },
+   "citations_ok": true,
+   "n_citations": 17,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "extra_chapters_all_real_and_bounded",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900014",
+   "category": "cross_chunk",
+   "split": "dev",
+   "question": "「图里卡姆」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "answer": "act14side、act30side、memory_blackd",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "chapter_set_equal"
+   },
+   "citations_ok": true,
+   "n_citations": 12,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "chapter_set_equal",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900016",
+   "category": "cross_chunk",
+   "split": "dev",
+   "question": "「宁辞秋」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "answer": "act15side、act31side、act40side、act49side",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "chapter_set_equal"
+   },
+   "citations_ok": true,
+   "n_citations": 20,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "chapter_set_equal",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900017",
+   "category": "cross_chunk",
+   "split": "dev",
+   "question": "「日落街酒店」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "answer": "act37side、main_ep12、main_st12、memory_morgan",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "extra_chapters_all_real_and_bounded"
+   },
+   "citations_ok": true,
+   "n_citations": 7,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "extra_chapters_all_real_and_bounded",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900018",
+   "category": "cross_chunk",
+   "split": "dev",
+   "question": "「雄辩家」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "answer": "act22side、act41side、main_ep09、main_ep10",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "extra_chapters_all_real_and_bounded"
+   },
+   "citations_ok": true,
+   "n_citations": 10,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "extra_chapters_all_real_and_bounded",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900021",
+   "category": "cross_chunk",
+   "split": "dev",
+   "question": "「法伦」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "answer": "act7d5、memory_blitz、memory_durnar、memory_melan",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "extra_chapters_all_real_and_bounded"
+   },
+   "citations_ok": true,
+   "n_citations": 7,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "extra_chapters_all_real_and_bounded",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900022",
+   "category": "cross_chunk",
+   "split": "dev",
+   "question": "「巫术」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "answer": "act29side、act47side、main_ep13、main_ep14",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "chapter_set_missing"
+   },
+   "citations_ok": true,
+   "n_citations": 12,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "chapter_set_missing",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900024",
+   "category": "cross_chunk",
+   "split": "dev",
+   "question": "「帕特」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "answer": "act42side、memory_phenxi",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "chapter_set_missing"
+   },
+   "citations_ok": true,
+   "n_citations": 18,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "chapter_set_missing",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900026",
+   "category": "cross_chunk",
+   "split": "dev",
+   "question": "「蒂姆」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "answer": "act29side、act41side、memory_beewax、memory_lessng",
+   "abstained": false,
+   "judge": {
+    "pass": true,
+    "reason": "extra_chapters_all_real_and_bounded"
+   },
+   "citations_ok": true,
+   "n_citations": 11,
+   "arms": {
+    "prod": {
+     "pass": true,
+     "reason": "extra_chapters_all_real_and_bounded",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900027",
+   "category": "cross_chunk",
+   "split": "dev",
+   "question": "「炎魔」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "answer": "act15d0、main_ep13、main_ep14、rogue_rogue_4",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "chapter_set_missing"
+   },
+   "citations_ok": true,
+   "n_citations": 13,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "chapter_set_missing",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-cx-900030",
+   "category": "cross_chunk",
+   "split": "dev",
+   "question": "「勾吴」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "answer": "act16d5、act49side、memory_nothin、memory_sqrrel",
+   "abstained": false,
+   "judge": {
+    "pass": false,
+    "reason": "chapter_set_missing"
+   },
+   "citations_ok": true,
+   "n_citations": 15,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "chapter_set_missing",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-tc-900001",
+   "category": "time_conflict",
+   "split": "dev",
+   "question": "「W」与「罗德岛」在剧情不同阶段分别被描述为「同盟」和「敌对」。这两条记录应如何理解？",
+   "answer": "恩希欧迪斯同盟罗德岛。极境隶属罗德岛。温蒂隶属罗德岛。Medic隶属罗德岛。罗德岛交战整合运动。近卫局同盟罗德岛。霜星交战罗德岛。赫默任职罗德岛。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 9,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-tc-900003",
+   "category": "time_conflict",
+   "split": "dev",
+   "question": "「凯尔希」与「矿石病」在剧情不同阶段分别被描述为「感染」和「治愈」。这两条记录应如何理解？",
+   "answer": "凯尔希研究矿石病。凯尔希治愈矿石病。凯尔希交谈博士。可露希尔交谈凯尔希。凯尔希交谈艾莉。凯尔希指挥艾莉。莉莉娅研究矿石病。凯尔希交谈莉莉娅。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 14,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-tc-900004",
+   "category": "time_conflict",
+   "split": "dev",
+   "question": "同两个实体「诺希斯」与「喀兰贸易」之间先后出现「隶属」与「背叛」两种相反关系。这是抽取矛盾还是剧情演进？请说明理由。",
+   "answer": "诺希斯隶属喀兰贸易。诺希斯任职喀兰贸易。诺希斯背叛喀兰贸易。诺希斯离开喀兰贸易。缪尔赛思交谈诺希斯。诺希斯指挥希瓦艾什。诺希斯指挥莫希。喀兰贸易敌对维多利亚。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 18,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-tc-900005",
+   "category": "time_conflict",
+   "split": "dev",
+   "question": "同两个实体「纳乔」与「互助会」之间先后出现「背叛」与「隶属」两种相反关系。这是抽取矛盾还是剧情演进？请说明理由。",
+   "answer": "纳乔隶属互助会。纳乔背叛互助会。纳乔前往互助会。克莱门莎交谈纳乔。奥卢斯交谈纳乔。阿奎拉交谈纳乔。纳乔亲属鲁菲纳。纳乔交谈盖乌斯。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 14,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-tc-900006",
+   "category": "time_conflict",
+   "split": "dev",
+   "question": "同两个实体「西昆妲」与「乌尔比安」之间先后出现「同盟」与「敌对」两种相反关系。这是抽取矛盾还是剧情演进？请说明理由。",
+   "answer": "西昆妲师从乌尔比安。西昆妲交谈乌尔比安。乌尔比安交谈西昆妲。西昆妲敌对乌尔比安。西昆妲同盟乌尔比安。乌尔比安指导西昆妲。西昆妲隶属海巡队。西昆妲交谈艾丽妮。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 17,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-tc-900011",
+   "category": "time_conflict",
+   "split": "dev",
+   "question": "同两个实体「德克萨斯」与「拉维妮娅」之间先后出现「同盟」与「敌对」两种相反关系。这是抽取矛盾还是剧情演进？请说明理由。",
+   "answer": "拉维妮娅交谈德克萨斯。德克萨斯交谈拉维妮娅。拉维妮娅保护德克萨斯。拉维妮娅同盟德克萨斯。德克萨斯救助拉维妮娅。拉维妮娅获救于德克萨斯。德克萨斯交谈拉普兰德。拉维妮娅交谈贝纳尔多。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 35,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-tc-900012",
+   "category": "time_conflict",
+   "split": "dev",
+   "question": "「铸剑坊」与「山海众」在剧情不同阶段分别被描述为「同盟」和「敌对」。这两条记录应如何理解？",
+   "answer": "铸剑坊同盟山海众。山海众敌对铸剑坊。山海众敌对太合。山海众敌对林雨霞。山海众敌对大炎。左乐敌对山海众。孟铁衣敌对山海众。太合敌对山海众。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 13,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-tc-900016",
+   "category": "time_conflict",
+   "split": "dev",
+   "question": "「沙雷」与「德米特里」在剧情不同阶段分别被描述为「敌对」和「同盟」。这两条记录应如何理解？",
+   "answer": "沙雷交谈德米特里。沙雷敌对德米特里。沙雷同盟德米特里。德米特里交谈沙雷。德米特里交谈莱昂图索。莱昂图索交谈德米特里。沙雷持有黄金平原。沙雷交谈莱昂图索。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 21,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-tc-900019",
+   "category": "time_conflict",
+   "split": "dev",
+   "question": "「恩希欧迪斯」与「维多利亚」在剧情不同阶段分别被描述为「敌对」和「同盟」。这两条记录应如何理解？",
+   "answer": "恩希欧迪斯敌对维多利亚。恩希欧迪斯交谈维多利亚。维多利亚敌对谢拉格。阿德颂敌对维多利亚。维多利亚赠予谢拉格。恩希欧迪斯部署山雪鬼。恩希欧迪斯位于荣光号。休露丝冲突维多利亚。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 9,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-tc-900021",
+   "category": "time_conflict",
+   "split": "dev",
+   "question": "「赫拉格」与「爱国者」在剧情不同阶段分别被描述为「同盟」和「敌对」。这两条记录应如何理解？",
+   "answer": "赫拉格交谈爱国者。爱国者交谈赫拉格。爱国者赠予赫拉格。爱国者敌对赫拉格。赫拉格敌对爱国者。赫拉格同盟爱国者。赫拉格交谈临光。爱国者敌对塔露拉。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 27,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-tc-900022",
+   "category": "time_conflict",
+   "split": "dev",
+   "question": "「菈塔托丝」与「恩希欧迪斯」在剧情不同阶段分别被描述为「敌对」和「同盟」。这两条记录应如何理解？",
+   "answer": "菈塔托丝交谈恩希欧迪斯。恩希欧迪斯交谈菈塔托丝。菈塔托丝敌对恩希欧迪斯。恩希欧迪斯领导喀兰贸易。恩希欧迪斯交谈锏。菈塔托丝交谈阿克托斯。休露丝亲属菈塔托丝。阿克托斯交谈菈塔托丝。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 33,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-tc-900023",
+   "category": "time_conflict",
+   "split": "dev",
+   "question": "同两个实体「蒸汽骑士」与「维多利亚」之间先后出现「效忠」与「背叛」两种相反关系。这是抽取矛盾还是剧情演进？请说明理由。",
+   "answer": "蒸汽骑士效忠维多利亚。蒸汽骑士隶属维多利亚。维多利亚背叛蒸汽骑士。蒸汽骑士保护维多利亚。蒸汽骑士交战萨卡兹。蒸汽骑士位于诸王长眠之所。诸王之息属于维多利亚。推进之王交谈蒸汽骑士。（注：以上关系存在互斥记录，见 warnings，不作单一结论。）",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 18,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-tc-900024",
+   "category": "time_conflict",
+   "split": "dev",
+   "question": "同两个实体「蒸汽骑士」与「伦蒂尼姆」之间先后出现「离开」与「驻守」两种相反关系。这是抽取矛盾还是剧情演进？请说明理由。",
+   "answer": "蒸汽骑士驻守伦蒂尼姆。蒸汽骑士前往伦蒂尼姆。蒸汽骑士位于伦蒂尼姆。蒸汽骑士离开伦蒂尼姆。推进之王交谈蒸汽骑士。蒸汽骑士隶属维多利亚。蒸汽骑士位于诸王长眠之所。蒸汽骑士隶属议会。（注：以上关系存在互斥记录，见 warnings，不作单一结论。）",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 13,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-tc-900029",
+   "category": "time_conflict",
+   "split": "dev",
+   "question": "「蔓德拉」与「深池」在剧情不同阶段分别被描述为「效忠」和「背叛」。这两条记录应如何理解？",
+   "answer": "蔓德拉隶属深池。蔓德拉效忠深池。蔓德拉指挥深池。蔓德拉领导深池。蔓德拉敌对曼弗雷德。号角敌对蔓德拉。蔓德拉交谈曼弗雷德。深池交战萨卡兹。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 20,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-tc-900030",
+   "category": "time_conflict",
+   "split": "dev",
+   "question": "「贝洛内家族」与「罗塞蒂家族」在剧情不同阶段分别被描述为「敌对」和「同盟」。这两条记录应如何理解？",
+   "answer": "贝洛内家族交战罗塞蒂家族。贝洛内家族同盟萨卢佐家族。贝纳尔多敌对罗塞蒂家族。德克萨斯敌对罗塞蒂家族。罗塞蒂家族位于叙拉古。萨卢佐家族敌对贝洛内家族。罗塞蒂家族听命于瓦拉赫。德米特里指挥贝洛内家族。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 9,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-tc-900032",
+   "category": "time_conflict",
+   "split": "dev",
+   "question": "「菈玛莲」与「拂哀菈」在剧情不同阶段分别被描述为「交战」和「保护」。这两条记录应如何理解？",
+   "answer": "菈玛莲交谈拂哀菈。拂哀菈交谈菈玛莲。菈玛莲保护拂哀菈。菈玛莲交战拂哀菈。拂哀菈交谈娜斯提。娜斯提交谈拂哀菈。拂哀菈使用咒言。拂哀菈保护娜斯提。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 31,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-ad-900003",
+   "category": "adversarial",
+   "split": "dev",
+   "question": "有两个名字相近的实体：「感染者社区」与「感染者」。它们指同一个东西吗？请给出判断依据。",
+   "answer": "格拉尼前往感染者社区。发电机位于感染者社区。格拉尼驻守感染者社区。天火前往感染者社区。夜烟位于感染者社区。图拉领导感染者社区。丹顿兄弟前往感染者社区。绿意火花位于感染者社区。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 8,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-ad-900005",
+   "category": "adversarial",
+   "split": "dev",
+   "question": "「冬灵山脉」与「冬灵」名字相近，它们是同一个实体吗？若不是，请说明区别。",
+   "answer": "塞弗林敌对冬灵。冬灵属于沃伦姆德。沃伦姆德位于冬灵山脉。冬灵创建沃伦姆德。沃伦姆德包含冬灵。冬灵冲突沃伦姆德。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 7,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-ad-900007",
+   "category": "adversarial",
+   "split": "dev",
+   "question": "「威廉大学」与「威廉」名字相近，它们是同一个实体吗？若不是，请说明区别。",
+   "answer": "调香师交谈威廉。帕拉斯交谈威廉。小甘特交谈威廉。威廉交谈小甘特。凯勒任职威廉大学。凯勒位于威廉大学。威廉大学位于莱塔尼亚。威廉制造香水。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 10,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-ad-900008",
+   "category": "adversarial",
+   "split": "dev",
+   "question": "「沙阿宝库」与「沙阿」名字相近，它们是同一个实体吗？若不是，请说明区别。",
+   "answer": "沙阿宝库位于米纳特哈玛仪。祖拜尔驻守沙阿宝库。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 3,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-ad-900010",
+   "category": "adversarial",
+   "split": "dev",
+   "question": "「黑曜石音乐节」与「黑曜石」名字相近，它们是同一个实体吗？若不是，请说明区别。",
+   "answer": "黑曜石音乐节导致黑曜石。黑曜石产自火山。黑曜石产自汐斯塔。褐果研究黑曜石。伯德参与黑曜石音乐节。黑曜石音乐节发生于汐斯塔。汐斯塔源自黑曜石。哈莉参与黑曜石音乐节。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 9,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-ad-900011",
+   "category": "adversarial",
+   "split": "dev",
+   "question": "有两个名字相近的实体：「石棺研究所」与「石棺」。它们指同一个东西吗？请给出判断依据。",
+   "answer": "凯尔希研究石棺。第一集团军研究石棺。石棺研究所位于泽尔格勒。谢尔盖研究石棺。乌萨斯持有石棺。石棺位于切尔诺伯格。乌萨斯研究石棺。石棺称为原型。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 11,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-ad-900013",
+   "category": "adversarial",
+   "split": "dev",
+   "question": "有两个名字相近的实体：「王酋军」与「王酋」。它们指同一个东西吗？请给出判断依据。",
+   "answer": "王酋赠予瑰盐。王酋雇用瑰盐。王酋领导贫民窟。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 3,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  },
+  {
+   "question_id": "q-ad-900014",
+   "category": "adversarial",
+   "split": "dev",
+   "question": "「龙门游客」与「龙门」名字相近，它们是同一个实体吗？若不是，请说明区别。",
+   "answer": "整合运动敌对龙门。饮酒的老客交谈龙门游客。黎交谈龙门游客。整合运动冲突龙门。切尔诺伯格前往龙门。陈源自龙门。星熊保护龙门。陈背叛龙门。",
+   "abstained": false,
+   "judge": {
+    "pass": null,
+    "reason": "structural:not_supported"
+   },
+   "citations_ok": true,
+   "n_citations": 8,
+   "arms": {
+    "prod": {
+     "pass": false,
+     "reason": "structural:not_supported",
+     "answered": true
+    }
+   }
+  }
+ ]
+}

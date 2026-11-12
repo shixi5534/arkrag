@@ -1,0 +1,2930 @@
+{
+ "summary": {
+  "generation_id": "g-20261103T132152Z-06a741",
+  "prod_options": {
+   "quote_locate": true,
+   "bridge": true,
+   "bridge_search_top_k": 40,
+   "graph_reserve_tokens": 12000,
+   "chapter_cap": 4
+  },
+  "cap": 4,
+  "n_failing": 20,
+  "split_counts": {
+   "dev": 12,
+   "holdout": 8
+  },
+  "per_split_bucket": {
+   "dev": {
+    "n": 12,
+    "buckets": {
+     "C_name_present_but_dropped": 6,
+     "A_chunk_absent": 12
+    },
+    "gold_all_in_ctx": 2,
+    "recoverable_by_reselection": 4
+   },
+   "holdout": {
+    "n": 8,
+    "buckets": {
+     "C_name_present_but_dropped": 5,
+     "A_chunk_absent": 5
+    },
+    "gold_all_in_ctx": 3,
+    "recoverable_by_reselection": 3
+   }
+  },
+  "per_missing_chapter_buckets": {
+   "C_name_present_but_dropped": 11,
+   "A_chunk_absent": 17
+  },
+  "question_level_gold_coverage": {
+   "gold_all_in_ctx": 5,
+   "gold_partly_in_ctx": 10,
+   "gold_none_in_ctx": 5
+  },
+  "want_size_hist": {
+   "3": 5,
+   "4": 5,
+   "2": 10
+  },
+  "got_size_hist": {
+   "4": 14,
+   "3": 1,
+   "2": 2,
+   "1": 3
+  },
+  "recoverable_by_reselection": {
+   "n": 7,
+   "ids": [
+    "q-cx-000032",
+    "q-cx-900022",
+    "q-cx-900027",
+    "q-cx-900030",
+    "q-cx-000012",
+    "q-cx-000015",
+    "q-cx-000025"
+   ],
+   "note": "W ⊆ `_chapter_answer` 候选集 且 |W| ≤ cap ⇒ 只换排序键就可能全中"
+  },
+  "stage_b": {
+   "n_questions": 64,
+   "replication_ok": true,
+   "replication_mismatches": [],
+   "replication_text_diffs": [],
+   "replication_note": "当前键的重放判据必须逐题等于生产档实测；不相等则本阶段的换键结论全部作废",
+   "per_key": {
+    "sum_score_then_count": {
+     "n": 64,
+     "pass": 44,
+     "prod_pass": 44,
+     "gain": 0,
+     "loss": 0,
+     "gain_ids": [],
+     "loss_ids": [],
+     "changed_ids": [],
+     "per_split": {
+      "dev": {
+       "n": 38,
+       "pass": 26,
+       "prod_pass": 26
+      },
+      "holdout": {
+       "n": 26,
+       "pass": 18,
+       "prod_pass": 18
+      }
+     }
+    },
+    "sum_score": {
+     "n": 64,
+     "pass": 44,
+     "prod_pass": 44,
+     "gain": 0,
+     "loss": 0,
+     "gain_ids": [],
+     "loss_ids": [],
+     "changed_ids": [],
+     "per_split": {
+      "dev": {
+       "n": 38,
+       "pass": 26,
+       "prod_pass": 26
+      },
+      "holdout": {
+       "n": 26,
+       "pass": 18,
+       "prod_pass": 18
+      }
+     }
+    },
+    "max_score": {
+     "n": 64,
+     "pass": 44,
+     "prod_pass": 44,
+     "gain": 0,
+     "loss": 0,
+     "gain_ids": [],
+     "loss_ids": [],
+     "changed_ids": [
+      "q-cx-000006",
+      "q-cx-000012",
+      "q-cx-000015",
+      "q-cx-000019",
+      "q-cx-000025",
+      "q-cx-000027",
+      "q-cx-000028",
+      "q-cx-000029",
+      "q-cx-900007",
+      "q-cx-900023",
+      "q-cx-900027",
+      "q-cx-900031"
+     ],
+     "per_split": {
+      "dev": {
+       "n": 38,
+       "pass": 26,
+       "prod_pass": 26
+      },
+      "holdout": {
+       "n": 26,
+       "pass": 18,
+       "prod_pass": 18
+      }
+     }
+    },
+    "count": {
+     "n": 64,
+     "pass": 43,
+     "prod_pass": 44,
+     "gain": 0,
+     "loss": 1,
+     "gain_ids": [],
+     "loss_ids": [
+      "q-cx-900008"
+     ],
+     "changed_ids": [
+      "q-cx-000004",
+      "q-cx-000006",
+      "q-cx-000013",
+      "q-cx-000015",
+      "q-cx-000019",
+      "q-cx-000032",
+      "q-cx-900004",
+      "q-cx-900007",
+      "q-cx-900008",
+      "q-cx-900022",
+      "q-cx-900023",
+      "q-cx-900027"
+     ],
+     "per_split": {
+      "dev": {
+       "n": 38,
+       "pass": 25,
+       "prod_pass": 26
+      },
+      "holdout": {
+       "n": 26,
+       "pass": 18,
+       "prod_pass": 18
+      }
+     }
+    },
+    "evidence": {
+     "n": 64,
+     "pass": 47,
+     "prod_pass": 44,
+     "gain": 4,
+     "loss": 1,
+     "gain_ids": [
+      "q-cx-000012",
+      "q-cx-000025",
+      "q-cx-000032",
+      "q-cx-900027"
+     ],
+     "loss_ids": [
+      "q-cx-900031"
+     ],
+     "changed_ids": [
+      "q-cx-000004",
+      "q-cx-000006",
+      "q-cx-000012",
+      "q-cx-000013",
+      "q-cx-000015",
+      "q-cx-000019",
+      "q-cx-000025",
+      "q-cx-000032",
+      "q-cx-900004",
+      "q-cx-900007",
+      "q-cx-900022",
+      "q-cx-900023",
+      "q-cx-900027",
+      "q-cx-900030",
+      "q-cx-900031"
+     ],
+     "per_split": {
+      "dev": {
+       "n": 38,
+       "pass": 28,
+       "prod_pass": 26
+      },
+      "holdout": {
+       "n": 26,
+       "pass": 19,
+       "prod_pass": 18
+      }
+     }
+    },
+    "evidence_then_score": {
+     "n": 64,
+     "pass": 47,
+     "prod_pass": 44,
+     "gain": 3,
+     "loss": 0,
+     "gain_ids": [
+      "q-cx-000012",
+      "q-cx-000015",
+      "q-cx-000032"
+     ],
+     "loss_ids": [],
+     "changed_ids": [
+      "q-cx-000004",
+      "q-cx-000012",
+      "q-cx-000015",
+      "q-cx-000032",
+      "q-cx-900007",
+      "q-cx-900023"
+     ],
+     "per_split": {
+      "dev": {
+       "n": 38,
+       "pass": 27,
+       "prod_pass": 26
+      },
+      "holdout": {
+       "n": 26,
+       "pass": 20,
+       "prod_pass": 18
+      }
+     }
+    },
+    "mean_score": {
+     "n": 64,
+     "pass": 44,
+     "prod_pass": 44,
+     "gain": 0,
+     "loss": 0,
+     "gain_ids": [],
+     "loss_ids": [],
+     "changed_ids": [
+      "q-cx-000006",
+      "q-cx-000012",
+      "q-cx-000015",
+      "q-cx-000019",
+      "q-cx-000025",
+      "q-cx-000027",
+      "q-cx-000028",
+      "q-cx-000029",
+      "q-cx-000032",
+      "q-cx-900007",
+      "q-cx-900023",
+      "q-cx-900027",
+      "q-cx-900030",
+      "q-cx-900031"
+     ],
+     "per_split": {
+      "dev": {
+       "n": 38,
+       "pass": 26,
+       "prod_pass": 26
+      },
+      "holdout": {
+       "n": 26,
+       "pass": 18,
+       "prod_pass": 18
+      }
+     }
+    },
+    "max_score_then_count": {
+     "n": 64,
+     "pass": 44,
+     "prod_pass": 44,
+     "gain": 0,
+     "loss": 0,
+     "gain_ids": [],
+     "loss_ids": [],
+     "changed_ids": [
+      "q-cx-000006",
+      "q-cx-000012",
+      "q-cx-000015",
+      "q-cx-000019",
+      "q-cx-000025",
+      "q-cx-000027",
+      "q-cx-000028",
+      "q-cx-000029",
+      "q-cx-900007",
+      "q-cx-900023",
+      "q-cx-900027",
+      "q-cx-900031"
+     ],
+     "per_split": {
+      "dev": {
+       "n": 38,
+       "pass": 26,
+       "prod_pass": 26
+      },
+      "holdout": {
+       "n": 26,
+       "pass": 18,
+       "prod_pass": 18
+      }
+     }
+    },
+    "assertions": {
+     "n": 64,
+     "pass": 47,
+     "prod_pass": 44,
+     "gain": 3,
+     "loss": 0,
+     "gain_ids": [
+      "q-cx-000012",
+      "q-cx-000015",
+      "q-cx-000032"
+     ],
+     "loss_ids": [],
+     "changed_ids": [
+      "q-cx-000004",
+      "q-cx-000012",
+      "q-cx-000015",
+      "q-cx-000032",
+      "q-cx-900007",
+      "q-cx-900023"
+     ],
+     "per_split": {
+      "dev": {
+       "n": 38,
+       "pass": 27,
+       "prod_pass": 26
+      },
+      "holdout": {
+       "n": 26,
+       "pass": 20,
+       "prod_pass": 18
+      }
+     }
+    },
+    "focus_assertions": {
+     "n": 64,
+     "pass": 48,
+     "prod_pass": 44,
+     "gain": 4,
+     "loss": 0,
+     "gain_ids": [
+      "q-cx-000012",
+      "q-cx-000015",
+      "q-cx-000032",
+      "q-cx-900027"
+     ],
+     "loss_ids": [],
+     "changed_ids": [
+      "q-cx-000004",
+      "q-cx-000012",
+      "q-cx-000015",
+      "q-cx-000032",
+      "q-cx-900007",
+      "q-cx-900023",
+      "q-cx-900027"
+     ],
+     "per_split": {
+      "dev": {
+       "n": 38,
+       "pass": 28,
+       "prod_pass": 26
+      },
+      "holdout": {
+       "n": 26,
+       "pass": 20,
+       "prod_pass": 18
+      }
+     }
+    },
+    "direct_units": {
+     "n": 64,
+     "pass": 44,
+     "prod_pass": 44,
+     "gain": 0,
+     "loss": 0,
+     "gain_ids": [],
+     "loss_ids": [],
+     "changed_ids": [],
+     "per_split": {
+      "dev": {
+       "n": 38,
+       "pass": 26,
+       "prod_pass": 26
+      },
+      "holdout": {
+       "n": 26,
+       "pass": 18,
+       "prod_pass": 18
+      }
+     }
+    },
+    "entities_mentioned": {
+     "n": 64,
+     "pass": 47,
+     "prod_pass": 44,
+     "gain": 3,
+     "loss": 0,
+     "gain_ids": [
+      "q-cx-000012",
+      "q-cx-000015",
+      "q-cx-000032"
+     ],
+     "loss_ids": [],
+     "changed_ids": [
+      "q-cx-000004",
+      "q-cx-000012",
+      "q-cx-000015",
+      "q-cx-000032",
+      "q-cx-900007",
+      "q-cx-900023"
+     ],
+     "per_split": {
+      "dev": {
+       "n": 38,
+       "pass": 27,
+       "prod_pass": 26
+      },
+      "holdout": {
+       "n": 26,
+       "pass": 20,
+       "prod_pass": 18
+      }
+     }
+    }
+   }
+  },
+  "stage_c": {
+   "oracle_key_upper_bound": {
+    "n_pass": 7,
+    "n_questions": 20,
+    "prod_pass_on_same_set": 0,
+    "n_fail": 20,
+    "note": "oracle 键 = gold 章节排最前，**不是可用方案**，只用来界定「重选章节」这条路的天花板；它同时说明剩余题不是排序问题",
+    "still_failing": [
+     "q-cx-000004",
+     "q-cx-000011",
+     "q-cx-000013",
+     "q-cx-000016",
+     "q-cx-000019",
+     "q-cx-000022",
+     "q-cx-000029",
+     "q-cx-900002",
+     "q-cx-900005",
+     "q-cx-900007",
+     "q-cx-900009",
+     "q-cx-900023",
+     "q-cx-900024"
+    ]
+   },
+   "a_bucket_chapter_misses": {
+    "n": 17,
+    "in_entity_index": 17,
+    "not_in_entity_index": 0,
+    "rows": [
+     {
+      "question_id": "q-cx-000004",
+      "split": "dev",
+      "chapter": "rogue_rogue_6",
+      "in_entity_index_chapters": true
+     },
+     {
+      "question_id": "q-cx-000011",
+      "split": "dev",
+      "chapter": "memory_bryota",
+      "in_entity_index_chapters": true
+     },
+     {
+      "question_id": "q-cx-000016",
+      "split": "dev",
+      "chapter": "memory_tinman",
+      "in_entity_index_chapters": true
+     },
+     {
+      "question_id": "q-cx-000022",
+      "split": "dev",
+      "chapter": "memory_dagda",
+      "in_entity_index_chapters": true
+     },
+     {
+      "question_id": "q-cx-000029",
+      "split": "dev",
+      "chapter": "memory_confes",
+      "in_entity_index_chapters": true
+     },
+     {
+      "question_id": "q-cx-900002",
+      "split": "dev",
+      "chapter": "act36side",
+      "in_entity_index_chapters": true
+     },
+     {
+      "question_id": "q-cx-900002",
+      "split": "dev",
+      "chapter": "act52side",
+      "in_entity_index_chapters": true
+     },
+     {
+      "question_id": "q-cx-900005",
+      "split": "dev",
+      "chapter": "act38side",
+      "in_entity_index_chapters": true
+     },
+     {
+      "question_id": "q-cx-900005",
+      "split": "dev",
+      "chapter": "memory_demetr",
+      "in_entity_index_chapters": true
+     },
+     {
+      "question_id": "q-cx-900005",
+      "split": "dev",
+      "chapter": "memory_vigil",
+      "in_entity_index_chapters": true
+     },
+     {
+      "question_id": "q-cx-900024",
+      "split": "dev",
+      "chapter": "main_ep11",
+      "in_entity_index_chapters": true
+     },
+     {
+      "question_id": "q-cx-900024",
+      "split": "dev",
+      "chapter": "main_ep12",
+      "in_entity_index_chapters": true
+     },
+     {
+      "question_id": "q-cx-000013",
+      "split": "holdout",
+      "chapter": "act41side",
+      "in_entity_index_chapters": true
+     },
+     {
+      "question_id": "q-cx-000019",
+      "split": "holdout",
+      "chapter": "memory_peper",
+      "in_entity_index_chapters": true
+     },
+     {
+      "question_id": "q-cx-900007",
+      "split": "holdout",
+      "chapter": "act10mini",
+      "in_entity_index_chapters": true
+     },
+     {
+      "question_id": "q-cx-900009",
+      "split": "holdout",
+      "chapter": "memory_ela",
+      "in_entity_index_chapters": true
+     },
+     {
+      "question_id": "q-cx-900023",
+      "split": "holdout",
+      "chapter": "rogue_rogue_4",
+      "in_entity_index_chapters": true
+     }
+    ],
+    "note": "gold 章在本次上下文里无单元。`in_entity_index_chapters=True` ⇒ 该章属于焦点实体自己的 chunks（信息在产物里、没进上下文，属召回面）；False ⇒ 连实体索引里也没有，属 gold/索引面。该口径是**索引直读**，红线 34 要求标注，仅用于诊断。"
+   }
+  }
+ },
+ "rows": [
+  {
+   "question_id": "q-cx-000004",
+   "split": "dev",
+   "question": "「海洋」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "want": [
+    "act17side",
+    "memory_deepcl",
+    "rogue_rogue_6"
+   ],
+   "got": [
+    "act17side",
+    "act34side",
+    "rogue_rogue_2",
+    "rogue_rogue_5"
+   ],
+   "missing": [
+    "memory_deepcl",
+    "rogue_rogue_6"
+   ],
+   "extra": [
+    "act34side",
+    "rogue_rogue_2",
+    "rogue_rogue_5"
+   ],
+   "n_want": 3,
+   "n_got": 4,
+   "judge_reason": "chapter_set_missing",
+   "answer_text": "act17side、act34side、rogue_rogue_2、rogue_rogue_5",
+   "chapter_path": {
+    "applied": true,
+    "n_chapters": 4,
+    "chapter_source": "unit.chapter",
+    "citations": 16,
+    "chapter_cap": 4,
+    "n_chapters_found": 7,
+    "chapters_truncated": true
+   },
+   "n_chapters_found": 7,
+   "chapters_truncated": true,
+   "cap": 4,
+   "focus_names": [
+    "海洋"
+   ],
+   "anchors": [
+    "海洋"
+   ],
+   "n_entity_candidates_total": 1,
+   "ctx_chapters": [
+    "act17side",
+    "act34side",
+    "act39side",
+    "memory_deepcl",
+    "rogue_rogue_2",
+    "rogue_rogue_5",
+    "roguelike_level_rogue2_ending_3"
+   ],
+   "ctx_n_units": 19,
+   "ctx_chapters_with_focus_name": [
+    "act17side",
+    "act34side",
+    "act39side",
+    "memory_deepcl",
+    "rogue_rogue_2",
+    "rogue_rogue_5",
+    "roguelike_level_rogue2_ending_3"
+   ],
+   "candidate_set_size": 7,
+   "gold_chunk_ids": [
+    "activities/act17side/level_act17side_st09#000",
+    "obt/memory/story_deepcl_2_1#004",
+    "obt/rogue/rogue_6/endbook/endbook_rogue_6_3_3#004"
+   ],
+   "gold_chapters_from_chunks": [
+    "act17side",
+    "memory_deepcl",
+    "rogue_rogue_6"
+   ],
+   "gold_in_ctx": [
+    "obt/memory/story_deepcl_2_1#004"
+   ],
+   "gold_chapters_covered_by_ctx": [
+    "memory_deepcl"
+   ],
+   "w_subset_of_candidates": false,
+   "max_recoverable_by_reselection": false,
+   "per_missing_chapter": [
+    {
+     "chapter": "memory_deepcl",
+     "bucket": "C_name_present_but_dropped",
+     "n_units_in_ctx": 1,
+     "n_units_with_focus_name": 1,
+     "n_units_with_anchor": 1,
+     "rank_under_current_key": 7,
+     "rank_under_focus_assertions_key": 1,
+     "n_assertions": 1,
+     "n_focus_assertions": 1,
+     "n_evidence_spans": 1,
+     "anchor_hits": [
+      {
+       "chunk_id": "obt/memory/story_deepcl_2_1#004",
+       "anchor": "海洋",
+       "snippet": "已经是尽头了，你要去哪里？ 深海色踏入了海洋。 深海色：她被海洋带走了，不是吗？ “助祭”：被海洋浸湿，就再也回不去了。 深海色：她有得选吗？ “助祭”：没有。"
+      }
+     ],
+     "chapter_corpus_has_anchor": {
+      "海洋": true
+     },
+     "gold_chunks_in_ctx_of_this_chapter": [
+      "obt/memory/story_deepcl_2_1#004"
+     ],
+     "unit_scores": [
+      1.0975
+     ]
+    },
+    {
+     "chapter": "rogue_rogue_6",
+     "bucket": "A_chunk_absent",
+     "n_units_in_ctx": 0,
+     "n_units_with_focus_name": 0,
+     "n_units_with_anchor": 0,
+     "rank_under_current_key": null,
+     "rank_under_focus_assertions_key": null,
+     "n_assertions": null,
+     "n_focus_assertions": null,
+     "n_evidence_spans": null,
+     "anchor_hits": [],
+     "chapter_corpus_has_anchor": {
+      "海洋": true
+     },
+     "gold_chunks_in_ctx_of_this_chapter": [],
+     "unit_scores": []
+    }
+   ],
+   "warnings": []
+  },
+  {
+   "question_id": "q-cx-000011",
+   "split": "dev",
+   "question": "「汐斯塔火山」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "want": [
+    "act27side",
+    "act3d0",
+    "memory_bryota",
+    "memory_buildr"
+   ],
+   "got": [
+    "act27side",
+    "act3d0",
+    "memory_buildr"
+   ],
+   "missing": [
+    "memory_bryota"
+   ],
+   "extra": [],
+   "n_want": 4,
+   "n_got": 3,
+   "judge_reason": "chapter_set_missing",
+   "answer_text": "act27side、act3d0、memory_buildr",
+   "chapter_path": {
+    "applied": true,
+    "n_chapters": 3,
+    "chapter_source": "unit.chapter",
+    "citations": 17,
+    "chapter_cap": 4,
+    "n_chapters_found": 3,
+    "chapters_truncated": false
+   },
+   "n_chapters_found": 3,
+   "chapters_truncated": false,
+   "cap": 4,
+   "focus_names": [
+    "汐斯塔火山"
+   ],
+   "anchors": [
+    "汐斯塔火山"
+   ],
+   "n_entity_candidates_total": 1,
+   "ctx_chapters": [
+    "act27side",
+    "act3d0",
+    "memory_buildr"
+   ],
+   "ctx_n_units": 19,
+   "ctx_chapters_with_focus_name": [
+    "act27side",
+    "act3d0",
+    "memory_buildr"
+   ],
+   "candidate_set_size": 3,
+   "gold_chunk_ids": [
+    "activities/act27side/level_act27side_07_beg#003",
+    "activities/act3d0/level_act3d0_st01#003",
+    "obt/memory/story_bryota_1_1#002",
+    "obt/memory/story_buildr_1_1#006"
+   ],
+   "gold_chapters_from_chunks": [
+    "act27side",
+    "act3d0",
+    "memory_bryota",
+    "memory_buildr"
+   ],
+   "gold_in_ctx": [
+    "activities/act3d0/level_act3d0_st01#003",
+    "obt/memory/story_buildr_1_1#006"
+   ],
+   "gold_chapters_covered_by_ctx": [
+    "act3d0",
+    "memory_buildr"
+   ],
+   "w_subset_of_candidates": false,
+   "max_recoverable_by_reselection": false,
+   "per_missing_chapter": [
+    {
+     "chapter": "memory_bryota",
+     "bucket": "A_chunk_absent",
+     "n_units_in_ctx": 0,
+     "n_units_with_focus_name": 0,
+     "n_units_with_anchor": 0,
+     "rank_under_current_key": null,
+     "rank_under_focus_assertions_key": null,
+     "n_assertions": null,
+     "n_focus_assertions": null,
+     "n_evidence_spans": null,
+     "anchor_hits": [],
+     "chapter_corpus_has_anchor": {
+      "汐斯塔火山": true
+     },
+     "gold_chunks_in_ctx_of_this_chapter": [],
+     "unit_scores": []
+    }
+   ],
+   "warnings": []
+  },
+  {
+   "question_id": "q-cx-000016",
+   "split": "dev",
+   "question": "「银行」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "want": [
+    "act28side",
+    "memory_tinman"
+   ],
+   "got": [
+    "act28side",
+    "memory_almond"
+   ],
+   "missing": [
+    "memory_tinman"
+   ],
+   "extra": [
+    "memory_almond"
+   ],
+   "n_want": 2,
+   "n_got": 2,
+   "judge_reason": "chapter_set_missing",
+   "answer_text": "act28side、memory_almond",
+   "chapter_path": {
+    "applied": true,
+    "n_chapters": 2,
+    "chapter_source": "unit.chapter",
+    "citations": 19,
+    "chapter_cap": 4,
+    "n_chapters_found": 2,
+    "chapters_truncated": false
+   },
+   "n_chapters_found": 2,
+   "chapters_truncated": false,
+   "cap": 4,
+   "focus_names": [
+    "银行"
+   ],
+   "anchors": [
+    "银行"
+   ],
+   "n_entity_candidates_total": 1,
+   "ctx_chapters": [
+    "act28side",
+    "memory_almond"
+   ],
+   "ctx_n_units": 19,
+   "ctx_chapters_with_focus_name": [
+    "act28side",
+    "memory_almond"
+   ],
+   "candidate_set_size": 2,
+   "gold_chunk_ids": [
+    "activities/act28side/level_act28side_03_end#005",
+    "obt/memory/story_tinman_1_1#006"
+   ],
+   "gold_chapters_from_chunks": [
+    "act28side",
+    "memory_tinman"
+   ],
+   "gold_in_ctx": [],
+   "gold_chapters_covered_by_ctx": [],
+   "w_subset_of_candidates": false,
+   "max_recoverable_by_reselection": false,
+   "per_missing_chapter": [
+    {
+     "chapter": "memory_tinman",
+     "bucket": "A_chunk_absent",
+     "n_units_in_ctx": 0,
+     "n_units_with_focus_name": 0,
+     "n_units_with_anchor": 0,
+     "rank_under_current_key": null,
+     "rank_under_focus_assertions_key": null,
+     "n_assertions": null,
+     "n_focus_assertions": null,
+     "n_evidence_spans": null,
+     "anchor_hits": [],
+     "chapter_corpus_has_anchor": {
+      "银行": true
+     },
+     "gold_chunks_in_ctx_of_this_chapter": [],
+     "unit_scores": []
+    }
+   ],
+   "warnings": []
+  },
+  {
+   "question_id": "q-cx-000022",
+   "split": "dev",
+   "question": "「杰克」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "want": [
+    "memory_dagda",
+    "memory_jaksel",
+    "memory_tiger"
+   ],
+   "got": [
+    "act25side",
+    "act47side",
+    "memory_jaksel",
+    "memory_tiger"
+   ],
+   "missing": [
+    "memory_dagda"
+   ],
+   "extra": [
+    "act25side",
+    "act47side"
+   ],
+   "n_want": 3,
+   "n_got": 4,
+   "judge_reason": "chapter_set_missing",
+   "answer_text": "act25side、act47side、memory_jaksel、memory_tiger",
+   "chapter_path": {
+    "applied": true,
+    "n_chapters": 4,
+    "chapter_source": "unit.chapter",
+    "citations": 19,
+    "chapter_cap": 4,
+    "n_chapters_found": 4,
+    "chapters_truncated": false
+   },
+   "n_chapters_found": 4,
+   "chapters_truncated": false,
+   "cap": 4,
+   "focus_names": [
+    "杰克"
+   ],
+   "anchors": [
+    "杰克"
+   ],
+   "n_entity_candidates_total": 1,
+   "ctx_chapters": [
+    "act25side",
+    "act47side",
+    "memory_jaksel",
+    "memory_tiger"
+   ],
+   "ctx_n_units": 19,
+   "ctx_chapters_with_focus_name": [
+    "act25side",
+    "act47side",
+    "memory_jaksel",
+    "memory_tiger"
+   ],
+   "candidate_set_size": 4,
+   "gold_chunk_ids": [
+    "obt/memory/story_dagda_1_1#002",
+    "obt/memory/story_jaksel_1_1#000",
+    "obt/memory/story_tiger_1_1#000"
+   ],
+   "gold_chapters_from_chunks": [
+    "memory_dagda",
+    "memory_jaksel",
+    "memory_tiger"
+   ],
+   "gold_in_ctx": [
+    "obt/memory/story_jaksel_1_1#000",
+    "obt/memory/story_tiger_1_1#000"
+   ],
+   "gold_chapters_covered_by_ctx": [
+    "memory_jaksel",
+    "memory_tiger"
+   ],
+   "w_subset_of_candidates": false,
+   "max_recoverable_by_reselection": false,
+   "per_missing_chapter": [
+    {
+     "chapter": "memory_dagda",
+     "bucket": "A_chunk_absent",
+     "n_units_in_ctx": 0,
+     "n_units_with_focus_name": 0,
+     "n_units_with_anchor": 0,
+     "rank_under_current_key": null,
+     "rank_under_focus_assertions_key": null,
+     "n_assertions": null,
+     "n_focus_assertions": null,
+     "n_evidence_spans": null,
+     "anchor_hits": [],
+     "chapter_corpus_has_anchor": {
+      "杰克": true
+     },
+     "gold_chunks_in_ctx_of_this_chapter": [],
+     "unit_scores": []
+    }
+   ],
+   "warnings": []
+  },
+  {
+   "question_id": "q-cx-000029",
+   "split": "dev",
+   "question": "「收音机」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "want": [
+    "act22side",
+    "memory_confes",
+    "rogue_rogue_4"
+   ],
+   "got": [
+    "act21mini",
+    "act21side",
+    "act22side",
+    "act38side"
+   ],
+   "missing": [
+    "memory_confes",
+    "rogue_rogue_4"
+   ],
+   "extra": [
+    "act21mini",
+    "act21side",
+    "act38side"
+   ],
+   "n_want": 3,
+   "n_got": 4,
+   "judge_reason": "chapter_set_missing",
+   "answer_text": "act21mini、act21side、act22side、act38side",
+   "chapter_path": {
+    "applied": true,
+    "n_chapters": 4,
+    "chapter_source": "unit.chapter",
+    "citations": 15,
+    "chapter_cap": 4,
+    "n_chapters_found": 8,
+    "chapters_truncated": true
+   },
+   "n_chapters_found": 8,
+   "chapters_truncated": true,
+   "cap": 4,
+   "focus_names": [
+    "收音机"
+   ],
+   "anchors": [
+    "收音机"
+   ],
+   "n_entity_candidates_total": 1,
+   "ctx_chapters": [
+    "act21mini",
+    "act21side",
+    "act22side",
+    "act38side",
+    "main_ep17",
+    "memory_haak",
+    "rogue_rogue_3",
+    "rogue_rogue_4"
+   ],
+   "ctx_n_units": 19,
+   "ctx_chapters_with_focus_name": [
+    "act21mini",
+    "act21side",
+    "act22side",
+    "act38side",
+    "main_ep17",
+    "memory_haak",
+    "rogue_rogue_3",
+    "rogue_rogue_4"
+   ],
+   "candidate_set_size": 8,
+   "gold_chunk_ids": [
+    "activities/act22side/level_act22side_07_end#003",
+    "obt/memory/story_confes_1_1#004",
+    "obt/rogue/rogue_4/endbook/endbook_rogue_4_1_3#002"
+   ],
+   "gold_chapters_from_chunks": [
+    "act22side",
+    "memory_confes",
+    "rogue_rogue_4"
+   ],
+   "gold_in_ctx": [
+    "activities/act22side/level_act22side_07_end#003",
+    "obt/rogue/rogue_4/endbook/endbook_rogue_4_1_3#002"
+   ],
+   "gold_chapters_covered_by_ctx": [
+    "act22side",
+    "rogue_rogue_4"
+   ],
+   "w_subset_of_candidates": false,
+   "max_recoverable_by_reselection": false,
+   "per_missing_chapter": [
+    {
+     "chapter": "memory_confes",
+     "bucket": "A_chunk_absent",
+     "n_units_in_ctx": 0,
+     "n_units_with_focus_name": 0,
+     "n_units_with_anchor": 0,
+     "rank_under_current_key": null,
+     "rank_under_focus_assertions_key": null,
+     "n_assertions": null,
+     "n_focus_assertions": null,
+     "n_evidence_spans": null,
+     "anchor_hits": [],
+     "chapter_corpus_has_anchor": {
+      "收音机": true
+     },
+     "gold_chunks_in_ctx_of_this_chapter": [],
+     "unit_scores": []
+    },
+    {
+     "chapter": "rogue_rogue_4",
+     "bucket": "C_name_present_but_dropped",
+     "n_units_in_ctx": 1,
+     "n_units_with_focus_name": 1,
+     "n_units_with_anchor": 1,
+     "rank_under_current_key": 8,
+     "rank_under_focus_assertions_key": 8,
+     "n_assertions": 0,
+     "n_focus_assertions": 0,
+     "n_evidence_spans": 0,
+     "anchor_hits": [
+      {
+       "chunk_id": "obt/rogue/rogue_4/endbook/endbook_rogue_4_1_3#002",
+       "anchor": "收音机",
+       "snippet": "不知道是谁啧了一声，收音机便像被一只无形的巨手攥住，瞬间变为了一坨冒烟的废铁。 “一百五十金券。”锡人说，“从你们的零花钱里扣。” 大拉里松"
+      }
+     ],
+     "chapter_corpus_has_anchor": {
+      "收音机": true
+     },
+     "gold_chunks_in_ctx_of_this_chapter": [
+      "obt/rogue/rogue_4/endbook/endbook_rogue_4_1_3#002"
+     ],
+     "unit_scores": [
+      0.982
+     ]
+    }
+   ],
+   "warnings": []
+  },
+  {
+   "question_id": "q-cx-000032",
+   "split": "dev",
+   "question": "「轮胎」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "want": [
+    "act38side",
+    "main_ep14"
+   ],
+   "got": [
+    "act12side",
+    "act38side",
+    "memory_coldst",
+    "memory_jnight"
+   ],
+   "missing": [
+    "main_ep14"
+   ],
+   "extra": [
+    "act12side",
+    "memory_coldst",
+    "memory_jnight"
+   ],
+   "n_want": 2,
+   "n_got": 4,
+   "judge_reason": "chapter_set_missing",
+   "answer_text": "act12side、act38side、memory_coldst、memory_jnight",
+   "chapter_path": {
+    "applied": true,
+    "n_chapters": 4,
+    "chapter_source": "unit.chapter",
+    "citations": 14,
+    "chapter_cap": 4,
+    "n_chapters_found": 10,
+    "chapters_truncated": true
+   },
+   "n_chapters_found": 10,
+   "chapters_truncated": true,
+   "cap": 4,
+   "focus_names": [
+    "轮胎"
+   ],
+   "anchors": [
+    "轮胎"
+   ],
+   "n_entity_candidates_total": 1,
+   "ctx_chapters": [
+    "act12side",
+    "act32side",
+    "act38side",
+    "act45side",
+    "act47side",
+    "act53side",
+    "main_ep14",
+    "memory_coldst",
+    "memory_jnight",
+    "memory_wscoot"
+   ],
+   "ctx_n_units": 20,
+   "ctx_chapters_with_focus_name": [
+    "act12side",
+    "act32side",
+    "act38side",
+    "act45side",
+    "act47side",
+    "act53side",
+    "main_ep14",
+    "memory_coldst",
+    "memory_jnight",
+    "memory_wscoot"
+   ],
+   "candidate_set_size": 10,
+   "gold_chunk_ids": [
+    "activities/act38side/level_act38side_06_end#003",
+    "obt/main/level_main_14-04_end#002"
+   ],
+   "gold_chapters_from_chunks": [
+    "act38side",
+    "main_ep14"
+   ],
+   "gold_in_ctx": [
+    "activities/act38side/level_act38side_06_end#003",
+    "obt/main/level_main_14-04_end#002"
+   ],
+   "gold_chapters_covered_by_ctx": [
+    "act38side",
+    "main_ep14"
+   ],
+   "w_subset_of_candidates": true,
+   "max_recoverable_by_reselection": true,
+   "per_missing_chapter": [
+    {
+     "chapter": "main_ep14",
+     "bucket": "C_name_present_but_dropped",
+     "n_units_in_ctx": 1,
+     "n_units_with_focus_name": 1,
+     "n_units_with_anchor": 1,
+     "rank_under_current_key": 9,
+     "rank_under_focus_assertions_key": 2,
+     "n_assertions": 1,
+     "n_focus_assertions": 1,
+     "n_evidence_spans": 1,
+     "anchor_hits": [
+      {
+       "chunk_id": "obt/main/level_main_14-04_end#002",
+       "anchor": "轮胎",
+       "snippet": ".. “吊塔”：结果遇到了那几个怪物！“轮胎”“刺盾”“螺母”全都被吃了！ “吊塔”：剩下的人拼了命地跑，不知道为什么那几个怪物一点也不敢往这边追，我们也没法出"
+      }
+     ],
+     "chapter_corpus_has_anchor": {
+      "轮胎": true
+     },
+     "gold_chunks_in_ctx_of_this_chapter": [
+      "obt/main/level_main_14-04_end#002"
+     ],
+     "unit_scores": [
+      1.1014
+     ]
+    }
+   ],
+   "warnings": []
+  },
+  {
+   "question_id": "q-cx-900002",
+   "split": "dev",
+   "question": "「安妮塔」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "want": [
+    "act18d3",
+    "act36side",
+    "act52side"
+   ],
+   "got": [
+    "act18d3"
+   ],
+   "missing": [
+    "act36side",
+    "act52side"
+   ],
+   "extra": [],
+   "n_want": 3,
+   "n_got": 1,
+   "judge_reason": "chapter_set_missing",
+   "answer_text": "act18d3",
+   "chapter_path": {
+    "applied": true,
+    "n_chapters": 1,
+    "chapter_source": "unit.chapter",
+    "citations": 21,
+    "chapter_cap": 4,
+    "n_chapters_found": 1,
+    "chapters_truncated": false
+   },
+   "n_chapters_found": 1,
+   "chapters_truncated": false,
+   "cap": 4,
+   "focus_names": [
+    "安妮塔"
+   ],
+   "anchors": [
+    "安妮塔"
+   ],
+   "n_entity_candidates_total": 1,
+   "ctx_chapters": [
+    "act18d3"
+   ],
+   "ctx_n_units": 21,
+   "ctx_chapters_with_focus_name": [
+    "act18d3"
+   ],
+   "candidate_set_size": 1,
+   "gold_chunk_ids": [
+    "activities/act18d3/level_act18d3_02_end#002",
+    "activities/act36side/level_act36side_06_end#003",
+    "activities/act52side/level_act52side_08_beg#003"
+   ],
+   "gold_chapters_from_chunks": [
+    "act18d3",
+    "act36side",
+    "act52side"
+   ],
+   "gold_in_ctx": [],
+   "gold_chapters_covered_by_ctx": [],
+   "w_subset_of_candidates": false,
+   "max_recoverable_by_reselection": false,
+   "per_missing_chapter": [
+    {
+     "chapter": "act36side",
+     "bucket": "A_chunk_absent",
+     "n_units_in_ctx": 0,
+     "n_units_with_focus_name": 0,
+     "n_units_with_anchor": 0,
+     "rank_under_current_key": null,
+     "rank_under_focus_assertions_key": null,
+     "n_assertions": null,
+     "n_focus_assertions": null,
+     "n_evidence_spans": null,
+     "anchor_hits": [],
+     "chapter_corpus_has_anchor": {
+      "安妮塔": true
+     },
+     "gold_chunks_in_ctx_of_this_chapter": [],
+     "unit_scores": []
+    },
+    {
+     "chapter": "act52side",
+     "bucket": "A_chunk_absent",
+     "n_units_in_ctx": 0,
+     "n_units_with_focus_name": 0,
+     "n_units_with_anchor": 0,
+     "rank_under_current_key": null,
+     "rank_under_focus_assertions_key": null,
+     "n_assertions": null,
+     "n_focus_assertions": null,
+     "n_evidence_spans": null,
+     "anchor_hits": [],
+     "chapter_corpus_has_anchor": {
+      "安妮塔": true
+     },
+     "gold_chunks_in_ctx_of_this_chapter": [],
+     "unit_scores": []
+    }
+   ],
+   "warnings": []
+  },
+  {
+   "question_id": "q-cx-900005",
+   "split": "dev",
+   "question": "「贝纳尔多」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "want": [
+    "act21side",
+    "act38side",
+    "memory_demetr",
+    "memory_vigil"
+   ],
+   "got": [
+    "act21side"
+   ],
+   "missing": [
+    "act38side",
+    "memory_demetr",
+    "memory_vigil"
+   ],
+   "extra": [],
+   "n_want": 4,
+   "n_got": 1,
+   "judge_reason": "chapter_set_missing",
+   "answer_text": "act21side",
+   "chapter_path": {
+    "applied": true,
+    "n_chapters": 1,
+    "chapter_source": "unit.chapter",
+    "citations": 19,
+    "chapter_cap": 4,
+    "n_chapters_found": 1,
+    "chapters_truncated": false
+   },
+   "n_chapters_found": 1,
+   "chapters_truncated": false,
+   "cap": 4,
+   "focus_names": [
+    "贝纳尔多"
+   ],
+   "anchors": [
+    "贝纳尔多"
+   ],
+   "n_entity_candidates_total": 1,
+   "ctx_chapters": [
+    "act21side"
+   ],
+   "ctx_n_units": 19,
+   "ctx_chapters_with_focus_name": [
+    "act21side"
+   ],
+   "candidate_set_size": 1,
+   "gold_chunk_ids": [
+    "activities/act21side/level_act21side_01_beg#000",
+    "activities/act38side/level_act38side_07_beg#004",
+    "obt/memory/story_demetr_1_1#001",
+    "obt/memory/story_vigil_1_1#000"
+   ],
+   "gold_chapters_from_chunks": [
+    "act21side",
+    "act38side",
+    "memory_demetr",
+    "memory_vigil"
+   ],
+   "gold_in_ctx": [
+    "activities/act21side/level_act21side_01_beg#000"
+   ],
+   "gold_chapters_covered_by_ctx": [
+    "act21side"
+   ],
+   "w_subset_of_candidates": false,
+   "max_recoverable_by_reselection": false,
+   "per_missing_chapter": [
+    {
+     "chapter": "act38side",
+     "bucket": "A_chunk_absent",
+     "n_units_in_ctx": 0,
+     "n_units_with_focus_name": 0,
+     "n_units_with_anchor": 0,
+     "rank_under_current_key": null,
+     "rank_under_focus_assertions_key": null,
+     "n_assertions": null,
+     "n_focus_assertions": null,
+     "n_evidence_spans": null,
+     "anchor_hits": [],
+     "chapter_corpus_has_anchor": {
+      "贝纳尔多": true
+     },
+     "gold_chunks_in_ctx_of_this_chapter": [],
+     "unit_scores": []
+    },
+    {
+     "chapter": "memory_demetr",
+     "bucket": "A_chunk_absent",
+     "n_units_in_ctx": 0,
+     "n_units_with_focus_name": 0,
+     "n_units_with_anchor": 0,
+     "rank_under_current_key": null,
+     "rank_under_focus_assertions_key": null,
+     "n_assertions": null,
+     "n_focus_assertions": null,
+     "n_evidence_spans": null,
+     "anchor_hits": [],
+     "chapter_corpus_has_anchor": {
+      "贝纳尔多": true
+     },
+     "gold_chunks_in_ctx_of_this_chapter": [],
+     "unit_scores": []
+    },
+    {
+     "chapter": "memory_vigil",
+     "bucket": "A_chunk_absent",
+     "n_units_in_ctx": 0,
+     "n_units_with_focus_name": 0,
+     "n_units_with_anchor": 0,
+     "rank_under_current_key": null,
+     "rank_under_focus_assertions_key": null,
+     "n_assertions": null,
+     "n_focus_assertions": null,
+     "n_evidence_spans": null,
+     "anchor_hits": [],
+     "chapter_corpus_has_anchor": {
+      "贝纳尔多": true
+     },
+     "gold_chunks_in_ctx_of_this_chapter": [],
+     "unit_scores": []
+    }
+   ],
+   "warnings": []
+  },
+  {
+   "question_id": "q-cx-900022",
+   "split": "dev",
+   "question": "「巫术」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "want": [
+    "main_ep11",
+    "main_ep14"
+   ],
+   "got": [
+    "act29side",
+    "act47side",
+    "main_ep13",
+    "main_ep14"
+   ],
+   "missing": [
+    "main_ep11"
+   ],
+   "extra": [
+    "act29side",
+    "act47side",
+    "main_ep13"
+   ],
+   "n_want": 2,
+   "n_got": 4,
+   "judge_reason": "chapter_set_missing",
+   "answer_text": "act29side、act47side、main_ep13、main_ep14",
+   "chapter_path": {
+    "applied": true,
+    "n_chapters": 4,
+    "chapter_source": "unit.chapter",
+    "citations": 12,
+    "chapter_cap": 4,
+    "n_chapters_found": 10,
+    "chapters_truncated": true
+   },
+   "n_chapters_found": 10,
+   "chapters_truncated": true,
+   "cap": 4,
+   "focus_names": [
+    "巫术"
+   ],
+   "anchors": [
+    "巫术"
+   ],
+   "n_entity_candidates_total": 1,
+   "ctx_chapters": [
+    "act13side",
+    "act17mini",
+    "act29side",
+    "act37side",
+    "act47side",
+    "main_ep07",
+    "main_ep11",
+    "main_ep13",
+    "main_ep14",
+    "memory_lava2"
+   ],
+   "ctx_n_units": 19,
+   "ctx_chapters_with_focus_name": [
+    "act13side",
+    "act17mini",
+    "act29side",
+    "act37side",
+    "act47side",
+    "main_ep07",
+    "main_ep11",
+    "main_ep13",
+    "main_ep14",
+    "memory_lava2"
+   ],
+   "candidate_set_size": 10,
+   "gold_chunk_ids": [
+    "obt/main/level_main_11-13_beg#000",
+    "obt/main/level_main_14-01_end#000"
+   ],
+   "gold_chapters_from_chunks": [
+    "main_ep11",
+    "main_ep14"
+   ],
+   "gold_in_ctx": [],
+   "gold_chapters_covered_by_ctx": [],
+   "w_subset_of_candidates": true,
+   "max_recoverable_by_reselection": true,
+   "per_missing_chapter": [
+    {
+     "chapter": "main_ep11",
+     "bucket": "C_name_present_but_dropped",
+     "n_units_in_ctx": 1,
+     "n_units_with_focus_name": 1,
+     "n_units_with_anchor": 1,
+     "rank_under_current_key": 10,
+     "rank_under_focus_assertions_key": 10,
+     "n_assertions": 0,
+     "n_focus_assertions": 0,
+     "n_evidence_spans": 0,
+     "anchor_hits": [
+      {
+       "chunk_id": "obt/main/level_main_11-13_beg#003",
+       "anchor": "巫术",
+       "snippet": ".. 克洛维希娅：......是赦罪师的巫术。这些萨卡兹是赦罪师的卫兵。 克洛维希娅：医疗法术也来不及挽救被这样的巫术急速消耗的生命。 克洛维希娅：让费斯特带着"
+      }
+     ],
+     "chapter_corpus_has_anchor": {
+      "巫术": true
+     },
+     "gold_chunks_in_ctx_of_this_chapter": [],
+     "unit_scores": [
+      0.9898
+     ]
+    }
+   ],
+   "warnings": []
+  },
+  {
+   "question_id": "q-cx-900024",
+   "split": "dev",
+   "question": "「帕特」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "want": [
+    "main_ep11",
+    "main_ep12"
+   ],
+   "got": [
+    "act42side",
+    "memory_phenxi"
+   ],
+   "missing": [
+    "main_ep11",
+    "main_ep12"
+   ],
+   "extra": [
+    "act42side",
+    "memory_phenxi"
+   ],
+   "n_want": 2,
+   "n_got": 2,
+   "judge_reason": "chapter_set_missing",
+   "answer_text": "act42side、memory_phenxi",
+   "chapter_path": {
+    "applied": true,
+    "n_chapters": 2,
+    "chapter_source": "unit.chapter",
+    "citations": 18,
+    "chapter_cap": 4,
+    "n_chapters_found": 2,
+    "chapters_truncated": false
+   },
+   "n_chapters_found": 2,
+   "chapters_truncated": false,
+   "cap": 4,
+   "focus_names": [
+    "帕特"
+   ],
+   "anchors": [
+    "帕特"
+   ],
+   "n_entity_candidates_total": 1,
+   "ctx_chapters": [
+    "act42side",
+    "memory_phenxi"
+   ],
+   "ctx_n_units": 18,
+   "ctx_chapters_with_focus_name": [
+    "act42side",
+    "memory_phenxi"
+   ],
+   "candidate_set_size": 2,
+   "gold_chunk_ids": [
+    "obt/main/level_main_11-03_beg#000",
+    "obt/main/level_main_12-03_end#000"
+   ],
+   "gold_chapters_from_chunks": [
+    "main_ep11",
+    "main_ep12"
+   ],
+   "gold_in_ctx": [],
+   "gold_chapters_covered_by_ctx": [],
+   "w_subset_of_candidates": false,
+   "max_recoverable_by_reselection": false,
+   "per_missing_chapter": [
+    {
+     "chapter": "main_ep11",
+     "bucket": "A_chunk_absent",
+     "n_units_in_ctx": 0,
+     "n_units_with_focus_name": 0,
+     "n_units_with_anchor": 0,
+     "rank_under_current_key": null,
+     "rank_under_focus_assertions_key": null,
+     "n_assertions": null,
+     "n_focus_assertions": null,
+     "n_evidence_spans": null,
+     "anchor_hits": [],
+     "chapter_corpus_has_anchor": {
+      "帕特": true
+     },
+     "gold_chunks_in_ctx_of_this_chapter": [],
+     "unit_scores": []
+    },
+    {
+     "chapter": "main_ep12",
+     "bucket": "A_chunk_absent",
+     "n_units_in_ctx": 0,
+     "n_units_with_focus_name": 0,
+     "n_units_with_anchor": 0,
+     "rank_under_current_key": null,
+     "rank_under_focus_assertions_key": null,
+     "n_assertions": null,
+     "n_focus_assertions": null,
+     "n_evidence_spans": null,
+     "anchor_hits": [],
+     "chapter_corpus_has_anchor": {
+      "帕特": true
+     },
+     "gold_chunks_in_ctx_of_this_chapter": [],
+     "unit_scores": []
+    }
+   ],
+   "warnings": []
+  },
+  {
+   "question_id": "q-cx-900027",
+   "split": "dev",
+   "question": "「炎魔」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "want": [
+    "act15d0",
+    "main_ep13",
+    "main_ep14",
+    "memory_plosis"
+   ],
+   "got": [
+    "act15d0",
+    "main_ep13",
+    "main_ep14",
+    "rogue_rogue_4"
+   ],
+   "missing": [
+    "memory_plosis"
+   ],
+   "extra": [
+    "rogue_rogue_4"
+   ],
+   "n_want": 4,
+   "n_got": 4,
+   "judge_reason": "chapter_set_missing",
+   "answer_text": "act15d0、main_ep13、main_ep14、rogue_rogue_4",
+   "chapter_path": {
+    "applied": true,
+    "n_chapters": 4,
+    "chapter_source": "unit.chapter",
+    "citations": 13,
+    "chapter_cap": 4,
+    "n_chapters_found": 8,
+    "chapters_truncated": true
+   },
+   "n_chapters_found": 8,
+   "chapters_truncated": true,
+   "cap": 4,
+   "focus_names": [
+    "炎魔"
+   ],
+   "anchors": [
+    "炎魔"
+   ],
+   "n_entity_candidates_total": 1,
+   "ctx_chapters": [
+    "act15d0",
+    "act19side",
+    "act25side",
+    "main_ep13",
+    "main_ep14",
+    "main_st12",
+    "memory_plosis",
+    "rogue_rogue_4"
+   ],
+   "ctx_n_units": 19,
+   "ctx_chapters_with_focus_name": [
+    "act15d0",
+    "act19side",
+    "act25side",
+    "main_ep13",
+    "main_ep14",
+    "main_st12",
+    "memory_plosis",
+    "rogue_rogue_4"
+   ],
+   "candidate_set_size": 8,
+   "gold_chunk_ids": [
+    "activities/act15d0/level_act15d0_04_end#000",
+    "obt/main/level_main_13-18_end#003",
+    "obt/main/level_main_14-18_end#001",
+    "obt/memory/story_plosis_1_1#006"
+   ],
+   "gold_chapters_from_chunks": [
+    "act15d0",
+    "main_ep13",
+    "main_ep14",
+    "memory_plosis"
+   ],
+   "gold_in_ctx": [
+    "obt/main/level_main_13-18_end#003",
+    "obt/main/level_main_14-18_end#001",
+    "obt/memory/story_plosis_1_1#006"
+   ],
+   "gold_chapters_covered_by_ctx": [
+    "main_ep13",
+    "main_ep14",
+    "memory_plosis"
+   ],
+   "w_subset_of_candidates": true,
+   "max_recoverable_by_reselection": true,
+   "per_missing_chapter": [
+    {
+     "chapter": "memory_plosis",
+     "bucket": "C_name_present_but_dropped",
+     "n_units_in_ctx": 1,
+     "n_units_with_focus_name": 1,
+     "n_units_with_anchor": 1,
+     "rank_under_current_key": 8,
+     "rank_under_focus_assertions_key": 4,
+     "n_assertions": 1,
+     "n_focus_assertions": 1,
+     "n_evidence_spans": 1,
+     "anchor_hits": [
+      {
+       "chunk_id": "obt/memory/story_plosis_1_1#006",
+       "anchor": "炎魔",
+       "snippet": "重担已经太多了。 日记：伊芙利特身上的“炎魔”，以及她与塞雷娅要面对的问题。 日记：但是......如果我的命运已经注定。 日记：我多么希望赫默医生与伊芙利特能"
+      }
+     ],
+     "chapter_corpus_has_anchor": {
+      "炎魔": true
+     },
+     "gold_chunks_in_ctx_of_this_chapter": [
+      "obt/memory/story_plosis_1_1#006"
+     ],
+     "unit_scores": [
+      1.095
+     ]
+    }
+   ],
+   "warnings": []
+  },
+  {
+   "question_id": "q-cx-900030",
+   "split": "dev",
+   "question": "「勾吴」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "want": [
+    "memory_sqrrel",
+    "rogue_rogue_5"
+   ],
+   "got": [
+    "act16d5",
+    "act49side",
+    "memory_nothin",
+    "memory_sqrrel"
+   ],
+   "missing": [
+    "rogue_rogue_5"
+   ],
+   "extra": [
+    "act16d5",
+    "act49side",
+    "memory_nothin"
+   ],
+   "n_want": 2,
+   "n_got": 4,
+   "judge_reason": "chapter_set_missing",
+   "answer_text": "act16d5、act49side、memory_nothin、memory_sqrrel",
+   "chapter_path": {
+    "applied": true,
+    "n_chapters": 4,
+    "chapter_source": "unit.chapter",
+    "citations": 15,
+    "chapter_cap": 4,
+    "n_chapters_found": 7,
+    "chapters_truncated": true
+   },
+   "n_chapters_found": 7,
+   "chapters_truncated": true,
+   "cap": 4,
+   "focus_names": [
+    "勾吴"
+   ],
+   "anchors": [
+    "勾吴"
+   ],
+   "n_entity_candidates_total": 1,
+   "ctx_chapters": [
+    "act15side",
+    "act16d5",
+    "act23side",
+    "act49side",
+    "memory_nothin",
+    "memory_sqrrel",
+    "rogue_rogue_5"
+   ],
+   "ctx_n_units": 20,
+   "ctx_chapters_with_focus_name": [
+    "act15side",
+    "act16d5",
+    "act23side",
+    "act49side",
+    "memory_nothin",
+    "memory_sqrrel",
+    "rogue_rogue_5"
+   ],
+   "candidate_set_size": 7,
+   "gold_chunk_ids": [
+    "obt/memory/story_sqrrel_2_1#004",
+    "obt/rogue/rogue_5/monthrecord/month_record_rogue_5_7_2#000"
+   ],
+   "gold_chapters_from_chunks": [
+    "memory_sqrrel",
+    "rogue_rogue_5"
+   ],
+   "gold_in_ctx": [
+    "obt/memory/story_sqrrel_2_1#004",
+    "obt/rogue/rogue_5/monthrecord/month_record_rogue_5_7_2#000"
+   ],
+   "gold_chapters_covered_by_ctx": [
+    "memory_sqrrel",
+    "rogue_rogue_5"
+   ],
+   "w_subset_of_candidates": true,
+   "max_recoverable_by_reselection": true,
+   "per_missing_chapter": [
+    {
+     "chapter": "rogue_rogue_5",
+     "bucket": "C_name_present_but_dropped",
+     "n_units_in_ctx": 2,
+     "n_units_with_focus_name": 2,
+     "n_units_with_anchor": 2,
+     "rank_under_current_key": 5,
+     "rank_under_focus_assertions_key": 5,
+     "n_assertions": 0,
+     "n_focus_assertions": 0,
+     "n_evidence_spans": 0,
+     "anchor_hits": [
+      {
+       "chunk_id": "obt/rogue/rogue_5/endbook/endbook_rogue_5_1_3#000",
+       "anchor": "勾吴",
+       "snippet": " 但和小穆想的不同，在走过入口那座巨大的勾吴石山后，一路上似乎并没有太多人，这让她多少有些意外。中午在邙山镇落脚时，那人山人海的队伍无疑是朝着界园来的。可现在…"
+      },
+      {
+       "chunk_id": "obt/rogue/rogue_5/monthrecord/month_record_rogue_5_7_2#000",
+       "anchor": "勾吴",
+       "snippet": "口冬笋丝。”高老板冷笑，“显得特地派人从勾吴带回熏兽腿的我就像个傻子。” “熏兽腿？”小大厨低着的头微微抬了起来，“瞎配。这次的熏兽腿烟熏味太冲，放在清蒸鲥鳞里"
+      }
+     ],
+     "chapter_corpus_has_anchor": {
+      "勾吴": true
+     },
+     "gold_chunks_in_ctx_of_this_chapter": [
+      "obt/rogue/rogue_5/monthrecord/month_record_rogue_5_7_2#000"
+     ],
+     "unit_scores": [
+      0.7851,
+      0.7451
+     ]
+    }
+   ],
+   "warnings": []
+  },
+  {
+   "question_id": "q-cx-000012",
+   "split": "holdout",
+   "question": "「工程部干员」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "want": [
+    "act13mini",
+    "memory_pudd"
+   ],
+   "got": [
+    "memory_beagle",
+    "memory_hpsts",
+    "memory_pinecn",
+    "memory_pudd"
+   ],
+   "missing": [
+    "act13mini"
+   ],
+   "extra": [
+    "memory_beagle",
+    "memory_hpsts",
+    "memory_pinecn"
+   ],
+   "n_want": 2,
+   "n_got": 4,
+   "judge_reason": "chapter_set_missing",
+   "answer_text": "memory_beagle、memory_hpsts、memory_pinecn、memory_pudd",
+   "chapter_path": {
+    "applied": true,
+    "n_chapters": 4,
+    "chapter_source": "unit.chapter",
+    "citations": 12,
+    "chapter_cap": 4,
+    "n_chapters_found": 10,
+    "chapters_truncated": true
+   },
+   "n_chapters_found": 10,
+   "chapters_truncated": true,
+   "cap": 4,
+   "focus_names": [
+    "工程部干员"
+   ],
+   "anchors": [
+    "工程部干员"
+   ],
+   "n_entity_candidates_total": 1,
+   "ctx_chapters": [
+    "act13mini",
+    "act38side",
+    "act53side",
+    "main_ep15",
+    "memory_beagle",
+    "memory_greyy2",
+    "memory_hpsts",
+    "memory_pinecn",
+    "memory_pudd",
+    "memory_serum"
+   ],
+   "ctx_n_units": 18,
+   "ctx_chapters_with_focus_name": [
+    "act13mini",
+    "act38side",
+    "act53side",
+    "main_ep15",
+    "memory_beagle",
+    "memory_greyy2",
+    "memory_hpsts",
+    "memory_pinecn",
+    "memory_pudd",
+    "memory_serum"
+   ],
+   "candidate_set_size": 10,
+   "gold_chunk_ids": [
+    "activities/act13mini/level_act13mini_st06#000",
+    "obt/memory/story_pudd_1_1#003"
+   ],
+   "gold_chapters_from_chunks": [
+    "act13mini",
+    "memory_pudd"
+   ],
+   "gold_in_ctx": [
+    "activities/act13mini/level_act13mini_st06#000",
+    "obt/memory/story_pudd_1_1#003"
+   ],
+   "gold_chapters_covered_by_ctx": [
+    "act13mini",
+    "memory_pudd"
+   ],
+   "w_subset_of_candidates": true,
+   "max_recoverable_by_reselection": true,
+   "per_missing_chapter": [
+    {
+     "chapter": "act13mini",
+     "bucket": "C_name_present_but_dropped",
+     "n_units_in_ctx": 1,
+     "n_units_with_focus_name": 1,
+     "n_units_with_anchor": 1,
+     "rank_under_current_key": 10,
+     "rank_under_focus_assertions_key": 2,
+     "n_assertions": 1,
+     "n_focus_assertions": 1,
+     "n_evidence_spans": 1,
+     "anchor_hits": [
+      {
+       "chunk_id": "activities/act13mini/level_act13mini_st06#000",
+       "anchor": "工程部干员",
+       "snippet": "一个。 冷静的孩子：？ 比丢：Biu！ 工程部干员：——？ 工程部干员：什么东西？你要干什么？！ 工程部干员：那是刚做出来的零件，不能吃——！ 工程部干员：喔—"
+      }
+     ],
+     "chapter_corpus_has_anchor": {
+      "工程部干员": true
+     },
+     "gold_chunks_in_ctx_of_this_chapter": [
+      "activities/act13mini/level_act13mini_st06#000"
+     ],
+     "unit_scores": [
+      1.4207
+     ]
+    }
+   ],
+   "warnings": []
+  },
+  {
+   "question_id": "q-cx-000013",
+   "split": "holdout",
+   "question": "「加斯特里尔」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "want": [
+    "act18mini",
+    "act41side",
+    "main_ep14",
+    "main_st14"
+   ],
+   "got": [
+    "act18mini",
+    "act37side",
+    "main_ep14",
+    "main_st14"
+   ],
+   "missing": [
+    "act41side"
+   ],
+   "extra": [
+    "act37side"
+   ],
+   "n_want": 4,
+   "n_got": 4,
+   "judge_reason": "chapter_set_missing",
+   "answer_text": "act18mini、act37side、main_ep14、main_st14",
+   "chapter_path": {
+    "applied": true,
+    "n_chapters": 4,
+    "chapter_source": "unit.chapter",
+    "citations": 17,
+    "chapter_cap": 4,
+    "n_chapters_found": 5,
+    "chapters_truncated": true
+   },
+   "n_chapters_found": 5,
+   "chapters_truncated": true,
+   "cap": 4,
+   "focus_names": [
+    "加斯特里尔"
+   ],
+   "anchors": [
+    "加斯特里尔"
+   ],
+   "n_entity_candidates_total": 1,
+   "ctx_chapters": [
+    "act18mini",
+    "act22side",
+    "act37side",
+    "main_ep14",
+    "main_st14"
+   ],
+   "ctx_n_units": 18,
+   "ctx_chapters_with_focus_name": [
+    "act18mini",
+    "act22side",
+    "act37side",
+    "main_ep14",
+    "main_st14"
+   ],
+   "candidate_set_size": 5,
+   "gold_chunk_ids": [
+    "activities/act18mini/level_act18mini_st01#002",
+    "activities/act41side/level_act41side_st03#001",
+    "obt/main/level_main_14-03_beg#002",
+    "obt/main/level_st_14-03#003"
+   ],
+   "gold_chapters_from_chunks": [
+    "act18mini",
+    "act41side",
+    "main_ep14",
+    "main_st14"
+   ],
+   "gold_in_ctx": [
+    "obt/main/level_main_14-03_beg#002",
+    "obt/main/level_st_14-03#003"
+   ],
+   "gold_chapters_covered_by_ctx": [
+    "main_ep14",
+    "main_st14"
+   ],
+   "w_subset_of_candidates": false,
+   "max_recoverable_by_reselection": false,
+   "per_missing_chapter": [
+    {
+     "chapter": "act41side",
+     "bucket": "A_chunk_absent",
+     "n_units_in_ctx": 0,
+     "n_units_with_focus_name": 0,
+     "n_units_with_anchor": 0,
+     "rank_under_current_key": null,
+     "rank_under_focus_assertions_key": null,
+     "n_assertions": null,
+     "n_focus_assertions": null,
+     "n_evidence_spans": null,
+     "anchor_hits": [],
+     "chapter_corpus_has_anchor": {
+      "加斯特里尔": true
+     },
+     "gold_chunks_in_ctx_of_this_chapter": [],
+     "unit_scores": []
+    }
+   ],
+   "warnings": []
+  },
+  {
+   "question_id": "q-cx-000015",
+   "split": "holdout",
+   "question": "「彼得」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "want": [
+    "act29side",
+    "main_st17",
+    "memory_pinecn",
+    "memory_turdus"
+   ],
+   "got": [
+    "act29side",
+    "act51side",
+    "main_st17",
+    "memory_turdus"
+   ],
+   "missing": [
+    "memory_pinecn"
+   ],
+   "extra": [
+    "act51side"
+   ],
+   "n_want": 4,
+   "n_got": 4,
+   "judge_reason": "chapter_set_missing",
+   "answer_text": "act29side、act51side、main_st17、memory_turdus",
+   "chapter_path": {
+    "applied": true,
+    "n_chapters": 4,
+    "chapter_source": "unit.chapter",
+    "citations": 7,
+    "chapter_cap": 4,
+    "n_chapters_found": 10,
+    "chapters_truncated": true
+   },
+   "n_chapters_found": 10,
+   "chapters_truncated": true,
+   "cap": 4,
+   "focus_names": [
+    "彼得"
+   ],
+   "anchors": [
+    "彼得"
+   ],
+   "n_entity_candidates_total": 1,
+   "ctx_chapters": [
+    "act10d5",
+    "act29side",
+    "act38side",
+    "act42side",
+    "act46side",
+    "act51side",
+    "main_ep14",
+    "main_ep17",
+    "main_st17",
+    "memory_absin",
+    "memory_bubble",
+    "memory_headb2",
+    "memory_pinecn",
+    "memory_turdus"
+   ],
+   "ctx_n_units": 18,
+   "ctx_chapters_with_focus_name": [
+    "act10d5",
+    "act29side",
+    "act38side",
+    "act51side",
+    "main_ep17",
+    "main_st17",
+    "memory_absin",
+    "memory_headb2",
+    "memory_pinecn",
+    "memory_turdus"
+   ],
+   "candidate_set_size": 10,
+   "gold_chunk_ids": [
+    "activities/act29side/level_act29side_03_end#000",
+    "obt/main/level_st_17-04#009",
+    "obt/memory/story_pinecn_1_1#003",
+    "obt/memory/story_turdus_1_1#002"
+   ],
+   "gold_chapters_from_chunks": [
+    "act29side",
+    "main_st17",
+    "memory_pinecn",
+    "memory_turdus"
+   ],
+   "gold_in_ctx": [
+    "activities/act29side/level_act29side_03_end#000",
+    "obt/main/level_st_17-04#009",
+    "obt/memory/story_pinecn_1_1#003",
+    "obt/memory/story_turdus_1_1#002"
+   ],
+   "gold_chapters_covered_by_ctx": [
+    "act29side",
+    "main_st17",
+    "memory_pinecn",
+    "memory_turdus"
+   ],
+   "w_subset_of_candidates": true,
+   "max_recoverable_by_reselection": true,
+   "per_missing_chapter": [
+    {
+     "chapter": "memory_pinecn",
+     "bucket": "C_name_present_but_dropped",
+     "n_units_in_ctx": 1,
+     "n_units_with_focus_name": 1,
+     "n_units_with_anchor": 1,
+     "rank_under_current_key": 6,
+     "rank_under_focus_assertions_key": 3,
+     "n_assertions": 1,
+     "n_focus_assertions": 1,
+     "n_evidence_spans": 1,
+     "anchor_hits": [
+      {
+       "chunk_id": "obt/memory/story_pinecn_1_1#003",
+       "anchor": "彼得",
+       "snippet": "找我。 不过爸爸已经找到工作了！ 还记得彼得叔叔吗？就是爸爸以前的工友，他现在当上了工头。这家伙还挺仗义的，把我叫了过去，不枉我当时经常帮他顶班！ 我们现在的项"
+      }
+     ],
+     "chapter_corpus_has_anchor": {
+      "彼得": true
+     },
+     "gold_chunks_in_ctx_of_this_chapter": [
+      "obt/memory/story_pinecn_1_1#003"
+     ],
+     "unit_scores": [
+      0.9948
+     ]
+    }
+   ],
+   "warnings": []
+  },
+  {
+   "question_id": "q-cx-000019",
+   "split": "holdout",
+   "question": "「弗雷德」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "want": [
+    "main_ep09",
+    "memory_peper"
+   ],
+   "got": [
+    "main_ep09",
+    "main_ep10",
+    "main_ep14",
+    "main_st14"
+   ],
+   "missing": [
+    "memory_peper"
+   ],
+   "extra": [
+    "main_ep10",
+    "main_ep14",
+    "main_st14"
+   ],
+   "n_want": 2,
+   "n_got": 4,
+   "judge_reason": "chapter_set_missing",
+   "answer_text": "main_ep09、main_ep10、main_ep14、main_st14",
+   "chapter_path": {
+    "applied": true,
+    "n_chapters": 4,
+    "chapter_source": "unit.chapter",
+    "citations": 16,
+    "chapter_cap": 4,
+    "n_chapters_found": 7,
+    "chapters_truncated": true
+   },
+   "n_chapters_found": 7,
+   "chapters_truncated": true,
+   "cap": 4,
+   "focus_names": [
+    "弗雷德"
+   ],
+   "anchors": [
+    "弗雷德"
+   ],
+   "n_entity_candidates_total": 1,
+   "ctx_chapters": [
+    "act33side",
+    "main_ep09",
+    "main_ep10",
+    "main_ep12",
+    "main_ep13",
+    "main_ep14",
+    "main_st14"
+   ],
+   "ctx_n_units": 19,
+   "ctx_chapters_with_focus_name": [
+    "act33side",
+    "main_ep09",
+    "main_ep10",
+    "main_ep12",
+    "main_ep13",
+    "main_ep14",
+    "main_st14"
+   ],
+   "candidate_set_size": 7,
+   "gold_chunk_ids": [
+    "obt/main/level_main_09-02_end#000",
+    "obt/memory/story_peper_1_1#004"
+   ],
+   "gold_chapters_from_chunks": [
+    "main_ep09",
+    "memory_peper"
+   ],
+   "gold_in_ctx": [],
+   "gold_chapters_covered_by_ctx": [],
+   "w_subset_of_candidates": false,
+   "max_recoverable_by_reselection": false,
+   "per_missing_chapter": [
+    {
+     "chapter": "memory_peper",
+     "bucket": "A_chunk_absent",
+     "n_units_in_ctx": 0,
+     "n_units_with_focus_name": 0,
+     "n_units_with_anchor": 0,
+     "rank_under_current_key": null,
+     "rank_under_focus_assertions_key": null,
+     "n_assertions": null,
+     "n_focus_assertions": null,
+     "n_evidence_spans": null,
+     "anchor_hits": [],
+     "chapter_corpus_has_anchor": {
+      "弗雷德": true
+     },
+     "gold_chunks_in_ctx_of_this_chapter": [],
+     "unit_scores": []
+    }
+   ],
+   "warnings": []
+  },
+  {
+   "question_id": "q-cx-000025",
+   "split": "holdout",
+   "question": "「集市」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "want": [
+    "act12d0",
+    "act15mini"
+   ],
+   "got": [
+    "act15mini",
+    "act18d0",
+    "act23side",
+    "memory_rfalcn"
+   ],
+   "missing": [
+    "act12d0"
+   ],
+   "extra": [
+    "act18d0",
+    "act23side",
+    "memory_rfalcn"
+   ],
+   "n_want": 2,
+   "n_got": 4,
+   "judge_reason": "chapter_set_missing",
+   "answer_text": "act15mini、act18d0、act23side、memory_rfalcn",
+   "chapter_path": {
+    "applied": true,
+    "n_chapters": 4,
+    "chapter_source": "unit.chapter",
+    "citations": 11,
+    "chapter_cap": 4,
+    "n_chapters_found": 13,
+    "chapters_truncated": true
+   },
+   "n_chapters_found": 13,
+   "chapters_truncated": true,
+   "cap": 4,
+   "focus_names": [
+    "集市"
+   ],
+   "anchors": [
+    "集市"
+   ],
+   "n_entity_candidates_total": 1,
+   "ctx_chapters": [
+    "act12d0",
+    "act15d5",
+    "act15mini",
+    "act16d5",
+    "act17mini",
+    "act18d0",
+    "act19mini",
+    "act23side",
+    "act27side",
+    "act47side",
+    "memory_confes",
+    "memory_rfalcn",
+    "rogue_rogue_5"
+   ],
+   "ctx_n_units": 20,
+   "ctx_chapters_with_focus_name": [
+    "act12d0",
+    "act15d5",
+    "act15mini",
+    "act16d5",
+    "act17mini",
+    "act18d0",
+    "act19mini",
+    "act23side",
+    "act27side",
+    "act47side",
+    "memory_confes",
+    "memory_rfalcn",
+    "rogue_rogue_5"
+   ],
+   "candidate_set_size": 13,
+   "gold_chunk_ids": [
+    "activities/act12d0/level_act12d0_05_beg#002",
+    "activities/act15mini/level_act15mini_st05#000"
+   ],
+   "gold_chapters_from_chunks": [
+    "act12d0",
+    "act15mini"
+   ],
+   "gold_in_ctx": [
+    "activities/act12d0/level_act12d0_05_beg#002",
+    "activities/act15mini/level_act15mini_st05#000"
+   ],
+   "gold_chapters_covered_by_ctx": [
+    "act12d0",
+    "act15mini"
+   ],
+   "w_subset_of_candidates": true,
+   "max_recoverable_by_reselection": true,
+   "per_missing_chapter": [
+    {
+     "chapter": "act12d0",
+     "bucket": "C_name_present_but_dropped",
+     "n_units_in_ctx": 1,
+     "n_units_with_focus_name": 1,
+     "n_units_with_anchor": 1,
+     "rank_under_current_key": 8,
+     "rank_under_focus_assertions_key": 8,
+     "n_assertions": 0,
+     "n_focus_assertions": 0,
+     "n_evidence_spans": 0,
+     "anchor_hits": [
+      {
+       "chunk_id": "activities/act12d0/level_act12d0_05_beg#002",
+       "anchor": "集市",
+       "snippet": "在找她呢，你见到她了？ 依娜姆：你可以去集市那边看看。 阿达克利斯人A：走过路过不要错过！新鲜出炉的原木雕刻！ 阿达克利斯人B：看看瞧瞧，从我阿爷那一代传下来的"
+      }
+     ],
+     "chapter_corpus_has_anchor": {
+      "集市": true
+     },
+     "gold_chunks_in_ctx_of_this_chapter": [
+      "activities/act12d0/level_act12d0_05_beg#002"
+     ],
+     "unit_scores": [
+      1.1458
+     ]
+    }
+   ],
+   "warnings": []
+  },
+  {
+   "question_id": "q-cx-900007",
+   "split": "holdout",
+   "question": "「维多利亚军队」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "want": [
+    "act10mini",
+    "memory_bpipe"
+   ],
+   "got": [
+    "act22side",
+    "act30side",
+    "main_ep09",
+    "main_ep13"
+   ],
+   "missing": [
+    "act10mini",
+    "memory_bpipe"
+   ],
+   "extra": [
+    "act22side",
+    "act30side",
+    "main_ep09",
+    "main_ep13"
+   ],
+   "n_want": 2,
+   "n_got": 4,
+   "judge_reason": "chapter_set_missing",
+   "answer_text": "act22side、act30side、main_ep09、main_ep13",
+   "chapter_path": {
+    "applied": true,
+    "n_chapters": 4,
+    "chapter_source": "unit.chapter",
+    "citations": 7,
+    "chapter_cap": 4,
+    "n_chapters_found": 7,
+    "chapters_truncated": true
+   },
+   "n_chapters_found": 7,
+   "chapters_truncated": true,
+   "cap": 4,
+   "focus_names": [
+    "维多利亚军队"
+   ],
+   "anchors": [
+    "维多利亚军队"
+   ],
+   "n_entity_candidates_total": 1,
+   "ctx_chapters": [
+    "act18mini",
+    "act22side",
+    "act30side",
+    "act46side",
+    "main_ep09",
+    "main_ep10",
+    "main_ep12",
+    "main_ep13",
+    "main_ep14",
+    "memory_bpipe"
+   ],
+   "ctx_n_units": 18,
+   "ctx_chapters_with_focus_name": [
+    "act22side",
+    "act30side",
+    "act46side",
+    "main_ep09",
+    "main_ep13",
+    "main_ep14",
+    "memory_bpipe"
+   ],
+   "candidate_set_size": 7,
+   "gold_chunk_ids": [
+    "activities/act10mini/level_act10mini_st05#004",
+    "obt/memory/story_bpipe_1_1#001"
+   ],
+   "gold_chapters_from_chunks": [
+    "act10mini",
+    "memory_bpipe"
+   ],
+   "gold_in_ctx": [
+    "obt/memory/story_bpipe_1_1#001"
+   ],
+   "gold_chapters_covered_by_ctx": [
+    "memory_bpipe"
+   ],
+   "w_subset_of_candidates": false,
+   "max_recoverable_by_reselection": false,
+   "per_missing_chapter": [
+    {
+     "chapter": "act10mini",
+     "bucket": "A_chunk_absent",
+     "n_units_in_ctx": 0,
+     "n_units_with_focus_name": 0,
+     "n_units_with_anchor": 0,
+     "rank_under_current_key": null,
+     "rank_under_focus_assertions_key": null,
+     "n_assertions": null,
+     "n_focus_assertions": null,
+     "n_evidence_spans": null,
+     "anchor_hits": [],
+     "chapter_corpus_has_anchor": {
+      "维多利亚军队": true
+     },
+     "gold_chunks_in_ctx_of_this_chapter": [],
+     "unit_scores": []
+    },
+    {
+     "chapter": "memory_bpipe",
+     "bucket": "C_name_present_but_dropped",
+     "n_units_in_ctx": 1,
+     "n_units_with_focus_name": 1,
+     "n_units_with_anchor": 1,
+     "rank_under_current_key": 7,
+     "rank_under_focus_assertions_key": 1,
+     "n_assertions": 1,
+     "n_focus_assertions": 1,
+     "n_evidence_spans": 1,
+     "anchor_hits": [
+      {
+       "chunk_id": "obt/memory/story_bpipe_1_1#001",
+       "anchor": "维多利亚军队",
+       "snippet": "，我有一点不明白。你连命都差点没了，那帮维多利亚军队的老头子不该给你颁上一堆奖章吗？ 风笛：奖励？算啦，案子没查完，我从来没想过。 风笛：但至少......我以"
+      }
+     ],
+     "chapter_corpus_has_anchor": {
+      "维多利亚军队": true
+     },
+     "gold_chunks_in_ctx_of_this_chapter": [
+      "obt/memory/story_bpipe_1_1#001"
+     ],
+     "unit_scores": [
+      1.1785
+     ]
+    }
+   ],
+   "warnings": []
+  },
+  {
+   "question_id": "q-cx-900009",
+   "split": "holdout",
+   "question": "「米沃什」这个实体横跨了多个章节。请给出它出现过的章节代号。",
+   "want": [
+    "act32side",
+    "memory_ela"
+   ],
+   "got": [
+    "act32side"
+   ],
+   "missing": [
+    "memory_ela"
+   ],
+   "extra": [],
+   "n_want": 2,
+   "n_got": 1,
+   "judge_reason": "chapter_set_missing",
+   "answer_text": "act32side",
+   "chapter_path": {
+    "applied": true,
+    "n_chapters": 1,
+    "chapter_source": "unit.chapter",
+    "citations": 19,
+    "chapter_cap": 4,
+    "n_chapters_found": 1,
+    "chapters_truncated": false
+   },
+   "n_chapters_found": 1,
+   "chapters_truncated": false,
+   "cap": 4,
+   "focus_names": [
+    "米沃什"
+   ],
+   "anchors": [
+    "米沃什"
+   ],
+   "n_entity_candidates_total": 1,
+   "ctx_chapters": [
+    "act32side"
+   ],
+   "ctx_n_units": 19,
+   "ctx_chapters_with_focus_name": [
+    "act32side"
+   ],
+   "candidate_set_size": 1,
+   "gold_chunk_ids": [
+    "activities/act32side/level_act32side_01_beg#001",
+    "obt/memory/story_ela_1_1#004"
+   ],
+   "gold_chapters_from_chunks": [
+    "act32side",
+    "memory_ela"
+   ],
+   "gold_in_ctx": [
+    "activities/act32side/level_act32side_01_beg#001"
+   ],
+   "gold_chapters_covered_by_ctx": [
+    "act32side"
+   ],
+   "w_subset_of_candidates": false,
+   "max_recoverable_by_reselection": false,
+   "per_missing_chapter": [
+    {
+     "chapter": "memory_ela",
+     "bucket": "A_chunk_absent",
+     "n_units_in_ctx": 0,
+     "n_units_with_focus_name": 0,
+     "n_units_with_anchor": 0,
+     "rank_under_current_key": null,
+     "rank_under_focus_assertions_key": null,
+     "n_assertions": null,
+     "n_focus_assertions": null,
+     "n_evidence_spans": null,
+     "anchor_hits": [],
+     "chapter_corpus_has_anchor": {
+      "米沃什": true
+     },
+     "gold_chunks_in_ctx_of_this_chapter": [],
+     "unit_scores": []
+    }
+   ],
+   "warnings": []
+  },
+  {
+   "question_id": "q-cx-900023",
+   "split": "holdout",
+   "question": "「防护服」在哪些章节的正文里出现过？请列出全部章节代号。",
+   "want": [
+    "act27side",
+    "memory_otter",
+    "rogue_rogue_4"
+   ],
+   "got": [
+    "act27side",
+    "main_st14",
+    "memory_aurora",
+    "memory_popka"
+   ],
+   "missing": [
+    "memory_otter",
+    "rogue_rogue_4"
+   ],
+   "extra": [
+    "main_st14",
+    "memory_aurora",
+    "memory_popka"
+   ],
+   "n_want": 3,
+   "n_got": 4,
+   "judge_reason": "chapter_set_missing",
+   "answer_text": "act27side、main_st14、memory_aurora、memory_popka",
+   "chapter_path": {
+    "applied": true,
+    "n_chapters": 4,
+    "chapter_source": "unit.chapter",
+    "citations": 9,
+    "chapter_cap": 4,
+    "n_chapters_found": 13,
+    "chapters_truncated": true
+   },
+   "n_chapters_found": 13,
+   "chapters_truncated": true,
+   "cap": 4,
+   "focus_names": [
+    "防护服"
+   ],
+   "anchors": [
+    "防护服"
+   ],
+   "n_entity_candidates_total": 1,
+   "ctx_chapters": [
+    "act10d5",
+    "act27side",
+    "act8mini",
+    "main_ep09",
+    "main_ep17",
+    "main_st14",
+    "memory_ansel",
+    "memory_aurora",
+    "memory_hibisc",
+    "memory_otter",
+    "memory_popka",
+    "memory_savage",
+    "memory_tanya"
+   ],
+   "ctx_n_units": 18,
+   "ctx_chapters_with_focus_name": [
+    "act10d5",
+    "act27side",
+    "act8mini",
+    "main_ep09",
+    "main_ep17",
+    "main_st14",
+    "memory_ansel",
+    "memory_aurora",
+    "memory_hibisc",
+    "memory_otter",
+    "memory_popka",
+    "memory_savage",
+    "memory_tanya"
+   ],
+   "candidate_set_size": 13,
+   "gold_chunk_ids": [
+    "activities/act27side/level_act27side_08_beg#001",
+    "obt/memory/story_otter_1_1#000",
+    "obt/rogue/rogue_4/endbook/endbook_rogue_4_1_2#001"
+   ],
+   "gold_chapters_from_chunks": [
+    "act27side",
+    "memory_otter",
+    "rogue_rogue_4"
+   ],
+   "gold_in_ctx": [
+    "activities/act27side/level_act27side_08_beg#001",
+    "obt/memory/story_otter_1_1#000"
+   ],
+   "gold_chapters_covered_by_ctx": [
+    "act27side",
+    "memory_otter"
+   ],
+   "w_subset_of_candidates": false,
+   "max_recoverable_by_reselection": false,
+   "per_missing_chapter": [
+    {
+     "chapter": "memory_otter",
+     "bucket": "C_name_present_but_dropped",
+     "n_units_in_ctx": 1,
+     "n_units_with_focus_name": 1,
+     "n_units_with_anchor": 1,
+     "rank_under_current_key": 9,
+     "rank_under_focus_assertions_key": 2,
+     "n_assertions": 1,
+     "n_focus_assertions": 1,
+     "n_evidence_spans": 1,
+     "anchor_hits": [
+      {
+       "chunk_id": "obt/memory/story_otter_1_1#000",
+       "anchor": "防护服",
+       "snippet": "收个尾，然后等她来就行。 梅尔：塞雷娅的防护服检修委托？主要是刷新涂料吧......糟了，我是不是没订涂料？！ 梅尔：啊——还好还好，上次的没用完。 梅尔：今天"
+      }
+     ],
+     "chapter_corpus_has_anchor": {
+      "防护服": true
+     },
+     "gold_chunks_in_ctx_of_this_chapter": [
+      "obt/memory/story_otter_1_1#000"
+     ],
+     "unit_scores": [
+      1.1451
+     ]
+    },
+    {
+     "chapter": "rogue_rogue_4",
+     "bucket": "A_chunk_absent",
+     "n_units_in_ctx": 0,
+     "n_units_with_focus_name": 0,
+     "n_units_with_anchor": 0,
+     "rank_under_current_key": null,
+     "rank_under_focus_assertions_key": null,
+     "n_assertions": null,
+     "n_focus_assertions": null,
+     "n_evidence_spans": null,
+     "anchor_hits": [],
+     "chapter_corpus_has_anchor": {
+      "防护服": true
+     },
+     "gold_chunks_in_ctx_of_this_chapter": [],
+     "unit_scores": []
+    }
+   ],
+   "warnings": []
+  }
+ ]
+}
