@@ -1,0 +1,25 @@
+turns=858 convs=211 domains=11  REPs=20000 seed=20261112
+observed pooled delta = +0.2629   observed macro delta = +0.2312
+
+口径                                       Δ   CI95 low  CI95 high       宽度       SE
+----------------------------------------------------------------------------------
+A iid@turn (pooled)                +0.2629    +0.2382    +0.2883   0.0502   0.0128
+B cluster@conv (pooled)            +0.2629    +0.2311    +0.2958   0.0647   0.0165
+C macro + turn                     +0.2312    +0.2085    +0.2543   0.0458   0.0117
+D macro + conv (正确)                +0.2312    +0.2055    +0.2566   0.0511   0.0131
+
+相对 A 的宽度比 / SE 比:
+  A iid@turn (pooled)               1.00x /  1.00x
+  B cluster@conv (pooled)           1.29x /  1.29x
+  C macro + turn                    0.91x /  0.91x
+  D macro + conv (正确)               1.02x /  1.03x
+
+=== 水平估计（非配对）的宏平均 SE ===
+  Base      SE_iid=0.01008 (半宽0.0198)  SE_clu=0.02084 (half0.0409)  膨胀=2.07x
+  +History  SE_iid=0.01206 (半宽0.0236)  SE_clu=0.02496 (half0.0489)  膨胀=2.07x
+
+=== per-turn nDCG 的 SD 区间（供 §2.2 引用）===
+  Base      per-domain SD 范围 [0.2041, 0.3701]  池化 SD 0.3123
+  +History  per-domain SD 范围 [0.2424, 0.4058]  池化 SD 0.3822
+
+wrote ci_final.json

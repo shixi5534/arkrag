@@ -1,0 +1,27 @@
+turns=858 convs=211 domains=11
+pooled paired delta observed = +0.2629
+official-style macro delta observed = +0.2312
+
+A iid @ turn                       CI95=[+0.2381,+0.2882] width=0.0501 sd=0.0128
+B cluster @ conversation           CI95=[+0.2304,+0.2954] width=0.0650 sd=0.0167
+C macro, resample turns in domain  CI95=[+0.2009,+0.2626] width=0.0617 sd=0.0157
+D macro, resample conv in domain   CI95=[+0.2051,+0.2562] width=0.0511 sd=0.0130
+
+����������� iid@turn��CI ���ȱȣ�:
+  A iid @ turn                       1.00x   (SE �� 1.00x)
+  B cluster @ conversation           1.30x   (SE �� 1.30x)
+  C macro, resample turns in domain  1.23x   (SE �� 1.23x)
+  D macro, resample conv in domain   1.02x   (SE �� 1.02x)
+
+per-turn SD of paired difference = 0.3758
+measured pooled design effect (Kish) = 4.48
+
+=== ���ؼ� ~200 turn / 11 �� �� MDE (alpha=.05 two-sided, power=.8) ===
+scenario                               n_eff      MDE
+250 turns, iid                         250.0   0.0666   (ÿ�� 22.7 turn -> �� MDE 0.221)
+250 turns, conv-clustered (deff)        55.8   0.1409   (ÿ�� 22.7 turn -> �� MDE 0.467)
+200 turns, iid                         200.0   0.0744   (ÿ�� 18.2 turn -> �� MDE 0.247)
+200 turns, conv-clustered (deff)        44.6   0.1576   (ÿ�� 18.2 turn -> �� MDE 0.523)
+150 turns, conv-clustered (deff)        33.5   0.1819   (ÿ�� 13.6 turn -> �� MDE 0.603)
+
+wrote dev_variance.json

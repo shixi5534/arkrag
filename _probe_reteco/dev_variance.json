@@ -1,0 +1,91 @@
+{
+  "seed": 20261112,
+  "reps": 4000,
+  "observed": {
+    "pooled": 0.2629,
+    "macro": 0.2312
+  },
+  "ci": {
+    "A iid @ turn": {
+      "ci": [
+        0.2381,
+        0.2882
+      ],
+      "width": 0.0501,
+      "sd": 0.0128
+    },
+    "B cluster @ conversation": {
+      "ci": [
+        0.2304,
+        0.2954
+      ],
+      "width": 0.065,
+      "sd": 0.0167
+    },
+    "C macro, resample turns in domain": {
+      "ci": [
+        0.2009,
+        0.2626
+      ],
+      "width": 0.0617,
+      "sd": 0.0157
+    },
+    "D macro, resample conv in domain": {
+      "ci": [
+        0.2051,
+        0.2562
+      ],
+      "width": 0.0511,
+      "sd": 0.013
+    }
+  },
+  "sd_paired_per_turn": 0.3758,
+  "dev_deff": 4.48,
+  "mde": [
+    {
+      "scenario": "250 turns, iid",
+      "n": 250,
+      "deff": 1.0,
+      "n_eff": 250.0,
+      "mde": 0.0666,
+      "per_domain_turns": 22.7,
+      "per_domain_mde": 0.2208
+    },
+    {
+      "scenario": "250 turns, conv-clustered (deff)",
+      "n": 250,
+      "deff": 4.48,
+      "n_eff": 55.8,
+      "mde": 0.1409,
+      "per_domain_turns": 22.7,
+      "per_domain_mde": 0.4674
+    },
+    {
+      "scenario": "200 turns, iid",
+      "n": 200,
+      "deff": 1.0,
+      "n_eff": 200.0,
+      "mde": 0.0744,
+      "per_domain_turns": 18.2,
+      "per_domain_mde": 0.2469
+    },
+    {
+      "scenario": "200 turns, conv-clustered (deff)",
+      "n": 200,
+      "deff": 4.48,
+      "n_eff": 44.64,
+      "mde": 0.1576,
+      "per_domain_turns": 18.2,
+      "per_domain_mde": 0.5225
+    },
+    {
+      "scenario": "150 turns, conv-clustered (deff)",
+      "n": 150,
+      "deff": 4.48,
+      "n_eff": 33.48,
+      "mde": 0.1819,
+      "per_domain_turns": 13.6,
+      "per_domain_mde": 0.6034
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "seed": 20261112,
+  "reps": 4000,
+  "target_turns": 200,
+  "per_domain_turns": 18.18,
+  "single_system": {
+    "ndcg_base": {
+      "dev_macro": 0.1957,
+      "sim_mean": 0.1954,
+      "ci95": [
+        0.1487,
+        0.2434
+      ],
+      "width": 0.0947,
+      "sd": 0.0241,
+      "p05": 0.1562,
+      "p95": 0.2349,
+      "min": 0.115,
+      "max": 0.2934
+    },
+    "ndcg_hist": {
+      "dev_macro": 0.4269,
+      "sim_mean": 0.4275,
+      "ci95": [
+        0.3596,
+        0.4961
+      ],
+      "width": 0.1365,
+      "sd": 0.0348,
+      "p05": 0.3709,
+      "p95": 0.4852,
+      "min": 0.3036,
+      "max": 0.5649
+    }
+  },
+  "paired": {
+    "observed_delta": 0.2317,
+    "p_hist_wins": 1.0
+  }
+}

@@ -137,3 +137,10 @@ data/rerank_features.json
 # 不写这一条的风险是实打实的：git add -A 会把 357 MB 一次灌进仓库，
 # 而 .git 一旦吃进去，删掉也还在历史里。
 /dist/
+# RETECO 实测产物（270 MB 数据 + 探针脚本），数据不入仓
+_probe_reteco/track2_recor/
+.hfcache/
+# 探针抓下来的第三方网页（RECOR / Miller 榜单原文）与 HF 下载缓存：外部内容的
+# 副本，不是本项目的结论；结论已写进 docs/计划书-RETECO补充-G0实测版-20261112.md。
+_probe_reteco/*.html
+_probe_reteco/.cache/

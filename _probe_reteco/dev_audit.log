@@ -1,0 +1,25 @@
+[biology             ] docs= 57359 turns= 115 convs= 26 base=0.2293 hist=0.5602  (28s)
+[drones              ] docs= 16381 turns=  38 convs= 11 base=0.1622 hist=0.2973  (14s)
+[earth_science       ] docs=121249 turns= 133 convs= 29 base=0.2557 hist=0.6306  (49s)
+[economics           ] docs= 50220 turns=  92 convs= 22 base=0.1993 hist=0.4555  (13s)
+[hardware            ] docs= 26308 turns=  58 convs= 14 base=0.1543 hist=0.2843  (15s)
+[law                 ] docs= 20027 turns=  66 convs= 15 base=0.1382 hist=0.3733  (23s)
+[medicalsciences     ] docs= 23297 turns=  44 convs= 13 base=0.1165 hist=0.1612  (23s)
+[politics            ] docs= 16712 turns=  54 convs= 13 base=0.1641 hist=0.3171  (20s)
+[psychology          ] docs= 52835 turns=  99 convs= 25 base=0.2528 hist=0.5540  (27s)
+[robotics            ] docs= 61961 turns=  75 convs= 20 base=0.1974 hist=0.5371  (23s)
+[sustainable_living  ] docs= 60792 turns=  84 convs= 23 base=0.2825 hist=0.5249  (27s)
+
+MACRO dev: Base=0.1957  +History=0.4269  (official 0.1827 / 0.4379)
+
+turns=858 convs=211 mean_cluster=4.07 Kish=191.3 pooled_deff=4.48
+ICC(1) of per-turn ndcg_base: 0.2014
+ICC(1) of per-turn ndcg_hist: 0.4528
+
+paired delta (Base->+History) observed = +0.2629
+  iid     CI95=[+0.2381,+0.2882]  width=0.0501  sd=0.0128
+  cluster CI95=[+0.2313,+0.2957]  width=0.0643  sd=0.0164  by conv
+  variance inflation = 1.64x   SE ratio = 1.28x
+
+total wall = 263s
+wrote dev_audit.json
